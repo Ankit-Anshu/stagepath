@@ -1,0 +1,84 @@
+title: DAY Function
+category: Spreadsheets
+what_is_it: Extracting just the day-of-month number from a full date value.
+why_it_matters: Completes the YEAR/MONTH/DAY trio, useful for breaking a date into its three components for grouping or display.
+prerequisites:
+  - month-function
+objectives:
+  - Extract the day of the month from a date with DAY
+estimated_minutes: 15
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-day-1
+    title: Extract the day of month
+    description: Given an order-date column, use DAY to extract just the day-of-month number for each order.
+verify:
+  - DAY correctly extracts the day-of-month number from a real date value
+note: |
+  ## 🎯 What is it?
+
+  **DAY** extracts just the day-of-month number (1-31) from a full date value, completing the trio alongside [YEAR](/skills/year-function) and [MONTH](/skills/month-function).
+
+  ## 💡 Why is it important?
+
+  Useful for breaking a date into its three components, or for a specific analysis question like "which day of the month do most orders come in?" (e.g., checking for a pattern around a monthly payday or billing cycle).
+
+  ## Syntax
+
+  ```
+  =DAY(date)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 2024-03-15 |
+
+  **Formula:** `=DAY(A1)` → `15`
+
+  ## Multiple examples
+
+  **Beginner:** `=DAY(A2)` — extract the day-of-month number from a date.
+  **Real-world:** `=DAY(order_date)` used to check whether orders cluster around specific days of the month (like the 1st or 15th), a common pattern tied to payday or billing cycles.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing DAY (day-of-month, 1-31) with a day-of-week function.** DAY has no awareness of which weekday a date falls on — a separate function (like WEEKDAY) is needed for that.
+
+  ## Real-world Data Analyst use cases
+
+  - **Pattern analysis:** checking whether order or payment timing clusters around specific days of the month.
+
+  ## Related concepts
+
+  ```
+  MONTH → DAY ← you are here → EOMONTH → Working Days
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that extracts the day-of-month number from A1.
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=DAY(A1)`
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What would you check DAY for in a real analysis?**
+  Short answer: Whether a metric (like orders or payments) clusters around specific days of the month, such as near a common payday or billing date, which YEAR and MONTH alone can't reveal.
+
+  ## Best practices
+
+  - Use DAY specifically for day-of-month pattern questions, not general date sorting (which works fine on the full date value directly).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **DAY(date)** → extracts the day-of-month as a number (1-31)

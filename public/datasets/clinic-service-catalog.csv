@@ -1,0 +1,7 @@
+service_id,current_label,plain_language_label,referral_required,duration_minutes,locations
+S01,MSK Physiotherapy,Joint and muscle physiotherapy,yes,40,"Central; North"
+S02,Dermatology,Skin clinic,yes,20,Central
+S03,General Practice,General doctor appointment,no,15,"Central; North; East"
+S04,Phlebotomy,Blood test,no,10,"Central; East"
+S05,Respiratory Medicine,Breathing and lung clinic,yes,30,North
+

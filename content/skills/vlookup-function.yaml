@@ -1,0 +1,108 @@
+title: VLOOKUP Function
+category: Spreadsheets
+what_is_it: Searching down the first column of a table for a matching value, then returning a value from a specified column to the right of it.
+why_it_matters: VLOOKUP is the classic, most widely-known way to pull matching data from another table by a shared key — still the most common lookup function you'll encounter in existing spreadsheets.
+prerequisites:
+  - averageifs-function
+objectives:
+  - Write a VLOOKUP with an exact match
+  - Explain VLOOKUP's left-to-right search limitation
+estimated_minutes: 40
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-vlookup-1
+    title: Pull a customer name by ID
+    description: Given a customers table and an orders table, use VLOOKUP to pull the customer name into the orders table by customer ID.
+verify:
+  - VLOOKUP returns the correct matching value
+  - Exact match (FALSE) is used deliberately, not left to default
+note: |
+  ## 🎯 What is it?
+
+  **VLOOKUP** searches **down** the first column of a table for a matching value, then returns a value from a column to the **right** of it, at a specified position.
+
+  ## 💡 Why is it important?
+
+  VLOOKUP is the classic, most widely-known way to pull matching data from another table by a shared key — it's still the most common lookup function you'll find in existing, real-world spreadsheets, even though [XLOOKUP](/skills/xlookup-function) is the modern replacement for new work.
+
+  ## Syntax
+
+  ```
+  =VLOOKUP(lookup_value, table_range, col_index_num, [exact_match])
+  ```
+
+  - **lookup_value** — the value to search for.
+  - **table_range** — the table to search, where the first column holds the values to match against.
+  - **col_index_num** — which column (counting from the table's first column as 1) to return a value from.
+  - **exact_match** — `FALSE` (or `0`) for an exact match, which should almost always be used; `TRUE` allows an approximate match, a rarely-needed, riskier default.
+
+  ## 📊 Example
+
+  `customers` table (A:C):
+
+  | customer_id | name | region |
+  |---|---|---|
+  | 101 | Ana Silva | West |
+  | 102 | Wei Chen | East |
+
+  **Formula:** `=VLOOKUP(102, A:C, 2, FALSE)`
+  **Result:** `"Wei Chen"`
+
+  **Explanation:** VLOOKUP finds 102 in the first column (A), then returns the value 2 columns over (column B, name).
+
+  ## Multiple examples
+
+  **Beginner:** `=VLOOKUP(A2,customers!A:C,2,FALSE)` — pull a name by ID.
+  **Intermediate:** `=IFERROR(VLOOKUP(A2,customers!A:C,3,FALSE),"Unknown")` — combining VLOOKUP with IFERROR to handle a missing match gracefully.
+  **Real-world:** Pulling a customer's region into an orders sheet by customer ID, to enable a regional revenue breakdown without manually merging two tables.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting the 4th argument (exact match).** Leaving it blank can default to an approximate match on unsorted data, silently returning a wrong result.
+  - **Hardcoding col_index_num, then inserting a new column** into the source table — this silently shifts which value gets returned, since the index number no longer points at the intended column.
+  - **Trying to look "left" of the lookup column.** VLOOKUP can only return a value to the right of its search column — see [INDEX + MATCH](/skills/index-match-function) or [XLOOKUP](/skills/xlookup-function) for lookups that need to go left.
+
+  ## Real-world Data Analyst use cases
+
+  - **Customer analysis:** merging customer attributes (name, region, tier) into a transactions sheet by customer ID.
+  - **Finance analysis:** pulling a department's budget target from a reference tab.
+
+  ## Related concepts
+
+  ```
+  Averageifs → VLOOKUP ← you are here → HLOOKUP → INDEX → MATCH → INDEX+MATCH → XLOOKUP → XMATCH
+  ```
+  This is the direct spreadsheet analog of [SQL — JOIN](/skills/sql-joins), which you'll learn in the SQL stage.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a VLOOKUP that returns a customer's name from a table in A:C, given an ID in B2.
+
+  ### Interview/Advanced
+  2. Why can VLOOKUP break silently when a new column is inserted into the source table?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=VLOOKUP(B2,A:C,2,FALSE)`
+  2. Because col_index_num is a hardcoded number counting columns from the table's start — inserting a new column shifts every column after it by one position, but the hardcoded index number doesn't automatically adjust, so it now points at a different (wrong) column.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What is VLOOKUP's biggest limitation compared to INDEX-MATCH or XLOOKUP?**
+  Short answer: It can only search the first column of the given range and return a value to the right of it — it can't look left, and it breaks if a column is inserted into the source table, since its column-index argument is a hardcoded number.
+
+  ## Best practices
+
+  - Always set the exact-match argument to FALSE explicitly.
+  - Consider INDEX-MATCH or XLOOKUP for new work, since both are more resilient to structural changes in the source table.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **VLOOKUP(value, table, col_index, FALSE)** → searches first column, returns a value to the right
+  **Watch for:** missing exact-match argument, column-index breaking after an inserted column

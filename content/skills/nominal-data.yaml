@@ -1,0 +1,66 @@
+title: Nominal Data
+category: Foundations
+what_is_it: Categorical data with no natural order or ranking between its categories — the values are simply different, not "greater" or "lesser."
+why_it_matters: It's the first of the four levels of measurement (nominal, ordinal, interval, ratio) that determine which statistics and chart types are valid for a given field.
+prerequisites:
+  - categorical-data
+objectives:
+  - Define nominal data and give two examples
+  - Explain why nominal categories can't be meaningfully ranked
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-nominal-data-1
+    title: Nominal or ordinal?
+    description: List five categorical columns from a dataset you use, and classify each as nominal (no order) or ordinal (has order).
+verify:
+  - Can define nominal data
+  - Can distinguish nominal from ordinal data with an example
+note: |
+  ## 🎯 What is it?
+
+  **Nominal data** is categorical data whose values have no natural order — they're simply different labels, not ranked from low to high. Country, gender, product category, and payment method are all nominal: "US" isn't greater or less than "UK," it's just different.
+
+  ## 💡 Why is it important?
+
+  - Nominal data is the first of four **levels of measurement** (nominal → ordinal → interval → ratio) that determine which statistics and charts are valid.
+  - It rules out anything order-based — you can't meaningfully compute a median or sort by "size" for nominal categories, only count frequencies.
+
+  ## Core concept
+
+  | Level | Has order? | Example | Valid summary |
+  |---|---|---|---|
+  | **Nominal** | No | Country, payment method | Count, mode |
+  | Ordinal | Yes | Rating (Low/Medium/High) | Count, mode, median |
+
+  ## 📊 Example
+
+  A `payment_method` column ("Credit Card", "PayPal", "Cash") is nominal — there's no inherent order to sort these by, only counts of how often each occurs. Contrast with an `education_level` column ("High School", "Bachelor's", "Master's") — that one is ordinal, because there's a real ranking.
+
+  ## ⚠️ Common mistakes
+
+  - **Sorting nominal categories alphabetically and implying meaning** — alphabetical order isn't the same as a real ranking, and readers can misread it as one.
+  - **Using a bar chart's default sort for a nominal field without checking whether sorting by value (not alphabet) would communicate better** — e.g., sorting "revenue by payment method" bars from highest to lowest, since there's no natural nominal order to preserve.
+
+  ## Related concepts
+
+  ```
+  Categorical Data
+         ↓
+  Nominal Data ← you are here (no order)      Ordinal Data (has order)
+         ↓                                            ↓
+                  Interval Data → Ratio Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Is "customer segment: Bronze/Silver/Gold" nominal or ordinal?**
+  Short answer: Ordinal — there's a clear ranking (Bronze < Silver < Gold), unlike a nominal field like country or payment method.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Nominal data** → categories with no natural order — country, payment method, gender
+  Valid summaries: count and mode only.

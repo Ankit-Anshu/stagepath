@@ -1,0 +1,24 @@
+title: Backend Developer
+category: Software Development
+difficulty: intermediate
+estimated_hours: 600
+audience: People who enjoy systems, logic, APIs, databases, and reliability.
+description: Learn to design secure APIs, model persistent data, test services, and operate production backends.
+stages:
+  - id: foundations
+    title: Programming and web foundations
+    description: Build the mental model every server-side system depends on.
+    skills: [programming-foundations, web-protocols]
+  - id: services
+    title: Services and data
+    description: Design useful interfaces and reliable data models.
+    skills: [api-design, databases]
+  - id: quality
+    title: Security and quality
+    description: Protect data and prove the system behaves correctly.
+    skills: [backend-security, backend-testing]
+  - id: operations
+    title: Production operations
+    description: Deploy, observe, debug, and scale a working service.
+    skills: [deployment-observability]
+

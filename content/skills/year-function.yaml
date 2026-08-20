@@ -1,0 +1,84 @@
+title: YEAR Function
+category: Spreadsheets
+what_is_it: Extracting just the year number from a full date value.
+why_it_matters: A common building block for grouping or filtering data by year, especially when summarizing multi-year data.
+prerequisites:
+  - date-function
+objectives:
+  - Extract the year from a date with YEAR
+estimated_minutes: 15
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-year-1
+    title: Group orders by year
+    description: Given an order-date column, use YEAR to create a helper column for grouping orders by year in a pivot table.
+verify:
+  - YEAR correctly extracts the year from a real date value
+note: |
+  ## 🎯 What is it?
+
+  **YEAR** extracts just the year number from a full date value.
+
+  ## 💡 Why is it important?
+
+  A common building block for grouping or filtering data by year — especially useful as a helper column when summarizing multi-year data in a report or pivot table.
+
+  ## Syntax
+
+  ```
+  =YEAR(date)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 2024-03-15 |
+
+  **Formula:** `=YEAR(A1)` → `2024`
+
+  ## Multiple examples
+
+  **Beginner:** `=YEAR(A2)` — extract the year from an order-date column.
+  **Real-world:** `=YEAR(order_date)` as a helper column used to build a "revenue by year" pivot table or SUMIFS breakdown, without needing a separate lookup or manual grouping.
+
+  ## ⚠️ Common mistakes
+
+  - **Applying YEAR to a text value that only looks like a date** (see [Data Types](/skills/spreadsheet-data-types)) — this will error or return an unexpected result, since YEAR requires a real, underlying date value to work with.
+
+  ## Real-world Data Analyst use cases
+
+  - **Finance analysis:** grouping revenue or expenses by year for a multi-year trend report.
+
+  ## Related concepts
+
+  ```
+  DATE → YEAR ← you are here → MONTH → DAY → EOMONTH
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that extracts the year from A1.
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=YEAR(A1)`
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would you add a YEAR helper column before building a pivot table on multi-year data?**
+  Short answer: It lets the pivot table group and summarize by year directly, without needing a more complex date-grouping configuration, and makes any related SUMIFS/COUNTIFS formulas simpler to write.
+
+  ## Best practices
+
+  - Confirm the source column is a real date (not text) before applying YEAR.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **YEAR(date)** → extracts the year as a number

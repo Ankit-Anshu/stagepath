@@ -1,0 +1,166 @@
+title: Charts
+what_is_it: Choosing and building the right chart type for a given question — bar, line, scatter, and distribution charts — and avoiding common chart mistakes.
+why_it_matters: The wrong chart type can make correct data look wrong, or hide the exact insight you are trying to show. Chart choice is a communication decision, not just an aesthetic one.
+prerequisites: []
+objectives:
+  - Match a chart type to a question (comparison, trend, distribution, relationship)
+  - Avoid misleading axes and truncated scales
+  - Label a chart so it stands on its own without narration
+estimated_minutes: 180
+resources:
+  - r-datavizcatalogue
+  - r-kaggle-dataviz
+practice:
+  - id: ex-charts-1
+    title: Pick the right chart
+    description: Given three business questions (trend over time, comparison across categories, relationship between two variables), choose and sketch the right chart type for each.
+verify:
+  - Chart type matches the question being asked
+  - Axes are not truncated in a misleading way
+  - Chart has a clear title and labeled axes
+category: Visualization
+subtopics:
+  - title: Chart types
+    description: Bar, line, scatter, and histogram charts, and which business question each one actually answers.
+    outcomes:
+      - Match a chart type to a specific business question
+  - title: Misleading charts
+    description: Truncated axes, unnecessary 3D effects, and other common distortions to avoid.
+    outcomes:
+      - Spot a misleading chart and explain why it misleads
+  - title: Labeling
+    description: Titles, axis labels, and legends that let a chart stand on its own without narration.
+    outcomes:
+      - Label a chart so it needs no verbal explanation
+note: |
+  ## 🎯 What is it?
+
+  Choosing and building the **right chart type** for a given question — bar, line, scatter, and distribution charts — and avoiding the common mistakes that make correct data look wrong.
+
+  ## 💡 Why is it important?
+
+  The wrong chart type can make correct data look confusing or even misleading, or hide the exact insight you're trying to show. Chart choice is a **communication decision**, not just an aesthetic one — it's one of the most visible, judged parts of an analyst's work, since a chart is often the *only* thing a busy stakeholder actually looks at.
+
+  ## Core concept
+
+  ### What type of data is it appropriate for, and when to use it
+
+  | Question shape | Chart type | When NOT to use it |
+  |---|---|---|
+  | Trend over time | Line chart | Too many overlapping lines (>5-6) becomes unreadable — consider small multiples instead |
+  | Comparison across categories | Bar chart | Too many categories (>10-15) — consider sorting and showing only the top N |
+  | Distribution of one variable | Histogram / box plot | Small sample sizes, where a shape isn't meaningful yet |
+  | Relationship between two variables | Scatter plot | More than ~2 variables at once without added encoding (color/size) — gets cluttered |
+  | Part-to-whole (a few categories) | Pie/donut chart | More than ~5 slices, or slices that are hard to compare by eye — a bar chart usually communicates this better |
+
+  ### Misleading charts
+  - **Truncated (non-zero) y-axis on a bar chart** exaggerates differences that are actually small — bar charts should almost always start at zero.
+  - **Unnecessary 3D effects** distort the actual proportions being shown and add no real information.
+  - **Dual axes with different scales** on the same chart can visually imply a relationship between two series that isn't actually there.
+
+  ### Labeling
+  A finished chart has a clear **title** stating the finding (not just "Revenue"), labeled **axes** with units, and a **legend** if more than one series/color is shown — it should stand on its own without someone explaining it verbally.
+
+  ## 📊 Example
+
+  **Question:** "How has monthly revenue trended this year?"
+
+  **Right choice:** A line chart, x-axis = month, y-axis = revenue, title: "Revenue Grew 18% From January to June."
+
+  **Wrong choice:** A pie chart of monthly revenue shares — pie charts don't communicate trend/order at all, and the question is fundamentally about change over time, which a pie chart can't show.
+
+  ## Multiple examples
+
+  **Beginner:** Comparing revenue across 4 regions → a bar chart, sorted highest to lowest.
+  **Intermediate:** Comparing the relationship between marketing spend and revenue across 20 campaigns → a scatter plot.
+  **Real-world:** A stakeholder asks "which product categories are underperforming?" — a sorted horizontal bar chart of revenue by category, with a reference line at the target, communicates this far faster than a table of 30 numbers.
+
+  ## Types / Variations
+
+  See the Core concept table above for the primary chart-type-to-question mapping — the single most testable and practically useful piece of visualization knowledge for an analyst.
+
+  ## ⚠️ Common mistakes
+
+  - **Choosing a chart type by habit rather than by the question.** Defaulting to a bar chart or pie chart regardless of what's actually being asked is one of the most common beginner mistakes.
+  - **Truncating a bar chart's y-axis** to exaggerate a difference — even unintentionally, this misleads the viewer about the actual magnitude of a change.
+  - **Using a pie chart with too many slices** or slices too close in size to distinguish visually.
+  - **Shipping an unlabeled or untitled chart**, requiring verbal explanation to be understood.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** a line chart of monthly revenue trend.
+  - **Product analysis:** a scatter plot of feature usage vs. retention to explore a relationship.
+  - **Finance analysis:** a sorted bar chart of expenses by category, immediately showing the biggest cost drivers.
+
+  ## Related concepts
+
+  ```
+  Charts ← you are here
+    ↓
+  Color & Accessibility in Visualization
+    ↓
+  Geospatial & Map Visualization
+    ↓
+  Dashboard Design
+    ↓
+  BI Tools (Power BI / Tableau)
+    ↓
+  Storytelling
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Which chart type best answers "how did revenue change month to month over the past year"?
+
+  ### Medium
+  2. A bar chart's y-axis starts at 90 instead of 0, making a 2% difference between two bars look dramatic. What's the fix?
+
+  ### Interview/Advanced
+  3. A stakeholder wants to compare 15 product categories' revenue share using a pie chart. What would you recommend instead, and why?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A line chart — it's specifically designed to show trend/change over time.
+  2. Start the y-axis at 0, so the visual difference between bars accurately reflects the actual magnitude of the difference in the data.
+  3. A sorted horizontal bar chart — with 15 categories, a pie chart's slices become too numerous and similarly-sized to compare accurately by eye; a sorted bar chart makes ranking and comparison immediate and much easier to read.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: How do you decide which chart type to use?**
+  Short answer: Match the chart type to the shape of the question being asked — trend over time → line, comparison → bar, distribution → histogram/box plot, relationship → scatter — rather than defaulting to a familiar chart type out of habit.
+
+  ### Conceptual questions
+  **Q: Why is a truncated y-axis considered misleading, even if the numbers on the chart are technically correct?**
+  Short answer: Human perception of a bar chart is driven by the *visual* height difference between bars — truncating the axis exaggerates that visual difference beyond what the actual data supports, even though the labeled numbers are accurate.
+
+  ### Scenario-based questions
+  **Q: You're asked to build "one chart that shows everything" about a dataset. How do you respond?**
+  Short answer: Push back on the framing — a single chart answers a single, specific question well; cramming multiple unrelated questions into one chart usually makes it harder to read than building 2-3 focused charts instead.
+
+  ### Practical questions
+  **Q: How would you design a chart comparing this year's and last year's monthly revenue on the same view?**
+  Short answer: A line chart with two lines (this year, last year), clearly labeled with a legend and distinguishable colors/styles, so the comparison across the same months is direct and readable.
+
+  ## Interview traps / tricky points
+
+  - "What's your favorite chart type?" is a trap if answered generically — the right answer explains that chart choice depends on the question, not personal preference.
+  - A chart can be numerically accurate and still visually misleading (truncated axis, 3D distortion) — this distinction is a common interview probe.
+
+  ## Best practices
+
+  - Choose the chart type based on the specific question being asked, every time.
+  - Never truncate a bar chart's y-axis; start at zero.
+  - Every chart needs a title stating the finding, labeled axes with units, and a legend if needed.
+  - Sort categorical bar charts by value, not alphabetically, unless there's a specific reason not to.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Trend over time** → line chart · **Comparison** → bar chart · **Distribution** → histogram/box plot · **Relationship** → scatter plot
+  **Bar charts** → always start the y-axis at zero
+  **Every chart needs:** a finding-based title, labeled axes, a legend if needed

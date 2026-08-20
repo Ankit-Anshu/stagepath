@@ -1,0 +1,94 @@
+title: MID Function
+category: Spreadsheets
+what_is_it: Extracting a specified number of characters from the middle of a text value, starting at a given position.
+why_it_matters: Completes the LEFT/RIGHT/MID trio — needed whenever the piece of text to extract sits neither at the very start nor the very end.
+prerequisites:
+  - right-function
+objectives:
+  - Extract a substring from the middle of a text value with MID
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-mid-1
+    title: Extract a middle segment
+    description: Given IDs formatted like "US-2024-A1234", extract just the "2024" portion using MID.
+verify:
+  - MID correctly extracts the intended substring using the right start position and length
+note: |
+  ## 🎯 What is it?
+
+  **MID** extracts a specified number of characters from the **middle** of a text value, starting at a given position — completing the trio alongside [LEFT](/skills/left-function) and [RIGHT](/skills/right-function).
+
+  ## 💡 Why is it important?
+
+  Needed whenever the piece of text to extract sits neither at the very start nor the very end of a value — like a segment sandwiched between two delimiters in a structured code.
+
+  ## Syntax
+
+  ```
+  =MID(text, start_num, num_chars)
+  ```
+
+  - **start_num** — the character position to begin extracting from (counting from 1).
+  - **num_chars** — how many characters to extract from that position.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | US-2024-A1234 |
+
+  **Formula:** `=MID(A1,4,4)`
+  **Result:** `"2024"` — starting at character 4, extracting 4 characters.
+
+  ## Multiple examples
+
+  **Beginner:** `=MID(A2,2,3)` — extract 3 characters starting at position 2.
+  **Real-world:** `=MID(product_code,4,4)` used to extract a fixed-position year segment embedded in the middle of a standardized product code format.
+
+  ## ⚠️ Common mistakes
+
+  - **Miscounting the start position.** MID counts from 1, not 0 — an off-by-one error here extracts the wrong substring.
+  - **Assuming a fixed position works for every row**, same risk as LEFT and RIGHT — if the format isn't perfectly consistent across all rows, MID will silently extract the wrong segment for inconsistent ones.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** extracting a fixed-position segment (like an embedded date or category code) from a structured identifier.
+
+  ## Related concepts
+
+  ```
+  RIGHT → MID ← you are here → LEN → FIND → SEARCH
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that extracts 3 characters starting at position 5 of A1.
+
+  ### Interview/Advanced
+  2. Given "US-2024-A1234", how would you extract just "A1234" (the segment after the second dash)?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=MID(A1,5,3)`
+  2. `=MID(A1,9,5)` (counting manually to the position after the second dash) — though a more robust real-world approach would combine MID with [FIND](/skills/find-function) to dynamically locate the dash position instead of hardcoding it, in case the surrounding segments vary in length.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would MID be combined with FIND instead of using a hardcoded start position?**
+  Short answer: When the position of the segment to extract isn't always the same across every row — FIND dynamically locates a delimiter's position, which MID can then use as its start_num, making the extraction robust to varying-length surrounding text.
+
+  ## Best practices
+
+  - Combine MID with FIND when a fixed start position isn't reliable across all rows.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **MID(text, start_num, num_chars)** → extracts from the middle, starting at a given position
+  **Counts from 1**, not 0 — watch for off-by-one errors

@@ -1,0 +1,32 @@
+name: Bug report
+description: Something on the site is broken or behaving incorrectly.
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what actually happened?
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      description: The page where you saw the problem (e.g. /roadmaps/data-analyst or /skills/sql-joins).
+    validations:
+      required: false
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: How can the maintainer see the same thing?
+    validations:
+      required: false
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / device
+      description: e.g. Chrome on Windows, Safari on iPhone.
+    validations:
+      required: false

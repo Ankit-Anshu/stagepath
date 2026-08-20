@@ -1,0 +1,69 @@
+title: Basic DAX
+category: Spreadsheets
+what_is_it: DAX (Data Analysis Expressions) is the formula language behind Power Pivot's measures — similar in spirit to worksheet formulas, but operating across a data model's related tables.
+why_it_matters: It's what unlocks calculations a standard pivot table's Calculated Fields can't express — and it's the same language Power BI uses, so learning it here previews that stage directly.
+prerequisites:
+  - data-model
+objectives:
+  - Write a basic DAX measure using SUM and a simple calculation
+  - Explain the difference between a DAX measure and a worksheet formula
+estimated_minutes: 30
+resources:
+  - r-ms-powerbi-training
+practice:
+  - id: ex-basic-dax-1
+    title: Write a profit margin measure
+    description: Given Revenue and Cost columns in a data model, write a DAX measure that calculates overall profit margin.
+verify:
+  - Can write a basic DAX measure
+  - Can explain how a DAX measure differs from a regular worksheet formula
+note: |
+  ## 🎯 What is it?
+
+  **DAX (Data Analysis Expressions)** is the formula language behind Power Pivot's **measures** — calculations that operate across a data model's related tables, rather than a single cell's neighbors the way a worksheet formula does. `=SUM(Orders[Revenue])` is a basic DAX measure summing a column from the `Orders` table.
+
+  ## 💡 Why is it important?
+
+  - It unlocks calculations a standard pivot table's Calculated Field can't express — DAX measures are aware of the data model's relationships and can aggregate correctly across related tables.
+  - It's the exact same formula language Power BI uses — learning basic DAX here directly previews the Power BI stage later in this roadmap.
+
+  ## Syntax
+
+  ```
+  Total Revenue := SUM(Orders[Revenue])
+  Profit Margin := DIVIDE(SUM(Orders[Revenue]) - SUM(Orders[Cost]), SUM(Orders[Revenue]))
+  ```
+
+  A measure has a name, then `:=`, then its formula — referencing a column as `TableName[ColumnName]`.
+
+  ## 📊 Example
+
+  A `Profit Margin` measure, defined once as `DIVIDE(SUM(Orders[Revenue]) - SUM(Orders[Cost]), SUM(Orders[Revenue]))`, can then be dropped into any pivot table built on the data model — automatically recalculating correctly at every level of detail (by region, by product, overall) without being redefined each time, unlike a row-level calculated column.
+
+  ## ⚠️ Common mistakes
+
+  - **Using regular division instead of DIVIDE()**, risking a `#DIV/0!` error when the denominator is zero — DAX's DIVIDE function handles this gracefully with an optional fallback value.
+  - **Confusing a DAX measure with a calculated column** — a measure aggregates dynamically based on the current pivot table context (region, date, etc.); a calculated column computes one fixed value per row, always.
+
+  ## Related concepts
+
+  ```
+  Data Model
+    ↓
+  Basic DAX ← you are here
+    ↓
+  Excel Automation Concepts
+  ```
+  Directly previews Power BI's DAX Fundamentals chapter, later in this roadmap.
+
+  ## 🎤 Interview preparation
+
+  **Q: Why use DIVIDE() instead of a plain / in a DAX measure?**
+  Short answer: DIVIDE() gracefully handles division by zero with an optional fallback value (like 0 or blank), avoiding the #DIV/0! error that a plain division would produce whenever the denominator happens to be zero for a given pivot context.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **DAX** → the formula language behind Power Pivot measures, e.g. `Total Revenue := SUM(Orders[Revenue])`
+  Same language Power BI uses — use DIVIDE() instead of / to avoid divide-by-zero errors.

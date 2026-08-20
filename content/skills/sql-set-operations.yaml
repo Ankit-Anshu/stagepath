@@ -1,0 +1,200 @@
+title: SQL — UNION & Set Operations
+what_is_it: Combining the results of two or more queries with UNION, UNION ALL, INTERSECT, and EXCEPT.
+why_it_matters: Combining similarly-shaped data from different tables or time periods — like this year's and last year's orders — is a UNION problem, not a JOIN problem.
+prerequisites:
+  - sql-joins
+objectives:
+  - Combine two queries with UNION
+  - Explain the difference between UNION and UNION ALL
+  - Use INTERSECT or EXCEPT to compare two result sets
+subtopics:
+  - title: UNION vs. UNION ALL
+    description: Combining result sets, with and without removing duplicates.
+    outcomes:
+      - Choose UNION or UNION ALL correctly based on whether duplicates matter
+  - title: Column & type matching
+    description: Why combined queries must return the same number of columns in compatible types.
+    outcomes:
+      - Fix a UNION query with mismatched columns
+  - title: INTERSECT & EXCEPT
+    description: Finding rows common to two queries, or rows in one but not the other.
+    outcomes:
+      - Use EXCEPT to find records missing from a second table
+estimated_minutes: 120
+resources:
+  - r-postgres-tutorial
+  - r-w3schools-join
+practice:
+  - id: ex-sql-union-1
+    title: Combine two periods
+    description: Combine this quarter's and last quarter's order tables into one result set with UNION ALL, tagging each row with its period.
+verify:
+  - UNION vs UNION ALL choice matches whether duplicates should be removed
+  - Combined columns are correctly typed and ordered
+  - Can explain what EXCEPT would reveal about two tables
+note: |
+  ## 🎯 What is it?
+
+  **Set operations** — UNION, UNION ALL, INTERSECT, and EXCEPT — combine the results of two or more separate queries, stacking them or comparing them, rather than matching them side by side like a JOIN does.
+
+  ## 💡 Why is it important?
+
+  Combining similarly-shaped data from different tables or time periods — like this year's and last year's orders, or two regional systems with the same structure — is a set-operation problem, not a JOIN problem. Knowing which tool fits which shape of question is a core SQL fluency signal.
+
+  ## Core concept
+
+  ### UNION vs. UNION ALL
+  Both stack the rows of two queries **on top of each other** (not side by side). `UNION` removes duplicate rows from the combined result; `UNION ALL` keeps every row, including duplicates, and is faster since it skips the deduplication step.
+
+  ### Column & type matching
+  Every query combined with a set operation must return the **same number of columns**, in **compatible data types**, in the **same order** — column *names* in the output come from the first query.
+
+  ### INTERSECT & EXCEPT
+  `INTERSECT` returns only rows that appear in **both** queries' results. `EXCEPT` (called `MINUS` in some databases) returns rows that appear in the first query's result but **not** in the second — useful for finding what's missing between two datasets.
+
+  | Operation | Returns |
+  |---|---|
+  | UNION | Combined rows, duplicates removed |
+  | UNION ALL | Combined rows, duplicates kept |
+  | INTERSECT | Rows present in both queries |
+  | EXCEPT | Rows in the first query but not the second |
+
+  ## Syntax
+
+  ```sql
+  SELECT column1, column2 FROM table_a
+  UNION ALL
+  SELECT column1, column2 FROM table_b;
+
+  SELECT customer_id FROM this_year_customers
+  EXCEPT
+  SELECT customer_id FROM last_year_customers;
+  ```
+
+  ## 📊 Example
+
+  `orders_q1`:
+
+  | order_id | amount |
+  |---|---|
+  | 1 | 200 |
+  | 2 | 150 |
+
+  `orders_q2`:
+
+  | order_id | amount |
+  |---|---|
+  | 2 | 150 |
+  | 3 | 300 |
+
+  **Query — combine both quarters, tagging the source:**
+
+  ```sql
+  SELECT order_id, amount, 'Q1' AS period FROM orders_q1
+  UNION ALL
+  SELECT order_id, amount, 'Q2' AS period FROM orders_q2;
+  ```
+
+  **Output:**
+
+  | order_id | amount | period |
+  |---|---|---|
+  | 1 | 200 | Q1 |
+  | 2 | 150 | Q1 |
+  | 2 | 150 | Q2 |
+  | 3 | 300 | Q2 |
+
+  **Explanation:** `UNION ALL` keeps order_id 2 from both periods (it's a real, distinct record in each source) — using plain `UNION` here would have incorrectly deduplicated it down to one row, since UNION compares entire rows including the period tag... but note the period differs, so it wouldn't actually be deduplicated either way in this specific case. UNION ALL is still the right, faster choice since these are genuinely two different periods' data with no intent to deduplicate.
+
+  ## Multiple examples
+
+  **Beginner:** `SELECT city FROM customers_us UNION SELECT city FROM customers_ca;` — a deduplicated list of cities across two tables.
+  **Intermediate:** `SELECT customer_id FROM leads INTERSECT SELECT customer_id FROM customers;` — leads who successfully converted to customers.
+  **Real-world:** `SELECT customer_id FROM active_subscribers EXCEPT SELECT customer_id FROM email_opt_outs;` — the exact audience list for an email campaign, subscribers minus opt-outs.
+
+  ## Types / Variations
+
+  See the Core concept table above — UNION/UNION ALL/INTERSECT/EXCEPT are the four standard set operations across most SQL databases (some databases spell EXCEPT as MINUS).
+
+  ## ⚠️ Common mistakes
+
+  - **Using UNION when UNION ALL is what's actually needed.** UNION's deduplication step has a real performance cost, and is unnecessary (or even incorrect) when the two sources are known to be genuinely distinct records.
+  - **Mismatched column counts or incompatible types.** A set operation errors immediately if the queries don't return the same number of columns in compatible types — this is stricter than a JOIN's flexibility.
+  - **Confusing a set operation with a JOIN.** Set operations stack rows *vertically*; JOINs combine columns *horizontally* based on a key — using one where the other is needed produces a completely wrong (or invalid) result.
+  - **Forgetting that column names in the output come from the first query**, which can make an EXCEPT/INTERSECT result confusing to label if the two queries used different aliases.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** combining this year's and last year's order tables into one comparable dataset with UNION ALL.
+  - **Marketing analysis:** finding a campaign audience with EXCEPT (subscribers minus opt-outs).
+  - **Data quality analysis:** using EXCEPT to find records present in a source system but missing from a downstream reporting table.
+
+  ## Related concepts
+
+  ```
+  JOIN → SUBQUERY
+    ↓
+  UNION / Set Operations ← you are here
+    ↓
+  CTE
+    ↓
+  WINDOW FUNCTIONS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the difference between UNION and UNION ALL?
+
+  ### Medium
+  2. Write a query combining `orders_2023` and `orders_2024` (same columns) into one result set without removing any rows.
+
+  ### Interview/Advanced
+  3. How would you find customer IDs that exist in a `customers` table but not in an `orders` table, using a set operation instead of a JOIN?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. UNION removes duplicate rows from the combined result; UNION ALL keeps every row, including duplicates, and is faster since it skips deduplication.
+  2. `SELECT * FROM orders_2023 UNION ALL SELECT * FROM orders_2024;`
+  3. `SELECT customer_id FROM customers EXCEPT SELECT customer_id FROM orders;` — this returns customer IDs present in the first list but not the second, directly answering "customers who never ordered" without a JOIN.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: When would you use UNION instead of a JOIN?**
+  Short answer: When you need to stack rows from two similarly-shaped queries on top of each other (same columns), rather than combine columns from related tables side by side based on a key.
+
+  ### Conceptual questions
+  **Q: Why is UNION ALL generally preferred over UNION when you know the two sources don't overlap?**
+  Short answer: UNION performs a deduplication pass over the combined result, which has a real performance cost that's unnecessary when duplicates aren't possible or aren't a concern.
+
+  ### Scenario-based questions
+  **Q: A UNION query errors with a "different number of columns" message. What's the fix?**
+  Short answer: Ensure both queries in the UNION select exactly the same number of columns, in compatible data types and the same order — add or remove columns (or cast types) until they match.
+
+  ### Practical questions
+  **Q: Write a query to find records present in a "legacy" customers table but missing from a "current" customers table.**
+  Short answer: `SELECT customer_id FROM legacy_customers EXCEPT SELECT customer_id FROM current_customers;`
+
+  ## Interview traps / tricky points
+
+  - Column names in a UNION's output always come from the *first* query — a common source of confusion when the two source queries use different aliases.
+  - EXCEPT/INTERSECT compare entire rows, not just a single "key" column, unless you explicitly select only that column — selecting extra columns can silently change which rows are considered "matching."
+
+  ## Best practices
+
+  - Default to UNION ALL unless deduplication is specifically needed.
+  - Explicitly select and alias only the columns you need before a set operation, to avoid unintended row-matching differences.
+  - Add a literal "source" or "period" column (like the Q1/Q2 tag above) when combining data from different time periods or systems, so the combined result stays traceable.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **UNION** → stacks rows, removes duplicates
+  **UNION ALL** → stacks rows, keeps duplicates, faster
+  **INTERSECT** → rows in both queries
+  **EXCEPT** → rows in the first query, not the second
+  **Rule:** column count, order, and type must match across all combined queries

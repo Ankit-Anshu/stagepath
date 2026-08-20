@@ -1,0 +1,65 @@
+title: ROUNDDOWN Function
+category: Spreadsheets
+what_is_it: Rounding a number down (toward zero) to a specified number of decimal places, regardless of the digit that follows.
+why_it_matters: Whenever only fully completed units should count — full months of tenure, full completed items — ROUNDDOWN (not standard rounding) gives the accurate, conservative answer.
+prerequisites:
+  - roundup-function
+objectives:
+  - Round a number down with ROUNDDOWN
+  - Identify a scenario where ROUNDDOWN is required instead of ROUND
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-rounddown-1
+    title: Calculate completed units
+    description: Given 7.9 completed months of a subscription, use ROUNDDOWN to correctly report only full completed months.
+verify:
+  - Can write a ROUNDDOWN formula
+  - Can identify a scenario requiring ROUNDDOWN over standard ROUND
+note: |
+  ## 🎯 What is it?
+
+  **ROUNDDOWN** rounds a number down (toward zero) to a specified number of decimal places, no matter what the following digit is — the mirror image of ROUNDUP.
+
+  ## 💡 Why is it important?
+
+  - Whenever only fully-completed units should count — full months of tenure, full completed orders, full years of experience — ROUNDDOWN gives the conservative, accurate answer; standard rounding could overstate it.
+
+  ## Syntax
+
+  ```
+  =ROUNDDOWN(number, num_digits)
+  ```
+
+  ## 📊 Example
+
+  A customer has been subscribed for 7.9 months. `=ROUNDDOWN(7.9, 0)` → `7` — they've only *completed* 7 full months; rounding to the nearest whole number would incorrectly report 8 completed months when the 8th isn't finished yet.
+
+  ## ⚠️ Common mistakes
+
+  - **Using standard ROUND when only fully completed units should count** — this can overstate tenure, completed cycles, or any other "whole units only" metric.
+  - **Assuming ROUNDDOWN always rounds toward negative infinity** — it rounds *toward zero*, so for negative numbers it rounds up (less negative), not further down.
+
+  ## Related concepts
+
+  ```
+  ROUNDUP
+    ↓
+  ROUNDDOWN ← you are here
+    ↓
+  Percentage Calculations
+  ```
+  This closes the ROUND/ROUNDUP/ROUNDDOWN trio.
+
+  ## 🎤 Interview preparation
+
+  **Q: A customer has been subscribed for 7.9 months. How many full months should a "months completed" report show?**
+  Short answer: 7 — `ROUNDDOWN(7.9, 0)` correctly reports only fully completed months; standard rounding would incorrectly report 8, since the 8th month isn't actually finished.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **ROUNDDOWN(num, digits)** → always rounds toward zero, regardless of the digit
+  Use whenever only fully completed units should count.

@@ -1,0 +1,73 @@
+title: Relational Database
+category: SQL
+what_is_it: A database that organizes data into tables of rows and columns, linked together by shared key values — the dominant style of database SQL was built for.
+why_it_matters: SQL (Structured Query Language) was designed specifically for relational databases — understanding "relational" is what makes joins and keys make sense later.
+prerequisites:
+  - what-is-a-database
+objectives:
+  - Define a relational database and explain what "relational" refers to
+  - Give an example of two related tables
+estimated_minutes: 20
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-relational-database-1
+    title: Sketch two related tables
+    description: Sketch a simple customers table and an orders table, and show which column links them.
+verify:
+  - Can define a relational database
+  - Can identify the linking column between two example tables
+note: |
+  ## 🎯 What is it?
+
+  A **relational database** organizes data into **tables** (rows and columns), where tables are linked — "related" — to each other through shared key values, rather than storing everything in one giant flat file. A `customers` table and an `orders` table are related through a shared `customer_id` column.
+
+  ## 💡 Why is it important?
+
+  - SQL (Structured Query Language) was built specifically for relational databases — this is *why* SQL has joins, keys, and a table-based structure at all.
+  - Splitting data into related tables avoids storing the same information redundantly (a customer's name doesn't need to be repeated on every one of their orders).
+
+  ## Core concept
+
+  ```
+  customers                    orders
+  +----+-------+       +----+-------------+--------+
+  | id | name  |        | id | customer_id | amount |
+  +----+-------+       +----+-------------+--------+
+  | 1  | Amir  |  ←───  | 101|      1      | 59.00  |
+  | 2  | Priya |  ←───  | 102|      2      | 120.00 |
+  +----+-------+        +----+-------------+--------+
+  ```
+
+  `customer_id` in `orders` "relates" back to `id` in `customers` — this is the relationship that lets you join the two tables together in a query.
+
+  ## 📊 Example
+
+  Instead of repeating "Amir, amir@email.com, New York" on every single one of Amir's 50 orders, a relational database stores it once in `customers`, and each row in `orders` just references `customer_id = 1` — smaller, more consistent, and update-safe (change Amir's email once, every order automatically reflects it via the relationship).
+
+  ## ⚠️ Common mistakes
+
+  - **Storing everything in one giant flat table** to avoid learning joins — this reintroduces the redundancy and inconsistency relational databases are specifically designed to prevent.
+  - **Assuming "relational" refers to a relationship in the everyday sense.** It specifically means tables linked by shared key columns.
+
+  ## Related concepts
+
+  ```
+  What is a Database
+    ↓
+  Relational Database ← you are here
+    ↓
+  Tables → Primary Key → Foreign Key → Relationships
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why store customer info in a separate table instead of repeating it on every order row?**
+  Short answer: To avoid redundancy and keep data consistent — storing it once in a `customers` table and referencing it by `customer_id` means an update (like a changed email) only needs to happen in one place.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Relational database** → data split across linked tables, connected by shared key columns
+  This structure is exactly what SQL's joins and keys are built around.

@@ -1,0 +1,168 @@
+title: Geospatial & Map Visualization
+what_is_it: Showing data on a map — choropleth (shaded region) maps, point maps, and choosing when a map is actually the right chart.
+why_it_matters: Location-based questions — "where are sales strongest," "which regions are underperforming" — are answered far faster with a map than with a table of region names and numbers.
+prerequisites:
+  - charts
+objectives:
+  - Choose between a choropleth and a point map for a question
+  - Build a basic map visualization from geographic data
+  - Recognize when a map isn't actually the right chart
+subtopics:
+  - title: Choropleth maps
+    description: Shading regions by a value, like sales by state or country.
+    outcomes:
+      - Build a choropleth map from region-level data
+  - title: Point maps
+    description: Plotting individual locations, like store or customer locations.
+    outcomes:
+      - Build a point map from latitude/longitude data
+  - title: When not to map
+    description: Recognizing when a bar chart would answer the question faster than a map would.
+    outcomes:
+      - Explain when a map is the wrong chart for a given question
+estimated_minutes: 120
+resources:
+  - r-datavizcatalogue
+  - r-kaggle-dataviz
+practice:
+  - id: ex-geospatial-1
+    title: Map regional performance
+    description: Build a choropleth map showing a metric by region, and write one sentence on what it reveals that a table wouldn't.
+verify:
+  - Map type matches the question being asked
+  - Regions or points are correctly matched to their data
+  - Can justify why a map was the right choice over a table or bar chart
+note: |
+  ## 🎯 What is it?
+
+  **Geospatial visualization** shows data on a map — **choropleth maps** (shading regions by a value) and **point maps** (plotting individual locations) — and knowing when a map is genuinely the right chart for a question, versus when it isn't.
+
+  ## 💡 Why is it important?
+
+  Location-based questions — "where are sales strongest," "which regions are underperforming" — are answered far faster with a map than with a table of region names and numbers, since geographic patterns (clustering, regional gaps) are often instantly visible on a map and easy to miss in a table.
+
+  ## Core concept
+
+  ### Choropleth maps
+  Shades geographic regions (states, countries, zip codes) by a value — darker/lighter color representing higher/lower values. Ideal for **region-level aggregated data** (e.g., total sales by state).
+
+  ### Point maps
+  Plots individual locations using latitude/longitude — ideal for **discrete, location-specific data** (e.g., individual store locations, customer addresses, delivery stops).
+
+  | Map type | Best for | Data needed |
+  |---|---|---|
+  | Choropleth | Regional comparison (state, country, zip) | A value per named region |
+  | Point map | Individual locations | Latitude/longitude pairs |
+
+  ### When not to map
+  A map is the wrong chart when the *comparison* matters more than the *location* — e.g., ranking 5 regions by revenue is usually clearer and faster to read as a sorted bar chart than as a choropleth map, since precise value comparison is genuinely harder on a map than on a bar chart's aligned axis.
+
+  ## Syntax / Formula / Structure
+
+  A practical decision framework:
+
+  ```
+  Is the geographic pattern itself the insight (clustering, regional spread)?
+    → YES: a map is likely the right choice
+    → NO, it's really about ranking/comparing values
+    → a sorted bar chart usually communicates faster and more precisely
+  ```
+
+  ## 📊 Example
+
+  **Question:** "Which US states have the highest average order value?"
+
+  **Choropleth map:** shades each state by average order value — this instantly reveals *where* (e.g., "the Northeast is consistently darker/higher") in a way a 50-row table doesn't.
+
+  **But if the actual follow-up question is** "rank the top 5 states by average order value" — a sorted bar chart of just those states communicates the precise ranking and values far more clearly than trying to compare shading intensity by eye on a map.
+
+  ## Multiple examples
+
+  **Beginner:** A choropleth map of total sales by country for a global company.
+  **Intermediate:** A point map plotting every store location, colored by whether it's over or under its monthly target.
+  **Real-world:** A logistics team investigating delivery delays builds a point map of delayed shipments — the map instantly reveals delays are clustered around one specific distribution hub, a pattern that would have been much harder to spot scanning a table of thousands of individual shipment rows.
+
+  ## Types / Variations
+
+  See the Core concept table above (choropleth vs. point map) — the two standard geospatial chart types for business analytics.
+
+  ## ⚠️ Common mistakes
+
+  - **Using a map when a bar chart would communicate the actual comparison better.** A map's strength is showing spatial pattern, not precise value comparison — using one out of habit for "which region is #1" questions often makes the answer harder to read, not easier.
+  - **Choropleth maps shaded by a raw total instead of a rate**, which can just reflect population/region size rather than a meaningful difference (e.g., a state looking "high" on total sales purely because it's a bigger state) — normalize by population or another denominator when relevant.
+  - **Point maps with too many overlapping points**, becoming an unreadable solid blob — clustering, heatmap-style density shading, or aggregation may be needed at scale.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** a choropleth map of revenue by region to spot geographic concentration.
+  - **Operations analysis:** a point map of delivery delays to spot clustering around a specific hub or route.
+  - **Marketing analysis:** a choropleth map of conversion rate by region to guide where to increase local ad spend.
+
+  ## Related concepts
+
+  ```
+  Charts
+    ↓
+  Geospatial & Map Visualization ← you are here
+    ↓
+  Dashboard Design
+    ↓
+  BI Tools (Power BI / Tableau)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Which map type fits "show total sales by country," and which fits "show every customer's exact location"?
+
+  ### Medium
+  2. A choropleth map of total revenue by state makes California and Texas look dominant — but this might just reflect their large populations. What's a better metric to map?
+
+  ### Interview/Advanced
+  3. A stakeholder asks for "a map showing which of our 5 regions is performing best." Would you build a map, or something else? Why?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Choropleth for total sales by country (region-level aggregate); point map for individual customer locations (discrete, location-specific data).
+  2. Revenue *per capita* (or per customer, or another population-normalized rate) — this removes the effect of raw population size and shows genuine regional differences in performance.
+  3. A sorted bar chart, not a map — with only 5 regions, the question is fundamentally about *ranking and precise comparison*, which a bar chart communicates faster and more accurately than shading intensity on a map; a map's strength (revealing spatial pattern across many regions) isn't the actual need here.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between a choropleth map and a point map?**
+  Short answer: A choropleth map shades entire geographic regions by a value; a point map plots individual, discrete locations using latitude/longitude.
+
+  ### Conceptual questions
+  **Q: When would a bar chart be a better choice than a map, even for geographic data?**
+  Short answer: When the question is really about precise ranking or comparison between a small number of regions — a map's strength is showing spatial pattern across many regions at once, not precise value comparison between a few.
+
+  ### Scenario-based questions
+  **Q: A choropleth map of total revenue makes the largest-population states look like the best performers. Is this a fair representation? How would you fix it?**
+  Short answer: Not necessarily — raw totals conflate performance with region size; shading by a normalized rate (revenue per capita, or per customer) removes that bias and better reflects true regional performance.
+
+  ### Practical questions
+  **Q: How would you visualize thousands of individual delivery locations without the map becoming an unreadable solid blob of points?**
+  Short answer: Use density/heatmap-style shading, clustering nearby points together, or aggregating to a coarser region-level choropleth instead of plotting every single point individually.
+
+  ## Interview traps / tricky points
+
+  - A map "looking impressive" isn't the same as a map communicating the actual answer efficiently — interviewers often probe whether a candidate defaults to a map for the wrong reasons (visual appeal) rather than the right ones (spatial pattern is the actual insight).
+  - Choropleth maps shaded by raw totals (not rates) are a very common, easy-to-miss source of a misleading regional comparison.
+
+  ## Best practices
+
+  - Default to normalized rates (per capita, per customer), not raw totals, when shading a choropleth map for comparison purposes.
+  - Use a map only when the geographic pattern itself is the insight — otherwise, prefer a bar chart for precise comparison.
+  - Aggregate or cluster point maps with a large number of locations to avoid an unreadable overlapping blob.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Choropleth map** → shades regions by a value; best for regional aggregates
+  **Point map** → plots individual lat/long locations; best for discrete points
+  **Use a map when:** spatial pattern itself is the insight — otherwise prefer a bar chart
+  **Shade by rate, not raw total,** to avoid conflating performance with region/population size

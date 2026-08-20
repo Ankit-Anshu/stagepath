@@ -1,0 +1,104 @@
+title: Working Days
+category: Spreadsheets
+what_is_it: Calculating a duration or a future/past date in terms of business days only, excluding weekends (and optionally holidays), using NETWORKDAYS and WORKDAY.
+why_it_matters: A raw calendar-day duration overstates real business time whenever a weekend falls within the range — NETWORKDAYS and WORKDAY are the correct way to measure or project business-day timelines.
+prerequisites:
+  - eomonth-function
+objectives:
+  - Calculate the number of working days between two dates with NETWORKDAYS
+  - Calculate a future or past working date with WORKDAY
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-working-days-1
+    title: Calculate a business-day SLA
+    description: Given an order date, use WORKDAY to calculate a shipping deadline exactly 3 business days later, correctly skipping weekends.
+verify:
+  - NETWORKDAYS correctly excludes weekends from the count
+  - WORKDAY correctly skips weekends when projecting a future/past date
+note: |
+  ## 🎯 What is it?
+
+  **NETWORKDAYS** counts the number of working (business) days between two dates, excluding weekends (and optionally a list of holidays). **WORKDAY** does the reverse — given a start date, it finds a date a specified number of *working* days in the future or past, correctly skipping weekends.
+
+  ## 💡 Why is it important?
+
+  A raw calendar-day duration overstates real business time whenever a weekend falls within the range — a task due "in 5 days" that spans a weekend actually has fewer real working days available than the raw calendar count suggests. NETWORKDAYS and WORKDAY are the correct way to measure or project business-day timelines, like an SLA deadline.
+
+  ## Syntax
+
+  ```
+  =NETWORKDAYS(start_date, end_date, [holidays])
+  =WORKDAY(start_date, days, [holidays])
+  ```
+
+  - **holidays** (optional) — a range of specific dates to also exclude, beyond just weekends.
+
+  ## 📊 Example
+
+  An order is placed on Thursday, and the SLA is "ship within 3 business days."
+
+  **Formula:** `=WORKDAY(order_date,3)`
+
+  If order_date is a Thursday, WORKDAY correctly skips the weekend and lands on the following Tuesday (Fri, Mon, Tue = 3 working days) — a plain `order_date+3` would have incorrectly landed on Sunday.
+
+  ## Multiple examples
+
+  **Beginner:** `=NETWORKDAYS(A2,B2)` — count working days between a start and end date.
+  **Intermediate:** `=WORKDAY(A2,5)` — find the date 5 working days after A2.
+  **Real-world:** `=NETWORKDAYS(order_date,ship_date,holiday_list)` used to accurately measure whether a shipment met a "3 business day" SLA, correctly excluding both weekends and a company holiday calendar from the count.
+
+  ## ⚠️ Common mistakes
+
+  - **Using a plain `date+N` calculation for a "business days" deadline**, which silently lands on a weekend whenever the range crosses one — this is the single most common reason a "days to ship" or SLA calculation is subtly wrong.
+  - **Forgetting the optional holidays argument** when a business has recognized holidays that should also be excluded from the working-day count, not just weekends.
+
+  ## Real-world Data Analyst use cases
+
+  - **Operations analysis:** measuring whether a shipment or support ticket met a business-day SLA.
+  - **Project planning:** calculating a realistic deadline that accounts for weekends (and holidays).
+
+  ## Related concepts
+
+  ```
+  EOMONTH → Working Days ← you are here
+  ```
+  This closes the Date & Time group.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula for the number of working days between A2 and B2.
+
+  ### Medium
+  2. An order is placed on a Friday with a "2 business day" shipping SLA. What date should it ship by, and which function calculates this correctly?
+
+  ### Interview/Advanced
+  3. Why would a report measuring "average days to ship" using plain date subtraction (not NETWORKDAYS) systematically overstate performance on some orders and understate it on others?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=NETWORKDAYS(A2,B2)`
+  2. `=WORKDAY(order_date,2)` — a Friday order plus 2 working days correctly lands on Tuesday (skipping Saturday and Sunday), whereas `order_date+2` would incorrectly land on Sunday.
+  3. Plain date subtraction counts every calendar day including weekends — an order placed just before a weekend appears to take much longer (in calendar days) to ship than one placed mid-week, even if both were shipped in the same number of actual working days, systematically distorting the comparison between orders depending on which day of the week they happened to be placed.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why use NETWORKDAYS instead of simple date subtraction to measure an SLA?**
+  Short answer: Simple subtraction counts every calendar day, including weekends (and holidays), which can make an SLA look missed or exceeded purely due to which days of the week the range happened to span — NETWORKDAYS measures the actual business-day duration, which is what an SLA is meant to track.
+
+  ## Best practices
+
+  - Use NETWORKDAYS/WORKDAY (not plain date math) for any deadline, SLA, or duration measured in "business days."
+  - Include a holiday list in the optional argument whenever the business recognizes holidays that should also be excluded.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **NETWORKDAYS(start, end, [holidays])** → counts working days between two dates
+  **WORKDAY(start, days, [holidays])** → finds a date N working days in the future/past
+  **Rule:** never use plain date math for a "business days" deadline — it silently includes weekends

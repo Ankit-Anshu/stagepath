@@ -1,0 +1,72 @@
+title: COUNTBLANK Function
+category: Spreadsheets
+what_is_it: Counting how many cells in a range are empty.
+why_it_matters: It's the fastest way to spot missing data in a column before relying on it for analysis — a high COUNTBLANK is an early warning sign.
+prerequisites:
+  - counta-function
+objectives:
+  - Count empty cells in a range with COUNTBLANK
+  - Explain the relationship between COUNTA, COUNT, and COUNTBLANK on the same range
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-countblank-1
+    title: Check for missing data
+    description: Given a column of 100 rows, use COUNTBLANK to check how many are missing a value before starting analysis.
+verify:
+  - Can write a COUNTBLANK formula
+  - Can explain how COUNTBLANK + COUNTA relate to the total row count
+note: |
+  ## 🎯 What is it?
+
+  **COUNTBLANK** counts how many cells in a range are empty. It's the direct complement to COUNTA (which counts non-empty cells) — together, they account for every cell in a range.
+
+  ## 💡 Why is it important?
+
+  - It's the fastest way to spot missing data before relying on a column for analysis — a high COUNTBLANK count is an early warning sign worth investigating before building anything on top of that data.
+  - `COUNTA + COUNTBLANK` should always equal the total number of cells in the range — a useful sanity check.
+
+  ## Syntax
+
+  ```
+  =COUNTBLANK(range)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Amir |
+  | 2 | *(empty)* |
+  | 3 | Priya |
+  | 4 | *(empty)* |
+
+  `=COUNTBLANK(A1:A4)` → `2`
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing "blank" with a cell containing an empty-looking string** (like a space character, or a formula returning `""`) — COUNTBLANK treats these differently depending on the exact spreadsheet application, so it's worth spot-checking rather than assuming.
+  - **Not cross-checking COUNTBLANK against COUNTA** — if `COUNTA(range) + COUNTBLANK(range)` doesn't equal the range's total cell count, something unexpected is in the data.
+
+  ## Related concepts
+
+  ```
+  COUNTA
+    ↓
+  COUNTBLANK ← you are here
+    ↓
+  MIN
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: You want to check how much of a column is missing data before analyzing it. What formula would you use?**
+  Short answer: `=COUNTBLANK(range)` — it directly counts empty cells, giving a quick read on how much data is missing before further analysis.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **COUNTBLANK(range)** → counts empty cells
+  `COUNTA + COUNTBLANK` should equal the range's total cell count — a useful sanity check.

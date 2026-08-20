@@ -1,0 +1,92 @@
+title: Bar Chart
+category: Spreadsheets
+what_is_it: A chart using horizontal bars to compare values across categories, with category labels running down the left side.
+why_it_matters: The best chart type for comparing many categories, or categories with long text labels that would be cramped and unreadable along a vertical column-chart axis.
+prerequisites:
+  - grouping-spreadsheets
+objectives:
+  - Build a bar chart from a pivot table or range
+  - Explain when a bar chart is preferable to a column chart
+estimated_minutes: 20
+resources:
+  - r-datavizcatalogue
+practice:
+  - id: ex-bar-chart-1
+    title: Compare revenue by category
+    description: Build a sorted horizontal bar chart comparing revenue across 8 product categories with long names.
+verify:
+  - Chart correctly represents the underlying data
+  - Categories are sorted by value for easy comparison, not left in arbitrary order
+note: |
+  ## 🎯 What is it?
+
+  A **bar chart** uses horizontal bars to compare values across categories, with category labels running down the left side and bar length representing the value.
+
+  ## 💡 Why is it important?
+
+  It's the best chart type for comparing many categories, or categories with long text labels — a horizontal layout gives labels room to read fully, something a vertical [column chart](/skills/column-chart) struggles with once labels get long or numerous (see [Charts](/skills/charts) for the full chart-selection framework).
+
+  ## Core concept
+
+  | When to use a bar chart | When NOT to |
+  |---|---|
+  | Comparing many categories (8+) | Showing a trend over time — use a [line chart](/skills/line-chart) instead |
+  | Category labels are long text | Only 2-3 short categories — a column chart works fine too |
+
+  **Always sort a bar chart by value** (largest to smallest, typically) unless there's a specific reason to keep a different order (like alphabetical or chronological) — sorting makes ranking and comparison immediate.
+
+  ## 📊 Example
+
+  Revenue by product category, 8 categories with names like "Home & Kitchen Appliances."
+
+  A **bar chart**, sorted largest-to-smallest, with categories down the left side, reads far more easily than the same data in a column chart, where 8 long category names crammed along the bottom axis would need to be rotated or truncated to fit.
+
+  ## Multiple examples
+
+  **Beginner:** A simple bar chart comparing revenue across 5 regions.
+  **Real-world:** A sorted bar chart of the top 15 products by units sold, immediately showing the ranking at a glance — something much harder to read in a column chart with 15 rotated labels along the bottom.
+
+  ## ⚠️ Common mistakes
+
+  - **Leaving categories in an arbitrary (unsorted) order** instead of sorting by value — this is the single easiest, highest-impact fix for a bar chart's readability.
+  - **Using a bar chart for a small number of categories with short labels**, where a column chart would work just as well and is often a more familiar format to most readers.
+  - **Truncating the value axis (not starting at zero)**, exaggerating the visual difference between bars — see [Charts](/skills/charts)'s misleading-chart guidance.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** ranking product categories or sales reps by revenue.
+  - **Marketing analysis:** comparing conversion rate across many campaigns with long, descriptive names.
+
+  ## Related concepts
+
+  ```
+  Grouping → Bar Chart ← you are here → Column Chart → Line Chart → Scatter Plot
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. When would a bar chart be preferred over a column chart?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. When comparing many categories, or categories with long text labels that need horizontal room to read clearly.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why sort a bar chart's categories by value instead of leaving them in the order they appear in the source data?**
+  Short answer: Sorting makes ranking and comparison immediate — a reader can see the highest and lowest values at a glance, instead of having to scan every bar to find them.
+
+  ## Best practices
+
+  - Sort a bar chart by value unless there's a specific reason to preserve a different order.
+  - Start the value axis at zero.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Bar chart** → horizontal bars, best for many categories or long labels
+  **Always:** sort by value, start the axis at zero

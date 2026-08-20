@@ -1,0 +1,68 @@
+title: Pie / Donut Chart
+category: Spreadsheets
+what_is_it: A circular chart showing each category's share of a whole — a pie chart as a full circle, a donut chart with a hollow center.
+why_it_matters: It's one of the most overused and most misused chart types — knowing when it genuinely fits (a handful of categories, part-to-whole) versus when a bar chart would communicate better is a real skill.
+prerequisites:
+  - scatter-plot
+objectives:
+  - Build a pie or donut chart to show part-to-whole composition
+  - Explain when a bar chart communicates better than a pie chart
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-pie-donut-chart-1
+    title: Build and critique a pie chart
+    description: Build a pie chart of 8 categories, then rebuild the same data as a bar chart and compare which communicates the differences more clearly.
+verify:
+  - Can build a pie or donut chart
+  - Can explain a scenario where a bar chart would be clearer than a pie chart
+note: |
+  ## 🎯 What is it?
+
+  A **pie chart** shows each category's share of a whole as a slice of a circle; a **donut chart** is the same idea with a hollow center (often used to display a total or KPI in the middle). Both work best for **part-to-whole** comparisons with a small number of categories.
+
+  ## 💡 Why is it important?
+
+  - It's one of the most recognizable — and most overused — chart types; knowing its real limits prevents reaching for it out of habit when it isn't the clearest choice.
+  - Understanding when it fits (a handful of categories, genuinely summing to a meaningful whole) versus when it doesn't (many categories, or comparing values that aren't parts of one whole) is a real, frequently-tested visualization judgment call.
+
+  ## Core concept
+
+  | Good fit | Poor fit |
+  |---|---|
+  | 2–5 categories | 7+ categories (slices become too thin to read) |
+  | Values that genuinely sum to a meaningful whole | Values that aren't parts of one whole (e.g., separate metrics) |
+  | A single point-in-time snapshot | Comparing change over time (use a line chart instead) |
+
+  ## 📊 Example
+
+  Market share across 4 competitors (summing to 100%) is a reasonable pie chart. The same data for 15 competitors becomes a wall of unreadable thin slices — a sorted bar chart communicates the same information far more clearly at that scale.
+
+  ## ⚠️ Common mistakes
+
+  - **Using a pie chart for more than 5-6 categories**, producing slices too thin to compare accurately by eye.
+  - **Using a pie chart to compare values across time or between unrelated metrics** — pie charts are for part-to-whole composition at one snapshot, not trends or unrelated comparisons.
+  - **3D pie charts** — the perspective distortion makes slice sizes even harder to compare accurately; avoid them.
+
+  ## Related concepts
+
+  ```
+  Scatter Plot
+    ↓
+  Pie / Donut Chart ← you are here
+    ↓
+  Area Chart
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you choose a bar chart over a pie chart for showing category shares?**
+  Short answer: When there are more than about 5-6 categories, or precise comparison between similarly-sized categories matters — bar charts let a viewer compare lengths accurately, while pie chart slices become hard to distinguish once there are many or similarly-sized categories.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Pie/Donut chart** → part-to-whole composition, best with 2–5 categories
+  Beyond ~5-6 categories, or for comparisons over time, a bar chart usually communicates better.

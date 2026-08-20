@@ -1,0 +1,24 @@
+title: Frontend Quality
+category: Frontend Development
+what_is_it: Testing behavior, measuring performance, and preventing accessibility and compatibility regressions.
+why_it_matters: Production UI must remain correct under change, slow networks, assistive technology, and real devices.
+estimated_minutes: 2600
+prerequisites: [frontend-frameworks]
+objectives: [Write meaningful tests, Diagnose performance, Audit accessibility]
+subtopics:
+  - title: Testing strategy
+    description: Unit, integration, end-to-end, visual, and accessibility testing tradeoffs.
+    outcomes: [Choose the right test level, Avoid testing implementation details]
+  - title: Component and integration tests
+    description: User-centered queries, events, async behavior, mocks, and fixtures.
+    outcomes: [Test visible behavior, Build reliable fixtures]
+  - title: End-to-end tests
+    description: Critical journeys, browser automation, test isolation, and flaky-test control.
+    outcomes: [Cover a core journey, Diagnose flakiness]
+  - title: Web performance
+    description: Core Web Vitals, loading waterfalls, code splitting, images, fonts, and runtime cost.
+    outcomes: [Profile a slow page, Prioritize performance work]
+  - title: Cross-browser quality
+    description: Progressive enhancement, feature detection, device testing, and fallbacks.
+    outcomes: [Create a compatibility matrix, Design graceful fallbacks]
+

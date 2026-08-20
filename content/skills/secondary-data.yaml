@@ -1,0 +1,67 @@
+title: Secondary Data
+category: Foundations
+what_is_it: Data originally collected by someone else, for a different purpose, that you reuse for your own analysis — public datasets, government statistics, third-party reports.
+why_it_matters: Most analysts use far more secondary data than primary data day to day — knowing its limitations (unknown collection quality, possible mismatch with your exact question) prevents overconfident conclusions.
+prerequisites:
+  - primary-data
+objectives:
+  - Define secondary data and give two examples
+  - Explain one risk of relying on secondary data
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-secondary-data-1
+    title: Evaluate a public dataset
+    description: Find any public dataset (Kaggle, government open data) and note what it was originally collected for, versus how you might reuse it.
+verify:
+  - Can define secondary data
+  - Can name one risk of using secondary data uncritically
+note: |
+  ## 🎯 What is it?
+
+  **Secondary data** was originally collected by someone else, for a different purpose, and you're reusing it. Public government statistics, industry reports, Kaggle datasets, and even a partner company's shared data all count — you didn't design the collection method.
+
+  ## 💡 Why is it important?
+
+  - It's cheap and fast to use — no need to run your own survey or experiment — which is why most analyst work leans heavily on secondary data (internal databases from other teams, third-party benchmarks, open datasets).
+  - You don't control how it was collected, so it may not perfectly fit your question, and its quality can be unknown or undocumented.
+
+  ## Core concept
+
+  | Risk | Why it matters |
+  |---|---|
+  | Unknown collection method | You can't verify sampling bias or data quality firsthand |
+  | Different original purpose | Fields may not map cleanly to what you actually need |
+  | Staleness | Public/third-party data can be outdated by the time you use it |
+  | Definitional mismatch | "Active user" in someone else's dataset may not match your definition |
+
+  ## 📊 Example
+
+  A government "average household income by region" dataset used to benchmark a company's own customer base is secondary data — useful and much cheaper than surveying every customer's income directly, but it wasn't collected specifically for that company's question, so it must be interpreted carefully.
+
+  ## ⚠️ Common mistakes
+
+  - **Treating secondary data as automatically representative of your own population** — a public dataset's population may differ meaningfully from your customers.
+  - **Skipping the source's methodology** before using it — a good analyst checks who collected the data, how, and when, before trusting conclusions built on it.
+
+  ## Related concepts
+
+  ```
+  Primary Data (collected firsthand, for this purpose)
+  Secondary Data ← you are here (collected by someone else, for another purpose)
+  ```
+
+  This closes the Data Fundamentals chapter — every dataset an analyst touches can be classified along all five of these dimensions: structure, qualitative/quantitative, level of measurement, and primary/secondary source.
+
+  ## 🎤 Interview preparation
+
+  **Q: What's a risk of basing a business decision entirely on a public secondary dataset?**
+  Short answer: You don't control its collection method or definitions, so its population or metric definitions may not match your own business — it should be used as a directional benchmark, not treated as equivalent to your own primary data.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Secondary data** → collected by someone else, for another purpose, reused by you — public datasets, third-party reports
+  Cheap and fast, but requires checking source, methodology, and fit to your question.

@@ -1,0 +1,87 @@
+title: Column Chart
+category: Spreadsheets
+what_is_it: A chart using vertical bars to compare values across categories, with category labels running along the bottom.
+why_it_matters: The most familiar, default chart type for comparing a small number of categories, and the standard choice when categories have a natural chronological or ranked order.
+prerequisites:
+  - bar-chart
+objectives:
+  - Build a column chart from a range or pivot table
+  - Explain when a column chart is preferable to a bar chart
+estimated_minutes: 15
+resources:
+  - r-datavizcatalogue
+practice:
+  - id: ex-column-chart-1
+    title: Compare quarterly revenue
+    description: Build a column chart comparing revenue across 4 quarters, in chronological order.
+verify:
+  - Chart correctly represents the underlying data
+  - Categories are in a sensible order (chronological, where relevant)
+note: |
+  ## 🎯 What is it?
+
+  A **column chart** uses vertical bars to compare values across categories, with category labels running along the bottom — the vertical counterpart to a [bar chart](/skills/bar-chart).
+
+  ## 💡 Why is it important?
+
+  It's the most familiar, default chart type for comparing a small number of categories, and the standard choice when categories have a natural chronological or ranked order (like quarters or years), where reading left-to-right matches how the reader naturally expects to interpret the sequence.
+
+  ## Core concept
+
+  | When to use a column chart | When NOT to |
+  |---|---|
+  | A small number of categories (roughly 2-7) | Many categories or long labels — use a [bar chart](/skills/bar-chart) instead |
+  | Categories with a natural left-to-right order (quarters, years) | A continuous trend over many time points — use a [line chart](/skills/line-chart) instead |
+
+  ## 📊 Example
+
+  Revenue by quarter (Q1, Q2, Q3, Q4) — a column chart, left to right in chronological order, matches how a reader naturally expects to scan a short time sequence.
+
+  ## Multiple examples
+
+  **Beginner:** A column chart comparing revenue across 4 quarters.
+  **Real-world:** A column chart comparing this year's and last year's revenue side by side for each quarter (a clustered column chart), making a year-over-year comparison immediately visible.
+
+  ## ⚠️ Common mistakes
+
+  - **Using a column chart for many categories or long labels**, cramming labels along the bottom axis until they need to be rotated or truncated to fit — a bar chart handles this far better.
+  - **Using a column chart to show a trend across many time points** (like 52 weeks), where a [line chart](/skills/line-chart) reads more clearly as a continuous trend rather than a series of separate bars.
+
+  ## Real-world Data Analyst use cases
+
+  - **Finance analysis:** comparing revenue or expenses across a handful of quarters or years.
+  - **Marketing analysis:** comparing performance across a small number of campaigns.
+
+  ## Related concepts
+
+  ```
+  Bar Chart → Column Chart ← you are here → Line Chart → Scatter Plot
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. When would you choose a column chart over a bar chart?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. When there's a small number of categories with short labels, especially ones with a natural left-to-right order like quarters or years.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why might a column chart become a poor choice as the number of categories grows?**
+  Short answer: Labels along the bottom axis get cramped and need to be rotated or truncated to fit, hurting readability — a horizontal bar chart handles many categories or long labels much more gracefully.
+
+  ## Best practices
+
+  - Reserve column charts for a small number of categories, ideally with a natural left-to-right order.
+  - Switch to a bar chart once category count or label length grows.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Column chart** → vertical bars, best for a small number of ordered categories
+  **Grows past ~7 categories or long labels?** → switch to a bar chart

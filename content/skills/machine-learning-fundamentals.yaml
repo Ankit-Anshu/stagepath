@@ -1,0 +1,28 @@
+title: Machine Learning Fundamentals
+what_is_it: >-
+  The core supervised learning workflow: framing a prediction problem, splitting data, training a
+  baseline model, and avoiding data leakage.
+why_it_matters: >-
+  Most of the value (and most of the mistakes) in applied ML happen before any advanced model is
+  chosen — in framing the problem and preparing the data correctly.
+prerequisites:
+  - pandas
+  - statistics
+objectives:
+  - Frame a business problem as a supervised learning problem
+  - Correctly split data into train and test sets
+  - Train and evaluate a simple baseline model
+  - Identify a source of data leakage
+estimated_minutes: 360
+resources:
+  - r-google-ml-crash-course
+practice:
+  - id: ex-ml-1
+    title: Build a baseline model
+    description: >-
+      Given a labeled dataset, split it correctly and train the simplest reasonable baseline model
+      before anything more complex.
+verify:
+  - Train/test split is done before any preprocessing that uses the full dataset
+  - Baseline model result is stated as a benchmark, not a final answer
+  - Can name a specific leakage risk in the given dataset

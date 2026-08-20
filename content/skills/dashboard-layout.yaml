@@ -1,0 +1,69 @@
+title: Dashboard Layout
+category: Spreadsheets
+what_is_it: Arranging a dashboard's charts and KPIs so the most important information is seen first, using position and visual hierarchy deliberately.
+why_it_matters: The same set of charts, arranged well versus poorly, can be the difference between a dashboard a viewer understands in 5 seconds and one they give up on.
+prerequisites:
+  - kpi-selection
+objectives:
+  - Arrange dashboard elements using a deliberate visual hierarchy
+  - Explain the common "top-left first" reading pattern and how it should guide layout
+estimated_minutes: 25
+resources:
+  - r-storytelling-with-data
+practice:
+  - id: ex-dashboard-layout-1
+    title: Sketch a layout
+    description: Given a set of 5 charts/KPIs for a dashboard, sketch a layout that puts the most important elements where a viewer will see them first.
+verify:
+  - Can arrange dashboard elements with a deliberate visual hierarchy
+  - Can explain why position affects what a viewer notices first
+note: |
+  ## 🎯 What is it?
+
+  **Dashboard layout** is the deliberate arrangement of charts and KPIs on the page — using position, size, and grouping so the most important information is what a viewer sees first, rather than scattering elements in whatever order they were built.
+
+  ## 💡 Why is it important?
+
+  - The same set of charts, arranged well versus poorly, can be the difference between a dashboard a viewer understands in 5 seconds and one they struggle with — layout is a real, high-leverage design decision, not an afterthought.
+  - Most viewers (in left-to-right reading cultures) scan top-left first — the single most important number or chart should live there, not buried at the bottom.
+
+  ## Core concept
+
+  | Layout principle | Why |
+  |---|---|
+  | Most important element top-left | Matches how most viewers naturally scan a page first |
+  | Bigger = more important | Size signals priority — don't make a minor metric as large as the headline one |
+  | Group related items together | Related charts near each other read as connected; scattered ones don't |
+  | Consistent grid alignment | Misaligned elements look unpolished and are harder to scan |
+
+  ## 📊 Example
+
+  A sales dashboard puts total revenue vs. target (the single most important number) as a large KPI card top-left, with supporting detail (revenue by region, top products) arranged below and to the right in decreasing order of importance — a viewer gets the headline answer instantly, with supporting detail available without hunting for it.
+
+  ## ⚠️ Common mistakes
+
+  - **Arranging charts in the order they were built**, rather than deliberately by importance — this is one of the most common, easiest-to-fix layout mistakes.
+  - **Making every element the same size**, giving no visual cue about what matters most.
+  - **Inconsistent spacing and alignment**, which makes a dashboard feel unpolished even when the underlying data and charts are solid.
+
+  ## Related concepts
+
+  ```
+  KPI Selection
+    ↓
+  Dashboard Layout ← you are here
+    ↓
+  Interactive Filters
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Where should the single most important number on a dashboard be placed, and why?**
+  Short answer: Top-left, and sized larger than supporting elements — most viewers scan a page starting top-left, so that position (combined with size) is the strongest signal of what matters most.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Dashboard layout** → arrange by importance: top-left first, size signals priority, group related items, align consistently
+  The same charts, laid out well vs. poorly, dramatically changes how fast a viewer understands them.

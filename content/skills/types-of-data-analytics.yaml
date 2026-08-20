@@ -1,0 +1,187 @@
+title: Types of Data Analytics
+category: Foundations
+what_is_it: The four categories of analytics — descriptive, diagnostic, predictive, and prescriptive — and what kind of question each one answers.
+why_it_matters: Knowing which type of analytics a question actually calls for keeps you from over- or under-engineering an answer. Not every question needs a predictive model, and not every question is answered by a summary chart.
+prerequisites: []
+objectives:
+  - Distinguish descriptive from diagnostic analytics
+  - Explain what predictive analytics adds beyond description
+  - Explain what prescriptive analytics adds beyond prediction
+  - Match a business question to the right type of analytics
+subtopics:
+  - title: Descriptive Analytics
+    description: Summarizing what already happened — totals, trends, and historical reporting.
+    outcomes:
+      - Identify a question that only needs descriptive analytics
+  - title: Diagnostic Analytics
+    description: Investigating why something happened by drilling into drivers and segments.
+    outcomes:
+      - Diagnose a metric change by segmenting the data
+  - title: Predictive Analytics
+    description: Using historical data to estimate what is likely to happen next.
+    outcomes:
+      - Explain what predictive analytics requires that descriptive analytics doesn't
+  - title: Prescriptive Analytics
+    description: Recommending a specific action based on a prediction, not just forecasting it.
+    outcomes:
+      - Explain the difference between predicting an outcome and prescribing an action
+estimated_minutes: 120
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-types-of-analytics-1
+    title: Classify a set of questions
+    description: Given five business questions, label each one as descriptive, diagnostic, predictive, or prescriptive, and explain why.
+verify:
+  - Each question is classified as the correct type
+  - Can explain what makes a question predictive rather than diagnostic
+  - Can name what evidence would be needed to answer a prescriptive question
+note: |
+  ## 🎯 What is it?
+
+  There are four types of analytics, and each answers a different kind of question:
+
+  | Type | Question it answers |
+  |---|---|
+  | **Descriptive** | What happened? |
+  | **Diagnostic** | Why did it happen? |
+  | **Predictive** | What's likely to happen next? |
+  | **Prescriptive** | What should we do about it? |
+
+  Think of a doctor visit: descriptive is your temperature reading, diagnostic is figuring out you have the flu, predictive is estimating how long you'll be sick, and prescriptive is the doctor telling you what medicine to take.
+
+  ## 💡 Why is it important?
+
+  - Every analysis request implicitly asks for one (or more) of these four types — misreading which one is being asked for wastes time and produces the wrong deliverable.
+  - Not every question needs a machine-learning model. Most business questions are actually descriptive or diagnostic, and treating them otherwise is over-engineering.
+  - Interviewers use this framework constantly to test whether you can scope a problem correctly before diving in.
+  - It's a shared vocabulary — saying "this is a diagnostic question" instantly communicates the right approach to a teammate or stakeholder.
+
+  ## Core concept
+
+  ### Descriptive Analytics — "What happened?"
+  Summarizes historical data: totals, averages, trends over time. This is the majority of dashboards and standard reports.
+
+  *Example:* "Total revenue last month was $1.2M, up 8% from the prior month."
+
+  ### Diagnostic Analytics — "Why did it happen?"
+  Digs into the descriptive result to find a driver — usually by segmenting the data (by region, channel, product, cohort) or comparing it to a related metric.
+
+  *Example:* "Revenue grew mainly because the West region had a 20% jump in average order value, not order count."
+
+  ### Predictive Analytics — "What's likely to happen next?"
+  Uses historical patterns to forecast a future outcome — anything from a simple trendline to a statistical or machine-learning model.
+
+  *Example:* "Based on current trends, next month's revenue is likely to land between $1.25M and $1.35M."
+
+  ### Prescriptive Analytics — "What should we do?"
+  Goes one step further than prediction: recommends a specific action, often by weighing trade-offs or running a simulation/optimization.
+
+  *Example:* "Increase West-region ad spend by 15% — modeling shows this is the highest-ROI lever available this quarter."
+
+  ## Types / Variations
+
+  | Type | Typical technique | Analyst effort |
+  |---|---|---|
+  | Descriptive | Aggregation, dashboards, reporting | Low–medium |
+  | Diagnostic | Segmentation, correlation, drill-down | Medium |
+  | Predictive | Trend analysis, regression, forecasting | Medium–high |
+  | Prescriptive | Optimization, simulation, decision rules | High |
+
+  ## 📊 Example
+
+  A subscription company sees churn rise. Here's the same underlying problem answered four ways:
+
+  - **Descriptive:** "Monthly churn rate rose from 3% to 5%."
+  - **Diagnostic:** "The increase is concentrated in customers on the free-trial-to-paid conversion, mostly in month 2."
+  - **Predictive:** "If this trend continues, churn will reach 7% by next quarter."
+  - **Prescriptive:** "Add a month-2 check-in email — a pilot on a similar cohort reduced churn by 1.5 points."
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** descriptive dashboard of monthly revenue; diagnostic drill-down when a region underperforms.
+  - **Marketing analysis:** predictive forecast of next quarter's leads based on current spend trends.
+  - **Product analysis:** prescriptive recommendation on which onboarding step to redesign first, based on modeled drop-off impact.
+
+  ## ⚠️ Common mistakes
+
+  - **Jumping straight to prediction/prescription when the question is actually descriptive.** Most stakeholder requests just need a clear, accurate summary — building a model is unnecessary and slower.
+  - **Treating a diagnostic finding as causal proof.** Segmenting data can reveal a strong association, but it doesn't prove causation without a proper experiment (see [A/B Testing](/skills/ab-testing)).
+  - **Confusing "predictive" with "certain."** A forecast is a range of likely outcomes, not a guarantee — always communicate uncertainty.
+
+  ## Related concepts
+
+  ```
+  What is Data Analytics
+    ↓
+  Types of Data Analytics ← you are here
+    ↓
+  The Data Analytics Lifecycle
+    ↓
+  KPIs & Metrics
+    ↓
+  Statistics (Descriptive Stats → Hypothesis Testing)
+    ↓
+  Forecasting & Trend Analysis (predictive)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Classify: "How many units did we sell last week?" — which type of analytics?
+  2. Classify: "Why did website traffic drop yesterday?" — which type?
+
+  ### Medium
+  3. A stakeholder asks "will we hit our Q4 sales target?" — which type of analytics does this require, and what would you need to answer it well?
+
+  ### Interview/Advanced
+  4. Give an example of a business question that requires *both* diagnostic and prescriptive analytics to fully answer, and explain why one type alone isn't enough.
+
+  <details>
+  <summary><strong>Answer / Solution</strong></summary>
+
+  1. Descriptive — it's a simple historical summary.
+  2. Diagnostic — it's asking for a cause.
+  3. Predictive — you'd need historical sales trends and, ideally, known factors like seasonality or pipeline data to forecast whether the target is reachable.
+  4. Example: "Why is churn rising, and what should we do about it?" — diagnostic identifies the driver (e.g., a broken onboarding step), but stopping there leaves the business without an action; prescriptive analytics is needed to recommend and prioritize a fix.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What are the four types of analytics?**
+  Short answer: Descriptive (what happened), diagnostic (why), predictive (what's next), prescriptive (what to do).
+
+  ### Conceptual questions
+  **Q: What's the difference between diagnostic and predictive analytics?**
+  Short answer: Diagnostic looks backward to explain a past result; predictive looks forward to estimate a future one.
+
+  ### Scenario-based questions
+  **Q: Your manager asks you to "figure out what's going on with sign-ups." What type of analytics do you start with, and why?**
+  Short answer: Start descriptive (confirm the trend is real and quantify it), then move diagnostic (segment to find the driver) — jumping to prediction or prescription before understanding the "what" and "why" is premature.
+
+  ### Practical questions
+  **Q: How would you tell a stakeholder that a forecast is a range, not a guarantee, without sounding evasive?**
+  Short answer: Frame it concretely — "based on current trends, we expect revenue between $1.2M and $1.35M, with $1.28M as our best estimate" — a range with a best estimate reads as precise, not uncertain.
+
+  ## Interview traps / tricky points
+
+  - Candidates often conflate diagnostic analytics (correlation/segmentation) with proof of causation — interviewers frequently probe this distinction directly.
+  - "Predictive" doesn't require machine learning — a simple trendline or moving average is still predictive analytics if it's estimating the future.
+
+  ## Best practices
+
+  - Identify which type of analytics a request actually needs *before* choosing a method — it's the single fastest way to avoid over- or under-engineering an answer.
+  - When presenting diagnostic findings, explicitly flag whether you've established causation or only a correlation/pattern.
+  - Pair predictive numbers with a range and the key assumptions behind them, not just a single point estimate.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Descriptive** → what happened (totals, trends, reporting)
+  **Diagnostic** → why it happened (segmentation, drill-down)
+  **Predictive** → what's likely next (forecasting, trendlines, models)
+  **Prescriptive** → what to do about it (recommendations, optimization)
+  Remember: most business questions are descriptive or diagnostic — don't over-engineer with prediction/prescription unless the question actually calls for it.

@@ -1,0 +1,59 @@
+title: Combining Columns
+category: Spreadsheets
+what_is_it: Joining two or more columns' content into one — like combining "First Name" and "Last Name" into "Full Name" — the reverse operation of splitting.
+why_it_matters: Reports and lookups often need one combined field even when the source data stores it separately.
+prerequisites:
+  - splitting-columns
+objectives:
+  - Combine multiple columns into one using concatenation or TEXTJOIN
+  - Add a separator correctly when combining columns
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-combining-columns-1
+    title: Combine an address
+    description: Given separate Street, City, and Zip columns, combine them into one formatted "Full Address" column with correct separators.
+verify:
+  - Can combine columns with & or TEXTJOIN
+  - Can add appropriate separators between combined values
+note: |
+  ## 🎯 What is it?
+
+  **Combining columns** joins two or more columns' content into one — the reverse of splitting. Combining "First Name" and "Last Name" into "Full Name," using `&` (concatenation) or the TEXTJOIN function.
+
+  ## 💡 Why is it important?
+
+  - Reports, labels, and lookups often need one combined field (a full name, a formatted address) even when the source data deliberately stores parts separately for flexibility.
+  - Getting separators right (a space between first/last name, commas in an address) is a small detail that makes a big difference in output quality.
+
+  ## 📊 Example
+
+  `=A2 & " " & B2` or `=TEXTJOIN(" ", TRUE, A2, B2)` combines "Amir" (A2) and "Khan" (B2) into "Amir Khan" — TEXTJOIN is generally preferred for combining more than two fields, since it handles the separator and empty-value skipping automatically.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting the separator**, producing a run-together result like "AmirKhan" instead of "Amir Khan."
+  - **Not handling blank fields gracefully** — combining a missing middle name with plain `&` concatenation can leave an awkward double space; TEXTJOIN's "ignore empty" option handles this better.
+
+  ## Related concepts
+
+  ```
+  Splitting Columns
+    ↓
+  Combining Columns ← you are here
+    ↓
+  Changing Data Types
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why might TEXTJOIN be a better choice than plain & concatenation for combining several address fields?**
+  Short answer: TEXTJOIN handles the separator consistently across many fields at once and can automatically skip empty values, avoiding awkward double separators that plain `&` concatenation would produce for a missing field like a blank apartment number.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Combining columns** → `&` or TEXTJOIN joins multiple columns into one
+  TEXTJOIN handles separators and empty-value skipping more gracefully than plain concatenation.

@@ -1,0 +1,95 @@
+title: TODAY Function
+category: Spreadsheets
+what_is_it: Returning the current date, updating automatically every time the spreadsheet recalculates.
+why_it_matters: The building block behind every "days since," "days until," and "as of today" calculation — like tenure or overdue-days formulas.
+prerequisites:
+  - substitute-function
+objectives:
+  - Use TODAY to get the current date
+  - Explain why TODAY changes automatically without being edited
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-today-1
+    title: Calculate days since signup
+    description: Use TODAY combined with a signup-date column to calculate how many days ago each customer signed up.
+verify:
+  - TODAY correctly returns the current date
+  - Combined formula correctly calculates a duration up to the current date
+note: |
+  ## 🎯 What is it?
+
+  **TODAY** returns the current date, and updates automatically every time the spreadsheet recalculates — no manual editing needed.
+
+  ## 💡 Why is it important?
+
+  It's the building block behind every "days since," "days until," and "as of today" calculation — like customer tenure, days overdue, or days until a deadline — all of which need to always reflect the *current* date, not a date typed in once and left stale.
+
+  ## Syntax
+
+  ```
+  =TODAY()
+  ```
+
+  Takes no arguments — it simply returns the current date.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 2024-01-05 |
+
+  **Formula:** `=TODAY()-A1`
+  **Result:** the number of days between the signup date in A1 and whatever "today" is when the formula is calculated — this result changes automatically every day.
+
+  ## Multiple examples
+
+  **Beginner:** `=TODAY()` — display today's date in a cell.
+  **Intermediate:** `=DATEDIF(A2,TODAY(),"D")` — combining TODAY with [DATEDIF](/skills/datedif-function) to compute an always-current duration.
+  **Real-world:** A dashboard's "days since last order" column, using TODAY so it stays accurate every time the sheet is opened, without anyone manually updating a reference date.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing TODAY with a typed-in date.** A typed date stays fixed forever; TODAY() recalculates to the actual current date every time the sheet is opened or recalculated.
+  - **Using TODAY in a report meant to represent a fixed historical snapshot.** If a report needs to always show "as of March 1st" regardless of when it's viewed, a typed-in fixed date is actually more appropriate than TODAY.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any recurring report:** calculating "days since," "days until," or "current age" values that should always reflect the actual current date.
+
+  ## Related concepts
+
+  ```
+  Substitute → TODAY ← you are here → NOW → DATE → YEAR/MONTH/DAY
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that displays today's date.
+
+  ### Interview/Advanced
+  2. Why might using TODAY() be the wrong choice in a report meant to represent a fixed historical snapshot?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=TODAY()`
+  2. TODAY() always reflects the actual current date whenever the sheet recalculates — a report meant to freeze a specific past moment (e.g., "sales as of March 1st") would show a different, incorrect date if reopened later using TODAY(), so a fixed, typed-in date is more appropriate for that use case.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why does TODAY() update automatically without anyone editing the cell?**
+  Short answer: It's a volatile function that recalculates every time the spreadsheet recalculates (on open, on edit, or on manual recalculation), always returning the actual current date rather than a fixed value.
+
+  ## Best practices
+
+  - Use TODAY() for any calculation that should always reflect the current date; use a fixed typed date for a report meant to represent a frozen historical snapshot.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **TODAY()** → current date, updates automatically, no arguments

@@ -1,0 +1,69 @@
+title: Pattern Identification
+category: Foundations
+what_is_it: Noticing recurring structure in data — trends, cycles, clusters, or repeated relationships — that isn't obvious from a single number.
+why_it_matters: Most valuable insights come from a pattern, not a single data point — spotting them is what turns a pile of numbers into something worth investigating.
+prerequisites:
+  - root-cause-analysis
+objectives:
+  - Define pattern identification and give an example
+  - Name two common pattern types an analyst looks for
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-pattern-identification-1
+    title: Spot a pattern
+    description: Look at any chart or table you have access to and identify one recurring pattern (a cycle, a cluster, a repeated relationship).
+verify:
+  - Can define pattern identification
+  - Can name two types of patterns an analyst looks for
+note: |
+  ## 🎯 What is it?
+
+  **Pattern identification** is the skill of noticing recurring structure in data — a trend, a seasonal cycle, a cluster of similar records, or a relationship that keeps showing up — rather than looking at each number in isolation.
+
+  ## 💡 Why is it important?
+
+  - Most valuable findings come from a pattern, not a single data point — "revenue was $50K in March" is a fact; "revenue always dips in March, every year" is a pattern worth investigating and planning around.
+  - It's the skill underlying trend analysis, segmentation, and correlation — all specific applications of noticing structure in data.
+
+  ## Core concept
+
+  | Pattern type | Example |
+  |---|---|
+  | Trend | Steady growth or decline over time |
+  | Seasonality/cycle | Sales spike every December |
+  | Cluster | A group of customers behaving similarly |
+  | Repeated relationship | Higher marketing spend consistently precedes higher signups |
+  | Outlier pattern | The same few accounts always driving disproportionate revenue |
+
+  ## 📊 Example
+
+  Looking at 3 years of monthly revenue, a single month's number tells you little. Plotting all 36 months reveals a pattern: revenue consistently spikes every November and December — a seasonal pattern worth planning inventory and staffing around, invisible from any single month's number.
+
+  ## ⚠️ Common mistakes
+
+  - **Seeing a pattern in too little data** — a "pattern" based on 2–3 data points is often just noise; genuine patterns usually need to be checked across a longer time period or larger sample.
+  - **Not verifying a suspected pattern holds across different segments** before treating it as a general truth.
+
+  ## Related concepts
+
+  ```
+  Root Cause Analysis
+    ↓
+  Pattern Identification ← you are here
+    ↓
+  Trend Analysis
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How do you avoid mistaking random noise for a real pattern?**
+  Short answer: Check whether the pattern holds across a longer time window or a larger sample, and whether it's consistent across relevant segments — a pattern seen in just 2–3 data points is much more likely to be noise than a real, recurring structure.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Pattern identification** → notice recurring structure (trends, cycles, clusters, relationships) rather than isolated numbers
+  Verify a pattern holds across enough data before trusting it.

@@ -1,0 +1,68 @@
+title: Ranges
+category: Spreadsheets
+what_is_it: A rectangular group of two or more cells, written as two corner addresses separated by a colon (e.g., B2:B10) — what most formulas actually operate on.
+why_it_matters: Almost every formula beyond the simplest ones — SUM, AVERAGE, VLOOKUP — takes a range as an input, so selecting the correct range is a constant, foundational skill.
+prerequisites:
+  - cells
+objectives:
+  - Define a range and write one using colon notation
+  - Select a range by clicking and dragging, and by typing it directly
+estimated_minutes: 15
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-ranges-1
+    title: Select a range
+    description: Given a column of 20 numbers, select the full range both by clicking and dragging, and by typing its address directly into a formula.
+verify:
+  - Can define a range
+  - Can write a range address using colon notation
+note: |
+  ## 🎯 What is it?
+
+  A **range** is a rectangular group of two or more cells, written as its top-left and bottom-right corner addresses separated by a colon: `B2:B10` means every cell from B2 through B10. A range can be a single column, a single row, or a full rectangular block.
+
+  ## 💡 Why is it important?
+
+  - Almost every formula beyond a single-cell reference — `SUM`, `AVERAGE`, `VLOOKUP`, a chart's data source — takes a range as its input.
+  - Selecting the *correct* range (not one row too short, not including a header row by mistake) is one of the most common places a simple mistake quietly produces a wrong number.
+
+  ## Core concept
+
+  | Range | Meaning |
+  |---|---|
+  | `B2:B10` | A single column, rows 2 through 10 |
+  | `A1:D1` | A single row, columns A through D |
+  | `A1:D10` | A rectangular block, 4 columns × 10 rows |
+
+  ## 📊 Example
+
+  `=SUM(B2:B10)` adds every value from cell B2 through B10. `=SUM(B2:B100)` on a table that only has data through row 50 still works — it just sums zeros for the empty rows — but selecting a range that's too *short* (e.g., `B2:B40` on 50 rows of data) silently excludes real data from the total, without any error.
+
+  ## ⚠️ Common mistakes
+
+  - **Selecting a range that's off by one row or column**, producing a result that's subtly wrong rather than obviously broken.
+  - **Including a header row in a numeric range by mistake** (e.g., `B1:B10` instead of `B2:B10`), which can cause errors or skew a calculation depending on the function.
+  - **Hardcoding a range's size** instead of using a Table (see Excel Tables) or a range that auto-expands as data grows.
+
+  ## Related concepts
+
+  ```
+  Cells
+    ↓
+  Ranges ← you are here
+    ↓
+  Cell References
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: You use `=SUM(B2:B40)` but the dataset actually has 50 rows of data. What happens?**
+  Short answer: The formula silently excludes rows 41–50 from the total — no error is raised, just a quietly understated result. Always double-check a range covers the full dataset, especially after new rows are added.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Range** → a group of cells, written as `TopLeft:BottomRight` (e.g., B2:B10)
+  What most formulas actually take as their input — double-check its boundaries.

@@ -1,0 +1,21 @@
+title: Networking & Systems
+category: Cybersecurity
+what_is_it: The protocols, services, operating-system concepts, and traffic patterns defenders investigate.
+why_it_matters: Alerts make sense only when you understand normal communication and system behavior.
+estimated_minutes: 3600
+prerequisites: [security-foundations]
+objectives: [Read network traffic, Explain common protocols, Investigate host and network evidence]
+subtopics:
+  - title: Network models
+    description: OSI and TCP/IP layers, packets, frames, addressing, routing, NAT, and segmentation.
+    outcomes: [Trace traffic across layers, Explain a subnet]
+  - title: Core protocols
+    description: ARP, DNS, DHCP, TCP, UDP, HTTP, TLS, SSH, SMTP, and common ports.
+    outcomes: [Recognize protocol behavior, Identify suspicious protocol use]
+  - title: Traffic analysis
+    description: Packet capture, flows, filtering, baselines, beacons, scanning, and exfiltration patterns.
+    outcomes: [Filter a packet capture, Build a traffic timeline]
+  - title: Operating-system internals
+    description: Processes, memory, filesystems, users, permissions, services, logs, and persistence.
+    outcomes: [Explain process ancestry, Identify persistence locations]
+

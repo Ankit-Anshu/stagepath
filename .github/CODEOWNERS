@@ -1,0 +1,5 @@
+# Every file in this repository requires review from the maintainer before it can merge.
+# This is the technical enforcement of the governance model described in GOVERNANCE.md —
+# combine with a branch protection rule on `main` ("Require review from Code Owners") for it
+# to actually block merges on GitHub.
+*       @Ankit-Anshu

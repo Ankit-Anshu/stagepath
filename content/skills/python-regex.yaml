@@ -1,0 +1,206 @@
+title: Regular Expressions for Data Cleaning
+what_is_it: Using pattern matching to find, extract, and clean text that doesn't follow a simple fixed format.
+why_it_matters: Some cleaning problems — extracting a phone number, validating an email format, splitting an inconsistent free-text field — can't be solved with simple string functions alone.
+prerequisites:
+  - pandas
+objectives:
+  - Write a basic regex pattern with character classes and quantifiers
+  - Extract a substring matching a pattern
+  - Validate whether a value matches an expected format
+  - Apply a regex across a pandas column
+subtopics:
+  - title: Pattern basics
+    description: Character classes, quantifiers, and anchors — the building blocks of a regex pattern.
+    outcomes:
+      - Write a pattern that matches a specific text format
+  - title: Extracting matches
+    description: Pulling a specific piece out of a larger text value, like a code or ID embedded in a string.
+    outcomes:
+      - Extract a substring matching a pattern from a column
+  - title: Validating format
+    description: Checking whether every value in a column matches an expected pattern, like an email or phone format.
+    outcomes:
+      - Flag rows that don't match an expected format
+estimated_minutes: 150
+resources:
+  - r-python-re-docs
+practice:
+  - id: ex-regex-1
+    title: Extract and validate IDs
+    description: Given a text column with embedded order IDs in an inconsistent format, extract the ID with a regex and flag rows that don't match.
+verify:
+  - Pattern correctly matches the intended format without false positives
+  - Extraction works across the whole column, not just the first example
+  - Non-matching rows are flagged, not silently dropped
+note: |
+  ## 🎯 What is it?
+
+  **Regular expressions (regex)** are patterns used to find, extract, and validate text that doesn't follow a simple, fixed format — like pulling a phone number out of a free-text field, or checking whether every value in a column looks like a valid email address.
+
+  ## 💡 Why is it important?
+
+  Some cleaning problems — extracting a code embedded in inconsistent text, validating a format, splitting a messy free-text field — genuinely can't be solved with simple string functions (like `.replace()` or `.split()`) alone. Regex is the general-purpose tool for exactly this class of problem, and it appears constantly in real-world data cleaning.
+
+  ## Core concept
+
+  ### Pattern basics
+  A regex pattern is built from **character classes** (what kind of character to match), **quantifiers** (how many times), and **anchors** (position in the string).
+
+  | Symbol | Meaning |
+  |---|---|
+  | `\d` | Any digit (0–9) |
+  | `\w` | Any word character (letter, digit, underscore) |
+  | `\s` | Any whitespace |
+  | `.` | Any character (except newline) |
+  | `*` | Zero or more of the previous element |
+  | `+` | One or more of the previous element |
+  | `?` | Zero or one (optional) of the previous element |
+  | `{n}` | Exactly n of the previous element |
+  | `^` / `$` | Start / end of the string |
+  | `[...]` | A character class — any one of the listed characters |
+
+  ### Extracting matches
+  Once a pattern is defined, functions like `re.search()`, `re.findall()`, or pandas' `.str.extract()` pull out the matching text (or a specific captured group within it) from a larger string.
+
+  ### Validating format
+  Checking whether an *entire* string matches a pattern (using anchors `^` and `$`, or `re.fullmatch()`) — useful for flagging rows where a value doesn't conform to an expected format, like an email or a phone number.
+
+  ## Syntax
+
+  ```python
+  import re
+  import pandas as pd
+
+  # Extract an order ID embedded in free text
+  text = "Order #A1234 shipped on 2024-01-05"
+  match = re.search(r"#([A-Z]\d{4})", text)
+  order_id = match.group(1) if match else None   # "A1234"
+
+  # Apply across a pandas column
+  df["order_id"] = df["notes"].str.extract(r"#([A-Z]\d{4})")
+
+  # Validate a format (does the whole value look like an email?)
+  df["valid_email"] = df["email"].str.fullmatch(r"[\w.+-]+@[\w-]+\.[a-zA-Z]{2,}")
+  ```
+
+  ## 📊 Example
+
+  **Input column** (`notes`):
+
+  | notes |
+  |---|
+  | "Order #A1234 shipped" |
+  | "See order B5678 for details" |
+  | "no order reference here" |
+
+  **Code:**
+
+  ```python
+  df["order_id"] = df["notes"].str.extract(r"([A-Z]\d{4})")
+  ```
+
+  **Output:**
+
+  | notes | order_id |
+  |---|---|
+  | "Order #A1234 shipped" | A1234 |
+  | "See order B5678 for details" | B5678 |
+  | "no order reference here" | NaN |
+
+  **Explanation:** The pattern `[A-Z]\d{4}` matches one uppercase letter followed by exactly 4 digits, wherever it appears in the text; rows with no match correctly return `NaN` rather than an error.
+
+  ## Multiple examples
+
+  **Beginner:** `r"\d+"` — match one or more digits anywhere in a string.
+  **Intermediate:** `r"^[A-Z]{2}\d{6}$"` — validate that an entire string is exactly 2 uppercase letters followed by 6 digits (e.g., a specific ID format).
+  **Real-world:** Extracting a US phone number from an inconsistently-formatted free-text field with a pattern like `r"\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}"`, which tolerates optional parentheses and different separator characters (spaces, dots, dashes) between digit groups.
+
+  ## Types / Variations
+
+  | Use case | Approach |
+  |---|---|
+  | Find first match | `re.search()` |
+  | Find all matches | `re.findall()` |
+  | Extract into a pandas column | `.str.extract()` |
+  | Check if an entire string matches | `re.fullmatch()` or `.str.fullmatch()` |
+  | Check if a pattern appears anywhere | `.str.contains()` |
+
+  ## ⚠️ Common mistakes
+
+  - **Writing a pattern that matches the example but not the general case.** A pattern tested on one row can easily be too narrow (or too permissive) for the full range of real, messy data — always test against a representative sample, not just the first example.
+  - **Forgetting to anchor a validation pattern** (`^`/`$` or `fullmatch`), which lets a pattern match a *substring* when the intent was to validate the *entire* value — a common source of false positives.
+  - **Silently dropping non-matching rows** instead of flagging them — per the [Data Cleaning](/skills/data-cleaning) principle, non-matches should be surfaced and reviewed, not quietly discarded.
+  - **Over-relying on regex for genuinely structured data.** If a field can be reliably split with `.split()` or parsed with a dedicated function (like a real date parser), plain string functions or a proper parser are usually simpler and more robust than a regex.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning (any domain):** extracting a consistent ID or code from a free-text notes field.
+  - **Marketing analysis:** validating email formats before an email campaign send.
+  - **Operations analysis:** extracting and standardizing phone numbers from an inconsistently-formatted contacts export.
+
+  ## Related concepts
+
+  ```
+  Pandas
+    ↓
+  Regular Expressions for Data Cleaning ← you are here
+  ```
+  This closes the Python stage — the next stage, Visualization, builds on cleaned, analysis-ready data like this to produce charts and dashboards.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a regex pattern that matches any sequence of digits.
+
+  ### Medium
+  2. Write a pandas expression that extracts a 4-digit year from a "notes" column containing free text.
+
+  ### Interview/Advanced
+  3. A regex intended to validate emails is flagging valid addresses as invalid. What's a likely cause?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `r"\d+"`
+  2. `df["notes"].str.extract(r"(\d{4})")` (with the caveat that this would also match any other 4-digit number in the text — a more specific pattern anchored to a year range or context would be more robust for real data).
+  3. The pattern is likely too strict/narrow for the real variety of valid email formats (e.g., not accounting for `+` in addresses, multi-part domains, or certain valid special characters) — regex-based email validation is famously hard to get perfectly right, and it's worth testing against a representative sample of real, valid addresses rather than assuming a simple pattern covers every case.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: When would you reach for regex instead of a simple string function like `.replace()`?**
+  Short answer: When the text to find or validate follows a *pattern* rather than an exact, fixed string — e.g., "any sequence of digits" or "a specific format" — which simple string functions can't express.
+
+  ### Conceptual questions
+  **Q: Why is it important to anchor a validation pattern with `^`/`$` (or use fullmatch)?**
+  Short answer: Without anchors, a pattern can match just part of a string, meaning a value like "abc123xyz" could pass a validation intended to require the *entire* string be purely digits — anchoring ensures the whole value conforms, not just a substring of it.
+
+  ### Scenario-based questions
+  **Q: You extract IDs from a notes column and get a lot of NaN results. How do you investigate?**
+  Short answer: Sample some of the non-matching rows directly and inspect their actual text — the pattern is likely too narrow for a format variation present in the real data (different casing, spacing, or an extra character) that wasn't in the original test example.
+
+  ### Practical questions
+  **Q: Write a regex to flag rows where a "product_code" column does NOT match the expected format of 2 letters followed by 4 digits (e.g., "AB1234").**
+  Short answer: `~df["product_code"].str.fullmatch(r"[A-Z]{2}\d{4}")` — the `~` negates the boolean mask, flagging non-matching rows.
+
+  ## Interview traps / tricky points
+
+  - A pattern that works on the one example you tested it against is not proof it works on the whole dataset — always validate against a representative sample.
+  - Un-anchored patterns silently allow partial matches, which is a very common, subtle validation bug.
+  - Regex email/phone validation is notoriously imperfect — acknowledging this limitation (rather than presenting a naive pattern as bulletproof) is itself a signal of experience in an interview.
+
+  ## Best practices
+
+  - Test a new pattern against several real, varied examples from the actual dataset, not just one.
+  - Anchor validation patterns explicitly, or use `fullmatch`, when the intent is to validate an entire value.
+  - Flag and report non-matching rows rather than silently dropping them.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **\d / \w / \s** → digit / word character / whitespace
+  **\* / + / ?** → zero-or-more / one-or-more / optional
+  **^ / $** → anchors — start / end of string (needed for full-value validation)
+  **.str.extract() / .str.fullmatch() / .str.contains()** → pandas' regex tools

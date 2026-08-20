@@ -1,0 +1,69 @@
+title: Cleaning Dates in Spreadsheets
+category: Spreadsheets
+what_is_it: Converting text that merely looks like a date into a true, calculable date value — and standardizing inconsistent date formats from different sources.
+why_it_matters: A "date" imported as text looks identical to a real date but silently fails at sorting, filtering, and date arithmetic until it's properly converted.
+prerequisites:
+  - cleaning-text-spreadsheets
+objectives:
+  - Identify whether a cell holds a true date or text that looks like one
+  - Convert text-formatted dates into real dates
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-cleaning-dates-spreadsheets-1
+    title: Fix imported dates
+    description: Given a column of dates imported as left-aligned text, convert them into true right-aligned date values.
+verify:
+  - Can identify a text-formatted "fake" date
+  - Can convert text into a true date value
+note: |
+  ## 🎯 What is it?
+
+  **Cleaning dates** means converting text that merely *looks* like a date (often from a CSV import or a system with a different date convention) into a true, calculable date value — and standardizing dates that arrived in inconsistent formats (MM/DD/YYYY vs. DD/MM/YYYY vs. YYYY-MM-DD).
+
+  ## 💡 Why is it important?
+
+  - A cell containing the text `"03/14/2024"` looks identical to a real date, but silently fails at sorting correctly, filtering by date range, and date arithmetic (subtraction, DATEDIF) until it's converted to a true date.
+  - International data sources often use DD/MM/YYYY while a US-based spreadsheet expects MM/DD/YYYY — misreading this silently swaps days and months for any date where both values are ≤ 12.
+
+  ## Core concept
+
+  A quick visual check: true dates are right-aligned by default; text that looks like a date is left-aligned (the same default alignment behavior that reveals numbers vs. text generally — see Data Types).
+
+  | Symptom | Likely cause |
+  |---|---|
+  | Dates left-aligned instead of right-aligned | Stored as text, not a real date |
+  | Sorting produces a strange order (not chronological) | Text-formatted dates sorting alphabetically |
+  | Date subtraction throws an error | One or both cells are text, not real dates |
+
+  ## 📊 Example
+
+  A CSV import produces a "Date" column that's left-aligned. Using `Data > Text to Columns` (with the Date option selected) or a `DATEVALUE` formula converts the text into a true, right-aligned date — after which sorting, filtering, and date arithmetic all work correctly.
+
+  ## ⚠️ Common mistakes
+
+  - **Not checking alignment** and assuming a column of "dates" is already usable, when it's actually left-aligned text quietly waiting to break the first date-based formula applied to it.
+  - **Assuming a date format without checking the data's source convention** — a US-based analyst reading DD/MM/YYYY data as MM/DD/YYYY silently swaps day and month for many rows without any error being raised.
+
+  ## Related concepts
+
+  ```
+  Cleaning Text
+    ↓
+  Cleaning Dates ← you are here
+    ↓
+  Cleaning Numbers
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A "Date" column sorts in a strange, non-chronological order. What's the likely cause and fix?**
+  Short answer: The dates are likely stored as text, not true dates — text sorts alphabetically rather than chronologically. Converting them with Text to Columns or DATEVALUE fixes the underlying type, after which sorting behaves correctly.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Cleaning dates** → convert text that looks like a date into a true date value
+  Check alignment (right = real date, left = text) as a quick diagnostic; watch for DD/MM vs. MM/DD confusion.

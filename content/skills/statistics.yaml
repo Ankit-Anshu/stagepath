@@ -1,0 +1,57 @@
+title: Statistics
+what_is_it: >-
+  The core statistical concepts used in analytics: descriptive statistics, distributions,
+  correlation, and the basics of hypothesis testing.
+why_it_matters: >-
+  Statistics is what separates "the number went up" from "the number went up and here is whether
+  that is meaningful." It is the foundation for A/B testing, forecasting, and any claim about what
+  data shows.
+prerequisites: []
+objectives:
+  - Summarize a dataset with mean, median, and standard deviation
+  - Explain a distribution shape
+  - Distinguish correlation from causation
+  - Interpret a basic hypothesis test / p-value
+estimated_minutes: 600
+resources:
+  - r-khan-statistics
+  - r-seeing-theory
+practice:
+  - id: ex-statistics-1
+    title: Describe a dataset
+    description: >-
+      Given a numeric dataset, compute and interpret mean, median, standard deviation, and identify
+      outliers.
+verify:
+  - Correctly computes descriptive statistics by hand or in a tool
+  - Can explain why correlation does not imply causation with an example
+  - Can interpret a p-value in plain language
+  - Can identify when a sample is too small or biased to trust
+category: Foundations
+subtopics:
+  - title: Descriptive statistics
+    description: Mean, median, mode, and standard deviation — and when each summary statistic is misleading.
+    outcomes:
+      - Compute and interpret mean vs. median on skewed data
+  - title: Distributions
+    description: >-
+      Recognizing normal, skewed, and bimodal shapes and what each implies about the underlying
+      data.
+    outcomes:
+      - Identify a distribution shape from a histogram
+  - title: Correlation vs. causation
+    description: Reading a correlation coefficient correctly and naming likely confounding variables.
+    outcomes:
+      - Explain a spurious correlation using a real example
+  - title: Hypothesis testing
+    description: >-
+      Null vs. alternative hypothesis, p-values, and significance thresholds explained in plain
+      language.
+    outcomes:
+      - Interpret a p-value correctly
+      - State a testable hypothesis for a business question
+  - title: Sampling basics
+    description: Sample size, sampling bias, and what a confidence interval actually means.
+    outcomes:
+      - Identify a biased sample
+      - Explain a confidence interval in plain words

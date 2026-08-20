@@ -1,0 +1,70 @@
+title: Relative References
+category: Spreadsheets
+what_is_it: A cell reference (like B2) that automatically shifts to match its new position when a formula is copied elsewhere.
+why_it_matters: It's the default reference behavior — the reason you can write one formula and copy it down 1,000 rows, each correctly adjusting to its own row's data.
+prerequisites:
+  - ranges
+  - cell-references
+objectives:
+  - Define a relative reference
+  - Predict how a relative reference changes when a formula is copied
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-relative-references-1
+    title: Copy a formula down
+    description: Write a formula in one row that references the row's own data, then copy it down 10 rows and confirm each row correctly references its own data.
+verify:
+  - Can define a relative reference
+  - Can predict what a copied relative reference will point to
+note: |
+  ## 🎯 What is it?
+
+  A **relative reference** (like `B2`) is the default kind of cell reference — it shifts automatically when a formula is copied to a new location. Think of it like giving directions relative to where you're standing ("two steps to the right") — the destination changes if you start somewhere else.
+
+  ## 💡 Why is it important?
+
+  - It's what makes copying one formula down an entire column of thousands of rows actually work — each copy automatically adjusts to reference its own row's data.
+  - It's the default behavior of every reference you type, unless you deliberately lock it (see Absolute References) — understanding it is required before absolute references make any sense.
+
+  ## Core concept
+
+  ```
+  C2: =A2*B2      (relative — references row 2)
+  Copied to C3:
+  C3: =A3*B3      (automatically shifted to reference row 3)
+  ```
+
+  Both the row and column shift together when a relative reference is copied — down a column, across a row, or both.
+
+  ## 📊 Example
+
+  A formula `=B2*1.1` in cell C2, copied down to C3, C4, C5, automatically becomes `=B3*1.1`, `=B4*1.1`, `=B5*1.1` — each row correctly calculates its *own* 10% markup, without needing to be rewritten by hand.
+
+  ## ⚠️ Common mistakes
+
+  - **Not realizing a reference is relative** when it needs to stay fixed — copying a formula that references one shared value (like a tax rate) with a relative reference causes it to shift incorrectly for every row after the first (see Absolute References).
+  - **Assuming relative references only shift vertically** — they shift in whichever direction the formula is copied, including horizontally.
+
+  ## Related concepts
+
+  ```
+  Cell References
+    ↓
+  Relative References ← you are here
+    ↓
+  Absolute References → Mixed References
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: You copy `=A2*B2` from row 2 down to row 3. What does the formula become, and why?**
+  Short answer: `=A3*B3` — both references are relative by default, so they shift automatically to match the new row when the formula is copied.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Relative reference (B2)** → shifts automatically when copied
+  The default behavior — what lets one formula be copied down thousands of rows correctly.

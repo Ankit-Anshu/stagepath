@@ -1,0 +1,24 @@
+title: User Research
+category: UX Design
+what_is_it: Collecting and synthesizing evidence about people, tasks, motivations, and environments.
+why_it_matters: Research replaces team assumptions with observable behavior and useful uncertainty.
+estimated_minutes: 3000
+prerequisites: [design-foundations]
+objectives: [Plan ethical research, Conduct useful interviews, Synthesize findings into opportunities]
+subtopics:
+  - title: Research planning
+    description: Questions, methods, participants, recruitment, consent, bias, logistics, and analysis plans.
+    outcomes: [Write a focused plan, Choose an appropriate method]
+  - title: Interviews and observation
+    description: Non-leading questions, active listening, probing, contextual inquiry, and note-taking.
+    outcomes: [Conduct a neutral interview, Capture behavioral evidence]
+  - title: Surveys and quantitative signals
+    description: Sampling, question design, scales, response bias, analytics, and appropriate inference.
+    outcomes: [Critique a survey, Avoid false precision]
+  - title: Synthesis
+    description: Coding, affinity mapping, themes, needs, jobs, journeys, and opportunity statements.
+    outcomes: [Turn notes into themes, Preserve contradictory evidence]
+  - title: Research communication
+    description: Findings, evidence, confidence, clips, artifacts, and actionable recommendations.
+    outcomes: [Present concise findings, State limitations]
+

@@ -1,0 +1,63 @@
+title: Adding Calculated Columns
+category: Spreadsheets
+what_is_it: Adding a new column whose values are computed from other columns in the same row, rather than typed in directly.
+why_it_matters: It's how raw source data becomes analysis-ready — deriving a profit margin, a full name, or a category from existing columns instead of manually entering it.
+prerequisites:
+  - sort-spreadsheets
+objectives:
+  - Add a calculated column that derives a value from other columns in the same row
+  - Explain why a calculated column stays in sync when source data changes
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-calculated-columns-1
+    title: Derive profit margin
+    description: Given columns for revenue and cost, add a calculated column for profit margin.
+verify:
+  - Can add a calculated column derived from other columns
+  - Can explain why it updates automatically when source data changes
+note: |
+  ## 🎯 What is it?
+
+  A **calculated column** is a new column whose values are computed with a formula from other columns in the same row — rather than typed in directly. `profit_margin = (revenue - cost) / revenue` is a calculated column built from two existing ones.
+
+  ## 💡 Why is it important?
+
+  - It's how raw source data becomes analysis-ready — most useful analytical fields (margin, full name, category, flag) don't exist in the raw import and need to be derived.
+  - Because it's a formula, it automatically stays in sync if the source data changes — unlike a manually typed value, which would need to be re-entered.
+
+  ## 📊 Example
+
+  | Revenue | Cost | Profit Margin |
+  |---|---|---|
+  | 100 | 60 | `=(A2-B2)/A2` → 40% |
+
+  If `Cost` in row 2 later changes from 60 to 70, the `Profit Margin` column recalculates automatically to 30% — no manual re-entry needed.
+
+  ## ⚠️ Common mistakes
+
+  - **Hardcoding a calculated value instead of using a formula**, which then silently goes stale the moment the source data changes.
+  - **Not extending the formula down for every row** after adding new data — a calculated column should cover every row of the dataset, not just the original rows.
+
+  ## Related concepts
+
+  ```
+  Sorting Data
+    ↓
+  Adding Calculated Columns ← you are here
+    ↓
+  Conditional Transformations
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why use a calculated column instead of just typing the computed values in manually?**
+  Short answer: A calculated column stays automatically in sync with its source data — if the underlying revenue or cost changes, the calculated column recalculates instantly, while manually typed values would silently go stale.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Calculated column** → a new column derived by formula from other columns in the same row
+  Stays in sync automatically — never hardcode a value that should be derived.

@@ -1,0 +1,199 @@
+title: KPIs & Metrics
+category: Foundations
+what_is_it: What makes a number a good Key Performance Indicator, and how to choose, define, and avoid being misled by one.
+why_it_matters: Businesses run on a small set of numbers everyone watches. Knowing how to choose and precisely define one is one of the most immediately useful skills a data analyst has.
+prerequisites:
+  - business-understanding
+objectives:
+  - Explain what makes a metric a good KPI
+  - Distinguish a leading from a lagging indicator
+  - Write a precise metric definition
+  - Identify a vanity metric
+subtopics:
+  - title: What makes a good KPI
+    description: Specific, measurable, and tied to a real business goal — not just a number that's easy to track.
+    outcomes:
+      - Evaluate whether a proposed KPI is actually useful
+  - title: Leading vs. lagging indicators
+    description: Metrics that predict a result versus metrics that report one after the fact.
+    outcomes:
+      - Classify a metric as leading or lagging
+  - title: Precise metric definitions
+    description: Why "active user" needs an exact definition before anyone can trust a dashboard built on it.
+    outcomes:
+      - Write an unambiguous definition for a common business metric
+  - title: Vanity metrics
+    description: Numbers that look impressive but don't actually inform a decision.
+    outcomes:
+      - Identify a vanity metric and explain why it's misleading
+estimated_minutes: 120
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-kpis-1
+    title: Define a KPI precisely
+    description: Pick a common business metric like "active user" or "conversion rate" and write a precise, unambiguous definition for it.
+verify:
+  - Metric definition is precise enough that two people would compute the same number
+  - Can distinguish a leading indicator from a lagging one
+  - Can explain why a specific metric is a vanity metric
+note: |
+  ## 🎯 What is it?
+
+  A **KPI (Key Performance Indicator)** is a specific, measurable number a business tracks to judge whether it's succeeding at something important. Not every metric is a KPI — a KPI is a metric that's been deliberately chosen and precisely defined because it's tied to a real goal.
+
+  Think of a car's dashboard again: it has dozens of possible readings, but only a handful — speed, fuel, engine temperature — are treated as KPIs the driver actually watches. The rest exist but aren't front-and-center.
+
+  ## 💡 Why is it important?
+
+  - Businesses run on a small set of numbers everyone watches — being the person who can define, calculate, and explain one correctly is immediately useful.
+  - A poorly defined KPI ("active user") causes different teams to report different numbers and lose trust in the data entirely.
+  - Choosing the wrong KPI to optimize for can drive genuinely bad decisions, even when every number reported is technically accurate.
+  - It's one of the most common interview and case-study topics for analyst roles.
+
+  ## Core concept
+
+  ### What makes a good KPI
+
+  | Trait | Meaning |
+  |---|---|
+  | Specific | Precisely defined, not open to interpretation |
+  | Measurable | Can actually be calculated from available data |
+  | Tied to a goal | Connects to something the business cares about, not just "trackable" |
+  | Actionable | If it moves, someone can do something about it |
+
+  ### Leading vs. lagging indicators
+
+  - **Leading indicators** predict a future result — e.g., trial signups predict future revenue.
+  - **Lagging indicators** report a result after the fact — e.g., quarterly revenue itself.
+
+  Leading indicators let you react early; lagging indicators tell you whether past actions worked.
+
+  ### Precise metric definitions
+  "Active user" is meaningless until it's defined exactly: Active in what window (daily/weekly/monthly)? Doing what action (any login, or a specific core action)? Two dashboards showing "500K active users" and "80K active users" can both be correct — with different definitions.
+
+  ### Vanity metrics
+  A vanity metric looks impressive but doesn't inform a decision — e.g., total signups ever, with no context on how many are still active or paying.
+
+  ## Syntax / Formula / Structure
+
+  A reusable framework for defining any metric precisely:
+
+  ```
+  Metric name:      [what it's called]
+  Numerator:        [what's being counted]
+  Denominator:       [if it's a rate — what it's divided by]
+  Time window:      [daily / weekly / monthly / rolling 30-day]
+  Inclusion rule:    [what counts — e.g., "logged in AND completed 1 action"]
+  Exclusion rule:    [what's explicitly excluded — e.g., test accounts]
+  ```
+
+  ## 📊 Example
+
+  **Vague:** "Track active users."
+
+  **Precise KPI definition:**
+  - Metric: Weekly Active Users (WAU)
+  - Inclusion rule: A registered, non-test account that completed at least one core action (create, edit, or share) in the trailing 7 days
+  - Time window: rolling 7-day window, refreshed daily
+
+  With this definition, any two analysts computing WAU from the same data will get the same number.
+
+  ## Types / Variations
+
+  | KPI type | Example |
+  |---|---|
+  | Growth | New signups, MRR growth rate |
+  | Engagement | DAU/MAU ratio, sessions per user |
+  | Retention | Churn rate, 30-day retention |
+  | Efficiency | Cost per acquisition, revenue per employee |
+  | Quality | Defect rate, support ticket resolution time |
+
+  ## ⚠️ Common mistakes
+
+  - **Tracking a metric just because it's easy to measure**, not because it connects to a real goal — this is how vanity metrics creep into dashboards.
+  - **Leaving a KPI's definition implicit.** "Active user" without a written definition guarantees eventual disagreement between teams.
+  - **Confusing a leading indicator with a guarantee.** A rise in trial signups suggests, but doesn't guarantee, future revenue growth.
+  - **Picking a KPI that can be gamed** without actually improving the underlying goal (e.g., optimizing "signups" while ignoring whether those users stay).
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** defining "won deal" precisely (does a deal that later gets refunded still count?).
+  - **Marketing analysis:** distinguishing "leads" (a leading indicator) from "closed revenue" (a lagging one).
+  - **Product analysis:** choosing DAU/MAU (stickiness) over raw signups as the KPI that actually reflects product health.
+
+  ## Related concepts
+
+  ```
+  Business Understanding
+    ↓
+  KPIs & Metrics ← you are here
+    ↓
+  Data Thinking (choosing the right metric for a question)
+    ↓
+  Statistics — Descriptive Statistics (how KPIs get summarized)
+    ↓
+  Dashboard Design (how KPIs get displayed)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Is "total signups since launch" more likely a good KPI or a vanity metric? Why?
+  2. Classify "monthly trial signups" as a leading or lagging indicator for future revenue.
+
+  ### Medium
+  3. Write a precise, unambiguous definition for "active user" for a note-taking app, including inclusion/exclusion rules and time window.
+
+  ### Interview/Advanced
+  4. A team wants to optimize purely for "number of features shipped per quarter." Explain why this could be a bad KPI, even though it's easy to measure.
+
+  <details>
+  <summary><strong>Answer / Solution</strong></summary>
+
+  1. Likely a vanity metric — it only grows, never reflects current health, and doesn't tell you whether those users are still engaged.
+  2. Leading indicator — it signals likely future revenue before that revenue is realized.
+  3. Example: "A registered, non-test account that created or edited at least one note in the trailing 7 days" (Weekly Active User), refreshed daily on a rolling 7-day window.
+  4. It rewards shipping volume regardless of whether features are used, well-built, or valuable — a team could hit the KPI by shipping many small, low-impact features while genuinely important work (bug fixes, a major feature) gets deprioritized because it doesn't count toward "features shipped."
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What makes a good KPI?**
+  Short answer: It's specific, measurable, tied to a real business goal, and actionable — not just easy to track.
+
+  ### Conceptual questions
+  **Q: What's the difference between a leading and a lagging indicator?**
+  Short answer: A leading indicator predicts a future outcome (e.g., trial signups); a lagging indicator reports a result after it's already happened (e.g., quarterly revenue).
+
+  ### Scenario-based questions
+  **Q: Two dashboards report different "active user" counts from the same database. How do you investigate?**
+  Short answer: Compare each dashboard's underlying definition — time window and inclusion/exclusion rules — rather than assuming one is a bug; they're often both "correct" under different definitions.
+
+  ### Practical questions
+  **Q: A stakeholder proposes "number of emails sent" as a marketing KPI. What follow-up question exposes whether it's a good choice?**
+  Short answer: "Does sending more emails actually correlate with more revenue or engagement, or could it just as easily correlate with more unsubscribes?" — probing whether the metric is actionable and tied to a real goal, not just easy to count.
+
+  ## Interview traps / tricky points
+
+  - Interviewers often present a metric that sounds impressive (e.g., "10 million downloads") specifically to test whether you'll identify it as a possible vanity metric.
+  - A metric can be a leading indicator for one outcome and irrelevant to another — always ask "leading indicator of *what*?"
+  - "Active" is one of the most commonly under-defined words in analytics interviews — always ask for the precise definition before answering a question that uses it.
+
+  ## Best practices
+
+  - Write every KPI definition down, including time window and inclusion/exclusion rules, and keep that definition in one shared place.
+  - Prefer a small number of well-chosen KPIs over a large dashboard of loosely related metrics.
+  - Periodically sanity-check whether a tracked KPI can be gamed without moving the real underlying goal — and adjust if so.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **KPI** → a specific, measurable metric tied to a real business goal
+  **Leading indicator** → predicts a future result (e.g., trial signups)
+  **Lagging indicator** → reports a result after the fact (e.g., revenue)
+  **Vanity metric** → looks impressive, doesn't inform a decision
+  Remember: always write down a metric's exact inclusion/exclusion rules and time window — "active user" means nothing without them.

@@ -1,0 +1,101 @@
+title: Conditional Formatting
+category: Spreadsheets
+what_is_it: Automatically changing a cell's appearance (color, bold, an icon) based on its value — highlighting what matters without manually formatting each cell.
+why_it_matters: It's how a spreadsheet becomes scannable at a glance, drawing the eye directly to outliers, targets missed, or values that need attention.
+prerequisites:
+  - data-validation
+objectives:
+  - Apply a conditional formatting rule based on a value threshold
+  - Use a color scale to visualize a range of values
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+  - r-datavizcatalogue
+practice:
+  - id: ex-conditional-formatting-1
+    title: Highlight underperforming regions
+    description: Apply conditional formatting to a revenue column, highlighting any value below a target threshold in red.
+verify:
+  - Formatting rule correctly highlights only the intended values
+  - Rule does not conflict with or override other formatting unintentionally
+note: |
+  ## 🎯 What is it?
+
+  **Conditional Formatting** automatically changes a cell's appearance — color, bold, an icon — based on its value, highlighting what matters without manually formatting each cell one at a time.
+
+  ## 💡 Why is it important?
+
+  It's how a spreadsheet becomes scannable **at a glance**, drawing the eye directly to outliers, missed targets, or values needing attention — turning a wall of numbers into something a reader can process in seconds instead of reading every cell.
+
+  ## Core concept
+
+  | Rule type | Use case |
+  |---|---|
+  | Highlight cells above/below a value | Flag targets missed or exceeded |
+  | Color scale | Show a full low-to-high range at a glance |
+  | Data bars | Compare magnitudes within a column visually, in-cell |
+  | Custom formula rule | Any condition not covered by a built-in rule type |
+
+  ## 📊 Example
+
+  A revenue column with a target of $10,000 per region.
+
+  **Rule:** "Highlight cells less than 10000" → red fill.
+
+  **Result:** Any region below target is immediately visible in red, without reading every individual number — a stakeholder scanning the sheet spots the problem region in under a second.
+
+  ## Multiple examples
+
+  **Beginner:** Highlighting any value in a column above a fixed threshold.
+  **Intermediate:** Applying a red-to-green color scale across a column to show a full performance range at a glance.
+  **Real-world:** A custom formula rule highlighting an entire row red if that row's status is "Overdue" AND its amount exceeds $1,000 — combining a business rule (built with [AND](/skills/and-function)) directly into the formatting logic, so high-value overdue items visually pop out immediately.
+
+  ## ⚠️ Common mistakes
+
+  - **Overusing conditional formatting** until the sheet is a wall of color and nothing stands out anymore — reserve it for the handful of values that truly need attention (see [Dashboard](/skills/dashboard-spreadsheets) for the same principle applied to full dashboards).
+  - **Relying on color alone without any other cue**, which fails colorblind viewers — see [Color & Accessibility in Visualization](/skills/dataviz-color-accessibility) for the same principle applied more broadly.
+  - **Applying multiple overlapping rules to the same range without checking rule priority/order**, which can cause an unexpected rule to silently take precedence over the one intended.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any status dashboard:** highlighting metrics that are off target, overdue, or otherwise need attention.
+  - **Data quality checks:** highlighting cells that fail a validation rule (like an out-of-range value) for quick visual review.
+
+  ## Related concepts
+
+  ```
+  Data Validation → Conditional Formatting ← you are here
+  ```
+  The same conditional-formatting principle scales up to full dashboards in [Dashboard](/skills/dashboard-spreadsheets).
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the purpose of a color scale conditional formatting rule?
+
+  ### Interview/Advanced
+  2. Why is overusing conditional formatting counterproductive?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. To visualize a full range of values (low to high) at a glance using a gradient of color, making relative magnitude immediately visible without reading every number.
+  2. If too many rules or colors are applied, nothing stands out anymore — the entire purpose of conditional formatting (drawing attention to what matters) is defeated when everything is highlighted.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you make a report immediately show which regions are missing their revenue target?**
+  Short answer: Apply a conditional formatting rule highlighting any revenue cell below the target value — this makes underperforming regions visible at a glance, without requiring the reader to compare every number manually against the target.
+
+  ## Best practices
+
+  - Reserve conditional formatting for the specific values that need attention — avoid over-formatting a sheet until nothing stands out.
+  - Pair color-based highlighting with a non-color cue (icon, label) for accessibility.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Conditional Formatting** → automatic, value-based cell formatting (color, icon, bar)
+  **Use sparingly:** reserve it for values that genuinely need attention

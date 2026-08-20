@@ -1,0 +1,93 @@
+title: DATE Function
+category: Spreadsheets
+what_is_it: Building a real date value from separate year, month, and day numbers.
+why_it_matters: A common need when combining year/month/day values that live in separate columns, or when constructing a specific date dynamically inside a formula.
+prerequisites:
+  - now-function
+objectives:
+  - Build a date from separate year, month, and day components with DATE
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-date-1
+    title: Combine separate date parts
+    description: Given separate Year, Month, and Day columns, use DATE to build one combined, real date value.
+verify:
+  - DATE correctly constructs a real, usable date value from the three components
+note: |
+  ## 🎯 What is it?
+
+  **DATE** builds a real, usable date value from separate year, month, and day numbers.
+
+  ## 💡 Why is it important?
+
+  A common need when year/month/day values live in separate columns (a frequent layout in exported data), or when constructing a specific date dynamically inside a larger formula, such as a date-range condition in [SUMIFS](/skills/sumifs-function).
+
+  ## Syntax
+
+  ```
+  =DATE(year, month, day)
+  ```
+
+  ## 📊 Example
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Year | Month | Day |
+  | 2 | 2024 | 3 | 15 |
+
+  **Formula:** `=DATE(A2,B2,C2)`
+  **Result:** `2024-03-15` — a real, calculable date value, not just text that looks like a date.
+
+  ## Multiple examples
+
+  **Beginner:** `=DATE(2024,1,1)` — construct a specific fixed date.
+  **Real-world:** `=SUMIFS(revenue,order_date,">="&DATE(2024,1,1),order_date,"<"&DATE(2024,2,1))` — using DATE to dynamically build the boundaries of a date-range condition inside SUMIFS, instead of hardcoding a text string that might not be interpreted as a real date.
+
+  ## ⚠️ Common mistakes
+
+  - **Combining year/month/day with text concatenation instead of DATE**, e.g. `=A2&"-"&B2&"-"&C2`, which produces text that *looks* like a date but isn't a real, calculable date value — this breaks any date-math formula applied to it (see [Data Types](/skills/spreadsheet-data-types)).
+  - **Passing an out-of-range month or day number.** DATE actually handles this gracefully by rolling over (e.g., month 13 becomes January of the next year) — useful, but can be a subtle source of confusion if not expected.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** combining separately-imported year/month/day columns into one real, usable date field.
+  - **Formula building:** dynamically constructing date boundaries for a SUMIFS or COUNTIFS condition.
+
+  ## Related concepts
+
+  ```
+  NOW → DATE ← you are here → YEAR → MONTH → DAY
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that builds the date March 15, 2024.
+
+  ### Interview/Advanced
+  2. Why does `=A2&"-"&B2&"-"&C2` (concatenating year/month/day as text) fail to produce a usable date, even if it looks correct?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=DATE(2024,3,15)`
+  2. Concatenation produces a text string that visually resembles a date but isn't internally stored as a real date value (see [Data Types](/skills/spreadsheet-data-types)) — any date-math function (like DATEDIF or a date comparison) applied to it will fail or behave unpredictably, since it's not actually a date to the spreadsheet.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why use DATE instead of concatenating year/month/day as text?**
+  Short answer: DATE produces a real, calculable date value that works correctly with date-math functions and comparisons — text concatenation only produces something that visually resembles a date, which breaks any genuine date arithmetic applied to it.
+
+  ## Best practices
+
+  - Always use DATE (not text concatenation) when combining separate year/month/day values into one date.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **DATE(year, month, day)** → builds a real, calculable date value
+  **Never** concatenate year/month/day as text — it only looks like a date

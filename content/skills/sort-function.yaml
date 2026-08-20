@@ -1,0 +1,67 @@
+title: SORT Function
+category: Spreadsheets
+what_is_it: Returning a range's rows reordered by a chosen column, spilled dynamically — a live, formula-based alternative to the manual Sort feature.
+why_it_matters: It updates automatically as source data changes, and can be combined directly with FILTER to filter and sort in one formula.
+prerequisites:
+  - filter-function
+objectives:
+  - Sort a range with SORT
+  - Combine FILTER and SORT in one formula
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-sort-function-1
+    title: Top N with FILTER + SORT
+    description: Combine FILTER and SORT to return the top 5 highest-revenue orders from a given region.
+verify:
+  - Can sort a range with SORT
+  - Can combine FILTER and SORT in one formula
+note: |
+  ## 🎯 What is it?
+
+  **SORT** returns a range's rows reordered by a chosen column, spilled dynamically — a live, formula-based alternative to the manual Sort feature (see Sort, in Excel Data Analysis) that automatically re-sorts as the source data changes.
+
+  ## 💡 Why is it important?
+
+  - It updates automatically as source data changes — a manual Sort has to be reapplied by hand every time new data is added, while a SORT formula stays current.
+  - It combines cleanly with FILTER in one nested formula, letting you filter *and* sort in a single, self-updating step.
+
+  ## Syntax
+
+  ```
+  =SORT(array, [sort_index], [sort_order])
+  ```
+
+  `sort_index` is which column to sort by (1 = first column of the array); `sort_order` is `1` for ascending (default) or `-1` for descending.
+
+  ## 📊 Example
+
+  `=SORT(FILTER(A2:D100, C2:C100="East"), 4, -1)` first filters to East region rows, then sorts those results by column 4 (e.g., revenue) in descending order — a live "top East region orders" list that updates automatically as source data changes.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting `sort_order` defaults to ascending**, producing a smallest-first result when descending was intended — always specify `-1` explicitly when descending order is needed.
+  - **Sorting on the wrong column index** relative to the array passed in — the index is relative to the array's own columns, not the worksheet's actual column letters.
+
+  ## Related concepts
+
+  ```
+  FILTER
+    ↓
+  SORT ← you are here
+    ↓
+  UNIQUE
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you build a live "top 5 highest-revenue orders" list that updates automatically?**
+  Short answer: Nest SORT around FILTER (or just SORT the full range if no filtering is needed) sorted descending by the revenue column, then wrap the whole thing in `=INDEX(..., SEQUENCE(5))` or simply reference the top 5 spilled rows — the combination stays live as source data changes.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **SORT(array, [sort_index], [sort_order])** → reorders rows, spilled dynamically; -1 = descending
+  Combines cleanly with FILTER for a live, self-updating filtered-and-sorted view.

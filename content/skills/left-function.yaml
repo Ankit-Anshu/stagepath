@@ -1,0 +1,90 @@
+title: LEFT Function
+category: Spreadsheets
+what_is_it: Extracting a specified number of characters from the start (left side) of a text value.
+why_it_matters: A common building block for parsing a structured text field, like pulling a 2-letter country code from the start of a longer ID.
+prerequisites:
+  - clean-function
+objectives:
+  - Extract a substring from the start of a text value with LEFT
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-left-1
+    title: Extract a prefix code
+    description: Given a column of product IDs like "US-A1234", extract just the 2-letter country prefix using LEFT.
+verify:
+  - LEFT correctly extracts the intended number of characters
+  - Formula works across the whole column, not just one example
+note: |
+  ## 🎯 What is it?
+
+  **LEFT** extracts a specified number of characters from the **start** (left side) of a text value.
+
+  ## 💡 Why is it important?
+
+  A common building block for parsing a structured text field — pulling a fixed-length prefix, like a 2-letter country code or a category tag, from the start of a longer ID or code.
+
+  ## Syntax
+
+  ```
+  =LEFT(text, num_chars)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | US-A1234 |
+
+  **Formula:** `=LEFT(A1,2)` → `"US"`
+
+  ## Multiple examples
+
+  **Beginner:** `=LEFT(A2,3)` — extract the first 3 characters of a code.
+  **Real-world:** `=LEFT(order_id,2)` used to extract a region prefix embedded in every order ID, enabling a quick regional breakdown without a separate lookup table.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming every value has the same length/structure.** LEFT extracts a fixed number of characters regardless of the text's actual length or format — if some rows don't follow the expected pattern, LEFT will extract the wrong substring without any error.
+  - **Using LEFT when the piece needed isn't always at a fixed position.** If the prefix length varies, [FIND](/skills/find-function) combined with LEFT is often needed instead of a fixed character count.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** extracting a fixed-length prefix or code embedded at the start of an ID field.
+
+  ## Related concepts
+
+  ```
+  CLEAN → LEFT ← you are here → RIGHT → MID → LEN
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that extracts the first 4 characters of A1.
+
+  ### Interview/Advanced
+  2. Why might `=LEFT(A2,2)` extract the wrong value for some rows in a real dataset?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=LEFT(A1,4)`
+  2. If not every row follows the exact same fixed-length format (e.g., some IDs have a 1-letter prefix instead of 2), a fixed-length LEFT extracts the wrong substring for those inconsistent rows — worth checking the data's actual consistency before relying on a fixed character count.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would LEFT not be a reliable way to extract a substring?**
+  Short answer: When the piece you need isn't always the same fixed length or in the same fixed position across every row — in that case, combining FIND (to locate a delimiter) with LEFT is more robust than a hardcoded character count.
+
+  ## Best practices
+
+  - Verify the data's actual format consistency before relying on a fixed-length LEFT extraction.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **LEFT(text, num_chars)** → first N characters from the start

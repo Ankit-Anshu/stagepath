@@ -1,0 +1,67 @@
+title: Quantitative Data
+category: Foundations
+what_is_it: Numeric data that represents a measurable quantity — something you can meaningfully count, sum, or average.
+why_it_matters: It's the data type behind almost every business metric (revenue, orders, response time) — and further splits into discrete vs. continuous, which determines how you'd visualize or model it.
+prerequisites:
+  - qualitative-data
+objectives:
+  - Define quantitative data and give two examples
+  - Explain the difference between quantitative and qualitative data
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-quantitative-data-1
+    title: List your metrics
+    description: List five quantitative metrics your team or company tracks, and note whether each is discrete or continuous.
+verify:
+  - Can define quantitative data
+  - Can name two quantitative columns from a real dataset
+note: |
+  ## 🎯 What is it?
+
+  **Quantitative data** is numeric data that represents a measurable amount — something you can meaningfully add, average, or compare mathematically. Revenue, order count, age, and response time are all quantitative.
+
+  ## 💡 Why is it important?
+
+  - It's the data type behind nearly every KPI and business metric an analyst reports.
+  - It further splits into **discrete** (countable, whole-number values like order count) and **continuous** (measurable on a scale, like revenue or time) — a distinction that shapes which chart type and statistical test are appropriate.
+  - Confusing a quantitative-looking field that's actually qualitative (like a ZIP code) leads to nonsensical summaries.
+
+  ## Core concept
+
+  | | Qualitative | Quantitative |
+  |---|---|---|
+  | Describes | Categories, labels | Measurable amounts |
+  | Example | Product category | Order count, revenue |
+  | Valid summary | Count, mode | Sum, mean, median |
+  | Further splits into | Nominal / Ordinal | Discrete / Continuous |
+
+  ## 📊 Example
+
+  A `revenue` column ($1,204.50, $89.00, ...) is quantitative — you can sum it for total revenue, or average it for average order value. An `order_count` column is also quantitative, and specifically **discrete** (whole orders — you can't have 2.5 orders).
+
+  ## ⚠️ Common mistakes
+
+  - **Treating a quantitative-looking ID as quantitative.** A customer ID or ZIP code is stored as a number but is actually qualitative — averaging it is meaningless.
+  - **Not checking discrete vs. continuous before choosing a chart** — a histogram bin width that makes sense for continuous revenue data may look wrong applied to discrete order counts.
+
+  ## Related concepts
+
+  ```
+  Quantitative Data ← you are here
+         ↓
+    Discrete Data (countable whole numbers)      Continuous Data (measurable on a scale)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Is "number of orders" discrete or continuous, and why does it matter?**
+  Short answer: Discrete — it's a countable whole number (you can't have 2.5 orders). It matters because discrete data is usually visualized with bar charts or count-based summaries, while continuous data (like revenue) suits histograms and averages.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Quantitative data** → numeric, measurable amounts — sum, average, or compare mathematically
+  Splits into discrete (countable) and continuous (measured on a scale).

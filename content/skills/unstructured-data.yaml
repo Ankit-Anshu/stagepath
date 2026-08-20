@@ -1,0 +1,68 @@
+title: Unstructured Data
+category: Foundations
+what_is_it: Data with no predefined format or organization — free text, images, audio, and video that don't fit naturally into rows and columns.
+why_it_matters: It's the majority of the world's data by volume, and while most entry-level analyst work uses structured data, recognizing unstructured data — and knowing it needs a different approach — is a basic literacy check.
+prerequisites:
+  - semi-structured-data
+objectives:
+  - Define unstructured data and give two examples
+  - Explain why unstructured data can't be queried with SQL directly
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-unstructured-data-1
+    title: Classify your own data
+    description: List five pieces of data your phone or laptop stores, and classify each as structured, semi-structured, or unstructured.
+verify:
+  - Can define unstructured data in one sentence
+  - Can explain why it needs extra processing before analysis
+note: |
+  ## 🎯 What is it?
+
+  **Unstructured data** has no predefined format — free-form text (emails, reviews, support tickets), images, audio, and video. There are no fixed fields or a uniform schema to query directly.
+
+  ## 💡 Why is it important?
+
+  - By volume, it's the majority of the world's data — most of what a phone, a website, or a support inbox generates.
+  - An analyst can't run `SELECT` or `SUM` on raw unstructured data — it first needs to be processed (extracting sentiment from text, tagging images, transcribing audio) before it becomes analyzable.
+  - Recognizing it is a basic data-literacy check — a common early interview or case-study trap is handing a candidate a pile of free-text reviews and seeing if they realize it can't be pivoted directly.
+
+  ## Core concept
+
+  | Data type | Example | Directly queryable with SQL? |
+  |---|---|---|
+  | Structured | Sales table | Yes |
+  | Semi-structured | JSON API response | After flattening |
+  | Unstructured | Customer support emails, product photos | No — needs processing first |
+
+  ## 📊 Example
+
+  A folder of 10,000 customer reviews is unstructured text. To analyze it as a data analyst, you'd typically extract structure from it first — e.g., a star rating (already structured, if captured), a word count, or a sentiment score — turning free text into a structured column you *can* aggregate.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming unstructured data can be dropped straight into a pivot table.** It needs an extraction or tagging step first.
+  - **Underestimating how much of "big data" is unstructured** — social media, video, audio, and documents dwarf structured data in raw volume, even though most entry-level analyst work happens in structured tables.
+
+  ## Related concepts
+
+  ```
+  Structured Data
+    ↓
+  Semi-Structured Data
+    ↓
+  Unstructured Data ← you are here (text, images, audio, video)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Can you run a SQL query directly on a folder of customer support emails?**
+  Short answer: No — it's unstructured; you'd need to extract structured fields from it first (e.g., ticket category, sentiment, response time) before it fits a table you can query.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Unstructured data** → no predefined format — text, images, audio, video
+  Must be processed/extracted into structured fields before it can be queried or charted.

@@ -1,0 +1,71 @@
+title: Basic Formatting
+category: Spreadsheets
+what_is_it: Visual styling applied to cells — bold, borders, fill color, alignment, and column width — that makes a spreadsheet easier to read without changing any data.
+why_it_matters: Clear formatting is what turns a correct spreadsheet into one a stakeholder can actually read and trust at a glance — a well-analyzed but poorly formatted sheet often undersells the work behind it.
+prerequisites:
+  - number-formats
+objectives:
+  - Apply bold, borders, fill color, and alignment to make a sheet easier to read
+  - Explain the difference between formatting for readability and formatting a number's display
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-basic-formatting-1
+    title: Format a small report
+    description: Take a plain, unformatted small table and apply bold headers, borders, and consistent alignment to make it presentation-ready.
+verify:
+  - Can apply bold, borders, and fill color to cells
+  - Report is visually clear and consistent, not just correct
+note: |
+  ## 🎯 What is it?
+
+  **Basic formatting** covers the visual styling tools that make a spreadsheet easier to read — bold and italic text, cell borders, fill (background) color, text alignment, and column width — all changes to *appearance*, not to the underlying data or its number format.
+
+  ## 💡 Why is it important?
+
+  - A correct but visually cluttered spreadsheet often undersells the analysis behind it — clean formatting is a large part of what makes a report look trustworthy and professional at a glance.
+  - It's a fast, low-effort way to guide a reader's eye to what matters — a bold header row, a colored total row, and consistent alignment do a lot of communication work with very little effort.
+
+  ## Core concept
+
+  | Formatting tool | Common use |
+  |---|---|
+  | Bold | Header rows, key totals |
+  | Borders | Separating sections, framing a table |
+  | Fill color | Highlighting a total row, flagging outliers |
+  | Alignment | Right-align numbers, left-align text (the spreadsheet default, worth keeping) |
+  | Column width | Auto-fit so no text is cut off |
+
+  ## 📊 Example
+
+  A raw table of numbers with no formatting is functional but hard to scan. Adding a bold header row, a light fill color on the total row, and consistent right-alignment on all numeric columns turns the same data into something a stakeholder can read in seconds, without changing a single value.
+
+  ## ⚠️ Common mistakes
+
+  - **Over-formatting** — too many colors, fonts, or borders competes for attention and makes a sheet harder to read, not easier.
+  - **Confusing formatting with a number format** — bold/borders/fill change appearance only, exactly like number formats (currency, %) — neither changes the underlying value, but they solve different problems (visual structure vs. how a number reads).
+  - **Manually resizing every column** instead of using auto-fit, leading to inconsistent, unpolished-looking columns.
+
+  ## Related concepts
+
+  ```
+  Number Formats
+    ↓
+  Basic Formatting ← you are here
+    ↓
+  Excel Tables
+  ```
+  This closes the Spreadsheet Fundamentals chapter — the next chapter (Core Formulas) starts writing actual calculations on top of this grid.
+
+  ## 🎤 Interview preparation
+
+  **Q: Why does formatting matter if the underlying analysis is already correct?**
+  Short answer: Poor formatting makes a correct analysis harder to trust and read at a glance — clear headers, alignment, and highlighting guide a stakeholder's attention to what matters, which is part of communicating the analysis effectively, not just producing it.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Basic formatting** → bold, borders, fill color, alignment, column width — visual only, doesn't touch the data
+  Use it deliberately (headers, totals) — over-formatting hurts readability as much as none at all.

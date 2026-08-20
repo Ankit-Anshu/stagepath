@@ -1,0 +1,70 @@
+title: Percentage Calculations
+category: Spreadsheets
+what_is_it: Common formula patterns for working with percentages — percent of total, percent change, and percentage-formatted display — all built from simple division.
+why_it_matters: Percentages are one of the most common ways a business communicates a number (growth rate, market share, conversion rate) — getting the formula pattern right (and avoiding a common sign error) matters constantly.
+prerequisites:
+  - rounddown-function
+objectives:
+  - Write a formula to calculate percent of total
+  - Write a formula to calculate percent change between two periods
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-percentage-calculations-1
+    title: Calculate percent change
+    description: Given last month's and this month's revenue, write a formula for percent change, and format the result as a percentage.
+verify:
+  - Can write a percent-of-total formula
+  - Can write a percent-change formula and explain the sign of a decrease
+note: |
+  ## 🎯 What is it?
+
+  **Percentage calculations** covers the common formula patterns for working with percentages in a spreadsheet — all of them are built from simple division, then formatted as a percentage (see Number Formats).
+
+  ## 💡 Why is it important?
+
+  - Percentages are one of the most common ways a business communicates a number — growth rate, market share, conversion rate, percent of budget used.
+  - The two most common patterns (percent of total, percent change) are simple but easy to get subtly wrong, especially the sign on a decrease.
+
+  ## Core concept
+
+  | Pattern | Formula |
+  |---|---|
+  | Percent of total | `=part/total` |
+  | Percent change | `=(new-old)/old` |
+
+  Both results are raw decimals (e.g., `0.12`) — apply a percentage number format to display them as "12%."
+
+  ## 📊 Example
+
+  **Percent of total:** A region had $50,000 in sales out of $400,000 total. `=50000/400000` → `0.125` → formatted as **12.5%**.
+
+  **Percent change:** Revenue went from $80,000 (old) to $92,000 (new). `=(92000-80000)/80000` → `0.15` → formatted as **+15%**. If revenue had instead *dropped* to $68,000: `=(68000-80000)/80000` → `-0.15` → formatted as **-15%**, correctly showing a decrease.
+
+  ## ⚠️ Common mistakes
+
+  - **Reversing new and old in the percent-change formula** (`(old-new)/old` instead of `(new-old)/old`), which flips the sign and reports growth as decline or vice versa.
+  - **Forgetting to apply a percentage number format**, leaving the result as a confusing raw decimal like `0.125` instead of "12.5%."
+  - **Dividing by the wrong "old" value** in a percent-change formula — always divide by the *starting* value, not the ending one.
+
+  ## Related concepts
+
+  ```
+  ROUNDDOWN
+    ↓
+  Percentage Calculations ← you are here
+  ```
+  This closes the Basic Formulas chapter — the next chapter (Logical Functions) builds conditional logic on top of these basics.
+
+  ## 🎤 Interview preparation
+
+  **Q: Revenue went from $80,000 to $68,000. Write the percent-change formula and explain the sign of the result.**
+  Short answer: `=(68000-80000)/80000` → `-0.15`, or -15% — the negative sign correctly indicates a decrease; always compute `(new-old)/old`, never the reverse.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Percent of total** → `part/total` · **Percent change** → `(new-old)/old`
+  Format the raw decimal result as a percentage — and always divide by the *starting* value in a percent-change formula.

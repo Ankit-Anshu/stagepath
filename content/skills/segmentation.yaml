@@ -1,0 +1,69 @@
+title: Segmentation
+category: Foundations
+what_is_it: Breaking an overall metric down into meaningful subgroups — by region, channel, customer type, or any other dimension — to see where a pattern is really coming from.
+why_it_matters: An overall average or total often hides very different behavior in different subgroups — segmentation is usually the single most useful technique for finding where a change is actually concentrated.
+prerequisites:
+  - trend-analysis
+objectives:
+  - Define segmentation and explain why an overall average can be misleading
+  - Name three common ways to segment business data
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-segmentation-1
+    title: Segment an overall number
+    description: Take an overall metric you have (or imagine one) and describe three different ways you could segment it to find more detail.
+verify:
+  - Can define segmentation
+  - Can name three common segmenting dimensions
+note: |
+  ## 🎯 What is it?
+
+  **Segmentation** breaks an overall metric down into meaningful subgroups — by region, channel, customer type, device, or any other relevant dimension — to see whether the pattern is uniform or concentrated somewhere specific. It's arguably the single most useful, most frequently applied technique in an analyst's toolkit.
+
+  ## 💡 Why is it important?
+
+  - An overall average often hides very different behavior underneath — segmentation is usually the fastest way to find where a change is actually happening.
+  - It's the core mechanic behind diagnostic analytics (see Root Cause Analysis and Diagnostic Analytics) — "segment and compare" is the standard first move when investigating any change.
+
+  ## Core concept
+
+  Common segmenting dimensions:
+  - Geography (region, country)
+  - Channel (organic, paid, email, referral)
+  - Customer type (new vs. returning, plan tier)
+  - Device/platform (mobile vs. desktop)
+  - Time (day of week, time of day)
+
+  ## 📊 Example
+
+  "Overall conversion rate is flat at 3%." Segmented by device: mobile conversion dropped from 4% to 2%, while desktop rose from 2% to 4% — the overall average hid a real, concerning shift that only segmentation revealed. Without segmenting, the mobile problem would have gone completely unnoticed.
+
+  ## ⚠️ Common mistakes
+
+  - **Reporting only the overall/blended number** and never checking whether it hides meaningfully different behavior in subgroups.
+  - **Segmenting into groups so small that the "pattern" found is just noise** — always sanity-check that a segment has enough data to draw a real conclusion from.
+
+  ## Related concepts
+
+  ```
+  Trend Analysis
+    ↓
+  Segmentation ← you are here
+    ↓
+  Comparison
+  ```
+  Directly supports Diagnostic Analytics and Root Cause Analysis — segmenting is usually the first concrete step in both.
+
+  ## 🎤 Interview preparation
+
+  **Q: Overall conversion rate looks flat. How would you check whether something's actually changing underneath?**
+  Short answer: Segment it — by device, channel, geography, or customer type — since a flat overall average can hide two segments moving in opposite directions that cancel each other out.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Segmentation** → break an overall metric into subgroups to see where a pattern is really concentrated
+  Often the fastest way to find what an overall average is hiding.

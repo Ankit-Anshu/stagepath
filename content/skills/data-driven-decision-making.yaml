@@ -1,0 +1,69 @@
+title: Data-Driven Decision Making
+category: Foundations
+what_is_it: Making business decisions primarily based on evidence from data, rather than intuition, opinion, or "how we've always done it" alone.
+why_it_matters: It's the whole point of the data analyst role existing — an analyst's output only matters if it actually changes a decision.
+prerequisites:
+  - correlation-vs-causation
+objectives:
+  - Explain what data-driven decision making means in practice
+  - Describe one limitation or risk of relying purely on data
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-data-driven-1
+    title: Data vs. intuition
+    description: Think of a recent decision (personal or work) made mostly on intuition, and describe what data could have informed it instead.
+verify:
+  - Can explain what data-driven decision making means
+  - Can name one limitation of relying purely on data
+note: |
+  ## 🎯 What is it?
+
+  **Data-driven decision making** means basing business decisions primarily on evidence from data — trends, experiment results, customer behavior — rather than on intuition, opinion, or "the way it's always been done" alone. It's the ultimate purpose behind everything else in this Foundations stage: data analysis exists to inform better decisions.
+
+  ## 💡 Why is it important?
+
+  - It's the whole reason the data analyst role exists — an analysis that never changes a decision hasn't accomplished its purpose, however technically correct it was.
+  - It reduces the influence of bias, guesswork, and the loudest voice in the room — replacing "I think" with "the data shows."
+
+  ## Core concept
+
+  Data-driven doesn't mean data-*only* — good decision-making usually blends:
+
+  | Input | Role |
+  |---|---|
+  | Data | Evidence of what's actually happening |
+  | Domain expertise | Context for interpreting the data correctly |
+  | Judgment | Handling situations data can't fully capture (new markets, ethical tradeoffs) |
+
+  ## 📊 Example
+
+  A team debating whether to redesign a checkout flow could decide based purely on a designer's opinion ("this looks better") — or, data-driven, they could A/B test both versions and let actual conversion-rate data decide, informed by (not replacing) the designer's expertise on why one version might work better.
+
+  ## ⚠️ Common mistakes
+
+  - **Treating "data-driven" as "data-only," ignoring context data can't capture** — e.g., a new market with too little historical data still needs some judgment alongside whatever data exists.
+  - **Cherry-picking data that supports a decision already made**, rather than letting the data genuinely inform the decision — this is data-driven in name only.
+
+  ## Related concepts
+
+  ```
+  Correlation vs Causation
+    ↓
+  Data-Driven Decision Making ← you are here
+    ↓
+  Translating Business Questions into Data Questions
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Does "data-driven" mean ignoring intuition and experience entirely?**
+  Short answer: No — data-driven decision making combines data with domain expertise and judgment; data provides evidence of what's happening, but context and experience are still needed to interpret it correctly and to handle situations data alone can't fully capture.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data-driven decision making** → base decisions primarily on data evidence, combined with (not replacing) domain expertise and judgment
+  The core purpose of the analyst role — an analysis only matters if it changes a decision.

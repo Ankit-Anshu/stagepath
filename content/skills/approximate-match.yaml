@@ -1,0 +1,73 @@
+title: Approximate Match
+category: Spreadsheets
+what_is_it: Looking up the closest value less than or equal to the search key, in a sorted list — used for tiered lookups like tax brackets or grading scales.
+why_it_matters: It's the right tool for range-based lookups (which bracket does this value fall into?) but requires a sorted list and is easy to use by accident when exact match was actually needed.
+prerequisites:
+  - exact-match
+objectives:
+  - Explain what approximate match means and when it's appropriate
+  - Use approximate match for a tiered/bracket lookup
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-approximate-match-1
+    title: Build a tax bracket lookup
+    description: Given a sorted table of income brackets and rates, use an approximate-match VLOOKUP to find the correct rate for a given income.
+verify:
+  - Can explain what approximate match means
+  - Can build a working bracket/tier lookup using approximate match
+note: |
+  ## 🎯 What is it?
+
+  **Approximate match** finds the closest value *less than or equal to* the search key, in a list that must be sorted ascending. It's controlled with `TRUE` (or `1`) in VLOOKUP/HLOOKUP, or omitting/using `1` in MATCH.
+
+  ## 💡 Why is it important?
+
+  - It's exactly the right tool for tiered/range-based lookups — which tax bracket, which grade band, which shipping-cost tier a value falls into — where you're not looking for an exact match, but "which range does this fall in."
+  - It requires the lookup list to be sorted ascending — using it on unsorted data produces unpredictable, often wrong results.
+
+  ## Syntax
+
+  ```
+  =VLOOKUP(lookup_value, table_array, col_index, TRUE)   ← TRUE = approximate match
+  ```
+
+  ## 📊 Example
+
+  A tax bracket table (sorted ascending by income threshold):
+
+  | Income ≥ | Rate |
+  |---|---|
+  | 0 | 10% |
+  | 50,000 | 20% |
+  | 100,000 | 30% |
+
+  `=VLOOKUP(72000, table, 2, TRUE)` → `20%` — it finds the largest threshold *less than or equal to* 72,000 (which is 50,000), and returns its rate.
+
+  ## ⚠️ Common mistakes
+
+  - **Using approximate match on unsorted data** — the function's result becomes unpredictable and often silently wrong, since it depends on the list being sorted ascending.
+  - **Using approximate match by accident when exact match was needed** — e.g., leaving VLOOKUP's 4th argument blank (which defaults to approximate) when looking up a specific ID, silently returning the "closest" ID instead of erroring on a true mismatch.
+
+  ## Related concepts
+
+  ```
+  Exact Match
+    ↓
+  Approximate Match ← you are here
+    ↓
+  Lookup Errors
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you deliberately use approximate match instead of exact match?**
+  Short answer: For range/tier-based lookups — like tax brackets or grading scales — where you want "the bracket this value falls into," not an exact match; the source list must be sorted ascending for this to work correctly.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Approximate match** → `TRUE`/`1`; finds the closest value ≤ the search key
+  Requires the lookup list to be sorted ascending — the right tool for tiers and brackets, not identifiers.

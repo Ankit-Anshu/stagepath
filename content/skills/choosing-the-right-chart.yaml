@@ -1,0 +1,72 @@
+title: Choosing the Right Chart
+category: Spreadsheets
+what_is_it: Matching a chart type to the type of comparison being shown — trend, category comparison, part-to-whole, or relationship — rather than picking a chart out of habit.
+why_it_matters: The wrong chart type can make a correct finding look confusing or even misleading, no matter how accurate the underlying data is.
+prerequisites:
+  - combo-chart
+objectives:
+  - Match a comparison type to the appropriate chart type
+  - Critique a chart choice that doesn't fit its underlying comparison
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-choosing-right-chart-1
+    title: Pick the right chart for 3 findings
+    description: Given three different findings (a trend over time, a category comparison, and a relationship between two variables), pick the right chart type for each and explain why.
+verify:
+  - Can match a comparison type to the appropriate chart
+  - Can explain why a specific chart choice fits a given finding
+note: |
+  ## 🎯 What is it?
+
+  **Choosing the right chart** means deliberately matching a chart type to the *type of comparison* being shown, rather than defaulting to a familiar chart out of habit. This directly applies the Foundations stage's Visualize Data concept to the specific chart types covered in this chapter.
+
+  ## 💡 Why is it important?
+
+  - The wrong chart type can make a correct finding look confusing, or actively mislead a viewer, even when every underlying number is accurate.
+  - It's one of the most commonly tested visualization judgment calls in interviews and case studies — being handed a finding and asked "what chart would you use?"
+
+  ## Core concept
+
+  | Comparison type | Best chart |
+  |---|---|
+  | Trend over time | Line chart, area chart |
+  | Comparing categories | Bar chart, column chart |
+  | Part-to-whole (few categories) | Pie/donut chart |
+  | Part-to-whole over time | Stacked area/bar chart |
+  | Relationship between two variables | Scatter plot |
+  | Two related metrics, different scales | Combo chart |
+  | A single key number | KPI card |
+
+  ## 📊 Example
+
+  A finding "revenue grew steadily each month" is a trend — a line chart fits. The same underlying data forced into a pie chart (one slice per month) would completely obscure the trend, even though the numbers are identical — the chart type, not the data, determines whether the finding actually comes through.
+
+  ## ⚠️ Common mistakes
+
+  - **Picking a chart type out of habit or personal preference** rather than matching it to the comparison being shown.
+  - **Trying to cram too many comparison types into one chart** — a chart trying to show a trend, a category breakdown, and a part-to-whole split all at once usually communicates none of them well; sometimes two focused charts beat one crowded one.
+
+  ## Related concepts
+
+  ```
+  Combo Chart
+    ↓
+  Choosing the Right Chart ← you are here
+    ↓
+  Chart Formatting
+  ```
+  Directly builds on Visualize Data from the Foundations stage.
+
+  ## 🎤 Interview preparation
+
+  **Q: You have data showing how five product categories' market share has changed over the last 3 years. What chart type fits, and why?**
+  Short answer: A stacked area or stacked bar chart — it's a part-to-whole comparison (market share) that's also changing over time, and stacking shows both dimensions (the total and each category's share) in one view, unlike a single pie chart which only captures one point in time.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Choosing the right chart** → match chart type to comparison type: trend→line, categories→bar, part-to-whole→pie, relationship→scatter
+  The wrong chart can obscure or mislead, even with perfectly accurate data.

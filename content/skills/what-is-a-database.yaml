@@ -1,0 +1,68 @@
+title: What is a Database?
+category: SQL
+what_is_it: An organized collection of data stored electronically so it can be reliably added to, updated, and retrieved — the thing SQL queries actually run against.
+why_it_matters: Every SQL query assumes a database underneath it — understanding what one actually is (and isn't) makes every later SQL topic click faster.
+prerequisites:
+  - what-is-data
+objectives:
+  - Define a database in plain language
+  - Explain why a database is more reliable than a plain spreadsheet or file for large, shared data
+estimated_minutes: 20
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-what-is-a-database-1
+    title: Name your databases
+    description: List three apps or systems you use daily that are almost certainly backed by a database (banking app, social media, online store).
+verify:
+  - Can define a database in one sentence
+  - Can explain one advantage a database has over a spreadsheet for large data
+note: |
+  ## 🎯 What is it?
+
+  A **database** is an organized collection of data stored electronically so it can be reliably added to, updated, searched, and retrieved — typically by many people or programs at once. When you check a bank balance, search a store's product catalog, or log into a website, a database is almost always what's actually being queried behind the scenes.
+
+  ## 💡 Why is it important?
+
+  - Every SQL query in this stage runs against a database — understanding what one actually is makes the syntax that follows much less abstract.
+  - Databases solve problems a plain spreadsheet or file can't: many people reading/writing at once safely, enforcing rules about what data is allowed, and staying fast even at millions of rows.
+
+  ## Core concept
+
+  | | Spreadsheet/file | Database |
+  |---|---|---|
+  | Concurrent users | Struggles past a handful | Designed for many at once |
+  | Data integrity rules | Manual, easy to break | Enforced automatically (see Constraints) |
+  | Scale | Slows down at large sizes | Built for millions+ rows |
+  | Querying | Manual filtering/formulas | A dedicated query language (SQL) |
+
+  ## 📊 Example
+
+  An online store's database holds its `products`, `customers`, and `orders` — thousands of people can browse products and place orders at the same second, and the database keeps every change consistent (e.g., it won't let two people simultaneously buy the last unit of stock without one of them being correctly rejected).
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming "database" means one specific software product.** It's a general concept — MySQL, PostgreSQL, SQL Server, and many others are all *database management systems* that implement it (see DBMS).
+  - **Confusing a database with a spreadsheet.** A spreadsheet can hold data too, but lacks the reliability, scale, and multi-user safety a real database provides.
+
+  ## Related concepts
+
+  ```
+  What is a Database ← you are here
+    ↓
+  Relational Database
+    ↓
+  DBMS / RDBMS
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would a company use a database instead of just storing everything in spreadsheets?**
+  Short answer: A database supports many concurrent users safely, enforces data integrity rules automatically, and stays performant at a scale (millions of rows) where spreadsheets become slow and error-prone.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Database** → an organized, reliable collection of data, built for many concurrent readers/writers at scale
+  Every SQL query in this roadmap runs against one.

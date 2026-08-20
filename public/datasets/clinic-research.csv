@@ -1,0 +1,10 @@
+observation_id,source,participant,observation,theme,severity
+R01,interview,P01,"Did not know whether physiotherapy required a referral",eligibility,high
+R02,support,P02,"Called after selecting the wrong clinic location",location,medium
+R03,usability,P03,"Could not find the earliest available appointment",availability,high
+R04,interview,P04,"Needed larger text and clearer service names",accessibility,high
+R05,analytics,aggregate,"38 percent exit on service selection",navigation,high
+R06,usability,P05,"Error removed all previously entered details",error recovery,critical
+R07,interview,P06,"Shared phone with family and wanted privacy",privacy,medium
+R08,support,P07,"Did not understand specialist department names",labels,high
+

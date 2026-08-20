@@ -1,0 +1,59 @@
+title: Marketplace Analytics Platform
+level: capstone
+duration: 25-35 hours
+description: >-
+  Build a complete analytics solution for a fictional marketplace company end to end: schema,
+  pipeline, dashboard, and executive summary.
+problem_statement: A two-sided marketplace has grown quickly but teams disagree on active users, liquidity, successful transactions, and listing quality. Build an end-to-end analytics foundation with shared definitions.
+scenario: You are the analytics engineer creating the first trustworthy marketplace metrics layer and executive review.
+dataset:
+  name: Marketplace operations bundle
+  description: Synthetic relational bundle covering users, listings, transactions, and reviews with realistic lifecycle and data-quality issues.
+  source_url: /datasets/marketplace-transactions.csv
+  format: CSV bundle
+  size: 4 related files
+  files: [marketplace-users.csv, marketplace-listings.csv, marketplace-transactions.csv, marketplace-reviews.csv]
+skills:
+  - sql-window-functions
+  - pandas
+  - dashboard-design
+  - business-analytics
+datasets:
+  - users
+  - listings
+  - transactions
+  - reviews
+tasks:
+  - Model the multi-table schema end to end
+  - Build a SQL + Python analytics pipeline
+  - Publish a dashboard
+  - Write an executive summary presentation
+requirements:
+  - Define entity grains, keys, lifecycle states, and metric ownership
+  - Build tested transformations from raw to analysis-ready tables
+  - Include data-quality checks and a reproducible runbook
+milestones:
+  - title: Design the analytics contract
+    description: Document the schema, business definitions, grains, and acceptance tests.
+  - title: Build the pipeline
+    description: Create staged and modeled tables with quality checks and reproducible execution.
+  - title: Analyze marketplace health
+    description: Measure acquisition, activation, liquidity, conversion, repeat behavior, and quality.
+  - title: Deliver the decision system
+    description: Publish the dashboard, executive narrative, repository, and operational runbook.
+rubric:
+  - criterion: Data architecture
+    definition: Models have clear grains, tested relationships, and traceable transformations.
+  - criterion: Metric governance
+    definition: Important measures have unambiguous definitions and reconcile across outputs.
+  - criterion: Product insight
+    definition: Analysis identifies a meaningful constraint and recommends a measurable response.
+  - criterion: Reproducibility
+    definition: A new contributor can set up, run, validate, and understand the project.
+artifacts:
+  - GitHub repository
+  - Dashboard
+  - Notebook
+  - SQL queries
+  - README
+  - Presentation

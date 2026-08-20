@@ -1,0 +1,73 @@
+title: Descriptive Analytics
+category: Foundations
+what_is_it: Analytics that summarizes what has already happened — the most common and foundational type of analysis a data analyst performs.
+why_it_matters: It's the type of analysis behind almost every dashboard and report — before diagnosing why something happened or predicting what's next, you first have to accurately describe what did happen.
+prerequisites:
+  - types-of-data-analytics
+objectives:
+  - Define descriptive analytics and give an example
+  - Explain why descriptive analytics is usually the first step in any analysis
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-descriptive-analytics-1
+    title: Write a descriptive summary
+    description: Pick any metric you track (spending, steps, screen time) and write one sentence purely describing what happened last week — no explanation, no prediction.
+verify:
+  - Can define descriptive analytics
+  - Can distinguish it from diagnostic analytics
+note: |
+  ## 🎯 What is it?
+
+  **Descriptive analytics** answers "what happened?" — it summarizes historical data into a clear picture of past events, using counts, sums, averages, and trends. "Revenue was $1.2M last month" and "signups grew 8% week over week" are both descriptive statements.
+
+  ## 💡 Why is it important?
+
+  - It's the foundation every other type of analytics builds on — you can't diagnose *why* something happened, or predict what's next, without first accurately describing what did happen.
+  - Nearly every dashboard a business runs is primarily descriptive analytics — KPI cards, trend lines, and summary tables.
+  - It's usually the fastest, cheapest type of analysis to produce, which is why it's almost always the first step.
+
+  ## Core concept
+
+  | Type | Question | Example |
+  |---|---|---|
+  | **Descriptive** | What happened? | "Revenue was $1.2M last month" |
+  | Diagnostic | Why did it happen? | "Revenue dropped because of a stockout" |
+  | Predictive | What will happen? | "Revenue is forecast to grow 5% next month" |
+  | Prescriptive | What should we do? | "Increase inventory by 20% to avoid the next stockout" |
+
+  ## 📊 Example
+
+  A weekly sales dashboard showing total revenue, order count, and average order value for the past 8 weeks is pure descriptive analytics — it summarizes what happened, with no explanation of *why* revenue moved, and no prediction of what comes next.
+
+  ## ⚠️ Common mistakes
+
+  - **Stopping at descriptive analytics when a stakeholder actually wanted diagnostic or prescriptive insight.** "Revenue dropped 10%" (descriptive) isn't useful on its own if the real question was "why, and what do we do about it?"
+  - **Adding unsupported explanations into a descriptive report.** "Revenue dropped because of the weather" is a diagnostic claim — it needs its own investigation, not just an assumption tacked onto a descriptive summary.
+
+  ## Related concepts
+
+  ```
+  Types of Data Analytics
+    ↓
+  Descriptive Analytics ← you are here (what happened)
+    ↓
+  Diagnostic Analytics (why it happened)
+    ↓
+  Predictive Analytics (what will happen)
+    ↓
+  Prescriptive Analytics (what to do)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Give an example of a descriptive analytics statement versus a diagnostic one.**
+  Short answer: Descriptive: "Weekly signups fell from 500 to 420." Diagnostic: "Signups fell because a broken signup form silently rejected 15% of attempts." The first only describes; the second explains.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Descriptive analytics** → summarizes what already happened — the most common, foundational type of analysis
+  Nearly every dashboard is primarily descriptive.

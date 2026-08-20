@@ -1,0 +1,165 @@
+title: Salary Negotiation
+category: Career
+what_is_it: Researching a fair market range and negotiating an offer professionally, instead of accepting the first number or negotiating blind.
+why_it_matters: The negotiation conversation happens once per offer. Going in without research or a plan is the single most common way candidates leave money on the table.
+prerequisites: []
+objectives:
+  - Research a realistic market range for a role and location
+  - Avoid naming a number first when possible
+  - Negotiate beyond base salary when relevant
+  - Respond to a lowball offer professionally
+subtopics:
+  - title: Researching a market range
+    description: Using public salary data and role/location comparisons to know what "fair" actually looks like.
+    outcomes:
+      - Research a realistic salary range for a specific role and location
+  - title: The negotiation conversation
+    description: Anchoring, timing, and how to respond when asked for a number first.
+    outcomes:
+      - Practice responding to "what are your salary expectations?"
+  - title: Beyond base salary
+    description: Signing bonus, equity, remote flexibility, and other levers besides the base number.
+    outcomes:
+      - Identify at least one non-salary lever worth negotiating
+estimated_minutes: 90
+resources:
+  - r-tech-interview-handbook
+practice:
+  - id: ex-negotiation-1
+    title: Draft a negotiation response
+    description: Given a sample offer below your researched market range, draft the email or script you'd use to negotiate it.
+verify:
+  - Range is grounded in actual research, not a guess
+  - Response is professional and specific, not vague or apologetic
+  - At least one non-salary lever is considered
+note: |
+  ## 🎯 What is it?
+
+  **Salary negotiation** is researching a fair market range and negotiating an offer professionally — instead of accepting the first number offered, or negotiating blind with no research to back up a counter.
+
+  ## 💡 Why is it important?
+
+  The negotiation conversation happens once per offer. Going in without research or a plan is the single most common way candidates leave money on the table — and unlike almost every other job-search skill, a single well-prepared conversation can have an outsized, immediate, and compounding financial impact (since future raises are often calculated as a percentage of the starting number).
+
+  ## Core concept
+
+  ### Researching a market range
+  Use public salary data (aggregator sites, industry surveys) and role/location comparisons to know what "fair" actually looks like for the specific role, level, and location **before** any negotiation conversation happens — negotiating without this is negotiating blind.
+
+  ### The negotiation conversation
+  - **Avoid naming a number first when possible.** Whoever names a number first sets an anchor — if you go first and guess low, you may leave money on the table; if the employer goes first, you have more room to negotiate up from their number.
+  - **When asked "what are your salary expectations?"** before an offer, it's reasonable to redirect: state you're focused on finding the right fit and would like to understand the role's budgeted range first, or give a well-researched range (not a single number) if pressed.
+  - **Timing matters** — negotiate after receiving a formal offer, not before, when you have the most leverage (the company has already decided they want you).
+
+  ### Beyond base salary
+  Signing bonus, equity, remote flexibility, extra PTO, and start date are all real, negotiable levers besides the base number — especially useful when a company has limited flexibility on base salary specifically but more flexibility elsewhere.
+
+  ## Syntax / Formula / Structure
+
+  A professional negotiation response template:
+
+  ```
+  "Thank you for the offer — I'm excited about the role. Based on my research
+  into [role] positions at [comparable companies/level] in [location], and
+  given my experience with [specific relevant skill/outcome], I was hoping
+  we could discuss a base closer to $[X]. Is there flexibility there, or
+  in [other lever, e.g., signing bonus/equity]?"
+  ```
+
+  ## 📊 Example
+
+  **Scenario:** An offer comes in at $65,000 for a role where researched market range is $70,000–$80,000 for the specific level and location.
+
+  **Weak response:** Accepting immediately without any research or counter, or countering with no specific number or reasoning ("can you do better?").
+
+  **Strong response:**
+  > "Thank you so much for the offer — I'm genuinely excited about this role. Based on my research into data analyst roles at similar companies in [location], and my experience with [a specific, relevant project/skill], I was hoping we could discuss a base salary closer to $75,000. Is there room to move on that, or on the signing bonus if the base is fixed?"
+
+  **Explanation:** The strong response is specific (a researched number, not a vague ask), professional in tone, grounded in evidence (comparable roles, specific relevant experience), and offers a fallback lever (signing bonus) if the base truly can't move — giving the employer an easy, low-friction way to say yes to something.
+
+  ## Multiple examples
+
+  **Beginner:** Researching a realistic salary range for a specific role/location before receiving any offer, so you're prepared regardless of when the question comes up.
+  **Intermediate:** Practicing a response to "what are your salary expectations?" that redirects to the role's budgeted range rather than naming a number first.
+  **Real-world:** Receiving a lowball offer, responding professionally with a specific researched counter-range and a note about a particularly relevant piece of experience, and separately asking about a signing bonus as a fallback if the base salary genuinely has no room to move.
+
+  ## ⚠️ Common mistakes
+
+  - **Accepting the first offer without any research or counter**, especially when it's below a realistic market range — most employers expect some negotiation and build room into an initial offer.
+  - **Naming a number first without any research behind it**, potentially anchoring far below what the role could actually support.
+  - **Being vague or apologetic in the ask** ("I don't know, maybe a little more if that's okay?") instead of a specific, professionally confident, evidence-backed number.
+  - **Only negotiating base salary**, ignoring other real levers (signing bonus, equity, start date, remote flexibility) that might have more room to move.
+
+  ## Real-world Data Analyst use cases
+
+  - **Every job offer received** — this conversation applies regardless of company size or seniority level.
+  - **Internal promotions/raises:** the same research-and-ask discipline applies to negotiating a raise, not just a new offer.
+
+  ## Related concepts
+
+  ```
+  Resume & LinkedIn Optimization
+  Technical Interview Practice
+  Case Study & Take-Home Assignments
+  Job Preparation
+    ↓
+  Salary Negotiation ← you are here (closes the Job Preparation stage)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Why is it generally better to avoid naming a salary number first, if possible?
+
+  ### Medium
+  2. An offer comes in $10K below your researched market range. Draft a one-sentence, professional response asking for more.
+
+  ### Interview/Advanced
+  3. A company says the base salary is completely fixed with no flexibility. What would you try negotiating next?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Whoever states a number first sets an anchor for the rest of the conversation — going first risks anchoring too low (leaving money on the table) if you don't yet know the employer's actual budgeted range.
+  2. Example: "Thank you for the offer — based on my research into similar roles in this market, I was hoping we could discuss a base closer to $[researched number]; is there flexibility there?"
+  3. Non-base levers — a signing bonus, additional equity, extra PTO, a flexible/remote work arrangement, or an accelerated performance review timeline — any of which can add real value even if the base number genuinely can't move.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why does researching a market range matter before negotiating?**
+  Short answer: It grounds the negotiation in evidence rather than a guess, making a counter-offer more credible and defensible, and prevents either underselling yourself or asking for something wildly unrealistic.
+
+  ### Conceptual questions
+  **Q: Why is timing important in salary negotiation — why wait until after a formal offer?**
+  Short answer: Leverage is highest after a formal offer, since the company has already decided they want you specifically — negotiating too early, before that decision, generally comes with much less leverage.
+
+  ### Scenario-based questions
+  **Q: You're asked for your salary expectations very early in the interview process, before any offer. How do you respond?**
+  Short answer: Redirect professionally — express that you're focused on finding the right fit first and would appreciate understanding the role's budgeted range, or provide a well-researched range rather than a single number if pressed to answer.
+
+  ### Practical questions
+  **Q: How would you research a realistic salary range for a data analyst role in a specific city?**
+  Short answer: Use public salary aggregator data and industry surveys, filtering by role, experience level, and location specifically, and cross-reference a few sources rather than relying on just one to get a more reliable range.
+
+  ## Interview traps / tricky points
+
+  - Negotiating apologetically or vaguely undermines an otherwise reasonable, well-researched ask — tone and specificity both matter, not just the underlying research.
+  - Focusing only on base salary can leave real value on the table when other levers (signing bonus, equity, PTO) might have more flexibility.
+
+  ## Best practices
+
+  - Always research a realistic market range before any negotiation conversation.
+  - Avoid naming a number first when possible; let the employer anchor first if you can.
+  - Negotiate professionally and specifically, backed by research and relevant experience.
+  - Consider non-base levers (signing bonus, equity, PTO, remote flexibility) when base salary has limited room to move.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Research first** → know a realistic market range before any conversation
+  **Avoid anchoring first** → let the employer name a number when possible
+  **Negotiate after a formal offer** → leverage is highest then
+  **Beyond base:** signing bonus, equity, PTO, and flexibility are all real, negotiable levers

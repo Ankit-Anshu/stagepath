@@ -1,0 +1,48 @@
+title: E-commerce Customer Analysis
+level: portfolio
+duration: 5-8 hours
+description: >-
+  Use SQL joins and aggregation across a small e-commerce schema to answer real business questions
+  about customers and revenue.
+problem_statement: An e-commerce team has separate customer, order, and product tables but no shared view of revenue quality. Determine who drives value, which categories grow, and where refunds or discounts distort performance.
+scenario: You are delivering the first reusable SQL analysis pack for the commercial team.
+dataset:
+  name: Northstar commerce relational dataset
+  description: Three synthetic CSV tables with customers, products, and orders designed for joins, aggregation, null handling, and cohort analysis.
+  source_url: /datasets/ecommerce-orders.csv
+  format: CSV bundle
+  size: 3 related files
+  files: [ecommerce-customers.csv, ecommerce-products.csv, ecommerce-orders.csv]
+skills:
+  - sql-joins
+  - sql-aggregation
+datasets:
+  - customers
+  - orders
+  - products
+tasks:
+  - Identify the highest-value customers
+  - Analyze product revenue
+  - Calculate monthly revenue
+  - Explain the SQL used
+requirements:
+  - Create and document primary and foreign keys before querying
+  - Reconcile order-level and line-level revenue totals
+  - Include at least one CTE and one window-function analysis
+milestones:
+  - title: Model the schema
+    description: Load the three files, define relationships, and test key uniqueness and orphan records.
+  - title: Build core metrics
+    description: Calculate net revenue, order value, repeat rate, product contribution, and monthly trend.
+  - title: Present the findings
+    description: Package readable queries and a short commercial recommendation with caveats.
+rubric:
+  - criterion: Query correctness
+    definition: Joins preserve the intended grain and metrics reconcile to source totals.
+  - criterion: SQL quality
+    definition: Queries are readable, modular, commented, and avoid unnecessary scans or duplication.
+  - criterion: Business reasoning
+    definition: Findings distinguish revenue volume from customer and product quality.
+artifacts:
+  - SQL queries
+  - README

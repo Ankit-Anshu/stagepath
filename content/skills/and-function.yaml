@@ -1,0 +1,98 @@
+title: AND Function
+category: Spreadsheets
+what_is_it: Checking whether multiple conditions are ALL true at once, returning a single TRUE or FALSE — most often used together with IF to build a rule that depends on more than one factor.
+why_it_matters: Many real business rules depend on multiple conditions holding simultaneously (e.g., "large AND overdue") — AND is how you express that precisely.
+prerequisites:
+  - ifs-function
+objectives:
+  - Use AND to check whether multiple conditions are all true
+  - Combine AND with IF to build a multi-condition rule
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-and-1
+    title: Flag priority orders
+    description: Flag an order as "Priority" only if it is both over $500 AND from a VIP customer, using AND inside an IF.
+verify:
+  - AND correctly returns TRUE only when every condition holds
+  - Combined IF+AND formula matches the stated business rule exactly
+note: |
+  ## 🎯 What is it?
+
+  **AND** checks whether multiple conditions are **all** true at once, returning a single TRUE or FALSE — most often used together with [IF](/skills/if-function) to build a rule that depends on more than one factor holding simultaneously.
+
+  ## 💡 Why is it important?
+
+  Many real business rules depend on more than one condition being true at the same time (e.g., "flag as priority only if the order is both large **and** from a VIP customer") — AND is how you express that precisely, rather than approximating it with separate, error-prone formulas.
+
+  ## Syntax
+
+  ```
+  =AND(condition1, condition2, ...)
+  =IF(AND(condition1, condition2), value_if_true, value_if_false)
+  ```
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Amount | Customer Type |
+  | 2 | 600 | VIP |
+
+  **Formula:** `=IF(AND(A2>500,B2="VIP"),"Priority","Standard")`
+  **Result:** `"Priority"` — both conditions (amount over 500, and VIP status) are true.
+
+  If the amount were 400, AND would return FALSE (even though the customer is VIP), so the result would be "Standard" — every condition must hold for AND to return TRUE.
+
+  ## Multiple examples
+
+  **Beginner:** `=AND(A1>0,A1<100)` — check whether a value falls within a range.
+  **Real-world:** `=IF(AND(days_overdue>30,amount>1000),"Escalate","Monitor")` — a collections rule that only escalates an account when it's both significantly overdue AND a large balance, avoiding over-escalating small overdue amounts.
+
+  ## ⚠️ Common mistakes
+
+  - **Using AND when OR was actually needed.** AND requires *every* condition to be true; a rule that should trigger if *any* condition is true needs [OR](/skills/or-function) instead — mixing these up silently produces the opposite of the intended rule.
+  - **Nesting too many conditions inside one AND**, making the rule hard to read — breaking a very complex rule into a helper column can improve clarity.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** flagging orders that meet multiple criteria at once (large AND from a specific region).
+  - **Operations analysis:** flagging a shipment as high-risk only if it's both overdue AND high-value.
+
+  ## Related concepts
+
+  ```
+  IFS → AND ← you are here → OR → IFERROR
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that returns TRUE only if A1 is greater than 10 AND less than 50.
+
+  ### Interview/Advanced
+  2. A formula `=IF(AND(A2>500,B2="VIP"),"Priority","Standard")` marks a $400 VIP order as "Standard." Is this a bug?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=AND(A1>10,A1<50)`
+  2. Not a bug — AND requires *both* conditions to be true; since the amount ($400) doesn't exceed 500, the AND correctly returns FALSE even though the customer is VIP, so "Standard" is the correct, intended result for this rule.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between AND and OR in a formula?**
+  Short answer: AND requires every listed condition to be true to return TRUE; OR only requires at least one of them to be true.
+
+  ## Best practices
+
+  - Choose AND vs. OR deliberately based on whether the business rule requires "all conditions" or "any condition."
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **AND(cond1, cond2, ...)** → TRUE only if every condition is true
+  **Common pattern:** `=IF(AND(...), true_result, false_result)`

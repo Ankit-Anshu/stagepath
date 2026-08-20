@@ -1,0 +1,68 @@
+title: Error Handling in Spreadsheets
+category: Spreadsheets
+what_is_it: 'Anticipating and gracefully managing formula errors — like #N/A, #DIV/0!, and #VALUE! — instead of letting them silently break downstream calculations.'
+why_it_matters: An unhandled error in one cell can cascade through every formula that depends on it — deliberate error handling keeps a report usable and makes real problems easier to spot.
+prerequisites:
+  - flash-fill
+objectives:
+  - Recognize the common spreadsheet error types and what causes each
+  - Use IFERROR to provide a clean fallback for an anticipated error
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-error-handling-spreadsheets-1
+    title: Handle a division error
+    description: Write a formula that calculates a conversion rate (conversions ÷ visits) and gracefully handles the case where visits is 0.
+verify:
+  - Can name three common spreadsheet error types
+  - Can wrap a risky formula in IFERROR appropriately
+note: |
+  ## 🎯 What is it?
+
+  **Error handling** means anticipating situations where a formula could fail — a missing lookup value, a division by zero, mismatched data types — and deliberately managing what happens, usually with IFERROR, instead of letting a raw error value cascade through a report.
+
+  ## 💡 Why is it important?
+
+  - An unhandled error in one cell breaks every formula downstream that references it — a single `#DIV/0!` can turn an entire summary row into errors.
+  - Deliberate error handling (a clean fallback message, or a 0 where appropriate) keeps a report readable, while still surfacing genuinely unexpected problems rather than hiding everything indiscriminately.
+
+  ## Core concept
+
+  | Error | Common cause | Typical handling |
+  |---|---|---|
+  | `#DIV/0!` | Dividing by zero or a blank cell | `IFERROR(a/b, 0)` or check `b<>0` first |
+  | `#N/A` | A lookup found no match | `IFERROR(VLOOKUP(...), "Not found")` |
+  | `#VALUE!` | Wrong data type in an operation | Fix the source data type, or wrap with IFERROR as a stopgap |
+  | `#REF!` | A referenced cell/range was deleted | Fix the broken reference — IFERROR can mask, but not fix, this |
+
+  ## 📊 Example
+
+  A conversion-rate formula `=conversions/visits` throws `#DIV/0!` for any row with zero visits. `=IFERROR(conversions/visits, 0)` (or, more precisely, `=IF(visits=0, 0, conversions/visits)`) handles it gracefully, showing a clean 0% instead of an error that would break a downstream SUM or chart.
+
+  ## ⚠️ Common mistakes
+
+  - **Wrapping every formula in IFERROR by default**, which can hide a genuine bug (like a broken reference) behind a generic fallback, making real problems harder to notice.
+  - **Choosing a fallback value that's misleading** — displaying 0 for a genuinely unknown/missing value (rather than "N/A" or blank) can make missing data look like a real zero in a downstream calculation.
+
+  ## Related concepts
+
+  ```
+  Flash Fill
+    ↓
+  Error Handling ← you are here
+    ↓
+  Standardizing Values
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A conversion-rate column shows several #DIV/0! errors. How would you handle it?**
+  Short answer: Wrap the formula with a check for zero (either `IF(visits=0, 0, conversions/visits)` or `IFERROR(conversions/visits, 0)`), choosing a fallback value that accurately represents "no visits" rather than letting the error propagate into downstream totals.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Error handling** → anticipate and manage formula errors deliberately, usually with IFERROR
+  Don't blanket-wrap everything — a hidden error can be a hidden bug.

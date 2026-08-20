@@ -1,0 +1,68 @@
+title: Columns
+category: SQL
+what_is_it: A single attribute tracked for every row in a table — each with its own name and data type, shared consistently across all rows.
+why_it_matters: Columns are what you select, filter, and aggregate on in every SQL query — and their data type determines what operations are valid.
+prerequisites:
+  - database-rows
+objectives:
+  - Define a column and explain its relationship to data type
+  - Name the columns you'd expect in a simple example table
+estimated_minutes: 15
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-database-columns-1
+    title: Assign data types
+    description: For a customers table, list its likely columns and assign each a sensible data type (text, integer, date, etc.).
+verify:
+  - Can define a column
+  - Can assign a sensible data type to a few example columns
+note: |
+  ## 🎯 What is it?
+
+  A **column** is a single attribute tracked for every row in a table — `name`, `email`, `signup_date` are each columns in a `customers` table. Every column has a name and a **data type** (text, integer, date, etc.) that every row's value in that column must match.
+
+  ## 💡 Why is it important?
+
+  - Columns are exactly what you name in a `SELECT`, filter in a `WHERE`, and aggregate in a `GROUP BY` — nearly every SQL clause references columns directly.
+  - A column's data type determines what's valid: you can `SUM()` a numeric column, but not a text column; you can compare a date column with `>`, but that comparison means something different for a text column.
+
+  ## Core concept
+
+  | Column | Data type | Valid operations |
+  |---|---|---|
+  | `name` | Text | Filter (`WHERE name = ...`), pattern match (`LIKE`) |
+  | `amount` | Numeric | Sum, average, compare with `>`/`<` |
+  | `signup_date` | Date | Compare, extract year/month, calculate differences |
+  | `is_active` | Boolean | Filter as true/false |
+
+  ## 📊 Example
+
+  Attempting `SUM(customer_name)` fails or produces nonsense — `customer_name` is a text column, and summing text isn't a valid operation. `SUM(order_amount)` works because `order_amount` is numeric — matching the operation to the column's data type is a basic but essential check.
+
+  ## ⚠️ Common mistakes
+
+  - **Trying to perform a numeric operation on a text or date column** without converting it first (see Conversion Functions later in this stage).
+  - **Assuming a column's name accurately describes its data type or contents** — always check with a quick `SELECT` or a schema lookup before assuming.
+
+  ## Related concepts
+
+  ```
+  Rows
+    ↓
+  Columns ← you are here
+    ↓
+  Primary Key → Foreign Key
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would `SUM(customer_name)` fail or produce a meaningless result?**
+  Short answer: `customer_name` is a text column — `SUM` is a numeric aggregation and isn't valid on text data. Checking a column's data type before aggregating it is a basic sanity check.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Column** → a named attribute with a data type, shared across every row in a table
+  Match your SQL operation (SUM, comparison, pattern match) to the column's actual data type.

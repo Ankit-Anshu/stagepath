@@ -1,0 +1,26 @@
+title: dbt Transformations
+what_is_it: >-
+  Writing modular, version-controlled, testable SQL transformations using dbt, instead of one-off
+  scripts.
+why_it_matters: >-
+  dbt is the industry-standard way modern data teams manage transformation logic — with version
+  control, testing, and documentation built in.
+prerequisites:
+  - sql-ctes
+objectives:
+  - Write a dbt model
+  - Add a test to a dbt model
+  - Explain how dbt manages dependencies between models
+estimated_minutes: 240
+resources:
+  - r-dbt-guides
+practice:
+  - id: ex-dbt-1
+    title: Convert a query into a dbt model
+    description: >-
+      Take an existing multi-CTE SQL query and restructure it as a set of small, testable dbt
+      models.
+verify:
+  - Each model has a single clear responsibility
+  - At least one dbt test is added and passes
+  - Model lineage/dependency graph is correct

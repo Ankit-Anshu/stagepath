@@ -1,0 +1,127 @@
+title: INDEX + MATCH
+category: Spreadsheets
+what_is_it: Combining INDEX and MATCH into a single, flexible two-way lookup that isn't limited to VLOOKUP's left-to-right, first-column-only search.
+why_it_matters: This is the classic, battle-tested alternative to VLOOKUP — it can look in any direction and doesn't break when a column is inserted into the source table.
+prerequisites:
+  - match-function
+objectives:
+  - Build a two-way lookup with INDEX-MATCH
+  - Explain why INDEX-MATCH is more resilient than VLOOKUP
+estimated_minutes: 40
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-index-match-1
+    title: Look up a value to the left of the key
+    description: Given a table where the value needed is to the LEFT of the lookup key, build an INDEX-MATCH formula to retrieve it (a case VLOOKUP alone cannot handle).
+verify:
+  - INDEX-MATCH correctly retrieves the value regardless of its position relative to the key
+  - Formula survives a column being inserted into the source table
+note: |
+  ## 🎯 What is it?
+
+  **INDEX + MATCH** combines [MATCH](/skills/match-function) (which finds *where* a value is) with [INDEX](/skills/index-function) (which retrieves a value at that position) into a single, flexible lookup — one that isn't limited to VLOOKUP's left-to-right, first-column-only search.
+
+  ## 💡 Why is it important?
+
+  This is the classic, battle-tested alternative to VLOOKUP, used throughout real-world spreadsheets for years before [XLOOKUP](/skills/xlookup-function) existed. It can look in **any** direction (including to the left of the key) and — because it references two separate ranges rather than one hardcoded column-index number — doesn't silently break when a column is inserted into the source table.
+
+  ## Syntax
+
+  ```
+  =INDEX(return_range, MATCH(lookup_value, lookup_range, 0))
+  ```
+
+  **How to read it:** MATCH finds the *position* of `lookup_value` within `lookup_range`; INDEX then returns the value at that same position, but from a completely different range (`return_range`) — which can be located anywhere relative to `lookup_range`, including to its left.
+
+  ## 📊 Example
+
+  `customers` table:
+
+  | region | customer_id | name |
+  |---|---|---|
+  | West | 101 | Ana Silva |
+  | East | 102 | Wei Chen |
+
+  **Task:** Given customer_id 102, find the **region** — which is to the **left** of customer_id. A plain VLOOKUP cannot do this at all.
+
+  **Formula:** `=INDEX(A:A, MATCH(102, B:B, 0))`
+
+  **Explanation:** MATCH finds that 102 is in row 2 of column B; INDEX then returns the value in row 2 of column A ("East") — successfully looking left, which VLOOKUP structurally cannot do.
+
+  ## Multiple examples
+
+  **Beginner:** `=INDEX(B:B,MATCH(A2,C:C,0))` — a straightforward one-way lookup, functionally equivalent to a VLOOKUP.
+  **Intermediate:** Looking left of the key column, as in the example above — VLOOKUP's core structural limitation.
+  **Real-world:** A two-way lookup — `=INDEX(data_range, MATCH(row_value,row_labels,0), MATCH(column_value,column_headers,0))` — retrieving a value from a matrix (like a table of revenue by region and month) by matching both a row label and a column header simultaneously.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting the `0` (exact match) argument in MATCH**, causing an approximate-match search on data that isn't sorted for it.
+  - **Mismatching the size of `return_range` and `lookup_range`** — MATCH finds a position within `lookup_range`, and INDEX applies that same position number to `return_range`; if the two ranges don't correspond row-for-row, the result will be wrong.
+  - **Reaching for a more complex formula than needed** when a plain VLOOKUP would have worked fine — INDEX-MATCH is more powerful, but adds complexity that isn't always necessary for a simple, standard left-to-right lookup.
+
+  ## Real-world Data Analyst use cases
+
+  - **Customer analysis:** looking up a customer's region when the region column sits to the left of the ID column in the source table.
+  - **Financial modeling:** a two-way lookup retrieving a specific cell from a matrix, like revenue by product and month.
+
+  ## Related concepts
+
+  ```
+  INDEX → MATCH → INDEX + MATCH ← you are here → XLOOKUP → XMATCH
+  ```
+  This is the direct spreadsheet-level equivalent of an [SQL — JOIN](/skills/sql-joins), extended to handle any lookup direction.
+
+  ## Practice questions
+
+  ### Easy
+  1. What two functions combine to form INDEX-MATCH, and what does each one contribute?
+
+  ### Medium
+  2. Write an INDEX-MATCH formula to look up a value in column A, using a key in column C (to the right of A).
+
+  ### Interview/Advanced
+  3. Why doesn't INDEX-MATCH break the way VLOOKUP does when a new column is inserted into the source table?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. MATCH finds the *position* of the lookup value within a range; INDEX retrieves the value at that position from a separate range — together they form a complete, flexible lookup.
+  2. `=INDEX(A:A, MATCH(lookup_value, C:C, 0))`
+  3. VLOOKUP relies on a hardcoded column-index *number*, which silently points at the wrong column if a new column shifts everything after it. INDEX-MATCH instead references the *return range* directly by its own column letter — inserting a column shifts that reference automatically along with it (Excel/Sheets auto-adjusts range references), so the formula keeps pointing at the correct column.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: How does INDEX-MATCH work, at a high level?**
+  Short answer: MATCH searches a range for a value and returns its position; INDEX then uses that position to retrieve the corresponding value from a separate range — together forming a flexible, two-part lookup.
+
+  ### Conceptual questions
+  **Q: Why is INDEX-MATCH considered more robust than VLOOKUP?**
+  Short answer: It can search and return values in any direction (not just left-to-right), and it references ranges directly rather than a hardcoded column-index number, so it doesn't silently break when the source table's structure changes.
+
+  ### Scenario-based questions
+  **Q: A stakeholder needs to look up a value that sits to the left of the lookup key. What approach do you use?**
+  Short answer: INDEX-MATCH (or XLOOKUP) — VLOOKUP structurally cannot look to the left of its search column, so a different function is required.
+
+  ### Practical questions
+  **Q: How would you build a two-way lookup that finds a value based on both a row and a column match?**
+  Short answer: Use INDEX with two MATCH calls — one finding the row position by matching a row label, and another finding the column position by matching a column header — passed as INDEX's row_num and column_num arguments respectively.
+
+  ## Interview traps / tricky points
+
+  - INDEX-MATCH and XLOOKUP solve the same core problems — being asked "why not just use XLOOKUP" is a fair follow-up, and the honest answer is that INDEX-MATCH remains essential for older spreadsheet versions or tools that lack XLOOKUP support.
+
+  ## Best practices
+
+  - Prefer INDEX-MATCH (or XLOOKUP) over VLOOKUP for any lookup that might need to survive structural changes to the source table.
+  - Always use exact match (0) in MATCH unless specifically working with sorted data and an approximate match is intended.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **INDEX(return_range, MATCH(value, lookup_range, 0))** → flexible two-part lookup
+  **Advantage over VLOOKUP:** works in any direction, survives inserted columns

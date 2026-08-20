@@ -1,0 +1,24 @@
+title: Semantic HTML & Accessibility
+category: Frontend Development
+what_is_it: Structuring content so browsers, assistive technology, search engines, and people understand it.
+why_it_matters: Accessibility and semantics are product quality, not a cleanup task.
+estimated_minutes: 1800
+prerequisites: [web-foundations]
+objectives: [Build semantic documents, Create accessible forms, Test keyboard and screen-reader behavior]
+subtopics:
+  - title: Document structure
+    description: Landmarks, headings, sections, lists, tables, and meaningful source order.
+    outcomes: [Create a logical outline, Choose semantic elements]
+  - title: Forms and validation
+    description: Labels, fieldsets, inputs, errors, autocomplete, and native validation.
+    outcomes: [Build a keyboard-friendly form, Announce errors clearly]
+  - title: Images and media
+    description: Alternative text, captions, transcripts, responsive images, and loading behavior.
+    outcomes: [Write useful alt text, Provide media alternatives]
+  - title: Accessibility mechanics
+    description: Focus order, keyboard interaction, ARIA, contrast, zoom, and reduced motion.
+    outcomes: [Complete a keyboard audit, Use ARIA only when necessary]
+  - title: Metadata and SEO
+    description: Titles, descriptions, canonical URLs, social metadata, and structured page meaning.
+    outcomes: [Create complete page metadata, Explain semantic SEO]
+

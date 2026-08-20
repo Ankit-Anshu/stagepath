@@ -1,0 +1,69 @@
+title: Data Types in Power Query
+category: Spreadsheets
+what_is_it: Setting and correcting each column's data type inside Power Query, before the data is ever loaded into a worksheet.
+why_it_matters: Fixing a data type here, once, at the source, means every downstream formula, pivot table, and chart automatically inherits the correct type — instead of needing to be fixed after loading.
+prerequisites:
+  - power-query-import-data
+objectives:
+  - Set a column's data type explicitly in Power Query
+  - Explain why fixing data types in Power Query is preferable to fixing them after loading
+estimated_minutes: 20
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-data-types-1
+    title: Fix imported types
+    description: Given a Power Query import where a date column and a numeric column were both detected as text, explicitly set their correct data types.
+verify:
+  - Can set a column's data type in Power Query
+  - Can explain why this is better done in Power Query than after loading
+note: |
+  ## 🎯 What is it?
+
+  Every column in Power Query has an explicit **data type** (Text, Whole Number, Decimal, Date, Date/Time, True/False) shown as a small icon in the column header — set automatically on import (sometimes incorrectly) and adjustable with a click.
+
+  ## 💡 Why is it important?
+
+  - Fixing a wrong data type here, once, at the source, means every downstream formula, pivot table, and chart built on the loaded data automatically inherits the correct type — directly applying Cleaning Numbers and Cleaning Dates, but solved once per query instead of once per worksheet.
+  - A wrong data type detected on import (e.g., a date column auto-detected as text) is one of the most common reasons an otherwise-correct Power Query import produces unusable data.
+
+  ## Core concept
+
+  | Icon/Type | Use for |
+  |---|---|
+  | ABC (Text) | Names, categories, free text |
+  | 1.2 (Decimal Number) | Prices, ratios |
+  | 123 (Whole Number) | Counts, IDs |
+  | Date | Pure dates |
+  | Date/Time | Timestamps |
+
+  ## 📊 Example
+
+  A CSV import detects an `order_date` column as Text (because the source file used an ambiguous format). Explicitly clicking the column header's type icon and selecting **Date** converts the whole column at once — a single fix here means every worksheet formula or pivot table built afterward already sees correct, sortable dates.
+
+  ## ⚠️ Common mistakes
+
+  - **Trusting Power Query's auto-detected types without checking them**, especially on messy or inconsistently-formatted source data.
+  - **Fixing data types after loading into the worksheet instead of in Power Query** — this means the fix has to be redone by hand every time the query refreshes with new data, defeating the purpose of an automated pipeline.
+
+  ## Related concepts
+
+  ```
+  Importing Data
+    ↓
+  Data Types in Power Query ← you are here
+    ↓
+  Transform Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why fix a wrong data type in Power Query rather than in the worksheet after loading?**
+  Short answer: A fix in Power Query is applied every time the query refreshes, automatically — a fix made only in the worksheet has to be manually redone every time new data is loaded, since Power Query would overwrite it on the next refresh.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data types in Power Query** → set explicitly per column (Text, Number, Date, etc.), fixed once at the source
+  Always fix here, not after loading — the fix then survives every future refresh.

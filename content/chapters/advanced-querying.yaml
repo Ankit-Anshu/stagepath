@@ -1,0 +1,5 @@
+title: Advanced Querying
+skills:
+  - sql-subqueries
+  - sql-ctes
+  - sql-window-functions

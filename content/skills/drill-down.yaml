@@ -1,0 +1,58 @@
+title: Drill Down
+category: Spreadsheets
+what_is_it: Double-clicking a Pivot Table's summary value to instantly see the individual source rows that make it up, on a new sheet.
+why_it_matters: It's the fastest way to verify a summary number is correct, or to investigate an unexpected total, without writing a single filter formula.
+prerequisites:
+  - calculated-fields
+objectives:
+  - Drill down from a Pivot Table summary value to its source rows
+  - Use drill-down to investigate an unexpected total
+estimated_minutes: 15
+resources:
+  - r-ms-pivot-tables
+practice:
+  - id: ex-drill-down-1
+    title: Verify a total
+    description: Given a Pivot Table showing total revenue by region, double-click one region's total to drill down and confirm which individual orders it's built from.
+verify:
+  - Can drill down from a pivot summary to its source rows
+  - Can explain a use case for drilling down
+note: |
+  ## 🎯 What is it?
+
+  **Drill down** means double-clicking a value inside a Pivot Table to instantly see every individual source row that was summed/counted/averaged into it — Excel automatically creates a new sheet containing exactly those underlying rows.
+
+  ## 💡 Why is it important?
+
+  - It's the fastest way to verify a summary number is correct, or to investigate why a total looks unexpectedly high or low — no filter formula needed, just a double-click.
+  - It builds trust in a pivot table's output — being able to instantly show "here are the exact 14 orders that make up this $42,000" is a strong, immediate way to defend a number.
+
+  ## 📊 Example
+
+  A Pivot Table shows East region revenue at $340,000 — higher than expected. Double-clicking that cell instantly opens a new sheet listing every individual order row that was summed into it, letting you scan for an obvious outlier (like one unusually large order) in seconds.
+
+  ## ⚠️ Common mistakes
+
+  - **Not knowing drill-down exists**, and instead manually rebuilding a filter to find the same underlying rows — much slower for the same result.
+  - **Forgetting the drill-down sheet is a snapshot**, not a live filtered view — it doesn't update if the pivot table's data changes afterward; re-drill if you need a fresh look.
+
+  ## Related concepts
+
+  ```
+  Calculated Fields
+    ↓
+  Drill Down ← you are here
+  ```
+  This closes the Excel Data Analysis chapter — the next chapter (Excel Visualization) turns these summarized numbers into charts.
+
+  ## 🎤 Interview preparation
+
+  **Q: A pivot table total looks unexpectedly high. What's the fastest way to investigate why?**
+  Short answer: Double-click the total to drill down — Excel automatically generates a new sheet with every individual source row that was summed into it, making it fast to spot an outlier or data-entry error without writing any filter formula.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Drill down** → double-click a pivot value to see its exact underlying source rows on a new sheet
+  The fastest way to verify or investigate a pivot table total.

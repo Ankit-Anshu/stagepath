@@ -1,0 +1,26 @@
+title: Workflow Orchestration
+what_is_it: >-
+  Scheduling, sequencing, and monitoring data pipelines so they run reliably and predictably, using
+  a tool such as Apache Airflow.
+why_it_matters: >-
+  A pipeline that only works when someone runs it by hand is not a production pipeline.
+  Orchestration is what makes data infrastructure trustworthy.
+prerequisites:
+  - etl-fundamentals
+objectives:
+  - Explain what a DAG is and why pipelines are modeled as one
+  - Schedule a pipeline to run on a recurring basis
+  - Design retries and alerting for a failing task
+estimated_minutes: 240
+resources:
+  - r-airflow-docs
+practice:
+  - id: ex-orchestration-1
+    title: Design a DAG
+    description: >-
+      Given three dependent pipeline steps, design the DAG, schedule, and retry/alerting behavior
+      for each step.
+verify:
+  - DAG dependencies match the real order of operations
+  - Retry and alerting behavior is defined, not left implicit
+  - Schedule matches the stated freshness requirement

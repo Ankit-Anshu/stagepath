@@ -1,0 +1,59 @@
+title: Filtering in Power Query
+category: Spreadsheets
+what_is_it: Removing rows that don't meet a condition, recorded as a permanent, automatically-reapplied step in the query — the Power Query equivalent of a worksheet filter, but baked into the data itself.
+why_it_matters: Unlike a worksheet filter (which just hides rows), a Power Query filter step permanently removes them from the loaded result, and reapplies automatically on every refresh.
+prerequisites:
+  - power-query-data-types
+objectives:
+  - Filter rows in Power Query based on a column condition
+  - Explain the difference between a Power Query filter and a worksheet Filter
+estimated_minutes: 20
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-filtering-1
+    title: Filter out test data
+    description: Given an imported dataset containing test/dummy rows, add a Power Query filter step to permanently exclude them from every future refresh.
+verify:
+  - Can add a filter step in Power Query
+  - Can explain how this differs from a worksheet-level Filter
+note: |
+  ## 🎯 What is it?
+
+  **Filtering** in Power Query removes rows that don't meet a condition — set via the column header's dropdown, just like a worksheet filter — but recorded as a permanent, named step in the query's list of transformations, reapplied automatically every time the query refreshes.
+
+  ## 💡 Why is it important?
+
+  - Unlike a worksheet-level Filter (see Filter, in Excel Data Analysis), which only *hides* rows while leaving them in the underlying data, a Power Query filter step **permanently excludes** them from the loaded result.
+  - It's how "always exclude test accounts" or "only load the last 2 years" becomes a one-time setup that applies automatically forever after, instead of a filter someone has to remember to reapply.
+
+  ## 📊 Example
+
+  Filtering out rows where `account_type = "test"` as a Power Query step means every future refresh automatically excludes test accounts from the loaded data — compared to a worksheet Filter, which would need to be manually reapplied any time the sheet's filter state was cleared or the data was reloaded.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing a Power Query filter with a worksheet Filter** — assuming filtered-out rows are just "hidden" and can be unhidden, when Power Query filtering genuinely excludes them from the loaded result (though the underlying source data itself is untouched).
+  - **Filtering too early in the step sequence**, before a needed data type conversion — filtering on a column still typed as text can behave differently than filtering after it's properly typed as a number or date.
+
+  ## Related concepts
+
+  ```
+  Data Types in Power Query
+    ↓
+  Filtering ← you are here
+    ↓
+  Removing Columns
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between filtering in Power Query versus using a worksheet's Filter feature?**
+  Short answer: A Power Query filter permanently excludes rows from the loaded result and reapplies automatically on every refresh; a worksheet Filter just temporarily hides rows in the current view, leaving the underlying data unchanged and needing to be reapplied manually if cleared.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Filtering in Power Query** → a permanent, automatically-reapplied step that excludes rows from the loaded result
+  Different from a worksheet Filter, which only hides rows temporarily.

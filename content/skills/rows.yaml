@@ -1,0 +1,67 @@
+title: Rows
+category: Spreadsheets
+what_is_it: The horizontal lines of a spreadsheet grid, numbered 1, 2, 3... — one of the two axes every cell address is built from.
+why_it_matters: Inserting, deleting, and selecting rows correctly (via the menu, not manual cut-and-paste) is what keeps formulas from silently breaking as a dataset grows.
+prerequisites:
+  - worksheet
+objectives:
+  - Identify a row by its number
+  - Insert and delete a row without breaking existing formulas
+estimated_minutes: 15
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-rows-1
+    title: Insert a row safely
+    description: Given a small table with a SUM formula, insert a new row in the middle using the Insert Row command and confirm the formula still works.
+verify:
+  - Can identify a row by its number
+  - Inserting a row does not break an existing formula
+note: |
+  ## 🎯 What is it?
+
+  **Rows** run horizontally across a spreadsheet, numbered 1, 2, 3... down the left side. A row is one of the two coordinates (along with column) that make up every cell's address.
+
+  ## 💡 Why is it important?
+
+  - Most datasets are organized "one row per record" (one row per order, one row per customer) — understanding rows is core to reading any table correctly.
+  - Inserting or deleting a row the right way (through the menu) automatically updates every formula's references; doing it by manually cutting and pasting data does not, and silently breaks formulas.
+
+  ## Core concept
+
+  | Action | Correct approach |
+  |---|---|
+  | Select a row | Click the row number on the left |
+  | Insert a row | Right-click a row number → Insert |
+  | Delete a row | Right-click a row number → Delete |
+
+  ## 📊 Example
+
+  Given a table with a total formula in row 10 summing rows 2–9, inserting a new row at row 5 (via Insert, not manual cut-paste) automatically expands the SUM formula's range to include the new row — this automatic adjustment only happens with a proper insert.
+
+  ## ⚠️ Common mistakes
+
+  - **Manually cutting a row's data and pasting it elsewhere** to "move" it instead of using cut/insert commands — this can break formulas that referenced the original row.
+  - **Deleting a row that other formulas depend on**, producing a `#REF!` error everywhere that row was referenced.
+
+  ## Related concepts
+
+  ```
+  Worksheet
+    ↓
+  Rows ← you are here
+    ↓
+  Columns
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why does inserting a row through the menu matter instead of manually shifting data down?**
+  Short answer: The Insert Row command automatically updates every formula's references to account for the new row; manually moving data doesn't, and can silently break references without any warning.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Row** → horizontal, numbered (1, 2, 3...)
+  Always insert/delete rows via the menu — never by manually cutting and pasting data.

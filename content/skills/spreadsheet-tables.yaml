@@ -1,0 +1,127 @@
+title: Tables
+category: Spreadsheets
+what_is_it: Converting a plain range of cells into a formal Table — a structured, named range that auto-expands, auto-formats, and supports readable structured references.
+why_it_matters: A Table is what keeps formulas, formatting, and ranges correctly including new rows automatically as data grows — one of the single highest-leverage habits for a spreadsheet that stays reliable over time.
+prerequisites:
+  - spreadsheet-data-types
+objectives:
+  - Convert a plain range into a formal Table
+  - Explain why a Table auto-expands a formula's range when new rows are added
+  - Use a structured reference to refer to a Table column
+estimated_minutes: 60
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-tables-1
+    title: Convert a growing dataset into a Table
+    description: Given a plain range of transaction rows, convert it into a Table, then add 3 new rows and confirm any SUM formula referencing the Table automatically includes them.
+verify:
+  - Range is converted into a real Table, not just formatted to look like one
+  - A formula referencing the Table correctly expands to include new rows
+note: |
+  ## 🎯 What is it?
+
+  A **Table** is a plain range of cells converted into a structured, named object — one with built-in filtering, consistent formatting, and, most importantly, a range that **automatically expands** to include new rows as they're added.
+
+  ## 💡 Why is it important?
+
+  This is one of the single highest-leverage habits for a spreadsheet that stays reliable as data grows — recall from [SUM](/skills/sum-function) that a plain formula like `=SUM(B2:B50)` silently ignores row 51 onward when new data is added. A Table fixes this at the root: any formula referencing the Table automatically includes new rows, with zero manual range updates.
+
+  ## Core concept
+
+  Converting a range into a Table gives it:
+
+  | Feature | Benefit |
+  |---|---|
+  | Auto-expanding range | New rows added at the bottom are automatically included in the Table |
+  | Structured references | Formulas can refer to `Table1[Revenue]` instead of a fragile cell range |
+  | Automatic formatting | Consistent header/row styling applied automatically |
+  | Built-in filter buttons | Every column header gets a filter/sort dropdown automatically |
+  | Automatic formula fill | A formula entered in one row of a Table column fills down the entire column automatically |
+
+  ## Syntax
+
+  ```
+  =SUM(Table1[Revenue])         (structured reference — sums the entire Revenue column, including future new rows)
+  =Table1[@Revenue]             (references the current row's Revenue value, used inside a Table row's formula)
+  ```
+
+  ## 📊 Example
+
+  **Before (plain range):**
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Product | Revenue |
+  | 2 | Widget | 120 |
+  | 3 | Gadget | 340 |
+
+  `=SUM(B2:B3)` — correct today, but silently excludes any row added below row 3 later.
+
+  **After converting to a Table** (named `SalesTable`):
+
+  `=SUM(SalesTable[Revenue])` — this reference automatically expands to include any new row added to the table, forever, with zero manual maintenance.
+
+  ## Multiple examples
+
+  **Beginner:** Converting a simple 3-column list into a Table and observing the automatic header styling and filter buttons appear.
+  **Intermediate:** Writing a SUM formula using a structured reference (`Table1[Revenue]`) instead of a fixed cell range.
+  **Real-world:** A weekly-updated transactions log kept as a Table — every week, new rows are pasted at the bottom, and every downstream formula, pivot table, and chart referencing the Table automatically picks up the new data without a single manual range adjustment.
+
+  ## ⚠️ Common mistakes
+
+  - **Only formatting a range to *look like* a table (borders, header shading) without actually converting it into a real Table object** — this looks identical but doesn't get any of the auto-expansion behavior.
+  - **Continuing to use fixed cell-range formulas** (`B2:B50`) even after converting to a Table, missing out on the entire auto-expansion benefit.
+  - **Renaming the Table to something unclear** (or leaving the default "Table1," "Table2") across a workbook with several tables, making structured references hard to read.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any recurring dataset that grows over time:** transaction logs, weekly reports, survey responses — anywhere new rows are added on a regular cadence.
+  - **Feeding a pivot table:** a Table as a pivot table's source means the pivot table's range never needs manual updating, only a refresh.
+
+  ## Related concepts
+
+  ```
+  Data Types
+    ↓
+  Tables ← you are here
+  ```
+  This closes the Fundamentals group — everything in Core Formulas, Logic & Conditional, and beyond builds on this base.
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the main advantage a Table has over a plain range for a growing dataset?
+
+  ### Medium
+  2. Write a structured-reference formula that sums a Table named `Orders`' `Amount` column.
+
+  ### Interview/Advanced
+  3. A team member formatted a range to "look like" a table with borders and header shading, but a SUM formula referencing it still doesn't include new rows. What's the likely issue?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. It automatically expands to include new rows added at the bottom, so any formula referencing the Table (via a structured reference) always includes current data without manual range updates.
+  2. `=SUM(Orders[Amount])`
+  3. The range was only visually formatted to resemble a table, but was never actually converted into a real Table object (via the "Format as Table" / "Insert Table" command) — visual styling alone doesn't provide auto-expansion behavior.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would you convert a range into a Table before building a pivot table or dashboard on top of it?**
+  Short answer: A Table automatically expands its range as new rows are added, so anything built on top of it (formulas, pivot tables, charts) stays current without needing manual range updates every time the data grows.
+
+  ## Best practices
+
+  - Convert any dataset that will grow over time into a real Table, not just a formatted-looking range.
+  - Use structured references (`Table[Column]`) in formulas built on top of a Table, instead of fixed cell ranges.
+  - Give each Table a clear, descriptive name, especially in a workbook with more than one.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Table** → a range converted into a structured, auto-expanding object
+  **Structured reference:** `Table1[Revenue]` — always includes new rows automatically
+  **Rule:** a Table that grows means every formula, pivot table, and chart referencing it stays current

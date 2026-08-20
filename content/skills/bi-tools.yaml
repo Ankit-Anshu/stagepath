@@ -1,0 +1,175 @@
+title: BI Tools (Power BI / Tableau)
+category: Visualization
+what_is_it: Connecting data sources and building interactive reports inside a dedicated business intelligence tool like Power BI or Tableau.
+why_it_matters: Most companies standardize on a BI tool for company-wide reporting. Fluency in at least one is one of the most commonly listed requirements in real data analyst job postings.
+prerequisites:
+  - charts
+objectives:
+  - Connect a BI tool to a data source
+  - Build a report with visuals and filters
+  - Use a calculated field
+  - Publish and share a report
+subtopics:
+  - title: Connecting data sources
+    description: Importing and refreshing data from files, databases, or spreadsheets.
+    outcomes:
+      - Connect a BI tool to a CSV or database source
+  - title: Building visuals & filters
+    description: Assembling charts and slicers into one interactive report page.
+    outcomes:
+      - Build a report page with at least one working filter
+  - title: Calculated fields
+    description: Writing a simple derived measure (e.g. a ratio or running total) inside the tool.
+    outcomes:
+      - Write one calculated field used by a visual
+  - title: Publishing & sharing
+    description: Publishing a report so a stakeholder can actually open and use it.
+    outcomes:
+      - Publish a report and share it with a working link
+estimated_minutes: 300
+resources:
+  - r-ms-powerbi-training
+  - r-tableau-training
+practice:
+  - id: ex-bi-tools-1
+    title: Rebuild a report in a BI tool
+    description: Take a chart you already built elsewhere and rebuild it as an interactive report with at least one filter, inside Power BI or Tableau.
+verify:
+  - Data source connects and refreshes without errors
+  - At least one filter updates the visuals correctly
+  - Report is published and shareable
+note: |
+  ## 🎯 What is it?
+
+  **BI (Business Intelligence) tools** — like Power BI or Tableau — are dedicated software for connecting to data sources and building interactive, shareable reports and dashboards, without writing code for every chart from scratch.
+
+  ## 💡 Why is it important?
+
+  Most companies standardize on one BI tool for company-wide reporting, so fluency in at least one is one of the most commonly listed requirements in real data analyst job postings — it's frequently the tool stakeholders actually interact with, more than raw SQL or Python output.
+
+  ## Core concept
+
+  ### Connecting data sources
+  BI tools connect directly to files, databases, spreadsheets, or APIs, and can be set to **refresh** automatically or on a schedule — turning a one-time import into a continuously up-to-date report, similar in spirit to Power Query's repeatable transforms.
+
+  ### Building visuals & filters
+  Charts, tables, and KPI cards are assembled visually (often drag-and-drop) into a report page, and **slicers/filters** are added to let the viewer interactively narrow what's shown.
+
+  ### Calculated fields
+  A derived measure written inside the BI tool itself — e.g., a ratio, a running total, or a year-over-year change — computed from the connected data rather than pre-calculated in the source.
+
+  ### Publishing & sharing
+  A report only delivers value once it's published somewhere the intended audience can actually open and interact with it — with appropriate access permissions, not just saved as a local file on the analyst's own machine.
+
+  ## Syntax / Formula / Structure
+
+  A typical BI-tool calculated field (illustrative — exact syntax varies by tool, e.g., DAX in Power BI, calculated fields in Tableau):
+
+  ```
+  Profit Margin = (Total Revenue - Total Cost) / Total Revenue
+  ```
+
+  - The calculation references existing fields/measures already connected from the data source.
+  - It updates automatically whenever the underlying data refreshes — no manual recalculation needed.
+
+  ## 📊 Example
+
+  **Task:** Build a report showing revenue by region, filterable by month, with a profit margin KPI.
+
+  **Steps in a BI tool:**
+  1. Connect to the `orders` data source (database or file).
+  2. Add a bar chart: region on one axis, sum of revenue on the other.
+  3. Add a calculated field: `Profit Margin = (Revenue - Cost) / Revenue`.
+  4. Add a month filter/slicer, connected to the chart and the profit margin KPI card.
+  5. Publish the report to the company's BI platform with a shareable link.
+
+  **Explanation:** Once published and connected with a scheduled refresh, this report stays current automatically — the stakeholder never needs to ask the analyst to "re-run" anything.
+
+  ## Multiple examples
+
+  **Beginner:** Connecting a BI tool to a single CSV and building one bar chart.
+  **Intermediate:** Adding a working filter/slicer that updates the chart interactively.
+  **Real-world:** Rebuilding a chart originally built in pandas/Matplotlib as a fully interactive Power BI/Tableau report — with a live database connection, a calculated profit-margin field, a working region filter, and a published, shareable link the sales team checks weekly without needing the analyst to intervene.
+
+  ## ⚠️ Common mistakes
+
+  - **Building a beautiful report that's never actually published/shared**, leaving it as a local file only the analyst can see.
+  - **Connecting to a static file export instead of a live/refreshable source** when the underlying data changes regularly — this quietly turns a "live report" into a stale snapshot.
+  - **Writing an overly complex calculated field** without testing it against a known manual calculation first — an error in a calculated field silently propagates into every visual that uses it.
+  - **Not setting appropriate access/sharing permissions**, either blocking the intended audience or (worse) exposing sensitive data too broadly.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** a live, refreshable Power BI dashboard connected directly to the company's sales database.
+  - **Marketing analysis:** a Tableau report combining ad-platform data with internal conversion data, filterable by campaign.
+  - **Company-wide reporting:** the standard BI tool being the single source of truth stakeholders check instead of asking an analyst for a one-off export every time.
+
+  ## Related concepts
+
+  ```
+  Charts → Color & Accessibility → Geospatial Visualization
+    ↓
+  Dashboard Design
+    ↓
+  BI Tools (Power BI / Tableau) ← you are here
+    ↓
+  Storytelling
+  ```
+  Everything learned in [Dashboard Design](/skills/dashboard-design) about layout and hierarchy applies directly inside whichever BI tool you use — the tool is the "how," dashboard design is the "why."
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the benefit of connecting a BI tool to a live data source instead of a static file export?
+
+  ### Medium
+  2. Write out (in plain terms) a calculated field for "year-over-year revenue growth %."
+
+  ### Interview/Advanced
+  3. A published report's numbers haven't changed in 3 weeks despite the underlying database updating daily. What would you check first?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. It stays automatically up to date as the underlying data changes (especially with a scheduled refresh), instead of becoming a stale snapshot the moment it's built.
+  2. `(This Year's Revenue - Last Year's Revenue) / Last Year's Revenue`, expressed as a percentage.
+  3. Check the data source's refresh schedule/settings first — the report is very likely connected correctly but simply isn't refreshing on the expected cadence (or refresh has silently failed), rather than a chart or calculation bug.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why do most companies standardize on a BI tool for reporting?**
+  Short answer: It gives stakeholders a consistent, self-service, interactive way to view and filter reports without needing an analyst to manually re-run and re-export something every time, and it's usually where non-technical stakeholders are most comfortable working.
+
+  ### Conceptual questions
+  **Q: What's the difference between a calculated field in a BI tool and pre-calculating the same value in the source data?**
+  Short answer: A calculated field is computed dynamically inside the tool based on whatever data is currently connected, so it automatically reflects live/refreshed data — pre-calculating it upstream requires the source data pipeline to be updated every time the logic changes.
+
+  ### Scenario-based questions
+  **Q: A stakeholder says a published dashboard "looks wrong" compared to a raw export they pulled themselves. How do you investigate?**
+  Short answer: Check whether the dashboard and the stakeholder's raw export are using the same filters, time window, and data refresh timestamp — a large share of "wrong dashboard" reports turn out to be a mismatch in scope or refresh timing, not an actual calculation bug.
+
+  ### Practical questions
+  **Q: How would you validate a new calculated field before publishing a report that uses it?**
+  Short answer: Test it against a small, known sample where you can manually verify the expected result (e.g., in a spreadsheet or a simple SQL query), and only trust it in the report once it matches that manual check.
+
+  ## Interview traps / tricky points
+
+  - A "wrong-looking" dashboard is very often actually a scope/filter/refresh-timing mismatch, not a genuine calculation bug — always check the boring explanation first.
+  - Access/sharing permissions are easy to overlook until launch day — confirm the intended audience can actually open a report well before considering the work "done."
+
+  ## Best practices
+
+  - Connect to live, refreshable data sources rather than static file exports whenever the underlying data changes regularly.
+  - Validate any new calculated field against a manual spot check before trusting it in a published report.
+  - Always confirm the intended audience can actually access a published report, with the right permissions, before considering it finished.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Connect** → live/refreshable data source, not a one-time static file
+  **Calculated field** → a derived measure computed inside the tool, updates with refreshed data
+  **Publish & share** → the report isn't finished until the intended audience can actually open it
+  **Validate** → test any calculated field against a manual spot check first

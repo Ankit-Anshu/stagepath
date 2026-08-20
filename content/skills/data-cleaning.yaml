@@ -1,0 +1,190 @@
+title: Data Cleaning & Quality
+category: Foundations
+what_is_it: Systematically finding and fixing problems in raw data — duplicates, missing values, inconsistent formats, and outliers — before any analysis begins.
+why_it_matters: '"Garbage in, garbage out." Most real datasets are messy, and an analysis built on unvalidated data produces confident-sounding wrong answers, no matter how sound the method is.'
+prerequisites: []
+objectives:
+  - Identify common data quality issues
+  - Choose an appropriate fix for missing data
+  - Detect duplicate and inconsistent records
+  - Validate a cleaned dataset against its source
+subtopics:
+  - title: Missing data strategies
+    description: Deciding whether to drop, fill, or flag missing values — and being able to justify the choice.
+    outcomes:
+      - Choose and apply a missing-data strategy with a stated reason
+  - title: Duplicate detection
+    description: Finding exact and near-duplicate records, and deciding which copy to keep.
+    outcomes:
+      - Identify and remove duplicates without losing valid rows
+  - title: Inconsistent formatting
+    description: Standardizing dates, casing, units, and category labels that were entered inconsistently.
+    outcomes:
+      - Normalize a column with mixed formats into one consistent format
+  - title: Outlier identification
+    description: Spotting values that are likely errors versus values that are real but extreme.
+    outcomes:
+      - Flag a suspicious outlier and decide whether to keep, cap, or remove it
+  - title: Validation & reconciliation
+    description: Checking a cleaned dataset against the original — row counts, totals, and spot checks.
+    outcomes:
+      - Reconcile a cleaned dataset's totals against the raw source
+estimated_minutes: 240
+resources:
+  - r-kaggle-data-cleaning
+  - r-openrefine-docs
+practice:
+  - id: ex-data-cleaning-1
+    title: Audit a raw dataset
+    description: Given a raw CSV, produce a short data-quality report listing every issue found before touching the data.
+verify:
+  - Every fix is documented with a reason
+  - No valid rows were silently dropped
+  - Cleaned totals reconcile against the raw source
+note: |
+  ## 🎯 What is it?
+
+  **Data cleaning** is the process of finding and fixing problems in raw data — missing values, duplicates, inconsistent formats, and outliers — before any real analysis begins.
+
+  Think of it like washing vegetables before cooking: skipping it doesn't mean the meal fails immediately, but whatever's wrong with the ingredients ends up in the final dish, often invisibly.
+
+  ## 💡 Why is it important?
+
+  - "Garbage in, garbage out" — an analysis built on messy data produces confident-sounding, wrong answers, no matter how sound the method is.
+  - Real-world data is almost always messy: manual entry errors, system migrations, merged data sources, and inconsistent naming are the norm, not the exception.
+  - It's one of the most time-consuming parts of real analyst work — industry estimates commonly put data cleaning at 50–80% of a project's time.
+  - Trust: a single obviously-wrong number in a report ("negative revenue," "age 300") can undermine a stakeholder's trust in an entire analysis.
+
+  ## Core concept
+
+  ### Missing data strategies
+
+  | Strategy | When to use it |
+  |---|---|
+  | Drop the row | Missingness is rare and random, and the row isn't critical |
+  | Fill with a value (mean/median/0/"Unknown") | Missingness is explainable and a reasonable default exists |
+  | Flag and keep | Missingness itself might be meaningful (e.g., "never logged in") |
+
+  Always justify the choice — silently dropping rows can bias an analysis if the missing data isn't random.
+
+  ### Duplicate detection
+  Two kinds of duplicates: **exact** (identical rows) and **near-duplicates** (same real-world entity, slightly different text — "Jon Smith" vs. "John Smith"). Exact duplicates are usually safe to drop; near-duplicates need a defined matching rule before merging.
+
+  ### Inconsistent formatting
+  Dates stored as text in three different formats, categories entered with inconsistent casing ("Retail", "retail", "RETAIL"), and units mixed within one column (kg and lbs) are all standard real-world problems that must be standardized before aggregation will work correctly.
+
+  ### Outlier identification
+  An outlier can be a genuine (if extreme) value or a data-entry error. The fix depends on which: a $50,000 online order might be real (B2B bulk order) or a decimal-point typo of $500.00.
+
+  ### Validation & reconciliation
+  After cleaning, check the cleaned dataset against the original: row counts, sums, and a manual spot check of a few records. This catches silent mistakes introduced during cleaning itself.
+
+  ## 📊 Example
+
+  Raw `orders` table (before cleaning):
+
+  | order_id | customer | order_date | amount |
+  |---|---|---|---|
+  | 1 | jon smith | 2024/01/05 | 120 |
+  | 2 | Jon Smith | 01-05-2024 | 120 |
+  | 3 | Maria Ruiz | 2024-01-06 | -15 |
+  | 4 | Maria Ruiz | 2024-01-06 | |
+
+  **Issues found:** row 1/2 look like the same order entered twice with inconsistent name casing and date format; row 3 has a negative amount (likely a refund miscoded as a sale, or a data error); row 4 is missing an amount entirely.
+
+  **Cleaning actions (with reasons):**
+  - Standardize `customer` casing to Proper Case, standardize `order_date` to `YYYY-MM-DD`.
+  - Investigate rows 1 & 2 as likely duplicates — same customer, same date, same amount — keep one, flag for review.
+  - Flag row 3's negative amount for manual review rather than silently deleting or "fixing" it.
+  - Row 4: missing amount — flag and exclude from revenue totals rather than guessing a value.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** deduplicating orders that got double-submitted due to a checkout bug before calculating revenue.
+  - **Customer analysis:** standardizing country names ("USA", "U.S.", "United States") before segmenting customers by geography.
+  - **Operations analysis:** flagging shipment records with impossible delivery times (negative or multi-year) before computing average delivery time.
+
+  ## ⚠️ Common mistakes
+
+  - **Silently dropping rows with missing or "weird" values** without documenting the decision — this can bias totals and is impossible for someone else to audit later.
+  - **Fixing an outlier by just deleting it** without investigating whether it's a real (if unusual) value.
+  - **Cleaning everything equally** instead of prioritizing fields that actually affect the analysis at hand — this wastes time on a real project with a deadline.
+  - **Not reconciling the cleaned dataset against the raw source**, which means cleaning bugs go completely unnoticed.
+
+  ## Related concepts
+
+  ```
+  The Data Analytics Lifecycle (this is the "Collect & Clean" stage)
+    ↓
+  Data Cleaning & Quality ← you are here
+    ↓
+  Spreadsheets — TRIM / REPLACE-SUBSTITUTE / UPPER-LOWER-PROPER (the tools)
+    ↓
+  SQL — WHERE / Aggregation (validating cleaned data at scale)
+    ↓
+  Statistics — Descriptive Statistics (spotting outliers numerically)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Name two common types of data quality issues.
+  2. What's the difference between an exact duplicate and a near-duplicate?
+
+  ### Medium
+  3. Given a column with dates in three different formats, describe your approach to standardizing it.
+
+  ### Interview/Advanced
+  4. You find a $500,000 single order in a dataset of otherwise $20–$200 orders. Walk through how you'd decide whether to keep, cap, or remove it.
+
+  <details>
+  <summary><strong>Answer / Solution</strong></summary>
+
+  1. Example: missing values and duplicate records (also acceptable: inconsistent formatting, outliers).
+  2. An exact duplicate is a byte-for-byte identical row; a near-duplicate represents the same real-world entity but with slightly different text (typos, casing, formatting differences).
+  3. Identify all formats present, pick one standard target format, convert each variant explicitly (don't guess ambiguous cases like 01/02/2024), and spot-check a sample after conversion.
+  4. Investigate before deciding: check if it's a known account (e.g., a legitimate bulk/B2B order), check the audit log or original source system, and see if similar large orders exist historically. If it's confirmed real, keep it but consider whether it should be excluded from a "typical order" analysis; if it's confirmed an error (e.g., duplicate zero was entered), correct or remove it and document why.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What is data cleaning and why does it matter?**
+  Short answer: It's finding and fixing data quality issues before analysis — because an analysis built on messy, unvalidated data produces confidently wrong results.
+
+  ### Conceptual questions
+  **Q: How do you decide whether to drop, fill, or flag a missing value?**
+  Short answer: It depends on whether the missingness is random and rare (often safe to drop), has a reasonable default (fill), or might itself be meaningful information (flag and keep, e.g., "never purchased").
+
+  ### Scenario-based questions
+  **Q: You find 500 duplicate customer records in a database of 50,000. How do you approach fixing it without losing valid data?**
+  Short answer: Define a clear matching rule (exact vs. near-duplicate), review a sample manually to validate the rule, then merge or remove according to that rule — always keeping an audit trail of what was changed.
+
+  ### Practical questions
+  **Q: How would you validate that your data cleaning didn't introduce new errors?**
+  Short answer: Reconcile row counts and key totals (e.g., total revenue) between the raw and cleaned datasets, and manually spot-check a handful of records end-to-end.
+
+  ## Interview traps / tricky points
+
+  - Candidates often say they'd "just remove" outliers or missing data — interviewers are listening for whether you'd investigate first, since removing real data silently can bias results.
+  - NULL/missing handling is a very common trap: NULL is not the same as zero, and treating it as zero in an aggregation can silently skew results (see [SQL — NULL handling](/skills/sql-filtering) type topics).
+  - Duplicate handling that's too aggressive can delete legitimately repeated transactions (e.g., a customer genuinely placing two identical orders on the same day).
+
+  ## Best practices
+
+  - Document every cleaning decision and the reason behind it — future you (or a teammate) needs to be able to audit it.
+  - Never silently drop data; flag and report what was excluded and why.
+  - Reconcile totals between raw and cleaned data as a final validation step, every time.
+  - Prioritize cleaning the fields that actually feed the current analysis rather than cleaning a whole dataset uniformly.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Missing data** → drop / fill / flag, always with a stated reason
+  **Duplicates** → exact (safe to drop) vs. near-duplicate (needs a matching rule)
+  **Formatting** → standardize dates, casing, and units before aggregating
+  **Outliers** → investigate before deciding to keep, cap, or remove
+  **Validation** → always reconcile cleaned totals against the raw source
+  Remember: garbage in, garbage out — no analysis method can fix a foundation of bad data.

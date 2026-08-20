@@ -1,0 +1,167 @@
+title: Funnel Analysis
+category: Business Analytics
+what_is_it: Mapping a multi-step process — like signup to purchase — and measuring the conversion rate and drop-off at each step.
+why_it_matters: Knowing the overall conversion rate tells you something is wrong. Funnel analysis tells you exactly which step it's wrong at, which is what actually leads to a fix.
+prerequisites:
+  - business-analytics
+objectives:
+  - Define the steps of a funnel
+  - Calculate the conversion rate at each step
+  - Identify the step with the largest drop-off
+  - Propose a hypothesis for why a step underperforms
+subtopics:
+  - title: Defining funnel steps
+    description: Breaking a process into clear, measurable, ordered steps.
+    outcomes:
+      - Define a funnel's steps for a given user journey
+  - title: Step-by-step conversion
+    description: Calculating what percentage of users make it from one step to the next.
+    outcomes:
+      - Calculate conversion rate at each funnel step
+  - title: Finding the biggest drop-off
+    description: Identifying which single step is losing the most users, relative to its opportunity.
+    outcomes:
+      - Identify the weakest step in a funnel and justify why
+estimated_minutes: 150
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-funnel-1
+    title: Analyze a signup funnel
+    description: Given step-by-step user counts through a signup funnel, calculate conversion at each step and identify the biggest opportunity.
+verify:
+  - Conversion rate is calculated correctly at each step
+  - Weakest step is correctly identified, not just assumed
+  - Hypothesis for the drop-off is specific and testable
+note: |
+  ## 🎯 What is it?
+
+  **Funnel analysis** maps a multi-step process — like signup → activation → purchase — and measures the conversion rate and drop-off at **each individual step**, not just the overall start-to-finish rate.
+
+  ## 💡 Why is it important?
+
+  Knowing the overall conversion rate tells you *something* is wrong. Funnel analysis tells you exactly *which step* it's wrong at — which is what actually leads to a specific, testable fix, rather than a vague "improve conversion" initiative that could target the wrong part of the process entirely.
+
+  ## Core concept
+
+  ### Defining funnel steps
+  Break a process into clear, ordered, measurable steps — each one representing a specific, unambiguous user action (e.g., "viewed pricing page," "started signup form," "completed signup," "made first purchase").
+
+  ### Step-by-step conversion
+  Calculate what percentage of users make it from each step to the *next* one — this is different from (and more useful than) each step's percentage of the very first step.
+
+  ### Finding the biggest drop-off
+  The step with the largest percentage-point drop **relative to its own starting point** is usually the biggest opportunity — though the step losing the most *absolute* users can also matter, depending on the business question.
+
+  ## Syntax / Formula / Structure
+
+  ```
+  Step-to-step conversion rate = (Users reaching step N+1) ÷ (Users reaching step N)
+  Overall conversion rate       = (Users completing final step) ÷ (Users entering step 1)
+  ```
+
+  ## 📊 Example
+
+  Signup funnel over one week:
+
+  | Step | Users | Step-to-step conversion |
+  |---|---|---|
+  | 1. Visited signup page | 10,000 | — |
+  | 2. Started form | 4,000 | 40% |
+  | 3. Completed form | 3,600 | 90% |
+  | 4. Verified email | 1,200 | 33% |
+  | 5. First login | 1,100 | 92% |
+
+  **Overall conversion (step 1 → 5):** 1,100 / 10,000 = 11%.
+
+  **Finding:** The biggest drop is step 3 → 4 (90% → 33%) — losing users at the "email verification" step, not at the signup form itself.
+
+  **Recommendation:** Investigate the email verification step specifically (e.g., are emails landing in spam? Is the verification link expiring too fast?) rather than redesigning the signup form, which is actually performing fine.
+
+  ## Multiple examples
+
+  **Beginner:** A 3-step funnel (visit → add to cart → purchase) with simple step-to-step percentages.
+  **Intermediate:** A 5-step onboarding funnel where the biggest relative drop is identified and a specific, testable hypothesis is proposed for the cause.
+  **Real-world:** Segmenting a funnel by traffic source reveals that paid-search users convert at half the rate of organic users at the "started form" step specifically — pointing to a landing-page-experience mismatch for paid traffic, not a general funnel problem.
+
+  ## ⚠️ Common mistakes
+
+  - **Only looking at the overall conversion rate.** This identifies *that* there's a problem but gives no actionable direction for where to focus.
+  - **Comparing a step's users to the very first step instead of the previous step.** This makes every later step look artificially worse and obscures which specific transition is actually weak.
+  - **Assuming the step with the largest raw drop-off is automatically the biggest opportunity**, without considering it relative to its own starting volume — a step losing 200 users out of 300 (67% drop) is a bigger relative opportunity than one losing 500 out of 5,000 (10% drop), even though 500 is a bigger number.
+  - **Stopping at "step X is weak" without forming a specific, testable hypothesis** for *why* — which is what actually leads to a fix.
+
+  ## Real-world Data Analyst use cases
+
+  - **Product analysis:** finding the weakest step in a user onboarding flow.
+  - **Marketing analysis:** finding where paid-traffic users drop off differently than organic traffic.
+  - **E-commerce analysis:** finding the exact checkout step causing the most cart abandonment.
+
+  ## Related concepts
+
+  ```
+  Business Analytics
+    ↓
+  Funnel Analysis ← you are here
+    ↓
+  A/B Testing (testing a fix for the weakest step)
+    ↓
+  Cohort & Retention Analysis
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Given 1,000 users at step 1 and 400 at step 2, what's the step-to-step conversion rate?
+
+  ### Medium
+  2. A funnel has steps losing 60%, 10%, and 70% of users respectively (relative to each prior step). Which step is the biggest opportunity, and what would you do next?
+
+  ### Interview/Advanced
+  3. Why is "the step losing the most total users" not always the same answer as "the step with the weakest relative conversion"?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. 400 / 1,000 = 40%.
+  2. The step losing 70% is the biggest relative opportunity; the next step is forming a specific, testable hypothesis for why that step underperforms (e.g., a UX issue, unclear messaging, a technical bug) before proposing a fix.
+  3. A step earlier in the funnel with more total users flowing through it can lose more *absolute* users even at a relatively strong conversion rate, while a later step with fewer total users but a much weaker *relative* conversion rate can represent a bigger untapped opportunity — which one matters most depends on the specific business question being asked.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What does funnel analysis add beyond knowing the overall conversion rate?**
+  Short answer: It shows conversion at each individual step, revealing exactly where in the process users are lost — the overall rate alone can't localize the problem.
+
+  ### Conceptual questions
+  **Q: Why calculate step-to-step conversion instead of comparing every step back to the first step?**
+  Short answer: Comparing to the first step makes every later step look progressively worse regardless of its actual performance; step-to-step conversion isolates exactly how well each individual transition is performing on its own.
+
+  ### Scenario-based questions
+  **Q: A funnel step shows a huge relative drop, but it's the very last step with very few users by that point. How do you weigh this?**
+  Short answer: Consider both the relative drop and the absolute number of users affected — a huge relative drop on a small remaining user base may represent less total opportunity than a smaller relative drop earlier in the funnel where far more users are affected.
+
+  ### Practical questions
+  **Q: How would you segment a funnel to investigate why mobile users convert worse than desktop?**
+  Short answer: Rebuild the same step-by-step funnel separately for mobile and desktop traffic, then compare step-to-step conversion rates between the two to find the specific step where the gap is concentrated.
+
+  ## Interview traps / tricky points
+
+  - Relative drop-off and absolute user loss can point to different "biggest opportunity" steps — always clarify which framing the business question actually needs.
+  - A funnel step's weak conversion could reflect a genuine problem, or it could reflect that step correctly filtering out unqualified users — not every drop-off is a "problem" to fix.
+
+  ## Best practices
+
+  - Always calculate step-to-step (not first-step-relative) conversion rates.
+  - Consider both relative drop-off and absolute user volume when prioritizing which step to investigate.
+  - Pair a weak step finding with a specific, testable hypothesis before recommending a fix.
+  - Segment a funnel by traffic source, device, or cohort when the aggregate funnel doesn't reveal an obvious cause.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Step-to-step conversion** → users at step N+1 ÷ users at step N
+  **Biggest opportunity** → weigh both relative drop-off % and absolute user volume
+  **Rule:** always end with a specific, testable hypothesis for *why* a step underperforms

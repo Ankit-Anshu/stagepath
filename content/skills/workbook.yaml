@@ -1,0 +1,70 @@
+title: Workbook
+category: Spreadsheets
+what_is_it: The entire spreadsheet file — a container that can hold one or many worksheets.
+why_it_matters: Knowing the workbook/worksheet distinction is what makes a multi-tab file navigable and lets you organize related data across separate, purposeful sheets instead of one sprawling grid.
+prerequisites:
+  - excel-interface
+objectives:
+  - Define a workbook and distinguish it from a worksheet
+  - Explain why real spreadsheet projects usually use multiple sheets within one workbook
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-workbook-1
+    title: Plan a workbook
+    description: Sketch out what sheets a workbook for tracking a month of personal expenses might have, and what each sheet would hold.
+verify:
+  - Can define a workbook
+  - Can name a reason to split data across multiple sheets in one workbook
+note: |
+  ## 🎯 What is it?
+
+  A **workbook** is the entire spreadsheet file — the thing you save, email, or open. A single workbook can contain one worksheet or many, each holding its own grid of data, shown as tabs along the bottom of the window.
+
+  ## 💡 Why is it important?
+
+  - Real spreadsheet projects almost always use multiple sheets *within one workbook* to organize related data — raw data, calculations, and a summary, kept separate but bundled in one file.
+  - Understanding "workbook" as the outer container is the first step to organizing a project cleanly, instead of piling everything into a single sprawling sheet.
+
+  ## Core concept
+
+  ```
+  Workbook (the file)
+   ├── Worksheet: "Raw Data"
+   ├── Worksheet: "Calculations"
+   └── Worksheet: "Summary"
+  ```
+
+  Think of a workbook like a binder, and each worksheet like one page inside it.
+
+  ## 📊 Example
+
+  A monthly expense tracker workbook might contain three worksheets: "Transactions" (raw entries), "Categories" (a lookup table of category names), and "Summary" (a dashboard pulling totals from the other two) — all saved as one workbook file.
+
+  ## ⚠️ Common mistakes
+
+  - **Creating a separate workbook file for every logical grouping** instead of separate worksheets within one workbook — this scatters related data across multiple files unnecessarily.
+  - **Confusing "workbook" and "worksheet"** in conversation or documentation, which can cause real confusion when giving or following instructions.
+
+  ## Related concepts
+
+  ```
+  Excel Interface
+    ↓
+  Workbook ← you are here
+    ↓
+  Worksheet
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between a workbook and a worksheet?**
+  Short answer: A workbook is the entire file; a worksheet is one grid/tab inside that file. One workbook can contain many worksheets.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Workbook** → the whole file
+  Can contain one or many worksheets, organized as tabs.

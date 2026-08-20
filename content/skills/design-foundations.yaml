@@ -1,0 +1,20 @@
+title: UX & Product Design Foundations
+category: UX Design
+what_is_it: The principles, process, ethics, and product context behind user-centered design.
+why_it_matters: Good interface craft cannot rescue a solution to the wrong problem.
+estimated_minutes: 1800
+objectives: [Frame design problems, Apply core usability principles, Critique interfaces constructively]
+subtopics:
+  - title: Human-centered design
+    description: Outcomes, users, context, divergent and convergent thinking, iteration, and evidence.
+    outcomes: [Frame a user-centered problem, Separate problem from solution]
+  - title: Usability principles
+    description: Feedback, visibility, consistency, affordances, constraints, error prevention, and recognition.
+    outcomes: [Run a heuristic review, Explain a usability issue]
+  - title: Product and business context
+    description: Value propositions, stakeholders, constraints, metrics, tradeoffs, and delivery teams.
+    outcomes: [Map stakeholders, Connect design choices to outcomes]
+  - title: Inclusive and ethical design
+    description: Accessibility, bias, privacy, dark patterns, vulnerable users, and unintended consequences.
+    outcomes: [Identify harmful patterns, Include edge users]
+

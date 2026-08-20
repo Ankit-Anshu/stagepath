@@ -1,0 +1,4 @@
+transaction_id,listing_id,buyer_id,created_at,amount,status
+T01,L02,U03,2026-01-20,75,completed
+T02,L01,U02,2026-02-11,120,cancelled
+

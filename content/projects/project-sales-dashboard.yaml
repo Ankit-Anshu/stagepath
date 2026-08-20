@@ -1,0 +1,44 @@
+title: Sales Dashboard
+level: portfolio
+duration: 5-8 hours
+description: Design and publish an interactive sales dashboard that a sales manager could actually use.
+problem_statement: Regional managers currently compare performance through emailed spreadsheets. Build one dashboard that explains current performance, trend, target variance, and the drivers behind change.
+scenario: You are the BI designer responsible for a weekly decision tool used in a 15-minute sales review.
+dataset:
+  name: Regional sales performance
+  description: Synthetic order CSV with targets, salespeople, regions, product categories, discounts, revenue, and margin.
+  source_url: /datasets/sales-dashboard.csv
+  format: CSV
+  size: 80 orders
+  files: [sales-dashboard.csv]
+skills:
+  - dashboard-design
+  - charts
+datasets:
+  - Sales transactions dataset
+tasks:
+  - Design a KPI layout with clear hierarchy
+  - Build interactive filters
+  - Publish a shareable dashboard
+requirements:
+  - Define every KPI and its filter behavior in a data dictionary
+  - Show target variance and margin alongside revenue
+  - Design explicit empty, loading, and no-result states
+milestones:
+  - title: Frame the decisions
+    description: Identify the weekly questions and define the minimum KPI set.
+  - title: Build and validate
+    description: Model calculations, reconcile totals, and create overview plus diagnostic views.
+  - title: Test the dashboard
+    description: Run five manager tasks and refine labels, hierarchy, and interactions.
+rubric:
+  - criterion: Metric integrity
+    definition: Calculations are defined, filter-aware, and reconciled against source data.
+  - criterion: Decision clarity
+    definition: The dashboard makes performance, variance, and drivers understandable at a glance.
+  - criterion: Interaction design
+    definition: Filters, drilldowns, and states are predictable and accessible.
+artifacts:
+  - Dashboard
+  - Screenshots
+  - README

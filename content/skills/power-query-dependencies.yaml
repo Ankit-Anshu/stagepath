@@ -1,0 +1,70 @@
+title: Query Dependencies
+category: Spreadsheets
+what_is_it: How one Power Query query can use another query as its source — creating a dependency chain where a change or break upstream affects everything downstream.
+why_it_matters: Understanding dependencies is what lets you build a maintainable, layered set of queries instead of one giant, hard-to-debug query — and what lets you diagnose which query actually broke when a refresh fails.
+prerequisites:
+  - power-query-data-transformation-workflow
+objectives:
+  - View a workbook's query dependencies
+  - Explain why breaking a query into layered, dependent queries is often better than one large query
+estimated_minutes: 20
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-dependencies-1
+    title: Diagnose a broken chain
+    description: Given three linked queries (Import → Clean → Merge), explain what happens to the last two if the first one's source breaks, and how the Query Dependencies view helps diagnose it.
+verify:
+  - Can explain what a query dependency is
+  - Can use the Query Dependencies view to diagnose a refresh failure
+note: |
+  ## 🎯 What is it?
+
+  A **query dependency** exists when one Power Query query uses another query as its source, rather than connecting directly to a raw file or database — for example, a "Clean Orders" query built on top of a raw "Import Orders" query. Excel's **Query Dependencies** view shows this whole chain visually, across every query in a workbook.
+
+  ## 💡 Why is it important?
+
+  - It's what lets you build a maintainable, layered pipeline — a raw import query, a cleaning query built on it, and a final summary query built on the cleaning query — instead of one giant, hard-to-follow query doing everything at once.
+  - When a refresh fails, understanding the dependency chain is what lets you correctly diagnose *which* query actually broke, rather than assuming the one that errored is the true source of the problem.
+
+  ## Core concept
+
+  ```
+  Import Orders (raw source)
+        ↓
+  Clean Orders (built on Import Orders)
+        ↓
+  Merge with Customers (built on Clean Orders + Customers)
+  ```
+
+  If `Import Orders`' source file moves or its structure changes, every query downstream of it (`Clean Orders`, `Merge with Customers`) can fail too — even though the error might only visibly appear on the last one in the chain.
+
+  ## 📊 Example
+
+  A refresh fails on the final "Merge with Customers" query with a generic error. Checking the Query Dependencies view shows it's built on "Clean Orders," which is built on "Import Orders" — tracing back reveals the *actual* problem is that the raw source file for "Import Orders" was renamed, which broke every query downstream, not something wrong with the merge step itself.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming the query that shows an error is the one that's actually broken**, rather than tracing the dependency chain back to the true upstream source of the problem.
+  - **Building one enormous query that does everything** instead of layering smaller, single-purpose queries — this makes both understanding and debugging much harder, since there's no dependency chain to reason about.
+
+  ## Related concepts
+
+  ```
+  Data Transformation Workflow
+    ↓
+  Query Dependencies ← you are here
+  ```
+  This closes the Power Query chapter — the next chapter (Advanced Excel) covers dynamic arrays, Power Pivot, and other advanced tools that often work alongside a Power Query-fed dataset.
+
+  ## 🎤 Interview preparation
+
+  **Q: A refresh fails with an error on your final summary query. How would you find the actual root cause?**
+  Short answer: Check the Query Dependencies view to see what that query is built on, and trace back through the chain — the query showing the error isn't necessarily where the actual problem originated; it's often failing because something further upstream (a moved file, a renamed source) broke first.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Query dependencies** → one query built on another, forming a traceable chain
+  When a refresh fails, trace the dependency chain back — the visible error isn't always the true source.

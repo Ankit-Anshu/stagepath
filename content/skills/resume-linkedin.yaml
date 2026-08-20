@@ -1,0 +1,166 @@
+title: Resume & LinkedIn Optimization
+category: Career
+what_is_it: Framing your resume and LinkedIn profile around measurable outcomes and the specific keywords a data analyst posting looks for.
+why_it_matters: Most applications are filtered before a human ever reads them. A resume that reads well to a person and clears keyword filters gets you to the interview at all.
+prerequisites: []
+objectives:
+  - Rewrite resume bullets around measurable outcomes
+  - Match resume keywords to a real job posting
+  - Write a LinkedIn headline and summary that aren't generic
+  - Trim a resume to what actually matters for the target role
+subtopics:
+  - title: Outcome-based bullets
+    description: Rewriting a task ("built dashboards") as an outcome ("cut reporting time by 40% by building X").
+    outcomes:
+      - Rewrite three resume bullets from tasks into outcomes
+  - title: Matching a job posting
+    description: Mirroring the specific tools and language a real posting uses, without lying about your experience.
+    outcomes:
+      - Tailor a resume's keywords to a specific job posting
+  - title: A LinkedIn profile that isn't generic
+    description: A headline and summary specific enough that it couldn't apply to just anyone.
+    outcomes:
+      - Write a specific, non-generic LinkedIn headline and summary
+estimated_minutes: 150
+resources:
+  - r-tech-interview-handbook
+practice:
+  - id: ex-resume-1
+    title: Tailor your resume to a real posting
+    description: Find a real data analyst job posting and rewrite your resume's bullets and keywords to match it honestly.
+verify:
+  - Every bullet states an outcome, not just a task
+  - Resume keywords reasonably match the target posting
+  - LinkedIn summary is specific to you, not a generic template
+note: |
+  ## 🎯 What is it?
+
+  Framing your **resume and LinkedIn profile** around measurable outcomes and the specific keywords a real data analyst job posting looks for, instead of a generic list of tasks or a one-size-fits-all summary.
+
+  ## 💡 Why is it important?
+
+  Most applications are filtered before a human ever reads them — by an applicant tracking system (ATS) scanning for relevant keywords, or by a recruiter spending seconds per resume. A resume that reads well to a person *and* clears keyword filters gets you to the interview at all — everything else in a job search depends on clearing this first gate.
+
+  ## Core concept
+
+  ### Outcome-based bullets
+  Rewrite a **task** ("built dashboards") as an **outcome** ("cut weekly reporting time by 40% by building an automated Power BI dashboard") — a task describes what you did; an outcome describes the *impact* it had, which is what an employer actually cares about.
+
+  | Task-based (weak) | Outcome-based (strong) |
+  |---|---|
+  | "Analyzed sales data" | "Identified a $40K/year revenue opportunity by analyzing checkout drop-off across 50K orders" |
+  | "Built dashboards in Power BI" | "Cut weekly reporting time from 4 hours to 20 minutes by building an automated Power BI dashboard" |
+  | "Used SQL to query databases" | "Wrote SQL queries that reduced a recurring monthly report's turnaround from 2 days to same-day" |
+
+  ### Matching a job posting
+  Mirror the specific tools and language a real posting uses (e.g., if it says "Power BI," don't only write "BI tools") — honestly, based on real experience, not by inventing skills you don't have. This directly helps with both ATS keyword filters and a human reviewer's quick scan.
+
+  ### A LinkedIn profile that isn't generic
+  A headline and summary specific enough that it couldn't apply to just anyone — "Aspiring data analyst passionate about data" describes thousands of candidates identically; a specific focus and a concrete example doesn't.
+
+  ## Syntax / Formula / Structure
+
+  A reusable formula for an outcome-based bullet:
+
+  ```
+  [Action verb] + [what you did] + [specific, measurable result] + [how/tool used]
+
+  Example: "Reduced monthly reporting turnaround from 3 days to same-day
+            by automating a SQL-based ETL pipeline"
+  ```
+
+  ## 📊 Example
+
+  **Before (task-based):** "Responsible for creating reports and dashboards for the marketing team."
+
+  **After (outcome-based):** "Built a marketing performance dashboard in Tableau that cut weekly reporting prep time by 5 hours and was adopted by 3 additional teams within 2 months."
+
+  **Explanation:** The "after" version quantifies the impact (5 hours saved), adds a credibility signal (adopted by 3 more teams), and states the specific tool (Tableau) — all things a hiring manager scans for and an ATS can match against a posting's keywords.
+
+  ## Multiple examples
+
+  **Beginner:** Rewriting one vague bullet ("worked with data") into a specific, outcome-based one.
+  **Intermediate:** Comparing a resume's current keyword set against 3 real job postings in the target field to identify consistent gaps (e.g., "SQL" appears in every posting but isn't on the resume at all, despite genuine experience).
+  **Real-world:** Tailoring the same base resume slightly differently for two different job postings — one emphasizing SQL/dashboarding experience, another emphasizing Python/automation experience — each version honestly reflecting the same underlying experience, just reordered and reworded to match what each specific posting emphasizes.
+
+  ## ⚠️ Common mistakes
+
+  - **Listing tasks instead of outcomes.** "Used SQL and Excel" says nothing about impact — pairing every bullet with a measurable result is what makes a resume compelling.
+  - **A generic LinkedIn summary** that could describe any candidate ("passionate about data and solving problems") — it's forgettable and wastes the space.
+  - **Inventing or exaggerating skills to match a posting's keywords.** This backfires immediately in a technical interview and damages trust.
+  - **A resume that's too long or unfocused**, including every job/skill ever held instead of trimming to what's actually relevant to the target role.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any job application:** the resume is the first (and often only) piece of evidence a recruiter sees before deciding whether to move forward.
+  - **Recruiter outreach:** a specific, well-optimized LinkedIn profile is what surfaces in a recruiter's keyword search in the first place.
+
+  ## Related concepts
+
+  ```
+  Portfolio Building → Case Study Presentations
+    ↓
+  Resume & LinkedIn Optimization ← you are here
+    ↓
+  Technical Interview Practice / Case Study & Take-Home Assignments
+    ↓
+  Job Preparation → Salary Negotiation
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Rewrite "responsible for data cleaning" as an outcome-based bullet (you can invent a plausible, reasonable result).
+
+  ### Medium
+  2. A job posting repeatedly mentions "Power BI" and "stakeholder communication," but your resume doesn't use either phrase despite having relevant experience. What would you do?
+
+  ### Interview/Advanced
+  3. Why can matching a job posting's keywords too aggressively (without real substance behind them) backfire later in the process?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Example: "Cleaned and validated a 30K-row customer dataset, reducing downstream reporting errors by identifying and fixing 200+ duplicate and inconsistent records."
+  2. Rewrite the relevant bullets to explicitly use those exact terms (honestly, since the experience already exists) — this helps both automated keyword filters and a human reviewer quickly recognize the match.
+  3. If the resume implies a depth of experience that isn't real, it typically becomes obvious in a technical interview or on the job itself — this damages trust and can cost the offer even after clearing the initial resume screen, which is a worse outcome than being honestly specific from the start.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why should resume bullets state outcomes instead of tasks?**
+  Short answer: Outcomes demonstrate the actual impact and value of your work, which is what a hiring manager is trying to assess — a list of tasks alone doesn't show whether the work actually mattered.
+
+  ### Conceptual questions
+  **Q: Why does tailoring a resume to each specific job posting matter, even if it's more work?**
+  Short answer: Applicant tracking systems and time-constrained recruiters both scan for relevant, specific keywords — a generic resume is less likely to surface as a strong match for any single posting, even if the underlying experience is genuinely relevant.
+
+  ### Scenario-based questions
+  **Q: You have strong SQL skills but your current resume buries them in a long, unfocused bullet list. How would you fix it for a SQL-heavy role?**
+  Short answer: Move SQL-related outcomes to the top of the relevant section, quantify their impact specifically, and trim less relevant bullets so the SQL experience is immediately visible to a quick scanner.
+
+  ### Practical questions
+  **Q: How would you write a LinkedIn headline that's specific rather than generic?**
+  Short answer: Include your specific focus area and a standout skill or result, e.g., "Data Analyst | SQL & Power BI | Turned a messy sales dataset into a $40K/year retention finding" rather than a generic "Data Enthusiast | Aspiring Analyst."
+
+  ## Interview traps / tricky points
+
+  - A resume padded with unfamiliar keywords can lead directly to a technical interview question you can't actually answer — never list a skill you can't discuss in depth.
+  - Recruiters often notice resumes clearly copy-pasted without any tailoring to their specific posting — some tailoring, even light, signals genuine interest.
+
+  ## Best practices
+
+  - Pair every bullet with a specific, measurable outcome where possible.
+  - Tailor keywords honestly to each specific job posting's language.
+  - Write a LinkedIn summary specific enough that it couldn't describe just anyone.
+  - Trim the resume to what's actually relevant for the target role.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Outcome-based bullet** → action + specific measurable result + tool/method
+  **Keyword matching** → mirror a posting's real language, honestly
+  **LinkedIn** → specific headline/summary, not generic
+  **Never:** list a skill on a resume you can't discuss in a technical interview

@@ -1,0 +1,53 @@
+title: Sales Data Analysis
+level: mini
+duration: 45-60 minutes
+description: Clean a messy raw sales export and summarize it in a pivot table.
+problem_statement: >-
+  A regional sales manager receives an inconsistent spreadsheet every month and cannot trust the
+  totals. Clean the export and create a repeatable summary that answers where revenue is growing or
+  falling.
+scenario: >-
+  You are the junior analyst responsible for returning a decision-ready workbook before the monthly
+  review.
+dataset:
+  name: Messy retail sales export
+  description: >-
+    Synthetic transaction-level CSV with duplicate orders, blank regions, mixed date formats,
+    inconsistent product labels, and malformed currency values.
+  source_url: /datasets/messy-sales.csv
+  format: CSV
+  size: 40 rows
+  files:
+    - messy-sales.csv
+skills:
+  - spreadsheets
+  - spreadsheets-pivot-tables
+datasets:
+  - Raw sales export (CSV) with duplicate rows, inconsistent date formats, and blank cells
+tasks:
+  - Remove duplicate rows
+  - Fix inconsistent date formats
+  - Standardize currency values
+  - Build a pivot summary by region and month
+requirements:
+  - Preserve a raw-data sheet and perform cleaning on a separate working sheet
+  - Document every cleaning rule in a notes tab
+  - Reconcile cleaned revenue against the raw export and explain the difference
+milestones:
+  - title: Audit the export
+    description: >-
+      Profile missing values, duplicates, invalid formats, and inconsistent labels before changing
+      anything.
+  - title: Build a cleaning workflow
+    description: Apply explicit, repeatable transformations and keep an audit trail.
+  - title: Answer the business question
+    description: Create a pivot view of monthly revenue and order count by region with two written findings.
+rubric:
+  - criterion: Data integrity
+    definition: Cleaning decisions are documented and totals reconcile without silent row loss.
+  - criterion: Analysis
+    definition: The summary uses correct measures and supports two evidence-based findings.
+  - criterion: Usability
+    definition: A manager can refresh, filter, and understand the workbook without help.
+artifacts:
+  - Cleaned spreadsheet

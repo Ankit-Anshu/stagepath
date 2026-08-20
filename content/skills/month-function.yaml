@@ -1,0 +1,85 @@
+title: MONTH Function
+category: Spreadsheets
+what_is_it: Extracting just the month number (1-12) from a full date value.
+why_it_matters: A common building block for grouping data by month, or for building a month-over-month report.
+prerequisites:
+  - year-function
+objectives:
+  - Extract the month from a date with MONTH
+estimated_minutes: 15
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-month-1
+    title: Group orders by month
+    description: Given an order-date column, use MONTH to create a helper column for a month-over-month revenue breakdown.
+verify:
+  - MONTH correctly extracts the month number from a real date value
+note: |
+  ## 🎯 What is it?
+
+  **MONTH** extracts just the month number (1 for January through 12 for December) from a full date value.
+
+  ## 💡 Why is it important?
+
+  A common building block for grouping data by month, or as a component in a month-over-month report or seasonal analysis (see [Forecasting & Trend Analysis](/skills/forecasting-trend-analysis)).
+
+  ## Syntax
+
+  ```
+  =MONTH(date)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 2024-03-15 |
+
+  **Formula:** `=MONTH(A1)` → `3`
+
+  ## Multiple examples
+
+  **Beginner:** `=MONTH(A2)` — extract the month number from an order-date column.
+  **Real-world:** `=MONTH(order_date)` combined with YEAR as helper columns, letting a pivot table or SUMIFS breakdown group revenue by year and month together for a full trend view.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming MONTH returns a month name** (like "March") — it returns a plain number (3); use a TEXT formatting function or a lookup table if a month name is needed for display.
+  - **Applying MONTH to a text-formatted date** (see [Data Types](/skills/spreadsheet-data-types)), which fails since MONTH requires a real underlying date value.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** building a month-over-month revenue trend using MONTH (and YEAR) as helper columns.
+
+  ## Related concepts
+
+  ```
+  YEAR → MONTH ← you are here → DAY → EOMONTH
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that extracts the month number from A1.
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=MONTH(A1)`
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Does MONTH return a month name or a number?**
+  Short answer: A number (1-12) — displaying it as a name requires additional text formatting or a lookup, MONTH alone only returns the numeric value.
+
+  ## Best practices
+
+  - Combine YEAR and MONTH together as helper columns for any month-over-month trend analysis spanning multiple years.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **MONTH(date)** → extracts the month as a number (1-12), not a name

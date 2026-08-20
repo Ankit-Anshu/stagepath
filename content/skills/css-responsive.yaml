@@ -1,0 +1,24 @@
+title: CSS & Responsive Layout
+category: Frontend Development
+what_is_it: Styling and arranging interfaces across screen sizes, content lengths, and user preferences.
+why_it_matters: Robust layouts adapt to content and context instead of matching one screenshot.
+estimated_minutes: 3000
+prerequisites: [html-accessibility]
+objectives: [Build fluid layouts, Create maintainable style systems, Handle responsive content]
+subtopics:
+  - title: Cascade and specificity
+    description: Inheritance, origins, layers, selectors, specificity, and computed values.
+    outcomes: [Predict which rule wins, Avoid specificity escalation]
+  - title: Box model and flow
+    description: Sizing, spacing, positioning, overflow, stacking contexts, and normal flow.
+    outcomes: [Debug unexpected sizing, Control overflow safely]
+  - title: Flexbox and Grid
+    description: One- and two-dimensional layout, alignment, intrinsic sizing, and common patterns.
+    outcomes: [Choose Grid or Flexbox, Build resilient layouts]
+  - title: Responsive design
+    description: Mobile-first queries, container queries, fluid type, images, and content-driven breakpoints.
+    outcomes: [Design without device-specific assumptions, Test edge widths]
+  - title: Design tokens and architecture
+    description: Custom properties, naming, component boundaries, themes, and reusable primitives.
+    outcomes: [Create a small token system, Organize scalable styles]
+

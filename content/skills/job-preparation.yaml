@@ -1,0 +1,178 @@
+title: Job Preparation
+what_is_it: Preparing to talk about your projects and skills under interview conditions — resume framing, technical questions, and mock interviews.
+why_it_matters: Being able to do the work and being able to demonstrate that you can do the work under interview pressure are different skills. This closes that gap.
+prerequisites:
+  - portfolio-building
+objectives:
+  - Frame resume bullets around measurable outcomes
+  - Answer a behavioral question using a structured format
+  - Walk through a portfolio project out loud in under 3 minutes
+estimated_minutes: 240
+resources:
+  - r-tech-interview-handbook
+  - r-pramp
+practice:
+  - id: ex-job-prep-1
+    title: Do one mock interview
+    description: Complete one full mock interview (technical or behavioral) with a peer or a free platform and note two things to improve.
+assessment: assessment-portfolio-readiness-checkpoint
+verify:
+  - Can walk through a portfolio project clearly in under 3 minutes
+  - Resume bullets state outcomes, not just tasks performed
+  - Has completed at least one mock interview
+category: Career
+subtopics:
+  - title: Resume framing
+    description: Writing outcome-based bullets ("reduced X by Y%") instead of a list of tasks performed.
+    outcomes:
+      - Rewrite a task-based resume bullet as an outcome-based one
+  - title: Behavioral interviews
+    description: Structuring an answer with situation, task, action, and result (STAR).
+    outcomes:
+      - Answer a behavioral question using the STAR structure
+  - title: Technical interviews
+    description: Talking through a SQL or Python problem out loud while writing it, not just silently solving it.
+    outcomes:
+      - Narrate your query logic clearly while writing it
+  - title: Walking through a project
+    description: Summarizing a portfolio project clearly and confidently in under three minutes.
+    outcomes:
+      - Present one portfolio project clearly in under 3 minutes
+note: |
+  ## 🎯 What is it?
+
+  **Job preparation** is preparing to talk about your projects and skills under real interview conditions — resume framing, behavioral questions, technical questions, and mock interviews — bringing together every skill from the Portfolio and earlier Job Preparation topics into interview-ready form.
+
+  ## 💡 Why is it important?
+
+  Being able to *do* the work and being able to *demonstrate* that you can do the work under interview pressure are genuinely different skills. A strong analyst who hasn't practiced presenting themselves can still struggle in an interview — this stage closes that specific gap deliberately, rather than leaving it to chance on interview day.
+
+  ## Core concept
+
+  ### Resume framing
+  Outcome-based bullets ("reduced X by Y%"), not a list of tasks performed — see [Resume & LinkedIn Optimization](/skills/resume-linkedin) for full depth.
+
+  ### Behavioral interviews — the STAR structure
+  A structured way to answer "tell me about a time..." questions:
+
+  | Part | Content |
+  |---|---|
+  | **Situation** | Brief context — what was the setting? |
+  | **Task** | What was your specific responsibility or goal? |
+  | **Action** | What did *you* specifically do (not "we")? |
+  | **Result** | What was the outcome, ideally quantified? |
+
+  ### Technical interviews
+  Talking through a SQL or Python problem out loud while writing it — see [Technical Interview Practice](/skills/technical-interview-practice) for full depth.
+
+  ### Walking through a project
+  Summarizing a portfolio project clearly and confidently in **under 3 minutes** — a compressed, spoken version of the [Case Study Presentations](/skills/case-study-presentations) structure (problem → approach → findings → impact), delivered live and conversationally rather than on slides.
+
+  ## Syntax / Formula / Structure
+
+  A STAR-structured behavioral answer template:
+
+  ```
+  Situation: "In my [role/project], we faced [brief context]..."
+  Task:      "I was responsible for [specific goal/responsibility]..."
+  Action:    "I [specific steps YOU took, not the team in general]..."
+  Result:    "This led to [quantified outcome], and [any follow-on impact]."
+  ```
+
+  ## 📊 Example
+
+  **Behavioral question:** "Tell me about a time you found an error in your own analysis."
+
+  **Weak answer (no structure, vague):** "Yeah, that's happened before, I just fix it and move on."
+
+  **Strong answer (STAR):**
+  > "**Situation:** While building a churn-rate dashboard for a portfolio project, I noticed the churn numbers looked unusually high. **Task:** I needed to figure out whether this was a real trend or a bug before presenting it. **Action:** I traced it back to my join logic — I was double-counting customers who'd changed plans mid-month, inflating the denominator. I rewrote the join to dedupe on customer ID first. **Result:** The corrected churn rate was 40% lower than my initial (wrong) number — a mistake that would have led to a completely wrong conclusion if I'd presented it as-is, which reinforced why I always sanity-check totals against a manual spot check now."
+
+  **Explanation:** The STAR-structured answer gives a specific, concrete story with a real technical detail and a genuine lesson learned — far more convincing and memorable than a vague, generic response.
+
+  ## Multiple examples
+
+  **Beginner:** Preparing one STAR-structured answer for a common question ("tell me about a challenge you faced").
+  **Intermediate:** Practicing a 3-minute spoken walkthrough of a single portfolio project, timed.
+  **Real-world:** A full mock interview with a peer or a free platform, covering resume questions, one behavioral question, and one live technical problem — then reviewing afterward for two specific things to improve, rather than treating the mock interview as a one-time pass/fail event.
+
+  ## ⚠️ Common mistakes
+
+  - **Answering behavioral questions vaguely or generically**, without a specific story or structure — this is forgettable and doesn't actually demonstrate the underlying skill being probed.
+  - **Rambling for 10+ minutes when walking through a project**, losing the interviewer's attention before reaching the actual finding — the 3-minute discipline exists specifically to prevent this.
+  - **Never actually rehearsing out loud**, so the first time you're saying these answers out loud is in the real interview — this shows in the delivery.
+  - **Treating a single mock interview as "done" preparation** instead of using it to identify and fix specific weaknesses before the real thing.
+
+  ## Real-world Data Analyst use cases
+
+  - **Every stage of a real interview loop:** resume screen, behavioral round, technical round, and project walkthrough all draw directly on these prepared skills.
+  - **Networking conversations:** the same 3-minute project walkthrough is useful well beyond formal interviews.
+
+  ## Related concepts
+
+  ```
+  Resume & LinkedIn Optimization
+  Technical Interview Practice
+  Case Study & Take-Home Assignments
+    ↓
+  Job Preparation ← you are here (brings these together)
+    ↓
+  Salary Negotiation
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What do the four letters of STAR stand for?
+
+  ### Medium
+  2. Rewrite this vague behavioral answer opener using STAR: "I'm good at handling pressure, like that one time with a tight deadline."
+
+  ### Interview/Advanced
+  3. Why is a 3-minute limit useful for practicing a project walkthrough, similar to the 5-slide limit in case study presentations?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Situation, Task, Action, Result.
+  2. Example: "**Situation:** I was two days from a stakeholder deadline when I discovered the underlying data had a formatting issue. **Task:** I needed to fix it without missing the deadline. **Action:** I wrote a quick validation script to catch and flag every affected row, fixed the formatting issue at its source, and re-ran the analysis. **Result:** I delivered on time, and the validation script became a reusable check for future reports."
+  3. It forces prioritizing the most important information — the finding and its impact — over exhaustive process detail, mirroring the same discipline that makes any communication clear and compelling under real time constraints (like an actual interview).
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why practice a project walkthrough specifically under a time limit?**
+  Short answer: Real interviews are time-constrained, and practicing under that constraint forces prioritizing the most important information (finding, impact) over exhaustive detail — the same skill needed live, under pressure.
+
+  ### Conceptual questions
+  **Q: Why does the STAR structure make a behavioral answer more convincing?**
+  Short answer: It ensures the answer includes a specific, concrete story with your individual actions and a clear, ideally quantified result — rather than a vague, generic claim that's hard to evaluate or remember.
+
+  ### Scenario-based questions
+  **Q: You're asked a behavioral question you haven't specifically prepared for. How do you respond in the moment?**
+  Short answer: Take a brief moment to think of a genuine, relevant experience, and structure your answer using STAR on the fly — even an imperfect but structured, specific answer is much stronger than a rambling, unstructured one.
+
+  ### Practical questions
+  **Q: What are the two things you should always do after a mock interview?**
+  Short answer: Identify specific, concrete things to improve (not just "do better"), and actually practice those specific improvements before the next attempt or the real interview.
+
+  ## Interview traps / tricky points
+
+  - A behavioral answer using "we" instead of "I" throughout makes it unclear what you specifically contributed — interviewers often probe this directly with a follow-up.
+  - Rehearsing an answer so heavily it sounds robotic/memorized can backfire — the goal is a clear structure, not a word-for-word script.
+
+  ## Best practices
+
+  - Prepare STAR-structured answers for the most common behavioral questions in advance.
+  - Practice a project walkthrough out loud, timed, more than once.
+  - Do at least one full mock interview, and use it to find specific, fixable gaps.
+  - Use "I," not "we," when describing your specific individual contribution.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **STAR** → Situation, Task, Action, Result — for behavioral questions
+  **Project walkthrough** → practiced, under 3 minutes, finding-first
+  **Mock interviews** → use them to find specific gaps, not just as a one-time test

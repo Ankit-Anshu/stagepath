@@ -1,0 +1,78 @@
+title: Primary Key
+category: SQL
+what_is_it: A column (or set of columns) that uniquely identifies each row in a table — no two rows can share the same primary key value, and it can never be empty.
+why_it_matters: It's what guarantees every row is uniquely identifiable — the foundation that foreign keys and joins are built on.
+prerequisites:
+  - database-columns
+objectives:
+  - Define a primary key and explain its two core rules
+  - Identify a plausible primary key column in an example table
+estimated_minutes: 20
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-primary-key-1
+    title: Find the primary key
+    description: For a products table with columns id, name, price, and category, identify which column is the most likely primary key, and why.
+verify:
+  - Can define a primary key
+  - Can explain why a primary key can't be null or duplicated
+note: |
+  ## 🎯 What is it?
+
+  A **primary key** is a column (or combination of columns) that uniquely identifies every row in a table. Two rules define it: every value must be **unique** (no two rows share one), and it can **never be null** (every row must have one). A `customers` table's `id` column is a typical primary key.
+
+  ## 💡 Why is it important?
+
+  - It guarantees every row can be unambiguously referenced — critical for updates, deletes, and especially joins.
+  - It's the anchor a **foreign key** in another table points back to, which is what makes relationships between tables work at all.
+
+  ## Core concept
+
+  | Rule | Why |
+  |---|---|
+  | Unique | No two rows can be confused with each other |
+  | Not null | Every row must be identifiable — an unidentifiable row breaks the model |
+
+  Primary keys are often a simple auto-incrementing integer (`id: 1, 2, 3, ...`), but can also be a naturally unique value (like an email address) or a combination of columns (a **composite key**).
+
+  ## 📊 Example
+
+  ```sql
+  customers
+  +----+--------+
+  | id | name   |   ← id is the primary key: unique, never null
+  +----+--------+
+  | 1  | Amir   |
+  | 2  | Priya  |
+  +----+--------+
+  ```
+
+  If two customers both had `id = 1`, or a row had a missing `id`, the database wouldn't be able to reliably tell rows apart — which is exactly what the primary key rule prevents.
+
+  ## ⚠️ Common mistakes
+
+  - **Choosing a column that isn't guaranteed unique** as if it were a primary key (like a name) — two customers can easily share a name, but never a properly enforced primary key.
+  - **Assuming a primary key must be a single column.** A composite primary key (two or more columns together being unique) is common, e.g. an `order_items` table keyed on `(order_id, product_id)` together.
+
+  ## Related concepts
+
+  ```
+  Columns
+    ↓
+  Primary Key ← you are here
+    ↓
+  Foreign Key → Relationships
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why can't a customer's name be used as a primary key?**
+  Short answer: A primary key must be unique for every row, and names aren't guaranteed unique — two different customers could easily share the same name, which would violate the primary key's uniqueness rule.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Primary key** → uniquely identifies every row: must be unique, must never be null
+  Foreign keys in other tables point back to it — the anchor relationships are built on.

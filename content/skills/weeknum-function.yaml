@@ -1,0 +1,73 @@
+title: WEEKNUM Function
+category: Spreadsheets
+what_is_it: Returning which numbered week of the year a date falls in (1-52 or 53).
+why_it_matters: It's how weekly reports group and compare data by calendar week rather than by exact date range.
+prerequisites:
+  - weekday-function
+objectives:
+  - Return a date's week number with WEEKNUM
+  - Use WEEKNUM to group data into weekly buckets
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-weeknum-1
+    title: Group by week
+    description: Given a column of daily transaction dates, add a WEEKNUM column and use it to group/summarize revenue by week.
+verify:
+  - Can return a date's week number
+  - Can use WEEKNUM to group dates into weekly buckets
+note: |
+  ## 🎯 What is it?
+
+  **WEEKNUM** returns which numbered week of the year a date falls in — a value from 1 to 52 (or 53 in some years), based on which week-numbering system is specified.
+
+  ## 💡 Why is it important?
+
+  - It's how weekly reports group and compare data by calendar week — "Week 11 revenue vs. Week 10 revenue" — instead of manually working with exact date ranges.
+  - Combined with YEAR, it enables grouping data into consistent weekly buckets across a pivot table or summary formula.
+
+  ## Syntax
+
+  ```
+  =WEEKNUM(date, [return_type])
+  ```
+
+  `return_type` controls which day the week starts on (commonly `1` for Sunday-start, `2` for Monday-start).
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 2024-03-14 |
+
+  `=WEEKNUM(A1)` → `11` (the 11th week of 2024, Sunday-start numbering)
+
+  Grouping revenue by week: `=SUMPRODUCT((WEEKNUM($A$2:$A$100)=11)*($B$2:$B$100))` sums revenue for only the rows falling in week 11.
+
+  ## ⚠️ Common mistakes
+
+  - **Comparing week numbers across different years without also checking the year** — "Week 11" alone is ambiguous without knowing which year, since every year has its own Week 11.
+  - **Mixing return_type conventions inconsistently** across a workbook, causing week boundaries to shift depending on which formula is used.
+
+  ## Related concepts
+
+  ```
+  WEEKDAY
+    ↓
+  WEEKNUM ← you are here
+    ↓
+  DATEDIF
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you build a "revenue by week" summary from daily transaction data?**
+  Short answer: Add a WEEKNUM (and YEAR, to disambiguate across years) column to the transaction data, then group/summarize revenue by that combination — either with a pivot table or a SUMIFS/SUMPRODUCT formula.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **WEEKNUM(date, [return_type])** → returns the week number of the year (1-52/53)
+  Always pair with YEAR when comparing across multiple years.

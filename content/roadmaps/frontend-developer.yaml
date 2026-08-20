@@ -1,0 +1,24 @@
+title: Frontend Developer
+category: Software Development
+difficulty: beginner
+estimated_hours: 520
+audience: People who enjoy visual problem-solving and building interactive products.
+description: Build accessible, responsive web interfaces from the browser fundamentals through production-quality applications.
+stages:
+  - id: web-foundations
+    title: Understand the web
+    description: Learn how browsers, pages, and users interact before choosing a framework.
+    skills: [web-foundations, html-accessibility]
+  - id: interface-building
+    title: Build interfaces
+    description: Create responsive layouts and interactive experiences with the platform itself.
+    skills: [css-responsive, javascript-browser]
+  - id: application-development
+    title: Build applications
+    description: Organize state, components, data fetching, and reusable UI at scale.
+    skills: [frontend-frameworks, testing-performance]
+  - id: production
+    title: Ship to production
+    description: Deliver, monitor, document, and improve a complete frontend product.
+    skills: [frontend-deployment]
+

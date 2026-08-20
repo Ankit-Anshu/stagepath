@@ -1,0 +1,68 @@
+title: Define the Business Problem
+category: Foundations
+what_is_it: The first step of any analysis — pinning down exactly what question is being asked and what decision the answer will inform, before touching any data.
+why_it_matters: Skipping this step is the single most common cause of wasted analyst work — a technically correct analysis that answers the wrong question has zero business value.
+prerequisites:
+  - what-is-data-analytics
+objectives:
+  - Explain why defining the business problem comes before touching data
+  - Write clarifying questions that turn a vague request into a well-defined problem
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-define-problem-1
+    title: Turn a vague ask into a defined problem
+    description: Take the vague request "can you look at our numbers?" and write 3 clarifying questions you'd ask before starting.
+verify:
+  - Can explain why this step comes first
+  - Can write clarifying questions for a vague request
+note: |
+  ## 🎯 What is it?
+
+  **Defining the business problem** means pinning down exactly what question is being asked, why it matters, and what decision the answer will inform — before writing a single query. It's the first step of the Data Analysis Process, and the one most often skipped under time pressure.
+
+  ## 💡 Why is it important?
+
+  - A technically flawless analysis that answers the wrong question has zero business value — and is one of the most common ways junior analysts waste days of work.
+  - Stakeholders often start with a vague ask ("can you check our numbers?") — the analyst's job is to turn that into a specific, answerable question.
+  - It determines everything downstream: what data to pull, what level of precision is needed, and how to present the result.
+
+  ## Core concept
+
+  Good clarifying questions:
+  - What decision will this analysis inform?
+  - What specific metric, time window, and segment matter?
+  - What would "done" look like — a number, a chart, a recommendation?
+  - Is there a deadline or a specific audience this needs to be ready for?
+
+  ## 📊 Example
+
+  Vague ask: "Can you check on our sales?" Defined problem, after clarifying: "Leadership wants to know whether Q1 revenue is on track to hit the $2M target, broken down by region, to decide whether to increase the marketing budget for underperforming regions before Q2 starts."
+
+  ## ⚠️ Common mistakes
+
+  - **Starting to pull data immediately** to seem responsive, rather than spending 10 minutes clarifying first — this usually costs far more time later when the analysis has to be redone.
+  - **Assuming you know what "the numbers" means** without confirming — different stakeholders often mean different metrics by the same vague phrase.
+
+  ## Related concepts
+
+  ```
+  Define the Business Problem ← you are here
+    ↓
+  Collect Data
+    ↓
+  Understand Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A stakeholder asks "can you check on our numbers?" — what's your first move?**
+  Short answer: Ask clarifying questions before touching any data — which metric, what time period, what decision this will inform — since "the numbers" is too vague to act on directly.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Define the business problem** → clarify the real question and the decision it informs, before pulling any data
+  The most commonly skipped step, and the costliest to skip.

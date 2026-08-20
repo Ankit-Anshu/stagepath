@@ -1,0 +1,67 @@
+title: Explore Data
+category: Foundations
+what_is_it: Looking at cleaned, transformed data with fresh eyes to spot patterns, outliers, and initial answers before committing to a specific analysis direction.
+why_it_matters: Skipping exploration and jumping straight to a final chart risks missing an obvious pattern, outlier, or data issue that changes the whole story.
+prerequisites:
+  - transform-data
+objectives:
+  - Explain the purpose of exploring data before formal analysis
+  - Describe common exploration techniques (summary stats, quick charts)
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-explore-data-1
+    title: Ten-minute exploration
+    description: Take any dataset and spend 10 minutes producing quick summary statistics and a rough chart before forming any conclusion.
+verify:
+  - Can explain why exploration comes before formal analysis
+  - Can name two quick exploration techniques
+note: |
+  ## 🎯 What is it?
+
+  **Exploring data** means looking at cleaned, transformed data with fresh eyes — quick summary statistics, rough charts, sorting by extremes — to spot patterns, outliers, or surprises before committing to a specific analysis direction. It's less formal than the full "Analyze" step that follows.
+
+  ## 💡 Why is it important?
+
+  - It catches problems and surprises early — an unexpected outlier or a pattern that contradicts the initial assumption is far cheaper to discover now than after a final report is built.
+  - It often reveals the *actual* interesting story, which can be different from what the original question assumed.
+
+  ## Core concept
+
+  Quick exploration techniques:
+  - Summary statistics (min, max, mean, median) for key numeric columns
+  - Sorting by the extremes (top/bottom 10 rows) to spot outliers
+  - A rough histogram or bar chart, without formatting polish
+  - Counting unique values in a categorical column to check for unexpected variety
+
+  ## 📊 Example
+
+  Exploring a cleaned `orders` table by sorting by `amount` descending might reveal a handful of orders worth $50,000+ — far above the typical $50 order. That's worth investigating before building a "top customers" report, since it may be a data error or a genuinely important segment (bulk B2B orders) that changes how the whole analysis should be framed.
+
+  ## ⚠️ Common mistakes
+
+  - **Skipping exploration and jumping straight to a polished chart** — this is how outliers or data issues end up baked silently into a final report.
+  - **Treating exploration as the final analysis.** It's meant to be quick and rough — formal analysis with a clear methodology comes next.
+
+  ## Related concepts
+
+  ```
+  Transform Data
+    ↓
+  Explore Data ← you are here
+    ↓
+  Analyze Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would you explore a dataset before building your final analysis?**
+  Short answer: Quick summary stats and rough charts catch outliers, surprises, or data issues early — cheaper to catch now than after a polished report has already been built and shared.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Explore data** → quick, informal look (summary stats, rough charts, sorting by extremes) to catch surprises early
+  Comes after transforming, before formal analysis.

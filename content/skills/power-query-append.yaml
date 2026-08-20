@@ -1,0 +1,97 @@
+title: Append
+category: Spreadsheets
+what_is_it: Stacking two or more queries with the same columns on top of each other — the Power Query equivalent of a SQL UNION ALL.
+why_it_matters: The right tool whenever combining similarly-shaped data from different periods or sources, as opposed to Merge, which combines different columns by a shared key.
+prerequisites:
+  - power-query-merge
+objectives:
+  - Append two or more queries with matching columns
+  - Explain the difference between Append and Merge
+estimated_minutes: 25
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-pq-append-1
+    title: Combine two periods
+    description: Append a "This Quarter" orders query and a "Last Quarter" orders query (same columns) into one combined query.
+verify:
+  - Appended query correctly stacks all rows from both sources
+  - Columns are correctly aligned between the appended queries
+note: |
+  ## 🎯 What is it?
+
+  **Append** stacks two or more queries with the **same columns** on top of each other — the Power Query equivalent of a SQL [UNION ALL](/skills/sql-set-operations), combining rows vertically rather than columns horizontally.
+
+  ## 💡 Why is it important?
+
+  It's the right tool whenever combining similarly-shaped data from different periods or sources — this quarter's and last quarter's orders, or exports from two regional systems with the same structure — as opposed to [Merge](/skills/power-query-merge), which combines *different* columns from two sources by a shared key.
+
+  ## Core concept
+
+  | | Merge | Append |
+  |---|---|---|
+  | Combines | Different columns, by a shared key | Same-shaped rows, stacked together |
+  | Analogous to | SQL JOIN | SQL UNION ALL |
+  | Use when | You need columns from both sources side by side | You need rows from both sources combined into one list |
+
+  ## 📊 Example
+
+  **"Q1 Orders" query:** order_id, customer_id, amount (500 rows)
+  **"Q2 Orders" query:** order_id, customer_id, amount (600 rows)
+
+  **Append Q1 + Q2** → one combined query with 1,100 rows, same three columns, ready for a full year-to-date analysis.
+
+  ## Multiple examples
+
+  **Beginner:** Appending two queries with identical column structures.
+  **Intermediate:** Appending three or more monthly queries into one combined dataset.
+  **Real-world:** Appending 12 monthly regional sales exports (each imported as its own query with identical structure) into a single combined query, feeding a full-year pivot table that stays current as each new month's query is added to the append list.
+
+  ## ⚠️ Common mistakes
+
+  - **Using Append when Merge was actually needed** (or vice versa) — Append stacks rows and requires matching columns; Merge combines different columns using a shared key. Mixing these up produces either an error or a structurally wrong result.
+  - **Appending queries with mismatched column names or types**, causing columns to misalign or produce unexpected blank values after combining.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any multi-period analysis:** combining monthly, quarterly, or yearly exports of the same structure into one dataset for trend analysis.
+  - **Multi-source combination:** combining exports from multiple regional systems that share the same structure.
+
+  ## Related concepts
+
+  ```
+  Merge → Append ← you are here → Refresh → Advanced Power Query
+  ```
+  Directly parallels [SQL — UNION & Set Operations](/skills/sql-set-operations) — the same "stack rows vertically" concept, expressed through Power Query's interface.
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the core difference between Merge and Append?
+
+  ### Interview/Advanced
+  2. Why would appending 12 monthly queries (built via Import Data → From Folder) be more maintainable than manually copy-pasting 12 months of data into one sheet?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Merge combines different columns from two sources using a shared key (like a JOIN); Append stacks rows from same-shaped sources on top of each other (like a UNION ALL).
+  2. The folder-based import and append combination automatically re-includes every file present, so adding a 13th month's file and refreshing the query updates the combined dataset with zero manual copy-paste — far less error-prone and far less repetitive work than manually managing 12+ pasted blocks of data.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you choose Append over Merge in Power Query?**
+  Short answer: When combining rows from same-structured sources (like monthly exports) into one longer list — Merge is for combining different columns from two sources by a shared key, which is a structurally different problem.
+
+  ## Best practices
+
+  - Confirm column names and types match across queries before appending.
+  - Combine Append with a folder-based Import Data source for a fully automated, growing dataset.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Append** → stacks rows from same-shaped queries (like SQL UNION ALL)
+  **vs. Merge** → combines different columns by a shared key (like SQL JOIN)

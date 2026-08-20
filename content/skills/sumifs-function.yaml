@@ -1,0 +1,106 @@
+title: SUMIFS Function
+category: Spreadsheets
+what_is_it: Summing a range based on two or more conditions at once — like summing revenue for the West region AND the current month.
+why_it_matters: Real business questions are often multi-conditional, and SUMIFS is the direct, single-formula way to answer them without a pivot table.
+prerequisites:
+  - sumif-function
+objectives:
+  - Write a SUMIFS formula with two or more conditions
+  - Explain the argument order difference between SUMIF and SUMIFS
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-sumifs-1
+    title: Sum revenue by region and month
+    description: Given a transactions list, use SUMIFS to total revenue for the "West" region in "January" only.
+verify:
+  - SUMIFS correctly sums only rows matching every condition
+  - All criteria ranges are correctly aligned with the sum range
+note: |
+  ## 🎯 What is it?
+
+  **SUMIFS** sums a range based on **two or more conditions at once** — like summing revenue for the West region **and** the current month, in a single formula.
+
+  ## 💡 Why is it important?
+
+  Real business questions are often multi-conditional ("revenue in the West region, in January, for completed orders only") — SUMIFS is the direct, single-formula answer, avoiding the need to build a full pivot table for a quick, targeted total.
+
+  ## Syntax
+
+  ```
+  =SUMIFS(sum_range, criteria_range1, criteria1, criteria_range2, criteria2, ...)
+  ```
+
+  > ⚠️ **Note the argument order difference from SUMIF:** SUMIFS puts `sum_range` **first**, while SUMIF puts it **last**. This is a very common source of confusion when switching between the two.
+
+  ## 📊 Example
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Region | Month | Revenue |
+  | 2 | West | Jan | 200 |
+  | 3 | West | Feb | 150 |
+  | 4 | East | Jan | 300 |
+
+  **Formula:** `=SUMIFS(C2:C4,A2:A4,"West",B2:B4,"Jan")`
+  **Result:** `200` (only row 2 matches both the region and month conditions)
+
+  ## Multiple examples
+
+  **Beginner:** `=SUMIFS(B2:B100,A2:A100,"Completed")` — SUMIFS with just one condition, functionally identical to SUMIF but with reordered arguments.
+  **Intermediate:** `=SUMIFS(revenue,region,"West",status,"Completed")` — two conditions combined.
+  **Real-world:** `=SUMIFS(revenue,region,"West",order_date,">="&DATE(2024,1,1),order_date,"<"&DATE(2024,2,1))` — summing revenue for one region within a specific date range, combining a text condition with two date-range conditions in one formula.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing SUMIF's argument order with SUMIFS's.** SUMIF: `(criteria_range, criteria, sum_range)`. SUMIFS: `(sum_range, criteria_range1, criteria1, ...)` — the sum_range moves to the front, a frequent source of formula errors when switching between the two.
+  - **Mismatched range sizes across the different criteria ranges**, which causes an error since every criteria range and the sum range must all be the same size.
+  - **Using AND-only logic without realizing it.** SUMIFS combines all conditions with AND (every condition must match) — there's no built-in OR logic across conditions within one SUMIFS call.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** revenue for one region within one specific date range.
+  - **Finance analysis:** total expenses for one cost category, in one department, within one quarter.
+
+  ## Related concepts
+
+  ```
+  SUMIF → SUMIFS ← you are here → COUNTIF → COUNTIFS → AVERAGEIF → AVERAGEIFS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a SUMIFS that totals column C where column A = "West" and column B = "Q1".
+
+  ### Interview/Advanced
+  2. Why does SUMIFS put sum_range first, unlike SUMIF which puts it last?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=SUMIFS(C:C,A:A,"West",B:B,"Q1")`
+  2. This is simply how Microsoft designed the function's argument order (to accommodate multiple criteria-range/criteria pairs of variable length after it) — there's no deeper logical reason, but it's a well-known, frequently-tested "gotcha" specifically because it differs from SUMIF's order.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you sum revenue for a specific region within a specific date range?**
+  Short answer: Use SUMIFS with the revenue column as sum_range, and two additional criteria pairs — one for the region and two for the date range's lower and upper bounds.
+
+  ## Interview traps / tricky points
+
+  - The SUMIF vs. SUMIFS argument-order swap is one of the most commonly tested "gotcha" details in spreadsheet interviews.
+
+  ## Best practices
+
+  - Double-check argument order whenever switching between SUMIF and SUMIFS.
+  - Keep all criteria ranges and the sum range the same size to avoid errors.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **SUMIFS(sum_range, crit_range1, crit1, crit_range2, crit2, ...)** → sum_range comes FIRST (unlike SUMIF)
+  **All conditions combine with AND** — every condition must match

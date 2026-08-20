@@ -1,0 +1,109 @@
+title: SUBSTITUTE Function
+category: Spreadsheets
+what_is_it: Replacing a specific matching piece of text wherever it appears within a value, or a specific occurrence of it.
+why_it_matters: The go-to tool for fixing a recurring character or word across a whole column — like stripping a currency symbol from an exported price field.
+prerequisites:
+  - replace-function
+objectives:
+  - Use SUBSTITUTE to replace a specific piece of matching text
+  - Use the optional instance_num argument to replace only one occurrence
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-substitute-1
+    title: Clean a formatted price field
+    description: Given a price column stored as text with a currency symbol and thousands separator, use nested SUBSTITUTE calls to strip both into a usable number.
+verify:
+  - SUBSTITUTE correctly replaces the matching text throughout the value
+  - Multiple substitutions are correctly nested when more than one target needs removing
+note: |
+  ## 🎯 What is it?
+
+  **SUBSTITUTE** replaces a specific matching piece of text wherever it appears within a value — or a specific occurrence of it, using the optional 4th argument.
+
+  ## 💡 Why is it important?
+
+  It's the go-to tool for fixing a recurring character or word across a whole column — stripping a currency symbol from an exported price field, or standardizing a delimiter — something [REPLACE](/skills/replace-function)'s position-based approach can't do when the target text isn't always in the same spot.
+
+  ## Syntax
+
+  ```
+  =SUBSTITUTE(text, old_text, new_text, [instance_num])
+  ```
+
+  - Without `instance_num`, **every** occurrence of `old_text` is replaced.
+  - With `instance_num`, only that specific occurrence (1st, 2nd, etc.) is replaced.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | $1,200.00 |
+
+  **Formula:** `=SUBSTITUTE(SUBSTITUTE(A1,"$",""),",","")`
+  **Result:** `"1200.00"` — both the `$` and the `,` are stripped, in two nested SUBSTITUTE calls, leaving a value that can be converted to a real number with [VALUE](/skills/spreadsheet-data-types).
+
+  ## Multiple examples
+
+  **Beginner:** `=SUBSTITUTE(A2,"-","/")` — swap all dashes for slashes.
+  **Intermediate:** `=SUBSTITUTE(A2,"NA","N/A")` — note SUBSTITUTE is case-sensitive by default, so this won't touch "na" in lowercase.
+  **Real-world:** `=VALUE(SUBSTITUTE(SUBSTITUTE(price_text,"$",""),",",""))` applied across an entire price column exported as text with currency formatting, converting every row into a real, usable number in one pass.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting SUBSTITUTE is case-sensitive by default.** `SUBSTITUTE(A2,"NA","N/A")` won't touch "na" in lowercase — combine with UPPER/LOWER if case-insensitive replacement is intended.
+  - **Needing to remove more than one distinct thing and forgetting to nest multiple SUBSTITUTE calls** — each SUBSTITUTE only handles one target string per call.
+  - **Not realizing SUBSTITUTE replaces every occurrence by default**, which can be wrong if only a specific instance should change — use the `instance_num` argument for that case.
+
+  ## Real-world Data Analyst use cases
+
+  - **Finance analysis:** stripping currency symbols and thousand-separators from an exported price field before converting to a usable number.
+  - **Data cleaning:** standardizing a delimiter (dashes to slashes) across a text-based date or ID column.
+
+  ## Related concepts
+
+  ```
+  REPLACE → SUBSTITUTE ← you are here
+  ```
+  This closes the Text Functions group — all 15 topics (UPPER, LOWER, PROPER, TRIM, CLEAN, LEFT, RIGHT, MID, LEN, FIND, SEARCH, CONCAT, TEXTJOIN, REPLACE, SUBSTITUTE) are now covered.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that replaces all dashes with slashes in A1.
+
+  ### Medium
+  2. Given a price stored as text like "$1,200.00", write a formula that returns it as a usable number.
+
+  ### Interview/Advanced
+  3. When would REPLACE be a better choice than SUBSTITUTE, and vice versa?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=SUBSTITUTE(A1,"-","/")`
+  2. `=VALUE(SUBSTITUTE(SUBSTITUTE(A1,"$",""),",",""))`
+  3. REPLACE fits when the target is defined by a fixed *position* (e.g., always the first 3 characters); SUBSTITUTE fits when the target is defined by *matching specific text* (e.g., every dollar sign), regardless of where it appears.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you clean a price column exported as text with a dollar sign and comma?**
+  Short answer: Nest two SUBSTITUTE calls — one removing the `$`, another removing the `,` — then wrap the result in VALUE to convert it into a real, usable number.
+
+  ## Interview traps / tricky points
+
+  - SUBSTITUTE's case sensitivity and its "replace every occurrence by default" behavior are both common, easy-to-miss gotchas worth mentioning proactively.
+
+  ## Best practices
+
+  - Nest multiple SUBSTITUTE calls when more than one character/string needs cleaning in the same field.
+  - Convert a cleaned numeric-looking text value with VALUE() so it can actually be summed/averaged, not just displayed.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **SUBSTITUTE(text, old, new, [instance])** → replace by matching text, every occurrence by default
+  **vs. REPLACE:** SUBSTITUTE is content-based, REPLACE is position-based

@@ -1,0 +1,68 @@
+title: Advanced Lookup
+category: Spreadsheets
+what_is_it: Combining dynamic array functions (FILTER, SORT) with lookup techniques to handle lookup scenarios standard VLOOKUP/XLOOKUP can't — like returning multiple matches, or looking up on multiple conditions.
+why_it_matters: Real-world lookups sometimes need more than one match (like every order for a customer, not just the first) — standard lookup functions only ever return one result.
+prerequisites:
+  - let-function
+objectives:
+  - Return multiple matching rows for a lookup value using FILTER
+  - Combine multiple lookup conditions in one formula
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-advanced-lookup-1
+    title: Return every match
+    description: Given an orders table, use FILTER to return every order (not just the first) for a specific customer ID.
+verify:
+  - Can return multiple matches for one lookup value using FILTER
+  - Can combine multiple lookup conditions in one formula
+note: |
+  ## 🎯 What is it?
+
+  **Advanced lookup** covers lookup scenarios that standard VLOOKUP, XLOOKUP, or INDEX+MATCH can't handle directly — most commonly, returning **every** matching row for a lookup value (not just the first), or matching on **multiple conditions at once** — typically solved using FILTER instead of a traditional lookup function.
+
+  ## 💡 Why is it important?
+
+  - Standard lookup functions are built to return exactly one match — real questions ("show me every order this customer placed," not just their first one) need something more.
+  - FILTER naturally handles both "every match" and "multiple conditions" scenarios that traditional lookup functions structurally can't.
+
+  ## Core concept
+
+  | Scenario | Traditional lookup | Advanced (FILTER-based) |
+  |---|---|---|
+  | First match only | XLOOKUP/VLOOKUP works fine | — |
+  | Every matching row | Not possible directly | `FILTER(range, condition)` |
+  | Multiple conditions | Requires helper columns or complex nesting | `FILTER(range, (cond1)*(cond2))` |
+
+  ## 📊 Example
+
+  To return **every** order placed by customer ID 452 (not just the first), `=FILTER(A2:D500, B2:B500=452)` returns all matching rows at once — something no single VLOOKUP or XLOOKUP call can do, since they're both built to stop at the first match.
+
+  ## ⚠️ Common mistakes
+
+  - **Reaching for VLOOKUP/XLOOKUP out of habit** when the real question needs every match, not just one — recognizing this distinction is the actual skill here.
+  - **Forgetting an `if_empty` fallback** in the FILTER, producing a `#CALC!` error for a lookup value with zero matches.
+
+  ## Related concepts
+
+  ```
+  LET
+    ↓
+  Advanced Lookup ← you are here
+    ↓
+  Named Ranges
+  ```
+  Builds directly on FILTER and the earlier Lookup & Reference chapter.
+
+  ## 🎤 Interview preparation
+
+  **Q: A stakeholder wants to see every order a specific customer has placed, not just their most recent one. Would VLOOKUP work here?**
+  Short answer: No — VLOOKUP always returns only the first match. FILTER (`=FILTER(orders_range, customer_id_column=452)`) returns every matching row at once, which is what this question actually needs.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Advanced lookup** → use FILTER for "every match" or multi-condition lookups standard functions can't handle
+  Traditional lookup functions (VLOOKUP, XLOOKUP) only ever return the first match.

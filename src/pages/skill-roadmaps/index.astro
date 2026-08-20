@@ -1,0 +1,108 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { SKILL_ROADMAPS, orderByPrerequisites } from '../../lib/skill-roadmaps';
+import { SQL_CURRICULUM } from '../../lib/sql-curriculum';
+import { POWERBI_CURRICULUM } from '../../lib/powerbi-curriculum';
+import { GIT_GITHUB_CURRICULUM } from '../../lib/git-github-curriculum';
+import { TABLEAU_CURRICULUM } from '../../lib/tableau-curriculum';
+import { PYTHON_CURRICULUM } from '../../lib/python-curriculum';
+import { STATISTICS_CURRICULUM } from '../../lib/statistics-curriculum';
+import { SPREADSHEET_CURRICULUM } from '../../lib/spreadsheet-curriculum';
+import { MACHINE_LEARNING_CURRICULUM } from '../../lib/machine-learning-curriculum';
+
+const skills = await getCollection('skills');
+const accents = ['green', 'amber', 'blue', 'violet'];
+
+// SQL, Power BI, Git & GitHub, Tableau, Python, Statistics, Spreadsheets,
+// and Machine Learning each have their own full curriculum tree (sections
+// of topics) rather than a flat, prerequisite-ordered skill list, so
+// they're built as cards by hand rather than through the generic
+// SKILL_ROADMAPS/skills-graph path below.
+const sqlCard = {
+  id: 'sql',
+  title: 'SQL',
+  primary: { value: SQL_CURRICULUM.length, label: 'sections' },
+  secondary: { value: SQL_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0), label: 'topics' },
+};
+
+const powerBiCard = {
+  id: 'power-bi',
+  title: 'Power BI',
+  primary: { value: POWERBI_CURRICULUM.length, label: 'sections' },
+  secondary: { value: POWERBI_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0), label: 'topics' },
+};
+
+const gitGithubCard = {
+  id: 'git-and-github',
+  title: 'Git & GitHub',
+  primary: { value: GIT_GITHUB_CURRICULUM.length, label: 'sections' },
+  secondary: { value: GIT_GITHUB_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0), label: 'topics' },
+};
+
+const tableauCard = {
+  id: 'tableau',
+  title: 'Tableau',
+  primary: { value: TABLEAU_CURRICULUM.length, label: 'sections' },
+  secondary: { value: TABLEAU_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0), label: 'topics' },
+};
+
+const pythonCard = {
+  id: 'python',
+  title: 'Python',
+  primary: { value: PYTHON_CURRICULUM.length, label: 'sections' },
+  secondary: { value: PYTHON_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0), label: 'topics' },
+};
+
+const statisticsCard = {
+  id: 'statistics',
+  title: 'Statistics',
+  primary: { value: STATISTICS_CURRICULUM.length, label: 'sections' },
+  secondary: { value: STATISTICS_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0), label: 'topics' },
+};
+
+const spreadsheetCard = {
+  id: 'spreadsheet',
+  title: 'Spreadsheets',
+  primary: { value: SPREADSHEET_CURRICULUM.length, label: 'sections' },
+  secondary: { value: SPREADSHEET_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0), label: 'topics' },
+};
+
+const machineLearningCard = {
+  id: 'machine-learning',
+  title: 'Machine Learning',
+  primary: { value: MACHINE_LEARNING_CURRICULUM.length, label: 'sections' },
+  secondary: { value: MACHINE_LEARNING_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0), label: 'topics' },
+};
+
+const roadmapCards = SKILL_ROADMAPS.map((def) => {
+  const items = orderByPrerequisites(skills.filter((skill) => def.match(skill.id)));
+  const subtopics = items.reduce((sum, skill) => sum + (skill.data.subtopics.length || skill.data.objectives.length), 0);
+  return { id: def.id, title: def.title, primary: { value: items.length, label: 'topics' }, secondary: { value: subtopics, label: 'subtopics' } };
+}).filter((roadmap) => roadmap.primary.value > 0);
+
+const roadmaps = [sqlCard, powerBiCard, gitGithubCard, tableauCard, pythonCard, statisticsCard, spreadsheetCard, machineLearningCard, ...roadmapCards].map((roadmap, index) => ({ ...roadmap, accent: accents[index % accents.length] }));
+---
+
+<Base title="Skill-based Roadmaps" description="Focused, single-technology paths ordered by what to learn first." wide>
+  <header class="skillmap-header"><h1 class="display-title">Skill-based Roadmaps</h1><p>Pick one technology and follow it start to finish, independent of any career track.</p></header>
+
+  <div class="skillmap-grid">
+    {roadmaps.map((roadmap, index) => (
+      <a href={`/skill-roadmaps/${roadmap.id}`} class={`skillmap-card ${roadmap.accent}`}>
+        <div class="card-top"><span>{String(index + 1).padStart(2, '0')}</span></div>
+        <p class="category">Skill roadmap</p><h2>{roadmap.title}</h2>
+        <div class="card-stats"><span><b>{roadmap.primary.value}</b> {roadmap.primary.label}</span><span><b>{roadmap.secondary.value}</b> {roadmap.secondary.label}</span></div>
+      </a>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .skillmap-header{padding:20px 0 35px}.skillmap-header .display-title{color:var(--green);font-size:clamp(44px,6vw,68px)}.skillmap-header>p{max-width:600px;margin:14px 0 0;color:var(--muted);font-size:16px}
+  .skillmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .skillmap-card{position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:150px;padding:16px;border:1px solid var(--line);border-radius:14px;background:white;transition:transform .18s,box-shadow .18s}.skillmap-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(22,43,37,.1)}.skillmap-card::after{content:'';position:absolute;right:-45px;bottom:-55px;width:130px;height:130px;border-radius:50%;background:#6bc58c;opacity:.13}.skillmap-card.amber::after{background:#e6a426}.skillmap-card.blue::after{background:#547bd7}.skillmap-card.violet::after{background:#8667c8}
+  .card-top{display:flex;justify-content:space-between;color:#8c968f;font-size:9px;font-weight:800}.category{margin:14px 0 2px;color:var(--green);font-size:8px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.amber .category{color:#9a680e}.blue .category{color:#4966a5}.violet .category{color:#7156a9}.skillmap-card h2{margin:0;font-size:18px;letter-spacing:-.03em}
+  .card-stats{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:14px}.card-stats span{color:#869088;font-size:7px;text-transform:uppercase}.card-stats b{display:block;color:var(--ink);font-size:11px;text-transform:none}
+  @media(max-width:850px){.skillmap-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.skillmap-grid{grid-template-columns:1fr}}
+</style>

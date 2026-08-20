@@ -1,0 +1,95 @@
+title: CLEAN Function
+category: Spreadsheets
+what_is_it: Removing non-printable characters from text — invisible formatting artifacts often left behind after copying data from another system.
+why_it_matters: Some cleaning problems look identical to a whitespace issue but aren't fixed by TRIM — CLEAN handles a different, often invisible category of junk characters.
+prerequisites:
+  - proper-function
+objectives:
+  - Remove non-printable characters from a text value with CLEAN
+  - Explain how CLEAN differs from TRIM
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-clean-1
+    title: Fix text pasted from a PDF
+    description: Given a column of text pasted from a PDF report with invisible line-break characters, use CLEAN to remove them.
+verify:
+  - Non-printable characters are removed without altering visible text
+  - Can explain when to use CLEAN vs. TRIM
+note: |
+  ## 🎯 What is it?
+
+  **CLEAN** removes non-printable characters from text — invisible formatting artifacts (like line breaks or control characters) that are often left behind after copying data from a PDF, a legacy system, or certain exports.
+
+  ## 💡 Why is it important?
+
+  Some cleaning problems look identical to a whitespace issue but aren't actually fixed by [TRIM](/skills/trim-function) — TRIM removes regular spaces, while CLEAN removes a different category of invisible, non-printable characters. A lookup or comparison can still silently fail even after TRIM if the real culprit is a non-printable character.
+
+  ## Syntax
+
+  ```
+  =CLEAN(text)
+  ```
+
+  Often combined with TRIM for a thorough cleanup: `=TRIM(CLEAN(text))`.
+
+  ## 📊 Example
+
+  A cell pasted from a PDF report contains "Total: 1200" followed by an invisible line-break character.
+
+  **Formula:** `=CLEAN(A1)`
+
+  **Explanation:** The visible text looks unchanged, but the invisible non-printable character is removed — this can fix a lookup or length check (LEN) that was mysteriously failing due to that hidden character.
+
+  ## Multiple examples
+
+  **Beginner:** `=CLEAN(A2)` — remove invisible characters from a single cell.
+  **Real-world:** `=TRIM(CLEAN(A2))` applied to a whole column of data pasted from an external report, fixing both regular extra spaces and invisible formatting artifacts in one pass, before using that column as a lookup key.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming TRIM alone fixes every "invisible character" problem.** TRIM only handles regular spaces; CLEAN is needed for non-printable control characters, which TRIM doesn't touch.
+  - **Not recognizing CLEAN is needed** when a value "looks" identical to another but a formula (like an exact-match lookup) still fails — this is a common, hard-to-spot symptom of a non-printable character.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** fixing text pasted from a PDF, a website, or a legacy export that carries invisible formatting artifacts.
+
+  ## Related concepts
+
+  ```
+  PROPER → CLEAN ← you are here → LEFT → RIGHT → MID
+  ```
+  Directly complements [TRIM](/skills/trim-function) — together they cover the two main categories of "invisible junk" in text data.
+
+  ## Practice questions
+
+  ### Easy
+  1. What does CLEAN remove that TRIM does not?
+
+  ### Interview/Advanced
+  2. Two cells look visually identical, but an exact-match formula treats them as different. TRIM was already applied. What's your next step?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Non-printable, non-space control characters (like line breaks or other formatting artifacts) — TRIM only removes regular spaces.
+  2. Try wrapping the value with CLEAN as well — a non-printable character invisible to the eye is a common cause of an exact-match failure that TRIM alone doesn't fix.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would CLEAN succeed where TRIM fails?**
+  Short answer: When the invisible problem in the text is a non-printable control character (like a hidden line break), not a regular space — TRIM only removes spaces, while CLEAN targets that different category of invisible character.
+
+  ## Best practices
+
+  - When a lookup or exact-match comparison mysteriously fails on visually identical text, try both TRIM and CLEAN together.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **CLEAN(text)** → removes non-printable characters (different from TRIM's regular-space removal)
+  **Combine:** `=TRIM(CLEAN(text))` for thorough text cleanup

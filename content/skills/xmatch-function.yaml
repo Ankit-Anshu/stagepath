@@ -1,0 +1,100 @@
+title: XMATCH Function
+category: Spreadsheets
+what_is_it: The modern version of MATCH — finding the position of a value within a range, with more flexible search options (including searching from the last item first).
+why_it_matters: It closes out the modern lookup family alongside XLOOKUP, and is occasionally the more direct choice when you specifically need a position, not a full lookup.
+prerequisites:
+  - xlookup-function
+objectives:
+  - Use XMATCH to find the position of a value in a range
+  - Explain how XMATCH differs from MATCH
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-xmatch-1
+    title: Find a position with XMATCH
+    description: Given a list of product IDs, use XMATCH to find the position of a specific ID, and compare the formula to an equivalent MATCH formula.
+verify:
+  - XMATCH correctly returns the position of the target value
+  - Can explain at least one XMATCH feature MATCH lacks
+note: |
+  ## 🎯 What is it?
+
+  **XMATCH** is the modern version of [MATCH](/skills/match-function) — it finds the **position** of a value within a range, with more flexible search options than the original MATCH function, including exact-match-by-default behavior and the ability to search from the last item backward.
+
+  ## 💡 Why is it important?
+
+  It closes out the modern lookup function family alongside [XLOOKUP](/skills/xlookup-function). While XLOOKUP alone covers most day-to-day lookup needs, XMATCH is occasionally the more direct choice when you specifically need just a *position*, not a full value retrieval — e.g., as an input to another formula.
+
+  ## Syntax
+
+  ```
+  =XMATCH(lookup_value, lookup_array, [match_mode], [search_mode])
+  ```
+
+  - Defaults to an **exact match** automatically (unlike MATCH, which defaults to an approximate match if the 3rd argument is omitted) — a small but meaningful safety improvement.
+  - **search_mode** can search from the last item first, useful for finding the *most recent* match in a chronologically-ordered list.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Widget |
+  | 2 | Gadget |
+  | 3 | Gizmo |
+
+  **Formula:** `=XMATCH("Gizmo",A1:A3)`
+  **Result:** `3` — same result as `=MATCH("Gizmo",A1:A3,0)`, but XMATCH doesn't require explicitly specifying exact match, since that's its default behavior.
+
+  ## Multiple examples
+
+  **Beginner:** `=XMATCH(102,A1:A10)` — find the position of a value, defaulting to exact match automatically.
+  **Real-world:** `=XMATCH(target_date, date_range, 0, -1)` — searching from the last row backward to find the most recent occurrence of a repeated value in a chronological log, something the original MATCH cannot do directly.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming XMATCH and MATCH are identical**, missing XMATCH's safer exact-match default and its reverse-search capability.
+  - **Using XMATCH when a full lookup (XLOOKUP) was actually needed.** XMATCH only returns a position, not a value — same distinction as MATCH vs. INDEX-MATCH.
+
+  ## Real-world Data Analyst use cases
+
+  - **Finding the most recent occurrence** of a value in a chronologically-ordered dataset, using XMATCH's reverse search mode.
+  - **As a component inside a larger formula** wherever a position (not a full value) is specifically needed.
+
+  ## Related concepts
+
+  ```
+  XLOOKUP → XMATCH ← you are here
+  ```
+  This closes the Lookup & Reference group.
+
+  ## Practice questions
+
+  ### Easy
+  1. What does XMATCH default to, that MATCH does not, when the match-type argument is left off?
+
+  ### Interview/Advanced
+  2. How would you find the position of the *most recent* occurrence of a repeated value in a date-ordered list?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. XMATCH defaults to an exact match automatically; MATCH defaults to an approximate match (requiring sorted data) if its match-type argument is omitted — a common source of MATCH errors that XMATCH avoids by design.
+  2. `=XMATCH(value, range, 0, -1)` — the `-1` search_mode searches from the last row backward, returning the position of the most recent (last) match instead of the first one.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What's one safety improvement XMATCH has over the original MATCH function?**
+  Short answer: XMATCH defaults to an exact match automatically, while MATCH defaults to an approximate match (which requires sorted data) if the match-type argument is left off — a common source of silent errors in the original MATCH.
+
+  ## Best practices
+
+  - Prefer XMATCH over MATCH for new work where it's available, for its safer default behavior.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **XMATCH(value, range, ...)** → modern MATCH; defaults to exact match automatically
+  **Bonus feature:** can search from the last item backward to find the most recent match

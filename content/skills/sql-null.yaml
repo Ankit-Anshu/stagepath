@@ -1,0 +1,70 @@
+title: 'NULL'
+category: SQL
+what_is_it: A special marker in SQL representing "no value" or "unknown" — distinct from zero, an empty string, or any actual value.
+why_it_matters: NULL behaves differently from every other value in comparisons and calculations — misunderstanding it is one of the most common sources of subtly wrong SQL queries.
+prerequisites:
+  - database-constraints
+objectives:
+  - Define NULL and explain how it differs from zero or an empty string
+  - Explain why standard comparisons don't work with NULL
+estimated_minutes: 20
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-sql-null-1
+    title: Spot the NULL trap
+    description: Explain why `WHERE column = NULL` doesn't work the way a beginner might expect, and what to use instead.
+verify:
+  - Can define NULL
+  - Can explain why NULL requires special comparison syntax
+note: |
+  ## 🎯 What is it?
+
+  **NULL** is a special marker in SQL meaning "no value" or "unknown" — it is *not* the same as zero, an empty string `''`, or any actual value. A customer's `middle_name` column might be NULL because they simply don't have one, not because it's blank text.
+
+  ## 💡 Why is it important?
+
+  - NULL behaves differently from every other value: standard comparisons (`=`, `!=`) don't work with it, which trips up nearly every SQL beginner at least once.
+  - Handling NULL correctly is essential for accurate counts, joins, and filters — mishandled NULLs are a common source of subtly wrong query results (see `IS NULL` / `IS NOT NULL` later in this stage's Filtering chapter).
+
+  ## Core concept
+
+  ```sql
+  WHERE middle_name = NULL     -- ❌ never matches, even for NULL rows
+  WHERE middle_name IS NULL    -- ✅ correctly matches NULL rows
+  ```
+
+  NULL represents "unknown," so `NULL = NULL` doesn't evaluate to true — it evaluates to *unknown*, which SQL treats as not matching. This is why `IS NULL` / `IS NOT NULL` exist as their own special syntax.
+
+  ## 📊 Example
+
+  A `phone_number` column is NULL for customers who never provided one — different from an empty string `''` (which would mean they were asked and explicitly submitted nothing) or `0` (which isn't a valid phone number at all). Treating all three the same in an analysis can quietly misrepresent how many customers are actually missing a phone number.
+
+  ## ⚠️ Common mistakes
+
+  - **Writing `WHERE column = NULL`** expecting it to match NULL rows — it never does; `IS NULL` is required.
+  - **Confusing NULL, empty string, and zero** as if they always mean the same thing — they represent three different situations and should usually be handled differently in cleaning and analysis.
+  - **Forgetting NULLs are excluded by default from most aggregations** — `AVG()` and `SUM()` skip NULLs automatically, which can be correct or misleading depending on what the NULL actually represents.
+
+  ## Related concepts
+
+  ```
+  Constraints
+    ↓
+  NULL ← you are here
+    ↓
+  Database Schemas
+  ```
+  Sets up IS NULL / IS NOT NULL and NULL Functions (COALESCE, NULLIF) later in this stage.
+
+  ## 🎤 Interview preparation
+
+  **Q: Why doesn't `WHERE middle_name = NULL` return rows where middle_name is NULL?**
+  Short answer: NULL represents "unknown," so any comparison against it (including `= NULL`) evaluates to unknown rather than true — SQL requires the special `IS NULL` syntax specifically to test for NULL correctly.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **NULL** → "no value" / "unknown" — not the same as zero or an empty string
+  Always test with `IS NULL` / `IS NOT NULL`, never `= NULL`.

@@ -1,0 +1,74 @@
+title: Categorical Data
+category: Foundations
+what_is_it: Data that places each observation into one of a limited set of named categories — a synonym analysts often use interchangeably with "qualitative data."
+why_it_matters: Categorical columns are how you slice and segment every metric — "revenue by region," "orders by channel" — so recognizing and correctly handling them is core to almost every analysis.
+prerequisites:
+  - quantitative-data
+objectives:
+  - Define categorical data and give two examples
+  - Explain the relationship between categorical and qualitative data
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-categorical-data-1
+    title: Find the segmenting columns
+    description: In any dataset, identify which columns are categorical — these are the ones you'd typically use in a GROUP BY or a pivot table's row labels.
+verify:
+  - Can define categorical data
+  - Can name a categorical column and a metric you'd segment by it
+note: |
+  ## 🎯 What is it?
+
+  **Categorical data** places each observation into one of a limited, named set of groups — product category, region, subscription plan, device type. In practice, analysts use "categorical" and "qualitative" almost interchangeably; categorical data is the term you'll see most often in statistics and BI tooling.
+
+  ## 💡 Why is it important?
+
+  - Categorical columns are what you segment and filter by — "revenue by region" and "signups by channel" both depend on a categorical column doing the grouping.
+  - `GROUP BY` in SQL and pivot table row/column labels are built specifically around categorical fields.
+  - Recognizing which columns are categorical (vs. numeric) is the first step in any exploratory data analysis.
+
+  ## Core concept
+
+  | Categorical example | Categories |
+  |---|---|
+  | `region` | North, South, East, West |
+  | `subscription_plan` | Free, Pro, Enterprise |
+  | `device_type` | Mobile, Desktop, Tablet |
+
+  Categorical data can be **nominal** (no natural order — region) or **ordinal** (a natural order — subscription tier from Free → Pro → Enterprise).
+
+  ## 📊 Example
+
+  ```sql
+  SELECT region, SUM(revenue)
+  FROM orders
+  GROUP BY region;
+  ```
+
+  `region` is categorical — it defines the groups the query aggregates `revenue` into. This is the single most common analytical pattern: one categorical column to group by, one quantitative column to summarize.
+
+  ## ⚠️ Common mistakes
+
+  - **Grouping by a categorical column with too many unique values** (like a raw customer ID) without realizing it — the result is hundreds of rows, not a useful summary.
+  - **Forgetting to check for inconsistent category labels** — "US", "USA", and "United States" being three different values in the same column silently breaks a `GROUP BY`.
+
+  ## Related concepts
+
+  ```
+  Qualitative Data ≈ Categorical Data ← you are here
+         ↓
+    Nominal (no order)   vs.   Ordinal (has order)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What kind of column would you GROUP BY to break revenue down by product line?**
+  Short answer: A categorical column — in this case, whichever column holds the product line label (e.g., `product_category`).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Categorical data** → groups observations into named categories; the field you segment/filter/GROUP BY on
+  Nearly synonymous with qualitative data.

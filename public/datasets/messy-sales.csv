@@ -1,0 +1,17 @@
+order_id,order_date,region,product,units,unit_price,revenue
+S-1001,2026-01-03,North,Laptop Stand,2,$48.00,$96.00
+S-1002,03/01/2026,south,USB-C Hub,3,35,105
+S-1003,2026/01/04,West,Mechanical keyboard,1,$89.00,$89.00
+S-1003,2026/01/04,West,Mechanical keyboard,1,$89.00,$89.00
+S-1004,Jan 5 2026,,Webcam,2,$64.50,$129.00
+S-1005,2026-01-08,EAST,Monitor Arm,1,"$110.00 ",$110.00
+S-1006,08-01-2026,North,usb c hub,4,$35.00,$140.00
+S-1007,2026-02-02,South,Laptop stand,2,$48.00,$96.00
+S-1008,02/04/2026,west,Web Cam,1,$64.50,$64.50
+S-1009,2026-02-06,East,Monitor Arm,,110,
+S-1010,2026/02/07,North,Mechanical Keyboard,2,$89.00,$178.00
+S-1011,Feb 10 2026,South,USB-C Hub,5,$35.00,$175.00
+S-1012,2026-03-01,West,Laptop Stand,3,$48.00,$144.00
+S-1013,01/03/2026,East,Webcam,2,$64.50,$129.00
+S-1014,2026-03-06,NORTH,Monitor arm,1,$110.00,$110.00
+

@@ -1,0 +1,9 @@
+step,sessions,completed,median_seconds
+landing,5000,4720,18
+service_selection,4720,2926,94
+eligibility,2926,2480,71
+location,2480,2110,46
+time_slot,2110,1844,83
+patient_details,1844,1592,132
+confirmation,1592,1510,29
+

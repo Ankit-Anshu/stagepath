@@ -1,0 +1,6 @@
+timestamp,device_id,query,record_type,response
+2026-07-21T08:05:04Z,NB-LT-044,portal.northbridge.test,A,203.0.113.10
+2026-07-21T08:22:20Z,NB-LT-044,cdn-update-example.test,A,198.51.100.91
+2026-07-21T08:27:20Z,NB-LT-044,cdn-update-example.test,A,198.51.100.91
+2026-07-21T08:32:20Z,NB-LT-044,cdn-update-example.test,A,198.51.100.91
+

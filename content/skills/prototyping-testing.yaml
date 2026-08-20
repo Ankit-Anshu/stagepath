@@ -1,0 +1,24 @@
+title: Prototyping & Usability Testing
+category: UX Design
+what_is_it: Building the smallest useful representation of an idea and testing it with representative users.
+why_it_matters: Early evidence is cheaper than polished rework and reveals problems static review misses.
+estimated_minutes: 2700
+prerequisites: [interaction-design, ui-design-systems]
+objectives: [Choose prototype fidelity, Moderate usability tests, Turn observations into design changes]
+subtopics:
+  - title: Prototype strategy
+    description: Questions, risk, fidelity, scope, tools, realism, and prototype bias.
+    outcomes: [Choose appropriate fidelity, Define what the prototype cannot prove]
+  - title: Interactive prototyping
+    description: Flows, components, variables, conditional behavior, content realism, and accessibility.
+    outcomes: [Build a testable flow, Represent important states]
+  - title: Usability study design
+    description: Participants, realistic tasks, success criteria, scripts, pilots, and consent.
+    outcomes: [Write neutral tasks, Define observable measures]
+  - title: Moderation and observation
+    description: Think-aloud, neutral prompts, silence, notes, severity, and separating behavior from opinion.
+    outcomes: [Moderate without leading, Capture useful observations]
+  - title: Analysis and iteration
+    description: Patterns, severity, root causes, recommendations, prioritization, and retesting.
+    outcomes: [Prioritize findings, Connect revisions to evidence]
+

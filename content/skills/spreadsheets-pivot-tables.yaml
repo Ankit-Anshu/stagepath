@@ -1,0 +1,180 @@
+title: Pivot Tables
+category: Spreadsheets
+what_is_it: Summarizing rows into totals, counts, and averages by category, with filters and slicers, without writing a single formula.
+why_it_matters: A pivot table is the fastest way to answer "how does this break down by X?" — the single most common question in spreadsheet-based analysis.
+prerequisites:
+  - xlookup-function
+objectives:
+  - Build a pivot table from raw rows
+  - Add a calculated field
+  - Filter and slice a pivot table
+  - Refresh a pivot table when source data changes
+subtopics:
+  - title: Building a pivot table
+    description: Assigning fields to rows, columns, values, and filters.
+    outcomes:
+      - Build a pivot table summarizing by two dimensions
+  - title: Calculated fields
+    description: Adding a derived measure inside the pivot table itself.
+    outcomes:
+      - Add a calculated field to a pivot table
+  - title: Filtering & slicers
+    description: Interactive filtering that narrows the summary without changing the source data.
+    outcomes:
+      - Add a slicer that filters a pivot table
+  - title: Keeping it current
+    description: Refreshing a pivot table after the underlying source data changes.
+    outcomes:
+      - Refresh a pivot table and confirm it reflects new data
+estimated_minutes: 180
+resources:
+  - r-ms-pivot-tables
+project: project-clean-messy-sales-data
+practice:
+  - id: ex-pivot-tables-1
+    title: Summarize regional sales
+    description: Build a pivot table showing total revenue and order count by region and month from a cleaned transactions sheet.
+verify:
+  - Pivot table correctly summarizes by category and date
+  - Calculated field returns the correct value
+  - Pivot table updates correctly after a refresh
+note: |
+  ## 🎯 What is it?
+
+  A **pivot table** summarizes rows of raw data into totals, counts, or averages, grouped by category — built by dragging fields into Rows, Columns, Values, and Filters, without writing a single formula.
+
+  Think of it as an interactive "group by" — you tell it which category to group by and which number to summarize, and it instantly builds the breakdown.
+
+  ## 💡 Why is it important?
+
+  A pivot table is the fastest way to answer "how does this break down by X?" — the single most common question in spreadsheet-based analysis. It's often faster than writing formulas for the same summary, and it's interactive: change the grouping in seconds without rebuilding anything.
+
+  ## Core concept
+
+  ### Building a pivot table
+  Four zones control the summary:
+
+  | Zone | Controls |
+  |---|---|
+  | **Rows** | The categories to group by, one row per group |
+  | **Columns** | An optional second grouping dimension, spread across columns |
+  | **Values** | The number being summarized (sum, count, average, etc.) |
+  | **Filters** | Restrict the whole pivot to a subset without changing the source data |
+
+  ### Calculated fields
+  A derived measure computed *inside* the pivot table itself — e.g., profit margin = (revenue − cost) / revenue — without adding a helper column to the raw data.
+
+  ### Filtering & slicers
+  Slicers are clickable, visual filter buttons that narrow a pivot table (and can be connected to multiple pivot tables at once) without touching the underlying source data.
+
+  ### Keeping it current
+  A pivot table does **not** auto-update when source data changes — it must be manually refreshed (or set to refresh automatically on open).
+
+  ## 📊 Example
+
+  Raw `transactions` data:
+
+  | region | month | revenue |
+  |---|---|---|
+  | West | Jan | 4,200 |
+  | East | Jan | 3,100 |
+  | West | Feb | 5,000 |
+
+  **Pivot setup:** Rows = region, Columns = month, Values = Sum of revenue.
+
+  **Result:**
+
+  | Region | Jan | Feb |
+  |---|---|---|
+  | West | 4,200 | 5,000 |
+  | East | 3,100 | — |
+
+  **Explanation:** The pivot table grouped and summed revenue by region and month automatically — no formulas written.
+
+  ## Multiple examples
+
+  **Beginner:** Rows = product category, Values = Sum of revenue — total revenue per category.
+  **Intermediate:** Rows = region, Columns = month, Values = Sum of revenue, Filter = only "Completed" orders.
+  **Real-world:** Add a calculated field `Profit Margin = (Sum of Revenue − Sum of Cost) / Sum of Revenue`, then add a slicer for region so a stakeholder can self-serve filter the same pivot without editing it.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting to refresh after the source data changes.** The pivot table silently shows stale numbers until manually refreshed.
+  - **Summarizing with the wrong aggregation** (e.g., "Count" instead of "Sum" for a revenue field) — always check the field's aggregation setting, not just its name.
+  - **Pivoting on uncleaned data** — inconsistent casing or duplicate categories (see [Data Cleaning & Quality](/skills/data-cleaning)) will split what should be one group into several.
+  - **Building a calculated field as an average of an average** instead of computing it correctly from the underlying sums — this is a very common silent error.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** revenue by region and month, refreshed weekly.
+  - **Marketing analysis:** campaign performance broken down by channel.
+  - **Finance analysis:** expenses summarized by department and category.
+
+  ## Related concepts
+
+  ```
+  Lookup & Reference Functions
+    ↓
+  Pivot Tables ← you are here
+    ↓
+  Charts & Dashboards in Spreadsheets
+    ↓
+  Power Query Introduction
+  ```
+  This is the direct spreadsheet analog of SQL's [GROUP BY / Aggregation](/skills/sql-aggregation).
+
+  ## Practice questions
+
+  ### Easy
+  1. What are the four zones of a pivot table, and what does each control?
+
+  ### Medium
+  2. Build a pivot table (describe the setup) showing total order count and total revenue by region and month.
+
+  ### Interview/Advanced
+  3. A pivot table shows 3 separate rows for "Retail," "retail," and "RETAIL." What's the root cause, and how would you fix it?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Rows (grouping), Columns (second grouping dimension), Values (the summarized number), Filters (restrict the view without altering source data).
+  2. Rows = region, Columns = month, Values = Count of order_id and Sum of revenue.
+  3. Root cause: the source data has inconsistent text casing, and pivot tables group by exact text value. Fix: standardize casing (e.g., with PROPER) in the source data before building or refreshing the pivot table.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What is a pivot table used for?**
+  Short answer: Summarizing raw rows into grouped totals, counts, or averages by category, interactively and without writing formulas.
+
+  ### Conceptual questions
+  **Q: Why doesn't a pivot table update automatically when the source data changes?**
+  Short answer: A pivot table caches a snapshot of the data when built; it requires an explicit refresh to re-read the current source data.
+
+  ### Scenario-based questions
+  **Q: A stakeholder says a pivot table's numbers "don't match" a raw export anymore. What do you check first?**
+  Short answer: Whether the pivot table has been refreshed since the source data last changed — this is the most common cause of a mismatch.
+
+  ### Practical questions
+  **Q: How would you add a profit margin measure to a pivot table without adding a helper column to the raw data?**
+  Short answer: Add a calculated field defined as (Sum of Revenue − Sum of Cost) / Sum of Revenue directly inside the pivot table.
+
+  ## Interview traps / tricky points
+
+  - A calculated field computes on the *aggregated* totals, not row-by-row — a calculated field can behave differently than a helper column computed per row and then summarized, especially for ratios.
+  - Grouping fails silently on inconsistent text — no error is raised, the data just quietly splits into more categories than it should.
+
+  ## Best practices
+
+  - Clean and standardize the source data before pivoting, not after.
+  - Refresh pivot tables as a standard last step before sharing any report.
+  - Prefer calculated fields for ratios over manually pre-computing a per-row ratio and averaging it (see [SUM](/skills/sum-function) common mistakes on weighted averages).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Rows/Columns** → grouping dimensions · **Values** → the summarized measure · **Filters** → narrow without altering source data
+  **Calculated field** → a derived measure computed inside the pivot
+  **Remember:** pivot tables need a manual refresh — they don't auto-update

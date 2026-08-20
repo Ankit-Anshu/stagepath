@@ -1,0 +1,21 @@
+title: Backend Security
+category: Backend Development
+what_is_it: Protecting services, credentials, data, and users against common attacks and design failures.
+why_it_matters: Security mistakes in server code can expose every user and record at once.
+estimated_minutes: 2600
+prerequisites: [api-design, databases]
+objectives: [Apply secure defaults, Protect secrets and user data, Threat-model a service]
+subtopics:
+  - title: Threat modeling
+    description: Assets, trust boundaries, abuse cases, attacker goals, and risk prioritization.
+    outcomes: [Draw a data-flow threat model, Prioritize mitigations]
+  - title: Identity security
+    description: Password hashing, sessions, tokens, MFA, account recovery, and authorization failures.
+    outcomes: [Design a secure session, Prevent horizontal privilege escalation]
+  - title: Input and injection defenses
+    description: SQL injection, command injection, SSRF, unsafe parsing, and output handling.
+    outcomes: [Use parameterized queries, Constrain outbound requests]
+  - title: Secrets and data protection
+    description: Secret storage, key rotation, encryption, minimization, logging hygiene, and retention.
+    outcomes: [Remove secrets from code, Define sensitive-data handling]
+

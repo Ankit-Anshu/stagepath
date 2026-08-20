@@ -1,0 +1,97 @@
+title: Pivot Charts
+category: Spreadsheets
+what_is_it: A chart built directly from a pivot table that stays interactively linked to it — filtering or restructuring the pivot table automatically updates the chart.
+why_it_matters: It turns a pivot table's numbers into an interactive visual that a stakeholder can explore themselves, without needing a new chart built for every different slice of the data.
+prerequisites:
+  - spreadsheet-tables
+objectives:
+  - Build a Pivot Chart from a pivot table
+  - Explain how a Pivot Chart stays linked to its pivot table
+estimated_minutes: 25
+resources:
+  - r-ms-pivot-tables
+  - r-datavizcatalogue
+practice:
+  - id: ex-pivot-charts-1
+    title: Build an interactive revenue chart
+    description: Build a Pivot Chart from a regional revenue pivot table, then change the pivot table's fields and confirm the chart updates automatically.
+verify:
+  - Pivot Chart correctly reflects the pivot table's current summary
+  - Chart updates automatically when the pivot table is refreshed or restructured
+note: |
+  ## 🎯 What is it?
+
+  A **Pivot Chart** is a chart built directly from a [pivot table](/skills/spreadsheets-pivot-tables) that stays interactively linked to it — filtering, restructuring, or refreshing the pivot table automatically updates the chart, with no manual chart-editing needed.
+
+  ## 💡 Why is it important?
+
+  It turns a pivot table's numbers into an interactive visual a stakeholder can explore themselves — instead of building a new chart every time someone wants to see the data sliced a different way, one Pivot Chart adapts automatically as the underlying pivot table's fields or filters change.
+
+  ## Core concept
+
+  A Pivot Chart is built directly on top of a pivot table's fields (Rows, Columns, Values, Filters) — changing any of those in the pivot table immediately reflects in the chart, since they share the same underlying summary.
+
+  | Action on the pivot table | Effect on the Pivot Chart |
+  |---|---|
+  | Change which field is in Rows | Chart's categories update automatically |
+  | Apply a filter | Chart's data updates to match |
+  | Refresh (after source data changes) | Chart reflects the newly refreshed numbers |
+
+  ## 📊 Example
+
+  A pivot table summarizing revenue by region. Building a Pivot Chart (a column chart) from it shows one bar per region.
+
+  **Interaction:** Adding "Month" to the pivot table's Columns field instantly reshapes the Pivot Chart into a clustered column chart — one cluster per region, one bar per month within each cluster — without touching the chart itself at all.
+
+  ## Multiple examples
+
+  **Beginner:** A simple Pivot Chart showing revenue by region, built directly from a pivot table.
+  **Intermediate:** Adding a slicer (see [Slicers](/skills/slicers)) connected to the same pivot table, letting a viewer interactively filter both the pivot table and its chart together.
+  **Real-world:** A self-service dashboard tab where a stakeholder can change the pivot table's grouping (region vs. product vs. month) using the field list, and the Pivot Chart instantly reshapes to match — no analyst intervention needed for a different view of the same data.
+
+  ## ⚠️ Common mistakes
+
+  - **Building a regular chart from a pivot table's output range instead of an actual Pivot Chart.** A regular chart built this way won't automatically update if the pivot table's structure changes — only a true Pivot Chart stays fully linked.
+  - **Forgetting the underlying pivot table (and its source data) still needs a refresh** after the source data changes — a Pivot Chart reflects its pivot table's current state, but that state itself doesn't update until refreshed.
+
+  ## Real-world Data Analyst use cases
+
+  - **Self-service dashboards:** letting a stakeholder explore different groupings of the same data interactively.
+  - **Recurring reports:** a Pivot Chart that stays current automatically as new data flows into the underlying source.
+
+  ## Related concepts
+
+  ```
+  Excel Tables → Pivot Tables (existing topic) → Pivot Charts ← you are here → Slicers → Grouping
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What happens to a Pivot Chart when its underlying pivot table's Rows field is changed?
+
+  ### Interview/Advanced
+  2. Why might a chart built from a pivot table's output range NOT update automatically, while a true Pivot Chart does?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. The chart automatically reshapes to reflect the new grouping — no manual chart editing is needed, since a Pivot Chart is directly linked to its pivot table's structure.
+  2. A regular chart built from a static output range only knows about the cells it was originally pointed at — if the pivot table restructures (different fields, different row count), that output range's shape changes and the regular chart doesn't automatically follow; a true Pivot Chart is built with an awareness of the pivot table's structure itself, not just a fixed range, so it adapts automatically.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why build a Pivot Chart instead of a regular chart on a pivot table's output?**
+  Short answer: A Pivot Chart stays structurally linked to the pivot table, automatically updating its shape and data whenever the pivot table's fields, filters, or source data change — a regular chart built from a static range doesn't adapt the same way.
+
+  ## Best practices
+
+  - Always build a true Pivot Chart (not a regular chart from a pivot's output range) when the chart needs to stay in sync with a pivot table that might be restructured.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Pivot Chart** → a chart built directly on a pivot table, stays linked automatically
+  **Advantage:** restructuring the pivot table automatically reshapes the chart too

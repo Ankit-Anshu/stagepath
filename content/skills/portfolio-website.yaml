@@ -1,0 +1,164 @@
+title: Personal Portfolio Website
+category: Portfolio
+what_is_it: Publishing a simple, free personal site that links to your best projects, so your portfolio has one clean landing page instead of a list of scattered links.
+why_it_matters: A recruiter spends seconds deciding whether to look further. One page that shows your best work clearly beats making them dig through your GitHub profile.
+prerequisites:
+  - git-version-control
+objectives:
+  - Publish a free static site
+  - Link to your best 3-4 projects from one page
+  - Write a short, clear personal summary
+  - Keep the site simple and fast to load
+subtopics:
+  - title: Publishing for free
+    description: Using GitHub Pages (or an equivalent) to host a personal site at no cost.
+    outcomes:
+      - Publish a working site accessible at a public URL
+  - title: Linking your best work
+    description: Curating 3-4 projects rather than listing everything you've ever built.
+    outcomes:
+      - Link to your best 3-4 projects with a one-line description each
+  - title: A clear personal summary
+    description: A short "who I am and what I do" that's specific, not generic.
+    outcomes:
+      - Write a personal summary a recruiter could read in 10 seconds
+estimated_minutes: 180
+resources:
+  - r-github-pages-docs
+  - r-readme-so
+practice:
+  - id: ex-portfolio-site-1
+    title: Publish a one-page portfolio
+    description: Publish a single-page site with a short summary and links to your 3-4 best projects, using GitHub Pages or an equivalent free host.
+verify:
+  - Site is publicly accessible at a working URL
+  - Only the strongest projects are featured
+  - Page loads quickly and reads clearly on a phone screen
+note: |
+  ## 🎯 What is it?
+
+  A **personal portfolio website** is a simple, free, single-page site that links to your best 3-4 projects — giving your portfolio one clean landing page instead of a scattered list of links a recruiter has to hunt for.
+
+  ## 💡 Why is it important?
+
+  A recruiter spends only seconds deciding whether to look further at a candidate. One page that shows your best work clearly beats making them dig through a GitHub profile full of every project you've ever started, including unfinished or low-quality ones.
+
+  ## Core concept
+
+  ### Publishing for free
+  Free static-site hosting (like GitHub Pages) lets you publish a working, public-URL site at zero cost — there's no reason a portfolio site should be blocked by cost or hosting complexity.
+
+  ### Linking your best work
+  Curate your **strongest 3-4 projects**, not every project you've ever built. A page listing 15 projects of mixed quality is worse than a page showing 3 excellent ones — quantity dilutes the signal of your best work.
+
+  ### A clear personal summary
+  A short "who I am and what I do" statement, specific enough that a recruiter understands your focus in 10 seconds — "aspiring data analyst passionate about data" is generic and forgettable; "Data analyst focused on turning messy e-commerce data into clear business decisions, with SQL and Python" is specific and memorable.
+
+  ## Syntax / Formula / Structure
+
+  A minimal, effective portfolio page structure:
+
+  ```
+  1. Name + one-line role statement (specific, not generic)
+  2. 2-3 sentence summary of your focus/strengths
+  3. 3-4 project cards, each with:
+     - Project title
+     - One-line description of the problem solved
+     - Link to the repo/case study
+  4. Contact info (email, LinkedIn, GitHub)
+  ```
+
+  ## 📊 Example
+
+  **Weak summary:** "I'm a data enthusiast who loves working with numbers and finding insights."
+
+  **Strong summary:** "Data analyst who turns messy sales and marketing data into clear, actionable dashboards — comfortable across SQL, Python, and Power BI. Recently analyzed a 50K-row e-commerce dataset to find a $40K/year opportunity in customer retention."
+
+  **Explanation:** The strong version is specific about focus, tools, and a concrete result — it gives a recruiter something memorable to latch onto, instead of a generic statement that could apply to anyone.
+
+  ## Multiple examples
+
+  **Beginner:** A single-page site with a summary and 3 project links, no styling beyond a clean template.
+  **Intermediate:** Adding a one-line "what problem this solved" description under each project link, instead of just a bare title.
+  **Real-world:** A portfolio site tested on a phone screen for load speed and readability before sharing the link on a resume or LinkedIn — since a meaningful share of recruiters will open it on mobile, not just desktop.
+
+  ## ⚠️ Common mistakes
+
+  - **Listing every project ever built**, diluting the impact of the genuinely strong ones.
+  - **A generic, forgettable personal summary** that could describe literally any candidate.
+  - **A slow-loading or cluttered site**, especially on mobile — a recruiter won't wait or scroll far.
+  - **Broken project links** — always verify every link actually works before sharing the site.
+
+  ## Real-world Data Analyst use cases
+
+  - **Job applications:** a single link on a resume/LinkedIn that gives a recruiter everything they need in one place.
+  - **Networking:** a quick, professional link to share in a conversation or cold outreach message.
+
+  ## Related concepts
+
+  ```
+  Git & Version Control
+    ↓
+  Personal Portfolio Website ← you are here
+    ↓
+  Portfolio Building
+    ↓
+  Case Study Presentations
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. How many projects should a portfolio site typically feature, and why not more?
+
+  ### Medium
+  2. Rewrite this generic summary to be more specific: "I love data and am eager to learn."
+
+  ### Interview/Advanced
+  3. Why might a recruiter prefer a single portfolio page over browsing a candidate's full GitHub profile directly?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. 3-4 — enough to show range without diluting attention across too many, including weaker, projects.
+  2. Example: "Data analyst who builds SQL and Python-driven dashboards to help teams find revenue opportunities in customer data — recently identified a $40K/year retention gap in an e-commerce dataset."
+  3. A curated page does the work of filtering for the recruiter — showing only the strongest, most relevant work — whereas a full GitHub profile requires them to sort through every repository themselves, including unfinished or low-quality ones, within the few seconds they're willing to spend.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why build a dedicated portfolio site instead of just linking to GitHub?**
+  Short answer: It curates your strongest work into one focused, easy-to-scan page, rather than requiring a recruiter to sift through a full GitHub profile with mixed-quality projects.
+
+  ### Conceptual questions
+  **Q: Why does a specific personal summary work better than a generic one?**
+  Short answer: A specific summary is memorable and communicates your actual focus and skills immediately, while a generic one blends in with every other candidate's near-identical statement.
+
+  ### Scenario-based questions
+  **Q: Your portfolio site lists 12 projects, several unfinished. A mentor suggests trimming it. Why would you agree?**
+  Short answer: A long list of mixed-quality projects dilutes attention away from your strongest work — showing only your best 3-4 projects makes a stronger, more focused impression in the limited time a recruiter spends looking.
+
+  ### Practical questions
+  **Q: What should you check before sharing your portfolio site's link on a resume?**
+  Short answer: That every project link works, the site loads quickly and reads clearly on a phone screen, and the summary and project descriptions are current and specific.
+
+  ## Interview traps / tricky points
+
+  - A portfolio site is often the very first impression a recruiter forms — treating it as a "someday" task rather than a priority is a common and costly mistake.
+  - Broken links or a slow-loading site can undermine an otherwise strong body of work before it's even seen.
+
+  ## Best practices
+
+  - Curate only your 3-4 strongest projects.
+  - Write a specific, memorable personal summary — not a generic statement.
+  - Test the site on a phone before sharing it, since many recruiters will view it on mobile.
+  - Verify every link works before sharing.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Curate** → 3-4 best projects, not every project ever built
+  **Summary** → specific and memorable, not generic
+  **Test** → mobile load speed and readability, and every link, before sharing

@@ -1,0 +1,89 @@
+title: PROPER Function
+category: Spreadsheets
+what_is_it: Converting text to Proper Case — capitalizing the first letter of each word.
+why_it_matters: The right casing choice for human-readable names and titles in a finished report, unlike UPPER or LOWER which read as shouting or informal.
+prerequisites:
+  - lower-function
+objectives:
+  - Convert a text value to Proper Case with PROPER
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-proper-1
+    title: Standardize a name column
+    description: Convert a column of inconsistently-cased customer names to Proper Case.
+verify:
+  - Every value in the column is correctly converted to Proper Case
+note: |
+  ## 🎯 What is it?
+
+  **PROPER** converts text to Proper Case — capitalizing the first letter of each word (e.g., "john smith" → "John Smith").
+
+  ## 💡 Why is it important?
+
+  It's the right casing choice for human-readable names and titles in a finished report — [UPPER](/skills/upper-function) reads as shouting, [LOWER](/skills/lower-function) reads as informal, but PROPER matches how names are naturally written.
+
+  ## Syntax
+
+  ```
+  =PROPER(text)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | john SMITH |
+
+  **Formula:** `=PROPER(A1)` → `"John Smith"`
+
+  ## Multiple examples
+
+  **Beginner:** `=PROPER(A2)` — standardize a customer name column for a report.
+  **Real-world:** `=PROPER(TRIM(A2))` — combining PROPER with TRIM to fix both casing and stray spaces in one step, a common real-world data-cleaning pattern.
+
+  ## ⚠️ Common mistakes
+
+  - **Using PROPER on text that shouldn't be title-cased**, like an email address, a product code, or an acronym — PROPER is for human names and titles, not identifiers, and can produce an odd result on non-name text (e.g., "usa" becomes "Usa," not "USA").
+
+  ## Real-world Data Analyst use cases
+
+  - **Customer analysis:** standardizing contact or company names before deduplication or display in a report.
+
+  ## Related concepts
+
+  ```
+  LOWER → PROPER ← you are here → TRIM (existing topic)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula to convert A1 to Proper Case.
+
+  ### Interview/Advanced
+  2. Why might PROPER produce an odd result on a value like "usa" or "nba"?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=PROPER(A1)`
+  2. PROPER blindly capitalizes the first letter of each "word" — it has no awareness that "usa" or "nba" are acronyms that should stay fully capitalized, so it produces "Usa" or "Nba" instead, which needs manual correction or a different approach for acronym-heavy text.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When is PROPER the wrong function to use?**
+  Short answer: On text that isn't a human name or title — identifiers, codes, and acronyms often need different (or no) casing treatment than Proper Case provides.
+
+  ## Best practices
+
+  - Reserve PROPER for genuine human names and titles, not codes or acronyms.
+  - Combine with TRIM when cleaning a name column, to fix spacing and casing together.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **PROPER(text)** → Each Word Capitalized — best for human names/titles, not codes or acronyms

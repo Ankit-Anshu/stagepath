@@ -1,0 +1,68 @@
+title: Number Formats
+category: Spreadsheets
+what_is_it: How a number is displayed (currency, percentage, date, decimal places) without changing its actual underlying value.
+why_it_matters: Confusing a number's display format with its real stored value is a common source of confusion — formatting a cell to show 2 decimals doesn't round the real number used in later calculations.
+prerequisites:
+  - spreadsheet-data-types
+objectives:
+  - 'Apply common number formats: currency, percentage, date'
+  - Explain the difference between a number's format and its actual stored value
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-number-formats-1
+    title: Format a column
+    description: Take a column of raw decimal numbers and format it as currency, then as a percentage, and observe how the underlying value stays the same.
+verify:
+  - Can apply a currency and a percentage format
+  - Can explain that formatting doesn't change the underlying stored value
+note: |
+  ## 🎯 What is it?
+
+  A **number format** controls how a number is *displayed* — as currency ($1,204.50), a percentage (12%), a date (03/14/2024), or with a specific number of decimal places — without changing the number's actual underlying stored value.
+
+  ## 💡 Why is it important?
+
+  - Confusing display formatting with the real value is a common, subtle mistake — formatting a cell to show 2 decimal places doesn't round the *actual* number used in further calculations (that's what the ROUND function is for).
+  - Correctly formatted numbers (currency symbols, percentages, consistent decimals) are what make a report readable and professional at a glance.
+
+  ## Core concept
+
+  | Format | Raw value | Displayed as |
+  |---|---|---|
+  | Currency | 1204.5 | $1,204.50 |
+  | Percentage | 0.12 | 12% |
+  | Date | 45365 (a date serial number) | 03/14/2024 |
+  | Number, 2 decimals | 14.386274 | 14.39 (displayed only — the real value is unchanged) |
+
+  ## 📊 Example
+
+  A cell contains the value `0.125`. Formatted as a percentage, it displays "12.5%" — the underlying value is still `0.125`, and any formula referencing this cell uses `0.125`, not "12.5%" as text.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming formatting a cell to show 2 decimals actually rounds the value** — it only changes the display; a sum of "rounded-looking" cells can differ slightly from the displayed total, because the true, unrounded values are what's actually being added (use the ROUND function to actually change the stored value).
+  - **Typing a % sign directly into a cell** without understanding it's being converted and stored as a decimal (e.g., typing "12%" stores 0.12).
+
+  ## Related concepts
+
+  ```
+  Data Types
+    ↓
+  Number Formats ← you are here
+    ↓
+  Basic Formatting
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why might a spreadsheet's displayed total not exactly match the sum of its displayed line items, even though both look correctly rounded on screen?**
+  Short answer: If the cells were only *formatted* to show 2 decimals (not actually rounded with the ROUND function), the underlying values still carry full precision — the displayed total is computed from those true values, which can differ slightly from the sum of the displayed (rounded-looking) numbers.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Number format** → controls display only (currency, %, date, decimals) — never changes the real stored value
+  Use the ROUND function to actually change a value, not just its formatting.

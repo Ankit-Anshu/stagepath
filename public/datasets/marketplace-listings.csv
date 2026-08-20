@@ -1,0 +1,5 @@
+listing_id,seller_id,created_at,category,status,price
+L01,U01,2026-01-08,Electronics,active,120
+L02,U02,2026-01-13,Home,sold,75
+L03,U01,2026-02-04,Fashion,expired,45
+

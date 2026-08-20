@@ -1,0 +1,72 @@
+title: Date Differences
+category: Spreadsheets
+what_is_it: Calculating the gap between two dates — in days with simple subtraction, or in months/years with DATEDIF — and choosing the right unit for the question being asked.
+why_it_matters: It's one of the most common real calculations (tenure, age, days since last purchase, turnaround time) and easy to get subtly wrong by picking the wrong unit or method.
+prerequisites:
+  - edate-function
+objectives:
+  - Calculate the number of days between two dates with subtraction
+  - Choose between simple subtraction and DATEDIF based on the unit needed
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-date-differences-1
+    title: Calculate tenure
+    description: Given a hire date and today's date, calculate both the number of days employed and the number of full years employed.
+verify:
+  - Can calculate days between two dates with subtraction
+  - Can choose the right method for a given date-difference question
+note: |
+  ## 🎯 What is it?
+
+  **Date differences** covers calculating the gap between two dates. For a simple day count, subtracting one date from another works directly (`end_date - start_date`). For a difference in complete months or years, DATEDIF (covered separately) is the more precise tool.
+
+  ## 💡 Why is it important?
+
+  - It's one of the most common real-world calculations — tenure, age, days since last purchase, support ticket turnaround time — and choosing the wrong method for the unit needed is an easy, common mistake.
+  - Dates are stored as serial numbers internally, which is exactly why subtracting two dates directly gives a meaningful day count.
+
+  ## Core concept
+
+  | Need | Method |
+  |---|---|
+  | Number of days between two dates | `=end_date - start_date` |
+  | Number of complete months/years between two dates | `=DATEDIF(start_date, end_date, "unit")` |
+  | Business days only (excluding weekends) | `NETWORKDAYS` (see Workday Calculations) |
+
+  ## 📊 Example
+
+  Start date: 2024-01-15. End date: 2024-03-20.
+
+  `=end_date - start_date` → `65` (total calendar days)
+  `=DATEDIF(start_date, end_date, "m")` → `2` (complete months)
+
+  Both are "correct" — they just answer different questions. A tenure report asking "how many days has this customer been active?" wants the first; one asking "how many full months?" wants the second.
+
+  ## ⚠️ Common mistakes
+
+  - **Using simple subtraction when a "complete months/years" figure was actually needed** — 65 days isn't the same information as "2 complete months," and presenting one when the other was asked for misleads.
+  - **Forgetting that date subtraction requires both cells to actually be true date values**, not text that merely looks like a date — subtracting two text-formatted "dates" produces an error or a nonsensical result.
+
+  ## Related concepts
+
+  ```
+  EDATE
+    ↓
+  Date Differences ← you are here
+  ```
+  This closes the Date & Time chapter — the next chapter (Data Cleaning) covers fixing exactly the kind of text-formatted "fake dates" that break date arithmetic like this.
+
+  ## 🎤 Interview preparation
+
+  **Q: You calculate `end_date - start_date` and get an error instead of a number. What's the likely cause?**
+  Short answer: One or both cells likely contain text that merely looks like a date, rather than a true date value — date arithmetic requires both operands to be real dates, not text; converting the text with DATEVALUE or re-entering it as a real date fixes it.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Simple subtraction** → total days between two dates
+  **DATEDIF** → complete months/years between two dates
+  Pick the method that matches the actual unit the question is asking for.

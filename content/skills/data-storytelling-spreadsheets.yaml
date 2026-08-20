@@ -1,0 +1,69 @@
+title: Data Storytelling in Spreadsheets
+category: Spreadsheets
+what_is_it: Sequencing and annotating charts within a spreadsheet to lead a viewer through a finding — context, then the data, then the takeaway — rather than presenting an isolated, unexplained chart.
+why_it_matters: A well-formatted chart still needs a narrative around it — without context and a clear takeaway, even a perfect chart can be misread or ignored.
+prerequisites:
+  - chart-formatting
+objectives:
+  - Sequence a chart with a title, annotation, and takeaway that tells a complete story
+  - Explain the difference between an accurate chart and a chart that actually communicates
+estimated_minutes: 25
+resources:
+  - r-storytelling-with-data
+practice:
+  - id: ex-data-storytelling-spreadsheets-1
+    title: Annotate a chart with a takeaway
+    description: Take a chart showing a revenue dip and add a text box annotation pointing to the dip with a one-line explanation of what caused it.
+verify:
+  - Can add context and a takeaway annotation to a chart
+  - Can explain the difference between an accurate chart and one that actually communicates
+note: |
+  ## 🎯 What is it?
+
+  **Data storytelling** in a spreadsheet means sequencing and annotating charts to lead a viewer through a finding — providing context, showing the data, and stating a clear takeaway — rather than dropping an isolated, unexplained chart into a sheet and expecting the viewer to draw the right conclusion themselves.
+
+  ## 💡 Why is it important?
+
+  - A perfectly accurate, well-formatted chart can still fail to communicate if it's presented with no context — a viewer might draw the wrong conclusion, or no conclusion at all.
+  - This directly applies the Foundations stage's Communicate Insights topic to spreadsheet charts specifically — the same "what happened, why, what to do" structure applies here.
+
+  ## Core concept
+
+  A simple structure for a chart that tells a story:
+
+  ```
+  1. Context      — a short text box or title stating what question this answers
+  2. The chart    — clearly formatted, showing the actual data
+  3. Annotation   — pointing directly at the key moment (a spike, a dip)
+  4. Takeaway     — one sentence stating what it means and/or what to do
+  ```
+
+  ## 📊 Example
+
+  A revenue chart alone shows a dip in March — a viewer might not know why, or whether it matters. Adding a text box annotation pointing directly at the March dip ("March dip: 3-day payment outage") and a one-line takeaway below the chart ("Recovered fully by April — no further action needed") turns the same chart into a complete, self-explanatory story.
+
+  ## ⚠️ Common mistakes
+
+  - **Presenting a chart with no annotation or takeaway**, leaving the viewer to interpret (and possibly misinterpret) what it means on their own.
+  - **Burying the takeaway in a separate document or email** instead of placing it directly next to the chart, where a viewer will actually see it.
+
+  ## Related concepts
+
+  ```
+  Chart Formatting
+    ↓
+  Data Storytelling ← you are here
+  ```
+  This closes the Excel Visualization chapter — the next chapter (Excel Dashboards) assembles multiple such charts into one complete, decision-ready view. Builds directly on Communicate Insights from the Foundations stage.
+
+  ## 🎤 Interview preparation
+
+  **Q: You've built a perfectly accurate, well-formatted chart. Why might it still fail to communicate its point?**
+  Short answer: Without context (what question it answers) and a clear takeaway (what it means or what to do), a viewer has to interpret the chart entirely on their own — accuracy and formatting alone don't guarantee the right conclusion gets drawn.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data storytelling** → context → chart → annotation → takeaway
+  An accurate, well-formatted chart still needs a narrative to reliably communicate its point.

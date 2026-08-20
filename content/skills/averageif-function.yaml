@@ -1,0 +1,96 @@
+title: AVERAGEIF Function
+category: Spreadsheets
+what_is_it: Averaging a range, but only for rows that meet one specific condition — like the average order value for just the West region.
+why_it_matters: A single overall average often hides meaningful differences between segments — AVERAGEIF lets you compute a segment-specific average directly.
+prerequisites:
+  - countifs-function
+objectives:
+  - Write an AVERAGEIF formula with one condition
+  - Explain how AVERAGEIF differs from AVERAGE
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-averageif-1
+    title: Average order value by region
+    description: Given a transactions list, use AVERAGEIF to calculate the average order value for just the "West" region.
+verify:
+  - AVERAGEIF correctly averages only matching rows
+  - Range and average range are correctly aligned
+note: |
+  ## 🎯 What is it?
+
+  **AVERAGEIF** averages a range, but only for the rows that meet **one specific condition** — like the average order value for just the West region, following the same pattern as [SUMIF](/skills/sumif-function) but computing a mean instead of a total.
+
+  ## 💡 Why is it important?
+
+  A single overall average often hides meaningful differences between segments (see [Descriptive Statistics](/skills/stats-descriptive)) — AVERAGEIF lets you compute a segment-specific average directly, without filtering the data first.
+
+  ## Syntax
+
+  ```
+  =AVERAGEIF(criteria_range, criteria, average_range)
+  ```
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Region | Amount |
+  | 2 | West | 100 |
+  | 3 | East | 200 |
+  | 4 | West | 300 |
+
+  **Formula:** `=AVERAGEIF(A2:A4,"West",B2:B4)`
+  **Result:** `200` — the average of 100 and 300, the two West rows only.
+
+  ## Multiple examples
+
+  **Beginner:** `=AVERAGEIF(A2:A100,"Completed",B2:B100)` — average order amount for completed orders only.
+  **Real-world:** Comparing `=AVERAGEIF(region,"West",amount)` against `=AVERAGEIF(region,"East",amount)` side by side to spot a meaningful regional difference in typical order size.
+
+  ## ⚠️ Common mistakes
+
+  - **Misaligning criteria_range and average_range**, same risk as SUMIF — they must correspond row-for-row.
+  - **Not checking for skew before trusting the average.** A segment-specific average can still be misleading if that segment has outliers — pairing it with a MEDIAN check is good practice, same as with plain AVERAGE.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** average order value for one specific region or product category.
+  - **HR analysis:** average tenure or salary for one specific department.
+
+  ## Related concepts
+
+  ```
+  COUNTIFS → AVERAGEIF ← you are here → AVERAGEIFS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write an AVERAGEIF that averages column B where column A equals "Completed".
+
+  ### Interview/Advanced
+  2. Why might comparing AVERAGEIF results across two segments be misleading without also checking each segment's spread?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=AVERAGEIF(A:A,"Completed",B:B)`
+  2. A segment average can be skewed by a small number of outliers within that segment, just like an overall average can be — comparing averages alone can hide that one segment is more volatile or has different extremes than the other, which a standard deviation or median comparison would reveal.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you use AVERAGEIF instead of plain AVERAGE?**
+  Short answer: When you need the average for a specific segment or category, not the whole dataset — AVERAGEIF filters and averages in one step.
+
+  ## Best practices
+
+  - Pair a segment-specific average with a check on that segment's spread (standard deviation) or median before drawing a strong conclusion.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **AVERAGEIF(criteria_range, criteria, average_range)** → conditional average, one condition

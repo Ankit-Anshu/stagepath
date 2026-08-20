@@ -1,0 +1,68 @@
+title: Tools Used by Data Analysts
+category: Foundations
+what_is_it: A map of the core tool categories a data analyst uses — spreadsheets, SQL, BI/visualization tools, and Python — and what each is typically used for.
+why_it_matters: It gives a concrete answer to "what will I actually be learning," and previews how the rest of this roadmap's stages map onto real job tools.
+prerequisites:
+  - typical-analyst-workflow
+objectives:
+  - Name the core tool categories a data analyst uses
+  - Match a common analyst task to the tool category most likely used for it
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-analyst-tools-1
+    title: Map tasks to tools
+    description: List five tasks a data analyst does day to day, and note which tool category (spreadsheets, SQL, BI tool, Python) is most likely used for each.
+verify:
+  - Can name the core tool categories a data analyst uses
+  - Can match at least two tasks to the right tool category
+note: |
+  ## 🎯 What is it?
+
+  Data analysts rely on a small set of tool categories, each suited to a different part of the workflow: **spreadsheets** (Excel/Google Sheets) for quick, flexible analysis; **SQL** for querying data stored in databases; **BI/visualization tools** (Power BI, Tableau) for dashboards stakeholders use directly; and **Python** (with pandas, NumPy) for larger or more repeatable analysis than a spreadsheet comfortably handles.
+
+  ## 💡 Why is it important?
+
+  - It previews exactly what the rest of this roadmap teaches — each stage (Spreadsheets, SQL, Python, Visualization, Power BI/Tableau) maps directly onto one of these tool categories.
+  - Job postings frequently list required tools without explaining what each is for — knowing this map helps you read a posting and immediately understand the role's actual day-to-day work.
+
+  ## Core concept
+
+  | Tool category | Used for | Roadmap stage |
+  |---|---|---|
+  | Spreadsheets (Excel/Sheets) | Quick analysis, small datasets, ad hoc reports | Spreadsheets |
+  | SQL | Querying data stored in a database | SQL |
+  | Python (pandas, NumPy) | Larger, repeatable, more complex analysis | Python |
+  | BI tools (Power BI, Tableau) | Interactive dashboards for stakeholders | Power BI / Tableau |
+  | Statistics | Testing whether a pattern is real, not noise | Statistics |
+
+  ## 📊 Example
+
+  A typical week might involve: pulling data with a SQL query, doing a first-pass exploration in a spreadsheet, running a deeper analysis in Python once the spreadsheet gets unwieldy, then publishing the final result as a Power BI dashboard stakeholders can explore themselves — each tool used where it's strongest.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming you need to master every tool before applying for jobs.** Most postings emphasize one or two of these categories (commonly SQL + one BI tool, or SQL + Excel) rather than requiring deep expertise in all of them.
+  - **Sticking with a spreadsheet long after a dataset has outgrown it** — a common signal it's time to move to SQL or Python is a spreadsheet that's become slow, error-prone, or too large to sanity-check by eye.
+
+  ## Related concepts
+
+  ```
+  Typical Analyst Workflow
+    ↓
+  Tools Used by Data Analysts ← you are here
+  ```
+  This closes the "Introduction to Data Analytics" chapter — the rest of this roadmap teaches each of these tool categories in depth, in roughly this order.
+
+  ## 🎤 Interview preparation
+
+  **Q: Which tools would you use to investigate a sudden drop in weekly revenue?**
+  Short answer: Start with SQL to pull the relevant order data from the database, do a first-pass exploration in a spreadsheet or Python, and if it becomes a recurring report, build it into a BI dashboard so stakeholders can monitor it themselves going forward.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Core analyst tools** → Spreadsheets (quick analysis) · SQL (querying databases) · Python (larger/repeatable analysis) · BI tools (dashboards)
+  Most postings emphasize SQL plus one or two of the others, not all of them at expert level.

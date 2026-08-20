@@ -1,0 +1,28 @@
+title: Cloud Engineering
+category: Software Development
+difficulty: intermediate
+estimated_hours: 650
+audience: Developers and IT learners who want to design, automate, secure, and operate dependable cloud platforms.
+description: Build the systems, networking, automation, security, deployment, and observability skills required for modern cloud environments.
+stages:
+  - id: systems-foundation
+    title: Understand systems and networks
+    description: Learn the operating-system, protocol, and network behavior beneath every cloud platform.
+    skills: [linux-security, networking-systems, web-protocols]
+  - id: cloud-services
+    title: Design cloud services
+    description: Connect applications, APIs, and persistent data into reliable service architectures.
+    skills: [api-design, databases, cloud-security]
+  - id: automation
+    title: Automate delivery and operations
+    description: Build repeatable workflows for provisioning, integration, deployment, and scheduled work.
+    skills: [workflow-orchestration, frontend-deployment]
+  - id: reliability
+    title: Build for reliability
+    description: Test systems, observe production behavior, and respond effectively when services fail.
+    skills: [backend-testing, deployment-observability, detection-response]
+  - id: secure-platforms
+    title: Secure the platform
+    description: Apply defense-in-depth across applications, identities, endpoints, networks, and operations.
+    skills: [backend-security, web-security, security-foundations]
+

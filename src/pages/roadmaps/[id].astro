@@ -1,0 +1,300 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const roadmaps = await getCollection('roadmaps');
+  return roadmaps.map((roadmap) => ({ params: { id: roadmap.id }, props: { roadmap } }));
+}
+
+const { roadmap } = Astro.props;
+const skills = await getCollection('skills');
+const projects = await getCollection('projects');
+const chapters = await getCollection('chapters');
+const skillById = new Map(skills.map((skill) => [skill.id, skill]));
+const projectById = new Map(projects.map((p) => [p.id, p]));
+const chapterById = new Map(chapters.map((chapter) => [chapter.id, chapter]));
+
+const roadmapSkills = roadmap.data.stages.flatMap((stage) => stage.skills);
+const subtopicCount = roadmapSkills.reduce((sum, id) => {
+  const skill = skillById.get(id);
+  return sum + (skill?.data.subtopics.length || skill?.data.objectives.length || 0);
+}, 0);
+
+const ACCENTS = ['#146c43', '#b5482f', '#3a5ba0', '#8667c8', '#a97b26', '#1f7a8c', '#8a3b5e', '#4a6b3f', '#475569'];
+const ICONS: Record<string, string> = {
+  foundations: '🧭', spreadsheets: '🧾', statistics: '📐', sql: '🗄️', python: '🐍', visualization: '📊',
+  'business-analytics': '💼', portfolio: '🗂️', 'job-preparation': '🎯',
+  'data-pipelines': '🔧', 'orchestration-and-tools': '⚙️',
+  'data-manipulation': '🧮', modeling: '🤖', communication: '🗣️',
+  // AI Engineer
+  'programming-foundation': '💻', 'data-foundation': '📁', 'machine-learning': '🤖',
+  'ai-products': '🧩', 'production-ai': '🚀',
+  // Backend Developer
+  services: '🔌', quality: '✅', operations: '🛠️',
+  // Business Analyst
+  'business-context': '🏢', 'everyday-analysis': '📋', 'connected-data': '🔗',
+  'decision-support': '🧠', 'career-proof': '🏆',
+  // Cloud Engineering
+  'systems-foundation': '🖥️', 'cloud-services': '☁️', automation: '⚙️',
+  reliability: '🛡️', 'secure-platforms': '🔒',
+  // Cybersecurity
+  'attack-surface': '🕵️', defense: '🛡️', proof: '🏆',
+  // Frontend Developer
+  'web-foundations': '🌐', 'interface-building': '🎨', 'application-development': '🧱', production: '🚀',
+  // Software Engineer
+  'computing-foundation': '💻', 'application-code': '🧱', 'data-systems': '🗄️', 'quality-security': '🔒',
+  // UX Designer
+  structure: '🗺️', interface: '🎨',
+};
+
+// Skill titles are authored as "Stage — Detail" (e.g. "SQL — JOINs") so they
+// read clearly on their own skill page. Inside a stage's own card that
+// stage name is already implied by the badge, so strip it for display here.
+function shortTitle(title: string, stageTitle: string): string {
+  const stripped = title.replace(new RegExp(`^${stageTitle}\\s*[—-]?\\s*`, 'i'), '').trim();
+  return stripped.length > 0 ? stripped : title;
+}
+
+const stageDetails = roadmap.data.stages.map((stage, index) => {
+  const stageSkills = stage.skills.map((id) => skillById.get(id)).filter(Boolean);
+  const projectIds = [...new Set(stageSkills.map((s) => s!.data.project).filter(Boolean))];
+  // Crowded stages (per topic.md's learning-group PRD) define `groups` in
+  // their YAML as a list of shared chapter ids (multi_role_roadmaps.md) —
+  // when present, the roadmap shows one tile per chapter instead of one
+  // tile per individual skill, linking to a group page that lists just
+  // that chapter's topics. Stages without groups keep the original
+  // behavior of one tile per skill, linking straight to its note.
+  const tiles = stage.groups && stage.groups.length > 0
+    ? stage.groups.map((chapterId) => {
+        const chapter = chapterById.get(chapterId);
+        return { key: chapterId, label: chapter?.data.title ?? chapterId, href: `/roadmaps/${roadmap.id}/${stage.id}/${chapterId}` };
+      })
+    : stageSkills.map((skill) => ({ key: skill!.id, label: shortTitle(skill!.data.title, stage.title), href: `/skills/${skill!.id}` }));
+  return {
+    stage,
+    index,
+    accent: ACCENTS[index % ACCENTS.length],
+    icon: ICONS[stage.id] ?? '🔹',
+    tiles,
+    projects: (projectIds as string[]).map((id) => projectById.get(id)).filter(Boolean),
+  };
+});
+---
+
+<Base title={roadmap.data.title} description={roadmap.data.description} wide>
+  <header class="roadmap-hero">
+    <div class="hero-main">
+      <a href="/roadmaps" class="back-link">← Browse all roadmaps</a>
+      <div class="hero-tags"><span>{roadmap.data.category}</span><span>{roadmap.data.difficulty}</span></div>
+      <h1>{roadmap.data.title}</h1>
+      <p>{roadmap.data.description}</p>
+      {roadmap.data.audience && <div class="audience"><strong>Good fit for</strong><span>{roadmap.data.audience}</span></div>}
+    </div>
+    <aside class="roadmap-summary">
+      <p>Roadmap depth</p>
+      <div><strong>{roadmap.data.stages.length}</strong><span>stages</span></div>
+      <div><strong>{roadmapSkills.length}</strong><span>major topics</span></div>
+      <div><strong>{subtopicCount}</strong><span>subtopics</span></div>
+      <div><strong>{roadmap.data.estimated_hours}h</strong><span>estimated effort</span></div>
+      <small>Estimates describe learning effort, not a job guarantee.</small>
+    </aside>
+  </header>
+
+  <section class="how-to-read">
+    <strong>How to use this map</strong>
+    <span><i class="dot" style="--c:#146c43"></i> Follow the numbered path top to bottom</span>
+    <span><i class="dot outline"></i> Each stop groups everything to learn for that stage</span>
+    <span><i class="dot diamond"></i> Dashed cards are the project to build after it</span>
+  </section>
+
+  <div class="roadmap-shell">
+    <nav class="stage-nav" aria-label="Roadmap stages">
+      <strong>Jump to a stage</strong>
+      {roadmap.data.stages.map((stage, index) => <a href={`#stage-${stage.id}`}><span>{String(index + 1).padStart(2, '0')}</span>{stage.title}</a>)}
+    </nav>
+
+    <div class="stage-track" id="stage-track">
+      <svg class="track-svg" id="track-svg" aria-hidden="true"><path id="track-path"></path></svg>
+      <div class="track-start"><span>START</span></div>
+
+      {stageDetails.map(({ stage, index, accent, icon, tiles, projects: stageProjects }) => (
+        <section class="stage-node" id={`stage-${stage.id}`} data-side={index % 2 === 0 ? 'right' : 'left'}>
+          <div class="stage-row">
+            <div class="stage-badge" style={`--accent:${accent}`}>
+              <span class="badge-icon" aria-hidden="true">{icon}</span>
+              <div class="badge-copy"><small>Stage {index + 1}</small><strong>{stage.title}</strong>{stage.description && <p>{stage.description}</p>}</div>
+            </div>
+
+            <div class="branch-wrap">
+              <svg class="branch-svg" data-branch-svg aria-hidden="true"><path style={`--accent:${accent}`}></path></svg>
+              <div class="topic-card" data-topic-card style={`--accent:${accent}`}>
+                <div class="topic-tiles">
+                  {tiles.map(({ key, label, href }) => (
+                    <a class:list={['topic-tile', { wide: label.length >= 20 }]} href={href}>{label}</a>
+                  ))}
+                  {stageProjects.map((project) => project && (
+                    <a class="topic-tile project-tile" href={`/projects/${project.id}`}>◇ {project.data.title}</a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <div class="track-finish"><span>BUILD. EXPLAIN. REPEAT.</span><strong>You reached the end of the map—not the end of learning.</strong><a href="/projects">Choose a project brief →</a></div>
+    </div>
+  </div>
+
+  <script define:vars={{ stageCount: stageDetails.length }}>
+    function drawTrack() {
+      const track = document.getElementById('stage-track');
+      const svg = document.getElementById('track-svg');
+      const path = document.getElementById('track-path');
+      if (!track || !svg || !path) return;
+      const badges = Array.from(track.querySelectorAll('.stage-badge'));
+      const startDot = track.querySelector('.track-start');
+      if (badges.length < 1) return;
+
+      const containerRect = track.getBoundingClientRect();
+      const width = track.scrollWidth;
+      const height = track.scrollHeight;
+      svg.setAttribute('width', String(width));
+      svg.setAttribute('height', String(height));
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+      const anchorOf = (el) => {
+        const r = el.getBoundingClientRect();
+        return { x: r.left + r.width / 2 - containerRect.left, y: r.top + r.height / 2 - containerRect.top };
+      };
+
+      const points = [];
+      if (startDot) points.push(anchorOf(startDot));
+      for (const b of badges) points.push(anchorOf(b));
+
+      if (points.length < 2) { path.setAttribute('d', ''); return; }
+
+      // Badges are nudged left/right by CSS (see .stage-badge transform),
+      // so consecutive anchors already sit at different x — a plain bezier
+      // through the real points gives one continuous, smoothly winding
+      // curve instead of snapping back to center at every stage.
+      let d = `M ${points[0].x} ${points[0].y}`;
+      for (let i = 1; i < points.length; i++) {
+        const p0 = points[i - 1];
+        const p1 = points[i];
+        const midY = (p0.y + p1.y) / 2;
+        d += ` C ${p0.x} ${midY}, ${p1.x} ${midY}, ${p1.x} ${p1.y}`;
+      }
+      path.setAttribute('d', d);
+    }
+
+    // Per-stage connector: a single curve from the stage badge to its one
+    // grouped topic card, keeping each stage to one clean line.
+    function drawBranches() {
+      const stageNodes = document.querySelectorAll('.stage-node');
+      stageNodes.forEach((stageEl) => {
+        const badge = stageEl.querySelector('.stage-badge');
+        const card = stageEl.querySelector('[data-topic-card]');
+        const svg = stageEl.querySelector('[data-branch-svg]');
+        const path = svg ? svg.querySelector('path') : null;
+        const wrap = stageEl.querySelector('.branch-wrap');
+        if (!badge || !card || !svg || !path || !wrap) return;
+
+        const wrapRect = wrap.getBoundingClientRect();
+        svg.setAttribute('width', String(wrapRect.width));
+        svg.setAttribute('height', String(wrapRect.height));
+        svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
+
+        const badgeRect = badge.getBoundingClientRect();
+        // Anchor to the first tile, not the whole (possibly tall) card, so
+        // the connector reads as one clean near-horizontal line instead of
+        // diving toward the card's vertical middle.
+        const firstTile = card.querySelector('.topic-tile');
+        const cardRect = (firstTile || card).getBoundingClientRect();
+        const badgeCx = badgeRect.left + badgeRect.width / 2;
+        const cardCx = cardRect.left + cardRect.width / 2;
+
+        const edgeAnchor = (rect, towardX) => {
+          const cy = rect.top + rect.height / 2 - wrapRect.top;
+          const x = towardX > rect.left + rect.width / 2
+            ? rect.right - wrapRect.left
+            : rect.left - wrapRect.left;
+          return { x, y: cy };
+        };
+
+        const a = edgeAnchor(badgeRect, cardCx);
+        const b = edgeAnchor(cardRect, badgeCx);
+        const midX = (a.x + b.x) / 2;
+        path.setAttribute('d', `M ${a.x} ${a.y} C ${midX} ${a.y}, ${midX} ${b.y}, ${b.x} ${b.y}`);
+      });
+    }
+
+    function drawAll() { drawTrack(); drawBranches(); }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(drawAll, 120); });
+    window.addEventListener('load', drawAll);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
+    document.addEventListener('DOMContentLoaded', drawAll);
+    drawAll();
+    setTimeout(drawAll, 300);
+  </script>
+</Base>
+
+<style>
+  .roadmap-hero { display: grid; grid-template-columns: 1fr 315px; gap: 70px; padding: 15px 0 50px; }
+  .back-link { display: inline-block; margin-bottom: 27px; color: var(--muted); font-size: 12px; font-weight: 700; }
+  .hero-tags { display: flex; gap: 7px; }.hero-tags span { padding: 5px 9px; border-radius: 7px; background: var(--green-soft); color: var(--green-dark); font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+  .hero-tags span:last-child { background: #eef0ed; color: #647067; }
+  .hero-main h1 { margin: 15px 0 0; font-size: clamp(48px, 7vw, 78px); letter-spacing: -.065em; line-height: .95; }.hero-main > p { max-width: 760px; margin: 19px 0 0; color: var(--muted); font-size: 18px; }
+  .audience { display: flex; gap: 10px; margin-top: 22px; font-size: 12px; }.audience strong { color: var(--green); }.audience span { color: var(--muted); }
+  .roadmap-summary { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: white; }.roadmap-summary > p { margin: 0 0 12px; color: #818b83; font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }.roadmap-summary > div { display: flex; align-items: baseline; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #edf0ec; }.roadmap-summary strong { font-size: 21px; }.roadmap-summary span { color: var(--muted); font-size: 11px; }.roadmap-summary small { display: block; margin-top: 15px; color: #8b958d; font-size: 9px; line-height: 1.5; }
+  .how-to-read { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; padding: 14px 19px; border: 1px solid var(--line); border-radius: 12px; background: #fafbf8; font-size: 10px; }.how-to-read > strong { color: var(--ink); }.how-to-read span { display: flex; align-items: center; gap: 7px; color: var(--muted); }.how-to-read .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--green)); }.how-to-read .outline { background: none; border: 2px solid var(--green); }.how-to-read .diamond { background: none; border: 2px solid var(--amber); border-radius: 1px; transform: rotate(45deg); }
+  .roadmap-shell { display: grid; grid-template-columns: 180px minmax(0, 980px); justify-content: center; gap: 42px; margin-top: 52px; }
+  .stage-nav { position: sticky; top: 95px; align-self: start; display: flex; flex-direction: column; gap: 4px; }.stage-nav > strong { margin: 0 7px 9px; color: #7c877e; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }.stage-nav a { display: flex; gap: 8px; padding: 7px; border-radius: 8px; color: #657168; font-size: 11px; font-weight: 650; }.stage-nav a:hover { background: white; color: var(--green-dark); }.stage-nav a span { color: #a1aaa3; font-size: 8px; }
+
+  .stage-track { position: relative; min-width: 0; padding-bottom: 10px; }
+  .track-svg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: visible; }
+  .track-svg path { fill: none; stroke: #3a5ba0; stroke-width: 3.5; stroke-dasharray: 1 10; stroke-linecap: round; opacity: .55; }
+  .track-start { position: relative; z-index: 2; display: flex; justify-content: center; margin-bottom: 40px; }
+  .track-start span { padding: 8px 13px; border-radius: 20px; background: var(--navy); color: var(--lime); font-size: 9px; font-weight: 850; letter-spacing: .1em; }
+
+  .stage-node { position: relative; z-index: 2; margin-bottom: 34px; scroll-margin-top: 90px; }
+  .stage-row { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: start; gap: 22px; }
+
+  .stage-badge { position: relative; z-index: 3; grid-column: 2; display: flex; width: 230px; gap: 10px; padding: 13px; border-radius: 14px; background: var(--accent); color: white; box-shadow: 0 10px 26px color-mix(in srgb, var(--accent) 45%, transparent); transform: translateX(96px); }
+  .stage-node[data-side='left'] .stage-badge { transform: translateX(-96px); }
+  .badge-icon { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; border-radius: 10px; background: rgba(255,255,255,.16); font-size: 16px; }
+  .badge-copy small { display: block; color: rgba(255,255,255,.75); font-size: 8px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .badge-copy strong { display: block; margin-top: 2px; font-size: 15px; letter-spacing: -.02em; }
+  .badge-copy p { margin: 3px 0 0; color: rgba(255,255,255,.85); font-size: 9px; line-height: 1.35; }
+
+  .branch-wrap { position: relative; grid-column: 3; min-width: 0; display: flex; justify-content: flex-start; padding-left: 90px; }
+  .stage-node[data-side='left'] .branch-wrap { grid-column: 1; justify-content: flex-end; padding-left: 0; padding-right: 90px; }
+  .branch-svg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: visible; }
+  .branch-svg path { fill: none; stroke: var(--accent, #3a5ba0); stroke-width: 2.5; stroke-dasharray: 1 8; stroke-linecap: round; opacity: .7; }
+  .topic-card { position: relative; z-index: 1; width: fit-content; min-width: 220px; max-width: 420px; padding: 6px; border: 2px solid color-mix(in srgb, var(--accent) 55%, #cfd6cf); border-radius: 12px; background: color-mix(in srgb, var(--accent) 6%, white); }
+  .topic-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .topic-tile { display: flex; align-items: center; justify-content: center; min-height: 26px; padding: 5px 8px; border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line)); border-radius: 8px; background: white; color: var(--ink); font-size: 10.5px; font-weight: 650; text-align: center; line-height: 1.25; white-space: normal; transition: transform .15s, box-shadow .15s, border-color .15s; }
+  .topic-tile.wide { grid-column: 1 / -1; }
+  .topic-tile:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 25%, transparent); }
+  .topic-tile.project-tile { grid-column: 1 / -1; border-style: dashed; border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, white); color: var(--accent); font-weight: 750; white-space: normal; }
+
+  .track-finish { position: relative; z-index: 2; width: min(520px, 90%); margin: 10px auto 0; padding: 24px; border-radius: 17px; background: var(--navy); color: white; text-align: center; }.track-finish span, .track-finish strong, .track-finish a { display: block; }.track-finish span { color: var(--lime); font-size: 8px; font-weight: 850; letter-spacing: .11em; }.track-finish strong { margin: 6px auto 13px; max-width: 380px; font-size: 16px; }.track-finish a { color: var(--lime); font-size: 10px; font-weight: 800; }
+
+  @media (max-width: 950px) {
+    .roadmap-hero { grid-template-columns: 1fr; gap: 30px; }.roadmap-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }.roadmap-summary > p, .roadmap-summary small { grid-column: 1 / 5; }.roadmap-summary > div { display: block; border-bottom: 0; }.roadmap-summary span { display: block; }
+    .roadmap-shell { grid-template-columns: 1fr; }.stage-nav { display: none; }
+  }
+  @media (max-width: 700px) {
+    .hero-main > p { font-size: 16px; }.roadmap-summary { grid-template-columns: 1fr 1fr; }.roadmap-summary > p, .roadmap-summary small { grid-column: 1 / 3; }
+    .how-to-read { align-items: flex-start; flex-direction: column; gap: 8px; }
+    .stage-row { grid-template-columns: 1fr; gap: 14px; }
+    .stage-badge, .branch-wrap, .stage-node[data-side='left'] .branch-wrap { grid-column: 1; }
+    .stage-badge, .stage-node[data-side='left'] .stage-badge { width: 100%; transform: none; }
+    .branch-wrap, .stage-node[data-side='left'] .branch-wrap { justify-content: stretch; width: 100%; padding-left: 0; padding-right: 0; }
+    .topic-card { width: 100%; max-width: 100%; }
+    .track-finish { width: 100%; }
+  }
+</style>

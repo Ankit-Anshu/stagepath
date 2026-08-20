@@ -1,0 +1,186 @@
+title: Hypothesis Testing
+category: Statistics
+what_is_it: Setting up a null and alternative hypothesis, running a significance test, and interpreting a p-value correctly.
+why_it_matters: This is the formal machinery behind every A/B test and "is this difference real or just noise?" question a data analyst gets asked.
+prerequisites:
+  - stats-correlation-regression
+objectives:
+  - State a null and alternative hypothesis
+  - Interpret a p-value correctly
+  - Explain what a significance threshold means
+  - Avoid the most common p-value misinterpretation
+subtopics:
+  - title: Null vs. alternative hypothesis
+    description: Framing a testable claim before looking at any results.
+    outcomes:
+      - State a clear null and alternative hypothesis
+  - title: P-values
+    description: What a p-value actually measures — and the misreading almost everyone starts out with.
+    outcomes:
+      - Interpret a p-value without the common misreading
+  - title: Significance thresholds
+    description: Choosing and justifying an alpha level before running a test.
+    outcomes:
+      - Explain what a chosen significance threshold implies
+estimated_minutes: 180
+resources:
+  - r-khan-statistics
+  - r-seeing-theory
+project: project-ab-testing-analysis
+practice:
+  - id: ex-stats-hypothesis-1
+    title: Run a significance test
+    description: Given results from two groups, state a hypothesis, run a significance test, and state a clear decision.
+verify:
+  - Hypothesis is stated clearly before the test is run
+  - P-value is interpreted correctly
+  - Decision follows logically from the significance threshold chosen
+note: |
+  ## 🎯 What is it?
+
+  **Hypothesis testing** is a formal process for deciding whether an observed difference in data (e.g., between two groups in an A/B test) is a real effect or just random noise. It involves stating a **null hypothesis** and **alternative hypothesis**, running a statistical test, and interpreting the resulting **p-value** to make a decision.
+
+  Think of it like a courtroom: you start by assuming "innocent until proven guilty" (the null hypothesis — no real difference exists), and only reject that assumption if the evidence (the data) is strong enough.
+
+  ## 💡 Why is it important?
+
+  - This is the formal machinery behind every A/B test and every "is this difference real or just noise?" question a data analyst gets asked.
+  - Without it, teams risk declaring a change "a success" based on random fluctuation, wasting resources rolling it out — or worse, missing a real effect by chance.
+  - p-values are one of the most commonly *misunderstood* statistical concepts in the industry — getting this right is a meaningful differentiator.
+
+  ## Core concept
+
+  ### Null vs. alternative hypothesis
+  - **Null hypothesis (H0):** the default assumption — there is *no* real difference or effect (e.g., "the new checkout flow has the same conversion rate as the old one").
+  - **Alternative hypothesis (H1):** what you're testing for — there *is* a real difference (e.g., "the new checkout flow has a different conversion rate").
+
+  The hypothesis must be stated **before** looking at the results — deciding it after seeing the data defeats the purpose of the test.
+
+  ### P-values
+  A p-value answers: *"If the null hypothesis were actually true (no real effect), how likely would we be to see a difference this large, or larger, just by random chance?"*
+
+  A **small p-value** (e.g., below 0.05) suggests the observed difference is unlikely to be pure chance — evidence *against* the null hypothesis.
+
+  > ⚠️ **A p-value is NOT the probability that the null hypothesis is true.** This is the single most common misreading — a p-value of 0.03 does not mean "there's a 3% chance there's no real effect."
+
+  ### Significance thresholds
+  The **alpha level** (commonly 0.05) is the threshold chosen *before* running the test — if p < alpha, the result is called "statistically significant" and the null hypothesis is rejected.
+
+  ## Syntax / Formula / Structure
+
+  A typical hypothesis test workflow:
+
+  ```
+  1. State H0 and H1 clearly, before looking at results
+  2. Choose a significance threshold (alpha), commonly 0.05
+  3. Collect data / run the experiment
+  4. Calculate the test statistic and p-value
+  5. Decision: if p < alpha  → reject H0 (statistically significant)
+               if p >= alpha → fail to reject H0 (not enough evidence)
+  ```
+
+  ## 📊 Example
+
+  An A/B test compares checkout conversion rates:
+
+  | Group | Visitors | Conversions | Conversion rate |
+  |---|---|---|---|
+  | A (old checkout) | 5,000 | 400 | 8.0% |
+  | B (new checkout) | 5,000 | 460 | 9.2% |
+
+  **H0:** conversion rate for A and B is the same.
+  **H1:** conversion rates differ.
+
+  Running a statistical significance test (e.g., a two-proportion z-test) on this data yields **p = 0.02**.
+
+  **Decision:** Since p (0.02) < alpha (0.05), reject H0 — the difference is statistically significant. The new checkout's higher conversion rate is unlikely to be random chance alone.
+
+  **Correct interpretation:** "If there were truly no difference between the two checkouts, we'd see a gap this large or larger only about 2% of the time by chance — that's unlikely enough that we conclude the new checkout likely performs better."
+
+  ## Multiple examples
+
+  **Beginner:** Testing whether a coin is fair after 100 flips landing 60 heads.
+  **Intermediate:** Testing whether average order value differs between two customer segments.
+  **Real-world:** A/B testing a pricing page redesign — stating hypotheses and alpha *before* launch, then making a ship/no-ship decision strictly based on the pre-registered threshold, not on "does the number look good."
+
+  ## ⚠️ Common mistakes
+
+  - **Misreading the p-value as "the probability the null hypothesis is true."** It's the probability of seeing data this extreme *if* the null hypothesis is true — a subtle but critical distinction.
+  - **Checking results repeatedly and stopping as soon as p < 0.05** ("peeking") — this inflates the chance of a false positive; the sample size and test duration should be decided in advance.
+  - **Treating "not statistically significant" as proof of "no effect."** It only means there wasn't enough evidence to detect one — the test may simply lack statistical power (too small a sample).
+  - **Confusing statistical significance with practical significance.** A large enough sample can make a tiny, business-irrelevant difference "statistically significant."
+
+  ## Real-world Data Analyst use cases
+
+  - **Marketing analysis:** A/B testing two email subject lines for open rate.
+  - **Product analysis:** testing whether a new onboarding flow improves activation rate.
+  - **Pricing analysis:** testing whether a price change significantly affects conversion, not just whether it "looks" different.
+
+  ## Related concepts
+
+  ```
+  Descriptive Statistics → Probability → Distributions → Correlation & Regression
+    ↓
+  Hypothesis Testing ← you are here
+    ↓
+  A/B Testing (the direct business application of this topic)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What is the null hypothesis, in plain language?
+
+  ### Medium
+  2. An A/B test returns p = 0.20 with alpha set at 0.05. What's the correct decision and interpretation?
+
+  ### Interview/Advanced
+  3. A colleague says "our p-value was 0.01, so there's a 99% chance our new feature works." What's wrong with this statement, and how would you correct it?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. The default assumption that there is no real effect or difference — the thing you're trying to find evidence against.
+  2. Since p (0.20) ≥ alpha (0.05), fail to reject the null hypothesis — there isn't enough evidence to conclude a real difference exists (this does not prove there's no difference, only that this test didn't detect one with sufficient confidence).
+  3. This misreads the p-value as the probability the hypothesis is true. Correct interpretation: "If there were truly no effect, we'd see a difference this large or larger only 1% of the time by chance" — the p-value describes the data given the null hypothesis, not the probability the null hypothesis (or its opposite) is true.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What does a p-value tell you?**
+  Short answer: The probability of observing a result at least as extreme as what was measured, *if* the null hypothesis were actually true — a small p-value is evidence against the null hypothesis.
+
+  ### Conceptual questions
+  **Q: What's the difference between statistical significance and practical significance?**
+  Short answer: Statistical significance means the result is unlikely to be random chance; practical significance means the effect is large enough to actually matter for the business — a result can be statistically significant but too small to be worth acting on.
+
+  ### Scenario-based questions
+  **Q: A test shows a "statistically significant" 0.1% lift in conversion rate from a huge sample of 10 million users. Should the company ship the change?**
+  Short answer: Not automatically — check whether a 0.1% lift is practically meaningful (worth the engineering/maintenance cost) before deciding, since huge sample sizes can make even tiny, business-irrelevant differences statistically significant.
+
+  ### Practical questions
+  **Q: How would you explain to a non-technical stakeholder why you can't declare a "winner" after just one day of an A/B test, even if one variant looks ahead?**
+  Short answer: Explain that early results are noisy and can reverse — the test needs to run for the pre-planned sample size/duration to reach a reliable conclusion, and "peeking" early and stopping increases the risk of a false positive.
+
+  ## Interview traps / tricky points
+
+  - The single most common trap: restating a p-value as "the probability the null hypothesis is true" — always correct this distinction clearly if it comes up.
+  - "Not statistically significant" ≠ "no effect exists" — it may just mean the test lacked the statistical power (sample size) to detect a real but smaller effect.
+  - Stopping a test early once it "looks significant" (p-hacking / peeking) is a serious, commonly-tested methodological error.
+
+  ## Best practices
+
+  - State the hypothesis and significance threshold *before* looking at any results.
+  - Decide the sample size / test duration in advance, and don't stop early based on interim results.
+  - Always pair statistical significance with a judgment of practical significance before recommending action.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Null hypothesis (H0)** → assumes no real effect/difference
+  **P-value** → probability of seeing this data (or more extreme) if H0 is true — NOT the probability H0 is true
+  **Alpha (0.05 common)** → the pre-chosen significance threshold
+  **Decision:** p < alpha → reject H0 (statistically significant); p >= alpha → fail to reject H0
+  **Remember:** statistical significance ≠ practical significance

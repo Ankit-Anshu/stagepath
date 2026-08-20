@@ -1,0 +1,24 @@
+title: Interaction Design
+category: UX Design
+what_is_it: Designing task flows, states, feedback, controls, and behavior across a complete user journey.
+why_it_matters: Interfaces are sequences of decisions and system responses, not collections of static screens.
+estimated_minutes: 3000
+prerequisites: [information-architecture]
+objectives: [Map complete flows, Design system states, Prevent and recover from errors]
+subtopics:
+  - title: User flows and tasks
+    description: Entry points, happy paths, alternate paths, dependencies, decisions, and exits.
+    outcomes: [Map an end-to-end flow, Find missing branches]
+  - title: Screen and state modeling
+    description: Empty, loading, success, partial, error, offline, permission, and edge states.
+    outcomes: [Create a state inventory, Design beyond the happy path]
+  - title: Forms and complex inputs
+    description: Progressive disclosure, defaults, validation, errors, confirmation, and destructive actions.
+    outcomes: [Design a forgiving form, Prevent costly mistakes]
+  - title: Feedback and motion
+    description: Status, response time, transitions, spatial continuity, reduced motion, and meaningful animation.
+    outcomes: [Match feedback to latency, Use motion purposefully]
+  - title: Content design
+    description: Labels, instructions, errors, confirmation, tone, hierarchy, and localization readiness.
+    outcomes: [Write actionable errors, Simplify interface language]
+

@@ -1,0 +1,191 @@
+title: NumPy
+what_is_it: 'Working with numeric arrays efficiently using NumPy: vectorized operations, indexing, and broadcasting.'
+why_it_matters: NumPy is the numeric foundation pandas and most of the Python data stack are built on. Understanding arrays makes pandas behavior much less mysterious.
+prerequisites:
+  - python-fundamentals
+objectives:
+  - Create and index NumPy arrays
+  - Use vectorized operations instead of loops
+  - Explain broadcasting with a simple example
+estimated_minutes: 180
+resources:
+  - r-numpy-quickstart
+practice:
+  - id: ex-numpy-1
+    title: Vectorize a calculation
+    description: Rewrite a loop-based calculation (e.g. normalizing a list of numbers) as a single vectorized NumPy operation.
+verify:
+  - Vectorized version produces identical output to the loop version
+  - No unnecessary Python-level loop remains
+  - Can explain what broadcasting did in the solution
+category: Python
+subtopics:
+  - title: Arrays
+    description: Creating and indexing 1D and 2D NumPy arrays, including slicing.
+    outcomes:
+      - Slice a 2D array by row and column
+  - title: Vectorized operations
+    description: Performing math on an entire array at once instead of looping element by element.
+    outcomes:
+      - Rewrite a loop-based calculation as a vectorized operation
+  - title: Broadcasting
+    description: How NumPy applies an operation across arrays of mismatched shapes without an explicit loop.
+    outcomes:
+      - Explain the result of a broadcasting operation
+  - title: Aggregations
+    description: sum, mean, min, and max computed along a specific array axis.
+    outcomes:
+      - Compute a column-wise average on a 2D array
+note: |
+  ## 🎯 What is it?
+
+  **NumPy** is Python's core library for working with numeric arrays efficiently — it lets you perform math on entire collections of numbers at once (vectorized operations) instead of writing a manual loop, and it's the numeric foundation pandas and most of the Python data stack are built on.
+
+  ## 💡 Why is it important?
+
+  Understanding NumPy arrays makes pandas' behavior far less mysterious, since a pandas DataFrame is essentially a labeled wrapper around NumPy arrays underneath. NumPy operations are also dramatically faster than an equivalent hand-written Python loop, which matters once datasets grow large.
+
+  ## Core concept
+
+  ### Arrays
+  A NumPy array (`ndarray`) is a grid of values, all the same type, that can be 1-dimensional (like a list) or multi-dimensional (like a table or matrix). Arrays support slicing similarly to Python lists, but extended to multiple dimensions at once.
+
+  ### Vectorized operations
+  Instead of looping element by element, NumPy lets you apply an operation to an entire array in one step — this is both far more concise to write and much faster to run, since the looping happens in optimized, compiled code rather than in Python itself.
+
+  ### Broadcasting
+  NumPy's rule for applying an operation between arrays of *different* shapes, by automatically "stretching" the smaller one — e.g., adding a single number to every element of an array, without writing a loop or manually resizing anything.
+
+  ### Aggregations
+  Functions like `sum`, `mean`, `min`, `max` computed either over the whole array, or along a specific **axis** (e.g., column-wise vs. row-wise on a 2D array).
+
+  ## Syntax
+
+  ```python
+  import numpy as np
+
+  # Create arrays
+  prices = np.array([10, 20, 30, 40])
+  matrix = np.array([[1, 2, 3], [4, 5, 6]])
+
+  # Vectorized operation (no loop needed)
+  discounted = prices * 0.9
+
+  # Broadcasting: adding a scalar to every element
+  adjusted = prices + 5
+
+  # Aggregation along an axis
+  column_sums = matrix.sum(axis=0)   # sum down each column
+  row_sums = matrix.sum(axis=1)      # sum across each row
+  ```
+
+  ## 📊 Example
+
+  **Task:** Normalize a list of test scores to a 0–1 scale.
+
+  **Loop-based version:**
+
+  ```python
+  scores = [60, 75, 90, 45]
+  min_s, max_s = min(scores), max(scores)
+  normalized = [(s - min_s) / (max_s - min_s) for s in scores]
+  ```
+
+  **Vectorized NumPy version:**
+
+  ```python
+  import numpy as np
+  scores = np.array([60, 75, 90, 45])
+  normalized = (scores - scores.min()) / (scores.max() - scores.min())
+  ```
+
+  **Output (both):** `[0.333, 0.667, 1.0, 0.0]`
+
+  **Explanation:** The NumPy version computes the subtraction and division across the *entire* array in one expression — no explicit loop — and produces identical results, but scales far better to large arrays.
+
+  ## Multiple examples
+
+  **Beginner:** `prices * 1.1` — apply a 10% increase to every price in an array at once.
+  **Intermediate:** `matrix[:, 1]` — slice out the entire second column of a 2D array.
+  **Real-world:** Computing a column-wise average across a 2D array of daily sales-by-region data with `data.mean(axis=0)`, the NumPy operation directly underlying a pandas `.mean()` call.
+
+  ## ⚠️ Common mistakes
+
+  - **Writing a manual Python loop over a NumPy array** instead of using a vectorized operation — this defeats the entire performance purpose of using NumPy in the first place.
+  - **Confusing `axis=0` and `axis=1`.** `axis=0` operates *down* columns (collapsing rows); `axis=1` operates *across* rows (collapsing columns) — easy to mix up, and a common source of a subtly wrong aggregation.
+  - **Assuming broadcasting always works between any two shapes.** It only works when shapes are compatible by NumPy's broadcasting rules; mismatched shapes raise a clear error rather than silently producing a wrong result.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any large numeric transformation:** normalizing, scaling, or applying a formula across an entire column of data efficiently.
+  - **Pandas under the hood:** understanding why a pandas column operation like `df["price"] * 1.1` is fast — it's a NumPy vectorized operation underneath.
+  - **Statistics:** computing means, standard deviations, and other aggregates efficiently across large arrays as a foundation for [Descriptive Statistics](/skills/stats-descriptive).
+
+  ## Related concepts
+
+  ```
+  Python Fundamentals → Jupyter Notebooks
+    ↓
+  NumPy ← you are here
+    ↓
+  Pandas (built on top of NumPy arrays)
+    ↓
+  Data Visualization with Python
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Given `arr = np.array([1, 2, 3, 4])`, write a vectorized expression that doubles every value.
+
+  ### Medium
+  2. Given a 2D array of shape (3 rows, 4 columns), write an expression that computes the sum of each column.
+
+  ### Interview/Advanced
+  3. Rewrite this loop as a single vectorized NumPy expression: `result = []; for x in values: result.append((x - mean) / std)`
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `arr * 2`
+  2. `matrix.sum(axis=0)`
+  3. `result = (values - mean) / std` (assuming `values` is a NumPy array) — this is the vectorized form of standardizing a set of values (subtracting the mean, dividing by the standard deviation), applied to the entire array in one step.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What is a vectorized operation, and why is it faster than a loop?**
+  Short answer: It applies an operation to an entire array at once using NumPy's optimized, compiled internals, rather than looping element by element in plain Python — which avoids Python's per-iteration overhead and is dramatically faster on large arrays.
+
+  ### Conceptual questions
+  **Q: What is broadcasting?**
+  Short answer: NumPy's rule for automatically applying an operation between arrays of different (but compatible) shapes, by conceptually "stretching" the smaller array to match — without writing an explicit loop or manually resizing anything.
+
+  ### Scenario-based questions
+  **Q: A column-wise average on a sales-by-region matrix returns row averages instead of column averages. What's the likely bug?**
+  Short answer: The wrong axis was used — `axis=0` averages down columns, `axis=1` averages across rows; swapping them is a very common and easy mistake.
+
+  ### Practical questions
+  **Q: How would you explain, to someone new to NumPy, why pandas operations are usually fast?**
+  Short answer: Pandas DataFrames are built on top of NumPy arrays, so most pandas operations are really vectorized NumPy operations underneath — that's why they run efficiently on large columns without an explicit Python loop.
+
+  ## Interview traps / tricky points
+
+  - `axis=0` vs. `axis=1` is one of the most commonly mixed-up NumPy concepts — always sanity check the result's shape against expectations.
+  - Broadcasting failures raise a clear shape-mismatch error rather than silently producing a wrong result — but knowing *why* two shapes are incompatible is a common interview probe.
+
+  ## Best practices
+
+  - Always prefer a vectorized operation over a manual Python loop on a NumPy array.
+  - Double-check the axis argument against a small test case when computing an aggregation on a 2D array.
+  - Use `.shape` liberally while debugging to confirm an array or the result of an operation has the dimensions you expect.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Vectorized operation** → apply math to a whole array at once, no loop, much faster
+  **Broadcasting** → automatically applies an operation across compatible mismatched shapes
+  **axis=0** → down columns · **axis=1** → across rows
+  **Remember:** pandas is built on NumPy arrays — this is why pandas operations are fast

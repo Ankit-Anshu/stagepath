@@ -1,0 +1,67 @@
+title: UNIQUE Function
+category: Spreadsheets
+what_is_it: Returning a list of each distinct value in a range, with duplicates removed, spilled dynamically.
+why_it_matters: It's a live, formula-based alternative to Remove Duplicates — the result updates automatically instead of needing to be manually re-run every time source data changes.
+prerequisites:
+  - sort-function
+objectives:
+  - Extract distinct values from a range with UNIQUE
+  - Explain the difference between UNIQUE and Remove Duplicates
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-unique-function-1
+    title: Build a live category list
+    description: Use UNIQUE to build a live, always-current list of distinct product categories from a raw data column.
+verify:
+  - Can extract distinct values with UNIQUE
+  - Can explain how UNIQUE differs from Remove Duplicates
+note: |
+  ## 🎯 What is it?
+
+  **UNIQUE** returns a list of each distinct value in a range, with duplicates removed, spilled dynamically starting from the formula's cell.
+
+  ## 💡 Why is it important?
+
+  - It's a live, formula-based alternative to Remove Duplicates — the result automatically updates as source data changes, instead of needing to be manually re-run every time new data is added.
+  - It's commonly used to power a dropdown list, a slicer-like filter, or the category list feeding into a FILTER/SUMIFS formula — always staying current with the source.
+
+  ## Syntax
+
+  ```
+  =UNIQUE(array, [by_col], [exactly_once])
+  ```
+
+  `exactly_once` (optional) returns only values that appear exactly once, instead of every distinct value — a useful way to find non-duplicated entries specifically.
+
+  ## 📊 Example
+
+  `=UNIQUE(C2:C500)` on a `region` column returns a live, always-current list of every distinct region present in the data — useful as the source list for a data validation dropdown, or as an input to a formula that loops through each region.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing UNIQUE with Remove Duplicates** — Remove Duplicates permanently deletes duplicate rows from the data itself; UNIQUE produces a separate, live list without touching the source data at all.
+  - **Forgetting UNIQUE's result is a spilled array** and trying to reference just its first cell when a later formula needs the whole list — use the `#` spill operator (see Dynamic Arrays).
+
+  ## Related concepts
+
+  ```
+  SORT
+    ↓
+  UNIQUE ← you are here
+    ↓
+  LET
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between using UNIQUE and using Remove Duplicates on a column?**
+  Short answer: Remove Duplicates permanently deletes duplicate rows from the source data; UNIQUE produces a separate, live, automatically-updating list of distinct values without modifying the original data at all — useful when you need both the full data and a distinct list side by side.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **UNIQUE(array, [by_col], [exactly_once])** → live list of distinct values, spilled dynamically
+  Doesn't touch the source data — unlike Remove Duplicates, which permanently deletes rows.

@@ -1,0 +1,37 @@
+name: Content suggestion
+description: Suggest a new resource, project, dataset, skill, or an outdated/broken piece of content.
+labels: [content]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of content?
+      options:
+        - New resource (video/article/course/book/docs)
+        - New project
+        - New dataset
+        - New skill / roadmap gap
+        - Outdated or broken existing content
+    validations:
+      required: true
+  - type: input
+    id: related-skill
+    attributes:
+      label: Related skill or roadmap id
+      description: e.g. sql-joins, data-analyst — leave blank if this is a brand-new topic.
+    validations:
+      required: false
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What should be added or fixed, and why is it worth including? Link to the resource/dataset if you have one.
+    validations:
+      required: true
+  - type: checkboxes
+    id: willing
+    attributes:
+      label: Would you be willing to open the pull request yourself?
+      options:
+        - label: Yes, I can submit a PR for this
+        - label: No, just flagging it

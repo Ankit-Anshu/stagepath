@@ -1,0 +1,100 @@
+title: Data Validation
+category: Spreadsheets
+what_is_it: Restricting what can be entered into a cell — a dropdown list, a number range, or a custom rule — to prevent bad data from being entered in the first place.
+why_it_matters: Preventing a data-quality problem at entry time is far more effective than cleaning it up after the fact — Data Validation stops many errors before they ever happen.
+prerequisites:
+  - find-and-replace
+objectives:
+  - Add a dropdown list to a cell using Data Validation
+  - Restrict a cell to a specific number range or format
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-data-validation-1
+    title: Add a category dropdown
+    description: Add a Data Validation dropdown to a category column, limiting entries to a fixed list of approved categories.
+verify:
+  - Dropdown correctly restricts entry to the approved list
+  - An out-of-range or invalid entry is correctly blocked or flagged
+note: |
+  ## 🎯 What is it?
+
+  **Data Validation** restricts what can be entered into a cell — a dropdown list of approved values, a number range, a date range, or a custom rule — to prevent bad data from being entered in the first place.
+
+  ## 💡 Why is it important?
+
+  Preventing a data-quality problem **at entry time** is far more effective than cleaning it up afterward — Data Validation stops many common errors (a typo'd category, an impossible date, a number outside a valid range) before they ever make it into the dataset.
+
+  ## Core concept
+
+  | Validation type | Example |
+  |---|---|
+  | List (dropdown) | Restrict a "Status" column to exactly "Pending," "Shipped," "Delivered" |
+  | Number range | Restrict a "Discount %" cell to between 0 and 100 |
+  | Date range | Restrict a "Delivery Date" to today or later |
+  | Custom formula | Any rule expressible as a TRUE/FALSE formula |
+
+  ## 📊 Example
+
+  A "Region" column should only ever contain "West," "East," "North," or "South."
+
+  **Setup:** Data Validation → List → source: `West,East,North,South`.
+
+  **Explanation:** Anyone entering data into this column now sees a dropdown instead of a free-text field — "west" (lowercase), "Wast" (typo), or "Region 1" (an unapproved value) are no longer possible, eliminating an entire category of downstream cleaning work (like the casing standardization covered in [UPPER](/skills/upper-function)).
+
+  ## Multiple examples
+
+  **Beginner:** Adding a Yes/No dropdown to a cell.
+  **Intermediate:** Restricting a "Quantity" column to whole numbers greater than 0, rejecting negative or fractional entries.
+  **Real-world:** Building a data-entry template for a team that regularly logs transactions manually, with Data Validation on every categorical column — eliminating the casing/typo cleanup that would otherwise be needed on every subsequent analysis of that data.
+
+  ## ⚠️ Common mistakes
+
+  - **Adding Data Validation only after a dataset already has inconsistent values.** Validation prevents *future* bad entries; it doesn't automatically fix values already in the sheet.
+  - **Building a dropdown list that's hard to maintain**, e.g., hardcoding values directly into the validation rule instead of referencing a separate list range that can be updated in one place.
+  - **Not communicating to data-entry users why a value is being rejected**, leading to confusion — a custom input message or error message helps here.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data collection templates:** any spreadsheet where a team manually logs data benefits enormously from Data Validation on categorical and numeric fields.
+  - **Preventing downstream cleaning work:** eliminating an entire category of data-cleaning tasks (typos, casing, invalid categories) at the source.
+
+  ## Related concepts
+
+  ```
+  Find & Replace → Data Validation ← you are here → Conditional Formatting
+  ```
+  Directly connects to [Data Cleaning & Quality](/skills/data-cleaning) — Data Validation is the "prevention" half of the same problem cleaning solves reactively.
+
+  ## Practice questions
+
+  ### Easy
+  1. What does a "List" Data Validation rule do?
+
+  ### Interview/Advanced
+  2. Why is Data Validation considered more effective than cleaning data after the fact?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. It restricts a cell's entry to a fixed set of approved values, typically shown as a dropdown, preventing free-text entry of anything else.
+  2. It prevents bad data from ever entering the dataset in the first place, rather than requiring detection and correction after the fact — eliminating typos, inconsistent casing, and invalid categories at the source is more reliable and efficient than catching them downstream.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you prevent a "Status" column from accumulating inconsistent free-text entries over time?**
+  Short answer: Apply Data Validation with a dropdown list of the approved status values, so users can only select from the fixed list instead of typing free text — this eliminates typos and casing inconsistencies at the source.
+
+  ## Best practices
+
+  - Reference a separate, maintainable list range for a dropdown's source, rather than hardcoding values directly into the rule.
+  - Add a clear input message explaining what's expected, especially for a custom validation rule.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data Validation** → restricts what can be entered into a cell (dropdown, number range, custom rule)
+  **Prevents** bad data at entry time, rather than requiring cleanup afterward

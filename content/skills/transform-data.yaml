@@ -1,0 +1,69 @@
+title: Transform Data
+category: Foundations
+what_is_it: Reshaping cleaned data into the form actually needed for analysis — aggregating, joining, filtering, or deriving new columns.
+why_it_matters: Clean data isn't automatically analysis-ready — it usually still needs reshaping (e.g., turning transaction-level data into a daily summary) before it can answer the business question.
+prerequisites:
+  - data-cleaning
+objectives:
+  - Explain the difference between cleaning data and transforming data
+  - Name two common transformation operations
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-transform-data-1
+    title: Reshape a dataset
+    description: Take any transaction-level dataset and describe the steps to transform it into a daily summary table.
+verify:
+  - Can distinguish cleaning from transforming
+  - Can name two transformation operations
+note: |
+  ## 🎯 What is it?
+
+  **Transforming data** reshapes already-clean data into the form actually needed to answer the business question — aggregating rows, joining tables together, filtering to a relevant subset, or deriving new calculated columns. It's a distinct step from cleaning: cleaning fixes *errors*, transforming changes *shape*.
+
+  ## 💡 Why is it important?
+
+  - Clean data usually isn't analysis-ready by itself — e.g., transaction-level rows need aggregating into a daily or monthly summary before they answer a trend question.
+  - It's where most of the actual "shaping" work happens — joining a customer table to an orders table, filtering to the right date range, or calculating a new ratio column.
+
+  ## Core concept
+
+  | Operation | Example |
+  |---|---|
+  | Aggregate | Sum daily transactions into a daily revenue total |
+  | Join | Combine `orders` and `customers` tables by customer ID |
+  | Filter | Keep only orders from the last 90 days |
+  | Derive | Calculate `profit_margin` from `revenue` and `cost` columns |
+  | Reshape | Pivot rows into columns (or vice versa) for a specific chart |
+
+  ## 📊 Example
+
+  Clean, transaction-level order data (one row per order) is transformed into a "daily revenue" table by grouping and summing by date — the underlying data was already clean, but it needed to be reshaped into daily totals before it could feed a trend chart.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing transformation with cleaning** — transforming doesn't fix errors in the data; it should always happen *after* cleaning, on already-trustworthy data.
+  - **Joining tables without checking for duplicate matches** — a join that unexpectedly multiplies rows (a many-to-many join where one-to-many was intended) silently inflates totals.
+
+  ## Related concepts
+
+  ```
+  Clean Data
+    ↓
+  Transform Data ← you are here
+    ↓
+  Explore Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between cleaning and transforming data?**
+  Short answer: Cleaning fixes errors and inconsistencies in the data itself (missing values, duplicates, wrong types); transforming reshapes already-clean data into the form needed for analysis (aggregating, joining, filtering, deriving new columns).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Transform data** → reshape clean data into an analysis-ready form: aggregate, join, filter, derive
+  Distinct from cleaning: cleaning fixes errors, transforming changes shape.

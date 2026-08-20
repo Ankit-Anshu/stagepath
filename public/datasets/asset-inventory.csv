@@ -1,0 +1,4 @@
+device_id,owner,os,criticality,last_seen
+NB-LT-044,alex@northbridge.test,Windows 11,high,2026-07-21T08:40:00Z
+NB-LT-019,mina@northbridge.test,Windows 11,medium,2026-07-21T09:05:00Z
+

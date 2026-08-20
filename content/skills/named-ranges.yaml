@@ -1,0 +1,64 @@
+title: Named Ranges
+category: Spreadsheets
+what_is_it: Giving a cell or range a descriptive name (like TaxRate) that can be used in a formula instead of its raw cell address.
+why_it_matters: A formula using a named range reads like plain English and never breaks from a misplaced $ sign — a real readability and reliability upgrade over raw cell references.
+prerequisites:
+  - advanced-lookup
+objectives:
+  - Create and use a named range in a formula
+  - Explain the reliability advantage of a named range over an absolute cell reference
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-named-ranges-1
+    title: Replace $E$1 with a name
+    description: Given a formula referencing a fixed tax-rate cell with $E$1, create a named range called TaxRate for that cell and rewrite the formula to use it.
+verify:
+  - Can create a named range
+  - Can rewrite a formula to use a named range instead of a raw cell address
+note: |
+  ## 🎯 What is it?
+
+  A **named range** gives a cell or range a descriptive name — like `TaxRate` for cell E1 — that can then be used directly in a formula instead of its raw cell address, and automatically works like an absolute reference (it doesn't shift when copied).
+
+  ## 💡 Why is it important?
+
+  - A formula using a named range reads like plain English: `=Price*TaxRate` is instantly clearer than `=B2*$E$1`.
+  - It removes a whole category of Absolute Reference mistakes — a named range behaves as if it's always locked, without needing to remember `$` symbols at all.
+
+  ## Core concept
+
+  Creating a named range: select the cell/range, type a name directly into the Name Box (top-left of the interface), and press Enter — the name is then usable in any formula in the workbook.
+
+  ## 📊 Example
+
+  Instead of `=B2*$E$1` (where E1 holds a tax rate), naming E1 as `TaxRate` lets every formula read `=B2*TaxRate` — dramatically clearer to anyone reading the formula later, and immune to the classic "forgot to lock the reference" bug from Absolute References.
+
+  ## ⚠️ Common mistakes
+
+  - **Using a name that's also a valid cell address** (like "Q1"), which Excel will reject or misinterpret — choose names that can't be confused with a cell reference.
+  - **Not documenting what a named range refers to** in a large workbook, making named ranges just as opaque as raw references if there are many of them and none are self-explanatory.
+
+  ## Related concepts
+
+  ```
+  Advanced Lookup
+    ↓
+  Named Ranges ← you are here
+    ↓
+  Power Pivot
+  ```
+  Directly improves on the earlier Absolute References pattern.
+
+  ## 🎤 Interview preparation
+
+  **Q: Why might a formula using a named range be preferable to one using an absolute cell reference like $E$1?**
+  Short answer: A named range reads like plain English (`Price*TaxRate` vs. `B2*$E$1`), making the formula's intent clear to anyone reading it later, and it behaves like a locked reference automatically — removing the risk of a forgotten `$` symbol.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Named range** → give a cell/range a descriptive name, usable directly in formulas
+  Reads like plain English and behaves like an absolute reference automatically.

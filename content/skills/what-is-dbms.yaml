@@ -1,0 +1,69 @@
+title: DBMS
+category: SQL
+what_is_it: Database Management System — the software that actually stores, organizes, secures, and lets you query a database (e.g., PostgreSQL, MySQL, SQL Server).
+why_it_matters: Job postings and tools reference specific DBMS products by name — knowing the term clarifies that "PostgreSQL" and "a database" aren't quite the same thing.
+prerequisites:
+  - relational-database
+objectives:
+  - Define DBMS and name two examples
+  - Explain the difference between "a database" and "a DBMS"
+estimated_minutes: 15
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-dbms-1
+    title: Name a DBMS
+    description: Look up which DBMS product a tool or app you use is built on (many open-source projects document this).
+verify:
+  - Can define DBMS
+  - Can name two real DBMS products
+note: |
+  ## 🎯 What is it?
+
+  A **DBMS (Database Management System)** is the actual software that stores, organizes, secures, and lets you query a database — PostgreSQL, MySQL, Microsoft SQL Server, and Oracle Database are all DBMS products. "The database" usually refers to the *data itself*; "the DBMS" refers to the *software managing it*.
+
+  ## 💡 Why is it important?
+
+  - Job postings and tools name specific DBMS products ("3+ years with PostgreSQL") — knowing the term makes those postings and setup docs make sense.
+  - Nearly all SQL syntax an analyst learns is close to universal across DBMS products, with small differences (see RDBMS) — knowing this distinction sets the right expectation.
+
+  ## Core concept
+
+  | DBMS | Common use |
+  |---|---|
+  | PostgreSQL | Popular open-source, widely used in analytics |
+  | MySQL | Popular open-source, common in web applications |
+  | Microsoft SQL Server | Common in enterprise/Windows environments |
+  | Oracle Database | Common in large, established enterprises |
+  | SQLite | Lightweight, embedded (no separate server) |
+
+  ## 📊 Example
+
+  A company's "database" holds its customer and order data; PostgreSQL is the DBMS actually running on a server, managing that data, handling queries, and enforcing rules — the data and the software managing it are two different things people casually refer to with the same word.
+
+  ## ⚠️ Common mistakes
+
+  - **Using "database" and "DBMS" interchangeably in a way that confuses which one you mean** — usually harmless in casual conversation, but worth knowing the precise distinction for interviews.
+  - **Assuming all DBMS products have wildly different SQL** — the core SQL taught in this roadmap (SELECT, WHERE, JOIN, GROUP BY) works almost identically across all of them.
+
+  ## Related concepts
+
+  ```
+  Relational Database
+    ↓
+  DBMS ← you are here
+    ↓
+  RDBMS (a DBMS specifically for relational databases)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between a database and a DBMS?**
+  Short answer: The database is the actual organized data; the DBMS (like PostgreSQL or MySQL) is the software that stores, secures, and lets you query that data.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **DBMS** → the software managing a database — PostgreSQL, MySQL, SQL Server, Oracle
+  Core SQL syntax is nearly universal across DBMS products.

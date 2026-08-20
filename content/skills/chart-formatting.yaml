@@ -1,0 +1,70 @@
+title: Chart Formatting
+category: Spreadsheets
+what_is_it: Polishing a chart's titles, labels, colors, and gridlines so it communicates clearly and looks presentation-ready — without changing the underlying data.
+why_it_matters: An unformatted default chart is functional but forgettable — deliberate formatting is what makes a chart's point immediately obvious to a viewer.
+prerequisites:
+  - choosing-the-right-chart
+objectives:
+  - Apply clear titles, axis labels, and data labels to a chart
+  - Remove unnecessary visual clutter from a chart
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-chart-formatting-1
+    title: Polish a default chart
+    description: Take a default, unformatted chart and add a clear title, axis labels, and remove any unnecessary gridlines or clutter.
+verify:
+  - Can add a clear title and axis labels to a chart
+  - Can identify and remove unnecessary chart clutter
+note: |
+  ## 🎯 What is it?
+
+  **Chart formatting** covers the finishing touches that turn a default, generic chart into one that communicates clearly and looks presentation-ready — a specific title (not "Chart 1"), labeled axes, appropriate colors, and removing anything that doesn't help the viewer.
+
+  ## 💡 Why is it important?
+
+  - An unformatted default chart is functional but forgettable — a viewer has to work to figure out what it's showing, which is exactly the opposite of what a chart is for.
+  - Deliberate formatting is often what separates a chart that gets glanced at and dismissed from one that makes its point immediately.
+
+  ## Core concept
+
+  | Formatting choice | Why |
+  |---|---|
+  | A specific, descriptive title | "Monthly Revenue, 2024" beats "Chart 1" |
+  | Labeled axes | A viewer shouldn't have to guess what's being measured |
+  | Minimal gridlines | Heavy gridlines compete with the actual data |
+  | Deliberate color, not defaults | Highlight what matters; keep the rest muted |
+  | Data labels where they help | Direct labels can beat forcing a viewer to read off an axis |
+
+  ## 📊 Example
+
+  A default bar chart titled "Chart 1," with default blue bars and heavy gridlines, retitled "Revenue by Region — Q1 2024," with gridlines removed and the top-performing region highlighted in a distinct color while the rest stay muted gray — same data, dramatically clearer message.
+
+  ## ⚠️ Common mistakes
+
+  - **Leaving the default title** ("Chart 1," or just the series name), forcing a viewer to guess what the chart is actually about.
+  - **Over-formatting** — too many colors or 3D effects competes for attention just as much as too little formatting; the goal is clarity, not decoration.
+  - **Formatting decoratively without making the finding easier to see** — every formatting choice should serve communication, not just appearance.
+
+  ## Related concepts
+
+  ```
+  Choosing the Right Chart
+    ↓
+  Chart Formatting ← you are here
+    ↓
+  Data Storytelling
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the fastest formatting change that improves almost any default chart?**
+  Short answer: Replacing the default title ("Chart 1") with a specific, descriptive one that states what the chart shows — it's a small change that immediately tells a viewer what they're looking at, without requiring them to interpret the chart first.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Chart formatting** → specific titles, labeled axes, minimal clutter, deliberate color
+  Every formatting choice should make the chart's point clearer, not just prettier.

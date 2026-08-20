@@ -1,0 +1,68 @@
+title: Changing Data Types
+category: Spreadsheets
+what_is_it: Converting a column from one data type to another — text to number, text to date, number to text — so it behaves correctly in formulas and analysis.
+why_it_matters: A value with the wrong data type looks fine on screen but silently fails at sorting, summing, or filtering correctly until it's converted.
+prerequisites:
+  - combining-columns
+objectives:
+  - Convert a column between text, number, and date data types
+  - Diagnose a data-type mismatch from unexpected formula behavior
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-changing-data-types-1
+    title: Fix a mixed-type column
+    description: Given a column with numbers stored as text, convert the entire column to true numeric values.
+verify:
+  - Can convert a column from text to number or date
+  - Can diagnose a data-type mismatch from formula behavior
+note: |
+  ## 🎯 What is it?
+
+  **Changing data types** means converting a column from one data type to another — text to number, text to date, number to text — so it behaves correctly in formulas, sorting, and filtering. This directly applies the techniques from Cleaning Numbers and Cleaning Dates as a deliberate, general transformation step.
+
+  ## 💡 Why is it important?
+
+  - A value with the wrong data type can look completely normal on screen but silently fail at summing, sorting chronologically/numerically, or matching in a lookup.
+  - It's one of the most common, most overlooked data preparation steps — especially with data imported from CSVs, PDFs, or other systems.
+
+  ## Core concept
+
+  | Conversion | Tool |
+  |---|---|
+  | Text → Number | `VALUE()`, Text to Columns, multiply by 1 |
+  | Text → Date | `DATEVALUE()`, Text to Columns (Date option) |
+  | Number/Date → Text | `TEXT()` |
+
+  ## 📊 Example
+
+  A column imported as text (`"1204.50"`, left-aligned) is converted to a true number with `=VALUE(A2)` or Text to Columns — after which it can be correctly summed, sorted numerically, and compared with `>`/`<`.
+
+  ## ⚠️ Common mistakes
+
+  - **Not checking a column's actual data type before building formulas on it** — alignment (left = text, right = number/date) is a fast visual check worth doing early.
+  - **Converting a column's type without first cleaning obviously invalid entries** (like a stray "$" or "N/A" text mixed into a numeric column), which can cause the conversion itself to fail or error for some rows.
+
+  ## Related concepts
+
+  ```
+  Combining Columns
+    ↓
+  Changing Data Types ← you are here
+    ↓
+  Reshaping Data
+  ```
+  Directly builds on Cleaning Numbers and Cleaning Dates from the Data Cleaning chapter.
+
+  ## 🎤 Interview preparation
+
+  **Q: A column of "numbers" won't sum correctly, but visually looks fine. What's the likely cause and fix?**
+  Short answer: The values are likely stored as text, not true numbers — check alignment (left-aligned suggests text) and convert with VALUE() or Text to Columns to fix the underlying data type before summing.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Changing data types** → convert text ↔ number ↔ date so formulas, sorting, and filtering work correctly
+  Check alignment as a fast first diagnostic for a mismatched type.

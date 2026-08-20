@@ -1,0 +1,177 @@
+title: Cohort & Retention Analysis
+category: Business Analytics
+what_is_it: Grouping users by a shared starting point, like signup week, and tracking how their behavior changes over time to measure retention.
+why_it_matters: Average metrics hide what's really happening. Cohort analysis reveals whether a product or campaign is actually improving retention over time, not just growing in raw numbers.
+prerequisites:
+  - business-analytics
+objectives:
+  - Build a cohort table
+  - Calculate a retention rate
+  - Distinguish new vs. returning behavior
+  - Spot a retention curve that signals a problem
+subtopics:
+  - title: Defining a cohort
+    description: Choosing the shared starting event (signup, first purchase) that groups users together.
+    outcomes:
+      - Define a cohort boundary appropriate to the business question
+  - title: Building a cohort table
+    description: Laying out cohorts by start period against time-since-start to see behavior unfold.
+    outcomes:
+      - Build a cohort table from raw event data
+  - title: Retention rate calculation
+    description: Calculating the percentage of a cohort still active at each subsequent period.
+    outcomes:
+      - Calculate retention rate correctly for a given period
+  - title: Reading a retention curve
+    description: Recognizing a healthy plateau versus a curve trending toward zero.
+    outcomes:
+      - Diagnose whether a retention curve signals a healthy or unhealthy product
+estimated_minutes: 240
+resources:
+  - r-grow-google-data-analytics
+  - r-fcc-data-analysis-python
+practice:
+  - id: ex-cohort-1
+    title: Build a weekly cohort table
+    description: Given a raw signup and activity log, build a weekly cohort retention table and identify the week with the steepest drop-off.
+verify:
+  - Cohort boundaries are defined consistently
+  - Retention rate is calculated correctly at each period
+  - Can explain what the resulting curve implies about the product
+note: |
+  ## 🎯 What is it?
+
+  **Cohort analysis** groups users by a shared starting point — like the week they signed up — and tracks how their behavior changes over time, most commonly to measure **retention**: what percentage of a cohort is still active in each subsequent period.
+
+  ## 💡 Why is it important?
+
+  Average metrics hide what's really happening. A company can be growing in raw user count while its actual retention is quietly getting worse — cohort analysis is what reveals whether a product or campaign is genuinely improving retention over time, not just growing in top-line numbers.
+
+  ## Core concept
+
+  ### Defining a cohort
+  A cohort is a group of users who share a starting event — most commonly signup week/month, but it could be first purchase date, or the date they were exposed to a specific campaign. The right boundary depends on the business question being asked.
+
+  ### Building a cohort table
+  A cohort table lays cohorts (rows, by start period) against **time-since-start** (columns, e.g., week 0, week 1, week 2...) — each cell showing what percentage of that cohort was still active that many periods after joining.
+
+  ### Retention rate calculation
+  For a given cohort and period: the percentage of the *original* cohort size still active in that period.
+
+  ### Reading a retention curve
+  A **healthy** retention curve declines initially, then **plateaus** at some non-zero level — meaning a core group of users sticks around indefinitely. An **unhealthy** curve keeps trending toward zero with no plateau — meaning the product isn't building a durable, retained user base.
+
+  ## Syntax / Formula / Structure
+
+  ```
+  Retention rate (cohort, period N) = (Cohort members active in period N) ÷ (Total original cohort size)
+  ```
+
+  A cohort table's shape:
+
+  ```
+  Cohort        Week 0   Week 1   Week 2   Week 3
+  Jan 1 cohort   100%      45%      38%      35%
+  Jan 8 cohort   100%      50%      42%      —
+  Jan 15 cohort  100%      48%      —        —
+  ```
+
+  ## 📊 Example
+
+  Weekly signup cohort, tracked over 4 weeks:
+
+  | Cohort | Week 0 | Week 1 | Week 2 | Week 3 |
+  |---|---|---|---|---|
+  | Jan 1 (1,000 users) | 100% | 40% | 25% | 24% |
+  | Jan 8 (1,200 users) | 100% | 42% | 26% | — |
+
+  **Reading it:** The Jan 1 cohort drops sharply through week 2 (100% → 25%) but then **plateaus** at week 3 (25% → 24%) — this plateau is a healthy sign; the users who make it past the initial drop-off tend to stick around.
+
+  **Explanation:** If instead week 3 had continued falling toward 10%, 5%, and so on with no plateau, that would signal the product isn't retaining even its most engaged early users — a much more serious problem than the initial drop-off itself.
+
+  ## Multiple examples
+
+  **Beginner:** A simple monthly signup cohort table tracking 3 months of retention.
+  **Intermediate:** Comparing two consecutive weekly cohorts to see whether retention is *improving* over time (e.g., after a new onboarding flow launched).
+  **Real-world:** Building a weekly cohort retention table from a raw signup and activity log, identifying that a specific cohort (the week a pricing change launched) shows meaningfully worse week-1 retention than surrounding cohorts — directly implicating that specific change as worth investigating.
+
+  ## ⚠️ Common mistakes
+
+  - **Looking only at overall active-user counts**, which can mask declining retention if new signups are simultaneously growing fast enough to offset it.
+  - **Comparing cohorts of very different sizes without noting it**, which can make small-sample cohorts look noisier or more volatile than they really are.
+  - **Misreading a normal initial drop-off as a crisis.** Some early drop-off (week 0 → week 1) is completely normal for most products — the more important signal is whether the curve plateaus afterward, not the size of the very first drop.
+  - **Inconsistent cohort boundaries** (e.g., mixing calendar weeks and rolling 7-day windows) that make cohorts not directly comparable to each other.
+
+  ## Real-world Data Analyst use cases
+
+  - **Product analysis:** the standard way to measure whether product changes are genuinely improving long-term retention, not just short-term engagement.
+  - **Marketing analysis:** comparing retention of users acquired through different channels (organic vs. paid) to judge acquisition quality, not just acquisition volume.
+  - **Subscription business analysis:** tracking whether retention is improving or worsening cohort over cohort, a leading indicator for long-term revenue health.
+
+  ## Related concepts
+
+  ```
+  Business Analytics
+    ↓
+  Cohort & Retention Analysis ← you are here
+    ↓
+  Forecasting & Trend Analysis (retention trends feed revenue forecasts)
+  ```
+  Also connects to [KPIs & Metrics](/skills/kpis-metrics)' leading vs. lagging indicator framing — retention is often a leading indicator of future revenue health.
+
+  ## Practice questions
+
+  ### Easy
+  1. What defines a "cohort" in cohort analysis?
+
+  ### Medium
+  2. A cohort's retention curve drops from 100% to 20% by week 2, then holds steady at 19-20% through week 8. Is this a healthy or unhealthy pattern? Why?
+
+  ### Interview/Advanced
+  3. A company's total active user count is growing every month, but a cohort analysis shows retention worsening for each successive signup cohort. How do you reconcile these two facts, and which one should leadership be more concerned about?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A group of users who share a common starting event, most often the same signup period (week/month), used to track how their behavior evolves over time from that shared starting point.
+  2. Healthy — the sharp initial drop is common, but the plateau at week 2 onward shows a stable core of retained users who continue engaging over the long term, rather than continuing to decay toward zero.
+  3. Growing total active users can mask worsening retention if new signup volume is growing fast enough to offset the declining retention rate per cohort — leadership should be more concerned about the retention trend, since it signals a structural problem with the product's ability to keep users, which will eventually catch up with total user growth once new-signup growth slows.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What does a cohort retention table show that a simple monthly active user count doesn't?**
+  Short answer: It shows how a *specific group* of users, who all started at the same time, behaves over subsequent periods — revealing genuine retention trends that an aggregate active-user count can mask if new signups are simultaneously changing.
+
+  ### Conceptual questions
+  **Q: What does a "plateau" in a retention curve indicate?**
+  Short answer: A stable core of users who continue engaging long-term after the initial drop-off — generally a healthy sign, since it suggests the product has found a durable, retained user base rather than continuously losing everyone eventually.
+
+  ### Scenario-based questions
+  **Q: Two consecutive weekly cohorts show meaningfully different week-1 retention. What would you investigate?**
+  Short answer: What changed between the two cohorts' signup periods — a product change, a different acquisition channel mix, a pricing change, or an external factor — to form a specific hypothesis for the retention difference.
+
+  ### Practical questions
+  **Q: How would you build a cohort retention table from a raw signup and activity log?**
+  Short answer: Assign each user to a cohort based on their signup period, then for each subsequent period, calculate what percentage of that cohort's original members had any activity — laying cohorts as rows and time-since-signup as columns.
+
+  ## Interview traps / tricky points
+
+  - Rising total user counts can coexist with worsening retention — a classic scenario interviewers use to test whether a candidate reflexively trusts an aggregate growth number.
+  - A large initial drop-off (week 0 → week 1) is often normal and not itself alarming — the plateau (or lack of one) afterward is the more important signal.
+
+  ## Best practices
+
+  - Always define cohort boundaries consistently (e.g., always calendar weeks, not a mix of windows) so cohorts are genuinely comparable.
+  - Look for a plateau, not just the size of the initial drop, when judging whether a retention curve is healthy.
+  - Pair a declining cohort-over-cohort retention trend with a specific hypothesis (a product change, an acquisition channel shift) rather than reporting it in isolation.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Cohort** → users grouped by a shared starting event (e.g., signup week)
+  **Retention rate** → active in period N ÷ original cohort size
+  **Healthy curve** → declines then plateaus at a stable, non-zero level
+  **Remember:** rising total users can mask worsening retention — check cohorts, not just aggregates

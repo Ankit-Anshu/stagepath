@@ -1,0 +1,47 @@
+title: Marketing Campaign Analysis
+level: mini
+duration: 2-3 hours
+description: Compare campaigns across channels to find which ones actually generate profitable revenue, not just clicks.
+problem_statement: >-
+  Marketing wants to know which channel deserves more budget next quarter, based on cost per
+  conversion and return on ad spend, not just raw click counts.
+scenario: You're the analyst preparing the quarterly channel review for the marketing team.
+dataset:
+  name: Campaign performance export
+  description: One row per campaign with channel, spend, impressions, clicks, conversions, and revenue.
+  source_url: /datasets/marketing-campaigns.csv
+  format: CSV
+  size: 12 campaigns
+  files: [marketing-campaigns.csv]
+skills:
+  - percentage-calculations
+  - spreadsheets-pivot-tables
+  - combo-chart
+datasets:
+  - Campaign performance dataset
+tasks:
+  - Calculate click-through rate, cost per conversion, and ROAS for every campaign
+  - Build a pivot table summarizing total spend, conversions, and revenue by channel
+  - Build a combo chart comparing spend (bars) against ROAS (line) by channel
+  - Identify which channel has the best ROAS and which has the worst cost per conversion
+requirements:
+  - CTR, cost per conversion, and ROAS are all calculated with formulas, not estimated
+  - The combo chart clearly shows both spend and ROAS on appropriate, readable scales
+  - The channel comparison accounts for spend, not just conversion counts
+milestones:
+  - title: Calculate the metrics
+    description: Add CTR, cost per conversion, and ROAS as calculated columns for every campaign.
+  - title: Summarize by channel
+    description: Build the pivot table and combo chart comparing spend and ROAS across channels.
+  - title: Recommend a budget shift
+    description: Write a recommendation naming which channel should get more (or less) budget next quarter, and why.
+rubric:
+  - criterion: Metric correctness
+    definition: CTR, cost per conversion, and ROAS formulas are correct, including for zero-conversion campaigns.
+  - criterion: Chart clarity
+    definition: The combo chart's secondary axis makes both spend and ROAS clearly readable together.
+  - criterion: Budget recommendation
+    definition: The recommendation is specific, tied to the data, and considers cost, not just volume.
+artifacts:
+  - Spreadsheet
+  - README

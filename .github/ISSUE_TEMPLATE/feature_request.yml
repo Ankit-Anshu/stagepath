@@ -1,0 +1,22 @@
+name: Feature / improvement idea
+description: Suggest a change to how the site works (not a specific piece of content).
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve for learners?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What are you proposing?
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        For anything structural (a new page type, new content collection, redesign, new dependency),
+        please open this issue **before** starting a pull request — see
+        [GOVERNANCE.md](../../GOVERNANCE.md#how-decisions-get-made).

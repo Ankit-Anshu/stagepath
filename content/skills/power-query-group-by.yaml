@@ -1,0 +1,63 @@
+title: Group By in Power Query
+category: Spreadsheets
+what_is_it: Aggregating a query's rows into summarized groups — like SQL's GROUP BY or a pivot table — producing one row per group with a chosen summary (sum, count, average).
+why_it_matters: It lets a query pre-aggregate large, detailed data into a smaller, summary-ready result before it's even loaded into the worksheet.
+prerequisites:
+  - power-query-pivot-unpivot
+objectives:
+  - Group and summarize rows using Power Query's Group By
+  - Explain when pre-aggregating in Power Query is preferable to loading raw detail and summarizing in a pivot table
+estimated_minutes: 20
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-group-by-1
+    title: Summarize by region
+    description: Given a detailed transaction-level query, use Group By to produce one row per region with total revenue and order count.
+verify:
+  - Can group and summarize rows with Group By
+  - Can explain a reason to pre-aggregate in Power Query rather than after loading
+note: |
+  ## 🎯 What is it?
+
+  **Group By** in Power Query aggregates rows into summarized groups, similar to SQL's `GROUP BY` or a worksheet pivot table — producing one row per unique group value, with a chosen aggregation (sum, count, average, min, max) for other columns.
+
+  ## 💡 Why is it important?
+
+  - It lets a query pre-aggregate large, detailed data into a smaller, summary-ready result *before* it's even loaded into the worksheet — useful when the detailed data is huge but only the summary is actually needed.
+  - It's a repeatable step, meaning the aggregation automatically recalculates on every refresh as new detailed data arrives.
+
+  ## Syntax / Structure
+
+  Group By dialog: choose the column(s) to group by, then add one or more aggregations (e.g., `Sum of Revenue`, `Count of Rows`).
+
+  ## 📊 Example
+
+  A transaction-level query with thousands of rows is grouped by `Region`, with an aggregation of `Sum of Revenue` and `Count of Orders` — producing a small, clean summary table (one row per region) loaded directly into the worksheet, instead of loading every individual transaction and summarizing with a separate pivot table.
+
+  ## ⚠️ Common mistakes
+
+  - **Grouping by a column with too many unique values** (like a raw ID), producing a "summary" that's barely smaller than the original detailed data.
+  - **Choosing the wrong aggregation for a metric** — e.g., averaging a column that should be summed (like revenue), producing a misleading result.
+
+  ## Related concepts
+
+  ```
+  Pivot / Unpivot
+    ↓
+  Group By ← you are here
+    ↓
+  Custom Columns
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you pre-aggregate data with Power Query's Group By, instead of loading the raw detail and summarizing it with a pivot table afterward?**
+  Short answer: When the detailed source data is very large and only the summary is actually needed — pre-aggregating in Power Query keeps the loaded worksheet data small and fast, while still automatically recalculating from full detail on every refresh.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Group By** → aggregate rows into summarized groups (like SQL's GROUP BY), as a repeatable Power Query step
+  Useful for pre-summarizing large detailed data before it's loaded.

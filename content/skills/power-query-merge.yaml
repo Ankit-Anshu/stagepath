@@ -1,0 +1,105 @@
+title: Merge
+category: Spreadsheets
+what_is_it: Combining two queries by a shared key — the Power Query equivalent of a spreadsheet lookup or a SQL join, built directly into the query itself.
+why_it_matters: It lets two separate, repeatable data sources be joined together automatically on every refresh, without a manual VLOOKUP that needs re-checking each time.
+prerequisites:
+  - power-query-transform-data
+objectives:
+  - Merge two Power Query queries on a shared key
+  - Choose the correct join type (matching SQL/JOIN concepts) for a merge
+estimated_minutes: 35
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-pq-merge-1
+    title: Merge two data sources
+    description: Merge an orders query with a customers query on customer_id, keeping every order even if the customer record is missing.
+verify:
+  - Merge correctly combines matching rows on the shared key
+  - Correct join type is chosen based on whether unmatched rows should be kept
+note: |
+  ## 🎯 What is it?
+
+  **Merge** combines two Power Query queries by a shared key — conceptually the same as a spreadsheet [VLOOKUP](/skills/vlookup-function) or a SQL [JOIN](/skills/sql-joins), but built directly into the query itself, so both sources merge together automatically on every refresh.
+
+  ## 💡 Why is it important?
+
+  It lets two separate, repeatable data sources be joined together automatically — a manual VLOOKUP needs to be re-checked or re-copied every time source data changes; a Power Query merge re-executes the join logic fresh, every single refresh, with zero manual intervention.
+
+  ## Core concept
+
+  Just like a SQL JOIN, a Power Query merge requires choosing a **join kind**:
+
+  | Join kind | Keeps |
+  |---|---|
+  | Inner | Only rows matched in both queries |
+  | Left Outer | All rows from the first (left) query, matched where possible |
+  | Right Outer | All rows from the second (right) query, matched where possible |
+  | Full Outer | All rows from both, matched where possible |
+
+  This maps directly onto [SQL — JOINs](/skills/sql-joins)' INNER/LEFT/RIGHT/FULL concepts — the same underlying logic, expressed through Power Query's interface instead of SQL syntax.
+
+  ## 📊 Example
+
+  **Orders query:** order_id, customer_id, amount.
+  **Customers query:** customer_id, name, region.
+
+  **Merge:** Orders (Left Outer) + Customers, matched on customer_id.
+
+  **Result:** Every order row is kept, with the matching customer's name and region attached — and any order with no matching customer (a data-quality issue worth investigating) still appears, with blank customer fields, rather than silently disappearing.
+
+  ## Multiple examples
+
+  **Beginner:** A simple Inner merge between two queries sharing a key.
+  **Intermediate:** A Left Outer merge to preserve every row from the primary query, even without a match.
+  **Real-world:** Merging a monthly transactions query with a currency-conversion reference query, so every transaction is automatically converted to a standard currency on every refresh, without a manual VLOOKUP needing to be re-copied down the sheet each month.
+
+  ## ⚠️ Common mistakes
+
+  - **Using the default join kind without considering whether unmatched rows should be kept** — just like choosing the wrong SQL JOIN type, this can silently drop rows that should have been preserved.
+  - **Merging on a key that isn't unique on at least one side**, silently multiplying rows — the exact same "row explosion" risk covered in [SQL — JOINs](/skills/sql-joins) and [pandas .merge()](/skills/pandas).
+  - **Not deduplicating a key column before merging**, when duplicates are the actual root cause of an unexpected row-count increase after a merge.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any recurring analysis combining two data sources:** transactions + customer reference data, sales + currency rates, orders + product catalog.
+
+  ## Related concepts
+
+  ```
+  Transform Data → Merge ← you are here → Append → Refresh → Advanced Power Query
+  ```
+  This is conceptually identical to [SQL — JOINs](/skills/sql-joins) and pandas' `.merge()` — the same join logic, three different tools.
+
+  ## Practice questions
+
+  ### Easy
+  1. What Power Query join kind would you use to keep every row from your primary query, even without a match?
+
+  ### Interview/Advanced
+  2. A merge produces far more rows than either source query. What's the most likely cause?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Left Outer — it preserves every row from the primary (left) query, filling in blanks for any row without a matching key in the second query.
+  2. A duplicate key on one or both sides of the merge — every duplicate match multiplies the resulting rows, the same "fan-out" issue seen in SQL joins and pandas merges on a non-unique key.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How does a Power Query merge relate to a SQL JOIN?**
+  Short answer: They're conceptually identical — both combine two data sources on a shared key, and both require choosing a join type (inner, left, right, full) that determines whether unmatched rows are kept or dropped.
+
+  ## Best practices
+
+  - Choose the join kind deliberately based on whether unmatched rows should be preserved.
+  - Check for duplicate keys on both sides before merging, to avoid an unexpected row-count multiplication.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Merge** → Power Query's join, combining two queries by a shared key
+  **Join kinds** → Inner / Left Outer / Right Outer / Full Outer, same logic as SQL JOINs
+  **Watch for:** duplicate keys causing row multiplication

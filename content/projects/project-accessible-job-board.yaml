@@ -1,0 +1,42 @@
+title: Accessible Job Board
+level: portfolio
+duration: 18-24 hours
+description: Build a responsive job-discovery application with search, filters, saved URLs, accessible forms, and resilient API states.
+problem_statement: Career switchers need a fast way to find suitable roles without losing filter state or struggling with inaccessible controls.
+scenario: You are the frontend developer delivering a production-ready discovery flow for a nonprofit careers service.
+skills: [html-accessibility, css-responsive, javascript-browser, frontend-frameworks, testing-performance]
+dataset:
+  name: Open roles catalog
+  description: Synthetic JSON containing 45 roles across disciplines, levels, locations, work modes, salary ranges, and skills.
+  source_url: /datasets/jobs.json
+  format: JSON
+  size: 45 jobs
+  files: [jobs.json]
+datasets: [Open roles catalog JSON]
+tasks:
+  - Build keyword search with debounced, shareable URL state
+  - Add accessible filters for discipline, level, location, and work mode
+  - Design loading, empty, error, and no-JavaScript states
+  - Add job detail routing and recently viewed roles
+requirements:
+  - All core tasks must work with keyboard only and at 200 percent zoom
+  - Filters must be encoded in the URL and survive refresh
+  - Automated tests must cover search, filter combinations, and error recovery
+milestones:
+  - title: Model the experience
+    description: Define routes, filter logic, component states, and accessibility acceptance criteria.
+  - title: Build the discovery flow
+    description: Implement responsive results, filters, details, and URL-driven state.
+  - title: Prove product quality
+    description: Add tests, performance measurements, accessibility audit, and deployment notes.
+artifacts: [Deployed application, Source repository, Test suite, Accessibility audit, Architecture README]
+rubric:
+  - criterion: Accessibility
+    definition: Structure, focus, labels, errors, announcements, contrast, and zoom behavior support real use.
+  - criterion: State design
+    definition: URLs, filters, navigation, loading, and failures behave predictably.
+  - criterion: Engineering quality
+    definition: Components have clear responsibilities and critical behavior is tested.
+  - criterion: Performance
+    definition: The application loads efficiently and measurements guide optimization decisions.
+

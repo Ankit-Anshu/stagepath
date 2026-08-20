@@ -1,0 +1,65 @@
+title: Conditional Transformations
+category: Spreadsheets
+what_is_it: Deriving a column's value based on a condition rather than a fixed formula — using IF/IFS to transform data differently depending on what each row contains.
+why_it_matters: Real transformations are rarely one-size-fits-all — bucketing values, flagging exceptions, or applying different logic per category all require conditional logic.
+prerequisites:
+  - calculated-columns
+objectives:
+  - Build a calculated column using conditional logic
+  - Explain when a conditional transformation is needed instead of a simple formula
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-conditional-transformations-1
+    title: Bucket a numeric column
+    description: Given a column of ages, create a calculated column that buckets each into "Under 18," "18-64," or "65+" using IFS.
+verify:
+  - Can build a conditional calculated column
+  - Can explain a scenario requiring conditional logic over a plain formula
+note: |
+  ## 🎯 What is it?
+
+  A **conditional transformation** derives a column's value based on a condition, using IF or IFS, rather than a single fixed formula applied uniformly to every row. Bucketing a numeric value into a category, flagging an outlier, or applying different logic depending on another column are all conditional transformations.
+
+  ## 💡 Why is it important?
+
+  - Real transformations are rarely one-size-fits-all — a discount rate might differ by customer tier, or an age needs to become an age *bracket* for reporting — both require conditional logic, not a plain formula.
+  - It's the pattern that connects the earlier Logical Functions chapter (IF, IFS) directly to real data preparation work.
+
+  ## 📊 Example
+
+  Bucketing an `Age` column into ranges:
+
+  ```
+  =IFS(A2<18, "Under 18", A2<65, "18-64", TRUE, "65+")
+  ```
+
+  This transforms a raw numeric age into a categorical bucket usable for grouping and reporting — a plain, unconditional formula couldn't produce this branching result.
+
+  ## ⚠️ Common mistakes
+
+  - **Nesting deeply instead of using IFS**, producing a hard-to-read formula (see Nested IF vs. IFS).
+  - **Forgetting a catch-all final condition**, leaving some rows with no matching bucket and an unexpected result.
+
+  ## Related concepts
+
+  ```
+  Adding Calculated Columns
+    ↓
+  Conditional Transformations ← you are here
+    ↓
+  Splitting Columns
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you turn a raw age column into age brackets for a report?**
+  Short answer: Build a calculated column using IFS with the bracket boundaries as conditions — e.g., `IFS(age<18, "Under 18", age<65, "18-64", TRUE, "65+")` — producing a categorical bucket from a numeric input.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Conditional transformation** → derive a value using IF/IFS logic, not a single uniform formula
+  Used for bucketing, flagging, and any per-row branching logic.

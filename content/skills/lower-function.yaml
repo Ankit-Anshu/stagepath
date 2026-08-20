@@ -1,0 +1,84 @@
+title: LOWER Function
+category: Spreadsheets
+what_is_it: Converting text to all lowercase.
+why_it_matters: A common standardization step, especially for email addresses and identifiers where case shouldn't matter but often does to a spreadsheet.
+prerequisites:
+  - upper-function
+objectives:
+  - Convert a text value to lowercase with LOWER
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-lower-1
+    title: Standardize an email column
+    description: Convert a column of inconsistently-cased email addresses to all lowercase before deduplicating.
+verify:
+  - Every value in the column is correctly converted to lowercase
+note: |
+  ## 🎯 What is it?
+
+  **LOWER** converts text to all lowercase — the direct counterpart to [UPPER](/skills/upper-function).
+
+  ## 💡 Why is it important?
+
+  A common standardization step, especially for email addresses and usernames — "Ana@Company.com" and "ana@company.com" are the same real address, but a spreadsheet treats them as different text unless standardized to one casing first.
+
+  ## Syntax
+
+  ```
+  =LOWER(text)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Ana@Company.COM |
+
+  **Formula:** `=LOWER(A1)` → `"ana@company.com"`
+
+  ## Multiple examples
+
+  **Beginner:** `=LOWER(A2)` — standardize an email column.
+  **Real-world:** Standardizing email addresses to lowercase before using [COUNTIF](/skills/countif-function) to check for duplicate signups, since two differently-cased entries of the same email would otherwise count as unique.
+
+  ## ⚠️ Common mistakes
+
+  - **Deduplicating a text column without first standardizing casing** — this is the single most common reason a duplicate-detection formula misses real duplicates.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** standardizing email or username columns before deduplication or matching.
+
+  ## Related concepts
+
+  ```
+  UPPER → LOWER ← you are here → PROPER → TRIM
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula to convert A1 to lowercase.
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=LOWER(A1)`
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why standardize an email column to lowercase before deduplicating?**
+  Short answer: Email addresses are effectively case-insensitive in practice, but a spreadsheet compares text exactly — without standardizing casing first, the same real address entered with different casing would be miscounted as two separate, unique values.
+
+  ## Best practices
+
+  - Standardize casing before any duplicate-detection or matching step on text like emails or usernames.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **LOWER(text)** → all lowercase

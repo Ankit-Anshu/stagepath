@@ -1,0 +1,205 @@
+title: SQL — Filtering
+what_is_it: Narrowing query results with WHERE, comparison operators, boolean logic, and pattern matching.
+why_it_matters: Almost no real question is "show me everything" — it is "show me the subset that matters." Filtering is how you get there.
+prerequisites:
+  - sql-select
+objectives:
+  - Filter rows with WHERE
+  - Combine conditions with AND / OR / NOT
+  - Filter on ranges and lists (BETWEEN, IN)
+  - Handle NULLs correctly in filters
+estimated_minutes: 120
+resources:
+  - r-w3schools-where
+  - r-kaggle-intro-sql
+practice:
+  - id: ex-sql-filtering-1
+    title: Find at-risk orders
+    description: Write a query that returns orders with status "pending" that are older than 7 days, excluding orders with a NULL customer_id.
+verify:
+  - Combines multiple conditions correctly
+  - Handles NULL explicitly rather than assuming it behaves like a value
+  - Filter logic matches the stated business rule exactly
+category: SQL
+subtopics:
+  - title: WHERE basics
+    description: Comparison operators — =, !=, >, <, BETWEEN, IN, LIKE — and how each narrows a result set.
+    outcomes:
+      - Filter rows using a range and a list of values
+  - title: Combining conditions
+    description: AND, OR, NOT, and how operator precedence silently changes results without parentheses.
+    outcomes:
+      - Combine AND/OR correctly using parentheses
+  - title: NULL handling
+    description: Why NULL is not a value that can be compared with =, and using IS NULL / IS NOT NULL instead.
+    outcomes:
+      - Filter rows with and without NULLs correctly
+  - title: Pattern matching
+    description: LIKE and wildcard characters for partial text matches.
+    outcomes:
+      - Write a LIKE pattern for a partial text match
+note: |
+  ## 🎯 What is it?
+
+  **WHERE** narrows a query's results down to the rows that match a condition. Almost no real business question is "show me everything" — it's "show me the subset that matters" — and WHERE is how you get there.
+
+  ## 💡 Why is it important?
+
+  Filtering is the second thing every analyst learns after SELECT, because raw, unfiltered data is rarely useful on its own — "show me pending orders older than 7 days," "show me customers in California" are both filtering questions, and they're the shape of most real analyst requests.
+
+  ## Core concept
+
+  WHERE evaluates a condition for every row and keeps only the rows where it's TRUE.
+
+  | Operator | Meaning |
+  |---|---|
+  | `=`, `!=` (or `<>`) | Equal to, not equal to |
+  | `>`, `<`, `>=`, `<=` | Greater/less than (or equal) |
+  | `BETWEEN a AND b` | Inclusive range |
+  | `IN (a, b, c)` | Matches any value in a list |
+  | `LIKE` | Pattern match on text |
+  | `IS NULL` / `IS NOT NULL` | Presence or absence of a value |
+
+  ### Combining conditions
+  `AND`, `OR`, and `NOT` combine multiple conditions. **AND has higher precedence than OR**, meaning `a OR b AND c` is evaluated as `a OR (b AND c)` — not left to right — so parentheses are essential once you mix AND and OR.
+
+  ### NULL handling
+  NULL means "unknown" or "absent," not zero or empty text. It cannot be compared with `=` — `WHERE customer_id = NULL` returns **nothing**, even for rows where customer_id genuinely is NULL. You must use `IS NULL` / `IS NOT NULL`.
+
+  ### Pattern matching
+  `LIKE` uses wildcards: `%` matches any sequence of characters, `_` matches exactly one character.
+
+  ## Syntax
+
+  ```sql
+  SELECT columns
+  FROM table_name
+  WHERE condition;
+  ```
+
+  ## 📊 Example
+
+  `orders` table:
+
+  | order_id | status | days_open | customer_id |
+  |---|---|---|---|
+  | 1 | pending | 9 | 101 |
+  | 2 | pending | 3 | 102 |
+  | 3 | pending | 12 | NULL |
+  | 4 | completed | 20 | 103 |
+
+  **Query:**
+
+  ```sql
+  SELECT order_id, status, days_open
+  FROM orders
+  WHERE status = 'pending'
+    AND days_open > 7
+    AND customer_id IS NOT NULL;
+  ```
+
+  **Output:**
+
+  | order_id | status | days_open |
+  |---|---|---|
+  | 1 | pending | 9 |
+
+  **Explanation:** Row 3 matches "pending" and "days_open > 7" but is excluded because customer_id IS NULL — required explicitly, since `customer_id != NULL` would not have excluded it (it wouldn't match anything, including intentionally, so this must be an explicit IS NOT NULL check).
+
+  ## Multiple examples
+
+  **Beginner:** `WHERE country = 'Brazil'` — a single equality filter.
+  **Intermediate:** `WHERE amount BETWEEN 100 AND 500 AND status IN ('shipped','delivered')` — range + list filter combined.
+  **Real-world:** `WHERE (status = 'pending' OR status = 'processing') AND created_at < CURRENT_DATE - INTERVAL '7 days'` — parenthesized OR combined with AND, the exact shape of a real "at-risk orders" business rule.
+
+  ## Types / Variations
+
+  | Pattern | Matches |
+  |---|---|
+  | `LIKE 'A%'` | Starts with "A" |
+  | `LIKE '%burger%'` | Contains "burger" anywhere |
+  | `LIKE '_at'` | Any single character followed by "at" (e.g., "cat", "bat") |
+
+  ## ⚠️ Common mistakes
+
+  - **Using `= NULL` instead of `IS NULL`.** This is the single most common SQL filtering bug — it silently returns zero matching rows instead of erroring.
+  - **Mixing AND/OR without parentheses**, relying on default precedence — this frequently produces a *different* result than intended, silently.
+  - **Forgetting LIKE is case-sensitive in some databases** (though not others) — always check your specific database's behavior, or use a case-insensitive comparison explicitly.
+  - **Filtering with WHERE on an aggregated value** (e.g., `WHERE COUNT(*) > 5`) — this isn't valid; aggregated results must be filtered with HAVING, covered in the next topic.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** filtering orders to a specific date range and status.
+  - **Customer analysis:** filtering to customers in a specific region with no NULL email.
+  - **Operations analysis:** filtering shipments that are overdue (past a promised date) and not yet delivered.
+
+  ## Related concepts
+
+  ```
+  SELECT
+    ↓
+  WHERE (filter rows) ← you are here
+    ↓
+  GROUP BY (create groups)
+    ↓
+  HAVING (filter groups)
+    ↓
+  JOIN
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a query that returns customers where country = 'Canada'.
+
+  ### Medium
+  2. Write a query returning orders where status is 'pending' OR 'processing', AND amount is over 100.
+
+  ### Interview/Advanced
+  3. Why does `WHERE customer_id = NULL` return zero rows even for rows where customer_id is actually NULL, and what's the correct way to write it?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `SELECT * FROM customers WHERE country = 'Canada';`
+  2. `SELECT * FROM orders WHERE (status = 'pending' OR status = 'processing') AND amount > 100;`
+  3. NULL represents "unknown," and any comparison (including `=`) against an unknown value is itself unknown — so it never evaluates to TRUE, no matter what. The correct form is `WHERE customer_id IS NULL`.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What does WHERE do?**
+  Short answer: It filters rows, keeping only those where a specified condition evaluates to TRUE.
+
+  ### Conceptual questions
+  **Q: Why can't you filter NULLs with `= NULL`?**
+  Short answer: NULL represents an unknown value, and SQL's three-valued logic means any comparison to NULL (including `=`) evaluates to unknown, not true — so `IS NULL`/`IS NOT NULL` exist specifically to test for NULL directly.
+
+  ### Scenario-based questions
+  **Q: A query filtering "active OR trial customers who signed up this year" returns unexpected results. What's the first thing to check?**
+  Short answer: Operator precedence — check whether the AND/OR conditions need explicit parentheses, since AND binds tighter than OR by default and can silently change which rows match.
+
+  ### Practical questions
+  **Q: Write a query to find orders placed in the last 30 days with a NULL shipping address.**
+  Short answer: `SELECT * FROM orders WHERE order_date >= CURRENT_DATE - INTERVAL '30 days' AND shipping_address IS NULL;`
+
+  ## Interview traps / tricky points
+
+  - `NOT IN` with a list that contains a NULL silently returns zero rows for the *entire* query — one of the most notorious SQL gotchas, worth mentioning explicitly if it comes up.
+  - LIKE's case-sensitivity depends on the database engine and collation — never assume without checking.
+
+  ## Best practices
+
+  - Always use `IS NULL` / `IS NOT NULL`, never `= NULL`.
+  - Parenthesize explicitly whenever AND and OR are mixed, even when precedence would technically give the right answer — it's clearer to the next reader.
+  - Prefer `IN` over a long chain of OR'd equality checks for readability.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **WHERE** → filters rows before grouping
+  **AND/OR/NOT** → combine conditions; parenthesize when mixing AND/OR
+  **IS NULL / IS NOT NULL** → the only correct way to test for NULL
+  **LIKE** → `%` = any sequence, `_` = exactly one character

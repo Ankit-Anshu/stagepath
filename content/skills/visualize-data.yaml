@@ -1,0 +1,73 @@
+title: Visualize Data
+category: Foundations
+what_is_it: Turning an analysis finding into a chart or dashboard that communicates it clearly to someone who wasn't involved in producing it.
+why_it_matters: A correct finding that's poorly visualized often fails to land with stakeholders — the right chart choice is what makes a finding actually legible and persuasive.
+prerequisites:
+  - analyze-data
+objectives:
+  - Explain why visualization is a distinct step from analysis
+  - Name a basic principle of choosing the right chart
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-visualize-data-1
+    title: Chart a finding
+    description: Take any finding you've made (from an earlier exercise) and decide which chart type would communicate it most clearly, and why.
+verify:
+  - Can explain why visualization matters even after the analysis is done
+  - Can name one chart-choice principle
+note: |
+  ## 🎯 What is it?
+
+  **Visualizing data** turns an analysis finding into a chart, table, or dashboard that communicates it clearly to someone who wasn't involved in producing it. It's a distinct step from analysis itself — a correct finding still needs to be made legible.
+
+  ## 💡 Why is it important?
+
+  - Most stakeholders will never see the underlying data or queries — the chart *is* the analysis, as far as they're concerned.
+  - A correct finding presented in a confusing or misleading chart often fails to land, or worse, gets misread.
+  - This roadmap covers chart selection and dashboard design in much more depth in the Data Visualization stage — this topic is the conceptual entry point.
+
+  ## Core concept
+
+  Basic chart-choice principle: match the chart type to the *type of comparison* being shown.
+
+  | Comparison type | Chart |
+  |---|---|
+  | Trend over time | Line chart |
+  | Comparing categories | Bar chart |
+  | Part-to-whole | Stacked bar, (sparingly) pie chart |
+  | Relationship between two variables | Scatter plot |
+  | A single key number | KPI card |
+
+  ## 📊 Example
+
+  The finding "revenue grew steadily each month this year" is best shown as a line chart (trend over time) — showing the same finding as a pie chart would obscure the trend entirely, even though the underlying numbers are identical.
+
+  ## ⚠️ Common mistakes
+
+  - **Picking a chart type out of habit rather than fit** — e.g., defaulting to a pie chart for a comparison that would be much clearer as a bar chart.
+  - **Overloading one chart with too many series or categories**, making it harder to read than a table would have been.
+
+  ## Related concepts
+
+  ```
+  Analyze Data
+    ↓
+  Visualize Data ← you are here
+    ↓
+  Interpret Results
+  ```
+  This roadmap's Data Visualization stage covers chart types and dashboard design in full depth.
+
+  ## 🎤 Interview preparation
+
+  **Q: You have a finding showing steady revenue growth over 12 months. What chart would you use, and why?**
+  Short answer: A line chart — it's built specifically to show a trend over time, which is exactly what this finding is; a pie or bar chart would obscure the time-based pattern.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Visualize data** → turn a finding into a chart/dashboard a stakeholder can read without seeing the underlying data
+  Match the chart type to the type of comparison (trend → line, categories → bar, relationship → scatter).

@@ -1,0 +1,182 @@
+title: Git & Version Control
+category: Career
+what_is_it: Tracking changes to your work with Git and hosting it on GitHub — commits, branches, and a clean project history.
+why_it_matters: Every portfolio project needs to live somewhere reviewable. Git is also how virtually every data team manages code and collaborates, making it a baseline expectation, not a nice-to-have.
+prerequisites: []
+objectives:
+  - Initialize a repository and make a commit
+  - Write a clear commit message
+  - Push a project to GitHub
+  - Explain a basic branch and merge workflow
+subtopics:
+  - title: Commits & history
+    description: Saving snapshots of a project's progress and reviewing what changed and when.
+    outcomes:
+      - Make a sequence of commits that tell a clear story
+  - title: Writing clear commit messages
+    description: A commit message that explains what changed and why, not just "update".
+    outcomes:
+      - Write a commit message a stranger could understand
+  - title: Branches
+    description: Working on a change in isolation before merging it back into the main project.
+    outcomes:
+      - Create a branch, make a change, and merge it back
+  - title: Pushing to GitHub
+    description: Publishing a local repository to GitHub so it is visible and reviewable.
+    outcomes:
+      - Push a repository to GitHub with a working history
+estimated_minutes: 180
+resources:
+  - r-git-docs
+  - r-github-best-practices
+practice:
+  - id: ex-git-1
+    title: Version-control a project
+    description: Take any file you have, initialize a Git repository, make three meaningful commits, and push it to a public GitHub repository.
+verify:
+  - Commit history is meaningful, not a single giant commit
+  - Commit messages are clear and specific
+  - Repository is public and visible on GitHub
+note: |
+  ## 🎯 What is it?
+
+  **Git** is a tool for tracking changes to a project over time — saving snapshots (**commits**) you can review, compare, or revert to. **GitHub** is a website that hosts Git repositories online, making your work visible and reviewable by anyone with the link.
+
+  Think of Git like a video game's save system: instead of one single save file that gets overwritten, you keep a full history of every meaningful checkpoint, with a note on what changed at each one.
+
+  ## 💡 Why is it important?
+
+  - Every portfolio project needs to live somewhere reviewable — a hiring manager can't evaluate a project that only exists on your laptop.
+  - Git is how virtually every data team manages code and collaborates, making it a baseline expectation for any technical role, not a nice-to-have.
+  - A clean, meaningful commit history is itself a signal of how you work — messy, unexplained commits (or one giant "final version" commit) read very differently than a clear, incremental story.
+
+  ## Core concept
+
+  ### Commits & history
+  A commit is a saved snapshot of your project at a point in time, with a message describing what changed. A sequence of good commits tells the story of how a project was built, step by step — genuinely useful both for you (to undo a mistake) and for anyone reviewing your work.
+
+  ### Writing clear commit messages
+  A commit message should explain *what* changed and *why*, specifically enough that a stranger (or you, six months later) understands it without needing to open the code. "update" or "fix stuff" convey nothing; "Fix incorrect revenue calculation in monthly summary" does.
+
+  ### Branches
+  A branch lets you work on a change in isolation from the main project, then **merge** it back once it's ready — useful for trying something without risking the working version, and standard practice on any real team project.
+
+  ### Pushing to GitHub
+  `git push` publishes your local repository's commits to GitHub, making the project (and its full history) visible and reviewable online.
+
+  ## Syntax
+
+  ```bash
+  git init                              # start tracking a new project
+  git add file.py                       # stage a specific file's changes
+  git commit -m "Add revenue by region analysis script"
+  git branch feature-cleanup            # create a new branch
+  git checkout feature-cleanup          # switch to it
+  git merge feature-cleanup             # merge it back into the current branch
+  git push origin main                  # publish commits to GitHub
+  ```
+
+  ## 📊 Example
+
+  A messy vs. clean commit history for the same project:
+
+  **Messy:** `"update"`, `"fix"`, `"more fixes"`, `"final version"`, `"final version 2"`
+
+  **Clean:**
+  ```
+  1. "Add initial data cleaning script for raw sales export"
+  2. "Fix incorrect handling of missing region values"
+  3. "Add revenue-by-region summary and chart"
+  4. "Add README with problem statement and findings"
+  ```
+
+  **Explanation:** The clean history reads like a table of contents for how the project was built — a reviewer can understand the project's evolution just by scanning the commit log, without opening a single file.
+
+  ## Multiple examples
+
+  **Beginner:** Initializing a repository for a single script and making one commit.
+  **Intermediate:** Making a sequence of 3-4 meaningful commits as a project is built, each with a clear, specific message.
+  **Real-world:** Creating a branch to try an alternative cleaning approach, keeping the working main branch untouched until the new approach is verified, then merging it in — the same low-risk experimentation workflow used on real data teams.
+
+  ## ⚠️ Common mistakes
+
+  - **One giant commit at the end** ("final project") instead of an incremental history — this hides the actual process and makes it impossible to review individual changes.
+  - **Vague commit messages** like "update" or "fix" that convey no information about what actually changed.
+  - **Committing sensitive data or credentials** (like an API key) directly into a public repository — a real security mistake, not just a style issue.
+  - **Never actually pushing to GitHub**, leaving the project invisible to anyone reviewing a portfolio.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any portfolio project:** version-controlling and publishing analysis scripts and notebooks for review.
+  - **Team collaboration:** the standard way any data team tracks and reviews changes to shared analysis code.
+  - **Reproducibility:** being able to see exactly what changed, and why, at any point in a project's history.
+
+  ## Related concepts
+
+  ```
+  Git & Version Control ← you are here
+    ↓
+  Personal Portfolio Website
+    ↓
+  Portfolio Building
+    ↓
+  Case Study Presentations
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the difference between `git add` and `git commit`?
+
+  ### Medium
+  2. Why is "final version 2" a poor commit message, even if it's technically accurate?
+
+  ### Interview/Advanced
+  3. Why might a hiring manager care about a portfolio project's commit history, not just its final code?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `git add` stages specific changes to be included in the next commit; `git commit` actually saves a snapshot of the staged changes with a descriptive message.
+  2. It describes nothing about what actually changed, forcing anyone reviewing the history (including future you) to open the code to understand it — a good message states the specific change and its purpose.
+  3. A clean, incremental commit history reveals how someone actually works and thinks through a problem step by step — it's a signal of process and habits, not just the end result, which a single "final" commit can't demonstrate.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between Git and GitHub?**
+  Short answer: Git is the version-control tool itself, tracking changes locally; GitHub is a website that hosts Git repositories online, making them visible and shareable.
+
+  ### Conceptual questions
+  **Q: Why use a branch instead of just editing the main project directly?**
+  Short answer: A branch isolates a change so it can be tried, tested, or abandoned without risking or disrupting the working main version — it's a low-risk way to experiment before committing to a change.
+
+  ### Scenario-based questions
+  **Q: A recruiter opens your GitHub and sees a single commit labeled "final project." What impression does this create, and how would you fix it going forward?**
+  Short answer: It suggests the work wasn't actually built incrementally, or that history wasn't preserved — going forward, committing in small, meaningful, well-described steps throughout a project demonstrates process, not just a finished result.
+
+  ### Practical questions
+  **Q: How would you version-control and publish a completed data analysis project?**
+  Short answer: Initialize a Git repository, commit the work in a logical sequence of meaningful steps with clear messages, add a README explaining the project, and push it to a public GitHub repository.
+
+  ## Interview traps / tricky points
+
+  - Committing credentials or sensitive data to a public repository is a genuine, embarrassing mistake that's easy to make accidentally — always double-check before pushing.
+  - A commit history entirely of "wip" or "update" messages signals the same lack of process as a single giant commit, even though it looks incremental.
+
+  ## Best practices
+
+  - Commit in small, logical steps, each with a specific, descriptive message.
+  - Never commit credentials, API keys, or sensitive data — use a `.gitignore` file to exclude them.
+  - Push regularly so work is backed up and visible, not just saved locally.
+  - Use a branch for any experimental or risky change before merging it into the main version.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Commit** → a saved, described snapshot of the project
+  **Commit message** → should explain what changed and why, specifically
+  **Branch** → isolate a change before merging it back in
+  **Push** → publishes commits (and the full history) to GitHub for review

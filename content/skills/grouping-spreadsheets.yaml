@@ -1,0 +1,97 @@
+title: Grouping
+category: Spreadsheets
+what_is_it: Collapsing detailed rows or columns into a summarized, expandable outline — and, inside a pivot table, combining individual values (like dates) into broader buckets (like months).
+why_it_matters: It lets a detailed dataset be shown at multiple levels of detail at once, letting a reader drill from a summary into the underlying detail on demand.
+prerequisites:
+  - slicers
+objectives:
+  - Group rows or columns into a collapsible outline
+  - Group a pivot table's date field into months or quarters
+estimated_minutes: 25
+resources:
+  - r-ms-pivot-tables
+practice:
+  - id: ex-grouping-1
+    title: Group daily data into months
+    description: Given a pivot table with a daily date field, group it into months for a cleaner, higher-level summary.
+verify:
+  - Grouping correctly collapses detail into the intended broader buckets
+  - Underlying detail remains accessible by expanding the group
+note: |
+  ## 🎯 What is it?
+
+  **Grouping** collapses detailed rows or columns into a summarized, expandable outline — clicking a `+`/`-` control shows or hides the underlying detail. Inside a **pivot table** specifically, grouping combines individual values (like every single date) into broader buckets (like months or quarters).
+
+  ## 💡 Why is it important?
+
+  It lets a detailed dataset be shown at multiple levels of detail at once — a reader sees a clean summary by default, and can drill into the underlying detail on demand, without needing two separate versions of the same report.
+
+  ## Core concept
+
+  ### Outline grouping (rows/columns)
+  Selecting a range of rows (e.g., all the individual expense line items under one category) and grouping them creates a collapsible outline — collapsed by default to show just the category subtotal, expandable to reveal every line item.
+
+  ### Pivot table field grouping
+  A pivot table's date field, by default, shows every individual date as a separate row — often far too granular. Grouping that field into **months** or **quarters** produces a much more useful, higher-level summary automatically, without needing a separate [MONTH](/skills/month-function) helper column.
+
+  ## 📊 Example
+
+  A pivot table summarizing daily revenue shows 365 individual date rows — unreadable as a report.
+
+  **Grouping the Date field by Month** collapses this into just 12 rows (one per month), each showing that month's total — instantly more useful, and still expandable back to daily detail if needed.
+
+  ## Multiple examples
+
+  **Beginner:** Grouping a set of detail rows under a category into a collapsible outline.
+  **Intermediate:** Grouping a pivot table's date field by quarter instead of by individual date.
+  **Real-world:** A financial summary with expense line items grouped under collapsible category headers — collapsed by default for a clean executive view, but expandable for anyone who needs to audit the underlying detail, all within the same single sheet.
+
+  ## ⚠️ Common mistakes
+
+  - **Leaving a pivot table showing every individual date** instead of grouping into a meaningful bucket (month, quarter, year) appropriate to the audience and question.
+  - **Grouping rows manually with helper columns (like a MONTH formula) when the pivot table's built-in date grouping would do the same job automatically**, with less setup.
+  - **Forgetting that a collapsed group still contains its full underlying data** — collapsing doesn't delete anything, just hides it from view, similar to filtering.
+
+  ## Real-world Data Analyst use cases
+
+  - **Finance analysis:** grouping expense line items under collapsible category headers for a clean, drillable report.
+  - **Sales analysis:** grouping a pivot table's daily date field into months or quarters for a readable trend summary.
+
+  ## Related concepts
+
+  ```
+  Slicers → Grouping ← you are here
+  ```
+  This closes the Data Analysis group.
+
+  ## Practice questions
+
+  ### Easy
+  1. What does grouping a pivot table's date field by month accomplish?
+
+  ### Interview/Advanced
+  2. Why is pivot table date grouping generally preferred over building a separate MONTH() helper column for the same purpose?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. It collapses individual daily entries into monthly buckets, producing a much more readable, higher-level summary without losing access to the underlying daily detail.
+  2. It's built directly into the pivot table with no extra setup, automatically stays in sync as the source data changes, and doesn't require maintaining a separate helper column in the source data — a simpler, more maintainable solution for the same result.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you make a daily revenue pivot table more readable for an executive summary?**
+  Short answer: Group the date field by month (or quarter), collapsing 365 daily rows into a much more digestible 12 monthly rows, while keeping the option to drill back into daily detail if needed.
+
+  ## Best practices
+
+  - Use a pivot table's built-in date grouping instead of manually building a MONTH/YEAR helper column for the same purpose.
+  - Keep detail available (collapsed, not deleted) so a reader can drill in when needed.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Grouping** → collapses detail into a summarized, expandable outline
+  **Pivot table date grouping** → combines individual dates into months/quarters automatically

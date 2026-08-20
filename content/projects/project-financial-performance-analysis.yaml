@@ -1,0 +1,47 @@
+title: Financial Performance Analysis
+level: mini
+duration: 2-3 hours
+description: Compare budget against actual spend by department and month to explain where the business is over or under budget.
+problem_statement: >-
+  Finance needs a monthly variance report showing which departments are over budget, by how much,
+  and whether the trend is improving or worsening.
+scenario: You're the analyst producing the monthly budget-vs-actual review for department heads.
+dataset:
+  name: Monthly budget vs. actuals
+  description: One row per department per month with budget, actual cost, and revenue (where applicable).
+  source_url: /datasets/financial-performance.csv
+  format: CSV
+  size: 15 rows (3 departments × 5 months)
+  files: [financial-performance.csv]
+skills:
+  - percentage-calculations
+  - conditional-formatting-spreadsheets
+  - line-chart
+datasets:
+  - Budget vs. actuals dataset
+tasks:
+  - Calculate budget variance (actual minus budget) and variance % for every department-month
+  - Flag any department-month over budget by more than 5%
+  - Build a line chart showing each department's monthly variance % trend
+  - Identify which department is most consistently over budget
+requirements:
+  - Variance and variance % are calculated with formulas, referencing budget and actual columns
+  - Over-budget rows are visually flagged using a formula-based conditional formatting rule
+  - The trend chart makes it possible to see whether a department is improving or worsening over time
+milestones:
+  - title: Calculate variance
+    description: Add variance and variance % calculated columns for every department-month.
+  - title: Flag and chart the trend
+    description: Apply conditional formatting to flag over-budget rows and build the trend line chart.
+  - title: Summarize for leadership
+    description: Write a short summary naming the department with the biggest concern and whether it's trending better or worse.
+rubric:
+  - criterion: Calculation correctness
+    definition: Variance and variance % formulas are correct and reference the right columns for every row.
+  - criterion: Visual flagging
+    definition: Over-budget department-months are immediately visible via conditional formatting, not just calculated.
+  - criterion: Trend interpretation
+    definition: The summary correctly reads the trend line, not just a single month's snapshot.
+artifacts:
+  - Spreadsheet
+  - README

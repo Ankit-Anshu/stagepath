@@ -1,0 +1,169 @@
+title: Case Study Presentations
+category: Portfolio
+what_is_it: Turning a finished project into a short, structured slide deck or write-up that presents the problem, approach, and findings the way you would in a job interview.
+why_it_matters: A GitHub repo alone asks a busy hiring manager to do the work of understanding your project. A tight case study does that work for them.
+prerequisites:
+  - portfolio-building
+objectives:
+  - Structure a case study as problem, approach, findings, impact
+  - Fit a full project into a 5-slide summary
+  - Lead with the result, not the method
+  - Anticipate the first follow-up question
+subtopics:
+  - title: Case study structure
+    description: Problem, approach, findings, and impact — in that order, every time.
+    outcomes:
+      - Structure a case study using this four-part framework
+  - title: Fitting it to 5 slides
+    description: Cutting a full project down to what a reviewer actually needs to see.
+    outcomes:
+      - Summarize a full project in 5 slides or less
+  - title: Leading with the result
+    description: Opening with the finding and impact instead of a slow build-up through the method.
+    outcomes:
+      - Write an opening slide that states the result immediately
+estimated_minutes: 150
+resources:
+  - r-storytelling-with-data
+practice:
+  - id: ex-case-study-1
+    title: Turn a project into a case study
+    description: Take one completed portfolio project and turn it into a 5-slide case study following the problem/approach/findings/impact structure.
+verify:
+  - First slide states the result, not just the topic
+  - Case study fits in 5 slides without losing the key finding
+  - A stranger could follow it without the original project open
+note: |
+  ## 🎯 What is it?
+
+  A **case study presentation** turns a finished project into a short, structured slide deck or write-up presenting the problem, approach, and findings — the way you would in a real job interview, not the way a technical README does.
+
+  ## 💡 Why is it important?
+
+  A GitHub repo alone asks a busy hiring manager to do the work of understanding your project. A tight case study does that work *for* them — and being able to present your own work clearly and concisely is itself a skill being directly evaluated in the interview process.
+
+  ## Core concept
+
+  ### Case study structure: problem → approach → findings → impact
+  Every case study follows the same four-part shape, in the same order, every time:
+
+  | Part | Content |
+  |---|---|
+  | **Problem** | What business question was being investigated, and why it mattered |
+  | **Approach** | What data and methods were used, briefly (not every technical detail) |
+  | **Findings** | The 1-2 most important results, stated plainly |
+  | **Impact** | What this enabled — a decision made, an opportunity sized, a recommendation given |
+
+  ### Fitting it to 5 slides
+  The discipline of a 5-slide limit forces you to identify what a reviewer actually needs to see, cutting everything else — this mirrors [Storytelling](/skills/storytelling)'s finding-first principle, applied to a portfolio project specifically.
+
+  ### Leading with the result
+  Just like storytelling generally, open with the finding and its impact — not a slow build-up through the method — since a reviewer (or interviewer) may only give the first slide their full attention.
+
+  ## Syntax / Formula / Structure
+
+  A 5-slide case study template:
+
+  ```
+  Slide 1: The result, stated plainly — "Found a $40K/year retention opportunity
+            by analyzing checkout drop-off across 50K e-commerce orders"
+  Slide 2: The problem — what question was being investigated, and why
+  Slide 3: The approach — data, tools, and method, briefly
+  Slide 4: The finding — the key chart/evidence supporting the result
+  Slide 5: The impact — what this enabled, or what was recommended
+  ```
+
+  ## 📊 Example
+
+  **Weak opening (method-first):** "For this project, I used SQL to pull 3 months of transaction data, then cleaned it in Python, then built a funnel analysis..."
+
+  **Strong opening (result-first):** "Mobile checkout drop-off was silently costing this e-commerce business an estimated $40K/year — I traced it to one broken step in the payment flow."
+
+  **Explanation:** The strong opening states the compelling result immediately — a reviewer skimming slide 1 alone already understands the project's value, while the weak opening requires them to read through the entire method before reaching the point.
+
+  ## Multiple examples
+
+  **Beginner:** A 3-slide case study for a small project: result, approach, impact.
+  **Intermediate:** A full 5-slide case study following problem → approach → findings → impact, with one supporting chart.
+  **Real-world:** Practicing the case study out loud before an interview, anticipating the interviewer's most likely follow-up question ("how did you validate that finding?", "what would you do differently?") and having a specific, prepared answer ready — exactly the [Storytelling](/skills/storytelling) principle of anticipating questions, applied to portfolio work.
+
+  ## ⚠️ Common mistakes
+
+  - **Building a method-first narrative** instead of leading with the result — a common instinct that undersells a strong finding by delaying it.
+  - **Trying to cram every technical detail into 5 slides.** The case study is a summary, not the full technical documentation (that's what the README is for) — cutting detail is a feature, not a loss.
+  - **Skipping the "impact" slide.** A finding without a stated impact ("so what did this actually enable?") feels incomplete and less compelling.
+  - **Not rehearsing an answer to the obvious follow-up question**, leading to an unprepared, less confident response in an actual interview.
+
+  ## Real-world Data Analyst use cases
+
+  - **Job interviews:** presenting a portfolio project confidently and concisely when asked to "walk me through a project."
+  - **Networking/informational interviews:** a quick, compelling summary that doesn't require the listener to already understand technical details.
+  - **Internal presentations:** the same finding-first, 4-part structure applies directly to presenting real work findings to stakeholders on the job.
+
+  ## Related concepts
+
+  ```
+  Git & Version Control → Personal Portfolio Website → Portfolio Building
+    ↓
+  Case Study Presentations ← you are here
+    ↓
+  Job Preparation stage (Technical Interview Practice, Case Study Interviews)
+  ```
+  This closes the Portfolio stage — the next stage, Job Preparation, is where this case study gets rehearsed and stress-tested under real interview conditions.
+
+  ## Practice questions
+
+  ### Easy
+  1. What are the four parts of the case study structure, in order?
+
+  ### Medium
+  2. Rewrite this method-first opening to lead with the result instead: "I pulled transaction data from the last 6 months and built a cohort analysis to look at retention trends."
+
+  ### Interview/Advanced
+  3. Why is a 5-slide limit a useful constraint rather than just an arbitrary restriction?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Problem, approach, findings, impact — in that order, every time.
+  2. Example: "Customer retention had quietly dropped 15% over 6 months — a cohort analysis of transaction data revealed exactly when and why."
+  3. The constraint forces a clear prioritization of what a reviewer actually needs to see — without it, it's tempting to include every technical detail, which buries the actual finding and impact under unnecessary process narration; the limit is a forcing function for the same finding-first discipline that makes any communication effective.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why prepare a case study presentation in addition to a project's README?**
+  Short answer: A README is a technical, scannable document for someone reviewing on their own; a case study is a concise, spoken/presented narrative for actively walking someone through the project's value — they serve different, complementary purposes.
+
+  ### Conceptual questions
+  **Q: Why does a case study lead with the result instead of the method?**
+  Short answer: An interviewer's attention is highest at the very start — leading with the compelling result immediately establishes the project's value, rather than risking losing their attention during a lengthy method walkthrough before ever reaching the point.
+
+  ### Scenario-based questions
+  **Q: An interviewer says "walk me through a project" and you have 2 minutes. How do you structure your answer?**
+  Short answer: State the result and its impact first in one or two sentences, briefly cover the problem and approach next, and be ready to go deeper into any part if the interviewer asks a follow-up — rather than starting from the beginning and running out of time before reaching the finding.
+
+  ### Practical questions
+  **Q: How would you prepare for the follow-up question "what would you do differently?" for a finished project?**
+  Short answer: Reflect honestly on a genuine limitation or a decision you'd reconsider (e.g., a better data source, a different segmentation approach) and prepare a specific, thoughtful answer in advance — an interviewer views a genuine, reflective answer far more favorably than a defensive "nothing, it was perfect."
+
+  ## Interview traps / tricky points
+
+  - A case study that's really just the README read aloud, in the same order, misses the point — a case study should feel like a story with a lead result, not a technical document narrated verbatim.
+  - Not having a rehearsed answer to "what would you do differently" is a common gap that reads as a lack of reflection or self-awareness.
+
+  ## Best practices
+
+  - Always open with the result and its impact, not the method.
+  - Keep the case study to the 4-part structure and a 5-slide (or equivalent) limit — resist the urge to include every technical detail.
+  - Rehearse the case study out loud, and prepare for the 1-2 most likely follow-up questions in advance.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Structure:** problem → approach → findings → impact, every time
+  **Open with:** the result and its impact — not the method
+  **Constraint:** 5 slides forces prioritizing what actually matters
+  **Prepare for:** the obvious follow-up question ("what would you do differently?")

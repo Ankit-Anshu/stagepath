@@ -1,0 +1,97 @@
+title: COUNTA Function
+category: Spreadsheets
+what_is_it: Counting how many cells in a range are not empty, regardless of whether they hold a number, text, or date.
+why_it_matters: It answers "how many rows actually have something in them," a constant need when checking a dataset for completeness or counting mixed-content columns like names or statuses.
+prerequisites:
+  - count-function
+objectives:
+  - Count non-empty cells with COUNTA
+  - Explain when COUNTA is the right choice over COUNT
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-counta-1
+    title: Count filled rows
+    description: Given a column of customer names (text), count how many rows are actually filled in using COUNTA.
+verify:
+  - COUNTA correctly counts non-empty cells regardless of type
+  - Can explain the difference from COUNT
+note: |
+  ## 🎯 What is it?
+
+  **COUNTA** counts how many cells in a range are **not empty** — regardless of whether they hold a number, text, a date, or anything else.
+
+  ## 💡 Why is it important?
+
+  It answers "how many rows actually have something in them" — a constant need when checking a dataset's completeness, or counting a column of mixed content like names or status labels, which [COUNT](/skills/count-function) alone can't do since COUNT only counts numeric cells.
+
+  ## Syntax
+
+  ```
+  =COUNTA(range)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Ana |
+  | 2 | *(blank)* |
+  | 3 | Wei |
+
+  **Formula:** `=COUNTA(A1:A3)` → `2`
+
+  **Explanation:** Counts the two filled text cells, ignoring the blank one — COUNT on this same range would return 0, since none of the values are numbers.
+
+  ## Multiple examples
+
+  **Beginner:** `=COUNTA(A1:A100)` — how many rows have any data at all.
+  **Real-world:** `=COUNTA(customer_name_range)` used alongside `=COUNT(order_amount_range)` to compare "total customers" against "customers with a recorded order amount," spotting missing data.
+
+  ## ⚠️ Common mistakes
+
+  - **Using COUNTA expecting it to count only numbers.** It counts *any* non-empty cell — use COUNT if you specifically need numeric-only counting.
+  - **A formula that returns `""` (empty string) still counts as non-empty for COUNTA** — a cell that "looks" blank because of a formula can inflate a COUNTA count unexpectedly.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data quality checks:** counting how many rows in a text or status column are actually filled in.
+  - **Marketing analysis:** counting total leads (COUNTA on a name column) versus leads with a recorded score (COUNT).
+
+  ## Related concepts
+
+  ```
+  COUNT → COUNTA ← you are here → MIN → MAX → ROUND
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula counting non-empty cells in A2:A50.
+
+  ### Interview/Advanced
+  2. Why might COUNTA and COUNT give different results on the exact same range?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=COUNTA(A2:A50)`
+  2. COUNT only counts numeric cells; COUNTA counts any non-empty cell — if the range contains text, dates as text, or mixed content, COUNTA will return a higher (or different) count than COUNT.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you use COUNTA instead of COUNT?**
+  Short answer: When you need to count any non-empty cell regardless of type (like names or status labels), not just numeric values.
+
+  ## Best practices
+
+  - Choose COUNT vs. COUNTA deliberately based on the column's actual data type.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **COUNTA(range)** → counts any non-empty cell, any type
+  **COUNT(range)** → counts numeric cells only

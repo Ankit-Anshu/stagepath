@@ -1,0 +1,49 @@
+title: A/B Testing Analysis
+level: portfolio
+duration: 4-6 hours
+description: 'Analyze the results of an A/B test end to end: hypothesis, significance test, and recommendation.'
+problem_statement: >-
+  An onboarding team tested a shorter signup flow. Variant B appears to convert better, but the team
+  needs to know whether the difference is credible and worth shipping.
+scenario: You are the product analyst writing the experiment readout for a launch decision.
+dataset:
+  name: Signup experiment results
+  description: >-
+    Synthetic user-level CSV containing assignment, conversion, device, country, and session
+    timestamp.
+  source_url: /datasets/ab-test-signup.csv
+  format: CSV
+  size: 60 observations
+  files:
+    - ab-test-signup.csv
+skills:
+  - statistics
+  - business-analytics
+  - stats-hypothesis-testing
+datasets:
+  - A/B test experiment results (CSV)
+tasks:
+  - State a clear hypothesis
+  - Test for statistical significance
+  - Recommend a ship / no-ship decision with reasoning
+requirements:
+  - Check sample balance and missing values before testing the outcome
+  - Report absolute lift, relative lift, confidence interval, and p-value
+  - Separate statistical significance from practical significance
+milestones:
+  - title: Validate the experiment
+    description: Confirm assignment quality, sample sizes, and metric definitions.
+  - title: Estimate the effect
+    description: Calculate conversion rates, uncertainty, and a suitable two-proportion test.
+  - title: Make the decision
+    description: Write a recommendation that includes risk, limitations, and the next experiment.
+rubric:
+  - criterion: Statistical correctness
+    definition: The test, assumptions, confidence interval, and interpretation are appropriate.
+  - criterion: Decision quality
+    definition: The recommendation connects evidence to business impact without overstating certainty.
+  - criterion: Reproducibility
+    definition: Another analyst can run the notebook and reproduce every reported number.
+artifacts:
+  - Notebook or report
+  - README

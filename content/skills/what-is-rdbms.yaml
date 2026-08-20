@@ -1,0 +1,68 @@
+title: RDBMS
+category: SQL
+what_is_it: Relational Database Management System — a DBMS built specifically to manage relational (table-based) databases, which is what SQL is designed for.
+why_it_matters: It's the precise term for the category of tool this entire SQL stage is about — almost every DBMS an analyst will touch day to day is an RDBMS.
+prerequisites:
+  - what-is-dbms
+objectives:
+  - Define RDBMS and explain how it relates to DBMS
+  - Name two RDBMS products
+estimated_minutes: 15
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-rdbms-1
+    title: RDBMS vs. NoSQL
+    description: Look up one NoSQL database (MongoDB, for example) and note one way its data model differs from an RDBMS's tables.
+verify:
+  - Can define RDBMS
+  - Can explain the relationship between DBMS and RDBMS
+note: |
+  ## 🎯 What is it?
+
+  An **RDBMS (Relational Database Management System)** is a DBMS built specifically to manage *relational* (table-based) databases — enforcing keys, relationships, and constraints. PostgreSQL, MySQL, and SQL Server are all RDBMSs. It's a more specific term than DBMS: every RDBMS is a DBMS, but not every DBMS is an RDBMS (some, called NoSQL databases, manage non-relational data instead).
+
+  ## 💡 Why is it important?
+
+  - It's the precise term for exactly what this SQL stage is about — nearly every tool an entry-level data analyst touches (PostgreSQL, MySQL, SQL Server, Snowflake, BigQuery) is an RDBMS.
+  - Distinguishing RDBMS from NoSQL databases (which store semi-structured/unstructured data — see Semi-Structured Data) helps place SQL in the wider data landscape.
+
+  ## Core concept
+
+  | | RDBMS | NoSQL database |
+  |---|---|---|
+  | Data model | Tables, rows, columns | Documents, key-value, graphs |
+  | Structure | Fixed schema | Flexible/no fixed schema |
+  | Query language | SQL | Varies (e.g. MongoDB's query syntax) |
+  | Example | PostgreSQL, MySQL | MongoDB, DynamoDB |
+
+  ## 📊 Example
+
+  An e-commerce company might use an RDBMS (PostgreSQL) for its core order and customer data — where structure and consistency matter — and a NoSQL database (like MongoDB) for something like flexible product catalog attributes that vary a lot between product types.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming RDBMS and DBMS are interchangeable terms.** RDBMS is a specific type of DBMS — the one built for relational, table-based data.
+  - **Assuming every modern data tool is an RDBMS.** Many important tools (MongoDB, Redis, Cassandra) are NoSQL, not RDBMS — though RDBMSs remain dominant for the kind of structured business data an analyst works with most.
+
+  ## Related concepts
+
+  ```
+  DBMS
+    ↓
+  RDBMS ← you are here (a DBMS for relational/table data)
+    ↓
+  Tables
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Is MongoDB an RDBMS?**
+  Short answer: No — MongoDB is a NoSQL, document-based database. It's a DBMS, but not a *relational* one, since it doesn't organize data into fixed-schema tables linked by keys the way PostgreSQL or MySQL do.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **RDBMS** → a DBMS specifically for relational (table-based) data — PostgreSQL, MySQL, SQL Server
+  Every RDBMS is a DBMS; not every DBMS is an RDBMS (see NoSQL).

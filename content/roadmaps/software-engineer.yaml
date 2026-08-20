@@ -1,0 +1,28 @@
+title: Software Engineer
+category: Software Development
+difficulty: beginner
+estimated_hours: 760
+audience: Learners who want a broad engineering foundation for designing, building, testing, and operating software systems.
+description: Develop a complete software-engineering foundation across programming, web systems, databases, APIs, quality, security, and production.
+stages:
+  - id: computing-foundation
+    title: Learn computing fundamentals
+    description: Understand how software executes, communicates, and is organized before choosing specialized tools.
+    skills: [programming-foundations, web-foundations, web-protocols]
+  - id: application-code
+    title: Build application code
+    description: Write maintainable client and server behavior with clear modules and dependable interfaces.
+    skills: [javascript-browser, python-fundamentals, api-design]
+  - id: data-systems
+    title: Design data systems
+    description: Model persistent data and choose sound patterns for storing and retrieving it.
+    skills: [databases, sql-select, sql-joins]
+  - id: quality-security
+    title: Engineer for quality and security
+    description: Test behavior, improve performance, and reduce common application risks.
+    skills: [backend-testing, testing-performance, backend-security]
+  - id: production
+    title: Operate production software
+    description: Deploy, observe, troubleshoot, document, and improve software after release.
+    skills: [deployment-observability, frontend-deployment, job-preparation]
+

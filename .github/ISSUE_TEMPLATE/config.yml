@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question / discussion
+    url: https://github.com/Ankit-Anshu/stagepath/discussions
+    about: Ask a question or start a discussion that isn't a bug or a concrete content suggestion.

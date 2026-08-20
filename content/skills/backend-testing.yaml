@@ -1,0 +1,21 @@
+title: Backend Testing & Reliability
+category: Backend Development
+what_is_it: Proving service behavior across units, databases, integrations, and failure conditions.
+why_it_matters: A backend must stay correct while dependencies fail and data changes concurrently.
+estimated_minutes: 2400
+prerequisites: [api-design, databases]
+objectives: [Create a balanced test suite, Test database behavior, Design failure handling]
+subtopics:
+  - title: Test design
+    description: Unit, integration, contract, end-to-end, property, and load testing.
+    outcomes: [Choose the right test boundary, Write behavior-focused tests]
+  - title: Test data and isolation
+    description: Fixtures, factories, transactions, containers, deterministic time, and cleanup.
+    outcomes: [Create isolated tests, Avoid shared-state flakiness]
+  - title: Resilience patterns
+    description: Timeouts, retries, backoff, circuit breakers, bulkheads, and idempotency.
+    outcomes: [Handle transient failure safely, Prevent retry storms]
+  - title: Performance and load
+    description: Latency percentiles, throughput, bottlenecks, profiling, and capacity tests.
+    outcomes: [Run a representative load test, Interpret latency distributions]
+

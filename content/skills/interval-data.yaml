@@ -1,0 +1,67 @@
+title: Interval Data
+category: Foundations
+what_is_it: Numerical data with a meaningful order and equal, measurable gaps between values — but no true zero point, so ratios between values aren't meaningful.
+why_it_matters: It's the level of measurement behind classic examples like temperature — understanding it prevents a common statistics mistake (saying "40°C is twice as hot as 20°C").
+prerequisites:
+  - ordinal-data
+objectives:
+  - Define interval data and give an example
+  - Explain why interval data has no true zero
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-interval-data-1
+    title: Find the "no true zero"
+    description: Explain why 0°C doesn't mean "no temperature," and contrast that with $0 revenue meaning "no revenue."
+verify:
+  - Can define interval data
+  - Can explain why "twice as much" doesn't apply to interval data
+note: |
+  ## 🎯 What is it?
+
+  **Interval data** has a meaningful order *and* equal, measurable gaps between values — but no true zero point. Temperature in Celsius or Fahrenheit is the classic example: the gap between 10° and 20° equals the gap between 20° and 30°, but 0° doesn't mean "no temperature," so you can't say 40° is "twice as hot" as 20°.
+
+  ## 💡 Why is it important?
+
+  - It's the level of measurement most likely to trip up a ratio claim — "twice as much" only makes sense with a true zero (see Ratio Data), and interval data doesn't have one.
+  - Business analysts encounter true interval data less often than ratio data (most business metrics have a real zero — $0 revenue, 0 orders), but the distinction matters whenever a "years" or calendar-based field is involved (e.g., the year 2000 isn't "twice" the year 1000).
+
+  ## Core concept
+
+  | Level | Order? | Equal gaps? | True zero? | Ratio claims valid? |
+  |---|---|---|---|---|
+  | Ordinal | Yes | No | No | No |
+  | **Interval** | Yes | Yes | No | No |
+  | Ratio | Yes | Yes | Yes | Yes |
+
+  ## 📊 Example
+
+  Temperature: 20°C to 30°C is the same 10-degree gap as 30°C to 40°C (equal intervals) — but 0°C isn't "no heat," it's just the freezing point of water. So "40°C is twice as hot as 20°C" is a common but incorrect claim about interval data.
+
+  ## ⚠️ Common mistakes
+
+  - **Making a ratio claim ("twice as much") about interval data** — this is only valid for ratio data, which has a true zero.
+  - **Assuming all numeric business data is interval, when it's usually ratio** — revenue, orders, and counts all have a genuine zero, making them ratio data, not interval.
+
+  ## Related concepts
+
+  ```
+  Ordinal Data (order, unequal gaps)
+         ↓
+  Interval Data ← you are here (order, equal gaps, no true zero — e.g. temperature)
+         ↓
+  Ratio Data (order, equal gaps, true zero — e.g. revenue)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is it incorrect to say "40°C is twice as hot as 20°C"?**
+  Short answer: Temperature in Celsius is interval data — it has equal gaps but no true zero (0°C isn't "no temperature"), so ratio comparisons like "twice as much" aren't valid the way they are for ratio data like revenue.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Interval data** → ordered, equal gaps, but no true zero — temperature is the classic example
+  "Twice as much" claims are invalid without a true zero.

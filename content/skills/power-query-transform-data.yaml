@@ -1,0 +1,108 @@
+title: Transform Data
+category: Spreadsheets
+what_is_it: Recording a cleaning process as a saved, ordered list of steps — filtering rows, changing data types, renaming columns — that automatically reapplies every time the query refreshes.
+why_it_matters: This is what turns a repetitive manual cleaning routine into a one-time setup that reruns identically and automatically forever after.
+prerequisites:
+  - power-query-import-data
+objectives:
+  - Build a multi-step transformation in Power Query
+  - Explain why transform steps must be edited, not the loaded output table
+estimated_minutes: 35
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-pq-transform-1
+    title: Build a repeatable cleaning routine
+    description: Build a Power Query transformation that filters out test rows, fixes a date column's type, and renames columns to a consistent standard.
+verify:
+  - Transform steps are named descriptively and in a logical order
+  - Re-running the query on new source data correctly reapplies every step
+note: |
+  ## 🎯 What is it?
+
+  **Transform Data** means recording a cleaning process as a saved, **ordered list of steps** — filtering rows, changing data types, renaming columns, and more — that automatically reapplies every time the query is refreshed against new source data.
+
+  ## 💡 Why is it important?
+
+  This is what turns a repetitive manual cleaning routine (delete these rows, fix this column's format, rename these headers — every single week) into a one-time setup that reruns identically and automatically, forever after — genuinely one of the highest-leverage habits in all of spreadsheet work.
+
+  ## Core concept
+
+  Every action taken in Power Query's editor is recorded as a named, visible **step** in the "Applied Steps" pane — each step builds on the previous one, and the whole sequence re-executes from the top every time the query refreshes.
+
+  | Common transform step | Purpose |
+  |---|---|
+  | Changed Type | Ensures columns are the correct data type (see [Data Types](/skills/spreadsheet-data-types)) |
+  | Filtered Rows | Removes unwanted rows (e.g., test accounts, blanks) |
+  | Removed Columns | Drops columns not needed downstream |
+  | Renamed Columns | Standardizes column names |
+  | Split Column | Breaks a combined field into parts (like [Text to Columns](/skills/text-to-columns), but repeatable) |
+
+  ## 📊 Example
+
+  A monthly raw export needs: dropping a "notes" column, filtering out rows where `status = "test"`, and fixing the date column's type (it imports as text by default).
+
+  **Recorded steps (in order):**
+  ```
+  1. Source
+  2. Removed Columns (dropped "notes")
+  3. Filtered Rows (status <> "test")
+  4. Changed Type (order_date → Date)
+  5. Close & Load
+  ```
+
+  **Result:** Next month, refreshing this query against the new file re-applies all four steps automatically and identically — no manual re-cleaning needed.
+
+  ## Multiple examples
+
+  **Beginner:** A single transform step, like changing one column's data type.
+  **Intermediate:** A 4-5 step sequence combining filtering, type changes, and column renaming.
+  **Real-world:** A transform sequence that also splits a combined "City, State" column, standardizes casing on a category column, and removes duplicate rows — the same cleaning checklist a team used to redo manually every week, now fully automated and consistent every single time it runs.
+
+  ## ⚠️ Common mistakes
+
+  - **Editing the loaded output table directly instead of adding a query step.** Manual edits to the final loaded table are wiped out on the next refresh — every change must happen as a recorded transform step.
+  - **Building an undocumented, cryptically-named step list** that's hard for anyone (including future you) to audit — renaming steps descriptively as you go avoids this.
+  - **Doing a transformation manually once instead of recording it as a step**, missing out on the entire repeatability benefit.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any recurring cleaning task:** replacing a manual weekly/monthly cleaning checklist with a one-time, fully repeatable transform sequence.
+
+  ## Related concepts
+
+  ```
+  Import Data → Transform Data ← you are here → Merge → Append → Refresh
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Why does editing a Power Query's loaded output table directly not work as a lasting fix?
+
+  ### Interview/Advanced
+  2. Why is naming each transform step descriptively considered a best practice, not just a nice-to-have?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. The loaded table is regenerated from the query's recorded steps every time it refreshes — any manual edit made directly to that output table gets silently overwritten on the next refresh, since it isn't part of the recorded step sequence.
+  2. A long, undocumented step list ("Changed Type1," "Filtered Rows2," etc.) is very hard for anyone — including the original author, months later — to audit or modify confidently; descriptive names make the whole transformation process self-documenting and safe to hand off or revisit.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would a team replace a manual, repeated data-cleaning routine with a Power Query transform sequence?**
+  Short answer: Once built, the transform sequence reapplies automatically and identically every time the query is refreshed — eliminating the risk of human error or inconsistency from redoing the same cleaning steps manually, and saving significant repeated effort.
+
+  ## Best practices
+
+  - Always make a change as a recorded query step, never by editing the loaded output table directly.
+  - Name every step descriptively as you build the sequence.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Transform steps** → a named, ordered, repeatable "recipe" that reruns on every refresh
+  **Rule:** never manually edit the loaded output table — always edit the query steps instead

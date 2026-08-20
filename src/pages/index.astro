@@ -1,0 +1,252 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const roadmaps = await getCollection('roadmaps');
+const skills = await getCollection('skills');
+const graphData = {
+  roadmaps: roadmaps.map((roadmap) => ({
+    id: roadmap.id,
+    title: roadmap.data.title,
+    category: roadmap.data.category,
+    description: roadmap.data.description,
+    href: `/roadmaps/${roadmap.id}`,
+    stages: roadmap.data.stages,
+  })),
+  skills: skills.map((skill) => ({
+    id: skill.id,
+    title: skill.data.title,
+    category: skill.data.category,
+    description: skill.data.what_is_it,
+    href: `/skills/${skill.id}`,
+    prerequisites: skill.data.prerequisites,
+    subtopics: skill.data.subtopics.length ? skill.data.subtopics.map((subtopic) => subtopic.title) : skill.data.objectives,
+  })),
+};
+---
+
+<Base title="Career Roadmaps, Step by Step" description="Structured learning paths across software, security, design, and data — from first topic to finished project." wide>
+  <section class="hero"><h1>Career Roadmaps</h1></section>
+
+  <section class="knowledge" id="learn-anything" aria-label="StagePath knowledge graph">
+    <div class="graph-frame">
+      <canvas id="knowledge-graph" tabindex="0" aria-label="Interactive knowledge universe. Scroll to zoom, drag empty space to pan, drag nodes to rearrange, and select a roadmap or skill to open it."></canvas>
+      <div class="graph-header">
+        <label class="graph-search"><span aria-hidden="true">⌕</span><input id="graph-search" type="search" placeholder="Find any topic…" autocomplete="off" /></label>
+      </div>
+      <div class="graph-tools" aria-label="Graph zoom controls"><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="fit-graph" type="button" aria-label="Fit whole graph">⌗</button></div>
+      <div class="graph-status" id="graph-status"><b>{roadmaps.length + skills.length + skills.reduce((total, skill) => total + (skill.data.subtopics.length || skill.data.objectives.length), 0)}</b> nodes · scroll to zoom · drag to explore</div>
+      <div class="graph-tooltip" id="graph-tooltip" role="status" aria-live="polite"></div>
+      <details class="graph-directory"><summary>Browse as a list</summary><div>{roadmaps.map((roadmap) => <a href={`/roadmaps/${roadmap.id}`} data-graph-link={`roadmap:${roadmap.id}`}>{roadmap.data.title}<span>Roadmap →</span></a>)}{skills.map((skill) => <a href={`/skills/${skill.id}`} data-graph-link={`skill:${skill.id}`}>{skill.data.title}<span>Topic →</span></a>)}</div></details>
+      <script type="application/json" id="graph-data" set:html={JSON.stringify(graphData)} />
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .hero{margin-top:-48px;padding:14px 0 10px;text-align:center}.hero h1{margin:0;color:var(--green);font-size:20px;font-weight:850;letter-spacing:-.02em}
+  .knowledge{position:relative;width:100vw;height:100svh;min-height:650px;margin-left:calc(50% - 50vw);margin-bottom:-72px;scroll-margin-top:0;background:#0b0e0d}.graph-frame{position:absolute;inset:0;overflow:hidden;background:#0b0e0d}#knowledge-graph{display:block;width:100%;height:100%;cursor:grab;touch-action:none}#knowledge-graph:active{cursor:grabbing}#knowledge-graph:focus-visible{outline:3px solid var(--lime);outline-offset:-5px}.graph-header{position:absolute;z-index:3;top:26px;right:28px;left:28px;display:flex;justify-content:flex-end;pointer-events:none}.graph-search{display:flex;align-items:center;gap:9px;width:min(330px,40vw);padding:0 14px;border:1px solid rgba(255,255,255,.3);border-radius:10px;background:#000;box-shadow:0 12px 35px rgba(0,0,0,.4);pointer-events:auto}.graph-search span{color:#fff;font-size:22px}.graph-search input{width:100%;padding:12px 0;border:0;outline:0;background:#000;color:#fff;font:inherit;font-size:11px}.graph-search input::placeholder{color:rgba(255,255,255,.7)}.graph-search:focus-within{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.16)}.graph-legend{position:absolute;z-index:2;top:28px;left:29px;display:flex;flex-wrap:wrap;gap:13px;color:#8e9b95;font-size:8px}.graph-legend span{display:flex;align-items:center;gap:5px}.graph-legend i{display:block;border-radius:50%;background:#88928d}.graph-legend .roadmap-dot{width:9px;height:9px;background:#d7f47a}.graph-legend .stage-dot{width:7px;height:7px;background:#5d86e7}.graph-legend .skill-dot{width:6px;height:6px;background:#b16bc1}.graph-legend .topic-dot{width:4px;height:4px}.graph-tools{position:absolute;z-index:3;right:24px;bottom:24px;display:grid;overflow:hidden;border:1px solid rgba(255,255,255,.15);border-radius:10px;background:rgba(20,25,23,.88);box-shadow:0 10px 30px rgba(0,0,0,.25);backdrop-filter:blur(10px)}.graph-tools button{display:grid;place-items:center;width:38px;height:35px;border:0;border-bottom:1px solid rgba(255,255,255,.1);background:transparent;color:#e8f0eb;font:700 16px/1 system-ui;cursor:pointer}.graph-tools button:last-child{border-bottom:0;font-size:13px}.graph-tools button:hover{background:rgba(255,255,255,.1)}.graph-status{position:absolute;z-index:2;bottom:24px;left:26px;padding:8px 11px;border:1px solid rgba(255,255,255,.1);border-radius:8px;background:rgba(20,25,23,.72);color:#84938c;font-size:8px;backdrop-filter:blur(8px)}.graph-status b{color:#d7f47a}.graph-tooltip{position:absolute;z-index:4;max-width:260px;padding:10px 12px;border:1px solid rgba(215,244,122,.28);border-radius:8px;background:rgba(10,14,12,.95);box-shadow:0 12px 30px rgba(0,0,0,.35);color:#dce7e1;font-size:9px;line-height:1.45;pointer-events:none;opacity:0;transform:translate(13px,13px);transition:opacity .1s}.graph-tooltip b{display:block;margin-bottom:2px;color:white;font-size:10px}.graph-tooltip.visible{opacity:1}.graph-directory{position:absolute;z-index:4;right:72px;bottom:24px}.graph-directory summary{padding:9px 12px;border:1px solid rgba(255,255,255,.13);border-radius:8px;background:rgba(20,25,23,.82);color:#abbab3;font-size:8px;font-weight:800;cursor:pointer;list-style:none;backdrop-filter:blur(8px)}.graph-directory[open] summary{border-radius:0 0 8px 8px}.graph-directory>div{position:absolute;right:0;bottom:100%;display:grid;width:300px;max-height:50vh;overflow:auto;border:1px solid rgba(255,255,255,.13);border-radius:10px 10px 0 10px;background:#141917;box-shadow:0 18px 45px rgba(0,0,0,.4)}.graph-directory a{display:flex;justify-content:space-between;gap:15px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.07);color:#d7e1db;font-size:9px}.graph-directory a:hover{background:rgba(255,255,255,.07)}.graph-directory a span{color:#86ab98;font-size:8px;white-space:nowrap}
+  @media(max-width:640px){.hero{margin-top:-32px}}
+  @media(max-width:620px){.knowledge{min-height:620px}.graph-header{top:16px;right:16px;left:16px}.graph-search{width:min(250px,68vw)}.graph-legend{top:72px;left:17px}.graph-status{right:67px;bottom:15px;left:15px;overflow:hidden;white-space:nowrap}.graph-tools{right:15px;bottom:15px}.graph-directory{display:none}}
+</style>
+
+<style is:global>
+  #graph-search {
+    background: #000 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    caret-color: #fff;
+    color-scheme: dark;
+  }
+  #graph-search::placeholder {
+    color: rgba(255, 255, 255, .7) !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, .7) !important;
+  }
+  #graph-search:-webkit-autofill,
+  #graph-search:-webkit-autofill:hover,
+  #graph-search:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+  .graph-header {
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+  }
+  .graph-header .graph-legend {
+    position: static;
+    flex-wrap: nowrap;
+  }
+  @media (max-width: 620px) {
+    .graph-header { gap: 8px; }
+    .graph-header .graph-legend { gap: 5px; font-size: 6px; }
+    .graph-header .graph-search { width: min(190px, 54vw); }
+  }
+</style>
+
+<script src="../scripts/knowledge-graph.ts"></script>
+
+<script is:inline type="text/plain">
+  type PathData = { id: string; title: string; category: string; description: string; href: string; topics: number };
+  type GraphNode = { id: string; label: string; category: string; kind: 'root' | 'category' | 'path'; x: number; y: number; width: number; height: number; color: string; data?: PathData };
+
+  const canvas = document.querySelector<HTMLCanvasElement>('#knowledge-graph');
+  const dataElement = document.querySelector<HTMLScriptElement>('#graph-data');
+  const search = document.querySelector<HTMLInputElement>('#graph-search');
+  const tooltip = document.querySelector<HTMLDivElement>('#graph-tooltip');
+  const reset = document.querySelector<HTMLButtonElement>('#reset-graph');
+
+  if (canvas && dataElement && search && tooltip && reset) {
+    const context = canvas.getContext('2d');
+    const paths = JSON.parse(dataElement.textContent || '[]') as PathData[];
+    const colors: Record<string, string> = { 'Software Development': '#71c891', Cybersecurity: '#e2ae4f', Design: '#7999ec', Data: '#a98ad5' };
+    let nodes: GraphNode[] = [];
+    let edges: Array<[string, string]> = [];
+    let query = '';
+    let active: GraphNode | null = null;
+    let moved = false;
+    let pointerOffset = { x: 0, y: 0 };
+    let cssWidth = 0;
+    let cssHeight = 0;
+
+    const roundedRect = (x: number, y: number, width: number, height: number, radius: number) => {
+      context?.beginPath();
+      context?.roundRect(x, y, width, height, radius);
+    };
+
+    const buildGraph = () => {
+      const centerX = cssWidth / 2;
+      const centerY = cssHeight / 2 - 8;
+      const compact = cssWidth < 650;
+      const categories = [...new Set(paths.map((path) => path.category))];
+      const categoryRadius = compact ? Math.min(cssWidth * .28, 135) : Math.min(cssWidth * .22, 195);
+      const childRadius = compact ? Math.min(cssWidth * .48, 235) : Math.min(cssWidth * .39, 335);
+      nodes = [{ id: 'root', label: 'Learn anything', category: '', kind: 'root', x: centerX, y: centerY, width: compact ? 112 : 132, height: compact ? 52 : 58, color: '#d7f47a' }];
+      edges = [];
+
+      categories.forEach((category, categoryIndex) => {
+        const angle = -Math.PI / 2 + (Math.PI * 2 * categoryIndex) / categories.length;
+        const categoryId = `category-${category}`;
+        const categoryNode: GraphNode = { id: categoryId, label: category, category, kind: 'category', x: centerX + Math.cos(angle) * categoryRadius, y: centerY + Math.sin(angle) * categoryRadius, width: compact ? 104 : 124, height: 42, color: colors[category] || '#71c891' };
+        nodes.push(categoryNode);
+        edges.push(['root', categoryId]);
+        const children = paths.filter((path) => path.category === category);
+        children.forEach((path, index) => {
+          const spread = (index - (children.length - 1) / 2) * (compact ? .34 : .27);
+          const childAngle = angle + spread;
+          const pathNode: GraphNode = { id: path.id, label: path.title, category, kind: 'path', x: centerX + Math.cos(childAngle) * childRadius, y: centerY + Math.sin(childAngle) * childRadius, width: compact ? 112 : 138, height: compact ? 43 : 47, color: colors[category] || '#71c891', data: path };
+          nodes.push(pathNode);
+          edges.push([categoryId, path.id]);
+        });
+      });
+    };
+
+    const matches = (node: GraphNode) => !query || `${node.label} ${node.category} ${node.data?.description || ''}`.toLowerCase().includes(query);
+
+    const draw = () => {
+      if (!context) return;
+      context.clearRect(0, 0, cssWidth, cssHeight);
+      context.fillStyle = '#10231e';
+      context.fillRect(0, 0, cssWidth, cssHeight);
+      context.fillStyle = 'rgba(173, 205, 190, .10)';
+      for (let x = 18; x < cssWidth; x += 26) for (let y = 18; y < cssHeight; y += 26) { context.beginPath(); context.arc(x, y, 1, 0, Math.PI * 2); context.fill(); }
+
+      edges.forEach(([fromId, toId]) => {
+        const from = nodes.find((node) => node.id === fromId);
+        const to = nodes.find((node) => node.id === toId);
+        if (!from || !to) return;
+        const highlighted = query && (matches(from) || matches(to));
+        context.beginPath();
+        context.moveTo(from.x, from.y);
+        const midX = (from.x + to.x) / 2;
+        const midY = (from.y + to.y) / 2;
+        context.quadraticCurveTo(midX + (to.y - from.y) * .08, midY - (to.x - from.x) * .08, to.x, to.y);
+        context.strokeStyle = highlighted ? 'rgba(215,244,122,.75)' : 'rgba(150,184,168,.24)';
+        context.lineWidth = highlighted ? 2 : 1;
+        context.stroke();
+      });
+
+      nodes.forEach((node) => {
+        const isMatch = matches(node);
+        const dimmed = query && !isMatch && node.kind !== 'root';
+        context.globalAlpha = dimmed ? .2 : 1;
+        const x = node.x - node.width / 2;
+        const y = node.y - node.height / 2;
+        roundedRect(x, y, node.width, node.height, node.kind === 'root' ? 18 : 12);
+        context.fillStyle = node.kind === 'root' ? node.color : node.kind === 'category' ? `${node.color}26` : '#173029';
+        context.fill();
+        context.strokeStyle = node.color;
+        context.lineWidth = node.kind === 'root' || (query && isMatch) ? 2 : 1;
+        context.stroke();
+        if (node.kind === 'path') { context.beginPath(); context.arc(x + 13, node.y, 3.5, 0, Math.PI * 2); context.fillStyle = node.color; context.fill(); }
+        context.fillStyle = node.kind === 'root' ? '#10231e' : '#ecf4ef';
+        context.font = `${node.kind === 'root' ? 800 : 700} ${node.kind === 'root' ? 13 : node.kind === 'category' ? 10 : 9}px system-ui, sans-serif`;
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        const label = node.label.length > 22 ? `${node.label.slice(0, 21)}…` : node.label;
+        context.fillText(label, node.x + (node.kind === 'path' ? 4 : 0), node.y);
+        context.globalAlpha = 1;
+      });
+    };
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cssWidth = rect.width;
+      cssHeight = rect.height;
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
+      context?.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildGraph();
+      draw();
+    };
+
+    const position = (event: PointerEvent) => { const rect = canvas.getBoundingClientRect(); return { x: event.clientX - rect.left, y: event.clientY - rect.top }; };
+    const hitNode = (point: { x: number; y: number }) => [...nodes].reverse().find((node) => Math.abs(point.x - node.x) <= node.width / 2 && Math.abs(point.y - node.y) <= node.height / 2);
+    const showTooltip = (node: GraphNode | undefined, point: { x: number; y: number }) => {
+      if (!node || node.kind === 'root') { tooltip.classList.remove('visible'); return; }
+      tooltip.textContent = node.data ? `${node.data.title} · ${node.data.topics} major topics. Click to open.` : `${node.label} learning paths`;
+      tooltip.style.left = `${Math.min(point.x, cssWidth - 245)}px`;
+      tooltip.style.top = `${Math.min(point.y, cssHeight - 75)}px`;
+      tooltip.classList.add('visible');
+    };
+
+    canvas.addEventListener('pointerdown', (event) => {
+      const point = position(event);
+      active = hitNode(point) || null;
+      moved = false;
+      if (active) { pointerOffset = { x: point.x - active.x, y: point.y - active.y }; canvas.setPointerCapture(event.pointerId); }
+    });
+    canvas.addEventListener('pointermove', (event) => {
+      const point = position(event);
+      if (active) {
+        const nextX = Math.max(active.width / 2 + 8, Math.min(cssWidth - active.width / 2 - 8, point.x - pointerOffset.x));
+        const nextY = Math.max(active.height / 2 + 8, Math.min(cssHeight - active.height / 2 - 35, point.y - pointerOffset.y));
+        if (Math.abs(nextX - active.x) > 2 || Math.abs(nextY - active.y) > 2) moved = true;
+        active.x = nextX; active.y = nextY; draw();
+      }
+      const hovered = active || hitNode(point);
+      canvas.style.cursor = hovered ? (active ? 'grabbing' : 'pointer') : 'grab';
+      showTooltip(hovered, point);
+    });
+    canvas.addEventListener('pointerleave', () => { if (!active) tooltip.classList.remove('visible'); });
+    canvas.addEventListener('pointerup', (event) => {
+      if (active && !moved && active.kind === 'path') document.querySelector<HTMLAnchorElement>(`[data-path-id="${CSS.escape(active.id)}"]`)?.click();
+      active = null;
+      canvas.releasePointerCapture(event.pointerId);
+    });
+    search.addEventListener('input', () => {
+      query = search.value.trim().toLowerCase();
+      document.querySelectorAll<HTMLAnchorElement>('[data-path-id]').forEach((link) => {
+        const path = paths.find((item) => item.id === link.dataset.pathId);
+        const matched = !query || `${path?.title} ${path?.category} ${path?.description}`.toLowerCase().includes(query);
+        link.classList.toggle('matched', Boolean(query && matched));
+        link.classList.toggle('dimmed', Boolean(query && !matched));
+      });
+      draw();
+    });
+    reset.addEventListener('click', resize);
+    new ResizeObserver(resize).observe(canvas);
+    resize();
+  }
+</script>

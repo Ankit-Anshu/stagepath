@@ -1,0 +1,67 @@
+title: Columns
+category: Spreadsheets
+what_is_it: The vertical lines of a spreadsheet grid, lettered A, B, C... — the second of the two axes every cell address is built from.
+why_it_matters: Columns are almost always where an individual field/attribute lives (name, date, amount) — understanding them is required before writing any formula that references a field across many rows.
+prerequisites:
+  - rows
+objectives:
+  - Identify a column by its letter
+  - Insert and delete a column without breaking existing formulas
+estimated_minutes: 15
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-columns-1
+    title: Insert a column safely
+    description: Given a small table with formulas referencing specific columns, insert a new column in the middle and confirm the formulas still reference the correct data.
+verify:
+  - Can identify a column by its letter
+  - Inserting a column does not break an existing formula
+note: |
+  ## 🎯 What is it?
+
+  **Columns** run vertically down a spreadsheet, lettered A, B, C... (continuing AA, AB... after Z) across the top. A column is the second coordinate, along with row, that makes up every cell's address.
+
+  ## 💡 Why is it important?
+
+  - Columns are almost always where one specific field lives (name, date, amount) — a table's columns *are* its schema, in spreadsheet form.
+  - Inserting or deleting a column through the proper menu command keeps every formula's references correct; manually shifting data does not.
+
+  ## Core concept
+
+  | Action | Correct approach |
+  |---|---|
+  | Select a column | Click the column letter at the top |
+  | Insert a column | Right-click a column letter → Insert |
+  | Delete a column | Right-click a column letter → Delete |
+
+  ## 📊 Example
+
+  A table with columns Product (A), Q1 (B), Q2 (C) — inserting a new "Category" column between A and B (via Insert Column) shifts Q1/Q2 to columns C/D automatically, and any formula referencing B2 automatically updates to reference C2.
+
+  ## ⚠️ Common mistakes
+
+  - **Manually cutting a column's data and pasting it elsewhere** instead of using the Insert/Delete Column commands, risking broken references.
+  - **Not double-checking which column a formula is really referencing** after several inserts/deletes on a complex sheet — worth periodically sanity-checking with the formula bar.
+
+  ## Related concepts
+
+  ```
+  Rows
+    ↓
+  Columns ← you are here
+    ↓
+  Cells
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: You need to insert a new column between B and C without breaking any existing formulas. What's the correct approach?**
+  Short answer: Right-click the column C header and choose Insert Column — this correctly shifts existing data and updates formula references automatically, unlike a manual cut-and-paste.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Column** → vertical, lettered (A, B, C...)
+  Always insert/delete columns via the menu — it keeps formula references correct.

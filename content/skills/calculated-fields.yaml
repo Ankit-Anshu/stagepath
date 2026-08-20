@@ -1,0 +1,59 @@
+title: Calculated Fields
+category: Spreadsheets
+what_is_it: A custom field defined inside a Pivot Table itself, computed from other fields already in the pivot — without adding a new column to the source data.
+why_it_matters: It lets a pivot table show a derived metric (like profit margin) without modifying the underlying source data at all.
+prerequisites:
+  - spreadsheets-pivot-tables
+objectives:
+  - Add a calculated field to a Pivot Table
+  - Explain the difference between a calculated field and a calculated column in the source data
+estimated_minutes: 25
+resources:
+  - r-ms-pivot-tables
+practice:
+  - id: ex-calculated-fields-1
+    title: Add a margin calculated field
+    description: Given a Pivot Table with Revenue and Cost fields, add a Calculated Field for Profit Margin without changing the source data.
+verify:
+  - Can add a calculated field to a Pivot Table
+  - Can explain when a calculated field is preferable to a source-data calculated column
+note: |
+  ## 🎯 What is it?
+
+  A **calculated field** is a custom field defined inside a Pivot Table, computed from other fields already present in the pivot — without adding anything to the underlying source data. `Profit Margin = Sum(Revenue) - Sum(Cost)` as a calculated field appears as a normal field inside the pivot, computed on the fly.
+
+  ## 💡 Why is it important?
+
+  - It lets a pivot table show a derived metric without modifying the source data at all — useful when you don't want to (or can't) add a new column to the original table.
+  - It's computed *after* the pivot's aggregation, which matters: a calculated field operates on the summarized totals, not row-by-row, which can behave differently than a calculated column in the source data (see Adding Calculated Columns) for non-additive metrics like a ratio.
+
+  ## 📊 Example
+
+  A Pivot Table summarizing Revenue and Cost by region can add a calculated field `= Revenue - Cost` to show Profit directly in the pivot, without ever adding a "Profit" column to the source data table.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing a calculated field with a calculated column added to the source data** — a calculated field computes on the pivot's already-aggregated totals, which can give a different (and sometimes more correct) result for ratios and percentages than averaging a row-level calculated column would.
+  - **Building a calculated field with circular or overly complex logic**, which pivot tables handle less gracefully than a plain worksheet formula.
+
+  ## Related concepts
+
+  ```
+  Pivot Tables
+    ↓
+  Calculated Fields ← you are here
+    ↓
+  Drill Down
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why might a pivot table's calculated field for "average margin" give a different result than averaging a row-level margin column?**
+  Short answer: A calculated field computes on the pivot's already-aggregated totals (e.g., total revenue and total cost first, then margin), while averaging a row-level margin column averages each row's individually-computed margin — these can differ meaningfully when order sizes vary, and the aggregated version is usually more accurate for an overall margin.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Calculated field** → a custom pivot-table field, computed from other pivot fields, without touching the source data
+  Computes on the pivot's aggregated totals — can differ from a row-level calculated column for ratios.

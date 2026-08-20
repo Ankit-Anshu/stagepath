@@ -1,0 +1,95 @@
+title: LEN Function
+category: Spreadsheets
+what_is_it: Counting the number of characters in a text value, including spaces.
+why_it_matters: A simple but essential building block for validating a fixed-format field (like a phone number) and for combining with other text functions like MID and FIND.
+prerequisites:
+  - mid-function
+objectives:
+  - Count the number of characters in a text value with LEN
+  - Use LEN to validate a fixed-length field
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-len-1
+    title: Validate a phone number length
+    description: Given a column of phone numbers, use LEN to flag any that don't have the expected 10 digits.
+verify:
+  - LEN correctly counts characters including spaces
+  - Can use LEN to flag rows that don't match an expected length
+note: |
+  ## 🎯 What is it?
+
+  **LEN** counts the number of characters in a text value, including spaces.
+
+  ## 💡 Why is it important?
+
+  A simple but essential building block — for validating a fixed-format field (like a 10-digit phone number), and as a component inside other text formulas that need to know a string's length (like calculating how many characters MID should extract).
+
+  ## Syntax
+
+  ```
+  =LEN(text)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Hello World |
+
+  **Formula:** `=LEN(A1)` → `11` (including the space between the two words)
+
+  ## Multiple examples
+
+  **Beginner:** `=LEN(A2)` — count the characters in a text value.
+  **Intermediate:** `=LEN(A2)=10` — check whether a phone number has exactly 10 characters.
+  **Real-world:** `=IF(LEN(phone)<>10,"Check format","OK")` applied down a phone-number column, quickly flagging any row that doesn't match the expected fixed length before the data is trusted for outreach.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting LEN counts spaces too.** A value with unexpected extra spaces (see [TRIM](/skills/trim-function)) will have a longer LEN than expected, even if it visually looks the same length.
+  - **Using LEN to validate format without also checking content.** LEN only confirms the *count* of characters, not whether they're the *right kind* of characters (e.g., all digits) — pairing it with another check is often needed for full validation.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data quality checks:** validating that a fixed-format field (phone number, postal code, product code) has the expected character count.
+  - **Building block:** used inside more complex text formulas that need to reference a string's length dynamically.
+
+  ## Related concepts
+
+  ```
+  MID → LEN ← you are here → FIND → SEARCH
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that returns the character count of A1.
+
+  ### Interview/Advanced
+  2. A phone number column shows LEN results of both 10 and 11 for values that "look" the same length visually. What's the likely cause?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=LEN(A1)`
+  2. A hidden extra space (see [TRIM](/skills/trim-function)) in some values — LEN counts every character including spaces, so an invisible trailing or leading space adds 1 to the count without changing how the value looks visually.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you quickly flag phone numbers that don't match an expected 10-digit format?**
+  Short answer: `=IF(LEN(phone)<>10,"Check format","OK")` — comparing each value's character count against the expected length flags any mismatch instantly, though it should be paired with a digits-only check for full validation.
+
+  ## Best practices
+
+  - Use LEN as a fast first-pass validation check on any fixed-format field.
+  - Remember LEN counts spaces, which can help diagnose an otherwise-invisible whitespace problem.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **LEN(text)** → character count, including spaces
+  **Use case:** quick validation of a fixed-length field (phone number, code, ID)

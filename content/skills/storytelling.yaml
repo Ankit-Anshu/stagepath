@@ -1,0 +1,168 @@
+title: Storytelling
+what_is_it: Presenting an analysis so a non-technical audience understands the finding, why it matters, and what to do about it.
+why_it_matters: An analysis nobody acts on has no impact, no matter how correct it is. Storytelling is the skill that turns analysis into a decision.
+prerequisites:
+  - dashboard-design
+objectives:
+  - Lead with the finding, not the method
+  - 'Structure a narrative: context, finding, so-what, recommendation'
+  - Anticipate and pre-empt the obvious follow-up question
+estimated_minutes: 180
+resources:
+  - r-storytelling-with-data
+practice:
+  - id: ex-storytelling-1
+    title: Write a one-paragraph summary
+    description: Take any completed analysis and write a single paragraph a busy executive could read in 20 seconds and know what to do.
+verify:
+  - Finding is stated in the first sentence
+  - Recommendation is explicit, not implied
+  - A non-technical reader could summarize it back correctly
+category: Visualization
+subtopics:
+  - title: Leading with the finding
+    description: Structuring a summary so the conclusion comes first, not buried at the end.
+    outcomes:
+      - Write a finding-first summary of an analysis
+  - title: Narrative structure
+    description: Context, finding, so-what, and recommendation — the four-part shape of a persuasive analysis.
+    outcomes:
+      - Structure a full narrative for one completed analysis
+  - title: Anticipating questions
+    description: Pre-empting the obvious follow-up question before a stakeholder has to ask it.
+    outcomes:
+      - List the two most likely follow-up questions for a finding
+note: |
+  ## 🎯 What is it?
+
+  **Storytelling** is presenting an analysis so a non-technical audience understands the finding, why it matters, and what to do about it — structured deliberately, not just narrated chronologically the way the analysis was actually done.
+
+  ## 💡 Why is it important?
+
+  An analysis nobody acts on has zero impact, no matter how correct it is. Storytelling is the skill that turns a technically sound analysis into an actual decision — and it's frequently what separates an analyst whose work gets acted on from one whose (equally good) work gets ignored.
+
+  ## Core concept
+
+  ### Leading with the finding
+  Most instinctively-written analysis walks through the process first ("I pulled the data, then I cleaned it, then I checked X, then Y...") before finally arriving at the point. Effective communication does the opposite: **state the finding in the first sentence**, then support it — a busy stakeholder should be able to stop reading after sentence one and already know the headline.
+
+  ### Narrative structure: context → finding → so-what → recommendation
+
+  | Part | Answers |
+  |---|---|
+  | **Context** | What question was being investigated, briefly |
+  | **Finding** | What the data actually showed |
+  | **So-what** | Why this matters to the business, in plain terms |
+  | **Recommendation** | What to specifically do about it |
+
+  Skipping the "so-what" or the "recommendation" is one of the most common ways a technically correct analysis fails to drive action — a stakeholder is left with a fact, but no clear next step.
+
+  ### Anticipating questions
+  Before presenting, list the 1–2 most obvious follow-up questions a stakeholder will ask ("is this statistically significant?", "does this hold across regions?") and pre-empt them in the write-up — this builds credibility and avoids an awkward "let me get back to you" moment.
+
+  ## Syntax / Formula / Structure
+
+  A reusable one-paragraph template for any finished analysis:
+
+  ```
+  [Finding, in one sentence, with the key number]
+  [One sentence of context — what was being investigated]
+  [Why this matters to the business — the "so what"]
+  [Specific, explicit recommendation]
+  ```
+
+  ## 📊 Example
+
+  **Weak (process-first) version:**
+  > "I pulled Q3 order data, cleaned duplicate records, segmented by region, and compared it to Q2. After removing outliers, I found that West region revenue was down."
+
+  **Strong (finding-first) version:**
+  > "West region revenue dropped 14% in Q3, driven almost entirely by a 30% decline in repeat customer orders. This suggests a retention problem, not an acquisition one — I recommend prioritizing a West-region win-back campaign over increasing ad spend."
+
+  **Explanation:** The strong version leads with the number and its cause, states the business implication ("retention problem, not acquisition"), and ends with an explicit, actionable recommendation — a busy executive gets the full picture from this one paragraph alone.
+
+  ## Multiple examples
+
+  **Beginner:** Rewriting a single chalkboard-style chart caption to lead with the finding instead of the chart's title alone.
+  **Intermediate:** Structuring a 3-slide summary using context → finding → so-what → recommendation for a mid-sized analysis.
+  **Real-world:** A full quarterly business review is restructured so the very first slide states the single most important finding and recommendation, with every following slide organized as *supporting evidence* for that opening claim — rather than building up to the conclusion at the end, which risks losing a time-constrained executive audience before they reach it.
+
+  ## ⚠️ Common mistakes
+
+  - **Narrating the analytical process instead of leading with the finding.** This is the single most common gap between a technically sound analysis and one that actually gets read and acted on.
+  - **Stating a finding with no explicit recommendation.** "Revenue is down 14%" leaves the stakeholder to figure out what to do about it themselves — an analyst's job includes proposing the next step, not just reporting the fact.
+  - **Not anticipating the obvious follow-up question**, leading to a credibility-damaging "I don't know, let me check" in the room when it comes up.
+  - **Burying the one important number in a wall of supporting detail**, instead of stating it plainly up front.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** a finding-first executive summary explaining a revenue miss and a specific recommended action.
+  - **Product analysis:** a one-paragraph Slack update on a feature launch's impact, structured context → finding → so-what → recommendation.
+  - **Any stakeholder-facing deliverable:** the difference between a report stakeholders skim past and one that drives an actual decision.
+
+  ## Related concepts
+
+  ```
+  Charts → Dashboard Design → BI Tools
+    ↓
+  Storytelling ← you are here
+  ```
+  This closes the Visualization stage — everything from chart choice to dashboard layout ultimately exists in service of communicating a finding clearly enough that someone acts on it.
+
+  ## Practice questions
+
+  ### Easy
+  1. Rewrite this process-first sentence to lead with the finding: "I looked at signups by channel over the last quarter and noticed organic search was performing well."
+
+  ### Medium
+  2. Given the finding "cart abandonment rate is 68%, higher on mobile than desktop," write a one-paragraph summary using the context → finding → so-what → recommendation structure.
+
+  ### Interview/Advanced
+  3. Why can a technically perfect analysis still fail to change anything, and what specifically fixes that?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Example: "Organic search is our strongest signup channel this quarter — [supporting detail can follow]."
+  2. Example: "Cart abandonment is at 68% overall, and notably higher on mobile than desktop [finding]. We looked into checkout behavior across devices this quarter [context]. This gap likely means our mobile checkout flow has friction that's costing us real revenue [so-what]. I recommend prioritizing a mobile checkout redesign next sprint, starting with the payment step where the largest drop-off occurs [recommendation]."
+  3. A technically correct analysis fails to change anything when it doesn't clearly state a finding, its business implication, and a specific recommendation — stakeholders act on clear, actionable communication, not on the underlying rigor of the analysis alone; leading with the finding and always including an explicit recommendation directly fixes this gap.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why does "leading with the finding" matter?**
+  Short answer: Busy stakeholders often only read the first sentence or two — leading with the finding ensures the most important information gets through even if nothing else is read, rather than being buried at the end of a process narrative.
+
+  ### Conceptual questions
+  **Q: What's the difference between a "finding" and a "so-what"?**
+  Short answer: A finding is what the data shows (a fact); the "so-what" is why that fact actually matters to the business and the decision at hand — a finding without a so-what leaves the audience unsure why they should care.
+
+  ### Scenario-based questions
+  **Q: You present a finding and a stakeholder immediately asks "is this statistically significant?" — a question you hadn't addressed. What does this signal, and how do you prevent it next time?**
+  Short answer: It signals the presentation didn't anticipate an obvious follow-up question; next time, explicitly address likely questions (statistical significance, applicability across segments) proactively in the write-up or presentation, before being asked.
+
+  ### Practical questions
+  **Q: How would you compress a 10-page analysis into a single paragraph an executive could read in 20 seconds?**
+  Short answer: Identify the single most important finding and its business implication, state that finding in the first sentence with the key number, briefly note the context, and end with one explicit, specific recommendation — cutting everything else to supporting detail available on request.
+
+  ## Interview traps / tricky points
+
+  - "More detail" is not the same as "more persuasive" — interviewers often probe whether a candidate defaults to comprehensive detail instead of a focused, finding-first structure.
+  - A recommendation that's vague ("we should look into this more") is functionally the same as no recommendation at all — a strong answer states a specific, concrete next step.
+
+  ## Best practices
+
+  - State the finding, with the key number, in the first sentence of any summary.
+  - Always follow a finding with an explicit "so what" and a specific recommendation — never leave either implied.
+  - Anticipate and pre-empt the 1–2 most obvious follow-up questions before presenting.
+  - Structure longer presentations so the first slide/paragraph could stand alone as a complete summary.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Lead with the finding** → state it in the first sentence, not the process
+  **Structure:** context → finding → so-what → recommendation
+  **Always include:** an explicit, specific recommendation — never leave it implied
+  **Anticipate:** the 1–2 most obvious follow-up questions before presenting

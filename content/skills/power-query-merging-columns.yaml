@@ -1,0 +1,66 @@
+title: Merging Columns in Power Query
+category: Spreadsheets
+what_is_it: Combining two or more columns' content into one, as a repeatable Power Query step — not to be confused with Merge Queries, which combines two whole tables.
+why_it_matters: It's a common, small transformation step, and easy to confuse by name with the much bigger "Merge Queries" operation — knowing the difference matters.
+prerequisites:
+  - power-query-splitting-columns
+objectives:
+  - Merge two or more columns into one in Power Query
+  - Explain the difference between Merge Columns and Merge Queries
+estimated_minutes: 15
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-merging-columns-1
+    title: Combine name columns
+    description: Given separate First Name and Last Name columns, use Power Query's Merge Columns to combine them into one Full Name column with a space separator.
+verify:
+  - Can merge columns in Power Query
+  - Can explain the difference between Merge Columns and Merge Queries
+note: |
+  ## 🎯 What is it?
+
+  **Merging columns** in Power Query combines two or more columns' content into one, with a chosen separator — select the columns, right-click, and choose **Merge Columns**. This is a small, single-table operation — distinct from **Merge Queries**, which joins two entirely separate tables together by a shared key.
+
+  ## 💡 Why is it important?
+
+  - It's a common, small transformation step (the Power Query equivalent of worksheet Combining Columns), but its name is easy to confuse with the much larger "Merge Queries" operation — knowing the difference prevents real confusion when following documentation or instructions.
+
+  ## Core concept
+
+  | | Merge Columns | Merge Queries |
+  |---|---|---|
+  | Combines | Two+ columns within one table | Two separate tables, by a shared key |
+  | Result | One new combined column | A new table with columns from both sources |
+  | Equivalent to | Worksheet concatenation | A spreadsheet lookup or SQL join |
+
+  ## 📊 Example
+
+  Merging "First Name" and "Last Name" columns (with a space separator) into one "Full Name" column is Merge Columns — a small, one-table operation. Combining a "Customers" query with an "Orders" query by matching customer ID is Merge Queries — a completely different, much larger operation.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing "Merge Columns" with "Merge Queries"** when following instructions or documentation — always double-check which operation is actually meant, since they do very different things.
+  - **Forgetting to specify a separator**, producing a combined value with no space or delimiter between the original parts.
+
+  ## Related concepts
+
+  ```
+  Splitting Columns in Power Query
+    ↓
+  Merging Columns in Power Query ← you are here
+    ↓
+  Merge Queries
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between "Merge Columns" and "Merge Queries" in Power Query?**
+  Short answer: Merge Columns combines two or more columns *within one table* into a single column (like combining first and last name); Merge Queries joins two entirely separate tables together by a shared key, similar to a SQL join — they're unrelated operations despite the similar name.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Merge Columns** → combine columns within one table into one (like concatenation)
+  **Merge Queries** → join two separate tables by a key — a completely different, larger operation

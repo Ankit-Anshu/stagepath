@@ -1,0 +1,184 @@
+title: Descriptive Statistics
+category: Statistics
+what_is_it: Summarizing a dataset with mean, median, mode, standard deviation, and quartiles.
+why_it_matters: Before you can say anything meaningful about data, you need to describe it accurately — and know when a single summary number is misleading.
+prerequisites: []
+objectives:
+  - Compute mean, median, and mode
+  - Compute standard deviation and interpret it
+  - Identify quartiles and use them to spot skew
+  - Choose the right summary statistic for a dataset
+subtopics:
+  - title: Measures of center
+    description: Mean, median, and mode, and when each one is the right choice.
+    outcomes:
+      - Choose the right measure of center for a skewed dataset
+  - title: Measures of spread
+    description: Range, variance, and standard deviation as ways of describing how spread out data is.
+    outcomes:
+      - Compute and interpret a standard deviation
+  - title: Quartiles & IQR
+    description: Identifying the middle 50% of data and using it to spot skew and outliers.
+    outcomes:
+      - Compute quartiles and identify skew
+estimated_minutes: 150
+resources:
+  - r-khan-statistics
+  - r-seeing-theory
+practice:
+  - id: ex-stats-descriptive-1
+    title: Describe a dataset
+    description: Given a numeric dataset, compute mean, median, standard deviation, and quartiles, and explain what each one tells you.
+verify:
+  - Descriptive statistics are computed correctly
+  - Can justify which measure of center best fits a skewed dataset
+  - Can identify an outlier using the IQR
+note: |
+  ## 🎯 What is it?
+
+  **Descriptive statistics** summarize a dataset with a handful of numbers — mean, median, mode (measures of center), and standard deviation, range, and quartiles (measures of spread) — so you can describe "what this data looks like" without listing every single value.
+
+  Think of it like describing a class of 30 students' test scores to someone in one sentence instead of reading out all 30 scores — you'd naturally reach for the average and maybe how spread out the scores were.
+
+  ## 💡 Why is it important?
+
+  - Before saying anything meaningful about data, you need to describe it accurately — and know when a single summary number is misleading.
+  - It's the first thing to compute on any new dataset, and it's often enough to catch data-quality problems (implausible min/max, huge standard deviation) before deeper analysis.
+  - Every dashboard number — an "average order value," a "median session time" — is a descriptive statistic; understanding them well means understanding what you're actually reporting.
+
+  ## Core concept
+
+  ### Measures of center
+
+  | Statistic | Meaning | Best used when |
+  |---|---|---|
+  | **Mean** | Sum ÷ count (the arithmetic average) | Data is roughly symmetric, no major outliers |
+  | **Median** | The middle value when sorted | Data is skewed or has outliers (e.g., income, order value) |
+  | **Mode** | The most frequent value | Categorical data, or spotting a common repeated value |
+
+  ### Measures of spread
+
+  | Statistic | Meaning |
+  |---|---|
+  | **Range** | Max − Min |
+  | **Variance** | Average of squared distances from the mean |
+  | **Standard deviation** | Square root of variance — spread expressed in the *same units* as the data |
+
+  ### Quartiles & IQR
+  Quartiles split sorted data into four equal parts. Q1 = 25th percentile, Q2 = median, Q3 = 75th percentile. **IQR (Interquartile Range) = Q3 − Q1** — the spread of the "middle 50%," and a standard way to define outliers: any value more than 1.5×IQR beyond Q1 or Q3.
+
+  ## Syntax / Formula / Structure
+
+  ```
+  Mean (x̄)           = (sum of all x values) ÷ n
+  Variance            = (sum of (x − x̄)²) ÷ n
+  Standard deviation  = √Variance
+  ```
+
+  - **x** — each individual value
+  - **n** — the number of values
+  - **x̄** — the mean
+
+  (Note: dividing by n−1 instead of n gives the *sample* variance/std dev — the version almost always used in practice, since real datasets are usually a sample, not the full population.)
+
+  ## 📊 Example
+
+  Order values: `20, 25, 30, 30, 500`
+
+  - **Mean:** (20+25+30+30+500)/5 = **121**
+  - **Median:** sorted middle value = **30**
+  - **Mode:** **30** (appears twice)
+  - **Range:** 500 − 20 = **480**
+
+  **Interpretation:** The mean (121) is dragged far above what a "typical" order looks like by the single 500 outlier — the median (30) is a much more honest description of a typical order here.
+
+  ## Multiple examples
+
+  **Beginner:** Compute mean and median for 5 test scores; note whether they're close (roughly symmetric data).
+  **Intermediate:** Compute standard deviation for two products' weekly sales — same average, but one has much higher std dev, meaning much less predictable demand.
+  **Real-world:** Use IQR to flag outlier transactions in a fraud-review queue: any order more than 1.5×IQR above Q3 gets auto-flagged for manual review.
+
+  ## ⚠️ Common misconceptions
+
+  - **"The mean is always the right summary."** It's misleading whenever data is skewed or has outliers — median is often the better choice (see the order-value example above).
+  - **"Standard deviation of 0 means no data."** It means every value is identical — a genuinely useful (if unusual) signal, not a lack of data.
+  - **Confusing variance and standard deviation.** Variance is in *squared* units (hard to interpret directly); standard deviation converts back to the original units, which is why it's reported far more often.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** median order value alongside the mean, to avoid a misleading "average" driven by a few large B2B orders.
+  - **Operations analysis:** standard deviation of delivery time, to judge consistency, not just average speed.
+  - **Product analysis:** IQR-based outlier detection on session duration to filter out bot traffic before analyzing real user behavior.
+
+  ## Related concepts
+
+  ```
+  Descriptive Statistics ← you are here
+    ↓
+  Probability Basics
+    ↓
+  Distributions
+    ↓
+  Correlation & Regression
+    ↓
+  Hypothesis Testing
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. For the dataset `4, 8, 6, 5, 3, 4`, compute the mean, median, and mode.
+
+  ### Medium
+  2. Two products both average 100 units sold per week. Product A has a standard deviation of 5; Product B has a standard deviation of 40. What does this tell a demand planner?
+
+  ### Interview/Advanced
+  3. A dataset has a mean of 80 and a median of 45. What does this gap suggest about the data's shape, and which statistic would you lead with in a report to leadership?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Mean = (4+8+6+5+3+4)/6 = 5; Median = sorted (3,4,4,5,6,8) → average of 4 and 5 = 4.5; Mode = 4 (appears twice).
+  2. Product A's demand is far more consistent week to week (low variability), while Product B swings widely — B is riskier to plan inventory around even with the same average.
+  3. A mean well above the median suggests a right-skewed distribution (a few high values pulling the mean up) — likely a handful of large orders or high-value outliers. Lead with the median, since it better represents the typical value, and mention the mean alongside it for context.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between mean and median?**
+  Short answer: Mean is the arithmetic average; median is the middle value when sorted — median is more robust to outliers and skew.
+
+  ### Conceptual questions
+  **Q: When would you report the median instead of the mean?**
+  Short answer: When the data is skewed or has significant outliers, since the mean gets pulled toward extreme values while the median doesn't.
+
+  ### Scenario-based questions
+  **Q: You're asked for the "average" salary at a company that has a handful of very high earners. How do you respond?**
+  Short answer: Report both the mean and median, and flag that the mean is likely inflated by a small number of high earners — the median gives a more representative picture of a "typical" salary.
+
+  ### Practical questions
+  **Q: Given a list of daily website session durations, how would you identify and handle outliers?**
+  Short answer: Compute Q1, Q3, and IQR; flag any value beyond 1.5×IQR from Q1/Q3 as a candidate outlier, then investigate (e.g., bot traffic) before deciding whether to exclude it from the main analysis.
+
+  ## Interview traps / tricky points
+
+  - Standard deviation is in the same units as the data; variance is in squared units — mixing them up is a very common and easy-to-catch mistake in an interview.
+  - "Average" is ambiguous in casual speech — always clarify whether mean or median is meant, especially with skewed data like income or order value.
+  - A single very large or very small value can dramatically shift the mean while barely moving the median — always sanity-check for this before reporting.
+
+  ## Best practices
+
+  - Report mean *and* median together for any metric that could plausibly be skewed (price, income, session duration).
+  - Use IQR-based rules, not gut feeling, to define what counts as an outlier.
+  - Always look at standard deviation alongside a mean — two datasets with the same average can behave very differently.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Mean** → average, sensitive to outliers
+  **Median** → middle value, robust to outliers/skew
+  **Mode** → most frequent value
+  **Standard deviation** → typical distance from the mean, same units as data
+  **IQR** → Q3 − Q1, the "middle 50%"; outlier rule: beyond 1.5×IQR from Q1/Q3

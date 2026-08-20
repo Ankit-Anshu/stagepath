@@ -1,0 +1,21 @@
+title: Information Architecture
+category: UX Design
+what_is_it: Organizing, labeling, and connecting content so people can find and understand it.
+why_it_matters: Clear navigation begins with a coherent mental model, not a prettier menu.
+estimated_minutes: 2100
+prerequisites: [user-research]
+objectives: [Model content, Design navigation systems, Validate findability]
+subtopics:
+  - title: Content modeling
+    description: Content types, attributes, relationships, lifecycle, metadata, and governance.
+    outcomes: [Create a content inventory, Define a simple content model]
+  - title: Taxonomy and labeling
+    description: Categories, facets, controlled vocabularies, label clarity, and ambiguity.
+    outcomes: [Design a useful taxonomy, Test labels with users]
+  - title: Navigation and search
+    description: Global, local, contextual, utility navigation, filters, search, and wayfinding.
+    outcomes: [Create a navigation model, Provide orientation cues]
+  - title: Validation methods
+    description: Card sorting, tree testing, first-click testing, search logs, and findability metrics.
+    outcomes: [Run a tree test, Interpret task success]
+

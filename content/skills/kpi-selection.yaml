@@ -1,0 +1,70 @@
+title: KPI Selection
+category: Spreadsheets
+what_is_it: Choosing the small handful of metrics that actually belong on a dashboard, out of every metric that could theoretically be shown.
+why_it_matters: A dashboard with 20 metrics is harder to use than one with 5 well-chosen ones — selection is as important a design skill as any chart-building technique.
+prerequisites:
+  - dashboard-planning
+objectives:
+  - Apply the KPI criteria from the Foundations stage to select dashboard metrics
+  - Explain why more metrics on a dashboard isn't automatically better
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-kpi-selection-1
+    title: Narrow a metric list
+    description: Given a list of 15 possible metrics for a sales dashboard, narrow it down to the 5 that would actually belong, and explain why you excluded the rest.
+verify:
+  - Can select a focused set of metrics for a specific dashboard purpose
+  - Can explain why excluding metrics is part of good dashboard design
+note: |
+  ## 🎯 What is it?
+
+  **KPI selection** is choosing the small handful of metrics that actually belong on a specific dashboard, applying the KPI criteria from the Foundations stage (specific, measurable, tied to a real goal, actionable) to decide what makes the cut — and just as importantly, what doesn't.
+
+  ## 💡 Why is it important?
+
+  - A dashboard with 20 metrics is genuinely harder to use than one with 5 well-chosen ones — a viewer has to work to find what matters, which defeats the purpose of a dashboard.
+  - Deliberately excluding a metric because it's not tied to the dashboard's specific purpose (even if it's a "good" metric in another context) is itself a real design skill.
+
+  ## Core concept
+
+  Reapplying the earlier KPIs & Metrics criteria specifically to dashboard selection:
+
+  | Question | Keeps a metric on the dashboard if... |
+  |---|---|
+  | Tied to this dashboard's purpose? | Yes — directly relevant to the decision it supports |
+  | Actionable by this audience? | Yes — the viewer can actually do something if it moves |
+  | Avoids redundancy? | Yes — doesn't just restate another metric already shown |
+
+  ## 📊 Example
+
+  A sales dashboard planned for "spot underperforming regions" should show revenue vs. target by region — a directly relevant, actionable metric. A metric like "total historical page views on the company blog" might be interesting, but doesn't belong on this specific dashboard — it's not tied to its stated purpose.
+
+  ## ⚠️ Common mistakes
+
+  - **Adding a metric because a stakeholder mentioned it once**, without checking whether it's actually tied to the dashboard's core purpose.
+  - **Including several metrics that all measure roughly the same thing**, adding clutter without adding new information.
+
+  ## Related concepts
+
+  ```
+  Dashboard Planning
+    ↓
+  KPI Selection ← you are here
+    ↓
+  Dashboard Layout
+  ```
+  Directly applies KPIs & Metrics from the Foundations stage.
+
+  ## 🎤 Interview preparation
+
+  **Q: A stakeholder wants 20 metrics added to a dashboard. How would you respond?**
+  Short answer: Push back constructively — ask which decision each metric supports, and whether the dashboard's core purpose actually needs all 20; a focused set of 5-8 well-chosen metrics almost always serves the audience better than a comprehensive but cluttered one.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **KPI selection** → choose the small set of metrics genuinely tied to the dashboard's specific purpose
+  Excluding a metric deliberately is as much a design skill as including one.

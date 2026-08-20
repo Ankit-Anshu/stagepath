@@ -1,0 +1,21 @@
+title: Security Portfolio & Communication
+category: Cybersecurity
+what_is_it: Presenting investigations, risk, labs, and recommendations in a way technical and business readers can trust.
+why_it_matters: Security work creates value only when others understand the evidence and can act on it.
+estimated_minutes: 1800
+prerequisites: [detection-response, cloud-security]
+objectives: [Write clear findings, Build a defensible lab portfolio, Communicate risk without hype]
+subtopics:
+  - title: Investigation reports
+    description: Executive summary, timeline, evidence, scope, impact, uncertainty, and recommendations.
+    outcomes: [Write an incident report, Separate facts from hypotheses]
+  - title: Vulnerability findings
+    description: Reproduction, impact, severity, evidence, remediation, and retest criteria.
+    outcomes: [Write a complete finding, Calibrate severity]
+  - title: Lab documentation
+    description: Safe scope, architecture, setup, screenshots, queries, lessons, and cleanup.
+    outcomes: [Publish a reproducible lab, Protect sensitive details]
+  - title: Interview evidence
+    description: Explaining tradeoffs, investigation reasoning, failed hypotheses, and ethical boundaries.
+    outcomes: [Tell a structured security story, Discuss limitations honestly]
+

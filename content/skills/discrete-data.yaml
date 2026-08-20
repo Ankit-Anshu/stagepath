@@ -1,0 +1,66 @@
+title: Discrete Data
+category: Foundations
+what_is_it: Numerical data that can only take specific, countable values — usually whole numbers, with no meaningful values in between.
+why_it_matters: It shapes which chart and which statistical treatment is appropriate — you can't have "2.3 orders," so discrete counts get bar charts and integer-based analysis, not smooth curves.
+prerequisites:
+  - numerical-data
+objectives:
+  - Define discrete data and give two examples
+  - Explain why discrete data has no meaningful values "in between"
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-discrete-data-1
+    title: Discrete or continuous?
+    description: List five numeric fields from a dataset you use and classify each as discrete or continuous.
+verify:
+  - Can define discrete data
+  - Can distinguish discrete from continuous data with an example
+note: |
+  ## 🎯 What is it?
+
+  **Discrete data** is numerical data that only takes specific, countable values, typically whole numbers, with nothing meaningful in between. Number of orders, number of children, and number of website visits are discrete — you can't have 2.5 orders.
+
+  ## 💡 Why is it important?
+
+  - It affects chart choice — discrete counts are usually shown as bar charts or count-based histograms with integer bins, not smooth curves.
+  - Some statistical distributions (like Poisson) apply specifically to discrete counts, while others (like the Normal distribution) assume continuous data.
+
+  ## Core concept
+
+  | | Discrete | Continuous |
+  |---|---|---|
+  | Values | Countable, usually whole numbers | Any value within a range |
+  | Example | Number of orders, number of visits | Revenue, time, temperature |
+  | "In-between" values? | Not meaningful (no 2.5 orders) | Meaningful (a purchase can be $19.995) |
+
+  ## 📊 Example
+
+  `orders_per_customer` (0, 1, 2, 3...) is discrete — every value is a whole number and there's nothing meaningful between 1 and 2 orders. A bar chart or count histogram fits it naturally.
+
+  ## ⚠️ Common mistakes
+
+  - **Averaging discrete data and reporting a fractional result without context** — "2.3 average orders per customer" is a valid average even though no single customer placed 2.3 orders; the mistake is presenting it as if it described an individual case.
+  - **Confusing "discrete" with "categorical."** Discrete describes *countable numeric* values; categorical describes *named groups* — a count of orders is discrete, not categorical.
+
+  ## Related concepts
+
+  ```
+  Numerical Data
+         ↓
+  Discrete Data ← you are here      Continuous Data
+  (countable, whole numbers)         (any value on a scale)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would you use a count-based histogram rather than a smooth density curve for "number of purchases per customer"?**
+  Short answer: Because it's discrete — values only exist at whole numbers, so binning at integers (0, 1, 2, 3...) matches the actual data, unlike a smooth curve that implies fractional in-between values.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Discrete data** → countable, whole-number values, no meaningful "in-between" — order counts, visit counts
+  Pairs with bar charts / integer-based analysis.

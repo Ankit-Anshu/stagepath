@@ -1,0 +1,104 @@
+title: ROUND Function
+category: Spreadsheets
+what_is_it: Rounding a number to a specified number of decimal places, using standard rounding rules (0.5 and above rounds up).
+why_it_matters: Unrounded numbers with long decimal tails look unprofessional in a report and can cause small display/reality mismatches — ROUND is how you control precision deliberately.
+prerequisites:
+  - max-function
+objectives:
+  - Round a number to a specified number of decimal places
+  - Explain the difference between formatting a cell to show fewer decimals and actually using ROUND
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-round-1
+    title: Clean up a currency column
+    description: Given a column of prices with long decimal tails from a division formula, round them to 2 decimal places for a clean report.
+verify:
+  - Rounded values match the correct decimal precision
+  - Can explain the difference between ROUND and just formatting a cell to show fewer decimals
+note: |
+  ## 🎯 What is it?
+
+  **ROUND** rounds a number to a specified number of decimal places, using standard rounding rules (0.5 and above rounds up, below 0.5 rounds down).
+
+  ## 💡 Why is it important?
+
+  Unrounded numbers with long decimal tails (like `14.386274193`) look unprofessional in a report and can cause confusing small mismatches between a displayed total and a "true" calculated one — ROUND is how you control precision deliberately, instead of just changing how a number *displays* without changing its actual stored value (see Number Formats).
+
+  ## Syntax
+
+  ```
+  =ROUND(number, num_digits)
+  ```
+
+  - **num_digits** — how many decimal places to keep; `0` rounds to a whole number, negative numbers round to the left of the decimal (e.g., `-2` rounds to the nearest hundred).
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 14.386274 |
+
+  **Formula:** `=ROUND(A1,2)` → `14.39`
+  **Formula:** `=ROUND(A1,0)` → `14`
+
+  ## Multiple examples
+
+  **Beginner:** `=ROUND(B2,2)` — round a price to 2 decimal places (cents).
+  **Intermediate:** `=ROUND(B2,-2)` — round a large number to the nearest hundred.
+  **Real-world:** Rounding a calculated commission to 2 decimal places for a payroll report, since displaying a commission to 6 decimal places would look unprofessional and doesn't reflect real currency precision.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing "rounding for display" (formatting a cell to show 2 decimals) with actually rounding the underlying value.** Cell formatting only changes what's *displayed* — the true stored value still has the full decimal tail, which can cause a displayed total to not quite match the sum of displayed line items. ROUND changes the actual stored value.
+  - **Using ROUND when the situation actually calls for ROUNDUP or ROUNDDOWN** — e.g., calculating "how many trucks are needed" should always round up even for a small remainder, which standard ROUND won't do (see ROUNDUP).
+
+  ## Real-world Data Analyst use cases
+
+  - **Finance analysis:** rounding calculated monetary values to 2 decimal places for a clean, professional report.
+  - **Reporting:** rounding a percentage or ratio to a consistent, readable number of decimal places across a whole dashboard.
+
+  ## Related concepts
+
+  ```
+  MIN → MAX → ROUND ← you are here
+    ↓
+  ROUNDUP → ROUNDDOWN
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that rounds A1 to 2 decimal places.
+
+  ### Medium
+  2. Why might a report's displayed total not exactly match the sum of its displayed line items, even though both look "correctly rounded" on screen?
+
+  ### Interview/Advanced
+  3. When would ROUND give the wrong answer for a business calculation, even though it's working exactly as designed?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=ROUND(A1,2)`
+  2. If the underlying values were only *formatted* to display 2 decimals (not actually rounded with ROUND), the true stored values still carry their full decimal precision — the displayed total is computed from the true values, which can differ slightly from the sum of the displayed (rounded-looking) line items.
+  3. Whenever any leftover, partial amount still requires a full additional unit (an extra truck, an extra box) — standard ROUND can round down a value like 4.24 to 4, understating the real requirement; ROUNDUP is needed instead.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between formatting a cell to show 2 decimals and using ROUND?**
+  Short answer: Formatting only changes how the value is *displayed*; the underlying stored value keeps its full precision. ROUND actually changes the stored value itself, which is why it matters when the rounded value feeds into further calculations.
+
+  ## Best practices
+
+  - Use ROUND (not just cell formatting) whenever a rounded value will be used in a further calculation.
+  - Reach for ROUNDUP or ROUNDDOWN instead when a business rule requires always rounding in one specific direction.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **ROUND(num, digits)** → standard rounding (0.5 and above rounds up)
+  **Remember:** cell formatting changes display only; ROUND changes the actual stored value.

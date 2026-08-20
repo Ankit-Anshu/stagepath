@@ -1,0 +1,71 @@
+title: Asking Analytical Questions
+category: Foundations
+what_is_it: The skill of turning a vague curiosity or business concern into a specific, answerable question that data can actually address.
+why_it_matters: The quality of an analysis is capped by the quality of the question behind it — a vague question guarantees a vague, hard-to-act-on answer.
+prerequisites:
+  - make-recommendations
+objectives:
+  - Turn a vague concern into a specific, answerable question
+  - Explain what makes a question "answerable" with available data
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-analytical-questions-1
+    title: Sharpen a question
+    description: Take the vague concern "our users don't seem engaged" and turn it into a specific, answerable analytical question.
+verify:
+  - Can turn a vague concern into a specific question
+  - Can explain why specificity matters
+note: |
+  ## 🎯 What is it?
+
+  **Asking analytical questions** is the skill of turning a vague curiosity ("are we doing okay?") or business concern ("users don't seem engaged") into a specific, answerable question a dataset can actually address ("what percentage of new users complete a core action within their first 7 days, and how has that changed over the last 6 months?").
+
+  ## 💡 Why is it important?
+
+  - The quality of an analysis is capped by the quality of the question — a vague question guarantees a vague, hard-to-act-on answer, no matter how skilled the analyst.
+  - It's the mental-model foundation for the earlier "Define the Business Problem" process step — this topic is the underlying *thinking skill*, not just the workflow step.
+
+  ## Core concept
+
+  A good analytical question is usually:
+  - **Specific** — names a metric, a segment, and a time window.
+  - **Measurable** — answerable with data that exists or can reasonably be collected.
+  - **Tied to a decision** — the answer changes what someone does next.
+
+  | Vague | Specific & answerable |
+  |---|---|
+  | "Are we doing okay?" | "Is Q1 revenue on track to hit the $2M target?" |
+  | "Users don't seem engaged" | "What % of new users complete a core action within 7 days, and how has that trended?" |
+
+  ## 📊 Example
+
+  A product manager says, "I feel like people aren't sticking around." An analyst sharpens this into: "What's the 30-day retention rate for users who signed up in the last 3 months, and how does it compare to the prior 3 months?" — now it's something a query can actually answer.
+
+  ## ⚠️ Common mistakes
+
+  - **Accepting a vague question at face value** and diving into data without sharpening it first — often producing an answer to a question nobody actually asked.
+  - **Over-narrowing a question too early**, before understanding what the stakeholder actually cares about — sharpening should still capture their real underlying concern.
+
+  ## Related concepts
+
+  ```
+  Asking Analytical Questions ← you are here
+    ↓
+  Hypothesis Thinking
+    ↓
+  Root Cause Analysis
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A stakeholder says "our marketing doesn't feel like it's working." How do you turn this into an answerable question?**
+  Short answer: Ask what "working" means to them specifically — leads? conversions? cost per acquisition? — then sharpen it into something measurable, like "has our cost per acquisition increased over the last two quarters compared to target?"
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Asking analytical questions** → turn vague concerns into specific, measurable, decision-relevant questions
+  The ceiling of any analysis is set by the quality of its question.

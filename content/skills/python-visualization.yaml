@@ -1,0 +1,179 @@
+title: Data Visualization with Python
+category: Python
+what_is_it: Creating charts directly from pandas data using Matplotlib and Seaborn, for exploratory analysis and reporting.
+why_it_matters: Python-native visualization lets you explore data and produce report-ready charts inside the same workflow as your cleaning and analysis, without switching tools.
+prerequisites:
+  - pandas
+objectives:
+  - Create a chart directly from a DataFrame
+  - Customize titles, labels, and colors
+  - Choose Matplotlib vs. Seaborn for a task
+  - Export a chart as an image for a report
+subtopics:
+  - title: Matplotlib basics
+    description: 'The core plotting API: figures, axes, and the most common chart types.'
+    outcomes:
+      - Plot a line and bar chart from a DataFrame
+  - title: Seaborn statistical plots
+    description: Higher-level statistical charts — distributions, box plots, and category comparisons — with less code.
+    outcomes:
+      - Build a distribution plot and a box plot with Seaborn
+  - title: Customizing and labeling
+    description: Titles, axis labels, legends, and color choices that make a chart stand on its own.
+    outcomes:
+      - Fully label a chart without relying on verbal explanation
+  - title: Exporting for reports
+    description: Saving a chart at the right resolution and format to drop into a slide or document.
+    outcomes:
+      - Export a chart as a high-resolution image file
+estimated_minutes: 180
+resources:
+  - r-matplotlib-docs
+  - r-seaborn-docs
+practice:
+  - id: ex-python-viz-1
+    title: Chart a cleaned dataset
+    description: Using the churn analysis dataset, produce three labeled charts that each answer a different question about the data.
+verify:
+  - Each chart answers a specific, stated question
+  - Axes and legends are labeled
+  - Chart type matches the question being asked
+note: |
+  ## 🎯 What is it?
+
+  **Data Visualization with Python** covers building charts directly from pandas data using **Matplotlib** (the foundational plotting library) and **Seaborn** (a higher-level library built on top of it, specialized for statistical charts) — for both quick exploratory looks and polished, report-ready output.
+
+  ## 💡 Why is it important?
+
+  Python-native visualization lets you explore data and produce report-ready charts inside the same workflow as your cleaning and analysis — no switching to a separate tool, and every chart stays reproducible as code rather than a one-off manual export.
+
+  ## Core concept
+
+  ### Matplotlib basics
+  The core plotting API, built around **figures** (the whole chart canvas) and **axes** (an individual plot within it). Matplotlib gives you full manual control over every chart element — useful, but more verbose than Seaborn for common statistical chart types.
+
+  ### Seaborn statistical plots
+  A higher-level library (built on Matplotlib) purpose-built for statistical visualization — distribution plots, box plots, and category comparisons — that produces attractive, well-labeled charts with far less code than raw Matplotlib.
+
+  ### Customizing and labeling
+  Titles, axis labels, legends, and deliberate color choices are what make a chart understandable **on its own**, without a verbal explanation standing next to it — a core requirement for any chart going into a report or dashboard.
+
+  ### Exporting for reports
+  Saving a chart at the correct resolution and file format (commonly PNG for slides, SVG/PDF for print) so it looks sharp wherever it's placed, not stretched or pixelated.
+
+  ## Syntax
+
+  ```python
+  import matplotlib.pyplot as plt
+  import seaborn as sns
+
+  # Matplotlib — a basic bar chart from a DataFrame
+  df.groupby("region")["revenue"].sum().plot(kind="bar")
+  plt.title("Total Revenue by Region")
+  plt.xlabel("Region")
+  plt.ylabel("Revenue ($)")
+  plt.savefig("revenue_by_region.png", dpi=300, bbox_inches="tight")
+
+  # Seaborn — a distribution plot in one line
+  sns.histplot(data=df, x="order_amount", bins=30)
+  plt.title("Distribution of Order Amounts")
+  ```
+
+  ## 📊 Example
+
+  **Task:** Compare order-amount distributions across two customer segments.
+
+  ```python
+  sns.boxplot(data=df, x="segment", y="order_amount")
+  plt.title("Order Amount by Customer Segment")
+  plt.xlabel("Segment")
+  plt.ylabel("Order Amount ($)")
+  plt.savefig("segment_comparison.png", dpi=300, bbox_inches="tight")
+  ```
+
+  **Explanation:** A box plot is the right chart type here specifically because it shows the median, spread, and outliers of each segment side by side — a bar chart of *averages* alone would hide whether one segment's high average is driven by a typical customer or a few large outliers (see [Descriptive Statistics](/skills/stats-descriptive)).
+
+  ## Multiple examples
+
+  **Beginner:** A single line chart of monthly revenue over time using Matplotlib.
+  **Intermediate:** A Seaborn box plot comparing a metric across categories, fully labeled with a title and axis labels.
+  **Real-world:** Three labeled charts answering three specific questions for a stakeholder report — a trend line (is revenue growing?), a box plot (how does order value vary by segment?), and a bar chart (which category drives the most revenue?) — each exported as a high-resolution PNG ready to drop into a slide.
+
+  ## ⚠️ Common mistakes
+
+  - **Choosing a chart type that doesn't fit the question**, e.g., a line chart for unordered categories, or a pie chart with too many slices. (See [Charts & Chart Selection](/skills/charts) for the full decision framework.)
+  - **Shipping an unlabeled chart** — no title, no axis labels — that only makes sense if someone explains it verbally alongside it.
+  - **Exporting at too low a resolution** for its intended use, resulting in a blurry chart once placed in a slide or printed document.
+  - **Choosing Matplotlib for a task Seaborn handles better in one line** (like a distribution or box plot), leading to unnecessarily verbose code for a standard chart type.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** a revenue trend line chart for a monthly business review.
+  - **Product analysis:** a box plot comparing session duration across user segments.
+  - **Marketing analysis:** a bar chart of conversion rate by channel, exported for a stakeholder deck.
+
+  ## Related concepts
+
+  ```
+  NumPy → Pandas
+    ↓
+  Data Visualization with Python ← you are here
+    ↓
+  Visualization stage (Charts, Dashboard Design, Storytelling — chart-selection theory)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write code to create a bar chart of total revenue by region from a pandas DataFrame.
+
+  ### Medium
+  2. You need to compare the distribution (not just the average) of order amounts across 4 product categories. Which chart type and library feature fits best?
+
+  ### Interview/Advanced
+  3. Why might a box plot reveal something a bar chart of category averages hides entirely?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `df.groupby("region")["revenue"].sum().plot(kind="bar"); plt.title("Total Revenue by Region")`
+  2. A Seaborn box plot (`sns.boxplot(data=df, x="category", y="order_amount")`) — it shows median, spread, and outliers per category in one chart, which a simple bar chart of averages cannot.
+  3. A bar chart of averages collapses each category to a single number, hiding whether that average reflects a typical, consistent value or is being pulled by a few extreme outliers — a box plot exposes the underlying spread and outliers directly, which can completely change how the comparison should be interpreted.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between Matplotlib and Seaborn?**
+  Short answer: Matplotlib is the foundational, low-level plotting library with full manual control; Seaborn is built on top of it and provides higher-level, statistically-focused chart types with much less code for common use cases.
+
+  ### Conceptual questions
+  **Q: Why does a chart need axis labels and a title even if you'll be presenting it live?**
+  Short answer: A chart should be understandable on its own, since it may be viewed later, forwarded, or included in a written report without you present to explain it — labels remove ambiguity about what's being shown.
+
+  ### Scenario-based questions
+  **Q: A stakeholder says a chart you sent "doesn't make sense" without more context. What likely went wrong?**
+  Short answer: The chart probably lacked a clear title, axis labels, or a chart type that matched the underlying question — a chart requiring verbal explanation to be understood isn't finished yet.
+
+  ### Practical questions
+  **Q: How would you export a chart so it looks sharp in a printed report, not just on screen?**
+  Short answer: Save at a high resolution (e.g., `dpi=300`) and, if the report supports it, a vector format like SVG or PDF instead of a low-resolution raster image.
+
+  ## Interview traps / tricky points
+
+  - Choosing Seaborn vs. Matplotlib isn't about one being "better" — it's about matching the tool to the task: Seaborn for quick, well-styled statistical charts; Matplotlib when you need fine-grained custom control.
+  - A chart that looks fine on a laptop screen can be blurry or oddly cropped once placed in a slide deck — always export deliberately, not via a screenshot.
+
+  ## Best practices
+
+  - Always add a title and labeled axes before considering a chart "done."
+  - Choose the chart type based on the question being answered, not habit or what's fastest to code.
+  - Export at a resolution appropriate for the chart's final destination (slide, print, dashboard).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Matplotlib** → low-level, full control · **Seaborn** → high-level, statistical charts, less code
+  **Every chart needs:** a title, labeled axes, and a chart type that matches the question
+  **Export:** high resolution (`dpi=300`+) for anything going into a report or slide

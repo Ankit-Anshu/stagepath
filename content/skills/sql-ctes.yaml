@@ -1,0 +1,189 @@
+title: SQL — CTEs
+what_is_it: Breaking a complex query into named, readable steps using WITH (common table expressions), including recursive CTEs.
+why_it_matters: Real analytics queries get complicated fast. CTEs make a query readable, testable step by step, and reusable within itself.
+prerequisites:
+  - sql-joins
+objectives:
+  - Write a query using one or more CTEs
+  - Explain why a CTE is more readable than a nested subquery
+  - Chain multiple CTEs together
+estimated_minutes: 180
+resources:
+  - r-postgres-tutorial
+  - r-kaggle-advanced-sql
+practice:
+  - id: ex-sql-ctes-1
+    title: Refactor a nested subquery
+    description: Given a deeply nested subquery, rewrite it as a sequence of CTEs that produces the same result and is easier to read.
+verify:
+  - CTE result matches the original nested query exactly
+  - Each CTE has a clear, single purpose
+  - Can explain the query step by step using the CTE names
+category: SQL
+subtopics:
+  - title: WITH syntax
+    description: Naming a common table expression and referencing it later in the same query.
+    outcomes:
+      - Write a query using a single CTE
+  - title: Chaining CTEs
+    description: Building a multi-step query as a readable sequence of named steps, each building on the last.
+    outcomes:
+      - Chain two CTEs where the second uses the first
+  - title: CTEs vs. subqueries
+    description: Why a CTE is usually easier to read and debug than a deeply nested subquery.
+    outcomes:
+      - Refactor a nested subquery into a CTE
+  - title: Recursive CTEs (intro)
+    description: What a recursive CTE is for, conceptually — traversing hierarchical or sequential data.
+    outcomes:
+      - Explain when you would need a recursive CTE
+note: |
+  ## 🎯 What is it?
+
+  A **CTE (Common Table Expression)**, written with `WITH`, lets you name a subquery and reference it later in the same query — breaking a complex query into readable, named, sequential steps instead of one giant nested expression.
+
+  ## 💡 Why is it important?
+
+  Real analytics queries get complicated fast — filtering, aggregating, joining, and ranking all in one query. CTEs make that complexity readable and testable step by step, and each CTE can be reused multiple times within the same query without repeating its logic.
+
+  ## Core concept
+
+  ### WITH syntax
+  A CTE is defined with `WITH name AS (subquery)`, then referenced by name later in the query, just like a real table.
+
+  ### Chaining CTEs
+  Multiple CTEs can be defined in sequence, each one able to reference any CTE defined before it — building a multi-step pipeline where each step has a clear, single purpose and a descriptive name.
+
+  ### CTEs vs. subqueries
+  A deeply nested subquery forces you to read from the inside out, tracking parentheses. A CTE reads top-to-bottom, each step named for what it does — functionally often equivalent, but far easier for a human (including future-you) to follow, test, and debug.
+
+  ### Recursive CTEs (intro)
+  A CTE that references *itself*, used for traversing hierarchical or sequential data — like an employee-to-manager reporting chain, or generating a sequence of dates. Covered here conceptually; full recursive syntax is an advanced topic beyond this stage.
+
+  ## Syntax
+
+  ```sql
+  WITH regional_totals AS (
+    SELECT region, SUM(amount) AS total_revenue
+    FROM orders
+    GROUP BY region
+  ),
+  above_average AS (
+    SELECT region, total_revenue
+    FROM regional_totals
+    WHERE total_revenue > (SELECT AVG(total_revenue) FROM regional_totals)
+  )
+  SELECT * FROM above_average
+  ORDER BY total_revenue DESC;
+  ```
+
+  ## 📊 Example
+
+  `orders` table:
+
+  | region | amount |
+  |---|---|
+  | West | 4,200 |
+  | East | 1,800 |
+  | North | 5,000 |
+
+  **Query (using the CTEs above):**
+
+  **Step 1 — `regional_totals`:** West: 4,200, East: 1,800, North: 5,000. Average = 3,666.67.
+  **Step 2 — `above_average`:** keeps only West and North.
+
+  **Output:**
+
+  | region | total_revenue |
+  |---|---|
+  | North | 5,000 |
+  | West | 4,200 |
+
+  **Explanation:** Each CTE is a clearly named, self-contained step — reading the query top to bottom tells you exactly what each stage does, unlike the equivalent nested-subquery version.
+
+  ## Multiple examples
+
+  **Beginner:** A single CTE that pre-filters rows before the main query selects from it.
+  **Intermediate:** Two chained CTEs — one aggregates, the next filters the aggregated result (as in the example above).
+  **Real-world:** A three-step CTE pipeline: `cleaned_orders` (dedupes and filters raw data) → `customer_totals` (aggregates spend per customer) → `top_customers` (ranks and filters to the top 10%) — each step readable and independently testable by running it alone.
+
+  ## ⚠️ Common mistakes
+
+  - **Turning a CTE chain into a new form of unreadable complexity** by giving CTEs vague names like `cte1`, `cte2` — the whole point is lost without descriptive names.
+  - **Assuming a CTE is always materialized (computed once and cached).** In many databases, a CTE referenced multiple times may be re-evaluated each time it's referenced — for performance-critical repeated use, check your specific database's behavior (some support explicit materialization hints).
+  - **Forgetting a CTE only exists for the single query it's attached to** — it isn't a saved view or table, and can't be referenced by a separate query.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** a multi-step CTE pipeline building from raw orders → cleaned orders → regional summary → top-region flag.
+  - **Customer analysis:** a CTE computing customer lifetime value, referenced by a later CTE that segments customers into tiers.
+  - **Any complex report:** replacing a deeply nested subquery with a readable, named sequence of CTEs for easier review and maintenance.
+
+  ## Related concepts
+
+  ```
+  JOIN → SUBQUERY
+    ↓
+  CTE ← you are here (often a cleaner alternative to nested subqueries)
+    ↓
+  UNION / Set Operations
+    ↓
+  WINDOW FUNCTIONS (often used together with CTEs)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Rewrite `SELECT * FROM (SELECT region, SUM(amount) AS total FROM orders GROUP BY region) t WHERE t.total > 1000;` using a CTE instead of a nested subquery.
+
+  ### Medium
+  2. Write a two-step CTE query: first aggregate total spend per customer, then filter to customers with spend over $500.
+
+  ### Interview/Advanced
+  3. Why might a team prefer a CTE-based query over an equivalent nested-subquery version, even if performance is identical?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `WITH region_totals AS (SELECT region, SUM(amount) AS total FROM orders GROUP BY region) SELECT * FROM region_totals WHERE total > 1000;`
+  2. `WITH customer_spend AS (SELECT customer_id, SUM(amount) AS total_spend FROM orders GROUP BY customer_id) SELECT * FROM customer_spend WHERE total_spend > 500;`
+  3. Readability and maintainability — a CTE query reads top-to-bottom with each named step self-documenting its purpose, making it far easier for another analyst (or future you) to review, debug, and modify than a deeply nested subquery that must be read inside-out.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What is a CTE, and why use one?**
+  Short answer: A named, temporary result set defined with WITH, used to break a complex query into readable, sequential steps instead of deeply nested subqueries.
+
+  ### Conceptual questions
+  **Q: How is a CTE different from a subquery in the FROM clause?**
+  Short answer: Functionally they can achieve similar things, but a CTE is named and defined upfront, can be referenced multiple times within the same query, and reads top-to-bottom — a FROM subquery is inline and unnamed, and gets harder to read as nesting grows.
+
+  ### Scenario-based questions
+  **Q: You inherit a query with 4 levels of nested subqueries and need to add a new filter. How would you approach it?**
+  Short answer: Refactor the nested subqueries into a sequence of named CTEs first — this makes it much easier to identify exactly where the new filter belongs and to verify each step still produces the expected result.
+
+  ### Practical questions
+  **Q: Write a CTE-based query that finds the top 3 customers by total spend.**
+  Short answer: `WITH customer_totals AS (SELECT customer_id, SUM(amount) AS total FROM orders GROUP BY customer_id) SELECT * FROM customer_totals ORDER BY total DESC LIMIT 3;`
+
+  ## Interview traps / tricky points
+
+  - A CTE is scoped to a single query — it cannot be referenced by a different, separate query the way a view or table can.
+  - Whether a CTE is "materialized" (computed once) or re-evaluated on each reference varies by database engine — don't assume a specific performance behavior without checking.
+
+  ## Best practices
+
+  - Give every CTE a clear, descriptive name that states its purpose (e.g., `cleaned_orders`, not `cte1`).
+  - Keep each CTE focused on a single, well-defined transformation step.
+  - Refactor a deeply nested subquery into CTEs whenever it becomes hard to read at a glance.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **WITH name AS (...)** → defines a named, reusable step within one query
+  **Chained CTEs** → each can reference any CTE defined before it
+  **vs. subqueries** → same logical power, far more readable
+  **Scope:** a CTE only exists for the query it's attached to

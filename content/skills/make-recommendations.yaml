@@ -1,0 +1,66 @@
+title: Make Recommendations
+category: Foundations
+what_is_it: The final step of the analysis process — converting findings into a specific, actionable suggestion for what the business should do next.
+why_it_matters: Most stakeholders ultimately want to know what to do, not just what the data shows — a strong recommendation is what closes the loop from data back to a business decision.
+prerequisites:
+  - communicate-insights
+objectives:
+  - Explain what makes a recommendation specific and actionable
+  - Practice converting a finding into a recommendation
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-make-recommendations-1
+    title: Write a recommendation
+    description: Take a finding from an earlier exercise and write a specific, actionable recommendation based on it — not a vague suggestion.
+verify:
+  - Can explain what makes a recommendation actionable
+  - Can write a specific recommendation from a finding
+note: |
+  ## 🎯 What is it?
+
+  **Making recommendations** is the final step of the data analysis process — converting an interpreted, communicated finding into a specific, actionable suggestion for what the business should do next. It's the practical expression of prescriptive analytics, applied at the end of any individual analysis.
+
+  ## 💡 Why is it important?
+
+  - It's what most stakeholders actually want from an analysis — the finding matters mainly because of what it implies should happen next.
+  - A strong recommendation is what separates an analyst who's seen as a strategic partner from one who's seen purely as a report-generator.
+
+  ## Core concept
+
+  A good recommendation is:
+  - **Specific** — not "improve marketing," but "reallocate 15% of EU budget to the US region."
+  - **Actionable** — something a real person or team can actually do.
+  - **Tied to the finding** — clearly follows from the analysis, not a generic best practice.
+  - **Honest about confidence** — flags if the recommendation depends on an assumption or has real uncertainty.
+
+  ## 📊 Example
+
+  Weak: "We should look into improving retention." Strong: "New users who don't complete onboarding within 48 hours retain 3x worse — I recommend adding a reminder email at the 24-hour mark, targeting the highest-drop-off step specifically."
+
+  ## ⚠️ Common mistakes
+
+  - **Ending an analysis with only a finding, no recommendation** — leaving the "so what do we do" question for the stakeholder to answer themselves.
+  - **Making a recommendation broader than the data supports.** A finding about one region shouldn't be turned into a company-wide recommendation without checking whether it generalizes.
+
+  ## Related concepts
+
+  ```
+  Communicate Insights
+    ↓
+  Make Recommendations ← you are here
+  ```
+  This closes the Data Analysis Process chapter — the same nine steps (define → collect → understand → clean → transform → explore → analyze → visualize → interpret → communicate → recommend) recur, at different depths, across almost every stage of this roadmap.
+
+  ## 🎤 Interview preparation
+
+  **Q: What makes a recommendation "good," beyond just being correct?**
+  Short answer: It should be specific and actionable (not vague), clearly tied to the finding that produced it, and honest about any assumptions or uncertainty behind it — a correct but vague recommendation is much less useful than a specific one.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Make recommendations** → convert a finding into a specific, actionable next step
+  Good recommendations are specific, actionable, tied to the finding, and honest about confidence.

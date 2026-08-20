@@ -1,0 +1,68 @@
+title: Ratio Data
+category: Foundations
+what_is_it: Numerical data with a meaningful order, equal gaps between values, and a true zero — meaning ratios like "twice as much" are valid.
+why_it_matters: It's the level of measurement almost every core business metric lives at — revenue, orders, customers, time-on-page — so it's the type of data an analyst works with most.
+prerequisites:
+  - interval-data
+objectives:
+  - Define ratio data and give two examples
+  - Explain why ratio data supports "twice as much" claims
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-ratio-data-1
+    title: Find the true zero
+    description: List three business metrics you know and confirm each has a true zero (i.e., zero means "none"), confirming they're ratio data.
+verify:
+  - Can define ratio data
+  - Can explain why revenue is ratio data, not interval
+note: |
+  ## 🎯 What is it?
+
+  **Ratio data** has everything interval data has — order, equal gaps — plus a true zero point, where zero genuinely means "none." Revenue, order count, age, and time-on-page are all ratio data: $0 revenue means no revenue, and $200 is genuinely twice as much as $100.
+
+  ## 💡 Why is it important?
+
+  - It's the level of measurement almost every core business metric lives at, so it's the data type an analyst works with the most.
+  - Because it has a true zero, ratio comparisons ("twice as much," "half as many") are mathematically valid — unlike interval data.
+  - It's the final and most information-rich of the four levels of measurement (nominal → ordinal → interval → ratio), supporting every summary statistic: mode, median, mean, and ratios.
+
+  ## Core concept
+
+  | Level | Order? | Equal gaps? | True zero? | Example |
+  |---|---|---|---|---|
+  | Nominal | No | — | — | Payment method |
+  | Ordinal | Yes | No | No | Satisfaction rating |
+  | Interval | Yes | Yes | No | Temperature (°C) |
+  | **Ratio** | Yes | Yes | Yes | Revenue, order count, age |
+
+  ## 📊 Example
+
+  Revenue is ratio data: $0 genuinely means no revenue, and $2,000 is genuinely twice as much as $1,000 — both the equal-interval property and the ratio ("twice as much") claim hold. This is why revenue supports every kind of summary — sum, average, and ratio comparisons like growth rate.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing ratio and interval data** — the tell is always: does zero genuinely mean "none of this"? If yes, it's ratio.
+  - **Assuming ratio claims always require ratio data explicitly checked** — in practice most business metrics *are* ratio data, so this mostly matters as a sanity check when a field feels unusual (like a year, or a temperature).
+
+  ## Related concepts
+
+  ```
+  Nominal → Ordinal → Interval → Ratio Data ← you are here
+                                  (order + equal gaps + true zero)
+  ```
+
+  This closes the four levels of measurement — the same framework used later in Statistics to decide which summary statistics and tests are valid for a variable.
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is revenue ratio data and not interval data?**
+  Short answer: Revenue has a true zero — $0 genuinely means no revenue — so ratio comparisons like "twice as much revenue" are mathematically valid, which isn't true for interval data like Celsius temperature.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Ratio data** → ordered, equal gaps, true zero — revenue, orders, age, time
+  Supports every summary statistic, including valid ratio ("twice as much") comparisons.

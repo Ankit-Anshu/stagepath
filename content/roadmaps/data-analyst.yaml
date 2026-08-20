@@ -1,0 +1,372 @@
+title: Data Analyst
+category: Data
+difficulty: beginner
+estimated_hours: 420
+description: Go from not knowing where to start to being able to prove you can analyze data, build dashboards, and communicate findings a business can act on.
+stages:
+  - id: foundations
+    title: Foundations
+    description: The baseline thinking and tooling every later stage depends on.
+    skills:
+      - what-is-data
+      - what-is-data-analytics
+      - data-analyst-vs-business-analyst
+      - types-of-data-analytics
+      - descriptive-analytics
+      - diagnostic-analytics
+      - predictive-analytics
+      - prescriptive-analytics
+      - data-analytics-lifecycle
+      - typical-analyst-workflow
+      - tools-used-by-data-analysts
+      - structured-data
+      - semi-structured-data
+      - unstructured-data
+      - qualitative-data
+      - quantitative-data
+      - categorical-data
+      - numerical-data
+      - discrete-data
+      - continuous-data
+      - nominal-data
+      - ordinal-data
+      - interval-data
+      - ratio-data
+      - primary-data
+      - secondary-data
+      - define-business-problem
+      - collect-data
+      - understand-data
+      - data-cleaning
+      - transform-data
+      - explore-data
+      - analyze-data
+      - visualize-data
+      - interpret-results
+      - communicate-insights
+      - make-recommendations
+      - asking-analytical-questions
+      - hypothesis-thinking
+      - root-cause-analysis
+      - pattern-identification
+      - trend-analysis
+      - segmentation
+      - comparison
+      - correlation-vs-causation
+      - data-driven-decision-making
+      - translating-business-questions-into-data-questions
+      - business-understanding
+      - kpis-metrics
+      - data-thinking
+    groups:
+      - intro-to-data-analytics
+      - data-fundamentals
+      - data-analysis-process
+      - analytical-thinking
+      - business-thinking
+  - id: spreadsheets
+    title: Spreadsheets
+    description: Work confidently in Excel or Google Sheets — formulas, lookups, pivot tables, and dashboards.
+    skills:
+      - intro-to-spreadsheets
+      - excel-interface
+      - workbook
+      - worksheet
+      - rows
+      - columns
+      - cells
+      - ranges
+      - cell-references
+      - relative-references
+      - absolute-references
+      - mixed-references
+      - spreadsheet-data-types
+      - number-formats
+      - basic-formatting
+      - spreadsheet-tables
+      - arithmetic-operators
+      - sum-function
+      - average-function
+      - count-function
+      - counta-function
+      - countblank-function
+      - min-function
+      - max-function
+      - round-function
+      - roundup-function
+      - rounddown-function
+      - percentage-calculations
+      - if-function
+      - ifs-function
+      - and-function
+      - or-function
+      - not-function
+      - iferror-function
+      - nested-if
+      - sumif-function
+      - sumifs-function
+      - countif-function
+      - countifs-function
+      - averageif-function
+      - averageifs-function
+      - xlookup-function
+      - vlookup-function
+      - hlookup-function
+      - index-function
+      - match-function
+      - index-match-function
+      - xmatch-function
+      - exact-match
+      - approximate-match
+      - lookup-errors
+      - upper-function
+      - lower-function
+      - proper-function
+      - trim-function
+      - clean-function
+      - left-function
+      - right-function
+      - mid-function
+      - len-function
+      - find-function
+      - search-function
+      - concat-function
+      - textjoin-function
+      - replace-function
+      - substitute-function
+      - text-function
+      - today-function
+      - now-function
+      - date-function
+      - year-function
+      - month-function
+      - day-function
+      - weekday-function
+      - weeknum-function
+      - datedif-function
+      - edate-function
+      - eomonth-function
+      - working-days
+      - date-differences
+      - missing-values-spreadsheets
+      - duplicate-data
+      - remove-duplicates
+      - find-and-replace
+      - text-to-columns
+      - flash-fill
+      - data-validation
+      - error-handling-spreadsheets
+      - standardizing-values
+      - cleaning-text-spreadsheets
+      - cleaning-dates-spreadsheets
+      - cleaning-numbers-spreadsheets
+      - filter-spreadsheets
+      - sort-spreadsheets
+      - calculated-columns
+      - conditional-transformations
+      - splitting-columns
+      - combining-columns
+      - changing-data-types
+      - reshaping-data
+      - wide-vs-long-data
+      - preparing-data-for-analysis
+      - preparing-data-for-pivot-tables
+      - advanced-filter
+      - conditional-formatting-spreadsheets
+      - spreadsheets-pivot-tables
+      - pivot-charts
+      - grouping-spreadsheets
+      - slicers
+      - calculated-fields
+      - drill-down
+      - chart-fundamentals-spreadsheets
+      - column-chart
+      - bar-chart
+      - line-chart
+      - pie-donut-chart
+      - area-chart
+      - scatter-plot
+      - combo-chart
+      - kpi-spreadsheets
+      - choosing-the-right-chart
+      - chart-formatting
+      - data-storytelling-spreadsheets
+      - dashboard-planning
+      - kpi-selection
+      - dashboard-layout
+      - interactive-filters
+      - dashboard-spreadsheets
+      - executive-dashboard
+      - sales-dashboard
+      - performance-dashboard
+      - spreadsheets-power-query
+      - power-query-import-data
+      - power-query-data-types
+      - power-query-transform-data
+      - power-query-filtering
+      - power-query-removing-columns
+      - power-query-splitting-columns
+      - power-query-merging-columns
+      - power-query-merge
+      - power-query-append
+      - power-query-pivot-unpivot
+      - power-query-group-by
+      - power-query-advanced
+      - power-query-data-cleaning
+      - power-query-data-transformation-workflow
+      - power-query-refresh
+      - power-query-dependencies
+      - dynamic-arrays
+      - filter-function
+      - sort-function
+      - unique-function
+      - let-function
+      - advanced-lookup
+      - named-ranges
+      - power-pivot
+      - data-model
+      - basic-dax
+      - excel-automation-concepts
+    groups:
+      - fundamentals
+      - core-formulas
+      - logical-functions
+      - conditional-aggregation
+      - lookup-and-reference
+      - text-functions
+      - date-and-time
+      - data-cleaning
+      - data-transformation
+      - data-analysis
+      - excel-visualization
+      - excel-dashboards
+      - power-query
+      - advanced-excel
+  - id: statistics
+    title: Statistics
+    description: The statistical foundation behind every real analysis and experiment.
+    skills:
+      - stats-descriptive
+      - stats-probability
+      - stats-distributions
+      - stats-correlation-regression
+      - stats-hypothesis-testing
+  - id: sql
+    title: SQL
+    description: Query, filter, aggregate, and combine data confidently.
+    skills:
+      - what-is-a-database
+      - relational-database
+      - what-is-dbms
+      - what-is-rdbms
+      - database-tables
+      - database-rows
+      - database-columns
+      - primary-key
+      - foreign-key
+      - database-relationships
+      - database-constraints
+      - sql-null
+      - database-schemas
+      - sql-select
+      - sql-filtering
+      - sql-aggregation
+      - sql-joins
+      - sql-subqueries
+      - sql-set-operations
+      - sql-ctes
+      - sql-window-functions
+      - sql-query-optimization
+    checkpoint:
+      id: sql-foundations
+      title: SQL Foundations Checkpoint
+      requires:
+        - sql-select
+        - sql-filtering
+        - sql-aggregation
+        - sql-joins
+        - sql-ctes
+        - sql-window-functions
+      unlock_message: SQL Foundations unlocked.
+    groups:
+      - database-fundamentals
+      - query-fundamentals
+      - joins-and-combining-data
+      - advanced-querying
+      - performance-and-optimization
+  - id: python
+    title: Python
+    description: Automate cleaning and analysis beyond what a spreadsheet can do.
+    skills:
+      - python-fundamentals
+      - python-notebooks
+      - numpy
+      - pandas
+      - python-visualization
+      - python-apis
+      - python-regex
+    checkpoint:
+      id: python-foundations
+      title: Python Foundations Checkpoint
+      requires:
+        - python-fundamentals
+        - numpy
+        - pandas
+      unlock_message: Python Foundations unlocked.
+    groups:
+      - python-basics
+      - data-manipulation
+      - applied-python
+  - id: visualization
+    title: Visualization
+    description: Turn analysis into something a stakeholder can read at a glance.
+    skills:
+      - charts
+      - dataviz-color-accessibility
+      - dataviz-geospatial
+      - dashboard-design
+      - bi-tools
+      - storytelling
+    groups:
+      - chart-fundamentals
+      - dashboards-and-bi-tools
+      - communicating-insights
+  - id: business-analytics
+    title: Business Analytics
+    description: Apply everything to real business metrics and decisions.
+    skills:
+      - business-analytics
+      - ab-testing
+      - funnel-analysis
+      - customer-segmentation
+      - cohort-retention-analysis
+      - forecasting-trend-analysis
+    groups:
+      - metrics-and-experimentation
+      - customer-analytics
+      - forecasting
+  - id: portfolio
+    title: Portfolio
+    description: Turn your projects into evidence.
+    skills:
+      - git-version-control
+      - portfolio-website
+      - portfolio-building
+      - case-study-presentations
+  - id: job-preparation
+    title: Job Preparation
+    description: Get ready to demonstrate everything you've learned under interview conditions.
+    skills:
+      - resume-linkedin
+      - technical-interview-practice
+      - case-study-interviews
+      - job-preparation
+      - salary-negotiation
+    checkpoint:
+      id: portfolio-readiness
+      title: Portfolio Readiness Checkpoint
+      requires:
+        - portfolio-building
+        - job-preparation
+      unlock_message: You are portfolio-ready.
+audience: First-time data job seekers, Excel-heavy analysts leveling up, and career switchers who want a business-facing, SQL-and-dashboards role.

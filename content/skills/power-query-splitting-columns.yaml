@@ -1,0 +1,58 @@
+title: Splitting Columns in Power Query
+category: Spreadsheets
+what_is_it: Breaking one Power Query column into several, by a delimiter or by a fixed number of characters — the Power Query equivalent of worksheet Text to Columns, but recorded as a repeatable step.
+why_it_matters: It handles the same problem as worksheet Text to Columns, but automatically reapplies on every refresh instead of needing to be redone by hand each time new data is imported.
+prerequisites:
+  - power-query-removing-columns
+objectives:
+  - Split a column by delimiter in Power Query
+  - Explain the advantage of splitting columns in Power Query over Text to Columns
+estimated_minutes: 20
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-splitting-1
+    title: Split a combined field
+    description: Given an imported "Full Name" column, use Power Query's Split Column by Delimiter to separate it into First and Last Name columns as a repeatable step.
+verify:
+  - Can split a column by delimiter in Power Query
+  - Can explain the advantage over doing it manually with Text to Columns
+note: |
+  ## 🎯 What is it?
+
+  **Splitting columns** in Power Query breaks one column into several — by delimiter (a specific character, like a space or comma) or by a fixed number of characters — using **Split Column**, the direct Power Query equivalent of the worksheet's Text to Columns (see Splitting Columns in the Data Transformation chapter).
+
+  ## 💡 Why is it important?
+
+  - It solves the exact same problem as worksheet Text to Columns, but as a recorded, repeatable step — meaning it automatically reapplies to every future refresh, instead of needing to be manually redone each time new data is imported.
+
+  ## 📊 Example
+
+  An imported "Full Name" column ("Amir Khan") is split by the space delimiter into "First Name" and "Last Name" columns using Split Column by Delimiter — and unlike the worksheet version, this split automatically reapplies to every new row of data the next time the query refreshes.
+
+  ## ⚠️ Common mistakes
+
+  - **Splitting on a delimiter that isn't consistent across every row** (some names with a middle name, some without), producing a misaligned result for the exceptions — the same risk as the worksheet version, still worth checking first.
+  - **Splitting after data has already been filtered or transformed in a way that changes the delimiter's position** — step order matters in Power Query, just as it does in a worksheet formula chain.
+
+  ## Related concepts
+
+  ```
+  Removing Columns
+    ↓
+  Splitting Columns in Power Query ← you are here
+    ↓
+  Merging Columns
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why split a "Full Name" column in Power Query rather than with the worksheet's Text to Columns?**
+  Short answer: A Power Query split is a recorded, repeatable step that automatically reapplies every time the query refreshes with new data — Text to Columns in the worksheet is a one-time operation that would need to be manually redone for every new import.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Splitting columns in Power Query** → Split Column by Delimiter (or fixed width), recorded as a repeatable step
+  Same idea as worksheet Text to Columns, but automatically reapplies on every refresh.

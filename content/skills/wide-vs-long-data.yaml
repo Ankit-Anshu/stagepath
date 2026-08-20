@@ -1,0 +1,68 @@
+title: Wide vs Long Data
+category: Spreadsheets
+what_is_it: Two ways to lay out the same data — wide format spreads related values across many columns; long format stacks them into fewer columns and more rows.
+why_it_matters: Most analysis tools (pivot tables, GROUP BY, most charts) expect long format — recognizing wide data early tells you a reshape is needed before analysis can proceed.
+prerequisites:
+  - reshaping-data
+objectives:
+  - Distinguish wide-format data from long-format data
+  - Explain why long format is generally preferred for analysis
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-wide-vs-long-data-1
+    title: Convert wide to long, on paper
+    description: Given a wide table with one column per quarter, sketch its long-format equivalent with a "Quarter" and "Value" column.
+verify:
+  - Can distinguish wide from long format with an example
+  - Can explain why long format suits most analysis tools better
+note: |
+  ## 🎯 What is it?
+
+  **Wide data** spreads related values across many columns — one column per month, per product, or per category. **Long data** stacks the same information into fewer columns and more rows — one column naming the category, one column holding the value.
+
+  ```
+  Wide:                          Long:
+  Product | Jan | Feb | Mar       Product | Month | Sales
+  Widget  | 100 | 120 | 90        Widget  | Jan   | 100
+                                   Widget  | Feb   | 120
+                                   Widget  | Mar   | 90
+  ```
+
+  ## 💡 Why is it important?
+
+  - Most analysis tools — pivot tables, SQL's `GROUP BY`, most charting libraries — expect long format as their input; wide format is easier for a *human* to read at a glance, but harder for a tool to aggregate or filter by the spread-out dimension (month, in the example above).
+  - Recognizing wide data early is what tells you a reshape (unpivot) is needed before analysis can proceed smoothly.
+
+  ## 📊 Example
+
+  A wide sales table with a column per month can't easily answer "what was total sales in February across all products" with a simple formula — you'd need to reference the Feb column specifically for every product. The same data in long format answers it with one simple `SUMIFS(sales, month, "Feb")`, regardless of how many months or products exist.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming wide format is always "wrong."** It's genuinely the better shape for final display in a report — the mistake is trying to *analyze* wide data directly instead of reshaping it to long format first, then optionally pivoting back to wide for the final presentation.
+  - **Not recognizing wide data as the reason a formula or pivot table feels awkward to build** — if you're referencing many similarly-named columns in a formula, that's usually a sign the data should be long instead.
+
+  ## Related concepts
+
+  ```
+  Reshaping Data
+    ↓
+  Wide vs Long Data ← you are here
+    ↓
+  Preparing Data for Analysis
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is long-format data generally preferred over wide-format data for analysis?**
+  Short answer: Long format lets a tool group, filter, or aggregate by the "spread-out" dimension (like month) using a single consistent column, rather than requiring separate logic per wide column — pivot tables, GROUP BY, and most charting tools are all built around this expectation.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Wide data** → one column per category (e.g., one per month) — easy to read, hard to analyze
+  **Long data** → one row per category-value pair — harder to read raw, easy to analyze
+  Reshape wide → long before analyzing; pivot back to wide for final display if needed.

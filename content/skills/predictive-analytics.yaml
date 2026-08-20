@@ -1,0 +1,71 @@
+title: Predictive Analytics
+category: Foundations
+what_is_it: Analytics that forecasts what is likely to happen next, based on patterns in historical data.
+why_it_matters: Businesses plan budgets, staffing, and inventory around forecasts — a data analyst is often expected to at least understand simple predictive methods, even without building full machine-learning models.
+prerequisites:
+  - diagnostic-analytics
+objectives:
+  - Define predictive analytics and give an example
+  - Explain the difference between predictive analytics and diagnostic analytics
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-predictive-analytics-1
+    title: Make a simple forecast
+    description: Using the last 4–6 data points of any trend you track, write a simple prediction for the next period and state your reasoning.
+verify:
+  - Can define predictive analytics
+  - Can name one simple predictive technique
+note: |
+  ## 🎯 What is it?
+
+  **Predictive analytics** answers "what's likely to happen next?" — using patterns in historical data to forecast a future value or outcome. "Revenue is forecast to grow 5% next quarter based on the last 8 quarters' trend" is a predictive statement.
+
+  ## 💡 Why is it important?
+
+  - Businesses plan budgets, staffing, and inventory around forecasts — being able to build or interpret a simple prediction is a practical, frequently-used analyst skill.
+  - Entry-level data analysts typically use simpler predictive methods (trend extrapolation, moving averages, basic regression) rather than full machine-learning models — that deeper work usually belongs to a data scientist.
+  - It builds directly on Statistics topics like Regression and Forecasting/Trend Analysis covered later in the roadmap.
+
+  ## Core concept
+
+  | Type | Question | Example |
+  |---|---|---|
+  | Diagnostic | Why did it happen? | "Revenue dropped because of a stockout" |
+  | **Predictive** | What will happen? | "Revenue is forecast to grow 5% next month" |
+  | Prescriptive | What should we do? | "Increase inventory by 20%" |
+
+  Common entry-level predictive techniques: moving averages, simple linear regression, and trend extrapolation.
+
+  ## 📊 Example
+
+  Given the last 12 months of revenue showing a steady 3% month-over-month increase, a simple predictive statement is: "If the trend continues, next month's revenue is likely to land around 3% above this month's." This is a lightweight forecast, not a formal machine-learning model — and it's often exactly what a business needs.
+
+  ## ⚠️ Common mistakes
+
+  - **Presenting a forecast as a certainty.** A prediction should always come with a sense of its uncertainty or a range, not a single confident number.
+  - **Extrapolating a trend blindly without checking for seasonality or a one-off event** that might not repeat (e.g., a holiday spike shouldn't be assumed to continue every month).
+
+  ## Related concepts
+
+  ```
+  Diagnostic Analytics (why it happened)
+    ↓
+  Predictive Analytics ← you are here (what will happen)
+    ↓
+  Prescriptive Analytics (what to do about it)
+  ```
+  Builds toward Statistics — Regression and Business Analytics — Forecasting & Trend Analysis, covered later in the roadmap.
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between predictive and diagnostic analytics?**
+  Short answer: Diagnostic analytics explains a past event ("why did revenue drop"); predictive analytics forecasts a future one ("what will revenue likely be next month"), typically using patterns found during diagnostic and descriptive analysis.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Predictive analytics** → forecasts what's likely to happen next, based on historical patterns
+  Entry-level analysts typically use simple techniques: moving averages, trend extrapolation, basic regression.

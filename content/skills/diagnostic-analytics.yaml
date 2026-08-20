@@ -1,0 +1,72 @@
+title: Diagnostic Analytics
+category: Foundations
+what_is_it: Analytics that investigates why something happened — digging past a descriptive summary to find the underlying cause.
+why_it_matters: A number moving is rarely the end of the question a stakeholder is really asking — diagnostic analytics is what turns "revenue dropped" into an explanation someone can act on.
+prerequisites:
+  - descriptive-analytics
+objectives:
+  - Define diagnostic analytics and give an example
+  - Describe one common technique used in diagnostic analysis
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-diagnostic-analytics-1
+    title: Diagnose a change
+    description: Take a descriptive statement ("X went up/down") about anything you track, and list three plausible causes you'd investigate to explain it.
+verify:
+  - Can define diagnostic analytics
+  - Can name a technique used to find a root cause
+note: |
+  ## 🎯 What is it?
+
+  **Diagnostic analytics** answers "why did this happen?" — it digs past a descriptive summary ("revenue dropped 10%") to find the underlying cause, typically by segmenting the data, comparing time periods, and looking for correlated events.
+
+  ## 💡 Why is it important?
+
+  - A stakeholder who sees "revenue dropped 10%" almost always immediately asks "why?" — diagnostic analytics is what answers that follow-up.
+  - It's where **root cause analysis** and **segmentation** — core analyst techniques — get used the most.
+  - Correctly diagnosing a cause (versus guessing) is what separates a credible analysis from an unsupported assumption.
+
+  ## Core concept
+
+  Typical diagnostic technique: **segment and compare**.
+
+  | Step | Example |
+  |---|---|
+  | 1. Confirm the change is real | Re-pull the number, rule out a reporting bug |
+  | 2. Segment | By region, channel, product, customer type |
+  | 3. Compare | Find where the change is concentrated vs. flat |
+  | 4. Correlate | Check for events lining up with the change (a price change, an outage, a competitor promo) |
+
+  ## 📊 Example
+
+  Descriptive: "Revenue dropped 10% last week." Diagnostic investigation: segmenting by region shows the drop is entirely in one country; checking recent changes reveals a payment provider outage in that country for 6 hours — that outage is the diagnosed cause.
+
+  ## ⚠️ Common mistakes
+
+  - **Jumping to a cause without segmenting first.** "Revenue dropped because of the economy" is a guess; segmenting to find *where* the drop is concentrated usually points to a much more specific, verifiable cause.
+  - **Confusing correlation with causation** — two things happening around the same time doesn't prove one caused the other; diagnostic analysis should look for a plausible, verifiable mechanism, not just a coincidence in timing.
+
+  ## Related concepts
+
+  ```
+  Descriptive Analytics (what happened)
+    ↓
+  Diagnostic Analytics ← you are here (why it happened)
+    ↓
+  Predictive Analytics (what will happen)
+  ```
+  Closely related to Root Cause Analysis and Correlation vs Causation (see Analytical Thinking chapter).
+
+  ## 🎤 Interview preparation
+
+  **Q: Walk through how you'd diagnose a 10% weekly revenue drop.**
+  Short answer: Confirm the drop is real (rule out a data bug), segment by region/channel/product to find where it's concentrated, then look for a plausible cause that lines up in time and scope with the concentrated segment — rather than guessing at a broad explanation.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Diagnostic analytics** → answers "why did this happen?" via segmenting, comparing, and correlating
+  Core technique: confirm → segment → compare → correlate.

@@ -1,0 +1,67 @@
+title: EDATE Function
+category: Spreadsheets
+what_is_it: Calculating a date a specified number of months before or after a given date — the month-based counterpart to simple date addition.
+why_it_matters: It correctly handles month-length differences (like January 31 + 1 month) that simple day-based addition would get wrong.
+prerequisites:
+  - weeknum-function
+objectives:
+  - Calculate a date N months in the future or past with EDATE
+  - Explain why EDATE handles month-length differences correctly
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-edate-1
+    title: Calculate a renewal date
+    description: Given a subscription start date, use EDATE to calculate the renewal date 12 months later.
+verify:
+  - Can calculate a future/past date with EDATE
+  - Can explain why simply adding 30 days is not equivalent to adding 1 month
+note: |
+  ## 🎯 What is it?
+
+  **EDATE** calculates a date a specified number of months before or after a given date — correctly handling the fact that months have different lengths, which simple day-based addition (`date + 30`) gets wrong.
+
+  ## 💡 Why is it important?
+
+  - Adding "30 days" is not the same as adding "1 month" — EDATE correctly lands on the same day-of-month in the target month (or the last valid day, if the target month is shorter).
+  - It's the standard way to calculate renewal dates, payment due dates, or any recurring monthly schedule.
+
+  ## Syntax
+
+  ```
+  =EDATE(start_date, months)
+  ```
+
+  A positive `months` moves forward; a negative `months` moves backward.
+
+  ## 📊 Example
+
+  `=EDATE(DATE(2024,1,31), 1)` → `2024-02-29` (2024 is a leap year) — EDATE correctly lands on the last valid day of February, since February 31 doesn't exist. Simply adding 30 days to January 31 would instead land on March 1, which is not "one month later" in the calendar sense.
+
+  ## ⚠️ Common mistakes
+
+  - **Using `date + 30` as a substitute for "one month later"** — this drifts across months of different lengths and produces the wrong date for many use cases (like billing cycles).
+  - **Forgetting EDATE returns a date serial number**, which may need a date number format applied to display correctly rather than showing as a raw number.
+
+  ## Related concepts
+
+  ```
+  WEEKNUM
+    ↓
+  EDATE ← you are here
+    ↓
+  EOMONTH
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is `EDATE(date, 1)` more reliable than `date + 30` for calculating "one month later"?**
+  Short answer: Months have different lengths (28-31 days), so adding a fixed 30 days drifts away from the actual same-day-next-month — EDATE correctly accounts for each month's real length, including landing on the last valid day when the target month is shorter.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **EDATE(start_date, months)** → the date N months before/after start_date
+  Correctly handles month-length differences — never approximate "1 month" as "30 days."

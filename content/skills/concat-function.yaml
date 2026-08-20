@@ -1,0 +1,104 @@
+title: CONCAT Function
+what_is_it: Joining values from multiple cells into a single text value, such as combining first and last name into a full name.
+why_it_matters: Real data is often split across columns that need to be combined for reporting, matching, or display — CONCAT is how you join them back together.
+objectives:
+  - Combine values from multiple cells into one with CONCAT
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-concat-1
+    title: Build a full name column
+    description: Given separate first-name and last-name columns, build a single full-name column with CONCAT.
+verify:
+  - Combined value includes a proper separator (space, comma, etc.)
+  - Formula works correctly for every row, including edge cases like a missing middle name
+category: Spreadsheets
+prerequisites: []
+note: |
+  ## 🎯 What is it?
+
+  **CONCAT** (or CONCATENATE, or the `&` operator) joins values from multiple cells into a single text value — such as combining first and last name into a full name.
+
+  ## 💡 Why is it important?
+
+  Real data is often split across columns that need to be combined for reporting, matching, or display — building a full name, a full address, or a composite ID are all everyday CONCAT jobs.
+
+  ## Syntax
+
+  ```
+  =CONCAT(text1, text2, ...)
+  =A2 & " " & B2        (the & operator, equivalent for two values)
+  ```
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | First | Last |
+  | 2 | Ana | Silva |
+
+  **Formula:** `=CONCAT(A2," ",B2)` or `=A2&" "&B2`
+  **Result:** `"Ana Silva"`
+
+  ## Multiple examples
+
+  **Beginner:** `=A2&" "&B2` — build a full name.
+  **Intermediate:** `=A2&"-"&B2&"-"&TEXT(C2,"YYYYMMDD")` — build a composite ID from name and date.
+  **Real-world:** `=TRIM(A2)&", "&TRIM(B2)` — combining a city and country column into one display field, using TRIM to guard against stray spaces in either source column.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting the separator.** `=CONCAT(A2,B2)` produces `"AnaSilva"` with no space — the separator (`" "`, `", "`) must be added explicitly.
+  - **Not handling a missing value.** If a middle name column is sometimes blank, a naive concatenation can leave a double space or trailing separator — wrap with logic (e.g., IF) for a clean result across all rows.
+  - **Concatenating numbers without formatting them first**, e.g. combining a date column directly often shows an internal serial number instead of a readable date — wrap with `TEXT(date, "format")` first.
+
+  ## Real-world Data Analyst use cases
+
+  - **Customer analysis:** building a full-name display column from first/last name fields.
+  - **Reporting:** building a composite key (e.g., `region-month`) to use as a unique lookup value across two tables.
+
+  ## Related concepts
+
+  ```
+  TRIM → REPLACE/SUBSTITUTE → CONCAT ← you are here → Aggregate functions
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that joins A2 and B2 with a space between them.
+
+  ### Medium
+  2. Given separate first-name and (sometimes blank) middle-name and last-name columns, write a formula that builds a clean full name without a double space when middle name is blank.
+
+  ### Interview/Advanced
+  3. Why might concatenating a date column directly produce an unexpected result like "45312" instead of a readable date?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=A2&" "&B2`
+  2. `=TRIM(A2&" "&B2&" "&C2)` — TRIM collapses the extra space left behind when the middle name is blank.
+  3. Dates are stored internally as serial numbers; concatenation treats the cell's underlying value, not its display format, so it shows the raw number unless wrapped in `TEXT(date_cell,"format")` first.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How do you avoid a double space when concatenating a column that's sometimes blank?**
+  Short answer: Wrap the whole concatenation in TRIM, which collapses any doubled-up spaces left by the blank field.
+
+  ## Interview traps / tricky points
+
+  - Concatenating a formatted number or date directly shows its raw underlying value, not its displayed format — always wrap with TEXT() when combining formatted values into a string.
+
+  ## Best practices
+
+  - Always account for optional/blank fields when building a concatenation used across many rows.
+  - Use TEXT() to control the exact formatting of dates/numbers before combining them into a string.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **CONCAT(text1, text2, ...)** or **&** → joins text values
+  **Watch for:** missing separators, blank fields causing double separators, unformatted dates/numbers

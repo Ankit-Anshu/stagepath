@@ -1,0 +1,24 @@
+title: Cloud Security
+category: Cybersecurity
+what_is_it: Securing identities, networks, data, workloads, and configuration in shared-responsibility environments.
+why_it_matters: Cloud incidents often come from identity and configuration mistakes rather than exotic exploits.
+estimated_minutes: 3000
+prerequisites: [security-foundations, networking-systems]
+objectives: [Explain shared responsibility, Review cloud identity and storage, Investigate cloud logs]
+subtopics:
+  - title: Cloud architecture
+    description: Regions, accounts, projects, virtual networks, managed services, and shared responsibility.
+    outcomes: [Map cloud trust boundaries, Classify provider versus customer duties]
+  - title: Identity and permissions
+    description: Roles, policies, service identities, temporary credentials, federation, and least privilege.
+    outcomes: [Review an access policy, Identify privilege-escalation paths]
+  - title: Storage and data security
+    description: Public exposure, encryption, key management, backups, retention, and data classification.
+    outcomes: [Audit a storage configuration, Define data protections]
+  - title: Cloud logging and posture
+    description: Control-plane logs, configuration inventory, posture findings, drift, and alerting.
+    outcomes: [Trace an administrative action, Prioritize misconfigurations]
+  - title: Workload security
+    description: Virtual machines, containers, serverless functions, images, metadata services, and supply chain.
+    outcomes: [Threat-model a cloud workload, Harden runtime credentials]
+

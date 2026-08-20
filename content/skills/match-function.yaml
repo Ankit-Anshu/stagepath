@@ -1,0 +1,100 @@
+title: MATCH Function
+category: Spreadsheets
+what_is_it: Finding the position of a value within a range, returning its row/column number rather than the value itself — the search half of the INDEX+MATCH lookup pattern.
+why_it_matters: MATCH is what turns INDEX from a simple positional retrieval into a genuine, flexible lookup — together they solve nearly every lookup VLOOKUP can't handle.
+prerequisites:
+  - index-function
+objectives:
+  - Use MATCH to find the position of a value in a range
+  - Explain the three match-type options
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-match-1
+    title: Find a value's position
+    description: Given a list of product IDs, use MATCH to find the position of a specific ID within the list.
+verify:
+  - MATCH correctly returns the position of the target value
+  - Exact match (0) is used deliberately
+note: |
+  ## 🎯 What is it?
+
+  **MATCH** finds the **position** of a value within a range — returning a row or column number (like "3rd item"), not the value itself. It's the search half of the [INDEX + MATCH](/skills/index-match-function) lookup pattern.
+
+  ## 💡 Why is it important?
+
+  MATCH is what turns [INDEX](/skills/index-function) from a simple positional retrieval into a genuine, flexible lookup — together they solve nearly every lookup scenario VLOOKUP can't handle, including looking left and surviving inserted columns.
+
+  ## Syntax
+
+  ```
+  =MATCH(lookup_value, lookup_range, [match_type])
+  ```
+
+  - **match_type**: `0` for exact match (the standard, almost-always-correct choice), `1` for the largest value less than or equal to the target (requires sorted ascending data), `-1` for the smallest value greater than or equal to it (requires sorted descending data).
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Widget |
+  | 2 | Gadget |
+  | 3 | Gizmo |
+
+  **Formula:** `=MATCH("Gizmo",A1:A3,0)`
+  **Result:** `3` — Gizmo is the 3rd item in the range.
+
+  **Note:** MATCH returns the *position* (3), not the value ("Gizmo") — this is why it's almost always paired with INDEX, which uses that position to actually retrieve a value.
+
+  ## Multiple examples
+
+  **Beginner:** `=MATCH(102,A1:A10,0)` — find the position of customer ID 102 in a list.
+  **Real-world:** `=INDEX(customer_names, MATCH(102, customer_ids, 0))` — MATCH finds *where* ID 102 sits, and INDEX retrieves the corresponding name at that position — the complete [INDEX + MATCH](/skills/index-match-function) pattern.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting the match_type argument, or using 1 by mistake.** Match type 1 requires the data to be sorted ascending and finds an *approximate* match — using it on unsorted data (or expecting an exact match) produces a silently wrong result.
+  - **Confusing MATCH's returned position with the actual value.** MATCH never returns the matched value itself — always pair it with INDEX (or another function) to retrieve the actual value at that position.
+
+  ## Real-world Data Analyst use cases
+
+  - **The search half of INDEX+MATCH**, used throughout real spreadsheet work as a VLOOKUP alternative.
+  - **Finding a column's position dynamically** in a formula, so it still works correctly even if columns are reordered.
+
+  ## Related concepts
+
+  ```
+  INDEX → MATCH ← you are here → INDEX + MATCH → XLOOKUP → XMATCH
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that finds the position of "Gadget" in range A1:A10.
+
+  ### Interview/Advanced
+  2. Why does MATCH alone rarely appear by itself in a finished spreadsheet?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=MATCH("Gadget",A1:A10,0)`
+  2. Because it only returns a *position* number, not a usable value — on its own it rarely answers a real business question directly, so it's almost always combined with INDEX (to retrieve the actual value at that position) rather than used standalone.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What does MATCH return, and why is that different from what VLOOKUP returns?**
+  Short answer: MATCH returns a position number (like "item 3"), while VLOOKUP returns an actual data value — this is why MATCH is almost always paired with INDEX, which uses that position to retrieve the real value.
+
+  ## Best practices
+
+  - Default to match_type 0 (exact match) unless you specifically need an approximate match on sorted data.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **MATCH(value, range, [0])** → returns a position number, not the value itself
+  **Match type 0** → exact match (the standard choice)

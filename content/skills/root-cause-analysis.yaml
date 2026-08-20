@@ -1,0 +1,74 @@
+title: Root Cause Analysis
+category: Foundations
+what_is_it: Systematically tracing a problem back to its actual underlying cause, rather than stopping at the first plausible-looking explanation.
+why_it_matters: Acting on a surface-level cause instead of the real root cause means the same problem tends to recur — root cause analysis is what prevents that.
+prerequisites:
+  - hypothesis-thinking
+objectives:
+  - Explain the difference between a symptom and a root cause
+  - Apply a simple root-cause technique (like "5 Whys") to a problem
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-root-cause-1
+    title: Run the 5 Whys
+    description: Pick a problem ("revenue dropped") and ask "why" five times in a row, each answer building on the last, until you reach a root cause.
+verify:
+  - Can distinguish a symptom from a root cause
+  - Can apply the "5 Whys" technique to a simple problem
+note: |
+  ## 🎯 What is it?
+
+  **Root cause analysis** is the practice of systematically tracing a problem back to its actual underlying cause, instead of stopping at the first plausible-looking explanation (a symptom). A classic technique is the **"5 Whys"** — repeatedly asking "why did that happen?" until you reach something genuinely actionable.
+
+  ## 💡 Why is it important?
+
+  - Fixing a symptom instead of the root cause means the problem tends to come back — e.g., patching one broken report without fixing the pipeline bug that caused it.
+  - It's a core diagnostic-analytics technique, and a very common interview scenario ("walk me through how you'd figure out why X happened").
+
+  ## Core concept
+
+  ```
+  Problem:  Revenue dropped 10% last week.
+  Why?      Because orders from Region A dropped sharply.
+  Why?      Because the checkout page errored for Region A users.
+  Why?      Because a currency conversion bug was introduced in Monday's deploy.
+  Why?      Because that deploy skipped its usual QA check.
+  Why?      Because the QA step isn't enforced for hotfix deploys.
+                                          ↑ this is the actionable root cause
+  ```
+
+  The first "why" (orders dropped) is a symptom; the last is something a team can actually fix to prevent recurrence.
+
+  ## 📊 Example
+
+  A support team notices ticket volume spiked. Root cause analysis traces it: spike → mostly about failed payments → payments failing mostly for one card type → that card type's integration silently changed its error format last week → the checkout code wasn't updated to handle the new format. The fix (update the error-handling code) addresses the actual root cause, not just "respond to more tickets faster."
+
+  ## ⚠️ Common mistakes
+
+  - **Stopping at the first explanation that sounds plausible**, without verifying it against the data or asking "why" at least once more.
+  - **Confusing a contributing factor with the single root cause** — real problems often have multiple contributing factors; root cause analysis should surface the most actionable one(s), not force a single oversimplified answer.
+
+  ## Related concepts
+
+  ```
+  Hypothesis Thinking
+    ↓
+  Root Cause Analysis ← you are here
+    ↓
+  Pattern Identification
+  ```
+  Closely related to Diagnostic Analytics, which is the broader category of analysis this technique supports.
+
+  ## 🎤 Interview preparation
+
+  **Q: Walk me through how you'd find the root cause of a sudden spike in customer complaints.**
+  Short answer: Segment the complaints to find a common pattern (one product, one region, one channel), then keep asking "why" about that specific pattern until reaching something concretely fixable — not stopping at the first surface-level explanation.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Root cause analysis** → trace a problem to its actual underlying cause, not just its symptom
+  Technique: "5 Whys" — keep asking why until you reach something actionable.

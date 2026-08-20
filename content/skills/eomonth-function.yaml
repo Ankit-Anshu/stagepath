@@ -1,0 +1,98 @@
+title: EOMONTH Function
+category: Spreadsheets
+what_is_it: Finding the last day of a month, a specified number of months before or after a given date — commonly used to find "end of this month" or "end of last month."
+why_it_matters: Manually calculating a month's last day is surprisingly fiddly (months have different lengths, leap years complicate February) — EOMONTH handles this reliably in one formula.
+prerequisites:
+  - day-function
+objectives:
+  - Find the last day of the current or a nearby month with EOMONTH
+  - Use EOMONTH as a date-range boundary in a SUMIFS formula
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-eomonth-1
+    title: Find month-end deadlines
+    description: Given a list of dates, use EOMONTH to find the last day of each corresponding month for a billing-deadline column.
+verify:
+  - EOMONTH correctly returns the last day of the intended month
+  - Formula correctly handles months of different lengths
+note: |
+  ## 🎯 What is it?
+
+  **EOMONTH** finds the last day of a month, a specified number of months before or after a given date — commonly used to find "end of this month" or "end of last month" without manually accounting for how many days each month has.
+
+  ## 💡 Why is it important?
+
+  Manually calculating a month's last day is surprisingly fiddly — months have different lengths (28, 29, 30, or 31 days), and leap years complicate February specifically. EOMONTH handles all of this reliably in one formula, with zero manual logic.
+
+  ## Syntax
+
+  ```
+  =EOMONTH(start_date, months)
+  ```
+
+  - **months** — `0` for the end of the same month as start_date, a positive number for future months, a negative number for past months.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 2024-02-10 |
+
+  **Formula:** `=EOMONTH(A1,0)` → `2024-02-29` (correctly accounting for 2024 being a leap year)
+  **Formula:** `=EOMONTH(A1,-1)` → `2024-01-31` (the last day of the *previous* month)
+
+  ## Multiple examples
+
+  **Beginner:** `=EOMONTH(TODAY(),0)` — the last day of the current month.
+  **Intermediate:** `=EOMONTH(TODAY(),1)` — the last day of *next* month, useful for calculating a deadline.
+  **Real-world:** `=SUMIFS(revenue,order_date,">="&EOMONTH(TODAY(),-2)+1,order_date,"<="&EOMONTH(TODAY(),-1))` — dynamically calculating "last month's" full date range for a recurring report, without hardcoding specific dates that would need manual updating every month.
+
+  ## ⚠️ Common mistakes
+
+  - **Manually trying to calculate a month's last day with IF statements accounting for month length and leap years** — EOMONTH replaces all of that fragile logic with one reliable function call.
+  - **Forgetting EOMONTH returns the last day of the month, not the first.** A common companion need — "first day of the month" — is instead `=EOMONTH(date,-1)+1`.
+
+  ## Real-world Data Analyst use cases
+
+  - **Finance analysis:** calculating billing or reporting periods that always align to month boundaries, automatically.
+  - **Recurring reports:** dynamically defining "last month" or "this month" date ranges without manual date updates each time the report runs.
+
+  ## Related concepts
+
+  ```
+  DAY → EOMONTH ← you are here → Working Days
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula for the last day of the current month.
+
+  ### Interview/Advanced
+  2. How would you get the *first* day of the current month using EOMONTH?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=EOMONTH(TODAY(),0)`
+  2. `=EOMONTH(TODAY(),-1)+1` — the last day of the *previous* month, plus one day, lands exactly on the first day of the current month.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is EOMONTH more reliable than manually calculating a month's last day?**
+  Short answer: It automatically accounts for months of different lengths and leap years without any manual conditional logic, eliminating an entire category of easy-to-get-wrong edge cases.
+
+  ## Best practices
+
+  - Use EOMONTH (not manual date math) for any formula needing a reliable month boundary.
+  - Combine with TODAY() for a recurring report's dynamic "this month" / "last month" date ranges.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **EOMONTH(start_date, months)** → last day of a month, N months before/after start_date
+  **First day of a month:** `=EOMONTH(date,-1)+1`

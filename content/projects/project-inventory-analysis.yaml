@@ -1,0 +1,47 @@
+title: Inventory Analysis
+level: mini
+duration: 2-3 hours
+description: Find which SKUs are at risk of stocking out and which are overstocked, from a raw inventory export.
+problem_statement: >-
+  Operations wants a weekly view of which products need reordering now and which ones are tying up
+  warehouse space unnecessarily, built from the current stock export.
+scenario: You're the analyst supporting the warehouse team's weekly reorder decision.
+dataset:
+  name: Inventory snapshot
+  description: One row per SKU with warehouse, stock on hand, reorder point, unit cost, and monthly units sold.
+  source_url: /datasets/inventory-analysis.csv
+  format: CSV
+  size: 14 SKUs
+  files: [inventory-analysis.csv]
+skills:
+  - conditional-formatting-spreadsheets
+  - sumif-function
+  - xlookup-function
+datasets:
+  - Inventory snapshot dataset
+tasks:
+  - Calculate months of stock remaining at the current sales rate for each SKU
+  - Flag every SKU currently at or below its reorder point
+  - Calculate total inventory value tied up per warehouse
+  - Identify the 3 SKUs with the most capital tied up in slow-moving stock
+requirements:
+  - Months-of-stock-remaining is a formula, using current stock and monthly units sold
+  - At-risk (below reorder point) SKUs are visually flagged
+  - Inventory value by warehouse is summarized in one table
+milestones:
+  - title: Prepare and calculate
+    description: Convert to a Table, calculate months of stock remaining and inventory value per SKU.
+  - title: Flag and summarize
+    description: Flag reorder-point breaches with conditional formatting and summarize value by warehouse.
+  - title: Recommend
+    description: Write a short recommendation naming which SKUs to reorder immediately and which to deprioritize.
+rubric:
+  - criterion: Calculation correctness
+    definition: Months-of-stock and inventory value formulas are correct and handle zero-stock SKUs without erroring.
+  - criterion: Risk visibility
+    definition: Reorder-point breaches are immediately visible without reading every row.
+  - criterion: Actionable recommendation
+    definition: The written recommendation names specific SKUs and a clear next action for each.
+artifacts:
+  - Spreadsheet
+  - README

@@ -1,0 +1,104 @@
+title: SUMIF Function
+category: Spreadsheets
+what_is_it: Summing a range, but only for rows that meet one specific condition — like summing revenue for just one region.
+why_it_matters: Most real summary questions are conditional ("total revenue in the West region," not just "total revenue") — SUMIF answers this directly without a pivot table.
+prerequisites:
+  - iferror-function
+objectives:
+  - Write a SUMIF formula with one condition
+  - Explain the three arguments of SUMIF
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-sumif-1
+    title: Sum revenue by region
+    description: Given a transactions list, use SUMIF to total revenue for just the "West" region.
+verify:
+  - SUMIF correctly sums only rows matching the condition
+  - Range and criteria range are correctly aligned
+note: |
+  ## 🎯 What is it?
+
+  **SUMIF** sums a range, but only for the rows that meet **one specific condition** — like summing revenue for just one region, without first filtering or sorting the data.
+
+  ## 💡 Why is it important?
+
+  Most real summary questions are conditional ("total revenue in the West region," not just "total revenue across everything") — SUMIF answers this directly with a single formula, no pivot table required.
+
+  ## Syntax
+
+  ```
+  =SUMIF(criteria_range, criteria, sum_range)
+  ```
+
+  - **criteria_range** — the column to check the condition against.
+  - **criteria** — the condition to match (a value, text, or expression like `">100"`).
+  - **sum_range** — the column to actually sum, for the rows where the condition matched.
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Region | Revenue |
+  | 2 | West | 200 |
+  | 3 | East | 150 |
+  | 4 | West | 300 |
+
+  **Formula:** `=SUMIF(A2:A4,"West",B2:B4)`
+  **Result:** `500` (200 + 300, the two West rows only)
+
+  ## Multiple examples
+
+  **Beginner:** `=SUMIF(A2:A100,"Completed",B2:B100)` — total revenue for only completed orders.
+  **Intermediate:** `=SUMIF(B2:B100,">500",B2:B100)` — total of only the values themselves over 500 (criteria_range and sum_range can be the same range).
+  **Real-world:** `=SUMIF(region_range,"West",revenue_range)` copied across a list of regions in another column, producing a quick regional revenue breakdown without building a full pivot table.
+
+  ## ⚠️ Common mistakes
+
+  - **Misaligning criteria_range and sum_range** — they must correspond row-for-row, or the sum will be calculated against the wrong values entirely.
+  - **Forgetting quotes around a text criteria** (`"West"`, not `West`) — a common syntax error.
+  - **Needing more than one condition** and trying to force it into SUMIF, which only supports a single criteria — see [SUMIFS](/skills/sumifs-function) for multiple conditions.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** total revenue for one specific region, product category, or time period.
+  - **Finance analysis:** total expenses for one specific cost category.
+
+  ## Related concepts
+
+  ```
+  IFERROR → SUMIF ← you are here → SUMIFS → COUNTIF → COUNTIFS → AVERAGEIF → AVERAGEIFS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a SUMIF that totals column B where column A equals "Completed".
+
+  ### Interview/Advanced
+  2. Why would `=SUMIF(A2:A10,"West",B2:B20)` (mismatched range sizes) produce an unreliable result?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=SUMIF(A:A,"Completed",B:B)`
+  2. The criteria_range and sum_range must be the same size and aligned row-for-row — a mismatch means the function is checking conditions against one set of rows but summing a differently-sized range, producing a result that doesn't correspond correctly to the intended rows.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What are SUMIF's three arguments?**
+  Short answer: The criteria_range (where the condition is checked), the criteria itself (the condition to match), and the sum_range (the values to actually total for matching rows).
+
+  ## Best practices
+
+  - Always ensure criteria_range and sum_range are the same size and properly aligned.
+  - Use SUMIFS instead as soon as more than one condition is needed.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **SUMIF(criteria_range, criteria, sum_range)** → conditional sum, one condition
+  **Need 2+ conditions?** → use SUMIFS instead

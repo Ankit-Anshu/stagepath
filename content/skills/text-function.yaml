@@ -1,0 +1,72 @@
+title: TEXT Function
+category: Spreadsheets
+what_is_it: Converting a number, date, or currency value into text, formatted exactly the way you specify — independent of the cell's own number format.
+why_it_matters: 'It''s the standard way to build a formatted label or message that combines a number with text (like "Total: $1,204.50") without the number reverting to an unformatted raw value.'
+prerequisites:
+  - substitute-function
+objectives:
+  - Format a number or date as text using TEXT
+  - Combine TEXT with concatenation to build a formatted message
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-text-function-1
+    title: Build a formatted label
+    description: 'Combine a date and an amount into a single formatted text label like "Report for Mar 2024: $12,400.00" using TEXT and TEXTJOIN.'
+verify:
+  - Can format a number with TEXT
+  - Can combine TEXT with concatenation for a formatted message
+note: |
+  ## 🎯 What is it?
+
+  **TEXT** converts a number, date, or currency value into a text string, formatted exactly the way you specify with a format code — independent of whatever number format the source cell happens to have.
+
+  ## 💡 Why is it important?
+
+  - It's the standard way to build a combined label like `"Total: $1,204.50"` — concatenating a raw number directly with text just glues the *unformatted* number on, losing currency symbols, commas, or date formatting.
+  - It's essential for dynamic messages, chart labels, and dashboard text that need to embed a nicely formatted number.
+
+  ## Syntax
+
+  ```
+  =TEXT(value, format_code)
+  ```
+
+  Common format codes: `"$#,##0.00"` (currency), `"0%"` (percentage), `"mmm yyyy"` (month/year), `"0.0"` (one decimal).
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 1204.5 |
+
+  `=TEXT(A1, "$#,##0.00")` → `"$1,204.50"`
+
+  Combined with concatenation: `="Total: " & TEXT(A1, "$#,##0.00")` → `"Total: $1,204.50"` — without TEXT, `="Total: " & A1` would produce the unformatted `"Total: 1204.5"`.
+
+  ## ⚠️ Common mistakes
+
+  - **Concatenating a number directly with text**, expecting it to keep its currency or date formatting — it doesn't; TEXT is required to preserve formatting inside a combined string.
+  - **Using the wrong format code syntax**, producing an unexpected result — format codes are their own mini-language, worth double-checking against a reference rather than guessing.
+
+  ## Related concepts
+
+  ```
+  SUBSTITUTE
+    ↓
+  TEXT ← you are here
+  ```
+  This closes the Text Functions chapter.
+
+  ## 🎤 Interview preparation
+
+  **Q: You concatenate a currency-formatted cell into a text message and the formatting disappears. Why, and how do you fix it?**
+  Short answer: Concatenation ignores a cell's number format and uses its raw underlying value — wrapping the cell in `TEXT(cell, "$#,##0.00")` explicitly formats it as text before combining, preserving the intended formatting.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **TEXT(value, format_code)** → converts a number/date to formatted text
+  Required whenever a formatted number needs to be combined with text in one string.

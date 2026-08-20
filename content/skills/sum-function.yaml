@@ -1,0 +1,114 @@
+title: SUM Function
+what_is_it: Adding up a range of numbers — the single most-used function in any spreadsheet.
+why_it_matters: Almost every business report starts with a total. SUM is the foundation every other aggregate and pivot table builds on.
+objectives:
+  - Sum a range of cells correctly, excluding unintended rows
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-sum-1
+    title: Total a revenue column
+    description: Sum a revenue column and confirm the total matches a manual spot check on a small sample.
+verify:
+  - Sum range includes exactly the intended rows
+  - Total matches a manual spot check
+category: Spreadsheets
+prerequisites: []
+note: |
+  ## 🎯 What is it?
+
+  **SUM** adds up a range of numbers. It's the single most-used function in any spreadsheet — the starting point for almost every total you'll ever calculate.
+
+  ## 💡 Why is it important?
+
+  Almost every business report starts with a total — total revenue, total units, total cost. SUM is the foundation every other aggregate (AVERAGE, pivot tables) builds on, and getting the *range* right is a habit that prevents silent reporting errors later.
+
+  ## Syntax
+
+  ```
+  =SUM(range)
+  =SUM(number1, number2, ...)
+  ```
+
+  - **range** — the cells to add, e.g. `B2:B50`.
+  - Can also take individual values/cells separated by commas: `=SUM(B2, B5, B9)`.
+  - Text and blank cells inside the range are ignored automatically (not treated as errors).
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Product | Revenue |
+  | 2 | Widget | 120 |
+  | 3 | Gadget | 340 |
+  | 4 | Gizmo | 210 |
+
+  **Formula:** `=SUM(B2:B4)`
+  **Result:** `670`
+
+  **Explanation:** Adds every numeric value in B2 through B4.
+
+  ## Multiple examples
+
+  **Beginner:** `=SUM(B2:B100)` — total a revenue column.
+  **Intermediate:** `=SUM(B2:B100)-SUM(C2:C100)` — total profit as revenue minus cost, in one formula.
+  **Real-world:** `=SUM(B2:B100)/SUM(D2:D100)` — total revenue divided by total units sold, to get a blended average price (note: this is different from `AVERAGE` of a per-order price column — see Common mistakes).
+
+  ## ⚠️ Common mistakes
+
+  - **Range doesn't cover new rows added later.** `=SUM(B2:B50)` silently ignores row 51 onward. → Use a Table/structured range, or extend the range generously.
+  - **Summing a column that mixes numbers stored as text** (common after a CSV import) — SUM silently skips text-formatted numbers, quietly under-reporting the total.
+  - **Confusing "sum of a rate column" with "a rate calculated from sums."** Averaging a column of per-order profit margins is not the same as (total profit ÷ total revenue) — they can differ meaningfully when order sizes vary.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** total revenue for a period.
+  - **Finance analysis:** total expenses across categories.
+  - **Operations analysis:** total units shipped in a week.
+
+  ## Related concepts
+
+  ```
+  SUM → AVERAGE → COUNT → MIN/MAX → SUMIFS/conditional aggregation → Pivot Tables
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula to sum column `C2:C20`.
+
+  ### Medium
+  2. Given revenue in column B and cost in column C (rows 2–100), write one formula for total profit.
+
+  ### Interview/Advanced
+  3. Why might `=SUM(B:B)/SUM(C:C)` give a different (and more useful) answer than `=AVERAGE(D2:D100)` where D is a per-row ratio of B/C?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=SUM(C2:C20)`
+  2. `=SUM(B2:B100)-SUM(C2:C100)`
+  3. The ratio-of-sums is a *weighted* average (larger orders count more), while averaging a per-row ratio treats every row equally regardless of size — the two are only equal when all rows have the same denominator.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What does SUM do, and what does it silently ignore?**
+  Short answer: It adds a range of numeric values, and silently ignores text and blank cells rather than erroring — which can hide a data-quality issue if numbers were accidentally imported as text.
+
+  ## Interview traps / tricky points
+
+  - SUM does **not** error on text-formatted numbers — it just excludes them, which can under-report a total without any visible warning.
+  - A ratio of sums ≠ an average of ratios — a classic interview gotcha.
+
+  ## Best practices
+
+  - Use a Table (structured reference) or a deliberately generous range so SUM automatically includes new rows.
+  - Spot-check large totals against a manual count on a small sample.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **SUM(range)** → adds numeric values, ignores text/blanks silently
+  **Watch for:** ranges that don't grow with new data, numbers stored as text

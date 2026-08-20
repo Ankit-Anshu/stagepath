@@ -1,0 +1,167 @@
+title: Case Study & Take-Home Assignments
+category: Career
+what_is_it: Approaching an open-ended business case or take-home dataset the way real data analyst interviews actually test for — structured thinking under ambiguity.
+why_it_matters: Many data analyst interviews aren't pure SQL/Python tests — they hand you a vague business problem or a raw dataset and watch how you structure your thinking.
+prerequisites:
+  - business-understanding
+objectives:
+  - Structure an open-ended case with a clear framework
+  - State assumptions explicitly instead of guessing silently
+  - Prioritize what to analyze first given limited time
+  - Present a recommendation, not just an analysis
+subtopics:
+  - title: Structuring ambiguity
+    description: Breaking a vague prompt into a concrete, answerable plan before diving into data.
+    outcomes:
+      - Turn an open-ended prompt into a structured analysis plan
+  - title: Stating assumptions
+    description: Naming what you're assuming out loud instead of silently guessing and hoping it's right.
+    outcomes:
+      - State assumptions explicitly before proceeding with an analysis
+  - title: Ending with a recommendation
+    description: Closing with what you'd actually do, not just what you found.
+    outcomes:
+      - End a case study response with a specific recommendation
+estimated_minutes: 180
+resources:
+  - r-tech-interview-handbook
+practice:
+  - id: ex-case-interview-1
+    title: Practice a business case
+    description: Time yourself working through an open-ended business case prompt, then write down your structure, assumptions, and final recommendation.
+verify:
+  - Structure is clear before any numbers are calculated
+  - Assumptions are stated, not hidden
+  - Response ends with a specific, actionable recommendation
+note: |
+  ## 🎯 What is it?
+
+  Approaching an **open-ended business case or take-home dataset** the way real data analyst interviews actually test for: structured thinking under ambiguity, not a single clean technical question with one right answer.
+
+  ## 💡 Why is it important?
+
+  Many data analyst interviews aren't pure SQL/Python tests — they hand you a vague business problem or a raw dataset and watch how you *structure your thinking*. This is often the stage that most directly separates candidates who can execute a known task from those who can independently figure out what needs to be done in the first place — a core, differentiating analyst skill.
+
+  ## Core concept
+
+  ### Structuring ambiguity
+  Break a vague prompt ("our signups dropped last month, what happened?") into a **concrete, answerable plan** before diving into any data — this mirrors [Data Thinking](/skills/data-thinking) applied directly under interview conditions and time pressure.
+
+  ### Stating assumptions
+  Name what you're assuming **out loud**, instead of silently guessing and hoping it's right. If a dataset lacks a clear definition for something (e.g., what counts as an "active" user), state your assumption explicitly and proceed — an interviewer would much rather hear a stated, reasonable assumption than watch you get stuck on ambiguity, or worse, silently make a poor assumption that skews the whole analysis.
+
+  ### Prioritizing under limited time
+  A real case study rarely allows time to check everything — identify the 1-2 highest-leverage things to check first, given the time available, rather than trying to be exhaustive and running out of time before reaching any conclusion.
+
+  ### Ending with a recommendation
+  Close with what you'd actually **do** about the finding, not just what you found — mirroring [Storytelling](/skills/storytelling)'s recommendation principle, applied specifically to a live interview setting.
+
+  ## Syntax / Formula / Structure
+
+  A repeatable structure for any open-ended case prompt:
+
+  ```
+  1. Restate the problem in your own words
+  2. Propose a structure/plan: what would you check, and in what order?
+  3. State assumptions explicitly wherever the prompt is ambiguous
+  4. Work through your plan, prioritizing the highest-leverage checks first
+  5. State a finding — even a partial or preliminary one if time is short
+  6. End with a specific, actionable recommendation
+  ```
+
+  ## 📊 Example
+
+  **Prompt:** "Our app's weekly signups dropped 15% last month. What would you look into?"
+
+  **Structured response:**
+  > "First, I'd confirm the drop is real and not a tracking issue — checking for any changes to how signups are logged. [assumption/check #1] Then I'd segment the drop by channel, since a company-wide 15% drop concentrated in one channel points to a very different cause than a drop spread evenly across all channels. [prioritized plan] I'll assume 'signups' means completed account creation, not just started — I'd confirm that definition if this were a real project. [stated assumption] Given the time I have, I'd prioritize checking the two largest channels first, since they'd explain the most of the drop if something changed there. [prioritization] If I found the drop concentrated in paid search specifically, I'd recommend checking recent changes to that channel's spend or targeting before looking anywhere else."
+
+  **Explanation:** This response demonstrates a clear plan, explicit assumptions, sensible prioritization under a time constraint, and ends with a concrete next step — exactly what a case-study interviewer is evaluating, even without ever touching real data.
+
+  ## Multiple examples
+
+  **Beginner:** Practicing structuring a simple prompt ("why did revenue drop?") into a plan before attempting to answer it.
+  **Intermediate:** A timed 30-minute take-home dataset exercise, ending with a written one-paragraph recommendation.
+  **Real-world:** A live case interview where the interviewer deliberately withholds some information — successfully navigating this by stating a reasonable assumption ("I'll assume this is a B2C, not B2B, product based on the data shown") and proceeding, rather than stalling because the prompt isn't fully specified.
+
+  ## ⚠️ Common mistakes
+
+  - **Diving straight into calculations without a stated plan first.** This can look like doing work, but it's much harder for an interviewer to follow or evaluate your reasoning without an explicit structure.
+  - **Silently guessing at an ambiguous detail** instead of stating the assumption out loud — this hides your reasoning process, which is exactly what's being evaluated.
+  - **Trying to check everything exhaustively** in a time-limited case, running out of time before reaching any conclusion or recommendation at all.
+  - **Ending with only a finding, no recommendation.** "Revenue is down in the West region" is incomplete without "...so I'd recommend investigating the West sales team's recent activity first."
+
+  ## Real-world Data Analyst use cases
+
+  - **The case-study/take-home stage** of many real data analyst hiring processes — a direct rehearsal for it.
+  - **On-the-job ambiguous requests:** the same structuring skill applies directly whenever a stakeholder hands you a vague ask like "look into why X happened."
+
+  ## Related concepts
+
+  ```
+  Data Thinking → Business Understanding
+    ↓
+  Case Study & Take-Home Assignments ← you are here
+    ↓
+  Technical Interview Practice
+    ↓
+  Job Preparation
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Why is stating an assumption out loud better than silently guessing during a case interview?
+
+  ### Medium
+  2. Given the prompt "our checkout conversion dropped last week," outline the structure of your response before any data is available.
+
+  ### Interview/Advanced
+  3. You're given a 20-minute case study but realize the full analysis would genuinely take hours. How do you handle the time constraint?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. It makes your reasoning process visible and gives the interviewer a chance to correct a wrong assumption immediately, rather than silently building an entire analysis on a guess that might be wrong — and it demonstrates the same transparency a real stakeholder would want on the job.
+  2. Example: confirm the drop is real → segment by device/traffic source/region to isolate where it's concentrated → check for an obvious cause (a recent change, an outage) → state a specific, testable hypothesis → close with a recommendation.
+  3. Prioritize the highest-leverage checks first (the ones most likely to explain the most of the observed change), explicitly state that you're prioritizing given the time constraint, and present a preliminary finding and recommendation based on what was covered — rather than attempting to be exhaustive and running out of time with nothing concrete to show.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What is a case-study interview actually evaluating?**
+  Short answer: Structured thinking under ambiguity and time pressure — how you break down a vague problem, state assumptions, prioritize, and reach an actionable conclusion, not just whether you arrive at one specific "correct" answer.
+
+  ### Conceptual questions
+  **Q: Why do interviewers often deliberately leave a case prompt ambiguous?**
+  Short answer: Real business problems are genuinely ambiguous — the interviewer is testing whether a candidate can navigate that ambiguity productively (stating assumptions, prioritizing) rather than needing every detail spelled out before making progress.
+
+  ### Scenario-based questions
+  **Q: Partway through a case study, you realize your initial assumption was likely wrong. What do you do?**
+  Short answer: Say so directly, briefly explain what changed your thinking, and adjust your approach — this demonstrates real-time self-correction, which interviewers generally view very favorably compared to silently pushing forward on a flawed assumption.
+
+  ### Practical questions
+  **Q: How would you end a case-study response if you ran out of time before reaching a fully confident conclusion?**
+  Short answer: State the preliminary finding and its confidence level honestly, name what additional information or time would be needed to be more certain, and still provide a specific, actionable next step based on the evidence gathered so far.
+
+  ## Interview traps / tricky points
+
+  - A response that's all calculation with no stated structure or assumptions is a common way strong analytical instincts fail to come across clearly in an interview setting.
+  - Ending without a recommendation is one of the most common, easily-fixed gaps in an otherwise strong case-study answer.
+
+  ## Best practices
+
+  - Always state a plan/structure before diving into any calculation.
+  - State assumptions explicitly and proceed, rather than stalling on ambiguity.
+  - Prioritize the highest-leverage checks first when time is limited.
+  - Always end with a specific, actionable recommendation, even under a tight time constraint.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Structure first** → state your plan before any calculation
+  **State assumptions** → out loud, not silently guessed
+  **Prioritize** → highest-leverage checks first under time pressure
+  **Always end with:** a specific, actionable recommendation, not just a finding

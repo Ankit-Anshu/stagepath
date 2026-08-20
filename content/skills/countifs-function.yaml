@@ -1,0 +1,100 @@
+title: COUNTIFS Function
+category: Spreadsheets
+what_is_it: Counting how many rows meet two or more conditions at once — like counting orders that are both "Completed" AND from the "West" region.
+why_it_matters: Real counting questions are often multi-conditional, and COUNTIFS answers them directly without a pivot table.
+prerequisites:
+  - countif-function
+objectives:
+  - Write a COUNTIFS formula with two or more conditions
+  - Explain how COUNTIFS combines multiple conditions
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-countifs-1
+    title: Count completed West orders
+    description: Given a list of orders, use COUNTIFS to count how many are both "Completed" and from the "West" region.
+verify:
+  - COUNTIFS correctly counts only rows matching every condition
+  - All criteria ranges are correctly aligned
+note: |
+  ## 🎯 What is it?
+
+  **COUNTIFS** counts how many rows meet **two or more conditions at once** — like counting orders that are both "Completed" **and** from the "West" region, in a single formula.
+
+  ## 💡 Why is it important?
+
+  Real counting questions are often multi-conditional, and COUNTIFS answers them directly, following the same pattern as [SUMIFS](/skills/sumifs-function) but for counting rows instead of summing a value.
+
+  ## Syntax
+
+  ```
+  =COUNTIFS(criteria_range1, criteria1, criteria_range2, criteria2, ...)
+  ```
+
+  Unlike SUMIFS, COUNTIFS has no separate "range to total" — it just counts rows where every criteria pair matches.
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Region | Status |
+  | 2 | West | Completed |
+  | 3 | West | Pending |
+  | 4 | East | Completed |
+
+  **Formula:** `=COUNTIFS(A2:A4,"West",B2:B4,"Completed")`
+  **Result:** `1` (only row 2 matches both conditions)
+
+  ## Multiple examples
+
+  **Beginner:** `=COUNTIFS(A2:A100,"West")` — COUNTIFS with just one condition, equivalent to COUNTIF.
+  **Intermediate:** `=COUNTIFS(region,"West",status,"Completed")` — two conditions combined.
+  **Real-world:** `=COUNTIFS(region,"West",order_date,">="&DATE(2024,1,1),order_date,"<"&DATE(2024,2,1))` — counting how many West-region orders fell within January specifically.
+
+  ## ⚠️ Common mistakes
+
+  - **Mismatched criteria range sizes** — every criteria range must be the same size as every other, or the formula errors.
+  - **Assuming OR logic between conditions.** Like SUMIFS, COUNTIFS combines all conditions with AND — every condition must be true for a row to count.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** counting completed orders in a specific region and time period.
+  - **Operations analysis:** counting shipments that are both overdue and above a certain value, to size an escalation queue.
+
+  ## Related concepts
+
+  ```
+  COUNTIF → COUNTIFS ← you are here → AVERAGEIF → AVERAGEIFS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a COUNTIFS that counts rows where column A = "West" and column B = "Completed".
+
+  ### Interview/Advanced
+  2. How would you count orders that are either overdue OR high-value (not both required)?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=COUNTIFS(A:A,"West",B:B,"Completed")`
+  2. COUNTIFS alone only combines conditions with AND — for an OR-style count, add two separate COUNTIFS (or COUNTIF) calls together and subtract the overlap counted twice: `=COUNTIF(overdue_range,TRUE)+COUNTIF(highvalue_range,TRUE)-COUNTIFS(overdue_range,TRUE,highvalue_range,TRUE)`.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Does COUNTIFS support OR logic between its conditions?**
+  Short answer: No — every condition passed to COUNTIFS is combined with AND; achieving OR logic requires combining separate COUNTIF/COUNTIFS calls (and typically subtracting any double-counted overlap).
+
+  ## Best practices
+
+  - Keep all criteria ranges the same size and correctly aligned.
+  - Remember COUNTIFS is AND-only; build OR logic by combining multiple counts.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **COUNTIFS(range1, crit1, range2, crit2, ...)** → conditional count, 2+ conditions, all combined with AND

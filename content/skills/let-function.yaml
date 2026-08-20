@@ -1,0 +1,76 @@
+title: LET Function
+category: Spreadsheets
+what_is_it: Naming intermediate values inside a single formula, so a repeated sub-calculation is written once and reused, instead of being duplicated multiple times in the same formula.
+why_it_matters: It makes a complex formula both faster (the named calculation runs once, not once per repetition) and dramatically easier to read.
+prerequisites:
+  - unique-function
+objectives:
+  - Simplify a formula with a repeated sub-calculation using LET
+  - Explain the performance and readability benefits of LET
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-let-function-1
+    title: Simplify a repeated calculation
+    description: Given a formula that calculates the same intermediate value twice (e.g., a filtered range used in both a SUM and a COUNT), rewrite it using LET to calculate it once.
+verify:
+  - Can rewrite a formula using LET to name a repeated sub-calculation
+  - Can explain why LET can improve performance
+note: |
+  ## 🎯 What is it?
+
+  **LET** assigns a name to an intermediate value or calculation inside a single formula, then lets you reference that name later in the same formula — instead of repeating the same sub-calculation multiple times.
+
+  ## 💡 Why is it important?
+
+  - A repeated sub-calculation (like the same FILTER applied twice in one formula) makes Excel compute it twice — LET computes it once and reuses the named result, which can be meaningfully faster on large data.
+  - It makes a complex formula dramatically easier to read — named intermediate steps read like a small, understandable recipe instead of one dense, nested expression.
+
+  ## Syntax
+
+  ```
+  =LET(name1, value1, [name2, value2, ...], calculation)
+  ```
+
+  ## 📊 Example
+
+  Without LET, calculating a filtered range's average AND count separately means writing the same FILTER condition twice:
+
+  ```
+  =AVERAGE(FILTER(B2:B100, C2:C100="East")) & " avg of " & COUNT(FILTER(B2:B100, C2:C100="East")) & " orders"
+  ```
+
+  With LET, the filter is computed once and named:
+
+  ```
+  =LET(eastOrders, FILTER(B2:B100, C2:C100="East"),
+       AVERAGE(eastOrders) & " avg of " & COUNT(eastOrders) & " orders")
+  ```
+
+  ## ⚠️ Common mistakes
+
+  - **Not recognizing when a formula has an unnecessary repeated sub-calculation** that LET could name once — this is the exact situation LET is built for.
+  - **Choosing unclear names for LET variables**, undermining the readability benefit LET is meant to provide.
+
+  ## Related concepts
+
+  ```
+  UNIQUE
+    ↓
+  LET ← you are here
+    ↓
+  Advanced Lookup
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What problem does LET solve that a regular nested formula doesn't?**
+  Short answer: It lets a repeated sub-calculation within one formula be computed once and referenced by name multiple times — improving both performance (avoiding redundant recalculation) and readability (naming intermediate steps instead of nesting them densely).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **LET(name, value, ..., calculation)** → names intermediate values inside one formula
+  Computes a repeated sub-calculation once instead of multiple times — faster and more readable.

@@ -1,0 +1,106 @@
+title: KPI
+category: Spreadsheets
+what_is_it: Displaying a single, prominent, high-priority number (a Key Performance Indicator) as its own dedicated element on a dashboard — often with a comparison to a target or a prior period.
+why_it_matters: A stakeholder scanning a dashboard needs the single most important number to be instantly visible, not buried inside a chart or a table.
+prerequisites:
+  - scatter-plot
+objectives:
+  - Build a KPI cell/card showing a key metric with a comparison
+  - Explain why a KPI card is designed for instant scanning, not detailed analysis
+estimated_minutes: 25
+resources:
+  - r-datavizcatalogue
+practice:
+  - id: ex-kpi-1
+    title: Build a KPI card
+    description: Build a KPI display showing "Total Revenue" alongside a percentage change from the prior period, styled to stand out prominently.
+verify:
+  - KPI number is prominent and immediately readable
+  - Comparison (to target or prior period) is included and clearly labeled
+note: |
+  ## 🎯 What is it?
+
+  A **KPI** display shows a single, prominent, high-priority number as its own dedicated element on a dashboard — a Key Performance Indicator (see [KPIs & Metrics](/skills/kpis-metrics) for the underlying concept) — often paired with a comparison, like a percentage change from a target or a prior period.
+
+  ## 💡 Why is it important?
+
+  A stakeholder scanning a dashboard needs the single most important number to be instantly visible — not buried inside a chart's axis or a pivot table's cell — a KPI display exists specifically to answer "how are we doing?" in under a second.
+
+  ## Core concept
+
+  A well-built KPI display typically includes:
+
+  | Element | Purpose |
+  |---|---|
+  | The number itself, large and prominent | The core answer, readable at a glance |
+  | A label | What the number represents (e.g., "Total Revenue") |
+  | A comparison (vs. target, vs. prior period) | Context — is this good, bad, on track? |
+  | A visual cue (color, arrow) | Reinforces the comparison at a glance |
+
+  ## 📊 Example
+
+  A KPI card showing:
+
+  ```
+  TOTAL REVENUE
+  $1.2M
+  ▲ 8% vs. last month
+  ```
+
+  **Explanation:** The number is large and immediate; the comparison ("8% vs. last month") gives instant context on whether this is a good or concerning result, without requiring the viewer to know last month's number themselves.
+
+  ## Multiple examples
+
+  **Beginner:** A single large cell showing "Total Orders" with no comparison yet.
+  **Intermediate:** Adding a percentage-change comparison against the prior period, with conditional formatting coloring it green (up) or red (down).
+  **Real-world:** A dashboard's top row containing 3-4 KPI cards (Revenue, Orders, Conversion Rate, Average Order Value), each with its own comparison — giving a stakeholder the full "how are we doing" picture in the first few seconds of opening the dashboard, before they even look at any chart.
+
+  ## ⚠️ Common mistakes
+
+  - **Showing a raw number with no comparison or context.** "$1.2M" alone doesn't tell a viewer whether that's good, bad, or on track — a comparison is what makes a KPI actionable, not just informative.
+  - **Building too many KPI cards on one dashboard**, diluting which number is actually the *most* important — see [Dashboard Design](/skills/dashboard-design)'s visual hierarchy principle.
+  - **Using a color cue (green/red) without a backup label**, which can be inaccessible to colorblind viewers — see [Color & Accessibility in Visualization](/skills/dataviz-color-accessibility).
+
+  ## Real-world Data Analyst use cases
+
+  - **Any executive dashboard:** the "at a glance" answer to "how is the business doing" that everything else on the dashboard supports and explains.
+
+  ## Related concepts
+
+  ```
+  Scatter Plot → KPI ← you are here → Dashboard
+  ```
+  Directly builds on [KPIs & Metrics](/skills/kpis-metrics)' concept of a well-chosen, precisely-defined metric — this topic is about how to *display* one prominently.
+
+  ## Practice questions
+
+  ### Easy
+  1. What does a KPI card typically need beyond just the raw number itself?
+
+  ### Interview/Advanced
+  2. Why is a raw number like "$1.2M revenue" with no comparison considered an incomplete KPI display?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A comparison — to a target, a prior period, or both — giving the viewer context on whether the number represents good, bad, or on-track performance.
+  2. Without a comparison, a viewer has no way to judge whether $1.2M is good or concerning — the number is informative on its own, but not actionable, since it lacks the context needed to interpret it.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What makes a KPI display effective on a dashboard?**
+  Short answer: A large, prominent number paired with a clear comparison (to a target or prior period) and a visual cue reinforcing that comparison — giving a viewer instant, actionable context, not just a bare figure.
+
+  ## Best practices
+
+  - Always pair a KPI number with a comparison for context.
+  - Limit a dashboard to a small number of true KPI cards, so the most important number doesn't get lost among many.
+  - Pair a color-based comparison cue with a text/icon backup for accessibility.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **KPI display** → a large, prominent number + a comparison (target or prior period)
+  **Rule:** a number alone isn't actionable — the comparison is what gives it meaning

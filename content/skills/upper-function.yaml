@@ -1,0 +1,84 @@
+title: UPPER Function
+category: Spreadsheets
+what_is_it: Converting text to ALL CAPS.
+why_it_matters: Standardizing casing is essential before grouping or comparing text — inconsistent casing splits what should be one category into several.
+prerequisites:
+  - xmatch-function
+objectives:
+  - Convert a text value to uppercase with UPPER
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-upper-1
+    title: Standardize a code column
+    description: Convert a column of inconsistently-cased product codes to all uppercase.
+verify:
+  - Every value in the column is correctly converted to uppercase
+note: |
+  ## 🎯 What is it?
+
+  **UPPER** converts text to ALL CAPS.
+
+  ## 💡 Why is it important?
+
+  Standardizing casing is essential before grouping, comparing, or deduplicating text — inconsistent casing ("abc123", "ABC123") can split what should be one category into several in a pivot table or grouped report.
+
+  ## Syntax
+
+  ```
+  =UPPER(text)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | widget-a1 |
+
+  **Formula:** `=UPPER(A1)` → `"WIDGET-A1"`
+
+  ## Multiple examples
+
+  **Beginner:** `=UPPER(A2)` — standardize a product code column to all caps.
+  **Real-world:** Standardizing a country-code column to uppercase before joining it against a reference table that uses uppercase codes, so the join doesn't silently fail on a casing mismatch.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming a casing difference doesn't matter for grouping/pivoting.** It does — see [Data Types](/skills/spreadsheet-data-types) and [UPPER/LOWER/PROPER](/skills/lower-function) common mistakes for the same underlying issue.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** standardizing codes or identifiers before matching or joining two datasets.
+
+  ## Related concepts
+
+  ```
+  XMATCH → UPPER ← you are here → LOWER → PROPER → TRIM
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula to convert A1 to uppercase.
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=UPPER(A1)`
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why standardize text casing before comparing or grouping values?**
+  Short answer: Grouping and exact-match comparisons are case-sensitive for bucketing purposes, so inconsistent casing can silently split one real-world value into multiple categories.
+
+  ## Best practices
+
+  - Standardize casing on any identifier or code column before matching or grouping it.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **UPPER(text)** → ALL CAPS

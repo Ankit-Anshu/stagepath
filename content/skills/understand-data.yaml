@@ -1,0 +1,68 @@
+title: Understand the Data
+category: Foundations
+what_is_it: Getting familiar with a newly collected dataset's structure, size, columns, and quality before attempting to clean or analyze it.
+why_it_matters: Jumping straight into analysis without understanding the data first leads to wrong assumptions about what a column means or how complete the data is.
+prerequisites:
+  - collect-data
+objectives:
+  - List the basic questions to ask when first opening a new dataset
+  - Explain why understanding data comes before cleaning it
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-understand-data-1
+    title: First-look checklist
+    description: 'Open any dataset you have access to and answer: how many rows/columns, what does one row represent, and which columns have missing values?'
+verify:
+  - Can list at least three questions to ask when first opening a dataset
+  - Can explain what "the grain" of a dataset means
+note: |
+  ## 🎯 What is it?
+
+  **Understanding the data** is the step where an analyst gets familiar with a newly collected dataset before touching it further: how many rows and columns, what each column means, what one row represents (the "grain"), and roughly how complete or messy it looks.
+
+  ## 💡 Why is it important?
+
+  - Cleaning or analyzing a dataset before understanding it leads to wrong assumptions — e.g., accidentally double-counting because one row wasn't actually "one order," it was "one line item within an order."
+  - It's usually the fastest step in the process, but skipping it causes the most expensive mistakes later.
+
+  ## Core concept
+
+  First-look questions:
+  - How many rows and columns are there?
+  - What does **one row** represent (the "grain")? One customer? One order? One order line-item?
+  - What does each column mean, and what data type is it?
+  - Roughly how much is missing or looks wrong?
+  - Does the data cover the time period and scope the business problem needs?
+
+  ## 📊 Example
+
+  A dataset named `orders` might actually have one row per **item within** an order, not one row per order — summing a "quantity" column without first checking the grain would silently overcount total orders. Five minutes spent understanding the grain avoids a wrong headline number later.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming a table's name describes its grain accurately.** Always verify by checking whether a known key (like `order_id`) repeats across multiple rows.
+  - **Skipping this step because the dataset "looks familiar."** Even a dataset you've used before can change shape (new columns, a new grain) between exports.
+
+  ## Related concepts
+
+  ```
+  Collect Data
+    ↓
+  Understand the Data ← you are here
+    ↓
+  Clean Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would you check "the grain" of a table before summing a column?**
+  Short answer: If one row doesn't represent what you assume (e.g., one order-line-item instead of one order), summing directly will overcount — checking the grain first (does a key like order_id repeat?) prevents a wrong headline number.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Understand the data** → check size, columns, grain, and rough completeness before cleaning or analyzing
+  "The grain" = what one row actually represents.

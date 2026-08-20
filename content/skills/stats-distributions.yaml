@@ -1,0 +1,179 @@
+title: Distributions
+category: Statistics
+what_is_it: Recognizing normal, skewed, binomial, and uniform distributions, and what the shape of data tells you.
+why_it_matters: Many statistical methods assume a particular distribution shape — knowing what you're looking at tells you which methods are actually valid to use.
+prerequisites:
+  - stats-probability
+objectives:
+  - Recognize a normal distribution and the 68-95-99.7 rule
+  - Identify skewed and bimodal distributions
+  - Explain what a binomial distribution models
+  - Choose an appropriate method based on distribution shape
+subtopics:
+  - title: The normal distribution
+    description: The bell curve and the 68-95-99.7 rule for estimating ranges.
+    outcomes:
+      - Apply the 68-95-99.7 rule to estimate a range
+  - title: Skewed & bimodal shapes
+    description: What a long tail or two peaks in a histogram actually implies about the data.
+    outcomes:
+      - Identify a skewed distribution and explain its implication
+  - title: Common named distributions
+    description: Binomial and uniform distributions, at a beginner level.
+    outcomes:
+      - Explain what a binomial distribution models
+estimated_minutes: 150
+resources:
+  - r-seeing-theory
+  - r-khan-statistics
+practice:
+  - id: ex-stats-distributions-1
+    title: Identify a distribution shape
+    description: Given a histogram, identify whether the distribution is roughly normal, skewed, or bimodal, and explain what that implies.
+verify:
+  - Distribution shape is correctly identified from a histogram
+  - Can apply the 68-95-99.7 rule to a normal distribution
+  - Can explain the practical implication of a skewed shape
+note: |
+  ## 🎯 What is it?
+
+  A **distribution** describes the shape of how values in a dataset are spread out — whether they cluster in the middle (a bell curve), lean to one side (skewed), or bunch around a few distinct values (bimodal). Recognizing the shape tells you what's normal, what's an outlier, and which statistical methods are actually valid to use.
+
+  Think of a histogram of adult heights: most people cluster near the average, with fewer people as you move toward very short or very tall — that classic bell shape is a **normal distribution**.
+
+  ## 💡 Why is it important?
+
+  - Many statistical methods (including common hypothesis tests) assume data roughly follows a specific distribution — using them on data that doesn't fit can produce misleading results.
+  - Recognizing a distribution's shape from a histogram is often the fastest way to spot a data-quality issue or a genuinely interesting business pattern.
+  - It's the concept that connects raw data to probability statements like "95% of values fall within this range."
+
+  ## Core concept
+
+  ### The normal distribution (bell curve)
+  Symmetric around the mean, with the classic **68-95-99.7 rule**:
+
+  | Range | % of data contained |
+  |---|---|
+  | Mean ± 1 standard deviation | ~68% |
+  | Mean ± 2 standard deviations | ~95% |
+  | Mean ± 3 standard deviations | ~99.7% |
+
+  ### Skewed & bimodal shapes
+
+  - **Right-skewed (positive skew):** a long tail toward high values — mean > median. Common in income, order value.
+  - **Left-skewed (negative skew):** a long tail toward low values — mean < median. Less common, but seen in things like "time until a scheduled failure" data capped near a maximum.
+  - **Bimodal:** two distinct peaks — often a sign that two different populations are mixed together in one dataset (e.g., combining new-user and power-user session lengths into one histogram).
+
+  ### Common named distributions
+
+  - **Binomial:** models the number of successes in a fixed number of independent yes/no trials (e.g., number of purchases out of 100 site visits, each with the same conversion probability).
+  - **Uniform:** every value in a range is equally likely (e.g., a random number generator, or the minute-within-the-hour a random event occurs).
+
+  ## Syntax / Formula / Structure
+
+  ```
+  68-95-99.7 rule (normal distribution):
+    mean ± 1 std dev  → ~68% of values fall in this range
+    mean ± 2 std dev  → ~95% of values fall in this range
+    mean ± 3 std dev  → ~99.7% of values fall in this range
+  ```
+
+  ## 📊 Example
+
+  Average delivery time is 5 days with a standard deviation of 1 day, and delivery times are roughly normal.
+
+  Using the 68-95-99.7 rule:
+  - ~68% of deliveries arrive between 4 and 6 days.
+  - ~95% arrive between 3 and 7 days.
+
+  **Interpretation:** A delivery that takes 9 days is far outside the "normal" range (more than 3 standard deviations away) — a strong candidate to investigate as an anomaly, not typical variation.
+
+  ## Multiple examples
+
+  **Beginner:** Recognize that adult height data forms a roughly normal, symmetric histogram.
+  **Intermediate:** Recognize that customer order value is typically right-skewed (many small orders, a few very large ones) — meaning median, not mean, better represents a "typical" order.
+  **Real-world:** A histogram of session durations shows two peaks — one near 30 seconds, one near 10 minutes. Rather than treating this as one population, investigate whether it's actually two groups (e.g., bounced visitors vs. engaged users) mixed together, and analyze them separately.
+
+  ## ⚠️ Common misconceptions
+
+  - **Assuming all real-world data is normally distributed.** Much business data (order value, wait times, session length) is right-skewed, not normal — checking the shape first matters.
+  - **Treating a bimodal distribution's overall mean as meaningful.** The "average" of two very different groups combined often doesn't represent either group well.
+  - **Confusing "binomial" with "any yes/no outcome."** Binomial specifically requires a *fixed number* of *independent* trials with the *same* probability of success each time — real data often violates one of these conditions.
+
+  ## Real-world Data Analyst use cases
+
+  - **Operations analysis:** using the 68-95-99.7 rule on delivery times to define a reasonable "normal" range and flag genuine anomalies.
+  - **Product analysis:** spotting a bimodal session-length distribution and investigating whether it reflects two distinct user segments.
+  - **Marketing analysis:** modeling conversion counts out of a fixed number of impressions with a binomial distribution.
+
+  ## Related concepts
+
+  ```
+  Descriptive Statistics
+    ↓
+  Probability Basics
+    ↓
+  Distributions ← you are here
+    ↓
+  Correlation & Regression
+    ↓
+  Hypothesis Testing (many tests assume normally-distributed data)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. A dataset's histogram shows a single symmetric peak. What distribution shape does this suggest?
+
+  ### Medium
+  2. Order values for an e-commerce store show a long tail toward high values, with mean > median. What shape is this, and which measure of center should you lead with?
+
+  ### Interview/Advanced
+  3. A histogram of app session lengths shows two separate peaks. What might this indicate, and how would you investigate further?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Roughly a normal (bell-curve) distribution.
+  2. Right-skewed; lead with the median, since the mean is pulled upward by the long tail of high-value orders.
+  3. It may indicate two distinct sub-populations mixed together (e.g., bounced sessions vs. genuinely engaged sessions). Investigate by segmenting the data (e.g., by traffic source, device, or a behavioral flag) and examining each group's distribution separately rather than analyzing the combined histogram as one population.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What does the 68-95-99.7 rule describe?**
+  Short answer: For a normal distribution, about 68% of values fall within 1 standard deviation of the mean, 95% within 2, and 99.7% within 3.
+
+  ### Conceptual questions
+  **Q: Why does it matter whether data is normally distributed before applying a statistical test?**
+  Short answer: Many common tests assume roughly normal data; applying them to strongly skewed or bimodal data can produce misleading p-values or confidence intervals.
+
+  ### Scenario-based questions
+  **Q: You see mean and median differ substantially in a dataset. What does that tell you, and what would you check next?**
+  Short answer: It suggests the data is skewed, not symmetric — check a histogram to confirm the shape and decide whether median (or another robust statistic) is more appropriate to report.
+
+  ### Practical questions
+  **Q: How would you decide whether an observed value is a genuine outlier, using distribution shape?**
+  Short answer: If the data is roughly normal, use the standard-deviation-based 68-95-99.7 rule (e.g., beyond 3 std devs is highly unusual); if it's skewed, use an IQR-based rule instead, since standard deviation is less reliable on skewed data.
+
+  ## Interview traps / tricky points
+
+  - Real business data is very often *not* normal — assuming normality without checking is a common and consequential mistake.
+  - A bimodal shape is easy to miss if you only look at summary statistics (mean/std dev) without ever plotting a histogram — always visualize before assuming.
+
+  ## Best practices
+
+  - Plot a histogram before choosing a summary statistic or a statistical test — don't assume the shape.
+  - Use the 68-95-99.7 rule only when the data is genuinely close to normal; use IQR-based methods for skewed data.
+  - If a distribution looks bimodal, investigate whether it's actually two populations that should be analyzed separately.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Normal distribution** → symmetric bell curve; 68-95-99.7 rule applies
+  **Right-skewed** → long tail high, mean > median (e.g., order value)
+  **Bimodal** → two peaks, often two mixed populations
+  **Binomial** → number of successes in a fixed number of independent trials
+  **Uniform** → every value in a range equally likely

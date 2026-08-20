@@ -1,0 +1,68 @@
+title: ROUNDUP Function
+category: Spreadsheets
+what_is_it: Rounding a number up (away from zero) to a specified number of decimal places, regardless of the digit that follows.
+why_it_matters: Whenever any leftover amount still requires a full additional unit — an extra box, an extra truck, an extra staff member — ROUNDUP (not standard rounding) is the correct choice.
+prerequisites:
+  - round-function
+objectives:
+  - Round a number up with ROUNDUP
+  - Identify a scenario where ROUNDUP is required instead of ROUND
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-roundup-1
+    title: Calculate required units
+    description: Given 21.2 tons of cargo and trucks that hold 5 tons each, calculate the number of trucks needed using ROUNDUP.
+verify:
+  - Can write a ROUNDUP formula
+  - Can identify a scenario requiring ROUNDUP over standard ROUND
+note: |
+  ## 🎯 What is it?
+
+  **ROUNDUP** rounds a number up (away from zero) to a specified number of decimal places, no matter what the following digit is — unlike ROUND, which rounds to the *nearest* value.
+
+  ## 💡 Why is it important?
+
+  - Whenever any leftover, partial amount still requires a full additional unit — extra packaging, an extra delivery truck, an extra staff shift — ROUNDUP is the only correct choice; standard rounding would understate the real requirement.
+
+  ## Syntax
+
+  ```
+  =ROUNDUP(number, num_digits)
+  ```
+
+  ## 📊 Example
+
+  You need to ship 21.2 tons of cargo, and each truck holds 5 tons: `21.2 / 5 = 4.24` trucks.
+
+  `=ROUNDUP(21.2/5, 0)` → `5`
+
+  Rounding to the nearest whole number (`ROUND`) would give 4 trucks — not enough to actually ship all the cargo. ROUNDUP correctly accounts for the fact that any partial truckload still needs a full truck.
+
+  ## ⚠️ Common mistakes
+
+  - **Using standard ROUND when a partial amount genuinely requires a full extra unit** — this understates a real resource requirement (trucks, boxes, staff).
+  - **Assuming ROUNDUP always rounds toward positive infinity** — it actually rounds *away from zero*, so for negative numbers it rounds further negative, not toward positive.
+
+  ## Related concepts
+
+  ```
+  ROUND
+    ↓
+  ROUNDUP ← you are here
+    ↓
+  ROUNDDOWN
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: You need to calculate how many delivery trucks are needed for 21.2 tons of cargo, where each truck holds 5 tons. Which rounding function fits, and why?**
+  Short answer: ROUNDUP — `ROUNDUP(21.2/5, 0)` rounds 4.24 up to 5 trucks, since any partial amount still requires a full additional truck; standard ROUND would understate the requirement at 4.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **ROUNDUP(num, digits)** → always rounds away from zero, regardless of the digit
+  Use whenever a partial amount still needs a full extra unit.

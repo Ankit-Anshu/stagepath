@@ -1,0 +1,114 @@
+title: DATEDIF Function
+what_is_it: Calculating the difference between two dates — in days, months, or years — with a single formula.
+why_it_matters: Tenure, age, days-since-signup, and days-overdue are all just date differences. DATEDIF is the direct way to compute them without manual math.
+objectives:
+  - Calculate a duration between two dates in days, months, or years
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-datedif-1
+    title: Calculate tenure
+    description: Given a signup date column, calculate each customer's tenure in months as of today.
+verify:
+  - DATEDIF result matches a manual calculation
+  - Correct unit (day/month/year) is used for the question being asked
+category: Spreadsheets
+prerequisites: []
+note: |
+  ## 🎯 What is it?
+
+  **DATEDIF** calculates the difference between two dates — in days, months, or years — with a single formula.
+
+  ## 💡 Why is it important?
+
+  Tenure, age, days-since-signup, and days-overdue are all just date differences. DATEDIF computes them directly, without manual date-math that's easy to get subtly wrong (leap years, differing month lengths).
+
+  ## Syntax
+
+  ```
+  =DATEDIF(start_date, end_date, unit)
+  ```
+
+  | Unit | Returns |
+  |---|---|
+  | `"D"` | Days between the dates |
+  | `"M"` | Complete months between the dates |
+  | `"Y"` | Complete years between the dates |
+  | `"YM"` | Months, ignoring years (0–11) |
+  | `"MD"` | Days, ignoring months and years |
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Signup Date | |
+  | 2 | 2023-03-15 | |
+
+  **Formula:** `=DATEDIF(A2,TODAY(),"M")`
+  **Result (if today is 2024-01-05):** `9` (9 complete months of tenure)
+
+  ## Multiple examples
+
+  **Beginner:** `=DATEDIF(A2,B2,"D")` — days between two dates.
+  **Intermediate:** `=DATEDIF(A2,TODAY(),"Y")` — a customer's tenure in complete years.
+  **Real-world:** `=DATEDIF(order_date, ship_date, "D")` compared against a promised SLA (e.g., 3 days) to flag late shipments.
+
+  ## ⚠️ Common mistakes
+
+  - **Putting the later date first.** `start_date` must come before `end_date`, or DATEDIF returns an error (`#NUM!`).
+  - **Confusing "M" (complete months) with a simple month-number subtraction.** DATEDIF with "M" correctly handles a case like Jan 30 → Feb 28 as an edge case; naive subtraction often doesn't.
+  - **Forgetting DATEDIF is undocumented/legacy** in some spreadsheet tools — it still works, but always test it before relying on it in a shared template.
+
+  ## Real-world Data Analyst use cases
+
+  - **Customer analysis:** calculating customer tenure in months for a cohort report.
+  - **Operations analysis:** days between order and delivery, to flag SLA breaches.
+  - **HR analysis:** employee tenure in years for retention reporting.
+
+  ## Related concepts
+
+  ```
+  IF → DATEDIF ← you are here → Text cleaning (UPPER/LOWER/PROPER, TRIM) → Lookup functions
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula for the number of days between A2 and B2.
+
+  ### Medium
+  2. Given a signup-date column, write a formula for each customer's tenure in complete months as of today.
+
+  ### Interview/Advanced
+  3. What happens if you accidentally swap `start_date` and `end_date`?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=DATEDIF(A2,B2,"D")`
+  2. `=DATEDIF(A2,TODAY(),"M")`
+  3. DATEDIF returns a `#NUM!` error, because it requires start_date ≤ end_date.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you calculate a customer's tenure in months?**
+  Short answer: `=DATEDIF(signup_date, TODAY(), "M")` — it directly returns complete months without manual date arithmetic.
+
+  ## Interview traps / tricky points
+
+  - `"M"` returns *complete* months, not a rounded value — a customer who signed up 29 days ago shows 0 complete months, which can surprise someone expecting rounding.
+  - Swapped start/end dates cause an error rather than a negative number, unlike simple subtraction.
+
+  ## Best practices
+
+  - Always confirm `start_date` is chronologically before `end_date` before using DATEDIF in a formula that will run on many rows.
+  - Use `"YM"` and `"MD"` together when you need an "X years, Y months" style display, not just one unit.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **DATEDIF(start, end, unit)** → difference between two dates
+  **Units:** "D" days, "M" months, "Y" years, "YM"/"MD" partial combinations
+  **Watch for:** start_date must be before end_date, or it errors

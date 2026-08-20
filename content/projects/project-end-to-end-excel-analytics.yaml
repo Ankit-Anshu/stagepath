@@ -1,0 +1,67 @@
+title: End-to-End Excel Analytics Project
+level: capstone
+duration: 8-12 hours
+description: >-
+  Take two raw, messy, related exports all the way from import to a published dashboard — using
+  every stage of the Spreadsheets skill set in one project.
+problem_statement: >-
+  A small company's order and customer data lives in two separate, messy exports that have never
+  been properly combined. Leadership wants one trustworthy, automatically-refreshing dashboard
+  showing revenue by category and by customer segment, and a written summary of what's driving it.
+scenario: >-
+  You are the analyst tasked with turning two raw exports into a repeatable, automated reporting
+  pipeline — not a one-time cleanup, but something that keeps working when next month's export
+  arrives.
+dataset:
+  name: Orders and customers exports
+  description: >-
+    A messy, real-world-style orders export (inconsistent casing, stray whitespace, currency
+    stored as text, a missing customer ID, zero-amount rows) plus a clean customers reference
+    table, related by customer_id.
+  source_url: /datasets/capstone-orders.csv
+  format: CSV
+  size: 15 orders, 8 customers, 2 files
+  files: [capstone-orders.csv, capstone-customers.csv]
+skills:
+  - spreadsheets-power-query
+  - power-query-data-cleaning
+  - power-query-merge
+  - spreadsheets-pivot-tables
+  - dashboard-spreadsheets
+datasets:
+  - Orders export
+  - Customers reference table
+tasks:
+  - Import both files with Power Query, as live queries rather than pasted values
+  - Clean the orders query — fix inconsistent category casing, trim whitespace, convert currency-as-text to numbers, decide how to handle the missing customer ID and zero-amount rows
+  - Merge the cleaned orders query with the customers query by customer_id
+  - Build pivot tables summarizing revenue by category and by customer segment
+  - Assemble a one-tab dashboard with KPI cards, charts, and a slicer
+  - Write a short business summary explaining the top revenue driver and one data-quality issue found along the way
+requirements:
+  - Every cleaning and merging step happens in Power Query, not manually in the worksheet
+  - The missing customer ID and zero-amount rows are handled deliberately, with the decision documented
+  - The dashboard refreshes correctly if the query is re-run against the same source files
+  - The written summary states a specific, data-backed finding, not just a description of the charts
+milestones:
+  - title: Import and understand
+    description: Import both files as Power Query queries and review each column's data type and apparent quality issues before changing anything.
+  - title: Clean and merge
+    description: Build the cleaning steps for the orders query, then merge it with the customers query by customer_id.
+  - title: Analyze and build the dashboard
+    description: Summarize revenue by category and segment with pivot tables, then assemble the one-tab dashboard.
+  - title: Summarize and document
+    description: Write the business summary and a short README documenting every cleaning decision made and why.
+rubric:
+  - criterion: Pipeline correctness
+    definition: Every transformation is a repeatable Power Query step, not a manual one-time edit, and the result refreshes correctly.
+  - criterion: Data quality judgment
+    definition: The missing ID and zero-amount rows are handled with a stated, defensible decision, not silently dropped or ignored.
+  - criterion: Dashboard quality
+    definition: The dashboard has a clear core question, correct KPI definitions, and a working slicer.
+  - criterion: Communication
+    definition: The written summary states a specific, data-backed finding and names the most important data-quality caveat.
+artifacts:
+  - Workbook with Power Query pipeline
+  - Dashboard
+  - README documenting cleaning decisions

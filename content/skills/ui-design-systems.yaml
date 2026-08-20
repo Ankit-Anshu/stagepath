@@ -1,0 +1,24 @@
+title: UI Design & Design Systems
+category: UX Design
+what_is_it: Creating readable visual hierarchy and reusable interface patterns across a product.
+why_it_matters: Consistency should reduce cognitive load while still supporting real product variation.
+estimated_minutes: 3300
+prerequisites: [interaction-design]
+objectives: [Create polished responsive interfaces, Build reusable components, Document a small design system]
+subtopics:
+  - title: Visual hierarchy
+    description: Typography, spacing, scale, contrast, density, alignment, rhythm, and scanning.
+    outcomes: [Create a clear hierarchy, Diagnose visual noise]
+  - title: Color and accessibility
+    description: Color roles, contrast, states, non-color cues, themes, and semantic tokens.
+    outcomes: [Build an accessible palette, Avoid color-only communication]
+  - title: Responsive interface design
+    description: Content priority, reflow, touch targets, breakpoints, density, and cross-device behavior.
+    outcomes: [Design responsive variants, Handle content growth]
+  - title: Components and patterns
+    description: Anatomy, variants, states, composition, naming, and appropriate flexibility.
+    outcomes: [Specify a complete component, Avoid variant explosion]
+  - title: Tokens and documentation
+    description: Primitive and semantic tokens, usage guidance, examples, contribution, and governance.
+    outcomes: [Create a token hierarchy, Write component guidance]
+

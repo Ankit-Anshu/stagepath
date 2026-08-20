@@ -1,0 +1,67 @@
+title: Exact Match
+category: Spreadsheets
+what_is_it: Looking up a value that must match the search key precisely — no rounding, no "closest value" — the default and safest match mode for nearly every lookup.
+why_it_matters: It's the setting most lookup formulas need, and forgetting to specify it explicitly (defaulting to approximate match instead) is one of the most common causes of a silently wrong VLOOKUP result.
+prerequisites:
+  - xmatch-function
+objectives:
+  - Explain what exact match means in a lookup function
+  - Set VLOOKUP/HLOOKUP/MATCH to exact match mode explicitly
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-exact-match-1
+    title: Force exact match
+    description: Given a VLOOKUP formula missing its 4th argument, add FALSE to force exact match and explain why it matters.
+verify:
+  - Can explain what exact match means
+  - Can set exact match explicitly in VLOOKUP, HLOOKUP, and MATCH
+note: |
+  ## 🎯 What is it?
+
+  **Exact match** means a lookup only returns a result when it finds a value that matches the search key *precisely* — not the closest value, not a rounded value, an exact one. It's controlled explicitly in most lookup functions: `FALSE` (or `0`) in VLOOKUP/HLOOKUP/MATCH's last argument, and XLOOKUP/XMATCH default to it automatically.
+
+  ## 💡 Why is it important?
+
+  - It's the setting nearly every real-world lookup needs — looking up a customer ID, a product SKU, or an exact category name all require exact match.
+  - Forgetting to specify it in VLOOKUP/HLOOKUP (which default to approximate match if the argument is omitted) is one of the most common causes of a silently wrong result — the formula doesn't error, it just quietly returns the wrong row.
+
+  ## Syntax
+
+  ```
+  =VLOOKUP(lookup_value, table_array, col_index, FALSE)   ← FALSE = exact match
+  =MATCH(lookup_value, lookup_array, 0)                     ← 0 = exact match
+  =XLOOKUP(lookup_value, lookup_array, return_array)         ← exact match by default
+  ```
+
+  ## 📊 Example
+
+  Looking up a specific customer ID `10452` in a customer table with `VLOOKUP(10452, table, 2, FALSE)` returns the row where the ID matches exactly — if `10452` doesn't exist in the table, the formula correctly returns `#N/A` rather than guessing at the closest ID, which would be meaningless for an identifier like this.
+
+  ## ⚠️ Common mistakes
+
+  - **Omitting VLOOKUP's 4th argument**, silently defaulting to approximate match — this is one of the single most common real-world spreadsheet bugs.
+  - **Assuming exact match means "case-sensitive."** Standard exact match in VLOOKUP/MATCH is case-*insensitive* — "Amir" and "AMIR" are treated as the same match.
+
+  ## Related concepts
+
+  ```
+  XMATCH
+    ↓
+  Exact Match ← you are here
+    ↓
+  Approximate Match
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is it risky to omit VLOOKUP's 4th argument?**
+  Short answer: Omitting it defaults to approximate match, which can silently return the wrong row for a value that doesn't exist exactly in the table — always pass `FALSE` explicitly unless approximate match is genuinely intended.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Exact match** → `FALSE`/`0` in VLOOKUP/HLOOKUP/MATCH; the default in XLOOKUP/XMATCH
+  The setting almost every real-world lookup needs — never rely on it being the default in VLOOKUP.

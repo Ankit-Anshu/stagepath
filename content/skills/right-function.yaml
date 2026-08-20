@@ -1,0 +1,84 @@
+title: RIGHT Function
+category: Spreadsheets
+what_is_it: Extracting a specified number of characters from the end (right side) of a text value.
+why_it_matters: The mirror image of LEFT — used whenever the piece of text needed is a fixed-length suffix, like a file extension or the last few digits of an ID.
+prerequisites:
+  - left-function
+objectives:
+  - Extract a substring from the end of a text value with RIGHT
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-right-1
+    title: Extract a suffix code
+    description: Given a column of order IDs ending in a 4-digit year, extract just the year using RIGHT.
+verify:
+  - RIGHT correctly extracts the intended number of characters
+note: |
+  ## 🎯 What is it?
+
+  **RIGHT** extracts a specified number of characters from the **end** (right side) of a text value — the mirror image of [LEFT](/skills/left-function).
+
+  ## 💡 Why is it important?
+
+  Used whenever the piece of text needed is a fixed-length suffix — a file extension, the last 4 digits of an ID, or a year appended to the end of a code.
+
+  ## Syntax
+
+  ```
+  =RIGHT(text, num_chars)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | INV-2024 |
+
+  **Formula:** `=RIGHT(A1,4)` → `"2024"`
+
+  ## Multiple examples
+
+  **Beginner:** `=RIGHT(A2,3)` — extract the last 3 characters of a code.
+  **Real-world:** `=RIGHT(filename,3)` used to extract a file extension from a column of filenames, to check for and flag any files not matching an expected format (like ".csv").
+
+  ## ⚠️ Common mistakes
+
+  - **Same fixed-length assumption risk as LEFT** — RIGHT extracts a fixed number of characters regardless of whether every row's actual suffix is that same length.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** extracting a fixed-length suffix, like a year or file extension, from the end of a text field.
+
+  ## Related concepts
+
+  ```
+  LEFT → RIGHT ← you are here → MID → LEN
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that extracts the last 2 characters of A1.
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=RIGHT(A1,2)`
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the relationship between LEFT and RIGHT?**
+  Short answer: They extract from opposite ends of a text value — LEFT from the start, RIGHT from the end — both taking a fixed number of characters.
+
+  ## Best practices
+
+  - Verify the data's actual suffix-length consistency before relying on a fixed-length RIGHT extraction.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **RIGHT(text, num_chars)** → last N characters from the end

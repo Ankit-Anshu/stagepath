@@ -1,0 +1,75 @@
+title: What is Data?
+category: Foundations
+what_is_it: The raw facts, numbers, and observations recorded about the world — the material every later stage of analysis (cleaning, analyzing, visualizing) is built from.
+why_it_matters: Before learning tools or techniques, an analyst needs a precise mental model of what "data" actually is, so later classifications (structured, qualitative, ratio, etc.) have something concrete to attach to.
+prerequisites: []
+objectives:
+  - Define data in plain language
+  - Distinguish data from information and from insight
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-what-is-data-1
+    title: Trace one data point
+    description: 'Pick one number from a dashboard you use and trace it backward: what raw event or record produced it?'
+verify:
+  - Can define data in one sentence
+  - Can explain the difference between data, information, and insight
+note: |
+  ## 🎯 What is it?
+
+  **Data** is a raw fact, observation, or measurement recorded about the world — a number, a label, a timestamp, an event. On its own, a single piece of data usually means little: "47" is just a number until you know it's "47 orders placed yesterday."
+
+  Data becomes **information** once it's organized and given context (e.g., "47 orders were placed yesterday, up from 30 the day before"). Information becomes an **insight** once someone interprets *why* it matters and what to do about it (e.g., "orders spiked because of the email promotion — we should run more of them").
+
+  ## 💡 Why is it important?
+
+  - It's the raw material every later step — cleaning, analyzing, visualizing — is built from; without a clear sense of what counts as data, it's easy to skip straight to tools without understanding what's actually being manipulated.
+  - The data → information → insight chain is the backbone of the entire analyst role: the job is to move raw data all the way to an insight someone can act on.
+  - It sets up every later classification (structured/unstructured, qualitative/quantitative) — those are all ways of describing *properties of data*.
+
+  ## Core concept
+
+  ```
+  Data            "47"
+    ↓
+  Information     "47 orders yesterday, up from 30"
+    ↓
+  Insight         "Orders spiked because of yesterday's promo email — run more promos like it"
+  ```
+
+  Each step adds context and judgment. Data alone answers "what." Information adds "how much, compared to what." Insight adds "why, and what should we do."
+
+  ## 📊 Example
+
+  A raw database row — `order_id: 8842, amount: 59.00, date: 2024-03-14` — is data. Summed across a day and compared to the prior day, it becomes information: "Tuesday's revenue was $12,400, down 8% from Monday." Investigated further and explained, it becomes an insight: "Tuesday's dip matches a site outage from 2–4pm — fixing that recovers the lost revenue."
+
+  ## ⚠️ Common mistakes
+
+  - **Presenting raw data as if it were an insight.** A table of numbers with no interpretation doesn't tell a stakeholder what to do — that's the most common gap between a junior and a senior analyst.
+  - **Skipping straight from data to a conclusion** without the "information" step of proper context (comparison, trend, benchmark) — a number without context is easy to misread.
+
+  ## Related concepts
+
+  ```
+  What is Data ← you are here
+    ↓
+  What is Data Analytics
+    ↓
+  Types of Data Analytics
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between data, information, and insight?**
+  Short answer: Data is a raw fact ("47"); information is data with context ("47 orders, up from 30"); insight is an interpretation that suggests an action ("orders rose because of the promo — run more").
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data** → raw facts and observations
+  **Information** → data with context
+  **Insight** → an interpretation that suggests an action
+  The analyst's job is to move all the way from data to insight.

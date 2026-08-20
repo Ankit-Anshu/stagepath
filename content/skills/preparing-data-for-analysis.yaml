@@ -1,0 +1,69 @@
+title: Preparing Data for Analysis
+category: Spreadsheets
+what_is_it: Bringing together cleaning, transforming, and reshaping into one final checklist that confirms a dataset is genuinely ready for real analysis.
+why_it_matters: Starting analysis on data that isn't actually ready is one of the most common causes of a wrong or contested result discovered late.
+prerequisites:
+  - wide-vs-long-data
+objectives:
+  - Run through a checklist confirming a dataset is analysis-ready
+  - Explain the cost of skipping preparation and finding a data issue mid-analysis
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-preparing-data-for-analysis-1
+    title: Run the readiness checklist
+    description: Given a dataset, run through a full readiness checklist (grain, types, missing values, duplicates, shape) before starting analysis.
+verify:
+  - Can list the key checks for analysis-readiness
+  - Can explain the cost of skipping preparation
+note: |
+  ## 🎯 What is it?
+
+  **Preparing data for analysis** is the final checklist step that confirms a dataset is genuinely ready before real analysis begins — bringing together everything from the Data Cleaning and Data Transformation chapters into one deliberate readiness check, rather than discovering a problem mid-analysis.
+
+  ## 💡 Why is it important?
+
+  - Starting analysis on data that isn't actually ready is one of the most common causes of a wrong or contested result discovered *late* — after a chart or report has already been shared.
+  - A short, deliberate checklist is much cheaper than re-doing an analysis after finding a data issue partway through.
+
+  ## Core concept
+
+  A practical readiness checklist:
+  - **Grain confirmed** — you know exactly what one row represents.
+  - **Types correct** — numbers are numbers, dates are dates, not text impersonating either.
+  - **Missing values handled** — reviewed and deliberately decided (not silently ignored).
+  - **Duplicates removed** — including business duplicates, not just exact ones.
+  - **Shape correct** — long format, ready for the analysis technique planned.
+  - **Scope confirmed** — the data covers the time period and segment the business question actually needs.
+
+  ## 📊 Example
+
+  Before building a "revenue by region" pivot table, a quick readiness pass confirms: the table's grain is one row per order (not per item), the `region` column has been standardized (no "NY" vs. "New York" split), `revenue` is a true numeric column, and the date range covers the full period the report needs — catching any of these late, after the pivot table and chart are built, costs far more time to fix.
+
+  ## ⚠️ Common mistakes
+
+  - **Skipping a deliberate readiness check** because the data "looks fine" at a glance — many real issues (business duplicates, text-formatted numbers, missing grain confirmation) are invisible on casual inspection.
+  - **Treating preparation as a one-time step** instead of re-checking it whenever new data is appended to an existing analysis.
+
+  ## Related concepts
+
+  ```
+  Wide vs Long Data
+    ↓
+  Preparing Data for Analysis ← you are here
+    ↓
+  Preparing Data for Pivot Tables
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What would you check before starting analysis on a dataset you've just received?**
+  Short answer: Confirm its grain, check that data types are correct (not text pretending to be numbers/dates), handle missing values deliberately, remove duplicates (including business duplicates), confirm the shape fits the planned analysis, and confirm the data actually covers the scope the question needs.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Preparing data for analysis** → a final readiness checklist: grain, types, missing values, duplicates, shape, scope
+  Cheaper to check upfront than to discover a problem after a report has already shipped.

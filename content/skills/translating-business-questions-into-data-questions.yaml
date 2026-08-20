@@ -1,0 +1,67 @@
+title: Translating Business Questions into Data Questions
+category: Foundations
+what_is_it: Converting a business-language question ("are we losing customers?") into a precise, technical question a dataset and query can actually answer ("what is our monthly churn rate, and how has it trended over the last 6 months?").
+why_it_matters: It's the exact skill that connects everything in this chapter to hands-on technical work — every SQL query or Python script an analyst writes starts from a translation like this.
+prerequisites:
+  - data-driven-decision-making
+objectives:
+  - Translate a business question into a specific, technical data question
+  - Identify the metric, filters, and time window implied by a business question
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-translate-questions-1
+    title: Translate a business question
+    description: Take the business question "is our marketing working?" and translate it into a specific, technical data question naming a metric, filters, and a time window.
+verify:
+  - Can translate a business question into a specific data question
+  - Can identify the metric, filter, and time window a business question implies
+note: |
+  ## 🎯 What is it?
+
+  **Translating business questions into data questions** is the skill of converting a stakeholder's business-language question — "are we losing customers?" — into a precise, technical question a dataset and query can directly answer — "what is our monthly customer churn rate for the last 6 months, and is it trending up or down?"
+
+  ## 💡 Why is it important?
+
+  - It's the exact bridge between everything else in this Analytical Thinking chapter (asking questions, hypotheses, comparison) and the hands-on technical stages that follow (SQL, Python, Statistics) — every query starts from a translation like this.
+  - Getting the translation wrong — defining "losing customers" incorrectly, or picking the wrong time window — produces a technically correct answer to the wrong question.
+
+  ## Core concept
+
+  A useful translation checklist:
+  - What's the specific **metric**? ("losing customers" → churn rate, or logo count, or revenue churn — these are different things)
+  - What's the **time window**? (monthly? rolling 90-day?)
+  - What **filters/segments** are implied? (all customers, or a specific plan/region?)
+  - What's the **comparison point**? (vs. last period? vs. a target?)
+
+  ## 📊 Example
+
+  Business question: "Are we losing customers?"
+  Translated data question: "What is our monthly customer churn rate (customers who cancel ÷ customers at start of month) for each of the last 6 months, and how does it compare to the prior 6 months?" — now it names a precise metric, a formula, a time window, and a comparison.
+
+  ## ⚠️ Common mistakes
+
+  - **Picking a definition without confirming it with the stakeholder** — "losing customers" could reasonably mean logo churn, revenue churn, or seat-count churn, and these can tell very different stories.
+  - **Skipping the time window and comparison point**, leaving the translated question just as unanswerable as the original.
+
+  ## Related concepts
+
+  ```
+  Data-Driven Decision Making
+    ↓
+  Translating Business Questions into Data Questions ← you are here
+  ```
+  This closes the Analytical Thinking chapter, and the entire Foundations stage — the next stage (Spreadsheets) begins the hands-on technical work this chapter's thinking skills support.
+
+  ## 🎤 Interview preparation
+
+  **Q: A stakeholder asks, "Is our product sticky?" How would you translate that into a data question?**
+  Short answer: Clarify what "sticky" means to them — likely some form of engagement or retention — then translate it into something specific and measurable, like "What's our DAU/MAU ratio over the last 6 months, and how does it compare to the prior 6 months?"
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Translating business questions into data questions** → convert vague business language into a specific metric, time window, filter, and comparison point
+  The exact bridge between business stakeholders and technical analysis work.

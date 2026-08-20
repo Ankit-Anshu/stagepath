@@ -1,0 +1,205 @@
+title: SQL — Window Functions
+what_is_it: Computing running totals, rankings, and row-to-row comparisons without collapsing rows, using OVER, PARTITION BY, and ranking functions.
+why_it_matters: Window functions answer questions aggregation cannot — "rank within group," "running total," "compare to previous row" — while keeping the underlying rows intact.
+prerequisites:
+  - sql-ctes
+objectives:
+  - Use ROW_NUMBER, RANK, and DENSE_RANK
+  - Partition a window with PARTITION BY
+  - Compute a running total
+  - Compare a row to the previous row with LAG/LEAD
+estimated_minutes: 240
+resources:
+  - r-postgres-tutorial
+  - r-kaggle-advanced-sql
+practice:
+  - id: ex-sql-window-1
+    title: Rank customers within region
+    description: Write a query that ranks customers by total spend within each region, and flags the top 3 per region.
+verify:
+  - PARTITION BY groups match the stated business rule
+  - Ranking function choice (ROW_NUMBER vs RANK vs DENSE_RANK) is justified
+  - Running total or comparison values match a manual spot check
+assessment: assessment-sql-foundations-checkpoint
+category: SQL
+subtopics:
+  - title: OVER and PARTITION BY
+    description: Computing a value per group without collapsing the underlying rows, unlike GROUP BY.
+    outcomes:
+      - Partition a calculation by a category column
+  - title: Ranking functions
+    description: ROW_NUMBER, RANK, and DENSE_RANK, and how each behaves differently when values tie.
+    outcomes:
+      - Pick the right ranking function for a tie scenario
+  - title: Running totals
+    description: Using SUM() OVER with an ORDER BY to compute a cumulative total.
+    outcomes:
+      - Compute a running total by date
+  - title: LAG and LEAD
+    description: Comparing a row to the previous or next row in a defined order — e.g. month-over-month change.
+    outcomes:
+      - Compute month-over-month change using LAG
+note: |
+  ## 🎯 What is it?
+
+  **Window functions** compute a value — a running total, a rank, a comparison to the previous row — **across a set of related rows**, without collapsing those rows into a single summary row the way GROUP BY does. Every original row stays in the output, each with its computed window value attached.
+
+  ## 💡 Why is it important?
+
+  Window functions answer questions plain aggregation cannot: "rank each customer within their region," "running total of revenue by date," "compare this month to the previous month" — all while keeping every individual row visible. This is one of the most powerful and most frequently tested advanced SQL skills for analyst roles.
+
+  ## Core concept
+
+  ### OVER and PARTITION BY
+  `OVER()` turns a function into a window function. `PARTITION BY` divides rows into groups — like GROUP BY — but **without** collapsing them; the calculation runs separately within each partition while every row remains in the output.
+
+  ### Ranking functions
+
+  | Function | Behavior on ties |
+  |---|---|
+  | `ROW_NUMBER()` | Assigns a unique number to every row, even ties (arbitrary tiebreak) |
+  | `RANK()` | Ties share the same rank; the next rank skips (1, 1, 3, ...) |
+  | `DENSE_RANK()` | Ties share the same rank; the next rank does NOT skip (1, 1, 2, ...) |
+
+  ### Running totals
+  `SUM(column) OVER (ORDER BY date_column)` computes a cumulative total up through each row, in the order specified.
+
+  ### LAG and LEAD
+  `LAG(column)` looks back to a previous row's value; `LEAD(column)` looks ahead to a following row's value — both within an ordering you define, making row-to-row comparisons (like month-over-month change) straightforward.
+
+  ## Syntax
+
+  ```sql
+  SELECT
+    customer_id,
+    region,
+    total_spend,
+    RANK() OVER (PARTITION BY region ORDER BY total_spend DESC) AS region_rank,
+    SUM(total_spend) OVER (ORDER BY total_spend) AS running_total,
+    LAG(total_spend) OVER (PARTITION BY region ORDER BY total_spend) AS previous_spend
+  FROM customer_totals;
+  ```
+
+  ## 📊 Example
+
+  `customer_totals`:
+
+  | customer_id | region | total_spend |
+  |---|---|---|
+  | 1 | West | 900 |
+  | 2 | West | 900 |
+  | 3 | West | 400 |
+  | 4 | East | 700 |
+
+  **Query:**
+
+  ```sql
+  SELECT customer_id, region, total_spend,
+    RANK() OVER (PARTITION BY region ORDER BY total_spend DESC) AS rnk,
+    DENSE_RANK() OVER (PARTITION BY region ORDER BY total_spend DESC) AS dense_rnk
+  FROM customer_totals;
+  ```
+
+  **Output:**
+
+  | customer_id | region | total_spend | rnk | dense_rnk |
+  |---|---|---|---|---|
+  | 1 | West | 900 | 1 | 1 |
+  | 2 | West | 900 | 1 | 1 |
+  | 3 | West | 400 | 3 | 2 |
+  | 4 | East | 700 | 1 | 1 |
+
+  **Explanation:** RANK() skips to 3 after the tie at 1; DENSE_RANK() continues at 2 — and both restart within each region because of PARTITION BY.
+
+  ## Multiple examples
+
+  **Beginner:** `ROW_NUMBER() OVER (ORDER BY signup_date)` — a simple sequential numbering of customers by signup order.
+  **Intermediate:** `SUM(revenue) OVER (ORDER BY order_date)` — a running total of revenue over time, one row per day, without collapsing daily detail.
+  **Real-world:** `LAG(monthly_revenue) OVER (PARTITION BY region ORDER BY month)` combined with a calculated difference column — the standard pattern for a month-over-month change report, broken out per region.
+
+  ## Types / Variations
+
+  See the ranking functions table above — ROW_NUMBER, RANK, and DENSE_RANK are the three standard ranking window functions; the choice depends entirely on how ties should be handled.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing window functions with GROUP BY.** GROUP BY collapses rows into one row per group; window functions keep every row and attach a computed value — they solve different problems and aren't interchangeable.
+  - **Forgetting PARTITION BY**, causing a ranking or running total to run across the *entire* result set instead of restarting per group — a common and easy-to-miss bug.
+  - **Picking the wrong ranking function for the scenario.** Using ROW_NUMBER when ties genuinely should share a rank (e.g., "top 3 by score" where two people tie for 3rd) produces a misleading, arbitrary result.
+  - **Using a window function in a WHERE clause directly** — not allowed, because of SQL's execution order (window functions are computed after WHERE). Wrap the query in a subquery or CTE and filter in the outer query instead.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** ranking sales reps within each region by total revenue.
+  - **Finance analysis:** running total of monthly revenue toward an annual target.
+  - **Product analysis:** month-over-month change in active users using LAG.
+
+  ## Related concepts
+
+  ```
+  GROUP BY / Aggregation (collapses rows)
+    ↓
+  CTE
+    ↓
+  WINDOW FUNCTIONS ← you are here (keeps every row)
+    ↓
+  SQL — Query Optimization Basics
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a query that assigns a row number to each order, ordered by order_date.
+
+  ### Medium
+  2. Write a query ranking customers by total_spend within each region, using DENSE_RANK.
+
+  ### Interview/Advanced
+  3. Why can't you filter directly on a window function's result in a WHERE clause, and how do you work around it?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `SELECT *, ROW_NUMBER() OVER (ORDER BY order_date) AS row_num FROM orders;`
+  2. `SELECT *, DENSE_RANK() OVER (PARTITION BY region ORDER BY total_spend DESC) AS spend_rank FROM customer_totals;`
+  3. WHERE is evaluated before window functions are computed in SQL's logical execution order, so the window function's result doesn't exist yet at that point. Workaround: wrap the window-function query in a subquery or CTE, then filter on the computed column in the outer query's WHERE clause.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between a window function and GROUP BY?**
+  Short answer: GROUP BY collapses rows into one summary row per group; a window function computes a value across related rows (optionally partitioned) while keeping every original row in the output.
+
+  ### Conceptual questions
+  **Q: What's the difference between RANK and DENSE_RANK?**
+  Short answer: Both give tied rows the same rank, but RANK skips the next rank number(s) equal to the number of ties, while DENSE_RANK continues with the very next consecutive number.
+
+  ### Scenario-based questions
+  **Q: A "top 3 per region" query using ROW_NUMBER returns exactly 3 rows per region, but a stakeholder complains it's missing a customer who tied for 3rd place. What's the fix?**
+  Short answer: ROW_NUMBER assigns a unique, arbitrary rank even to tied values, so it silently drops one of the tied customers — switching to RANK (or DENSE_RANK, depending on whether skipped ranks matter for the use case) will correctly include all tied customers at the cutoff.
+
+  ### Practical questions
+  **Q: Write a query showing each month's revenue alongside the previous month's revenue and the change between them.**
+  Short answer: `SELECT month, revenue, LAG(revenue) OVER (ORDER BY month) AS prev_revenue, revenue - LAG(revenue) OVER (ORDER BY month) AS change FROM monthly_revenue;`
+
+  ## Interview traps / tricky points
+
+  - Window functions cannot be referenced directly in the same query's WHERE clause — a very commonly tested execution-order gotcha.
+  - Forgetting PARTITION BY silently changes a "rank within group" calculation into a "rank across everything" calculation — always double check partitioning matches the actual business question.
+  - ROW_NUMBER vs. RANK vs. DENSE_RANK is a favorite interview question specifically because the "right" choice depends on how ties should be handled, not just default habit.
+
+  ## Best practices
+
+  - Choose the ranking function deliberately based on how ties should be treated for the specific question, not out of habit.
+  - Always double-check PARTITION BY matches the actual grouping the business question requires.
+  - Wrap a window-function query in a CTE/subquery when you need to filter on the computed window value.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **OVER() / PARTITION BY** → compute per group without collapsing rows
+  **ROW_NUMBER / RANK / DENSE_RANK** → differ in how they handle ties
+  **LAG / LEAD** → compare a row to the previous/next row in an order
+  **Rule:** window functions can't be filtered directly in WHERE — wrap in a subquery/CTE

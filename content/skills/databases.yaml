@@ -1,0 +1,24 @@
+title: Databases & Data Modeling
+category: Backend Development
+what_is_it: Storing, querying, constraining, and evolving application data reliably.
+why_it_matters: Most backend failures eventually involve incorrect models, unsafe queries, or misunderstood consistency.
+estimated_minutes: 4200
+prerequisites: [programming-foundations]
+objectives: [Design relational schemas, Write safe queries, Manage migrations and transactions]
+subtopics:
+  - title: Relational modeling
+    description: Entities, relationships, keys, normalization, constraints, and data types.
+    outcomes: [Create a normalized schema, Encode invariants with constraints]
+  - title: SQL queries
+    description: Selection, joins, aggregation, subqueries, CTEs, and window functions.
+    outcomes: [Write multi-table queries, Explain query results]
+  - title: Indexes and query plans
+    description: B-trees, selectivity, composite indexes, execution plans, and common performance traps.
+    outcomes: [Read a query plan, Design an evidence-based index]
+  - title: Transactions and consistency
+    description: ACID, isolation, locking, race conditions, retries, and idempotency.
+    outcomes: [Protect a multi-step write, Identify a concurrency bug]
+  - title: Migrations and operations
+    description: Backward-compatible schema changes, backups, retention, and recovery.
+    outcomes: [Plan a zero-downtime migration, Test a restore]
+

@@ -1,0 +1,79 @@
+title: Absolute References
+category: Spreadsheets
+what_is_it: A cell reference (like $B$2) locked with $ symbols so it stays fixed on the exact same cell no matter where a formula is copied.
+why_it_matters: It's one of the most common sources of a silently broken formula when missing — and one of the fastest wins once understood, since it's required to copy a formula that references one shared value down an entire range.
+prerequisites:
+  - relative-references
+objectives:
+  - Define an absolute reference and write one using $
+  - Fix a formula that breaks when copied by locking the right reference
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-absolute-references-1
+    title: Fix a broken copy-down formula
+    description: Given a formula that references a fixed "tax rate" cell, copy it down a column of 20 rows and fix it so every row still references the correct fixed cell.
+verify:
+  - Can define an absolute reference
+  - Can fix a formula broken by a missing absolute reference
+note: |
+  ## 🎯 What is it?
+
+  An **absolute reference** (like `$B$2`) is a cell reference locked with dollar signs so it stays fixed on the exact same cell no matter where a formula is copied — unlike a relative reference, which shifts. Think of it like a specific street address — it means the same place no matter where you're standing when you say it.
+
+  ## 💡 Why is it important?
+
+  - It's one of the most common sources of a silently broken formula in real spreadsheet work — copying a formula down a column without locking a shared reference (like a tax rate) breaks every row after the first.
+  - It's one of the fastest wins once understood, since it's exactly what makes copying a formula that references one shared value down an entire range work correctly.
+
+  ## Syntax
+
+  ```
+  =$B$2      (fully absolute — neither row nor column shifts when copied)
+  ```
+
+  The `$` "locks" whatever it's placed directly before — before the column letter locks the column, before the row number locks the row.
+
+  ## 📊 Example
+
+  A tax rate lives in a fixed cell **E1** (5%). A price column runs B2:B10.
+
+  **Wrong (relative reference to the tax rate):**
+  ```
+  C2: =B2*E1
+  ```
+  Copied down to C3, this becomes `=B3*E2` — the tax rate reference **shifted** to E2 (empty), breaking every row after the first.
+
+  **Correct (absolute reference to the tax rate):**
+  ```
+  C2: =B2*$E$1
+  ```
+  Copied down to C3, this becomes `=B3*$E$1` — the price reference (B2) correctly shifts, but the tax rate stays locked on E1.
+
+  ## ⚠️ Common mistakes
+
+  - **Copying a formula down a column without locking the reference to a shared value**, causing every row after the first to reference the wrong (often empty) cell.
+  - **Locking every reference as absolute out of caution**, which then prevents the formula from correctly adjusting to each row's own data.
+
+  ## Related concepts
+
+  ```
+  Relative References
+    ↓
+  Absolute References ← you are here
+    ↓
+  Mixed References
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A formula `=B2*E1` (where E1 is a fixed tax rate) is copied down 10 rows and breaks after row 2. What's the fix?**
+  Short answer: Change `E1` to `$E$1` so the tax rate reference stays locked for every copied row, while the price reference (B2) still correctly shifts.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Absolute reference ($B$2)** → stays fixed when copied
+  **Rule:** lock any reference to a single shared value (tax rate, commission %) before copying a formula across a range.

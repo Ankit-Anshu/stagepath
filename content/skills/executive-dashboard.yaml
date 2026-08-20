@@ -1,0 +1,68 @@
+title: Executive Dashboard
+category: Spreadsheets
+what_is_it: A dashboard built for senior leadership — extremely high-level, focused on a handful of top-line KPIs against target, designed to be understood in seconds.
+why_it_matters: An executive audience has the least time and the highest-level view of all dashboard audiences — designing for them requires the most aggressive prioritization of any dashboard type.
+prerequisites:
+  - interactive-filters
+objectives:
+  - Identify what makes an executive dashboard different from an operational one
+  - Select appropriate top-line KPIs for a leadership audience
+estimated_minutes: 20
+resources:
+  - r-storytelling-with-data
+practice:
+  - id: ex-executive-dashboard-1
+    title: Design an executive summary
+    description: Given a full operational sales dashboard with 15 metrics, select the 3-4 that belong on an executive summary version for the CEO.
+verify:
+  - Can explain what distinguishes an executive dashboard from an operational one
+  - Can select appropriate top-line KPIs for a leadership audience
+note: |
+  ## 🎯 What is it?
+
+  An **executive dashboard** is built for senior leadership — extremely high-level, focused on a handful of top-line KPIs measured against target, designed to be fully understood in seconds by someone with no time to explore detail.
+
+  ## 💡 Why is it important?
+
+  - An executive audience has the least time and the broadest, highest-level view of any dashboard audience — this requires more aggressive prioritization (see KPI Selection) than almost any other dashboard type.
+  - It's a common, concrete deliverable analysts are asked to build, and a common interview/case-study scenario ("design a dashboard for our CEO").
+
+  ## Core concept
+
+  | Trait | Executive dashboard | Operational dashboard |
+  |---|---|---|
+  | Metric count | 3-5 top-line KPIs | Can go deeper, more detail |
+  | Detail level | High-level, summarized | Granular, drill-down friendly |
+  | Update frequency | Often weekly/monthly | Often daily/real-time |
+  | Primary need | "Are we on track?" at a glance | "What exactly is happening, and where?" |
+
+  ## 📊 Example
+
+  An executive dashboard for a CEO might show just: total revenue vs. annual target, overall customer growth, and one or two other company-wide health indicators — each with a simple on-track/at-risk visual cue — deliberately leaving out the region-by-region, product-by-product detail an operational dashboard would include.
+
+  ## ⚠️ Common mistakes
+
+  - **Including operational-level detail** that an executive audience doesn't have time to parse — if it takes more than a glance to understand, it's probably too detailed for this audience.
+  - **Omitting a clear "are we on track" signal** (like a target comparison or a red/yellow/green indicator) — executives specifically need the "is this good or bad" judgment made easy, not just raw numbers.
+
+  ## Related concepts
+
+  ```
+  Interactive Filters
+    ↓
+  Executive Dashboard ← you are here
+    ↓
+  Sales Dashboard
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would an executive dashboard differ from the operational dashboard the same data might feed into a sales team?**
+  Short answer: Far fewer metrics (3-5 top-line KPIs vs. many detailed ones), more summarized (less drill-down detail), and built around an immediate "on track / at risk" judgment rather than granular exploration — the executive audience needs a glance-level answer, not a workspace.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Executive dashboard** → 3-5 top-line KPIs vs. target, understood in seconds, minimal detail
+  The most aggressive prioritization of any dashboard audience.

@@ -1,0 +1,209 @@
+title: SQL — Subqueries
+what_is_it: Nesting one query inside another — in the WHERE clause, the FROM clause, or as a scalar value — to answer questions a single flat query can't.
+why_it_matters: Before CTEs became common, subqueries were how every complex question got answered, and they still show up constantly in interviews and existing codebases.
+prerequisites:
+  - sql-aggregation
+objectives:
+  - Write a subquery in a WHERE clause
+  - Write a subquery in a FROM clause
+  - Distinguish a correlated from a non-correlated subquery
+subtopics:
+  - title: Subqueries in WHERE
+    description: Filtering rows based on the result of a separate inner query.
+    outcomes:
+      - Filter using a subquery in a WHERE clause
+  - title: Subqueries in FROM
+    description: Treating a query's result as a temporary table to query again.
+    outcomes:
+      - Write a query against a subquery in the FROM clause
+  - title: Correlated subqueries
+    description: A subquery that references the outer query's row, re-evaluated for every row.
+    outcomes:
+      - Explain why a correlated subquery runs once per outer row
+estimated_minutes: 180
+resources:
+  - r-postgres-tutorial
+  - r-mode-sql-tutorial
+practice:
+  - id: ex-sql-subqueries-1
+    title: Find above-average customers
+    description: Write a query returning customers whose total spend is above the average spend across all customers, using a subquery.
+verify:
+  - Subquery returns the intended single value or set
+  - Correlated vs. non-correlated is used correctly for the question
+  - Result matches an equivalent CTE-based rewrite
+note: |
+  ## 🎯 What is it?
+
+  A **subquery** is a query nested inside another query — in the WHERE clause, the FROM clause, or as a single scalar value — used to answer a question a single flat query can't answer directly.
+
+  ## 💡 Why is it important?
+
+  Before CTEs became widely supported, subqueries were how every complex SQL question got answered, and they still show up constantly in interviews and in existing production codebases you'll need to read and maintain.
+
+  ## Core concept
+
+  ### Subqueries in WHERE
+  Filters rows in the outer query based on the result of an inner query — e.g., "customers whose spend is above the *average* spend across all customers" requires computing that average first, inside a subquery.
+
+  ### Subqueries in FROM
+  Treats a query's result as a temporary, unnamed table that the outer query can then select from or join to — useful when you need to aggregate first, then filter or join on the aggregated result.
+
+  ### Correlated subqueries
+  A subquery that references a column from the **outer** query — meaning it can't be evaluated once; it's conceptually re-evaluated **for every row** of the outer query. This makes correlated subqueries more powerful, but also potentially much slower on large tables than a non-correlated one.
+
+  | Type | Runs |
+  |---|---|
+  | Non-correlated subquery | Once, independently of the outer query |
+  | Correlated subquery | Once per outer row (references the outer row) |
+
+  ## Syntax
+
+  ```sql
+  -- Subquery in WHERE (non-correlated)
+  SELECT customer_id, total_spend
+  FROM customer_totals
+  WHERE total_spend > (SELECT AVG(total_spend) FROM customer_totals);
+
+  -- Subquery in FROM
+  SELECT region, avg_order_value
+  FROM (
+    SELECT region, AVG(amount) AS avg_order_value
+    FROM orders
+    GROUP BY region
+  ) AS region_averages
+  WHERE avg_order_value > 100;
+
+  -- Correlated subquery
+  SELECT c.customer_id, c.name
+  FROM customers c
+  WHERE EXISTS (
+    SELECT 1 FROM orders o WHERE o.customer_id = c.customer_id AND o.amount > 1000
+  );
+  ```
+
+  ## 📊 Example
+
+  `customer_totals` (a summarized table/view):
+
+  | customer_id | total_spend |
+  |---|---|
+  | 1 | 900 |
+  | 2 | 200 |
+  | 3 | 1,500 |
+
+  **Query:**
+
+  ```sql
+  SELECT customer_id, total_spend
+  FROM customer_totals
+  WHERE total_spend > (SELECT AVG(total_spend) FROM customer_totals);
+  ```
+
+  **Average spend** = (900+200+1500)/3 = 866.67
+
+  **Output:**
+
+  | customer_id | total_spend |
+  |---|---|
+  | 1 | 900 |
+  | 3 | 1,500 |
+
+  **Explanation:** The inner subquery computes a single number (the average) once, and the outer query filters against it — customer 2 (200) falls below the average and is excluded.
+
+  ## Multiple examples
+
+  **Beginner:** `WHERE amount > (SELECT AVG(amount) FROM orders)` — filter against a single computed value.
+  **Intermediate — FROM subquery:** aggregate orders by region in a subquery, then filter that aggregated result in the outer query.
+  **Real-world — correlated subquery:** `WHERE EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.customer_id)` — a common, efficient way to check "does this customer have at least one order?" without joining and risking row duplication.
+
+  ## Types / Variations
+
+  | Location | Returns | Typical use |
+  |---|---|---|
+  | WHERE (scalar) | A single value | Compare a row against an aggregate |
+  | WHERE (IN/EXISTS) | A set of values | Check membership or existence |
+  | FROM | A full result set | Pre-aggregate, then filter/join on top |
+
+  ## ⚠️ Common mistakes
+
+  - **Using a subquery that returns more than one row where a single value is expected**, causing a runtime error (e.g., `= (SELECT ...)` when the subquery returns multiple rows — use `IN` instead of `=` for multi-row results).
+  - **Not recognizing a subquery is correlated**, and being surprised by its performance on a large table — a correlated subquery effectively runs once per outer row.
+  - **Nesting subqueries too deeply**, producing a query that's technically correct but very hard to read — this is exactly the problem [CTEs](/skills/sql-ctes) solve.
+
+  ## Real-world Data Analyst use cases
+
+  - **Customer analysis:** finding customers whose spend is above the company average.
+  - **Sales analysis:** finding products that have never been ordered, using `NOT EXISTS`.
+  - **Marketing analysis:** pre-aggregating campaign performance in a FROM subquery, then filtering the aggregated result.
+
+  ## Related concepts
+
+  ```
+  JOIN
+    ↓
+  SUBQUERY ← you are here
+    ↓
+  CTE (often a more readable alternative)
+    ↓
+  UNION / Set Operations
+    ↓
+  WINDOW FUNCTIONS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a query that returns orders with an amount above the overall average order amount, using a subquery.
+
+  ### Medium
+  2. Write a query that returns customers who have never placed an order, using `NOT EXISTS`.
+
+  ### Interview/Advanced
+  3. What's the difference between a correlated and a non-correlated subquery, and why does that difference matter for performance on a large table?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `SELECT * FROM orders WHERE amount > (SELECT AVG(amount) FROM orders);`
+  2. `SELECT * FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.customer_id);`
+  3. A non-correlated subquery runs once, independent of the outer query, and its result is reused for every outer row; a correlated subquery references a column from the outer query and is conceptually re-evaluated once per outer row — on a large table, this can be far slower unless the database optimizer rewrites it efficiently (e.g., as a join or semi-join internally).
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What is a subquery?**
+  Short answer: A query nested inside another query, used to compute a value or a filtered set that the outer query then uses.
+
+  ### Conceptual questions
+  **Q: What makes a subquery "correlated"?**
+  Short answer: It references a column from the outer query, meaning it depends on and is logically re-evaluated per row of the outer query, rather than being computed once independently.
+
+  ### Scenario-based questions
+  **Q: A query using `WHERE customer_id = (SELECT customer_id FROM ... )` throws an error about returning more than one row. What's the fix?**
+  Short answer: Change `=` to `IN`, since the subquery is returning a set of multiple values, not a single scalar — `=` only works when the subquery is guaranteed to return exactly one row.
+
+  ### Practical questions
+  **Q: Write a query finding products that have never appeared in any order.**
+  Short answer: `SELECT * FROM products p WHERE NOT EXISTS (SELECT 1 FROM order_items oi WHERE oi.product_id = p.product_id);`
+
+  ## Interview traps / tricky points
+
+  - `EXISTS`/`NOT EXISTS` is often more efficient than `IN`/`NOT IN` for large subqueries, and behaves more predictably around NULLs — `NOT IN` with a NULL in the subquery's result silently returns zero rows for the whole query, a classic and dangerous trap.
+  - A subquery that "looks" non-correlated but references an outer-query column deep in a nested clause is still correlated — always check carefully.
+
+  ## Best practices
+
+  - Prefer `EXISTS`/`NOT EXISTS` over `IN`/`NOT IN` when the subquery's result could contain a NULL.
+  - Consider rewriting a deeply nested subquery as a CTE for readability once it's more than one or two levels deep.
+  - Always verify whether a subquery is correlated, especially before running it against a large table.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Subquery in WHERE** → filter against a computed value or set
+  **Subquery in FROM** → treat a query's result as a temporary table
+  **Correlated** → references the outer row, re-evaluated per row
+  **Watch for:** `NOT IN` + NULL in the subquery silently returns zero rows — prefer `NOT EXISTS`

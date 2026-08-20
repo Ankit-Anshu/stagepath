@@ -1,0 +1,39 @@
+title: Data Engineer
+category: Data
+difficulty: intermediate
+estimated_hours: 480
+description: >-
+  Build the pipelines and infrastructure that make every other data role possible: reliable,
+  well-modeled, well-orchestrated data.
+stages:
+  - id: foundations
+    title: Foundations
+    description: The query and scripting skills every pipeline is built on.
+    skills:
+      - python-fundamentals
+      - sql-select
+      - sql-filtering
+      - sql-aggregation
+      - sql-joins
+  - id: data-pipelines
+    title: Data Pipelines
+    description: Move and model data reliably.
+    skills:
+      - etl-fundamentals
+      - data-warehousing
+  - id: orchestration-and-tools
+    title: Orchestration & Tooling
+    description: Manage transformation logic and scheduling like a production system.
+    skills:
+      - dbt-transformations
+      - workflow-orchestration
+  - id: portfolio
+    title: Portfolio
+    description: Turn your pipelines into evidence.
+    skills:
+      - portfolio-building
+  - id: job-preparation
+    title: Job Preparation
+    description: Get ready to demonstrate everything you've learned under interview conditions.
+    skills:
+      - job-preparation

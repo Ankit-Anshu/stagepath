@@ -1,0 +1,21 @@
+title: Web Protocols & Servers
+category: Backend Development
+what_is_it: How clients communicate with servers through HTTP, processes, sockets, and application runtimes.
+why_it_matters: Reliable APIs depend on understanding the protocol and runtime beneath the framework.
+estimated_minutes: 2200
+prerequisites: [programming-foundations]
+objectives: [Explain request lifecycles, Design correct HTTP behavior, Configure a basic server]
+subtopics:
+  - title: HTTP semantics
+    description: Methods, safety, idempotency, status codes, headers, caching, and content negotiation.
+    outcomes: [Choose correct methods and codes, Design cache behavior]
+  - title: Networking basics
+    description: DNS, TCP, TLS, ports, proxies, load balancers, and connection lifecycles.
+    outcomes: [Trace a request path, Diagnose a connection failure]
+  - title: Server runtime
+    description: Processes, threads, event loops, concurrency, environment variables, and graceful shutdown.
+    outcomes: [Explain the concurrency model, Handle termination safely]
+  - title: Middleware and request pipelines
+    description: Parsing, validation, authentication context, logging, and centralized errors.
+    outcomes: [Build a clean request pipeline, Avoid duplicated cross-cutting logic]
+

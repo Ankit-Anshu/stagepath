@@ -1,0 +1,67 @@
+title: Excel Automation Concepts
+category: Spreadsheets
+what_is_it: A conceptual overview of how repetitive spreadsheet tasks can be automated — macros that record and replay actions, and VBA for more complex custom logic.
+why_it_matters: Knowing automation exists as an option — and roughly what it can and can't do — helps you recognize when a repetitive manual task is worth automating, without needing to become a VBA programmer.
+prerequisites:
+  - basic-dax
+objectives:
+  - Explain what a macro is and what kind of task it's suited for
+  - Describe what VBA adds beyond a recorded macro
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-automation-concepts-1
+    title: Identify an automation candidate
+    description: Think of a repetitive spreadsheet task you've done manually more than once, and explain whether a recorded macro could handle it.
+verify:
+  - Can explain what a macro is and does
+  - Can describe a repetitive task that would be a good automation candidate
+note: |
+  ## 🎯 What is it?
+
+  **Excel automation** covers two levels of automating repetitive spreadsheet work: a **macro** (recording a sequence of manual actions and replaying them with one click or keyboard shortcut) and **VBA** (Visual Basic for Applications — a full programming language for more complex, conditional automation beyond what a simple recording can capture).
+
+  ## 💡 Why is it important?
+
+  - Recognizing when a repetitive manual task is worth automating — and roughly which tool fits (a simple macro vs. custom VBA code vs. Power Query, covered earlier) — is a practical skill, even without becoming a programmer.
+  - It sets realistic expectations: Power Query already automates most repetitive *data* cleaning/transformation tasks covered in this stage; macros and VBA matter more for automating *actions* across the interface (formatting, navigating between sheets, generating reports).
+
+  ## Core concept
+
+  | Tool | Good for |
+  |---|---|
+  | Macro (recorded) | A fixed, repeatable sequence of clicks/actions, replayed exactly |
+  | VBA (custom code) | Conditional logic, loops, and automation a simple recording can't capture |
+  | Power Query | Automating repeatable data import/cleaning/transformation specifically |
+
+  ## 📊 Example
+
+  A monthly task of formatting a fresh report (bold headers, apply currency format, auto-fit columns) is a good macro candidate — record the sequence once, and replay it with one click every month. A task requiring conditional logic ("if this region's total is negative, highlight it red and email a note") goes beyond what a simple recorded macro can do and would need custom VBA code.
+
+  ## ⚠️ Common mistakes
+
+  - **Reaching for VBA when Power Query already solves the problem** — most repetitive *data* cleaning/transformation tasks are better solved with Power Query's repeatable, visible steps than with custom code.
+  - **Recording a macro without understanding it also records mistakes** — an unintended click during recording gets replayed exactly every time, so a recorded macro should be tested carefully before relying on it.
+
+  ## Related concepts
+
+  ```
+  Basic DAX
+    ↓
+  Excel Automation Concepts ← you are here
+  ```
+  This closes the Advanced Excel chapter — the final chapter (Excel Projects) applies everything in this stage to complete, real-world briefs.
+
+  ## 🎤 Interview preparation
+
+  **Q: For a repetitive monthly data cleaning task, would you reach for a macro or Power Query?**
+  Short answer: Power Query, in most cases — it's purpose-built for repeatable data import/cleaning/transformation with visible, editable steps; macros and VBA are generally better suited to automating actions across the interface (formatting, navigation) rather than data transformation itself.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Macro** → records and replays a fixed sequence of actions
+  **VBA** → custom code for automation beyond what a simple recording can capture
+  For repeatable *data* cleaning specifically, Power Query is usually the better tool than either.

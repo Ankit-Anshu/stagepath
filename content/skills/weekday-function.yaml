@@ -1,0 +1,73 @@
+title: WEEKDAY Function
+category: Spreadsheets
+what_is_it: Returning which day of the week a date falls on, as a number (1-7 by default).
+why_it_matters: It's how you identify weekends, flag Monday-specific reports, or build any logic that depends on which day of the week a date is.
+prerequisites:
+  - day-function
+objectives:
+  - Return a date's day of the week with WEEKDAY
+  - Use WEEKDAY to flag weekend dates
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-weekday-1
+    title: Flag weekends
+    description: Given a column of dates, use WEEKDAY inside an IF to flag which ones fall on a Saturday or Sunday.
+verify:
+  - Can return a date's weekday number
+  - Can use WEEKDAY to identify weekend dates
+note: |
+  ## 🎯 What is it?
+
+  **WEEKDAY** returns which day of the week a date falls on, as a number. By default, `1` = Sunday through `7` = Saturday, though an optional second argument can change the numbering scheme.
+
+  ## 💡 Why is it important?
+
+  - It's the standard way to identify weekends, flag Monday-specific reports, or build any logic that depends on the day of the week — like excluding weekends from a business-day calculation.
+
+  ## Syntax
+
+  ```
+  =WEEKDAY(date, [return_type])
+  ```
+
+  `return_type` `1` (default): 1=Sunday...7=Saturday. `return_type` `2`: 1=Monday...7=Sunday.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 2024-03-14 (a Thursday) |
+
+  `=WEEKDAY(A1)` → `5` (Thursday, with Sunday=1)
+  `=WEEKDAY(A1, 2)` → `4` (Thursday, with Monday=1)
+
+  Flagging weekends: `=IF(OR(WEEKDAY(A1)=1, WEEKDAY(A1)=7), "Weekend", "Weekday")`
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming WEEKDAY always starts the week on Monday** — the default `return_type` starts on Sunday; always check or specify the return type explicitly to avoid off-by-one weekend/weekday misclassification.
+  - **Hardcoding weekday numbers without documenting which `return_type` was used**, making the formula's meaning unclear to a future reader.
+
+  ## Related concepts
+
+  ```
+  DAY
+    ↓
+  WEEKDAY ← you are here
+    ↓
+  WEEKNUM
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you flag which rows in a dataset fall on a weekend?**
+  Short answer: `=IF(OR(WEEKDAY(date_cell)=1, WEEKDAY(date_cell)=7), "Weekend", "Weekday")` — using the default Sunday=1 numbering, or adjust the check if using a different `return_type`.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **WEEKDAY(date, [return_type])** → returns the day of the week as a number
+  Default: Sunday=1...Saturday=7 — double-check the return_type before assuming a numbering scheme.

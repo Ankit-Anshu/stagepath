@@ -1,0 +1,67 @@
+title: Cleaning Text in Spreadsheets
+category: Spreadsheets
+what_is_it: Combining TRIM, CLEAN, UPPER/LOWER/PROPER, and Find & Replace into a repeatable routine for turning messy imported text into consistent, analysis-ready values.
+why_it_matters: Messy text (extra spaces, inconsistent casing, invisible characters) is one of the most common reasons a lookup, filter, or GROUP BY silently fails.
+prerequisites:
+  - standardizing-values
+objectives:
+  - Combine TRIM, CLEAN, and case functions into a text-cleaning routine
+  - Recognize when messy text is the hidden cause of a broken lookup or filter
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-cleaning-text-spreadsheets-1
+    title: Build a cleaning routine
+    description: Given a messy imported text column, build a formula combining TRIM, CLEAN, and PROPER to produce a clean, consistent version.
+verify:
+  - Can combine TRIM/CLEAN/case functions into one cleaning formula
+  - Can explain why messy text can look identical to clean text on screen
+note: |
+  ## 🎯 What is it?
+
+  **Cleaning text** in a spreadsheet means combining several individual text functions — **TRIM** (extra spaces), **CLEAN** (non-printable characters), and **UPPER/LOWER/PROPER** (casing) — into a repeatable routine that turns messy, inconsistently-formatted imported text into consistent, analysis-ready values.
+
+  ## 💡 Why is it important?
+
+  - Messy text is one of the most common hidden causes of a broken lookup, filter, or pivot table — and it often looks completely identical to clean text on screen, since extra spaces and non-printable characters are invisible.
+  - A repeatable cleaning formula, applied consistently, is far more reliable than manually fixing individual cells.
+
+  ## Core concept
+
+  ```
+  =PROPER(TRIM(CLEAN(A1)))
+  ```
+
+  Read inside-out: CLEAN strips non-printable characters first, TRIM removes extra spaces, PROPER standardizes capitalization — chaining them handles several common issues in one formula.
+
+  ## 📊 Example
+
+  A cell imported from a web export contains `"  amir KHAN\n"` (leading spaces, inconsistent case, a trailing non-printable line break). `=PROPER(TRIM(CLEAN(A1)))` produces a clean `"Amir Khan"` — none of the three issues would be obvious just from glancing at the cell, since the extra whitespace and line break are invisible on screen.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming a cell "looks fine" means it's clean** — extra spaces and non-printable characters are invisible, and are exactly why a lookup can fail even when the text visually appears identical.
+  - **Cleaning text after already building formulas/lookups on the messy version**, requiring everything downstream to be redone — clean text as early as possible in a workflow.
+
+  ## Related concepts
+
+  ```
+  Standardizing Values
+    ↓
+  Cleaning Text ← you are here
+    ↓
+  Cleaning Dates
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A VLOOKUP fails to find a value that looks identical to what's in the lookup table. What's a likely hidden cause?**
+  Short answer: Invisible characters — extra whitespace or a non-printable character from a data import — that make the cell's true content different from what it visually appears to be; wrapping both sides in `TRIM(CLEAN(...))` before comparing often resolves it.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Cleaning text** → `PROPER(TRIM(CLEAN(text)))` — strips invisible characters, extra spaces, and standardizes case
+  Messy text often looks identical to clean text on screen — that's exactly the risk.

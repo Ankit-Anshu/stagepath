@@ -1,0 +1,98 @@
+title: HLOOKUP Function
+category: Spreadsheets
+what_is_it: Searching across the first row of a table for a matching value, then returning a value from a specified row below it — the row-based counterpart to VLOOKUP.
+why_it_matters: Most real data is organized in columns, so HLOOKUP is used far less often than VLOOKUP — but it's the right tool whenever a dataset is instead laid out with categories across a row.
+prerequisites:
+  - vlookup-function
+objectives:
+  - Write an HLOOKUP with an exact match
+  - Explain when HLOOKUP is the right choice instead of VLOOKUP
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-hlookup-1
+    title: Pull a value from a row-based layout
+    description: Given a table with months across the top row and a metric in the row below, use HLOOKUP to pull the value for a specific month.
+verify:
+  - HLOOKUP returns the correct matching value
+  - Exact match (FALSE) is used deliberately
+note: |
+  ## 🎯 What is it?
+
+  **HLOOKUP** searches **across** the first row of a table for a matching value, then returns a value from a specified row **below** it — the row-based counterpart to [VLOOKUP](/skills/vlookup-function)'s column-based search.
+
+  ## 💡 Why is it important?
+
+  Most real data is organized in columns (one row per record), so HLOOKUP is used far less often than VLOOKUP — but it's the right tool whenever a dataset is instead laid out with categories spread across a row, such as months running left to right along the top.
+
+  ## Syntax
+
+  ```
+  =HLOOKUP(lookup_value, table_range, row_index_num, [exact_match])
+  ```
+
+  Same logic as VLOOKUP, just rotated 90 degrees: it searches the **first row** instead of the first column, and `row_index_num` counts rows down instead of columns across.
+
+  ## 📊 Example
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Month | Jan | Feb |
+  | 2 | Revenue | 4200 | 5100 |
+
+  **Formula:** `=HLOOKUP("Feb",A1:C2,2,FALSE)`
+  **Result:** `5100`
+
+  **Explanation:** HLOOKUP finds "Feb" in the first row, then returns the value 1 row down (row 2, the Revenue row).
+
+  ## Multiple examples
+
+  **Beginner:** `=HLOOKUP("Q1",A1:E2,2,FALSE)` — pull a value from a row-oriented quarterly summary.
+  **Real-world:** A dashboard sheet where months run across the top as column headers (a common layout for a trend view) — HLOOKUP pulls a specific month's value into a KPI cell elsewhere on the sheet.
+
+  ## ⚠️ Common mistakes
+
+  - **Reaching for HLOOKUP out of habit when the data is actually column-oriented** (the far more common layout) — VLOOKUP is almost always the right choice unless the specific table is genuinely row-oriented.
+  - **Forgetting the exact-match argument**, same risk as VLOOKUP.
+
+  ## Real-world Data Analyst use cases
+
+  - **Financial reporting:** pulling a specific month's or quarter's value from a summary table laid out with time periods across the top row.
+
+  ## Related concepts
+
+  ```
+  VLOOKUP → HLOOKUP ← you are here → INDEX → MATCH
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. When would HLOOKUP be the right choice instead of VLOOKUP?
+
+  ### Interview/Advanced
+  2. A table has product categories across the top row and monthly figures below. Which lookup function fits, and why?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. When the data being searched is organized with the lookup values running across a row (horizontally) rather than down a column.
+  2. HLOOKUP — since the categories to search for run across the top row, and the values to return sit in the rows beneath them, matching HLOOKUP's row-based search pattern exactly.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is HLOOKUP used less often than VLOOKUP in practice?**
+  Short answer: Most real datasets are organized with one record per row (column-oriented), which fits VLOOKUP's search pattern — HLOOKUP is only needed for the less common case of data organized horizontally, across a row.
+
+  ## Best practices
+
+  - Check the table's actual orientation before choosing HLOOKUP vs. VLOOKUP — don't default to one out of habit.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **HLOOKUP(value, table, row_index, FALSE)** → searches first row, returns a value below it
+  **Use when:** the lookup data runs horizontally across a row, not down a column

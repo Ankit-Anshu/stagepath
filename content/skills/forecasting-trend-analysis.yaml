@@ -1,0 +1,174 @@
+title: Forecasting & Trend Analysis
+category: Business Analytics
+what_is_it: Extending a historical trend into a simple forecast, and recognizing seasonality and noise along the way.
+why_it_matters: Planning questions — "how much revenue next quarter," "do we need to staff up" — need a forecast, not just a description of the past.
+prerequisites:
+  - stats-correlation-regression
+objectives:
+  - Identify a trend and seasonal pattern in time-series data
+  - Build a simple trend-based forecast
+  - Explain the difference between a forecast and a target
+  - State the uncertainty around a forecast
+subtopics:
+  - title: Trend vs. seasonality vs. noise
+    description: Separating a genuine long-term direction from a repeating seasonal pattern and random fluctuation.
+    outcomes:
+      - Identify trend and seasonal components in a time series
+  - title: Simple forecasting
+    description: Extending a trend line forward as a first-pass forecast.
+    outcomes:
+      - Build a simple trend-based forecast for the next period
+  - title: Forecast vs. target
+    description: Why a forecast (what will likely happen) is a different thing from a target (what you want to happen).
+    outcomes:
+      - Explain the difference between a forecast and a target to a stakeholder
+estimated_minutes: 180
+resources:
+  - r-khan-statistics
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-forecasting-1
+    title: Forecast next month's revenue
+    description: Given 12 months of revenue data, identify the trend and seasonal pattern, and produce a simple forecast for next month with a stated confidence caveat.
+verify:
+  - Trend and seasonal pattern are correctly identified
+  - Forecast is clearly labeled as an estimate, not a guarantee
+  - Can explain the forecast's biggest source of uncertainty
+note: |
+  ## 🎯 What is it?
+
+  **Forecasting** extends a historical trend into a simple estimate of the future, while recognizing **seasonality** (a repeating pattern) and **noise** (random fluctuation) along the way, so a forecast reflects genuine signal, not just the most recent up-or-down blip.
+
+  ## 💡 Why is it important?
+
+  Planning questions — "how much revenue next quarter," "do we need to staff up" — need a forecast, not just a description of the past. Descriptive reporting alone can't answer forward-looking business questions, which is exactly the gap [predictive analytics](/skills/types-of-data-analytics) fills.
+
+  ## Core concept
+
+  ### Trend vs. seasonality vs. noise
+  Any time series can be thought of as three overlapping components:
+
+  | Component | Meaning | Example |
+  |---|---|---|
+  | **Trend** | The genuine long-term direction | Revenue steadily growing 3%/month |
+  | **Seasonality** | A repeating pattern tied to a calendar cycle | Sales spike every December |
+  | **Noise** | Random, unexplained fluctuation | A single unusually slow Tuesday |
+
+  Separating these matters because a single data point (a slow week) might just be noise, not a genuine change in trend — reacting to noise as if it were a trend is a common forecasting mistake.
+
+  ### Simple forecasting
+  The most basic approach: extend the historical trend line forward, ideally adjusted for a known seasonal pattern (e.g., "add the typical December boost on top of the underlying trend").
+
+  ### Forecast vs. target
+  A **forecast** is an honest estimate of what will likely happen, based on data. A **target** is what the business *wants* to happen — the two are conceptually different, and conflating them (treating a target as if it were a forecast, or vice versa) leads to poor planning decisions.
+
+  ## Syntax / Formula / Structure
+
+  A simple linear trend-based forecast (extending [Correlation & Regression](/skills/stats-correlation-regression)):
+
+  ```
+  Forecast for next period = Trend line's predicted value for that period
+                              [+ seasonal adjustment, if a seasonal pattern applies]
+  ```
+
+  Always state the forecast as a range, not a single number:
+
+  ```
+  "We expect revenue between $X and $Y next month, with $Z as our best estimate,
+  based on the current trend and historical seasonal pattern."
+  ```
+
+  ## 📊 Example
+
+  12 months of revenue data shows a steady upward trend of about $10K/month, with a consistent seasonal spike each December (+30% above trend).
+
+  **Forecast for next December:** trend-line estimate ($150K) × 1.30 seasonal adjustment ≈ **$195K**, stated as a range (e.g., $180K–$210K) to reflect normal uncertainty.
+
+  **Explanation:** A naive forecast that only extended the linear trend (ignoring seasonality) would have significantly underestimated December — recognizing the seasonal component is what makes the forecast realistic.
+
+  ## Multiple examples
+
+  **Beginner:** Extending a simple linear trend line one period forward, with no seasonality present.
+  **Intermediate:** Identifying a clear seasonal pattern (e.g., weekly cycle in daily data) and adjusting a trend-based forecast to account for it.
+  **Real-world:** Forecasting next quarter's revenue for a staffing decision — presenting a range with a stated confidence caveat and the single biggest source of uncertainty (e.g., "this assumes no major new competitor launches"), rather than a single falsely-precise number that implies more certainty than the data supports.
+
+  ## ⚠️ Common mistakes
+
+  - **Treating a single data point (or a short blip) as a trend change.** One unusually good or bad week is very often just noise — a real trend shift needs to be confirmed over multiple periods.
+  - **Ignoring an obvious seasonal pattern**, producing a forecast that's systematically wrong every time that season recurs.
+  - **Presenting a forecast as a single precise number** instead of a range, implying far more certainty than the underlying method actually supports.
+  - **Confusing a forecast with a target.** A sales target of "$500K next quarter" is a goal, not a data-driven estimate — presenting it as if it were a forecast (or vice versa) misleads planning decisions.
+
+  ## Real-world Data Analyst use cases
+
+  - **Finance analysis:** forecasting next quarter's revenue for a staffing or budget decision.
+  - **Operations analysis:** forecasting seasonal demand to plan inventory or staffing levels ahead of a known peak period.
+  - **Sales analysis:** distinguishing a genuine downward trend from ordinary month-to-month noise before recommending a response.
+
+  ## Related concepts
+
+  ```
+  Statistics — Correlation & Regression
+    ↓
+  Business Analytics → Cohort & Retention Analysis
+    ↓
+  Forecasting & Trend Analysis ← you are here
+  ```
+  This closes the Business Analytics stage — the next stages, Portfolio and Job Preparation, turn everything learned here into demonstrable, interview-ready evidence.
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the difference between trend, seasonality, and noise in a time series?
+
+  ### Medium
+  2. Revenue jumps 40% in one single week after months of flat performance. Is this more likely a genuine trend change or noise, and how would you check?
+
+  ### Interview/Advanced
+  3. Why should a forecast always be presented as a range rather than a single number?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Trend is the genuine long-term direction; seasonality is a repeating, calendar-tied pattern; noise is random, unexplained fluctuation not attributable to either.
+  2. Likely noise or a one-off event until confirmed otherwise — check whether the jump persists over the following weeks (suggesting a genuine trend shift or a known cause, like a promotion) versus reverting back to the prior pattern (confirming it was a temporary blip).
+  3. A single point estimate implies a level of precision and certainty the underlying data and method don't actually support — a range communicates the genuine uncertainty honestly, helping stakeholders plan for a realistic set of outcomes rather than anchoring on one falsely-precise number.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between a forecast and a target?**
+  Short answer: A forecast is a data-driven estimate of what will likely happen; a target is a goal for what the business wants to happen — they can differ, and conflating them leads to poor planning.
+
+  ### Conceptual questions
+  **Q: Why is it risky to react immediately to a single unusual data point?**
+  Short answer: A single data point could just be random noise rather than a genuine trend shift — confirming a pattern over multiple periods (or checking for a specific, known cause) avoids over-reacting to what might just be normal variation.
+
+  ### Scenario-based questions
+  **Q: A stakeholder wants a single exact number for "next quarter's revenue" to put in a board deck. How do you respond?**
+  Short answer: Provide a best-estimate number alongside a realistic range and the key assumption(s) behind it — a single falsely-precise number risks setting an expectation the forecast can't actually guarantee, and being transparent about the range and its assumptions is more useful and more honest.
+
+  ### Practical questions
+  **Q: How would you build a simple forecast for a business with a clear weekly seasonal pattern in daily data?**
+  Short answer: Identify the underlying trend across weeks (smoothing out the day-to-day seasonal swings), then apply the typical day-of-week adjustment on top of that trend line to produce a forecast for a specific upcoming day.
+
+  ## Interview traps / tricky points
+
+  - Presenting a forecast without any stated uncertainty is a common red flag interviewers probe for — a forecast is inherently an estimate, and pretending otherwise is a communication failure.
+  - Ignoring an obvious, well-documented seasonal pattern (like December retail spikes) when it clearly applies is a basic, avoidable forecasting mistake.
+
+  ## Best practices
+
+  - Always separate trend, seasonality, and noise before building a forecast.
+  - State a forecast as a range with a best estimate, never a single falsely-precise number.
+  - Explicitly name the forecast's biggest source of uncertainty or key assumption when presenting it.
+  - Keep "forecast" (a data-driven estimate) and "target" (a business goal) clearly distinct in any communication.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Trend** → genuine long-term direction · **Seasonality** → repeating calendar pattern · **Noise** → random fluctuation
+  **Forecast ≠ target** → an estimate of what will happen vs. a goal for what's wanted
+  **Always present:** a range with a best estimate and the key uncertainty/assumption, never a single bare number

@@ -1,0 +1,80 @@
+title: Foreign Key
+category: SQL
+what_is_it: A column in one table that references a primary key in another table — this is the actual mechanism that creates a relationship between two tables.
+why_it_matters: Foreign keys are what a JOIN is built on — understanding them makes every join query intuitive instead of memorized syntax.
+prerequisites:
+  - primary-key
+objectives:
+  - Define a foreign key and explain what it references
+  - Identify the foreign key in a simple two-table example
+estimated_minutes: 20
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-foreign-key-1
+    title: Find the foreign key
+    description: In an orders table with a customer_id column, explain what customer_id references and why it's a foreign key.
+verify:
+  - Can define a foreign key
+  - Can identify a foreign key/primary key pair across two tables
+note: |
+  ## 🎯 What is it?
+
+  A **foreign key** is a column in one table that references a **primary key** in another table, creating a link between them. In an `orders` table, a `customer_id` column that points back to `customers.id` is a foreign key — it's how a database knows which customer placed which order.
+
+  ## 💡 Why is it important?
+
+  - It's the actual mechanism that makes a "relational" database relational — without foreign keys, tables would just be isolated, unconnected grids of data.
+  - It's exactly what a SQL `JOIN` uses to combine tables — understanding foreign keys makes join syntax feel logical instead of arbitrary.
+
+  ## Core concept
+
+  ```
+  customers (primary key: id)          orders (foreign key: customer_id)
+  +----+-------+                       +-----+-------------+--------+
+  | id | name  |                       | id  | customer_id | amount |
+  +----+-------+                       +-----+-------------+--------+
+  | 1  | Amir  |  ←──────────────────  | 101 |      1      | 59.00  |
+  | 2  | Priya |  ←──────────────────  | 102 |      2      | 120.00 |
+  +----+-------+                       +-----+-------------+--------+
+  ```
+
+  `orders.customer_id` is a foreign key referencing `customers.id` — this relationship is exactly what a later `JOIN` query uses to combine order and customer data.
+
+  ## 📊 Example
+
+  ```sql
+  SELECT orders.id, customers.name
+  FROM orders
+  JOIN customers ON orders.customer_id = customers.id;
+  ```
+
+  This join works specifically because `customer_id` (foreign key) matches values in `customers.id` (primary key) — the foreign key relationship is what makes this query meaningful rather than arbitrary.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming a foreign key must have the exact same column name as the primary key it references.** It commonly does (`customer_id` → `id`), but isn't required to.
+  - **Not checking for "orphaned" foreign key values** — a `customer_id` in `orders` that doesn't match any row in `customers` (e.g., a deleted customer) can silently drop rows from an inner join — see Duplicate Rows from Joins and Join Conditions later in this stage.
+
+  ## Related concepts
+
+  ```
+  Primary Key
+    ↓
+  Foreign Key ← you are here
+    ↓
+  Relationships → Constraints
+  ```
+  Directly sets up the Joins chapter later in this stage.
+
+  ## 🎤 Interview preparation
+
+  **Q: What does a foreign key actually do?**
+  Short answer: It's a column in one table whose values reference a primary key in another table — creating a relationship between the two tables that a JOIN query uses to combine matching rows.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Foreign key** → a column referencing another table's primary key
+  This is the exact mechanism a SQL JOIN relies on to combine tables.

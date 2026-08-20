@@ -1,0 +1,66 @@
+title: Duplicate Data
+category: Spreadsheets
+what_is_it: Rows that repeat the same information — either exact copies, or "business duplicates" that represent the same real-world thing despite small differences.
+why_it_matters: Undetected duplicates silently inflate totals and counts — a customer counted twice looks like two customers.
+prerequisites:
+  - missing-values-spreadsheets
+objectives:
+  - Distinguish an exact duplicate from a "business duplicate"
+  - Explain why undetected duplicates distort totals and counts
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-duplicate-data-1
+    title: Spot a business duplicate
+    description: Given two rows for "Amir Khan" and "amir khan " (with a trailing space and different casing), explain why they are duplicates despite not being an exact text match.
+verify:
+  - Can distinguish an exact duplicate from a business duplicate
+  - Can explain the impact of undetected duplicates on a total
+note: |
+  ## 🎯 What is it?
+
+  **Duplicate data** means two or more rows represent the same real-world thing. An **exact duplicate** matches character-for-character; a **business duplicate** represents the same thing despite small differences (extra whitespace, different capitalization, a typo) — like "Amir Khan" and "amir khan " being the same customer.
+
+  ## 💡 Why is it important?
+
+  - Undetected duplicates silently inflate totals and counts — a customer accidentally entered twice looks like two customers, and their combined spend looks like two customers' worth of revenue.
+  - Business duplicates are much harder to catch than exact ones — a simple "remove exact duplicates" pass won't catch them.
+
+  ## Core concept
+
+  | Type | Example | Caught by exact dedup? |
+  |---|---|---|
+  | Exact duplicate | Two identical rows | Yes |
+  | Business duplicate | "Amir Khan" vs. "amir khan " | No — needs standardizing first |
+
+  ## 📊 Example
+
+  A customer list has "Global Tech Inc." and "Global Tech, Inc" as two separate rows — an exact-match duplicate check won't flag these as duplicates, but they very likely represent the same company, entered slightly differently by two different people at different times.
+
+  ## ⚠️ Common mistakes
+
+  - **Only checking for exact duplicates** and assuming the data is now clean — business duplicates require standardizing text first (see Standardizing Values) before they can be reliably detected.
+  - **Deduplicating too aggressively**, accidentally merging two genuinely different records that happen to look similar (two different people with the same name).
+
+  ## Related concepts
+
+  ```
+  Missing Values
+    ↓
+  Duplicate Data ← you are here
+    ↓
+  Remove Duplicates
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why might "Remove Duplicates" fail to catch every duplicate in a customer list?**
+  Short answer: Remove Duplicates only catches exact matches — business duplicates (the same customer entered with different capitalization, whitespace, or a typo) need their text standardized first before they'll be recognized as duplicates.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Duplicate data** → exact duplicates (character-for-character) vs. business duplicates (same real-world thing, different text)
+  Standardize text before deduplicating to catch business duplicates.

@@ -1,0 +1,43 @@
+title: Community Clinic Booking Redesign
+level: portfolio
+duration: 20-30 hours
+description: Research, restructure, prototype, and test an accessible appointment-booking experience for a community clinic.
+problem_statement: Patients abandon appointment booking because service labels are unclear, eligibility rules appear too late, and error recovery is difficult on mobile.
+scenario: You are the product designer improving booking completion while protecting informed consent and accessibility.
+skills: [user-research, information-architecture, interaction-design, ui-design-systems, prototyping-testing, ux-portfolio]
+dataset:
+  name: Clinic discovery research pack
+  description: Synthetic interview notes, support themes, analytics funnel, service catalog, accessibility constraints, and usability-test observations.
+  source_url: /datasets/clinic-research.csv
+  format: CSV and Markdown bundle
+  size: 24 research observations
+  files: [clinic-research.csv, clinic-service-catalog.csv, clinic-funnel.csv]
+datasets: [Synthetic clinic research and service catalog]
+tasks:
+  - Synthesize research into prioritized needs and opportunity statements
+  - Redesign service categories, eligibility communication, and booking flow
+  - Build responsive prototypes for happy, error, and no-availability states
+  - Run a five-participant usability test and document evidence-based revisions
+requirements:
+  - Include keyboard, screen-reader, zoom, language, and low-bandwidth needs
+  - Do not hide medical eligibility or consent information to improve conversion
+  - Distinguish research evidence from assumptions and design hypotheses
+milestones:
+  - title: Understand the problem
+    description: Audit evidence, synthesize needs, map the current journey, and define success measures.
+  - title: Restructure the experience
+    description: Test service labels, create task flows, and design complete state coverage.
+  - title: Prototype and evaluate
+    description: Build an accessible prototype, run usability sessions, and prioritize findings.
+  - title: Communicate the outcome
+    description: Produce annotated specifications and an honest, evidence-led case study.
+artifacts: [Research synthesis, Journey map, Information architecture, Interactive prototype, Usability report, Portfolio case study]
+rubric:
+  - criterion: Research integrity
+    definition: Findings are grounded in evidence with limitations and contradictions visible.
+  - criterion: Interaction completeness
+    definition: The flow covers real states, edge cases, recovery, and accessibility needs.
+  - criterion: Evaluation quality
+    definition: Tasks are neutral, observations are prioritized, and revisions trace to evidence.
+  - criterion: Case-study clarity
+    definition: The narrative explains role, constraints, decisions, tradeoffs, outcomes, and learning.

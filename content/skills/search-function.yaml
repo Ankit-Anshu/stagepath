@@ -1,0 +1,95 @@
+title: SEARCH Function
+category: Spreadsheets
+what_is_it: Finding the position of one piece of text within another, case-insensitively — otherwise identical to FIND.
+why_it_matters: Real text data has inconsistent casing constantly, so a case-insensitive search is often what's actually needed instead of FIND's strict case-sensitive matching.
+prerequisites:
+  - find-function
+objectives:
+  - Use SEARCH to locate a substring case-insensitively
+  - Explain when SEARCH is preferable to FIND
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-search-1
+    title: Find text regardless of case
+    description: Given a column of product descriptions with inconsistent casing, use SEARCH to find whether each one mentions "sale" regardless of how it's capitalized.
+verify:
+  - SEARCH correctly finds a match regardless of casing
+note: |
+  ## 🎯 What is it?
+
+  **SEARCH** finds the position of one piece of text within another, just like [FIND](/skills/find-function) — but **case-insensitively**, so "Sale" and "sale" are treated as the same match.
+
+  ## 💡 Why is it important?
+
+  Real text data has inconsistent casing constantly — a case-insensitive search is often what's actually needed, rather than FIND's strict case-sensitive matching, which would miss "SALE" when searching for "sale".
+
+  ## Syntax
+
+  ```
+  =SEARCH(find_text, within_text, [start_num])
+  ```
+
+  Same argument structure as FIND — the only functional difference is case sensitivity.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Limited SALE this week |
+
+  **Formula:** `=SEARCH("sale",A1)` → `10` (found, despite the case difference)
+  **Formula:** `=FIND("sale",A1)` → `#VALUE!` error (FIND is case-sensitive, and "sale" ≠ "SALE" to FIND)
+
+  ## Multiple examples
+
+  **Beginner:** `=SEARCH("urgent",A2)` — check whether a description mentions "urgent" regardless of case.
+  **Real-world:** `=ISNUMBER(SEARCH("refund",notes_column))` used to flag any customer service note that mentions "refund" in any casing, for a quick keyword-based triage before deeper analysis.
+
+  ## ⚠️ Common mistakes
+
+  - **Using FIND when case shouldn't matter**, silently missing legitimate matches due to a casing difference — this is the most common reason to prefer SEARCH by default for keyword-flagging tasks.
+  - **SEARCH also supports wildcards** (`?` and `*`) unlike FIND — forgetting this can mean missing a useful feature, or accidentally triggering it when a literal `?` or `*` was intended.
+
+  ## Real-world Data Analyst use cases
+
+  - **Text analysis:** flagging rows containing a keyword regardless of how it was capitalized, such as scanning support tickets or free-text survey responses.
+
+  ## Related concepts
+
+  ```
+  FIND → SEARCH ← you are here → TEXTJOIN
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. When would SEARCH find a match that FIND would miss?
+
+  ### Interview/Advanced
+  2. Why might `=ISNUMBER(SEARCH("refund",A2))` be a more useful formula than `=SEARCH("refund",A2)` alone for a flagging task?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. When the target text and the source text differ only in casing (e.g., searching for "sale" within text containing "SALE") — FIND would fail to match due to its case sensitivity, while SEARCH succeeds.
+  2. SEARCH alone returns either a position number or a `#VALUE!` error, which is awkward to use directly in a TRUE/FALSE flagging formula — wrapping it in ISNUMBER converts that into a clean TRUE (found) or FALSE (not found), ready to use directly in an IF or as a filter condition.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why default to SEARCH over FIND for a keyword-flagging task?**
+  Short answer: Real text data has inconsistent casing, and SEARCH's case-insensitivity avoids silently missing a match just because of a capitalization difference — FIND's case sensitivity is a good fit only when case genuinely needs to be distinguished.
+
+  ## Best practices
+
+  - Default to SEARCH over FIND unless case sensitivity is specifically required.
+  - Wrap with ISNUMBER to convert a SEARCH result into a clean TRUE/FALSE flag.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **SEARCH(find_text, within_text)** → position of a substring, case-INsensitive (unlike FIND)
+  **Pattern:** `=ISNUMBER(SEARCH("keyword",text))` → clean TRUE/FALSE flag

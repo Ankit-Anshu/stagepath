@@ -1,0 +1,50 @@
+title: Data Scientist
+category: Data
+difficulty: intermediate
+estimated_hours: 520
+description: >-
+  Go from data to a defensible model to a decision: statistics, Python, modeling, and communicating
+  results that hold up under scrutiny.
+stages:
+  - id: foundations
+    title: Foundations
+    description: The statistical and problem-framing baseline every model depends on.
+    skills:
+      - statistics
+      - python-fundamentals
+      - data-thinking
+  - id: data-manipulation
+    title: Data Manipulation
+    description: Prepare data efficiently and correctly.
+    skills:
+      - numpy
+      - pandas
+  - id: sql
+    title: SQL
+    description: Pull and shape the data you model on.
+    skills:
+      - sql-select
+      - sql-filtering
+      - sql-aggregation
+      - sql-joins
+  - id: modeling
+    title: Modeling
+    description: Frame, train, and honestly evaluate a model.
+    skills:
+      - machine-learning-fundamentals
+      - model-evaluation
+  - id: communication
+    title: Communication
+    description: Make a model's result usable by someone who isn't a data scientist.
+    skills:
+      - storytelling
+  - id: portfolio
+    title: Portfolio
+    description: Turn your analyses and models into evidence.
+    skills:
+      - portfolio-building
+  - id: job-preparation
+    title: Job Preparation
+    description: Get ready to demonstrate everything you've learned under interview conditions.
+    skills:
+      - job-preparation

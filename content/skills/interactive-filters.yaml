@@ -1,0 +1,67 @@
+title: Interactive Filters
+category: Spreadsheets
+what_is_it: Letting a dashboard's viewer change what's displayed themselves — by region, date range, or category — without needing a new chart built for every possible slice.
+why_it_matters: One well-built interactive dashboard can answer many different viewers' specific questions, instead of requiring a separate static report for each one.
+prerequisites:
+  - dashboard-layout
+objectives:
+  - Explain the value of interactivity over a static, single-view report
+  - Identify which controls (slicers, dropdowns, timelines) provide interactivity in a spreadsheet dashboard
+estimated_minutes: 20
+resources:
+  - r-ms-pivot-tables
+practice:
+  - id: ex-interactive-filters-1
+    title: Plan an interactive dashboard
+    description: Given a dashboard showing revenue by region, decide which interactive control would let a viewer drill into a single region's detail themselves.
+verify:
+  - Can explain the benefit of interactivity over a static report
+  - Can identify appropriate interactive controls for a given dashboard
+note: |
+  ## 🎯 What is it?
+
+  **Interactive filters** let a dashboard's viewer change what's displayed themselves — filtering to one region, one date range, or one product category — without needing the dashboard builder to create a separate static chart for every possible combination. Slicers, dropdown-based filters, and timelines are the common mechanisms in a spreadsheet.
+
+  ## 💡 Why is it important?
+
+  - One well-built interactive dashboard can answer many different viewers' specific questions ("show me just my region") instead of requiring a separate static report per audience.
+  - It shifts exploration work from the dashboard builder (who'd otherwise need to build dozens of static variations) to the viewer, who can self-serve the specific slice they need.
+
+  ## Core concept
+
+  | Control | Use |
+  |---|---|
+  | Slicer | Filter by a category (region, product) with clickable buttons |
+  | Timeline | Filter by a date range with a visual slider |
+  | Dropdown-based filter | A cell-linked dropdown driving formulas or a pivot table |
+
+  ## 📊 Example
+
+  A regional sales manager and a national VP can both use the same dashboard: the VP leaves the region slicer unfiltered to see the national picture, while the manager clicks their own region's slicer button to instantly see just their data — one dashboard, two different useful views, with zero extra building required.
+
+  ## ⚠️ Common mistakes
+
+  - **Building a static dashboard when the audience genuinely needs different slices** — this either produces many redundant dashboards, or one dashboard useful to no one specifically.
+  - **Adding interactivity nobody asked for**, adding complexity to a dashboard that would have been clearer as a focused, static view for its one intended audience.
+
+  ## Related concepts
+
+  ```
+  Dashboard Layout
+    ↓
+  Interactive Filters ← you are here
+    ↓
+  Slicers
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you add interactive filters to a dashboard rather than keeping it static?**
+  Short answer: When the same dashboard genuinely needs to serve different viewers with different slice needs — like regional managers each wanting their own region's view — interactivity lets one dashboard self-serve many audiences instead of requiring a separate static version for each.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Interactive filters** → slicers, timelines, dropdowns that let a viewer change what's shown themselves
+  Lets one dashboard serve many audiences' specific slice needs without separate static versions.

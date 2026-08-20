@@ -1,0 +1,65 @@
+title: Numerical Data
+category: Foundations
+what_is_it: Data expressed as numbers that can be used in mathematical operations — the term most commonly used alongside "categorical data" in analytics tooling.
+why_it_matters: Recognizing numerical columns tells you what belongs on a chart's value axis and what can legitimately be summed, averaged, or plotted on a histogram.
+prerequisites:
+  - categorical-data
+objectives:
+  - Define numerical data and give two examples
+  - Explain the relationship between numerical and quantitative data
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-numerical-data-1
+    title: Separate the axes
+    description: For a dataset you know well, list which columns would go on a chart's value (numerical) axis versus its category axis.
+verify:
+  - Can define numerical data
+  - Can name a numerical column that would go on a chart's value axis
+note: |
+  ## 🎯 What is it?
+
+  **Numerical data** (also called numeric data) is data expressed as numbers usable in arithmetic — revenue, quantity, age, temperature. Like "categorical" and "qualitative," "numerical" and "quantitative" are largely interchangeable terms; "numerical" is the term you'll see most in BI tools and chart configuration.
+
+  ## 💡 Why is it important?
+
+  - Charting tools split fields into "dimensions" (categorical) and "measures" (numerical) — knowing which is which is required before you build a single chart in Excel, Power BI, or Tableau.
+  - Only numerical columns can go on a chart's value axis, be summed in a KPI card, or be tested statistically with methods like a t-test.
+
+  ## Core concept
+
+  | | Categorical | Numerical |
+  |---|---|---|
+  | Role in a chart | Axis/legend category | Value/measure |
+  | Example | `region`, `plan` | `revenue`, `age` |
+  | Aggregations | Count, mode | Sum, average, min/max |
+
+  ## 📊 Example
+
+  In a bar chart of "Revenue by Region," `region` is the categorical field driving the bars, and `revenue` is the numerical field driving each bar's height. Swap them and the chart stops making sense — you can't average `region`.
+
+  ## ⚠️ Common mistakes
+
+  - **Building a chart with two categorical fields** and expecting a meaningful value axis — a chart needs at least one numerical measure.
+  - **Treating a numeric-looking code (ZIP code, phone number) as numerical** when it's actually categorical — see Categorical Data.
+
+  ## Related concepts
+
+  ```
+  Quantitative Data ≈ Numerical Data ← you are here
+         ↓
+    Discrete   vs.   Continuous
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: In a BI tool, what's the difference between a "dimension" and a "measure"?**
+  Short answer: A dimension is a categorical field you slice/group by (e.g., region); a measure is a numerical field you aggregate (e.g., revenue) — this maps directly to categorical vs. numerical data.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Numerical data** → numbers usable in arithmetic; the "measure" in a chart or dashboard
+  Nearly synonymous with quantitative data.

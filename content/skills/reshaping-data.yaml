@@ -1,0 +1,63 @@
+title: Reshaping Data
+category: Spreadsheets
+what_is_it: Restructuring a dataset's layout — pivoting rows into columns or unpivoting columns into rows — without changing the underlying values themselves.
+why_it_matters: The "right" shape for viewing data (wide, readable) is often the wrong shape for analyzing it (long, consistent) — reshaping bridges the two.
+prerequisites:
+  - changing-data-types
+objectives:
+  - Explain what reshaping data means, distinct from cleaning or filtering
+  - Identify when a dataset needs to be reshaped before further analysis
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-reshaping-data-1
+    title: Identify a reshape need
+    description: Given a table with a separate column for each month's sales, explain how you would reshape it into a "long" format with one row per month per product.
+verify:
+  - Can explain what reshaping means, distinct from cleaning
+  - Can identify a dataset that needs reshaping before analysis
+note: |
+  ## 🎯 What is it?
+
+  **Reshaping data** restructures a dataset's layout — commonly pivoting (rows → columns) or unpivoting (columns → rows) — without changing any of the underlying values. It's a distinct operation from cleaning (which fixes errors) or filtering (which selects a subset); reshaping changes the data's *shape*.
+
+  ## 💡 Why is it important?
+
+  - The shape that's easiest for a human to *read* (wide, one column per month) is often the wrong shape for a tool to *analyze* (long, one row per month) — pivot tables, charts, and most formulas expect long-format data.
+  - Recognizing when a dataset needs reshaping — before trying to analyze it in its current shape — saves a lot of wasted effort trying to force the wrong shape to work.
+
+  ## Core concept
+
+  See Wide vs. Long Data for the two shapes reshaping moves between, and Power Query's Pivot/Unpivot tools (covered later in this stage) for the hands-on mechanics.
+
+  ## 📊 Example
+
+  A wide table with columns `Jan_Sales`, `Feb_Sales`, `Mar_Sales` is hard to filter or chart by month directly. Reshaped ("unpivoted") into a long format with columns `Month`, `Sales` — one row per product per month — it becomes trivial to filter, sum, or chart by month.
+
+  ## ⚠️ Common mistakes
+
+  - **Trying to build a pivot table or chart directly on wide-format data** (one column per period) instead of reshaping it into long format first, leading to awkward, manual workarounds.
+  - **Reshaping without a clear plan for the result's grain**, producing a reshaped table where it's unclear what one row now represents.
+
+  ## Related concepts
+
+  ```
+  Changing Data Types
+    ↓
+  Reshaping Data ← you are here
+    ↓
+  Wide vs Long Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between cleaning data and reshaping it?**
+  Short answer: Cleaning fixes errors in the data itself (missing values, wrong types); reshaping restructures the data's layout (pivoting or unpivoting) without changing any of the actual values — they're independent operations, often both needed on the same dataset.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Reshaping data** → restructure layout (pivot/unpivot) without changing the underlying values
+  Distinct from cleaning (fixes errors) and filtering (selects a subset).

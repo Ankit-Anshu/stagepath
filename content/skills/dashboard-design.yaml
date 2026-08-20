@@ -1,0 +1,169 @@
+title: Dashboard Design
+what_is_it: Laying out multiple charts and KPIs into a single dashboard that a stakeholder can scan and act on, using a BI tool such as Power BI or Tableau.
+why_it_matters: A dashboard is not a pile of charts — it is a tool for a specific decision-maker to answer specific questions quickly. Layout and hierarchy matter as much as the charts themselves.
+prerequisites:
+  - charts
+objectives:
+  - Design a KPI layout with clear visual hierarchy
+  - Add interactive filters
+  - Publish and share a dashboard
+estimated_minutes: 300
+resources:
+  - r-kaggle-dataviz
+  - r-ms-powerbi-training
+practice:
+  - id: ex-dashboard-1
+    title: Wireframe a sales dashboard
+    description: Sketch the layout of a dashboard answering "how is this month's sales performance trending against target?" before building it.
+project: project-sales-dashboard
+verify:
+  - Most important KPI is the most visually prominent element
+  - Filters work and update every chart correctly
+  - A first-time viewer can answer the dashboard's core question in under 10 seconds
+category: Visualization
+subtopics:
+  - title: KPI layout
+    description: Placing the single most important number where a viewer sees it first, with clear visual hierarchy.
+    outcomes:
+      - Design a KPI-first dashboard layout
+  - title: Interactivity
+    description: Filters and slicers that update every chart on the dashboard consistently.
+    outcomes:
+      - Add a working filter that updates multiple charts at once
+  - title: Publishing & sharing
+    description: Exporting or publishing a dashboard so stakeholders can actually access and use it.
+    outcomes:
+      - Publish a shareable, working dashboard
+note: |
+  ## 🎯 What is it?
+
+  **Dashboard design** is laying out multiple charts and KPIs into a single, coherent view that a specific stakeholder can scan and act on — using a BI tool such as Power BI or Tableau.
+
+  ## 💡 Why is it important?
+
+  A dashboard is not a pile of charts — it's a tool for a specific decision-maker to answer specific questions quickly. Layout and visual hierarchy matter as much as the underlying charts themselves; a dashboard with perfect data but poor layout still fails if a viewer can't find the answer in a few seconds.
+
+  ## Core concept
+
+  ### KPI layout
+  Place the single most important number where a viewer's eye lands first (top-left, largest), with a clear visual hierarchy from there — supporting charts and detail should feel secondary, not compete for equal attention.
+
+  ### Interactivity
+  Filters and slicers let a viewer narrow the view (by date, region, category) without needing a different dashboard for every slice — and every chart on the dashboard should update consistently when a filter is applied, not just some of them.
+
+  ### Publishing & sharing
+  A dashboard only has value once a stakeholder can actually open and use it — publishing to wherever the audience actually works (a BI platform, an embedded link) is part of the job, not an afterthought once "the analysis is done."
+
+  ## Syntax / Formula / Structure
+
+  A practical dashboard design checklist:
+
+  ```
+  1. What's the ONE question this dashboard must answer in under 10 seconds?
+  2. Is the single most important KPI the most visually prominent element?
+  3. Does every chart support that core question, or is it clutter?
+  4. Do all filters update every relevant chart consistently?
+  5. Can the intended audience actually access and use it once published?
+  ```
+
+  ## 📊 Example
+
+  **Question the dashboard must answer:** "How is this month's sales performance trending against target?"
+
+  **Layout:**
+  - **Top-left, largest element:** a single KPI card — "$1.2M / $1.5M target (80%)."
+  - **Below it:** a trend line chart of daily revenue vs. a target line.
+  - **Right side:** a smaller breakdown chart — revenue by region — for the natural follow-up question ("where is the gap coming from?").
+  - **Top filter bar:** a date-range and region filter that updates all three elements together.
+
+  **Explanation:** A first-time viewer sees the core answer (80% to target) within seconds, and the supporting charts are laid out to answer the *next* question they'd naturally ask, in the order they'd ask it.
+
+  ## Multiple examples
+
+  **Beginner:** A single-page dashboard with one KPI card and one supporting trend chart.
+  **Intermediate:** Adding a working region filter that updates both the KPI and the trend chart consistently.
+  **Real-world:** A full sales dashboard wireframed *before* building — sketching the layout on paper first to confirm the most important number is prominent and the supporting charts follow a logical reading order, then building it in a BI tool and publishing it with a shareable link the sales team actually uses weekly.
+
+  ## ⚠️ Common mistakes
+
+  - **Treating a dashboard as "however many charts fit."** Every chart should support the dashboard's core question — charts that don't are just clutter competing for attention.
+  - **Giving every element equal visual weight.** Without a clear hierarchy (size, position, color), a viewer has to hunt for the most important number instead of seeing it immediately.
+  - **Building filters that don't update every relevant chart.** A dashboard where only some charts respond to a filter is confusing and erodes trust in the whole tool.
+  - **Never actually publishing/sharing it**, or publishing it somewhere the intended audience doesn't naturally go — a technically great dashboard nobody opens has zero impact.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** a monthly sales-vs-target dashboard leadership checks every week.
+  - **Marketing analysis:** a campaign performance dashboard with a channel filter for the marketing team's self-service use.
+  - **Operations analysis:** a shipment-delay dashboard filterable by region and carrier for the ops team's daily standup.
+
+  ## Related concepts
+
+  ```
+  Charts → Color & Accessibility → Geospatial Visualization
+    ↓
+  Dashboard Design ← you are here
+    ↓
+  BI Tools (Power BI / Tableau)
+    ↓
+  Storytelling
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the single most important design decision for a dashboard's top-left, largest element?
+
+  ### Medium
+  2. A dashboard has 8 charts of equal size on one page. What's the likely problem, and how would you fix it?
+
+  ### Interview/Advanced
+  3. A finished, technically excellent dashboard has almost no weekly views from its intended audience. What would you investigate?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. It should be the single most important KPI for the dashboard's core question — the number a viewer needs to see first, given the most visual prominence.
+  2. Likely a lack of visual hierarchy — with 8 equally-weighted charts, a viewer can't tell what matters most at a glance; fix by identifying the one core question, making its KPI/chart the most prominent element, and demoting the rest to smaller, secondary positions.
+  3. Investigate distribution/access first — is it published where the audience actually works, do they know it exists, is it easy to open? A great dashboard that isn't easily accessible or discoverable will get low usage regardless of its design quality.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What makes a dashboard different from "a page full of charts"?**
+  Short answer: A dashboard is designed around a specific decision-maker's specific question, with a clear visual hierarchy guiding them to the answer quickly — a page of charts with no hierarchy or focus is not the same thing, even with identical underlying data.
+
+  ### Conceptual questions
+  **Q: Why does visual hierarchy matter in dashboard design?**
+  Short answer: Without it, every element competes equally for attention, forcing the viewer to hunt for what matters most — a clear hierarchy (size, position, color) guides the eye to the most important information first.
+
+  ### Scenario-based questions
+  **Q: A stakeholder asks for "everything" to be on one dashboard. How do you respond?**
+  Short answer: Push back by asking what specific question(s) the dashboard needs to answer — a dashboard trying to serve every possible question usually ends up serving none of them well; propose splitting into a few focused dashboards if the needs are genuinely distinct.
+
+  ### Practical questions
+  **Q: How would you decide what goes in the top-left corner of a dashboard?**
+  Short answer: Identify the single most important number for the dashboard's core question, and place it there with the largest visual weight — everything else should feel secondary to it.
+
+  ## Interview traps / tricky points
+
+  - A dashboard can be technically correct and still fail if its layout doesn't prioritize the actual question the audience needs answered — interviewers often probe design judgment, not just tool proficiency.
+  - "More charts" is not the same as "more useful" — a bloated dashboard with no hierarchy is a common and testable anti-pattern.
+
+  ## Best practices
+
+  - Identify the one core question a dashboard must answer before designing its layout.
+  - Give the most important KPI the most visual prominence — size, position, and color.
+  - Ensure every filter updates every relevant chart consistently.
+  - Wireframe/sketch the layout before building it in a BI tool.
+  - Publish where the intended audience actually works, and confirm they know it exists.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Core question first** → identify it before designing the layout
+  **Visual hierarchy** → most important KPI gets the most prominent position/size
+  **Interactivity** → filters must update every relevant chart consistently
+  **Publish deliberately** → a great dashboard nobody opens has zero impact

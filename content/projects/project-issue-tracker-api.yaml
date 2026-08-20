@@ -1,0 +1,44 @@
+title: Team Issue Tracker API
+level: portfolio
+duration: 20-28 hours
+description: Design, secure, test, and deploy a multi-user issue-tracking API with projects, tickets, comments, and audit history.
+problem_statement: A small engineering team needs one reliable service for issues and status history, with clear ownership rules and safe concurrent updates.
+scenario: You are the backend developer responsible for the API contract, database, security model, release pipeline, and operating documentation.
+skills: [api-design, databases, backend-security, backend-testing, deployment-observability]
+dataset:
+  name: Issue tracker seed data
+  description: Synthetic JSON bundle with users, teams, projects, issues, comments, labels, and audit events.
+  source_url: /datasets/issue-tracker-seed.json
+  format: JSON
+  size: 7 entity collections
+  files: [issue-tracker-seed.json]
+datasets: [Issue tracker seed JSON]
+tasks:
+  - Design and document the REST API and error model
+  - Model users, teams, projects, issues, comments, labels, and audit events
+  - Enforce ownership, team membership, and role permissions server-side
+  - Add integration tests, structured logs, health checks, and deployment automation
+requirements:
+  - Collection endpoints require bounded pagination and validated filters
+  - Updates must prevent accidental lost writes with versioning or transactions
+  - Sensitive fields and credentials must never appear in logs
+milestones:
+  - title: Contract and schema
+    description: Define API examples, database constraints, authorization matrix, and error semantics.
+  - title: Core service
+    description: Implement issue lifecycle, comments, labels, membership, and audit history.
+  - title: Security and reliability
+    description: Add permission tests, rate limits, idempotency, failure handling, and migrations.
+  - title: Operate it
+    description: Deploy with logs, metrics, alerts, runbook, backup, and rollback plan.
+artifacts: [OpenAPI specification, Deployed API, Database migrations, Automated tests, Operations runbook, Architecture README]
+rubric:
+  - criterion: Contract quality
+    definition: Resources, status codes, validation, errors, pagination, and examples are consistent.
+  - criterion: Data integrity
+    definition: Constraints and transactions protect relationships and concurrent changes.
+  - criterion: Security
+    definition: Every write has tested server-side authorization and safe input handling.
+  - criterion: Operability
+    definition: Health, logs, metrics, migrations, rollback, and recovery are documented and usable.
+

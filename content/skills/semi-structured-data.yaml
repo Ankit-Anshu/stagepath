@@ -1,0 +1,72 @@
+title: Semi-Structured Data
+category: Foundations
+what_is_it: Data with some organizational structure — tags, keys, or a hierarchy — but no fixed, uniform schema like a database table's.
+why_it_matters: A huge share of real-world data (API responses, logs, config files) arrives this way — an analyst needs to recognize it and flatten it before it can be analyzed like a normal table.
+prerequisites:
+  - structured-data
+objectives:
+  - Define semi-structured data and give two examples
+  - Explain what "flattening" semi-structured data means
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-semi-structured-1
+    title: Read a JSON response
+    description: Open any public API's example JSON response and identify which fields would become columns if you flattened it into a table.
+verify:
+  - Can define semi-structured data in one sentence
+  - Can name a common semi-structured format
+note: |
+  ## 🎯 What is it?
+
+  **Semi-structured data** has *some* organization — labeled fields, nested keys, tags — but doesn't follow one rigid, uniform schema the way a database table does. JSON, XML, and log files are the classic examples: each record has structure, but records can have different fields, nested objects, or varying depth.
+
+  ## 💡 Why is it important?
+
+  - It's extremely common in real work — API responses, application logs, and NoSQL databases are almost always semi-structured.
+  - An analyst frequently needs to **flatten** it (extract nested fields into flat columns) before it's usable in SQL, Excel, or a chart.
+  - Recognizing it early saves time — trying to open a nested JSON file directly in Excel produces a mess.
+
+  ## Core concept
+
+  | | Structured | Semi-structured |
+  |---|---|---|
+  | Schema | Fixed, uniform | Present, but flexible/nested |
+  | Example | Database table | JSON API response, XML file |
+  | Ready to chart? | Yes | Usually needs flattening first |
+
+  ## 📊 Example
+
+  ```json
+  { "order_id": 501, "customer": { "id": 12, "country": "US" }, "items": ["pen", "notebook"] }
+  ```
+
+  To analyze this in a table, you'd flatten it into columns: `order_id`, `customer_id`, `customer_country`, and a separate row per item — turning nested structure into the flat shape SQL and Excel expect.
+
+  ## ⚠️ Common mistakes
+
+  - **Trying to paste raw JSON straight into Excel** — it needs a flattening/parsing step first (Power Query's JSON import, or Python's `pandas.json_normalize`).
+  - **Assuming every record has the same fields.** Semi-structured records can differ record to record — always check for missing/extra keys before building a table from them.
+
+  ## Related concepts
+
+  ```
+  Structured Data
+    ↓
+  Semi-Structured Data ← you are here (JSON, XML, logs)
+    ↓
+  Unstructured Data (no inherent structure at all)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you get a nested JSON API response into a usable table?**
+  Short answer: Flatten it — extract the nested keys into their own columns (Power Query's JSON connector, or `pandas.json_normalize` in Python), producing one flat row per record.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Semi-structured data** → has structure (keys/tags), but no fixed uniform schema — JSON, XML, logs
+  Needs flattening before it behaves like a normal table.

@@ -1,0 +1,23 @@
+title: Cybersecurity
+category: Cybersecurity
+difficulty: beginner
+estimated_hours: 560
+audience: Curious investigators who enjoy understanding systems, threats, and evidence.
+description: Build practical defensive-security skills across networks, endpoints, web systems, cloud, and incident response.
+stages:
+  - id: foundations
+    title: Security foundations
+    description: Understand risk, systems, networking, and the attacker-defender model.
+    skills: [security-foundations, networking-systems]
+  - id: attack-surface
+    title: Systems and applications
+    description: Learn how endpoints and web applications are attacked and defended.
+    skills: [linux-security, web-security]
+  - id: defense
+    title: Detection and response
+    description: Investigate alerts, build timelines, and contain incidents.
+    skills: [detection-response, cloud-security]
+  - id: proof
+    title: Demonstrate the work
+    description: Create a defensible portfolio of labs, reports, and playbooks.
+    skills: [security-career]

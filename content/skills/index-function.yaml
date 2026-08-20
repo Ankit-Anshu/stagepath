@@ -1,0 +1,100 @@
+title: INDEX Function
+category: Spreadsheets
+what_is_it: Returning the value at a specific row and column position within a range — the building block that, combined with MATCH, forms one of the most flexible lookup patterns in spreadsheets.
+why_it_matters: INDEX alone is simple, but it's the foundation for INDEX+MATCH, one of the most powerful and resilient lookup techniques, fixing VLOOKUP's biggest limitations.
+prerequisites:
+  - hlookup-function
+objectives:
+  - Use INDEX to return a value at a specific position in a range
+  - Explain why INDEX alone isn't a full lookup, just a positional retrieval
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-index-1
+    title: Retrieve a value by position
+    description: Given a range of product names, use INDEX to return the 3rd product in the list.
+verify:
+  - INDEX correctly returns the value at the specified position
+  - Can explain the difference between INDEX and a full lookup
+note: |
+  ## 🎯 What is it?
+
+  **INDEX** returns the value at a specific **row and column position** within a range — e.g., "give me the value in the 3rd row of this range." On its own, it's simple; combined with [MATCH](/skills/match-function), it becomes one of the most flexible lookup patterns in spreadsheets.
+
+  ## 💡 Why is it important?
+
+  INDEX alone is just positional retrieval, not a full lookup — but it's the essential building block for [INDEX + MATCH](/skills/index-match-function), which fixes VLOOKUP's two biggest limitations: it can look in any direction (not just right), and it doesn't break when a column is inserted into the source range.
+
+  ## Syntax
+
+  ```
+  =INDEX(range, row_num, [column_num])
+  ```
+
+  - **range** — the range to pull a value from.
+  - **row_num** — which row within the range (counting from 1).
+  - **column_num** — which column within the range (optional if the range is a single column).
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Widget |
+  | 2 | Gadget |
+  | 3 | Gizmo |
+
+  **Formula:** `=INDEX(A1:A3,2)`
+  **Result:** `"Gadget"` — the 2nd value in the range.
+
+  ## Multiple examples
+
+  **Beginner:** `=INDEX(A1:A10,5)` — the 5th value in a single-column range.
+  **Intermediate:** `=INDEX(A1:C10,3,2)` — the value at row 3, column 2 of a multi-column range.
+  **Real-world:** `=INDEX(product_names, MATCH(target_id, product_ids, 0))` — INDEX alone doesn't know *which* row to look at; combining it with MATCH (which finds the position of a value) turns this into a full, flexible lookup — this exact combination is covered in depth in [INDEX + MATCH](/skills/index-match-function).
+
+  ## ⚠️ Common mistakes
+
+  - **Expecting INDEX alone to search for a value.** INDEX only retrieves by *position* — it has no way to find *which* position matches a value on its own; that's MATCH's job.
+  - **Off-by-one confusion**, since INDEX counts positions starting at 1, not 0.
+
+  ## Real-world Data Analyst use cases
+
+  - **The foundation of INDEX+MATCH**, a lookup pattern used constantly across real spreadsheet work wherever VLOOKUP's limitations become a problem.
+
+  ## Related concepts
+
+  ```
+  HLOOKUP → INDEX ← you are here → MATCH → INDEX + MATCH
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that returns the 4th value in range B1:B20.
+
+  ### Interview/Advanced
+  2. Why is INDEX alone not considered a "lookup" function in the same sense as VLOOKUP?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=INDEX(B1:B20,4)`
+  2. VLOOKUP searches for a matching value and returns a related result; INDEX only retrieves a value from a *known* position — it has no search capability of its own, which is why it's almost always paired with MATCH (which does the searching) to form a complete lookup.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What does INDEX do on its own, and what's it missing to be a full lookup?**
+  Short answer: INDEX returns a value at a specified row/column position within a range — it's missing the ability to search for *which* position matches a given value, which is exactly what MATCH provides when the two are combined.
+
+  ## Best practices
+
+  - Think of INDEX as "retrieve by position" and MATCH as "find the position" — understanding this split makes INDEX+MATCH intuitive rather than a memorized formula.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **INDEX(range, row_num, [col_num])** → returns the value at a specific position
+  **Alone:** just positional retrieval, not a search — pairs with MATCH for a full lookup

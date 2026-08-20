@@ -1,0 +1,94 @@
+title: Line Chart
+category: Spreadsheets
+what_is_it: A chart connecting data points with a continuous line, purpose-built to show a trend over time.
+why_it_matters: The single best chart type for answering "how has this changed over time?" — the most common question shape in business reporting.
+prerequisites:
+  - column-chart
+objectives:
+  - Build a line chart showing a trend over time
+  - Explain why a line chart fits a time-based question better than a column chart
+estimated_minutes: 20
+resources:
+  - r-datavizcatalogue
+practice:
+  - id: ex-line-chart-1
+    title: Chart a revenue trend
+    description: Build a line chart showing monthly revenue over the past 12 months.
+verify:
+  - Chart correctly represents the trend
+  - Time periods are in correct chronological order along the x-axis
+note: |
+  ## 🎯 What is it?
+
+  A **line chart** connects data points with a continuous line, purpose-built to show a **trend over time** — how a metric moves up, down, or stays flat across a sequence of time periods.
+
+  ## 💡 Why is it important?
+
+  It's the single best chart type for answering "how has this changed over time?" — the most common question shape in business reporting (weekly revenue, daily signups, monthly churn) — because the connecting line makes the *direction and rate* of change visually obvious in a way separate bars cannot.
+
+  ## Core concept
+
+  | When to use a line chart | When NOT to |
+  |---|---|
+  | A trend across many time points | Comparing unordered categories — use a bar/column chart instead |
+  | Showing the *rate* of change, not just individual values | Only 2-3 time points — a column chart may communicate just as well |
+  | Comparing multiple trends together (multiple lines) | More than ~5-6 lines at once — becomes cluttered and hard to read |
+
+  ## 📊 Example
+
+  Monthly revenue over 12 months — a line chart immediately shows whether revenue is trending up, down, flat, or seasonal, something a table of 12 numbers requires much more effort to perceive.
+
+  ## Multiple examples
+
+  **Beginner:** A single line showing monthly revenue over a year.
+  **Intermediate:** Two lines on the same chart comparing this year's and last year's monthly revenue, to visualize year-over-year change.
+  **Real-world:** A line chart of daily active users over 90 days, with the underlying trend line making clear whether a recent product change coincided with a genuine shift in the metric, versus normal day-to-day noise.
+
+  ## ⚠️ Common mistakes
+
+  - **Using a line chart for unordered, categorical data** (like product categories) — the connecting line implies a sequence or trend that doesn't actually exist between unrelated categories, which is misleading.
+  - **Plotting too many lines at once** (6+), turning the chart into an unreadable tangle — consider small multiples (several small individual charts) instead.
+  - **Not starting the y-axis at zero when the visual magnitude of change matters** — though for a line chart specifically, this is a more nuanced call than for bar charts, since the shape of the trend still communicates direction even without a zero baseline; be deliberate either way and label clearly.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** monthly or weekly revenue trend.
+  - **Product analysis:** daily active users or engagement metric trend over time.
+
+  ## Related concepts
+
+  ```
+  Column Chart → Line Chart ← you are here → Scatter Plot → KPI → Dashboard
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What question shape is a line chart specifically designed to answer?
+
+  ### Interview/Advanced
+  2. Why would plotting product categories on a line chart be misleading?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. "How has this metric changed over time?" — trend questions, not category comparisons.
+  2. A line chart's connecting line visually implies a sequence or trend between adjacent points — but unrelated categories (like product types) have no meaningful order or trend between them, so the connecting line falsely suggests a relationship that doesn't exist.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is a line chart the right choice for "how has revenue trended this year?" instead of a column chart?**
+  Short answer: A line chart's continuous connecting line makes the direction and rate of change visually obvious, which is the actual point of a trend question — a column chart of the same data technically shows the same values but requires more effort to perceive the trend shape.
+
+  ## Best practices
+
+  - Reserve line charts for genuinely time-ordered or sequential data.
+  - Limit simultaneous lines on one chart to roughly 5-6 before switching to small multiples.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Line chart** → best for trend-over-time questions
+  **Never use for:** unordered categorical comparisons — implies a false sequence

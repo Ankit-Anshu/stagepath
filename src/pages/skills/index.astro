@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const skills = await getCollection('skills');
+const order = ['Frontend Development','Backend Development','Cybersecurity','UX Design','General','Data'];
+const groups = [...new Set(skills.map((skill) => skill.data.category))].sort((a,b) => {
+  const ai = order.indexOf(a), bi = order.indexOf(b); return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi) || a.localeCompare(b);
+});
+---
+<Base title="Topic Library" description="Every topic in one place — why it matters, what it covers, and how to prove it." wide>
+  <header class="topic-header"><h1 class="display-title">Topics</h1></header>
+  <div class="topic-groups">{groups.map((group) => { const items = skills.filter((skill) => skill.data.category === group); return <section><div class="group-head"><h2>{group}</h2><span>{items.length} topics</span></div><div class="topic-grid">{items.map((skill) => { const depth = skill.data.subtopics.length || skill.data.objectives.length; return <a href={`/skills/${skill.id}`}><span class="topic-count">{depth || '—'}</span><div><strong>{skill.data.title}</strong><small>{depth} subtopics {skill.data.estimated_minutes ? `· ~${Math.max(1,Math.round(skill.data.estimated_minutes/60))}h` : ''}</small></div><span class="topic-arrow" aria-hidden="true">↗</span></a>; })}</div></section>; })}</div>
+</Base>
+<style>
+  .topic-header{padding:20px 0 40px}.topic-header .display-title{color:var(--green);font-size:clamp(46px,6vw,70px)}.topic-groups{display:grid;gap:55px}.group-head{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:11px;border-bottom:1px solid var(--line)}.group-head h2{margin:0;font-size:22px;letter-spacing:-.03em}.group-head span{color:#879188;font-size:9px;text-transform:uppercase}.topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.topic-grid>a{display:grid;grid-template-columns:32px 1fr 26px;align-items:center;gap:10px;min-height:70px;padding:14px;border:1px solid var(--line);border-radius:12px;background:white;transition:.18s}.topic-grid>a:hover{transform:translateY(-2px);border-color:#a8c2b0;box-shadow:0 8px 22px rgba(22,43,37,.07)}.topic-count{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--green-soft);color:var(--green);font-size:9px;font-weight:850}.topic-grid strong{font-size:11px}.topic-grid small{color:#929c94;font-size:7px}.topic-arrow{display:grid;place-items:center;justify-self:end;width:26px;height:26px;border:1px solid var(--line);border-radius:50%;color:var(--green);font-size:11px}@media(max-width:850px){.topic-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:550px){.topic-grid{grid-template-columns:1fr}}
+</style>
+

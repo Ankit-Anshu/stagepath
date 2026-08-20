@@ -1,0 +1,70 @@
+title: Ordinal Data
+category: Foundations
+what_is_it: Categorical data with a meaningful order or ranking between categories — but where the gap between each category isn't necessarily equal or measurable.
+why_it_matters: Survey ratings, customer tiers, and satisfaction scores are all ordinal — knowing this tells you a median makes sense but an average may be misleading.
+prerequisites:
+  - nominal-data
+objectives:
+  - Define ordinal data and give two examples
+  - Explain why the "gap" between ordinal categories isn't necessarily equal
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-ordinal-data-1
+    title: Rank the categories
+    description: Take a survey-style field (satisfaction rating, education level, customer tier) and write out its natural order.
+verify:
+  - Can define ordinal data
+  - Can explain why averaging ordinal ratings can be debatable
+note: |
+  ## 🎯 What is it?
+
+  **Ordinal data** is categorical data with a meaningful order — but the *distance* between categories isn't guaranteed to be equal or precisely measurable. A satisfaction rating ("Poor" → "Fair" → "Good" → "Excellent") is ordinal: there's a clear order, but "Good" isn't necessarily exactly one measurable unit better than "Fair."
+
+  ## 💡 Why is it important?
+
+  - Common in surveys, reviews, and customer tiers — recognizing ordinal data tells you a **median** or **mode** is safe, while an **average** is a judgment call some analysts and stakeholders will debate.
+  - It sits between nominal (no order) and interval/ratio (order *and* equal, measurable gaps) in the four levels of measurement.
+
+  ## Core concept
+
+  | Level | Order? | Equal gaps? | Example |
+  |---|---|---|---|
+  | Nominal | No | — | Payment method |
+  | **Ordinal** | Yes | No | Satisfaction rating |
+  | Interval | Yes | Yes | Temperature (°C) |
+  | Ratio | Yes | Yes, plus a true zero | Revenue |
+
+  ## 📊 Example
+
+  A 1–5 star rating is ordinal: 5 stars is better than 3 stars, but the "gap" in actual satisfaction between 4 and 5 stars isn't guaranteed to be the same size as the gap between 2 and 3 stars. Many teams still average star ratings in practice (treating it like interval data) — a common, pragmatic simplification worth being aware of.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming ordinal gaps are equal** — treating "Poor, Fair, Good, Excellent" as if they were evenly spaced numbers (1, 2, 3, 4) is a simplification, not a guarantee.
+  - **Encoding ordinal categories in the wrong order** in a chart or model (e.g., alphabetizing "High/Low/Medium" instead of ordering them Low → Medium → High).
+
+  ## Related concepts
+
+  ```
+  Nominal Data (no order)
+         ↓
+  Ordinal Data ← you are here (has order, unequal gaps)
+         ↓
+  Interval Data (has order, equal gaps, no true zero)
+         ↓
+  Ratio Data (has order, equal gaps, true zero)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why might a statistician push back on averaging a 1–5 satisfaction survey?**
+  Short answer: Because it's ordinal — the gap between each rating isn't guaranteed to be equal, so an average treats it like precisely measured interval data, which is a simplification some analysts consider debatable (though it's common practice).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Ordinal data** → categories with a real order, but unequal/unmeasured gaps — ratings, tiers, satisfaction scores
+  Median/mode are safe; averaging is a common but debatable simplification.

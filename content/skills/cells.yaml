@@ -1,0 +1,72 @@
+title: Cells
+category: Spreadsheets
+what_is_it: The individual box where a specific row and column meet — the basic unit that holds one piece of data or one formula.
+why_it_matters: Every formula, every data point, and every reference in a spreadsheet ultimately points at a cell — it's the atomic unit everything else is built from.
+prerequisites:
+  - columns
+objectives:
+  - Identify a cell by its address
+  - Select a single cell versus a range of cells
+estimated_minutes: 15
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-cells-1
+    title: Address practice
+    description: Given a small table, write down the address of five different specific cells by their row/column intersection.
+verify:
+  - Can correctly identify any cell by its address
+  - Can select a single cell and distinguish it from selecting a range
+note: |
+  ## 🎯 What is it?
+
+  A **cell** is the box where a specific row and column meet — the basic unit of a spreadsheet, identified by its address: column letter followed by row number, like `C5` (column C, row 5). A cell can hold a value, text, or a formula.
+
+  ## 💡 Why is it important?
+
+  - Every formula, every data point, and every reference in a spreadsheet ultimately points at a cell — it's the atomic unit everything else (rows, columns, ranges, formulas) is built from.
+  - Fluently identifying a cell's address is the physical skill every later spreadsheet topic (references, formulas, lookups) assumes you already have.
+
+  ## Core concept
+
+  | | Identified by | Example |
+  |---|---|---|
+  | Cell | Column letter + row number | B3 |
+
+  A cell can contain: a **value** (text or number), or a **formula** (which calculates and displays a result).
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Product | Q1 |
+  | 2 | Widget | 100 |
+
+  Cell **B2** = 100 (Widget's Q1 value). Cell **A1** contains the text "Product." Each is independently addressable and independently referenceable by a formula anywhere else in the sheet.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing a cell's displayed value with its underlying content** — a cell showing "16" might actually contain the formula `=SUM(B2:B3)`, visible in the formula bar, not the literal number 16.
+  - **Miscounting rows or columns when reading an address**, especially past column Z (where columns continue as AA, AB, AC...).
+
+  ## Related concepts
+
+  ```
+  Columns
+    ↓
+  Cells ← you are here
+    ↓
+  Ranges
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the address of the cell in column D, row 7?**
+  Short answer: D7 — column letter first, then row number.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Cell** → the intersection of a row and column, e.g. B3
+  Holds either a value or a formula — check the formula bar to see which.

@@ -1,0 +1,23 @@
+title: Deployment & Observability
+category: Backend Development
+what_is_it: Packaging, releasing, monitoring, and operating backend services in production.
+why_it_matters: Shipping is the beginning of a service lifecycle, not the last development step.
+estimated_minutes: 3000
+prerequisites: [backend-security, backend-testing]
+objectives: [Containerize a service, Build a safe release pipeline, Diagnose production failures]
+subtopics:
+  - title: Linux and containers
+    description: Processes, permissions, filesystems, networking, images, containers, and resource limits.
+    outcomes: [Build a minimal container, Diagnose a process problem]
+  - title: Configuration and infrastructure
+    description: Environments, secrets, managed services, infrastructure as code, and twelve-factor practices.
+    outcomes: [Separate config from code, Describe reproducible infrastructure]
+  - title: Continuous delivery
+    description: Automated verification, migrations, rolling releases, feature flags, and rollback.
+    outcomes: [Design a deployment pipeline, Define rollback triggers]
+  - title: Logs metrics and traces
+    description: Structured logs, RED metrics, distributed traces, correlation IDs, and dashboards.
+    outcomes: [Instrument a request path, Build an actionable dashboard]
+  - title: Incident response
+    description: Alerts, triage, mitigation, communication, postmortems, and learning loops.
+    outcomes: [Write an incident runbook, Conduct a blameless review]

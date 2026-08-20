@@ -1,0 +1,167 @@
+title: Probability Basics
+category: Statistics
+what_is_it: The core rules of probability — independent vs. dependent events, conditional probability, and expected value.
+why_it_matters: Probability is the language underneath statistics, A/B testing, and most machine learning. Without it, "95% confidence" is just a phrase you repeat without understanding.
+prerequisites:
+  - stats-descriptive
+objectives:
+  - Calculate the probability of independent and dependent events
+  - Apply conditional probability to a real scenario
+  - Calculate an expected value
+  - Explain the difference between probability and odds
+subtopics:
+  - title: Independent vs. dependent events
+    description: Whether one event changes the probability of another.
+    outcomes:
+      - Determine whether two events are independent
+  - title: Conditional probability
+    description: Calculating the probability of A given that B has occurred.
+    outcomes:
+      - Calculate a conditional probability from a scenario
+  - title: Expected value
+    description: Weighting each possible outcome by its probability to get a single expected result.
+    outcomes:
+      - Compute the expected value of a simple scenario
+estimated_minutes: 150
+resources:
+  - r-seeing-theory
+  - r-khan-statistics
+practice:
+  - id: ex-stats-probability-1
+    title: Calculate a conditional probability
+    description: Given a scenario with two related events, calculate and explain a conditional probability by hand.
+verify:
+  - Independence is correctly determined, not assumed
+  - Conditional probability is calculated correctly
+  - Expected value calculation matches a manual check
+note: |
+  ## 🎯 What is it?
+
+  **Probability** is a number between 0 and 1 (or 0% to 100%) describing how likely an event is to happen. This topic covers the core rules: independent vs. dependent events, conditional probability, and expected value — the language underneath statistics, A/B testing, and most machine learning.
+
+  Think of a weather forecast that says "30% chance of rain" — that's a probability statement, built from historical patterns of similar days.
+
+  ## 💡 Why is it important?
+
+  - Probability is the foundation "95% confidence" and "p-value" rest on — without it, those phrases are just repeated jargon, not something you actually understand.
+  - It underlies A/B testing directly: "is this difference real or just random chance?" is fundamentally a probability question.
+  - It shows up constantly in everyday analyst reasoning: estimating risk, forecasting a range of outcomes, or judging how surprising a result actually is.
+
+  ## Core concept
+
+  ### Independent vs. dependent events
+  Two events are **independent** if one happening doesn't change the probability of the other (e.g., two separate coin flips). They're **dependent** if one does affect the other (e.g., drawing two cards from a deck *without* replacement — the first draw changes the odds of the second).
+
+  ### Conditional probability
+  The probability of event A **given that** event B has already happened — read as "the probability of A given B." This is different from the plain probability of A alone whenever A and B are related.
+
+  ### Expected value
+  The average outcome you'd get if a scenario played out many times — each possible outcome weighted by its probability.
+
+  ## Syntax / Formula / Structure
+
+  ```
+  P(A and B)        = P(A) × P(B)                 — only valid if A and B are independent
+  P(A given B)      = P(A and B) ÷ P(B)           — conditional probability
+  Expected value    = Σ (outcome × probability of that outcome)
+  ```
+
+  ## 📊 Example — Conditional probability
+
+  Of 1,000 website visitors: 200 clicked an ad, and of those 200, 40 made a purchase. Overall, 100 of all 1,000 visitors made a purchase.
+
+  ```
+  P(purchase given clicked ad) = 40 / 200  = 20%
+  P(purchase overall)          = 100 / 1000 = 10%
+  ```
+
+  **Interpretation:** Visitors who clicked the ad purchased at double the overall rate — a meaningful signal that the ad is targeting (or influencing) the right people, though this alone doesn't prove the ad *caused* the higher rate (see [Correlation & Regression](/skills/stats-correlation-regression)).
+
+  ## Multiple examples
+
+  **Beginner:** A fair die roll — probability of rolling a 4 = 1/6.
+  **Intermediate:** Two marketing emails sent independently — P(both opened) = P(email 1 opened) × P(email 2 opened), only valid if opens are truly independent (they often aren't, if it's the same recipient).
+  **Real-world — expected value:** A promotion has a 5% chance of a customer redeeming a $50 discount and a 95% chance of no redemption. Expected cost per customer = 0.05 × 50 + 0.95 × 0 = **$2.50** — useful for budgeting a campaign before launch.
+
+  ## ⚠️ Common misconceptions
+
+  - **Assuming events are independent when they aren't.** Two purchases from the same household are not independent the way two purchases from unrelated customers are — treating them as independent understates real-world variability.
+  - **Confusing P(A given B) with P(B given A).** "The probability a purchaser clicked the ad" is a completely different number than "the probability an ad-clicker purchased" — mixing these up is one of the most common statistical reasoning errors (related to the "base rate fallacy").
+  - **Treating "expected value" as "the most likely single outcome."** It's a probability-weighted average, and may not match any individual possible outcome at all (e.g., an expected value of 2.5 children is meaningful as an average, not as a literal possible outcome).
+
+  ## Real-world Data Analyst use cases
+
+  - **Marketing analysis:** conditional probability of purchase given ad exposure, cart abandonment given device type.
+  - **Finance analysis:** expected value of a promotion's cost before committing budget.
+  - **Operations analysis:** probability a shipment arrives late given a specific carrier or route.
+
+  ## Related concepts
+
+  ```
+  Descriptive Statistics
+    ↓
+  Probability Basics ← you are here
+    ↓
+  Distributions
+    ↓
+  Correlation & Regression
+    ↓
+  Hypothesis Testing (built directly on probability)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. A bag has 4 red and 6 blue marbles. What's the probability of drawing a red marble?
+
+  ### Medium
+  2. Of 500 customers, 150 are on a premium plan. Of those 150, 90 renewed. What's P(renew given premium)?
+
+  ### Interview/Advanced
+  3. A promotion has a 10% chance of costing $100 and a 90% chance of costing $0. What's the expected cost per customer, and why is this number useful even though no single customer will actually cost exactly that amount?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. 4/10 = 40%.
+  2. 90/150 = 60%.
+  3. Expected cost = 0.10 × 100 + 0.90 × 0 = $10. It's useful because, across a large number of customers, the *average* cost will converge toward $10 per customer — making it the right number to use for budgeting, even though it doesn't describe any individual customer's actual outcome.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between independent and dependent events?**
+  Short answer: Independent events don't affect each other's probability; dependent events do — one event happening changes the likelihood of the other.
+
+  ### Conceptual questions
+  **Q: What is conditional probability, in plain terms?**
+  Short answer: The probability of one event happening, given that you already know another related event has happened — it narrows the population you're calculating the probability over.
+
+  ### Scenario-based questions
+  **Q: A stakeholder says "80% of our fraud cases involve a new account, so new accounts are risky." What's the reasoning gap?**
+  Short answer: That's P(new account given fraud), not P(fraud given new account) — if most accounts are new anyway, a high rate of new accounts among fraud cases doesn't necessarily mean new accounts are unusually risky; you need the reverse conditional probability to judge that.
+
+  ### Practical questions
+  **Q: How would you calculate the expected value of a marketing promotion before launching it?**
+  Short answer: Estimate the probability of each possible outcome (e.g., redemption vs. no redemption) and the cost of each, then sum each outcome's cost weighted by its probability.
+
+  ## Interview traps / tricky points
+
+  - Mixing up P(A given B) and P(B given A) is one of the most common statistical reasoning traps in interviews — always state clearly which event is the "given."
+  - Assuming independence without checking is a subtle, easy mistake — always ask whether one event could plausibly influence the other.
+
+  ## Best practices
+
+  - Explicitly state which event is "given" when discussing a conditional probability, out loud or in writing — it prevents the P(A|B) vs. P(B|A) mix-up.
+  - Check whether an independence assumption is realistic before multiplying probabilities together.
+  - Pair an expected value with a sense of its variance/spread — two scenarios can have the same expected value with very different risk profiles.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Independent events** → one doesn't affect the other's probability
+  **Conditional probability P(A|B)** → probability of A, given B already happened
+  **Expected value** → probability-weighted average outcome
+  **Watch for:** P(A|B) ≠ P(B|A) — always confirm which is the "given" event

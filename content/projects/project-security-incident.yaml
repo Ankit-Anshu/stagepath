@@ -1,0 +1,42 @@
+title: Suspicious Login Incident Investigation
+level: portfolio
+duration: 12-18 hours
+description: Investigate a synthetic account-compromise scenario across authentication, endpoint, DNS, and proxy logs.
+problem_statement: A privileged employee received a suspicious-login alert followed by unusual cloud activity. Determine what happened, scope affected assets, and recommend containment and detection improvements.
+scenario: You are the on-call security analyst. Leadership needs a defensible incident report by the end of the shift.
+skills: [networking-systems, linux-security, detection-response, cloud-security, security-career]
+dataset:
+  name: Northbridge incident evidence pack
+  description: Synthetic CSV and JSON logs with benign noise, time-zone differences, suspicious authentication, endpoint execution, DNS, and cloud administration events.
+  source_url: /datasets/security-auth-events.csv
+  format: CSV and JSON bundle
+  size: 5 evidence files
+  files: [security-auth-events.csv, security-endpoint-events.csv, security-dns-events.csv, security-cloud-events.json, asset-inventory.csv]
+datasets: [Northbridge synthetic incident evidence pack]
+tasks:
+  - Normalize timestamps and build a joined investigation timeline
+  - Separate confirmed facts, supported hypotheses, and unknowns
+  - Identify the likely entry point, affected identities, hosts, and actions
+  - Recommend containment, recovery, and three new behavioral detections
+requirements:
+  - Preserve the original files and document every transformation
+  - Map important behaviors to MITRE ATT&CK techniques
+  - Include evidence identifiers for every major conclusion
+milestones:
+  - title: Triage and preserve
+    description: Inventory evidence, validate time ranges, identify gaps, and record initial hypotheses.
+  - title: Investigate and scope
+    description: Correlate identity, host, network, and cloud evidence into a defensible timeline.
+  - title: Respond and improve
+    description: Propose containment, recovery checks, root-cause actions, and detection queries.
+artifacts: [Incident report, Investigation timeline, Evidence workbook, Detection queries, Response playbook]
+rubric:
+  - criterion: Evidence discipline
+    definition: Conclusions trace to preserved evidence and confidence is stated honestly.
+  - criterion: Investigation quality
+    definition: The timeline explains sequence, scope, attacker behavior, and important unknowns.
+  - criterion: Response judgment
+    definition: Recommendations balance urgency, business impact, evidence preservation, and recovery.
+  - criterion: Communication
+    definition: Technical and executive readers can understand what happened and what to do next.
+

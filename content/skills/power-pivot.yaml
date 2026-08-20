@@ -1,0 +1,69 @@
+title: Power Pivot
+category: Spreadsheets
+what_is_it: An add-in that loads multiple tables into an in-memory data model, letting you build relationships between them and calculate measures — the spreadsheet-level precursor to Power BI's modeling engine.
+why_it_matters: It handles far larger datasets than a normal worksheet, and lets you analyze data spread across multiple related tables without flattening everything into one giant sheet first.
+prerequisites:
+  - named-ranges
+objectives:
+  - Explain what Power Pivot adds beyond a standard Pivot Table
+  - Load multiple tables into Power Pivot's data model
+estimated_minutes: 25
+resources:
+  - r-ms-powerbi-training
+practice:
+  - id: ex-power-pivot-1
+    title: Load two related tables
+    description: Load a customers table and an orders table into Power Pivot and build a relationship between them by customer ID.
+verify:
+  - Can explain what Power Pivot adds beyond a standard Pivot Table
+  - Can load multiple related tables into the data model
+note: |
+  ## 🎯 What is it?
+
+  **Power Pivot** is an Excel add-in that loads multiple tables into an in-memory **data model**, lets you define relationships between them (like a relational database — see Relationships), and calculate custom **measures** using DAX — going well beyond what a standard Pivot Table (built on one flat table) can do.
+
+  ## 💡 Why is it important?
+
+  - It handles far larger datasets than a normal worksheet comfortably can — millions of rows, loaded into memory rather than a worksheet grid.
+  - It lets you analyze data spread across multiple related tables (customers, orders, products) directly, without first manually flattening everything into one giant lookup-heavy sheet.
+  - It's the spreadsheet-level version of the exact same modeling engine Power BI is built on — learning it here previews the Power BI stage later in this roadmap.
+
+  ## Core concept
+
+  | | Standard Pivot Table | Power Pivot |
+  |---|---|---|
+  | Source | One flat range/table | Multiple related tables in a data model |
+  | Scale | Limited by worksheet size | Millions of rows, in-memory |
+  | Calculations | Calculated Fields (basic) | DAX measures (much more powerful) |
+  | Relationships | None — needs pre-joined data | Built-in, like a relational database |
+
+  ## 📊 Example
+
+  Instead of using VLOOKUP to pull customer region into a flat orders table before building a pivot table, Power Pivot loads `Customers` and `Orders` as separate tables, links them by `customer_id`, and lets you build a pivot table pulling fields from both — without ever manually merging them into one sheet.
+
+  ## ⚠️ Common mistakes
+
+  - **Flattening data with VLOOKUP before Power Pivot when it isn't necessary** — Power Pivot's whole advantage is handling related tables natively, without that flattening step.
+  - **Not defining relationships between loaded tables**, causing calculations to behave unexpectedly since Power Pivot doesn't know how the tables connect.
+
+  ## Related concepts
+
+  ```
+  Named Ranges
+    ↓
+  Power Pivot ← you are here
+    ↓
+  Data Model
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you reach for Power Pivot instead of a standard Pivot Table?**
+  Short answer: When the dataset is too large for a comfortable worksheet, or when the analysis needs to pull from multiple related tables (like customers and orders) without first manually flattening them together with lookups.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Power Pivot** → an add-in loading multiple related tables into an in-memory data model, with DAX measures
+  Handles much larger data and multi-table analysis than a standard Pivot Table.

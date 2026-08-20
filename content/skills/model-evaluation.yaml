@@ -1,0 +1,26 @@
+title: Model Evaluation
+what_is_it: >-
+  Choosing the right metric for a model and a problem, and interpreting evaluation results honestly,
+  including on imbalanced data.
+why_it_matters: >-
+  A model with 95% accuracy can be worthless if the underlying classes are imbalanced. Evaluation is
+  where "the model works" claims get tested.
+prerequisites:
+  - machine-learning-fundamentals
+objectives:
+  - Choose an evaluation metric appropriate to the problem (accuracy, precision/recall, RMSE, etc.)
+  - Read a confusion matrix
+  - Explain why accuracy can be misleading on imbalanced data
+estimated_minutes: 180
+resources:
+  - r-sklearn-model-evaluation
+practice:
+  - id: ex-model-eval-1
+    title: Evaluate an imbalanced classifier
+    description: >-
+      Given a classifier trained on an imbalanced dataset, choose and justify a metric other than
+      accuracy, and interpret the result.
+verify:
+  - Metric choice is justified relative to the business cost of false positives/negatives
+  - Confusion matrix is read correctly
+  - States a clear limitation of the evaluation performed

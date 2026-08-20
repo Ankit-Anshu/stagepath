@@ -1,0 +1,120 @@
+title: IF Function
+what_is_it: Returning one value when a condition is true and another when it's false — the core building block of conditional logic in a spreadsheet.
+why_it_matters: IF is the gateway to every "if this, then that" rule in a spreadsheet — flagging late orders, grading a score, or labeling a category.
+objectives:
+  - Write an IF formula with a true and false result
+  - Nest IF statements for more than two outcomes
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-if-1
+    title: Flag a threshold
+    description: Write an IF formula that labels each order "Large" or "Standard" based on order value.
+verify:
+  - IF formula returns the correct result for both branches
+  - A nested IF handles more than two outcomes correctly
+category: Spreadsheets
+prerequisites: []
+note: |
+  ## 🎯 What is it?
+
+  **IF** returns one value when a condition is true and another when it's false. It's the core building block of conditional logic in a spreadsheet — the spreadsheet version of "if this, then that."
+
+  ## 💡 Why is it important?
+
+  IF is the gateway to every conditional rule you'll ever write in a spreadsheet: flagging a late order, grading a score, labeling a customer segment. Nearly every "smart" column in a real spreadsheet has an IF (or a function built on the same logic) behind it.
+
+  ## Syntax
+
+  ```
+  =IF(condition, value_if_true, value_if_false)
+  ```
+
+  - **condition** — anything that evaluates to TRUE or FALSE, e.g. `B2>100`.
+  - **value_if_true / value_if_false** — what to return for each case; can be text, a number, or another formula.
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Order | Amount |
+  | 2 | 1 | 450 |
+  | 3 | 2 | 80 |
+
+  **Formula (C2):** `=IF(B2>200,"Large","Standard")`
+  **Result:** `"Large"` for row 2, `"Standard"` for row 3.
+
+  ## Multiple examples
+
+  **Beginner:** `=IF(B2>=60,"Pass","Fail")` — grade a score.
+  **Intermediate — nested IF:** `=IF(B2>=90,"A",IF(B2>=80,"B",IF(B2>=70,"C","D")))` — multi-tier grading.
+  **Real-world:** `=IF(AND(B2>100,C2="VIP"),"Priority","Standard")` — combining IF with AND for a business rule that depends on two conditions.
+
+  ## Types / Variations
+
+  | Form | Use case |
+  |---|---|
+  | Simple IF | One condition, two outcomes |
+  | Nested IF | More than two outcomes (chain of conditions) |
+  | IF + AND/OR | A condition that depends on multiple factors |
+  | IFS (modern alternative) | Multiple conditions without deep nesting: `=IFS(B2>=90,"A",B2>=80,"B",TRUE,"D")` |
+
+  ## ⚠️ Common mistakes
+
+  - **Deeply nesting IFs (4+ levels) instead of using IFS or a lookup table.** It becomes unreadable and error-prone fast.
+  - **Forgetting the false branch**, e.g. `=IF(B2>100,"Large")` — this silently returns `FALSE` when the condition isn't met, which is rarely intended.
+  - **Comparing text case-sensitively without realizing it isn't** — `="vip"` and `="VIP"` are treated as equal in most spreadsheet comparisons, which can surprise people expecting exact-case matching.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** flagging orders above a large-order threshold.
+  - **Marketing analysis:** labeling leads as "Qualified"/"Not Qualified" based on a score.
+  - **Operations analysis:** flagging shipments as "Late" if delivery date exceeds a promised date.
+
+  ## Related concepts
+
+  ```
+  IF ← you are here → DATEDIF → Text cleaning (UPPER/LOWER/PROPER, TRIM, REPLACE/SUBSTITUTE) → Lookup functions
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write an IF formula that labels an order "Large" if amount (B2) is over 300, otherwise "Standard".
+
+  ### Medium
+  2. Write a nested IF that assigns "A" (≥90), "B" (≥80), "C" (≥70), or "D" (below 70) based on score in B2.
+
+  ### Interview/Advanced
+  3. Rewrite your answer to Q2 using IFS instead of nested IF, and explain one advantage of doing so.
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=IF(B2>300,"Large","Standard")`
+  2. `=IF(B2>=90,"A",IF(B2>=80,"B",IF(B2>=70,"C","D")))`
+  3. `=IFS(B2>=90,"A",B2>=80,"B",B2>=70,"C",TRUE,"D")` — it reads top-to-bottom without nested parentheses, which is far easier to audit and edit as tiers change.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you use IFS instead of nested IF?**
+  Short answer: When there are more than two or three outcomes — IFS avoids deep parenthesis nesting and is much easier to read and maintain.
+
+  ## Interview traps / tricky points
+
+  - Forgetting the false-branch argument returns `FALSE` (a boolean), not blank — a subtle bug in downstream formulas.
+  - Text comparisons inside IF are not case-sensitive by default, which trips up people expecting `="VIP"` to fail against `"vip"`.
+
+  ## Best practices
+
+  - Prefer IFS or a lookup table over 3+ levels of nested IF.
+  - Always include an explicit false-branch value, even if it's just `""`.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **IF(condition, if_true, if_false)** → the core conditional building block
+  **Nested IF** → chain for 3+ outcomes; prefer IFS for readability past 2 conditions
+  **Watch for:** missing false branch, case-insensitive text comparison

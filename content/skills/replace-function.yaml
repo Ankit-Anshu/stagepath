@@ -1,0 +1,98 @@
+title: REPLACE Function
+category: Spreadsheets
+what_is_it: Replacing part of a text value by position — a fixed starting character and length — regardless of what the existing characters actually are.
+why_it_matters: The right tool when what needs changing is defined by a fixed position, like always masking the first 3 digits of an account number, rather than by matching specific text.
+prerequisites:
+  - textjoin-function
+objectives:
+  - Use REPLACE to change characters at a known position
+  - Explain when REPLACE fits better than SUBSTITUTE
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-replace-1
+    title: Mask an account number
+    description: Mask the first 4 digits of an account number column with asterisks using REPLACE, for a shared, less-sensitive report.
+verify:
+  - REPLACE correctly changes only the intended positional range
+  - Formula works across the whole column, not just one example
+note: |
+  ## 🎯 What is it?
+
+  **REPLACE** changes part of a text value by **position** — a fixed starting character and a fixed length — regardless of what the existing characters at that position actually are.
+
+  ## 💡 Why is it important?
+
+  It's the right tool when what needs changing is defined by a fixed *position* (like always masking the first 4 digits of an account number for privacy), rather than by matching specific text — which is [SUBSTITUTE](/skills/substitute-function)'s job instead.
+
+  ## Syntax
+
+  ```
+  =REPLACE(old_text, start_num, num_chars, new_text)
+  ```
+
+  - **start_num** — the character position to begin replacing at.
+  - **num_chars** — how many characters to replace.
+  - **new_text** — what to put in their place.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 1234567890 |
+
+  **Formula:** `=REPLACE(A1,1,4,"****")`
+  **Result:** `"****567890"` — the first 4 characters are replaced with asterisks, regardless of what those original digits were.
+
+  ## Multiple examples
+
+  **Beginner:** `=REPLACE(A2,1,1,"X")` — replace just the first character with "X".
+  **Real-world:** `=REPLACE(account_number,1,4,"****")` applied down a whole column of account numbers for a shared report, masking the first 4 digits of every account number for privacy, regardless of each account number's specific digits.
+
+  ## ⚠️ Common mistakes
+
+  - **Using REPLACE when the text to change isn't always in the same position.** Since REPLACE blindly replaces by position, it will corrupt the value if row lengths or formats vary — [SUBSTITUTE](/skills/substitute-function) (matching by text) is safer for inconsistent formats.
+  - **Miscounting the start position or length**, replacing the wrong characters — always test against a real example before applying broadly.
+
+  ## Real-world Data Analyst use cases
+
+  - **Privacy/masking:** masking a fixed-position portion of a sensitive identifier (account number, SSN) for a report with broader visibility.
+
+  ## Related concepts
+
+  ```
+  TEXTJOIN → REPLACE ← you are here → SUBSTITUTE
+  ```
+  This closes the Text Functions group.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that replaces the first 2 characters of A1 with "XX".
+
+  ### Interview/Advanced
+  2. When would REPLACE be a better choice than SUBSTITUTE?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=REPLACE(A1,1,2,"XX")`
+  2. When the text to change is defined by a fixed, known *position* rather than a specific matching string — e.g., always masking the first N characters of every value, regardless of what those specific characters happen to be, which SUBSTITUTE (matching by text) can't express directly.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the core difference between REPLACE and SUBSTITUTE?**
+  Short answer: REPLACE changes characters at a specific *position*; SUBSTITUTE changes a specific *matching piece of text* wherever it appears — one is position-based, the other is content-based.
+
+  ## Best practices
+
+  - Use REPLACE only when every row's format is consistent enough for a fixed position to be reliable.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **REPLACE(text, start, length, new)** → replace by fixed position
+  **vs. SUBSTITUTE:** REPLACE is position-based, SUBSTITUTE is content-based (matches specific text)

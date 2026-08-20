@@ -1,0 +1,69 @@
+title: Cleaning Numbers in Spreadsheets
+category: Spreadsheets
+what_is_it: Converting text that looks like a number (often with a currency symbol, comma, or extra space) into a true numeric value that can be summed and calculated on.
+why_it_matters: A "number" imported as text can't be summed, averaged, or compared numerically until it's converted — and it often looks completely normal on screen.
+prerequisites:
+  - cleaning-dates-spreadsheets
+objectives:
+  - Identify whether a cell holds a true number or text that looks like one
+  - Convert text-formatted numbers into true numeric values
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-cleaning-numbers-spreadsheets-1
+    title: Fix imported numbers
+    description: Given a column of prices imported as text with a "$" prefix, convert them into true numeric values that can be summed.
+verify:
+  - Can identify a text-formatted "fake" number
+  - Can convert text into a true numeric value
+note: |
+  ## 🎯 What is it?
+
+  **Cleaning numbers** means converting text that merely *looks* like a number — often carrying a currency symbol, thousands separator, or extra whitespace from an import — into a true numeric value that can actually be summed, averaged, or compared.
+
+  ## 💡 Why is it important?
+
+  - A cell containing the text `"$1,204.50"` looks like a number but can't be summed directly — `SUM` silently treats text-formatted numbers as 0, understating a total without any error being raised.
+  - It's exactly the numeric counterpart to Cleaning Dates — data imported from CSVs, PDFs, or web sources frequently arrives as text that merely resembles a number.
+
+  ## Core concept
+
+  Same alignment diagnostic as dates: true numbers are right-aligned by default; text that looks like a number is left-aligned.
+
+  | Approach | When to use |
+  |---|---|
+  | `VALUE()` function | Convert a single text-number to a true number |
+  | Text to Columns | Convert a whole column at once |
+  | Multiply by 1 (`=A1*1`) | Quick trick to force text-to-number conversion |
+  | Find & Replace to strip symbols first | When a currency symbol or comma blocks conversion |
+
+  ## 📊 Example
+
+  A column imported as `"$1,204.50"`, `"$89.00"` (text, left-aligned) produces `SUM = 0` if summed directly. Stripping the `$` and `,` characters (Find & Replace) and converting with `VALUE()` or Text to Columns produces true numeric values, right-aligned, that correctly sum to the real total.
+
+  ## ⚠️ Common mistakes
+
+  - **Trusting a SUM of 0 (or an unexpectedly low total) without checking whether the source column is actually text**, rather than immediately suspecting a data or formula bug elsewhere.
+  - **Formatting a text cell to "look like" a number** (via a number format) without actually converting it — formatting alone does not change a text value into a true number.
+
+  ## Related concepts
+
+  ```
+  Cleaning Dates
+    ↓
+  Cleaning Numbers ← you are here
+  ```
+  This closes the Data Cleaning chapter — the next chapter (Data Transformation) builds on clean, correctly-typed data to reshape it for analysis.
+
+  ## 🎤 Interview preparation
+
+  **Q: A SUM formula over a column of prices returns 0, even though the cells clearly show dollar amounts. What's the likely cause?**
+  Short answer: The prices are likely stored as text (often from a CSV or web import, sometimes with a "$" prefix), not true numbers — SUM silently treats text as 0. Converting with VALUE(), Text to Columns, or stripping the currency symbol first resolves it.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Cleaning numbers** → convert text that looks like a number into a true numeric value
+  Check alignment (right = real number, left = text); SUM silently treats text-numbers as 0.

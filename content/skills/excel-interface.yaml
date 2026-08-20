@@ -1,0 +1,67 @@
+title: Excel Interface
+category: Spreadsheets
+what_is_it: The main parts of a spreadsheet application's window — the ribbon, formula bar, name box, sheet tabs, and status bar — and what each one is for.
+why_it_matters: Every later instruction ("click the ribbon," "check the name box") assumes you already know where these pieces are — five minutes spent here saves confusion in every topic that follows.
+prerequisites:
+  - intro-to-spreadsheets
+objectives:
+  - Identify the ribbon, formula bar, name box, sheet tabs, and status bar
+  - Explain what each main interface element is used for
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-excel-interface-1
+    title: Label the interface
+    description: Open Excel or Google Sheets and identify the ribbon/toolbar, formula bar, name box, and sheet tabs.
+verify:
+  - Can name the five main interface areas
+  - Can explain what the formula bar and name box are each used for
+note: |
+  ## 🎯 What is it?
+
+  The **interface** is the layout of a spreadsheet application's window — the fixed set of areas you use constantly, regardless of what data you're working with:
+
+  | Area | What it's for |
+  |---|---|
+  | **Ribbon / Toolbar** | Commands, organized into tabs (Home, Insert, Formulas, Data...) |
+  | **Formula Bar** | Shows and edits the actual content (formula or value) of the selected cell |
+  | **Name Box** | Shows the selected cell's address; typing a cell address here jumps to it |
+  | **Sheet Tabs** | Switch between worksheets in the workbook |
+  | **Status Bar** | Quick stats (sum, average, count) for whatever's currently selected |
+
+  ## 💡 Why is it important?
+
+  - Every later instruction in this roadmap ("check the formula bar," "click the ribbon's Data tab") assumes you already know where these live — this is the five-minute orientation that prevents confusion later.
+  - The **formula bar** specifically is one of the most useful, most overlooked tools — it's how you see a cell's *actual* formula, not just its displayed result.
+
+  ## 📊 Example
+
+  Clicking on a cell that displays "16" might show `=SUM(B2:B3)` in the formula bar — the cell displays a *calculated result*, but the formula bar reveals what actually produced it. This distinction (displayed value vs. underlying formula) trips up nearly every beginner at least once.
+
+  ## ⚠️ Common mistakes
+
+  - **Editing a cell's displayed value directly without checking the formula bar first**, accidentally overwriting a formula with a hardcoded number.
+  - **Not knowing about the Name Box**, and manually scrolling to a specific cell instead of just typing its address (e.g., `Z500`) into the Name Box to jump straight there.
+
+  ## Related concepts
+
+  ```
+  Introduction to Spreadsheets
+    ↓
+  Excel Interface ← you are here
+    ↓
+  Workbook → Worksheet
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How do you check whether a cell showing a number actually contains a formula?**
+  Short answer: Click the cell and look at the formula bar — it shows the cell's real underlying content (a formula, if there is one), separate from the calculated value displayed in the grid itself.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Ribbon** → commands · **Formula bar** → shows the real formula · **Name box** → jump to a cell by address · **Sheet tabs** → switch worksheets
+  The formula bar always reveals a cell's true content, not just its displayed result.

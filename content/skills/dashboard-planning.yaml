@@ -1,0 +1,67 @@
+title: Dashboard Planning
+category: Spreadsheets
+what_is_it: Deciding a dashboard's audience, the one or two decisions it needs to support, and which metrics actually belong on it — before opening a blank sheet and adding charts.
+why_it_matters: A dashboard built without a plan tends to become a pile of every chart someone thought was interesting, rather than a tool that actually helps anyone decide anything.
+prerequisites:
+  - data-storytelling-spreadsheets
+objectives:
+  - Identify a dashboard's intended audience and the decisions it should support
+  - Explain why planning comes before building in a dashboard project
+estimated_minutes: 25
+resources:
+  - r-storytelling-with-data
+practice:
+  - id: ex-dashboard-planning-1
+    title: Write a one-page dashboard brief
+    description: Before building anything, write down a dashboard's intended audience, the one key decision it should support, and the 3-5 metrics that actually matter for that decision.
+verify:
+  - Can identify a dashboard's intended audience and purpose before building it
+  - Can explain the risk of skipping planning
+note: |
+  ## 🎯 What is it?
+
+  **Dashboard planning** means deciding, before opening a blank sheet, who a dashboard is for, what decision or question it needs to support, and which handful of metrics actually matter for that — the same "define the business problem" thinking from the Foundations stage, applied specifically to a dashboard.
+
+  ## 💡 Why is it important?
+
+  - A dashboard built without a plan tends to become a pile of every chart someone thought was interesting, rather than a focused tool that helps a specific audience make a specific decision.
+  - Planning up front is far cheaper than redesigning a crowded, unfocused dashboard after it's already been built and shared.
+
+  ## Core concept
+
+  A simple planning checklist before building:
+  - **Audience** — who will actually look at this, and how often?
+  - **Purpose** — what decision or question should this help answer?
+  - **Key metrics** — the 3-5 numbers that genuinely matter for that decision (see KPI Selection)
+  - **Update frequency** — daily, weekly, monthly — which affects what data source and refresh setup is needed
+
+  ## 📊 Example
+
+  Before building anything, a plan might read: "Audience: VP of Sales, checked every Monday morning. Purpose: quickly spot if any region is falling behind its quarterly target. Key metrics: revenue vs. target by region, top/bottom 3 performing products. Update: weekly, refreshed automatically via Power Query." This plan alone rules out dozens of "interesting but unnecessary" charts before any time is spent building them.
+
+  ## ⚠️ Common mistakes
+
+  - **Skipping straight to building charts** without a plan, producing a dashboard that's technically impressive but doesn't clearly serve anyone's actual decision.
+  - **Designing for "everyone" instead of a specific audience** — a dashboard trying to serve every possible viewer's needs usually serves none of them well.
+
+  ## Related concepts
+
+  ```
+  Data Storytelling
+    ↓
+  Dashboard Planning ← you are here
+    ↓
+  KPI Selection
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Before building a dashboard, what would you want to know first?**
+  Short answer: Who the audience is, what decision or question the dashboard needs to support, and which handful of metrics genuinely matter for that — skipping this planning step is the most common reason dashboards end up cluttered and unfocused.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Dashboard planning** → decide audience, purpose, and key metrics before building anything
+  Cheaper to plan upfront than to redesign a cluttered dashboard later.

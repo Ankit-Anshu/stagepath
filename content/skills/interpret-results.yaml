@@ -1,0 +1,66 @@
+title: Interpret Results
+category: Foundations
+what_is_it: Explaining what an analysis's findings actually mean in business terms — not just reporting a number, but what it implies.
+why_it_matters: A chart or number alone rarely tells a stakeholder what to think about it — interpretation is what bridges "here's a chart" to "here's what it means for us."
+prerequisites:
+  - visualize-data
+objectives:
+  - Explain the difference between reporting a result and interpreting it
+  - Practice turning a chart into a one-sentence interpretation
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-interpret-results-1
+    title: Interpret a chart
+    description: Take any chart you've made or seen recently and write one sentence interpreting what it means, not just describing what it shows.
+verify:
+  - Can distinguish reporting a result from interpreting it
+  - Can write a one-sentence interpretation of a chart
+note: |
+  ## 🎯 What is it?
+
+  **Interpreting results** means explaining what an analysis's findings actually mean in business terms — going beyond "here's what the chart shows" to "here's what this implies, and why it matters." It's the step that turns a chart into something a non-technical stakeholder can use.
+
+  ## 💡 Why is it important?
+
+  - A chart alone doesn't tell a stakeholder what to think — two people can look at the same chart and draw different conclusions without a clear interpretation attached.
+  - It's the step most closely tied to the earlier data → information → insight progression (see "What is Data?") — interpretation is what turns information into an insight.
+
+  ## Core concept
+
+  | | Reporting | Interpreting |
+  |---|---|---|
+  | Says | "Revenue grew 8% this quarter" | "Revenue grew 8% this quarter, driven mostly by the new region launch, ahead of our original 5% target" |
+  | Reader's takeaway | A number | A number, why it happened, and how it compares to expectations |
+
+  ## 📊 Example
+
+  Reported result: "Signups from the email channel dropped 15% last month." Interpretation: "This drop is concerning because email is our lowest-cost acquisition channel — the likely cause is the reduced send frequency we tested, and reverting it should recover most of the lost signups."
+
+  ## ⚠️ Common mistakes
+
+  - **Stopping at the number.** "Revenue grew 8%" leaves the stakeholder to guess whether that's good, expected, or concerning — always compare against a benchmark, target, or prior trend.
+  - **Over-interpreting without support.** An interpretation should be traceable back to the analysis — speculating beyond what the data actually shows undermines credibility.
+
+  ## Related concepts
+
+  ```
+  Visualize Data
+    ↓
+  Interpret Results ← you are here
+    ↓
+  Communicate Insights
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between reporting a finding and interpreting it?**
+  Short answer: Reporting states the number ("revenue grew 8%"); interpreting explains what it means — compared to a target or prior trend, likely cause, and why it matters to the business.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Interpret results** → explain what a finding means, not just what it shows — compare to a benchmark, explain likely cause, state why it matters
+  Turns information into an insight.

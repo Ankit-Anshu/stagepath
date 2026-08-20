@@ -1,0 +1,73 @@
+title: NOT Function
+category: Spreadsheets
+what_is_it: Reversing a TRUE/FALSE result — turning TRUE into FALSE and FALSE into TRUE.
+why_it_matters: It's how you test for the absence of a condition without having to rewrite the condition itself in reverse.
+prerequisites:
+  - or-function
+objectives:
+  - Reverse a logical test with NOT
+  - Combine NOT with another logical test inside IF
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-not-1
+    title: Flag incomplete records
+    description: Use NOT with ISBLANK to flag rows where a required field is missing.
+verify:
+  - Can write a NOT formula
+  - Can combine NOT with another test inside IF
+note: |
+  ## 🎯 What is it?
+
+  **NOT** reverses a TRUE/FALSE result — `NOT(TRUE)` returns `FALSE`, and `NOT(FALSE)` returns `TRUE`. It's most useful wrapped around another test, to check for the *absence* of a condition.
+
+  ## 💡 Why is it important?
+
+  - It lets you test for the absence of a condition without rewriting the condition itself backward — `NOT(ISBLANK(A1))` reads naturally as "A1 is not blank," clearer than trying to invent a direct "is filled in" test.
+  - It's commonly combined with AND/OR and IF for more precise conditional logic.
+
+  ## Syntax
+
+  ```
+  =NOT(logical_test)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Amir |
+  | 2 | *(empty)* |
+
+  `=NOT(ISBLANK(A1))` → `TRUE` (A1 is not blank)
+  `=NOT(ISBLANK(A2))` → `FALSE` (A2 is blank)
+
+  Combined with IF: `=IF(NOT(ISBLANK(A1)), "Complete", "Missing")` → `"Complete"` for A1.
+
+  ## ⚠️ Common mistakes
+
+  - **Double-negating unnecessarily**, producing a confusing formula like `NOT(NOT(condition))` when the original condition alone would have worked.
+  - **Reaching for NOT when a direct comparison would be clearer** — e.g., `NOT(A1=B1)` works, but `A1<>B1` (SQL/spreadsheet "not equal" operator) is often more direct for a simple inequality check.
+
+  ## Related concepts
+
+  ```
+  OR
+    ↓
+  NOT ← you are here
+    ↓
+  IFERROR
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you flag rows where a required "email" column is missing?**
+  Short answer: `=IF(NOT(ISBLANK(email_cell)), "Complete", "Missing")` — NOT reverses the blank check, so the formula reads naturally as "if it's not blank."
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **NOT(logical_test)** → reverses TRUE/FALSE
+  Useful for testing the absence of a condition, like "not blank."

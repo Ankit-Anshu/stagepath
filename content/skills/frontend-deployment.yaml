@@ -1,0 +1,21 @@
+title: Frontend Delivery & Portfolio
+category: Frontend Development
+what_is_it: Shipping a documented, observable frontend and presenting the engineering decisions behind it.
+why_it_matters: A working public product is stronger evidence than disconnected tutorials.
+estimated_minutes: 1800
+prerequisites: [testing-performance]
+objectives: [Deploy a production build, Add basic observability, Present a credible case study]
+subtopics:
+  - title: Production builds
+    description: Environment configuration, build output, static hosting, server rendering, and caching.
+    outcomes: [Choose a deployment model, Verify production configuration]
+  - title: CI and release checks
+    description: Automated builds, tests, preview deployments, and rollback thinking.
+    outcomes: [Create a release pipeline, Define a release checklist]
+  - title: Monitoring
+    description: Client errors, performance monitoring, analytics ethics, and incident triage.
+    outcomes: [Capture actionable errors, Define health signals]
+  - title: Project documentation
+    description: README structure, architecture notes, tradeoffs, screenshots, and known limitations.
+    outcomes: [Write a useful README, Explain a technical decision]
+

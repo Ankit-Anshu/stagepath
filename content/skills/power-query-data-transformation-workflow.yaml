@@ -1,0 +1,75 @@
+title: Data Transformation Workflow
+category: Spreadsheets
+what_is_it: Managing a query's full sequence of transformation steps — the Applied Steps panel — as one coherent, ordered, editable pipeline rather than a series of one-off actions.
+why_it_matters: Every Power Query step depends on the ones before it — understanding the Applied Steps panel as a real, editable sequence is what lets you fix, reorder, or debug a query confidently.
+prerequisites:
+  - power-query-data-cleaning
+objectives:
+  - Read and edit a query's Applied Steps sequence
+  - Explain why step order matters in a Power Query pipeline
+estimated_minutes: 25
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-transformation-workflow-1
+    title: Reorder a broken pipeline
+    description: Given a query where a filter step was accidentally placed before a needed data-type conversion, reorder the Applied Steps to fix it.
+verify:
+  - Can read a query's Applied Steps panel
+  - Can explain why step order affects a pipeline's result
+note: |
+  ## 🎯 What is it?
+
+  Every transformation applied in Power Query — importing, filtering, changing types, removing columns, grouping — is recorded as a named, ordered entry in the **Applied Steps** panel. The **Data Transformation Workflow** is the practice of treating this list as one coherent, editable pipeline, not just a sequence of one-off actions you take and forget.
+
+  ## 💡 Why is it important?
+
+  - Every step depends on the state left by the step before it — reordering, editing, or deleting a step can change or break everything that comes after it, so understanding the sequence as a real pipeline (not independent actions) is essential.
+  - It's what makes a query maintainable — six months later, someone (including future you) can read the Applied Steps panel top to bottom and understand exactly what transformation pipeline is being applied.
+
+  ## Core concept
+
+  ```
+  Applied Steps:
+  1. Source              (connect to the file/database)
+  2. Changed Type          (fix data types)
+  3. Filtered Rows         (exclude test accounts)
+  4. Removed Columns       (trim to what's needed)
+  5. Unpivoted Columns     (wide → long)
+  6. Grouped Rows          (summarize by region)
+  ```
+
+  Each step can be clicked to preview the data's state *at that point*, edited via its gear icon, reordered by dragging, or deleted — the whole list is a live, inspectable pipeline.
+
+  ## 📊 Example
+
+  A query filters rows *before* converting a column's type from text to number — if the filter condition depends on that column being numeric (like "amount > 1000"), placing the filter step before the type conversion step can silently produce wrong results, since the comparison behaves differently against text. Reordering the steps (type conversion first, filter second) fixes it.
+
+  ## ⚠️ Common mistakes
+
+  - **Not realizing step order is meaningful**, and being confused when reordering (or inserting a new step) changes a query's result unexpectedly.
+  - **Deleting a step without checking what later steps depend on it**, breaking the pipeline further down in ways that can be hard to trace back to the actual cause.
+  - **Leaving steps with unclear default names** ("Custom1," "Changed Type1") instead of renaming them descriptively, making the pipeline harder for anyone (including future you) to follow later.
+
+  ## Related concepts
+
+  ```
+  Data Cleaning in Power Query
+    ↓
+  Data Transformation Workflow ← you are here
+    ↓
+  Refresh
+  ```
+  This closes the hands-on transformation steps — the chapter's final topic (Query Dependencies) covers how multiple queries relate to each other.
+
+  ## 🎤 Interview preparation
+
+  **Q: You reorder two steps in a Power Query pipeline and the result changes unexpectedly. Why?**
+  Short answer: Each Applied Step operates on the data state left by the step before it — reordering changes what state a given step actually operates on, which can produce a different (and sometimes broken) result, especially when a later step depends on a type conversion or filter that used to come earlier.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data Transformation Workflow** → the Applied Steps panel is one ordered, editable pipeline, not independent actions
+  Step order matters — each step depends on the state left by the one before it.

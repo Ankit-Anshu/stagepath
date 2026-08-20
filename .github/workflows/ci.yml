@@ -1,0 +1,28 @@
+name: CI
+
+# Runs on every pull request and push to main: installs deps and builds the site. Astro content
+# collections are schema-validated (src/content.config.ts) at build time, so this is also the
+# automated check that any new/edited YAML content is well-formed before a maintainer reviews it.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build

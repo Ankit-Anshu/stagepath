@@ -1,0 +1,66 @@
+title: Prescriptive Analytics
+category: Foundations
+what_is_it: Analytics that recommends a specific action to take, based on descriptive, diagnostic, and predictive findings.
+why_it_matters: It's the type of analytics that most directly drives business decisions — the ultimate goal of most real analyst work is to end with a clear, actionable recommendation, not just a finding.
+prerequisites:
+  - predictive-analytics
+objectives:
+  - Define prescriptive analytics and give an example
+  - Explain how prescriptive analytics builds on the other three types
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-prescriptive-analytics-1
+    title: Turn a finding into a recommendation
+    description: Take any finding you've made about a personal metric (spending, time use) and write one specific, actionable recommendation based on it.
+verify:
+  - Can define prescriptive analytics
+  - Can turn a descriptive finding into a prescriptive recommendation
+note: |
+  ## 🎯 What is it?
+
+  **Prescriptive analytics** answers "what should we do?" — it turns descriptive, diagnostic, and predictive findings into a specific, actionable recommendation. "Increase inventory by 20% ahead of next month's forecasted demand spike" is a prescriptive statement.
+
+  ## 💡 Why is it important?
+
+  - It's the type of analytics that most directly drives a business decision — most real-world analyst work is expected to end here, not stop at a description or a diagnosis.
+  - Interviewers and stakeholders consistently reward analysts who end an analysis with a clear recommendation rather than just a pile of numbers.
+  - It requires synthesizing all three earlier types (what happened, why, what's likely next) into one clear next step.
+
+  ## Core concept
+
+  | Type | Question | Example |
+  |---|---|---|
+  | Descriptive | What happened? | "Revenue dropped 10%" |
+  | Diagnostic | Why? | "Because of a stockout" |
+  | Predictive | What's next? | "Demand is forecast to rise again next month" |
+  | **Prescriptive** | What should we do? | "Increase inventory by 20% before next month" |
+
+  ## 📊 Example
+
+  Full chain: revenue dropped 10% (descriptive) → because a key product went out of stock for a week (diagnostic) → demand for that product is trending back up (predictive) → recommendation: pre-order 20% more stock than usual ahead of the next demand cycle (prescriptive). The recommendation is the part a stakeholder actually acts on.
+
+  ## ⚠️ Common mistakes
+
+  - **Giving a vague recommendation** ("we should improve inventory management") instead of a specific, actionable one ("increase safety stock of Product X by 20% starting next order cycle").
+  - **Skipping straight to a recommendation without the supporting descriptive/diagnostic/predictive chain** — a recommendation without evidence is much easier for a stakeholder to dismiss.
+
+  ## Related concepts
+
+  ```
+  Descriptive → Diagnostic → Predictive → Prescriptive Analytics ← you are here
+  ```
+  This closes the four types of data analytics — most real analyses move through all four, ending with a recommendation someone can act on.
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is prescriptive analytics considered the "highest value" type of the four?**
+  Short answer: Because it's the only one that directly tells a stakeholder what to do — descriptive, diagnostic, and predictive analytics all build toward it, but a business ultimately acts on a recommendation, not a description.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Prescriptive analytics** → recommends a specific action, built on descriptive + diagnostic + predictive findings
+  The type of analysis most directly tied to a business decision.

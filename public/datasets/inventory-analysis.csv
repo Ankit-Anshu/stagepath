@@ -1,0 +1,15 @@
+sku,product_name,category,warehouse,stock_on_hand,reorder_point,unit_cost,monthly_units_sold
+SKU-1001,Wireless Mouse,Accessories,North,42,50,8.50,65
+SKU-1002,USB-C Cable,Accessories,North,310,100,2.10,180
+SKU-1003,27in Monitor,Hardware,South,18,20,142.00,22
+SKU-1004,Mechanical Keyboard,Accessories,North,5,25,34.00,40
+SKU-1005,Laptop Stand,Accessories,West,88,30,15.75,28
+SKU-1006,Webcam HD,Hardware,South,0,15,22.30,19
+SKU-1007,Desk Lamp,Office,East,140,40,11.00,33
+SKU-1008,Office Chair,Office,East,12,15,89.00,14
+SKU-1009,Noise Cancelling Headset,Accessories,West,26,20,58.00,31
+SKU-1010,Docking Station,Hardware,South,3,20,76.50,17
+SKU-1011,Whiteboard,Office,North,55,20,24.00,9
+SKU-1012,External SSD 1TB,Hardware,West,9,25,64.00,38
+SKU-1013,Printer Paper (case),Office,East,220,80,18.00,52
+SKU-1014,Ergonomic Footrest,Office,North,31,20,19.50,11

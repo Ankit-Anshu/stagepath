@@ -1,0 +1,20 @@
+title: UX Portfolio & Case Studies
+category: UX Design
+what_is_it: Communicating your role, process, evidence, decisions, tradeoffs, outcomes, and reflection.
+why_it_matters: A portfolio must show how you think, not only polished final screens.
+estimated_minutes: 1800
+prerequisites: [prototyping-testing]
+objectives: [Write evidence-based case studies, Present work clearly, Explain constraints and learning]
+subtopics:
+  - title: Case-study narrative
+    description: Context, problem, role, constraints, evidence, decisions, outcomes, and reflection.
+    outcomes: [Build a coherent story, Keep focus on your contribution]
+  - title: Evidence selection
+    description: Research clips, artifacts, alternatives, iterations, metrics, and confidentiality.
+    outcomes: [Choose evidence that supports claims, Redact responsibly]
+  - title: Outcome communication
+    description: Usability change, business effect, proxy outcomes, limitations, and honest attribution.
+    outcomes: [Avoid invented impact, Explain what changed]
+  - title: Portfolio presentation
+    description: Scannability, accessibility, responsive behavior, project selection, and interview walkthroughs.
+    outcomes: [Create a readable case-study page, Deliver a concise walkthrough]

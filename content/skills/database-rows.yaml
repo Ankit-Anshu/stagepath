@@ -1,0 +1,68 @@
+title: Rows
+category: SQL
+what_is_it: A single record in a database table — one complete entry, with a value for every column, representing one "thing" (one customer, one order, one product).
+why_it_matters: Knowing exactly what one row represents (a table's "grain") is required before writing any query that counts, sums, or joins that table correctly.
+prerequisites:
+  - database-tables
+objectives:
+  - Define a row and explain what "the grain" of a table means
+  - Identify the row-level meaning of a simple example table
+estimated_minutes: 15
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-database-rows-1
+    title: Identify the grain
+    description: Given an orders table with an order_id and a product_id on every row, determine whether one row is "one order" or "one item within an order."
+verify:
+  - Can define a row
+  - Can explain what checking "the grain" means and why it matters
+note: |
+  ## 🎯 What is it?
+
+  A **row** is a single record in a table — one complete entry with a value in every column, representing one instance of whatever the table tracks: one customer, one order, one product. What exactly one row represents is called the table's **grain**.
+
+  ## 💡 Why is it important?
+
+  - Getting the grain wrong is one of the most common real SQL mistakes — summing a column assuming "one row = one order" when it's actually "one row = one item within an order" silently produces an inflated total.
+  - Every `COUNT(*)`, `SUM()`, and `JOIN` implicitly depends on correctly understanding what a row means.
+
+  ## Core concept
+
+  ```sql
+  SELECT COUNT(*) FROM orders;
+  ```
+
+  This only correctly counts "number of orders" if one row in `orders` truly represents one order. If the table is actually at the order-*item* grain (multiple rows per order, one per product purchased), this query overcounts.
+
+  ## 📊 Example
+
+  An `order_items` table with columns `order_id`, `product_id`, `quantity` has one row **per item within an order** — a single $50 order with 3 different products produces 3 rows, all sharing the same `order_id`. Counting rows here answers "how many items were ordered," not "how many orders were placed" — those require different queries.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming a table's name reveals its grain.** Always verify by checking whether a key column (like `order_id`) repeats across multiple rows.
+  - **Double-counting after a join** — joining two tables can multiply rows if the relationship isn't one-to-one, changing what "one row" means in the joined result.
+
+  ## Related concepts
+
+  ```
+  Tables
+    ↓
+  Rows ← you are here
+    ↓
+  Columns → Primary Key
+  ```
+  Directly connects to the earlier Understand the Data topic's concept of "the grain."
+
+  ## 🎤 Interview preparation
+
+  **Q: You run `SELECT COUNT(*) FROM orders` and get 500 — does that mean 500 orders were placed?**
+  Short answer: Only if you've confirmed the table's grain is one row per order. If it's actually one row per item within an order, 500 rows could represent far fewer than 500 distinct orders — always verify the grain first, e.g. by checking `COUNT(DISTINCT order_id)`.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Row** → one record in a table, representing one instance of the thing the table tracks
+  **Grain** → what exactly one row represents — always verify it before counting or summing.

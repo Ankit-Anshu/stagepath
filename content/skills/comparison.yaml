@@ -1,0 +1,68 @@
+title: Comparison
+category: Foundations
+what_is_it: Judging whether a number is good, bad, or normal by comparing it against a meaningful reference point — a target, a prior period, or a benchmark.
+why_it_matters: A number in isolation is meaningless — comparison is what gives it meaning, and choosing the right comparison point is a skill in itself.
+prerequisites:
+  - segmentation
+objectives:
+  - Explain why a number needs a comparison point to be meaningful
+  - Name three common types of comparison an analyst uses
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-comparison-1
+    title: Add a comparison point
+    description: Take any single metric you know (this month's spending, steps, etc.) and add a meaningful comparison — to a target, a prior period, or a benchmark.
+verify:
+  - Can explain why a number alone is hard to judge
+  - Can name three types of comparison
+note: |
+  ## 🎯 What is it?
+
+  **Comparison** is the practice of judging whether a number is good, bad, or normal by measuring it against a meaningful reference point — a target, a prior period, a benchmark, or another segment — rather than looking at it in isolation.
+
+  ## 💡 Why is it important?
+
+  - "Revenue was $1.2M last month" means almost nothing on its own — was that good? Comparison ("...versus a $1.5M target" or "...up 8% from the prior month") is what gives a number meaning.
+  - It's the analytical thinking skill underlying nearly every business report — nearly every metric that matters is presented alongside some form of comparison.
+
+  ## Core concept
+
+  | Comparison type | Example |
+  |---|---|
+  | vs. target/goal | Actual revenue vs. the quarterly target |
+  | vs. prior period | This month vs. last month, or this year vs. last year |
+  | vs. another segment | This region vs. that region |
+  | vs. an external benchmark | Our conversion rate vs. the industry average |
+
+  ## 📊 Example
+
+  "Support response time was 4 hours" says little alone. Adding comparisons: "...versus our 2-hour SLA target" (concerning), "...down from 6 hours last quarter" (improving), and "...compared to the industry average of 5 hours" (still competitive) — three different comparisons, three different (and all useful) angles on the same number.
+
+  ## ⚠️ Common mistakes
+
+  - **Presenting a number with no comparison point at all**, leaving the reader to guess whether it's good or bad.
+  - **Comparing against the wrong baseline** — e.g., comparing December sales to November's instead of to last December's, misreading normal seasonality as a real change (see Trend Analysis).
+
+  ## Related concepts
+
+  ```
+  Segmentation
+    ↓
+  Comparison ← you are here
+    ↓
+  Correlation vs Causation
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why does a metric like "response time: 4 hours" need a comparison point to be useful?**
+  Short answer: A single number can't be judged as good or bad on its own — it needs a reference point (a target, a prior period, or a benchmark) to tell you whether 4 hours is an improvement, a concern, or roughly normal.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Comparison** → judge a number by measuring it against a target, prior period, or benchmark
+  A number without a comparison point is hard to interpret at all.

@@ -1,0 +1,26 @@
+title: Data Warehousing
+what_is_it: >-
+  How analytical databases are structured for fast querying at scale — star schemas, fact and
+  dimension tables, and partitioning.
+why_it_matters: >-
+  A warehouse schema designed for reporting is not the same as one designed for a transactional app.
+  Getting this wrong makes every downstream query slow or wrong.
+prerequisites:
+  - sql-aggregation
+objectives:
+  - Explain fact vs dimension tables
+  - Design a simple star schema for a business process
+  - Explain why partitioning improves query performance at scale
+estimated_minutes: 240
+resources:
+  - r-aws-what-is-data-warehouse
+practice:
+  - id: ex-warehousing-1
+    title: Design a star schema
+    description: >-
+      Given a description of an orders business process, design a fact table and its supporting
+      dimension tables.
+verify:
+  - Fact table grain is stated explicitly
+  - Dimension tables are correctly separated from the fact table
+  - Schema supports the stated reporting questions

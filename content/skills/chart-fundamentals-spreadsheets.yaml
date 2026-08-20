@@ -1,0 +1,69 @@
+title: Chart Fundamentals
+category: Spreadsheets
+what_is_it: The basic building blocks every spreadsheet chart is made from — a data series, category axis, value axis, legend, and title.
+why_it_matters: Every specific chart type (bar, line, scatter) is a variation on these same building blocks — understanding them once makes every chart type faster to build and troubleshoot.
+prerequisites:
+  - preparing-data-for-pivot-tables
+objectives:
+  - Identify a chart's data series, category axis, value axis, and legend
+  - Build a basic chart from a selected range
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-chart-fundamentals-1
+    title: Build and label a basic chart
+    description: Select a small table and insert a chart, then identify its category axis, value axis, and legend.
+verify:
+  - Can identify the core parts of any chart
+  - Can build a basic chart from a selected range
+note: |
+  ## 🎯 What is it?
+
+  Every spreadsheet chart is built from the same core pieces: a **data series** (the values being plotted), a **category axis** (what each data point represents — usually along the bottom), a **value axis** (the scale the data is measured against — usually along the side), a **legend** (identifying multiple series), and a **title**.
+
+  ## 💡 Why is it important?
+
+  - Every specific chart type covered in this chapter (bar, line, scatter, pie...) is a variation on these same building blocks — understanding them once makes every chart type faster to build, read, and troubleshoot.
+  - Knowing the vocabulary (series, axis, legend) is required to follow any chart documentation or troubleshoot a chart showing something unexpected.
+
+  ## Core concept
+
+  | Part | What it is |
+  |---|---|
+  | Data series | The actual values being plotted (e.g., monthly revenue) |
+  | Category axis | What each data point represents (e.g., months) — typically horizontal |
+  | Value axis | The numeric scale the data is measured against — typically vertical |
+  | Legend | Identifies which color/style belongs to which series, when there's more than one |
+  | Title | Names what the chart shows |
+
+  ## 📊 Example
+
+  A chart of monthly revenue has `Month` (Jan, Feb, Mar...) on the category axis, `Revenue` values on the value axis, one data series (Revenue) plotted as bars or a line, and a title like "Monthly Revenue, 2024."
+
+  ## ⚠️ Common mistakes
+
+  - **Selecting the wrong range before inserting a chart**, causing Excel to guess the wrong series/category split — always select the intended range (including headers) deliberately.
+  - **Building a chart with no title or unclear axis labels**, leaving a viewer to guess what's actually being shown.
+
+  ## Related concepts
+
+  ```
+  Preparing Data for Pivot Tables
+    ↓
+  Chart Fundamentals ← you are here
+    ↓
+  Column Chart → Bar Chart → Line Chart
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between a chart's category axis and its value axis?**
+  Short answer: The category axis shows what each data point represents (like months or products), typically along the bottom; the value axis shows the numeric scale the data is measured against, typically along the side.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Chart building blocks** → data series, category axis, value axis, legend, title
+  Every specific chart type is a variation on these same core pieces.

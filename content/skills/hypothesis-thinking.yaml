@@ -1,0 +1,72 @@
+title: Hypothesis Thinking
+category: Foundations
+what_is_it: Forming a specific, testable guess about the answer to a question before diving into the data, then checking whether the data supports or contradicts it.
+why_it_matters: Analyzing with a hypothesis in mind is faster and more focused than open-ended exploration, and it's directly testable — you either confirm it, refute it, or learn something more specific.
+prerequisites:
+  - asking-analytical-questions
+objectives:
+  - Explain what a hypothesis is in an analytical context
+  - Form a testable hypothesis for a given business question
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-hypothesis-thinking-1
+    title: Form a hypothesis
+    description: For a business question you're curious about, write a specific hypothesis for what you think the answer is, before looking at any data.
+verify:
+  - Can define hypothesis thinking
+  - Can write a testable hypothesis for a given question
+note: |
+  ## 🎯 What is it?
+
+  **Hypothesis thinking** means forming a specific, testable guess about the likely answer to a question *before* diving into the data, then using the data to confirm, refute, or refine that guess — rather than exploring with no direction at all.
+
+  ## 💡 Why is it important?
+
+  - It's much faster than fully open-ended exploration — a hypothesis tells you exactly which data to pull and which comparison to make first.
+  - It's directly testable: a good hypothesis is specific enough that the data can clearly support or contradict it, which produces a sharper finding than vague exploration.
+  - It's the everyday, informal cousin of formal Hypothesis Testing (covered later in Statistics), which adds statistical rigor to the same basic idea.
+
+  ## Core concept
+
+  ```
+  Question:    "Why did signups drop last week?"
+  Hypothesis:  "I think it's because the signup form change we shipped Tuesday
+                introduced a bug that's rejecting some submissions."
+  Test:        Check the error rate on the signup form before/after Tuesday's deploy.
+  ```
+
+  A hypothesis should be specific enough to be wrong — "something changed" isn't a hypothesis; "the Tuesday deploy broke the form for mobile users" is.
+
+  ## 📊 Example
+
+  Given "conversion rate dropped this week," instead of exploring every possible angle at once, an analyst forms a hypothesis: "I suspect it's mobile-specific, since we shipped a mobile checkout change Monday." They check mobile vs. desktop conversion rate first — a focused, fast test — rather than starting with an unfocused deep dive across every dimension.
+
+  ## ⚠️ Common mistakes
+
+  - **Only looking for evidence that confirms the hypothesis** (confirmation bias) and ignoring data that contradicts it — a good analyst actively checks for disconfirming evidence too.
+  - **Treating a hypothesis as a conclusion before it's actually tested against the data.**
+
+  ## Related concepts
+
+  ```
+  Asking Analytical Questions
+    ↓
+  Hypothesis Thinking ← you are here
+    ↓
+  Root Cause Analysis
+  ```
+  Builds toward the formal Hypothesis Testing topic in the Statistics stage.
+
+  ## 🎤 Interview preparation
+
+  **Q: How does forming a hypothesis before analyzing data make you faster, not slower?**
+  Short answer: A specific hypothesis tells you exactly which comparison to check first, instead of exploring every possible angle — it focuses the analysis, and even a wrong hypothesis usually points toward the right one faster than unfocused exploration.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Hypothesis thinking** → form a specific, testable guess before diving into data, then check it against the data
+  Faster and sharper than open-ended exploration — but watch for confirmation bias.

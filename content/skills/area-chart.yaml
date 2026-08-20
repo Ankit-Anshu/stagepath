@@ -1,0 +1,67 @@
+title: Area Chart
+category: Spreadsheets
+what_is_it: A line chart with the area beneath the line filled in — emphasizing the magnitude of a trend over time, and useful for showing stacked totals across multiple series.
+why_it_matters: The filled area adds visual weight to volume/magnitude that a plain line chart doesn't emphasize as strongly, and stacked area charts show how multiple parts contribute to a changing total.
+prerequisites:
+  - pie-donut-chart
+objectives:
+  - Build an area chart to emphasize trend magnitude
+  - Explain when a stacked area chart is appropriate versus a plain line chart
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-area-chart-1
+    title: Build a stacked area chart
+    description: Given monthly revenue by 3 product categories, build a stacked area chart showing both the total trend and each category's contribution.
+verify:
+  - Can build an area chart
+  - Can explain when a stacked area chart is the right choice over a line chart
+note: |
+  ## 🎯 What is it?
+
+  An **area chart** is a line chart with the region beneath the line filled in — visually emphasizing the magnitude of a trend, not just its direction. A **stacked area chart** layers multiple series on top of each other, showing both the total and each series' contribution to it.
+
+  ## 💡 Why is it important?
+
+  - The filled area gives a stronger visual sense of volume/magnitude than a plain line, which can matter when communicating "how much," not just "which direction."
+  - Stacked area charts are one of the few chart types that clearly show both a changing total *and* the composition of that total over time in one view.
+
+  ## Core concept
+
+  | Chart | Best for |
+  |---|---|
+  | Line chart | Comparing trend direction across a few series |
+  | Area chart | Emphasizing magnitude/volume of a single trend |
+  | Stacked area chart | Showing a total's composition changing over time |
+
+  ## 📊 Example
+
+  Monthly revenue by product category, shown as a stacked area chart, reveals both the company's total revenue trend (the top of the stack) and which categories are growing or shrinking as a share of that total — information a set of separate line charts would make much harder to see at once.
+
+  ## ⚠️ Common mistakes
+
+  - **Stacking too many series**, making individual bands hard to distinguish and compare — beyond 4-5 series, consider a different chart or breaking it into smaller groups.
+  - **Using a stacked area chart when the series aren't meaningfully additive** (i.e., summing them doesn't represent something real) — stacking implies the total is meaningful; don't stack unrelated metrics.
+
+  ## Related concepts
+
+  ```
+  Pie / Donut Chart
+    ↓
+  Area Chart ← you are here
+    ↓
+  Combo Chart
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: When would a stacked area chart be a better choice than several separate line charts?**
+  Short answer: When you want to show both the overall trend of a total *and* how each component contributes to that total over time — a stacked area chart shows both in one view, while separate line charts would require the viewer to mentally combine them.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Area chart** → a filled line chart emphasizing magnitude
+  **Stacked area chart** → shows a changing total's composition over time — don't stack more than 4-5 series

@@ -1,0 +1,7 @@
+timestamp,user,source_ip,country,result,mfa,device_id
+2026-07-21T08:03:11Z,alex@northbridge.test,203.0.113.18,IN,success,push,NB-LT-044
+2026-07-21T08:17:42Z,alex@northbridge.test,198.51.100.77,DE,failure,password,unknown
+2026-07-21T08:18:05Z,alex@northbridge.test,198.51.100.77,DE,success,push,unknown
+2026-07-21T08:18:19Z,alex@northbridge.test,198.51.100.77,DE,success,token,unknown
+2026-07-21T09:04:31Z,mina@northbridge.test,203.0.113.42,IN,success,push,NB-LT-019
+

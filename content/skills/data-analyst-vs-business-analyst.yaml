@@ -1,0 +1,70 @@
+title: Data Analyst vs Business Analyst
+category: Foundations
+what_is_it: How the data analyst role differs from the business analyst role — two frequently confused, sometimes overlapping titles with different core focuses.
+why_it_matters: Job titles for these two roles overlap heavily in job postings — knowing the real difference helps you target the right roles and answer "why this role, not the other" confidently in an interview.
+prerequisites:
+  - what-is-data-analytics
+objectives:
+  - Explain the core difference between a data analyst and a business analyst
+  - Identify which role a given job posting is more likely describing
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-da-vs-ba-1
+    title: Classify job postings
+    description: Find three job postings titled "Business Analyst" or "Data Analyst" and note which core activities (SQL, requirements gathering, dashboards, process mapping) each emphasizes.
+verify:
+  - Can state the core difference between the two roles
+  - Can point to one skill each role emphasizes that the other doesn't
+note: |
+  ## 🎯 What is it?
+
+  A **Data Analyst** focuses on working directly with data — querying, cleaning, analyzing, and visualizing it — to answer specific questions. A **Business Analyst** focuses more broadly on understanding business processes, gathering requirements, and translating business needs into solutions, which may or may not involve deep hands-on data work.
+
+  In practice, the titles overlap heavily and company-to-company usage varies a lot — some "Business Analyst" roles are essentially data analyst roles, and vice versa.
+
+  ## 💡 Why is it important?
+
+  - Job postings use these titles inconsistently, so an analyst job-hunting needs to read the actual responsibilities, not just the title.
+  - Interviewers sometimes ask directly why you're pursuing "data analyst" over "business analyst" (or the reverse) — a vague answer suggests you haven't researched the distinction.
+
+  ## Core concept
+
+  | | Data Analyst | Business Analyst |
+  |---|---|---|
+  | Core focus | Working directly with data (querying, cleaning, visualizing) | Understanding business processes and requirements |
+  | Typical output | Dashboards, reports, statistical findings | Requirements documents, process improvements, recommendations |
+  | Core tools | SQL, Excel, Python, BI tools | Excel, process-mapping tools, stakeholder interviews |
+  | Closer to | Engineering/technical side | Product/strategy side |
+
+  ## 📊 Example
+
+  A data analyst is asked "why did signups drop last week?" — they'd query the database, segment the drop by channel, and report the finding with supporting numbers. A business analyst might instead be asked "should we change our onboarding process?" — they'd interview stakeholders, map the current process, and recommend a new one, using data as one input among several.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming the two roles are strictly separate everywhere.** In smaller companies, one person often does both — deep hands-on data work *and* stakeholder-facing requirements gathering.
+  - **Picking a role based on title alone.** Always read the actual day-to-day responsibilities in a job posting; titles are inconsistent across companies.
+
+  ## Related concepts
+
+  ```
+  What is Data Analytics
+    ↓
+  Data Analyst vs Business Analyst ← you are here
+  ```
+  (See the existing "What is Data Analytics" topic for the analyst-vs-scientist and analyst-vs-engineer comparisons.)
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you describe the difference between a data analyst and a business analyst?**
+  Short answer: A data analyst spends most of their time directly in the data — querying, cleaning, visualizing; a business analyst spends more time on process and requirements, using data as one of several inputs. The titles overlap in practice, so it's worth reading a specific job's actual responsibilities.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data Analyst** → hands-on with data: SQL, dashboards, statistical findings
+  **Business Analyst** → process/requirements-focused: stakeholder interviews, recommendations
+  Titles overlap heavily in practice — always check the actual responsibilities.

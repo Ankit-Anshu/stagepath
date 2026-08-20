@@ -1,0 +1,68 @@
+title: Missing Values in Spreadsheets
+category: Spreadsheets
+what_is_it: Identifying and deciding how to handle empty cells in a dataset — leave them, fill them, or flag them — before they distort a calculation.
+why_it_matters: A missing value silently skipped by one formula (like AVERAGE) but silently treated as zero by another (like a plain SUM of a range) can produce two different, both-plausible-looking numbers from the same data.
+prerequisites:
+  - lookup-errors
+objectives:
+  - Identify missing values in a range using COUNTBLANK or a filter
+  - Explain how AVERAGE and SUM treat blank cells differently from zero
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-missing-values-spreadsheets-1
+    title: Audit a column for gaps
+    description: Given a column of scores with some blank cells, use COUNTBLANK and a filter to find and review every missing entry before calculating an average.
+verify:
+  - Can find missing values in a column
+  - Can explain how AVERAGE handles blanks differently from zeros
+note: |
+  ## 🎯 What is it?
+
+  **Missing values** are empty cells in a dataset where a value should exist. Before calculating anything from a column, an analyst needs to know how many values are missing, where, and — critically — whether the tool being used treats a blank the same way it treats a zero.
+
+  ## 💡 Why is it important?
+
+  - AVERAGE silently *excludes* blank cells from its calculation, but treats a cell containing `0` as a real zero — these can produce very different averages from what looks like "the same" data at a glance.
+  - Deciding how to handle missing data (leave it blank, fill it, flag and exclude it) should be a deliberate choice, not an accident of which formula happened to be used.
+
+  ## Core concept
+
+  | Function | Blank cell | Cell containing 0 |
+  |---|---|---|
+  | `AVERAGE` | Excluded from the calculation | Included, counts as a real 0 |
+  | `SUM` | Contributes 0 (same effect either way) | Contributes 0 |
+  | `COUNT` | Not counted | Counted |
+  | `COUNTA` | Not counted | Counted |
+
+  ## 📊 Example
+
+  A column of 10 test scores has 2 blank cells (students who didn't take the test) and 1 score of `0` (a student who took it and scored zero). `AVERAGE` divides by 8 (excluding the 2 blanks, but including the real 0) — correctly reflecting "average score among those who took the test." Manually treating the blanks as zeros and dividing by 10 would understate the average and misrepresent what actually happened.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming blank and zero always behave identically** — they don't, especially in AVERAGE, COUNT, and COUNTA.
+  - **Filling every blank with 0 without checking whether "missing" and "genuinely zero" mean different things** in context (a missing test score is not the same as a score of zero).
+
+  ## Related concepts
+
+  ```
+  Date Differences
+    ↓
+  Missing Values ← you are here
+    ↓
+  Duplicate Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A column has some blank cells and some cells with 0. Does AVERAGE treat them the same?**
+  Short answer: No — AVERAGE excludes blank cells entirely from the calculation, but includes cells containing 0 as real values. This distinction matters whenever "missing" and "genuinely zero" mean different things in the data.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Missing values** → empty cells; check with COUNTBLANK before calculating
+  AVERAGE excludes blanks but includes real zeros — the two are not interchangeable.

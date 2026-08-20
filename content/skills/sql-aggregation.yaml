@@ -1,0 +1,207 @@
+title: SQL — Aggregation
+what_is_it: Summarizing rows into totals, counts, and averages using aggregate functions and GROUP BY, with HAVING to filter aggregated results.
+why_it_matters: Business questions are almost always about summaries — total revenue, average order size, count of active users — not individual rows.
+prerequisites:
+  - sql-filtering
+objectives:
+  - Use COUNT, SUM, AVG, MIN, MAX
+  - Group results with GROUP BY
+  - Filter groups with HAVING
+  - Avoid mixing aggregated and non-aggregated columns incorrectly
+estimated_minutes: 180
+resources:
+  - r-w3schools-groupby
+  - r-kaggle-intro-sql
+practice:
+  - id: ex-sql-aggregation-1
+    title: Monthly revenue by region
+    description: Write a query that returns total revenue per region per month, only for regions with more than $10,000 in revenue.
+verify:
+  - GROUP BY includes every non-aggregated selected column
+  - HAVING is used to filter on the aggregate, not WHERE
+  - Aggregate values match a manual spot check
+category: SQL
+subtopics:
+  - title: Aggregate functions
+    description: COUNT, SUM, AVG, MIN, MAX — and the fact that most of them silently ignore NULLs.
+    outcomes:
+      - Choose the right aggregate function for a question
+  - title: GROUP BY
+    description: Grouping rows into summary buckets, and which selected columns must appear in the GROUP BY.
+    outcomes:
+      - Write a GROUP BY with two grouping columns
+  - title: HAVING vs. WHERE
+    description: Filtering groups after aggregation with HAVING, instead of filtering rows before it with WHERE.
+    outcomes:
+      - Use HAVING to filter on an aggregated value
+  - title: Common aggregation mistakes
+    description: Mixing aggregated and non-aggregated columns, and double-counting rows from a join before aggregating.
+    outcomes:
+      - Spot a query that would double-count rows
+note: |
+  ## 🎯 What is it?
+
+  **Aggregation** summarizes many rows into one number per group — using functions like COUNT, SUM, AVG, MIN, MAX together with **GROUP BY** to define the groups, and **HAVING** to filter on the aggregated result.
+
+  ## 💡 Why is it important?
+
+  Business questions are almost always about summaries, not individual rows — "total revenue," "average order size," "count of active users per region" are the actual shape of most real analyst deliverables, not a list of raw transactions.
+
+  ## Core concept
+
+  ### Aggregate functions
+
+  | Function | Returns |
+  |---|---|
+  | `COUNT(*)` | Number of rows |
+  | `COUNT(column)` | Number of non-NULL values in that column |
+  | `SUM(column)` | Total of numeric values (ignores NULLs) |
+  | `AVG(column)` | Mean of numeric values (ignores NULLs, doesn't treat them as 0) |
+  | `MIN` / `MAX` | Smallest / largest value |
+
+  **All aggregate functions silently ignore NULLs** — this affects AVG especially, since it divides by the count of *non-NULL* rows, not all rows.
+
+  ### GROUP BY
+  Groups rows sharing the same value(s) in specified columns, so each aggregate function computes one result per group instead of one result overall. **Every selected column that isn't wrapped in an aggregate function must appear in the GROUP BY clause.**
+
+  ### HAVING vs. WHERE
+  WHERE filters individual rows **before** grouping/aggregation happens; HAVING filters **groups**, after aggregation, based on the aggregated value. You cannot use WHERE to filter on `SUM(amount) > 1000` — that requires HAVING.
+
+  ## Syntax
+
+  ```sql
+  SELECT column1, AGG_FUNCTION(column2)
+  FROM table_name
+  WHERE row_condition
+  GROUP BY column1
+  HAVING aggregate_condition
+  ORDER BY column1;
+  ```
+
+  ## 📊 Example
+
+  `orders` table:
+
+  | region | month | revenue |
+  |---|---|---|
+  | West | Jan | 4,200 |
+  | West | Jan | 1,800 |
+  | East | Jan | 3,100 |
+  | West | Feb | 5,000 |
+
+  **Query:**
+
+  ```sql
+  SELECT region, month, SUM(revenue) AS total_revenue
+  FROM orders
+  GROUP BY region, month
+  HAVING SUM(revenue) > 5000;
+  ```
+
+  **Output:**
+
+  | region | month | total_revenue |
+  |---|---|---|
+  | West | Jan | 6,000 |
+
+  **Explanation:** Rows are grouped by region+month, summed, and only groups with a total over 5,000 survive the HAVING filter — East/Jan (3,100) and West/Feb (5,000, not strictly over) are excluded.
+
+  ## Multiple examples
+
+  **Beginner:** `SELECT status, COUNT(*) FROM orders GROUP BY status;` — order count per status.
+  **Intermediate:** `SELECT region, AVG(amount) FROM orders WHERE order_date >= '2024-01-01' GROUP BY region;` — WHERE filters rows first, then AVG is computed per region.
+  **Real-world:** `SELECT customer_id, COUNT(*) AS order_count FROM orders GROUP BY customer_id HAVING COUNT(*) >= 5;` — finding repeat customers, the classic "loyal customer" segmentation query.
+
+  ## SQL execution order (why this matters here)
+
+  ```
+  FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
+  ```
+
+  WHERE runs *before* grouping (on raw rows); HAVING runs *after* (on aggregated groups) — this is exactly why WHERE can't reference an aggregate function, but HAVING can.
+
+  ## ⚠️ Common mistakes
+
+  - **Selecting a non-aggregated column that isn't in GROUP BY.** Most databases will either error or (worse, in some engines) silently return an arbitrary value from the group — always include every non-aggregated selected column in GROUP BY.
+  - **Using WHERE instead of HAVING to filter on an aggregate.** `WHERE SUM(revenue) > 1000` is invalid SQL in standard usage — aggregates aren't computed yet at the WHERE stage.
+  - **Double-counting rows after a join, then aggregating.** If a join fans out rows (e.g., one order joined to multiple line items), a naive `SUM(order.amount)` after the join will overcount — aggregate before joining, or use DISTINCT/pre-aggregated subqueries.
+  - **Assuming AVG treats NULL as 0.** It doesn't — AVG divides by the count of non-NULL values only, which can meaningfully change the result compared to what's expected.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** total and average revenue by region and month.
+  - **Customer analysis:** identifying repeat customers with HAVING COUNT(*) >= N.
+  - **Product analysis:** average rating per product, only for products with enough reviews to be statistically meaningful (HAVING COUNT(*) >= 10).
+
+  ## Related concepts
+
+  ```
+  SELECT → WHERE
+    ↓
+  GROUP BY (create groups) ← you are here
+    ↓
+  HAVING (filter groups) ← you are here
+    ↓
+  JOIN
+    ↓
+  SUBQUERY / CTE
+    ↓
+  WINDOW FUNCTIONS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a query that counts orders per status.
+
+  ### Medium
+  2. Write a query returning average order amount per region, only for regions with more than 50 orders.
+
+  ### Interview/Advanced
+  3. Why is `WHERE SUM(amount) > 1000` invalid, and how do you fix it?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `SELECT status, COUNT(*) FROM orders GROUP BY status;`
+  2. `SELECT region, AVG(amount) FROM orders GROUP BY region HAVING COUNT(*) > 50;`
+  3. WHERE filters individual rows *before* aggregation happens, so the aggregate value doesn't exist yet at that stage — the fix is to move the condition to HAVING, which filters groups after aggregation: `... GROUP BY region HAVING SUM(amount) > 1000`.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between WHERE and HAVING?**
+  Short answer: WHERE filters individual rows before grouping; HAVING filters groups after aggregation, based on the aggregated value.
+
+  ### Conceptual questions
+  **Q: Why do aggregate functions ignore NULLs?**
+  Short answer: NULL represents an unknown value, so it can't meaningfully contribute to a sum, average, or count of known values — including it would produce a misleading result, so SQL excludes it by design.
+
+  ### Scenario-based questions
+  **Q: A revenue total after joining orders to order line items looks 3x too high. What's the likely cause?**
+  Short answer: The join likely fanned out — each order matched multiple line-item rows, so summing the order-level revenue column after the join counted it once per matching line item instead of once per order.
+
+  ### Practical questions
+  **Q: Write a query to find customers who placed more than 3 orders totaling over $500.**
+  Short answer: `SELECT customer_id FROM orders GROUP BY customer_id HAVING COUNT(*) > 3 AND SUM(amount) > 500;`
+
+  ## Interview traps / tricky points
+
+  - COUNT(*) counts all rows including NULLs in any column; COUNT(column) counts only non-NULL values in that specific column — these can return different numbers on the same table.
+  - Aggregating after a row-multiplying join (without deduplication) is one of the most common real-world SQL bugs, and a favorite interview "spot the bug" scenario.
+
+  ## Best practices
+
+  - Always double-check whether a join before an aggregation could multiply rows — verify row counts before and after if unsure.
+  - Include every non-aggregated selected column explicitly in GROUP BY.
+  - Use HAVING only for conditions on the aggregate; keep row-level filters in WHERE for performance (WHERE filters before the more expensive grouping step).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **COUNT/SUM/AVG/MIN/MAX** → ignore NULLs (except COUNT(*))
+  **GROUP BY** → defines the groups; every non-aggregated SELECT column must appear here
+  **HAVING** → filters on the aggregate, after grouping (WHERE filters rows, before grouping)
+  **Execution order:** FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY

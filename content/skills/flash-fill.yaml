@@ -1,0 +1,67 @@
+title: Flash Fill
+category: Spreadsheets
+what_is_it: A spreadsheet feature that detects a pattern from one or two manually-typed examples and automatically fills the rest of a column to match.
+why_it_matters: It can do in seconds what would otherwise require a formula (or several) — extracting a first name, combining two columns, or reformatting a phone number — just by example.
+prerequisites:
+  - duplicate-data
+objectives:
+  - Use Flash Fill to extract or reformat a column based on an example
+  - Recognize when Flash Fill is a good fit versus when a formula is more reliable
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-flash-fill-1
+    title: Extract a first name
+    description: Given a "Full Name" column, type the first name for the first row manually, then use Flash Fill to extract it for every other row.
+verify:
+  - Can trigger Flash Fill from a typed example
+  - Can explain a situation where a formula would be more reliable than Flash Fill
+note: |
+  ## 🎯 What is it?
+
+  **Flash Fill** detects a pattern from one or two manually-typed examples in a column, then automatically fills in the rest of the column to match — without writing any formula. Typing "Amir" next to a "Full Name" cell containing "Amir Khan" and pressing Enter on the next row often triggers Flash Fill to extract first names for the whole column.
+
+  ## 💡 Why is it important?
+
+  - It can do in seconds what would otherwise take a formula — extracting a first name, combining first and last names, reformatting a phone number — just by demonstrating the pattern once or twice.
+  - It's genuinely fast for one-off cleanup tasks, though it produces static values (not a live formula), which matters if the source data might change later.
+
+  ## Core concept
+
+  | Task | Example input | Flash Fill result |
+  |---|---|---|
+  | Extract first name | "Amir Khan" → type "Amir" | Extracts first names for every row |
+  | Combine columns | "Amir" + "Khan" → type "Amir Khan" | Combines first+last for every row |
+  | Reformat | "5551234567" → type "(555) 123-4567" | Reformats every phone number |
+
+  ## 📊 Example
+
+  A "Full Name" column has "Priya Sharma," "Amir Khan," etc. Typing "Priya" in the adjacent cell and pressing Enter, then starting to type "Amir" in the next row often triggers Flash Fill's suggestion — accepting it (Enter) fills the first name for every remaining row automatically.
+
+  ## ⚠️ Common mistakes
+
+  - **Relying on Flash Fill for data that will be updated later** — its result is a static, one-time value, not a live formula; if the source column changes, Flash Fill's output does not automatically update.
+  - **Not double-checking Flash Fill's guess on inconsistent data** — it works by pattern-matching, and can guess wrong on rows that don't follow the same pattern as the examples given.
+
+  ## Related concepts
+
+  ```
+  Duplicate Data
+    ↓
+  Flash Fill ← you are here
+    ↓
+  Data Validation
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you use Flash Fill instead of a formula like LEFT or MID?**
+  Short answer: For a quick, one-off cleanup task on data that won't need to update automatically — Flash Fill is faster to set up than a formula, but produces static values, so a formula is the better choice if the source data will keep changing.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Flash Fill** → learns a pattern from a typed example and auto-fills the rest of a column
+  Fast for one-off cleanup; produces static values, not a live formula — double-check its guesses.

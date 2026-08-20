@@ -1,0 +1,94 @@
+title: MIN Function
+category: Spreadsheets
+what_is_it: Finding the smallest value in a range of numbers.
+why_it_matters: Spotting the lowest value in a column is a constant reporting need, and a fast way to catch a data-entry error like an impossible negative value.
+prerequisites:
+  - counta-function
+objectives:
+  - Find the minimum value in a range
+  - Use MIN to spot a likely data-entry error
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-min-1
+    title: Find the lowest price
+    description: Use MIN to find the lowest price in a product catalog and sanity-check whether it looks like a real value.
+verify:
+  - MIN correctly identifies the smallest value
+  - Can explain whether the result is plausible or a likely error
+note: |
+  ## 🎯 What is it?
+
+  **MIN** finds the smallest value in a range of numbers.
+
+  ## 💡 Why is it important?
+
+  Spotting the lowest value in a column — the cheapest price, the shortest delivery time, the earliest date — is a constant reporting need, and MIN is also a fast way to catch a data-entry error, like an impossible negative price.
+
+  ## Syntax
+
+  ```
+  =MIN(range)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 45 |
+  | 2 | 12 |
+  | 3 | 89 |
+
+  **Formula:** `=MIN(A1:A3)` → `12`
+
+  ## Multiple examples
+
+  **Beginner:** `=MIN(B2:B50)` — the lowest order amount.
+  **Real-world:** `=MIN(delivery_days_range)` used as a sanity check — a minimum of 0 or a negative number signals a data-entry error worth investigating before trusting the dataset.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming the minimum value is automatically valid.** A minimum of $0 or a negative price is often an error, not a real value — always sanity-check an extreme result.
+  - **MIN silently ignores text and blank cells**, same as SUM and AVERAGE.
+
+  ## Real-world Data Analyst use cases
+
+  - **Operations analysis:** shortest delivery time, as both a metric and a data-quality check.
+  - **Finance analysis:** lowest recorded transaction amount, to catch a likely refund or error miscoded as a sale.
+
+  ## Related concepts
+
+  ```
+  COUNTA → MIN ← you are here → MAX → ROUND
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula for the smallest value in C2:C40.
+
+  ### Interview/Advanced
+  2. MIN on a price column returns -50. What would you do next?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=MIN(C2:C40)`
+  2. Investigate the source row before trusting the dataset — a negative price is very likely a data-entry error or a refund miscoded as a regular sale, not a genuine price.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you use MIN as part of a data-quality check?**
+  Short answer: Run MIN on a numeric column early in any analysis — an implausible extreme (like a negative price) is a fast signal to investigate before trusting the data.
+
+  ## Best practices
+
+  - Run MIN (and MAX) as a first-pass sanity check on any new numeric column.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **MIN(range)** → smallest value; use as a quick data-quality check for implausible extremes

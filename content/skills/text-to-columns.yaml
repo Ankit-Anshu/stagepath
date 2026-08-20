@@ -1,0 +1,103 @@
+title: Text to Columns
+category: Spreadsheets
+what_is_it: Splitting one column of combined text into multiple separate columns, based on a delimiter (like a comma) or a fixed width.
+why_it_matters: Data is often imported as one combined field ("City, State") that needs to be split apart before it can be analyzed or filtered by its individual parts.
+prerequisites:
+  - remove-duplicates
+objectives:
+  - Split a combined text column into separate columns using a delimiter
+  - Explain when fixed-width splitting is needed instead of a delimiter
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-text-to-columns-1
+    title: Split a combined address field
+    description: Given a "City, State" column, use Text to Columns to split it into two separate columns.
+verify:
+  - Text is correctly split into the intended separate columns
+  - No data is lost or misaligned during the split
+note: |
+  ## 🎯 What is it?
+
+  **Text to Columns** splits one column of combined text into multiple separate columns, based on a **delimiter** (a character like a comma or space) or a **fixed width** (a consistent character position).
+
+  ## 💡 Why is it important?
+
+  Data is often imported as one combined field — "City, State" or "First Last" — that needs to be split apart into its individual parts before it can be properly analyzed, filtered, or sorted by just the city, just the state, or just the last name.
+
+  ## Core concept
+
+  | Split method | Use when |
+  |---|---|
+  | Delimiter | The combined value has a consistent separator character (comma, space, dash) |
+  | Fixed width | Every value has the same total length, with fields at consistent character positions |
+
+  ## 📊 Example
+
+  | A |
+  |---|
+  | Springfield, IL |
+  | Chicago, IL |
+
+  Running Text to Columns with a **comma** delimiter splits this into:
+
+  | A | B |
+  |---|---|
+  | Springfield | IL |
+  | Chicago | IL |
+
+  ## Multiple examples
+
+  **Beginner:** Splitting a "First Last" name column into separate First and Last columns using a space delimiter.
+  **Intermediate:** Splitting a fixed-width legacy export (where every field always occupies exact character positions) using the fixed-width option instead of a delimiter.
+  **Real-world:** Splitting a "City, State ZIP" combined address field into three separate columns for proper geographic analysis, after first confirming the delimiter pattern is consistent across every row.
+
+  ## ⚠️ Common mistakes
+
+  - **Running Text to Columns without checking that every row follows the same delimiter pattern.** A row with an unexpected extra comma, or missing the delimiter entirely, will split incorrectly or misalign with the rest of the data.
+  - **Overwriting adjacent columns accidentally.** Text to Columns writes the split results starting in the original column and extending rightward — if there's existing data in the columns immediately to the right, it can be overwritten without warning.
+  - **Not choosing the correct delimiter**, resulting in a split that's either too granular (splitting on every space in a multi-word value) or not granular enough.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** splitting a combined address, name, or category field imported from another system into properly separated, analyzable columns.
+
+  ## Related concepts
+
+  ```
+  Remove Duplicates → Text to Columns ← you are here → Find & Replace → Data Validation
+  ```
+  The formula-based alternative to this tool uses [LEFT](/skills/left-function), [RIGHT](/skills/right-function), [MID](/skills/mid-function), and [FIND](/skills/find-function) together — Text to Columns is the faster, no-formula version for a one-time cleanup.
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the difference between splitting by delimiter and splitting by fixed width?
+
+  ### Interview/Advanced
+  2. Why should you insert empty columns to the right of the source column before running Text to Columns?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Delimiter splitting divides text at a chosen separator character (like a comma); fixed-width splitting divides text at consistent character positions, regardless of what character is there — used when there's no consistent separator but every field has a predictable length.
+  2. Text to Columns writes its split results into the columns immediately to the right of the source column, and will silently overwrite any existing data there — inserting empty columns first (or copying the source data to a scratch area) protects against accidental data loss.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you use Text to Columns instead of a formula-based approach (LEFT/RIGHT/FIND)?**
+  Short answer: For a one-time cleanup of a column with a consistent delimiter or fixed-width pattern, Text to Columns is faster and doesn't require writing a formula — a formula-based approach is better when the split needs to stay dynamic and update automatically as new data is added.
+
+  ## Best practices
+
+  - Verify the delimiter pattern is consistent across every row before running Text to Columns.
+  - Protect against overwriting adjacent data by inserting empty columns first.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Text to Columns** → splits one column into several, by delimiter or fixed width
+  **Watch for:** overwriting adjacent columns, inconsistent delimiter patterns across rows

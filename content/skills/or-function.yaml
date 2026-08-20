@@ -1,0 +1,96 @@
+title: OR Function
+category: Spreadsheets
+what_is_it: Checking whether at least one of multiple conditions is true, returning a single TRUE or FALSE — the counterpart to AND, used when any one factor should trigger a rule.
+why_it_matters: Many business rules should trigger if any one of several conditions is met (e.g., "flag if overdue OR high-value") — OR is how you express that precisely.
+prerequisites:
+  - and-function
+objectives:
+  - Use OR to check whether at least one condition is true
+  - Combine OR with IF to build a multi-condition rule
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-or-1
+    title: Flag at-risk orders
+    description: Flag an order as "Review" if it is either overdue OR flagged as a high-value order, using OR inside an IF.
+verify:
+  - OR correctly returns TRUE when at least one condition holds
+  - Combined IF+OR formula matches the stated business rule exactly
+note: |
+  ## 🎯 What is it?
+
+  **OR** checks whether **at least one** of multiple conditions is true, returning a single TRUE or FALSE — the direct counterpart to [AND](/skills/and-function), used when any one factor should be enough to trigger a rule.
+
+  ## 💡 Why is it important?
+
+  Many business rules should trigger if any one of several conditions is met — "flag this account if it's overdue **or** unusually large" — OR is how you express that precisely, rather than writing separate rules for each condition.
+
+  ## Syntax
+
+  ```
+  =OR(condition1, condition2, ...)
+  =IF(OR(condition1, condition2), value_if_true, value_if_false)
+  ```
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Days Overdue | Amount |
+  | 2 | 45 | 200 |
+
+  **Formula:** `=IF(OR(A2>30,B2>1000),"Review","OK")`
+  **Result:** `"Review"` — days overdue (45) exceeds 30, so OR returns TRUE even though the amount doesn't meet the second condition.
+
+  ## Multiple examples
+
+  **Beginner:** `=OR(A1="Yes",A1="Maybe")` — check if a value matches either of two acceptable answers.
+  **Real-world:** `=IF(OR(status="Cancelled",status="Refunded"),"Exclude","Include")` — excluding any order in either of two non-revenue-generating statuses from a revenue report.
+
+  ## ⚠️ Common mistakes
+
+  - **Using OR when AND was actually needed.** OR only requires *one* condition to be true; a rule that genuinely needs *every* condition to hold needs [AND](/skills/and-function) instead — using the wrong one silently over- or under-triggers the rule.
+  - **Assuming OR checks conditions in a particular priority order.** OR simply returns TRUE if any condition is true — it doesn't distinguish which one, unlike IFS.
+
+  ## Real-world Data Analyst use cases
+
+  - **Collections/operations analysis:** flagging an account for review if it meets any one of several risk criteria.
+  - **Data cleaning:** excluding a row if its status matches any one of several "non-standard" values (cancelled, refunded, test).
+
+  ## Related concepts
+
+  ```
+  AND → OR ← you are here → IFERROR
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that returns TRUE if A1 equals "Red" OR "Blue".
+
+  ### Interview/Advanced
+  2. When would AND and OR give the same result for a given set of conditions?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=OR(A1="Red",A1="Blue")`
+  2. When exactly one condition is being checked (AND and OR behave identically with a single condition), or when every condition happens to be true or false together in the specific data being tested — in general, with 2+ genuinely independent conditions, AND and OR will diverge whenever the conditions don't all match.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you flag a row that meets any one of three different risk criteria?**
+  Short answer: Wrap all three conditions in a single OR, then use that OR inside an IF to produce the flag — OR returns TRUE as soon as any one condition is met.
+
+  ## Best practices
+
+  - Choose OR vs. AND deliberately based on whether the rule needs "any condition" or "all conditions" to trigger.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **OR(cond1, cond2, ...)** → TRUE if at least one condition is true
+  **vs. AND:** AND needs every condition true; OR needs just one

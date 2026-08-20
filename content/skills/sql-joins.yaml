@@ -1,0 +1,221 @@
+title: SQL — JOINs
+what_is_it: Combining data from multiple tables using relationships between columns — INNER, LEFT, RIGHT, and FULL joins.
+why_it_matters: Most real-world analytics work involves combining multiple datasets — customers with orders, orders with products. JOINs are how relational data becomes an answer.
+prerequisites:
+  - sql-aggregation
+objectives:
+  - Explain the difference between INNER and LEFT JOIN
+  - Join three or more tables correctly
+  - Avoid accidental row duplication from a join
+  - Handle NULLs produced by a LEFT JOIN
+estimated_minutes: 240
+resources:
+  - r-w3schools-join
+  - r-mode-sql-tutorial
+  - r-kaggle-intro-sql
+practice:
+  - id: ex-sql-joins-1
+    title: Customers without orders
+    description: Write a query that returns every customer and their order count, including customers who have never ordered.
+project: project-ecommerce-customer-analysis
+verify:
+  - Correct INNER JOIN
+  - Correct LEFT JOIN
+  - No accidental row multiplication
+  - Handles NULL values produced by the join
+  - Can explain why that JOIN type was chosen
+assessment: assessment-sql-foundations-checkpoint
+category: SQL
+subtopics:
+  - title: INNER JOIN
+    description: Matching only the rows that exist in both tables on the join key.
+    outcomes:
+      - Write an INNER JOIN across two tables
+  - title: LEFT JOIN
+    description: Keeping every row from the left table even when there is no match, and what the resulting NULLs mean.
+    outcomes:
+      - Write a LEFT JOIN and explain the resulting NULLs
+  - title: Joining multiple tables
+    description: Chaining three or more tables together through shared keys in a single query.
+    outcomes:
+      - Join three tables together in one query
+  - title: Avoiding row explosion
+    description: Why a join can silently multiply rows, and how to check row counts before trusting a result.
+    outcomes:
+      - Detect and fix an accidental row duplication from a join
+note: |
+  ## 🎯 What is it?
+
+  A **JOIN** combines rows from two or more tables based on a related column between them — like matching customers to their orders by customer_id. Most real-world analytics work involves combining multiple related datasets, and JOINs are how relational data becomes a single, answerable result.
+
+  ## 💡 Why is it important?
+
+  Real databases split data across many tables by design (a customers table, an orders table, a products table) to avoid duplication — JOINs are the only way to bring that related data back together for analysis. It's arguably the single most important SQL skill for a working analyst, and the most commonly tested in interviews.
+
+  ## Core concept
+
+  ### INNER JOIN
+  Returns only rows that have a match in **both** tables. If a customer has no orders, they simply don't appear in an INNER JOIN's result.
+
+  ### LEFT JOIN
+  Returns **every** row from the left table, whether or not it has a match in the right table — unmatched rows get NULL for every column from the right table.
+
+  ### RIGHT JOIN and FULL JOIN
+  RIGHT JOIN is the mirror of LEFT JOIN (every row from the right table kept). FULL JOIN (or FULL OUTER JOIN) keeps every row from **both** tables, matching where possible and filling NULLs where not.
+
+  | Join type | Keeps |
+  |---|---|
+  | INNER JOIN | Only rows matched in both tables |
+  | LEFT JOIN | All left rows + matches from right (NULL if none) |
+  | RIGHT JOIN | All right rows + matches from left (NULL if none) |
+  | FULL JOIN | All rows from both, matched where possible |
+
+  ### Joining multiple tables
+  Chain additional JOINs in the same query — each new JOIN connects to any table already brought into the query, not just the original one.
+
+  ### Avoiding row explosion
+  If the join key isn't unique on one side, a join can silently multiply rows — e.g., joining orders to order_items (many items per order) means a naive SUM on the orders table after the join will double- or triple-count.
+
+  ## Syntax
+
+  ```sql
+  SELECT a.column1, b.column2
+  FROM table_a a
+  INNER JOIN table_b b ON a.key = b.key;
+
+  SELECT a.column1, b.column2
+  FROM table_a a
+  LEFT JOIN table_b b ON a.key = b.key;
+  ```
+
+  ## 📊 Example
+
+  `customers`:
+
+  | customer_id | name |
+  |---|---|
+  | 1 | Ana |
+  | 2 | Wei |
+  | 3 | Omar |
+
+  `orders`:
+
+  | order_id | customer_id | amount |
+  |---|---|---|
+  | 1 | 1 | 200 |
+  | 2 | 1 | 150 |
+  | 3 | 2 | 300 |
+
+  **Query — customers with their order count, including customers with zero orders:**
+
+  ```sql
+  SELECT c.name, COUNT(o.order_id) AS order_count
+  FROM customers c
+  LEFT JOIN orders o ON c.customer_id = o.customer_id
+  GROUP BY c.name;
+  ```
+
+  **Output:**
+
+  | name | order_count |
+  |---|---|
+  | Ana | 2 |
+  | Wei | 1 |
+  | Omar | 0 |
+
+  **Explanation:** LEFT JOIN keeps Omar even though he has no matching orders row; `COUNT(o.order_id)` correctly returns 0 for him because COUNT ignores the NULL produced by the unmatched join (using `COUNT(*)` instead would incorrectly return 1 for Omar).
+
+  ## Multiple examples
+
+  **Beginner:** `INNER JOIN` customers to orders to list only customers who have actually ordered.
+  **Intermediate:** `LEFT JOIN` to find customers who have **never** ordered: add `WHERE o.order_id IS NULL` after the LEFT JOIN.
+  **Real-world:** Chaining three tables — `orders JOIN customers ... JOIN products ...` — to build a report showing customer name, product name, and order amount together in one row.
+
+  ## Types / Variations
+
+  See the Core concept table above for INNER/LEFT/RIGHT/FULL — the same four types are the standard set across virtually all SQL databases.
+
+  ## ⚠️ Common mistakes
+
+  - **Using INNER JOIN when you actually need LEFT JOIN.** This silently drops rows with no match — e.g., "customers without orders" disappears entirely from an INNER JOIN, which is often the opposite of what's needed.
+  - **Row explosion from a one-to-many join before aggregating.** Always check whether the join key is unique on both sides before trusting a SUM/COUNT computed after the join.
+  - **Using `COUNT(*)` instead of `COUNT(column)` after a LEFT JOIN**, which incorrectly counts unmatched rows as 1 instead of 0 (see the Omar example above).
+  - **Forgetting the ON condition** (or using a comma-style old-style join without a WHERE-based condition), which produces a cartesian product — every row of one table matched with every row of the other.
+
+  ## Real-world Data Analyst use cases
+
+  - **Customer analysis:** LEFT JOIN to find customers who never made a purchase — a common churn/re-engagement target list.
+  - **Sales analysis:** JOIN orders to products to report revenue by product category.
+  - **Operations analysis:** JOIN shipments to warehouses to region to find which region has the most delays.
+
+  ## Related concepts
+
+  ```
+  SELECT → WHERE → GROUP BY → HAVING
+    ↓
+  JOIN ← you are here
+    ↓
+  SUBQUERY / CTE
+    ↓
+  UNION / Set Operations
+    ↓
+  WINDOW FUNCTIONS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write an INNER JOIN between `customers` and `orders` on customer_id.
+
+  ### Medium
+  2. Write a query that returns every customer and their order count, including customers with zero orders.
+
+  ### Interview/Advanced
+  3. A query joining `orders` to `order_items` and then summing `orders.amount` returns a total 4x higher than the real total. What's happening, and how would you fix it?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `SELECT * FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id;`
+  2. `SELECT c.name, COUNT(o.order_id) AS order_count FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.name;`
+  3. Each order has multiple order_items rows, so the join multiplies each order's row by its number of items (row explosion) — summing `orders.amount` after the join re-counts that same amount once per item row. Fix: aggregate order_items separately (or use a subquery/CTE) before joining, or sum a distinct per-order value rather than the joined, multiplied rows.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between INNER JOIN and LEFT JOIN?**
+  Short answer: INNER JOIN returns only rows with a match in both tables; LEFT JOIN returns every row from the left table regardless of a match, filling unmatched right-side columns with NULL.
+
+  ### Conceptual questions
+  **Q: Why would you choose LEFT JOIN over INNER JOIN for "find customers with no orders"?**
+  Short answer: INNER JOIN would drop unmatched customers entirely, since it only keeps matched rows — LEFT JOIN keeps every customer, so filtering for NULL on the orders side afterward correctly finds customers with zero matches.
+
+  ### Scenario-based questions
+  **Q: A report's total revenue is unexpectedly 3x too high after adding a join to a new table. What's your diagnostic approach?**
+  Short answer: Compare the row count before and after the join — a jump in row count relative to the original table is the signature of row explosion from a one-to-many join, and the fix is usually to pre-aggregate one side before joining.
+
+  ### Practical questions
+  **Q: Write a query joining three tables — orders, customers, and products — to show customer name, product name, and order amount.**
+  Short answer: `SELECT c.name, p.name AS product_name, o.amount FROM orders o JOIN customers c ON o.customer_id = c.customer_id JOIN products p ON o.product_id = p.product_id;`
+
+  ## Interview traps / tricky points
+
+  - `COUNT(*)` vs `COUNT(column)` behaves differently after a LEFT JOIN — a very common "gotcha" question.
+  - Forgetting an explicit JOIN condition creates a cartesian product (every row × every row) — a subtle bug that inflates results dramatically without an obvious error.
+  - NULL values produced by a LEFT JOIN propagate into any calculation on those columns — always account for them explicitly.
+
+  ## Best practices
+
+  - Default to LEFT JOIN when it's unclear whether every row should be preserved — it's the safer choice to catch missing matches.
+  - Always sanity-check row counts before and after a join, especially before aggregating.
+  - Use table aliases consistently for readability once more than one table is involved.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **INNER JOIN** → only matched rows in both tables
+  **LEFT JOIN** → all left rows, NULL for unmatched right side
+  **Row explosion** → one-to-many joins multiply rows; check counts before aggregating
+  **COUNT(*) vs COUNT(column)** → behave differently on LEFT JOIN's NULLs

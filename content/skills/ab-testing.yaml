@@ -1,0 +1,183 @@
+title: A/B Testing & Experimentation
+category: Business Analytics
+what_is_it: Designing a controlled experiment — splitting users into groups, defining success metrics up front, and running the test long enough to trust the result.
+why_it_matters: Deciding whether a change actually caused an improvement, rather than just coinciding with one, is one of the most frequently requested and most frequently botched analyses a data analyst does.
+prerequisites:
+  - stats-hypothesis-testing
+objectives:
+  - Design a test with a clear control and variant
+  - Choose a primary metric before running the test
+  - Determine an appropriate sample size or test duration
+  - Avoid the most common experiment-design mistakes
+subtopics:
+  - title: Test design
+    description: Randomizing users into control and variant groups so the only difference is the change being tested.
+    outcomes:
+      - Design a test with a valid control group
+  - title: Choosing a metric up front
+    description: Committing to a primary success metric before seeing any results, to avoid cherry-picking afterward.
+    outcomes:
+      - State a primary metric before a test begins
+  - title: Sample size & duration
+    description: Running a test long enough, and with enough users, to trust the result.
+    outcomes:
+      - Explain why stopping a test too early is risky
+  - title: Common pitfalls
+    description: Peeking at results early, testing too many metrics at once, and novelty effects.
+    outcomes:
+      - Identify a flaw in a poorly-designed experiment
+estimated_minutes: 210
+resources:
+  - r-grow-google-data-analytics
+  - r-fcc-data-analysis-python
+project: project-ab-testing-analysis
+practice:
+  - id: ex-ab-testing-1
+    title: Design an experiment
+    description: 'Given a proposed product change, design an A/B test: hypothesis, control/variant split, primary metric, and minimum test duration.'
+verify:
+  - Control and variant groups are defined validly
+  - Primary metric is stated before any results are considered
+  - Can name at least one risk that would invalidate the test
+note: |
+  ## 🎯 What is it?
+
+  **A/B testing** is a controlled experiment: splitting users randomly into a **control** group (sees the current experience) and a **variant** group (sees the change being tested), then comparing a pre-chosen success metric between them to decide whether the change actually caused an improvement.
+
+  ## 💡 Why is it important?
+
+  Deciding whether a change actually *caused* an improvement — rather than just coinciding with one — is one of the most frequently requested and most frequently botched analyses a data analyst does. It's the proper, rigorous way to establish causation, directly addressing the "correlation ≠ causation" limitation covered in [Correlation & Regression](/skills/stats-correlation-regression).
+
+  ## Core concept
+
+  ### Test design
+  Users are **randomly** assigned to control or variant, so the *only* systematic difference between the two groups is the change being tested — this randomization is what allows a resulting difference to be attributed to the change itself, not to some other pre-existing difference between the groups.
+
+  ### Choosing a metric up front
+  The **primary metric** and the decision rule (what result counts as "success") must be committed to **before** the test starts and before any results are seen — deciding this after peeking at results is a form of cherry-picking that invalidates the test's statistical guarantees.
+
+  ### Sample size & duration
+  A test needs enough users, run for long enough, to reliably detect a real effect and to average out day-of-week and other short-term noise — stopping early because early results "look good" is one of the most common and serious experimentation mistakes (directly connected to [Hypothesis Testing](/skills/stats-hypothesis-testing)'s "peeking" problem).
+
+  ### Common pitfalls
+
+  | Pitfall | Why it's a problem |
+  |---|---|
+  | Peeking early and stopping | Inflates the false-positive rate |
+  | Testing too many metrics at once | Increases the chance one looks "significant" purely by chance |
+  | Novelty effect | A short-term boost from something being *new*, not genuinely better, that fades over time |
+  | Underpowered sample size | Fails to detect a real, but smaller, effect |
+
+  ## Syntax / Formula / Structure
+
+  A standard A/B test setup, before launch:
+
+  ```
+  1. Hypothesis:        "Changing X will increase [metric] because [reasoning]"
+  2. Control:            current experience (no change)
+  3. Variant:            the proposed change
+  4. Primary metric:      chosen and written down before launch
+  5. Minimum duration/sample size: decided in advance, not adjusted mid-test
+  6. Decision rule:       "if p < 0.05 on the primary metric, ship the variant"
+  ```
+
+  ## 📊 Example
+
+  **Test:** Does a simplified checkout page increase completed-purchase rate?
+
+  - **Control:** current 3-step checkout (5,000 users).
+  - **Variant:** new 1-step checkout (5,000 users).
+  - **Primary metric (chosen up front):** completed-purchase rate.
+  - **Result:** Control 8.0%, Variant 9.2%, p = 0.02 (statistically significant at the pre-chosen alpha = 0.05).
+
+  **Decision:** Ship the variant — the improvement is unlikely to be random chance, and the metric and threshold were committed to before the test ran, so this is a trustworthy result, not a post-hoc cherry-pick.
+
+  ## Multiple examples
+
+  **Beginner:** Testing two email subject lines for open rate.
+  **Intermediate:** Testing a pricing page redesign, with conversion rate as the pre-registered primary metric and revenue-per-visitor as a secondary metric to monitor (but not decide on).
+  **Real-world:** A product team wants to ship a redesign quickly after 2 days because "it's already looking good" — the analyst holds the line on the pre-committed minimum duration, explaining that early results are noisy and stopping early risks a false positive that could later be reversed.
+
+  ## ⚠️ Common mistakes
+
+  - **Choosing the primary metric after seeing which one "won."** This is a severe form of cherry-picking that invalidates the statistical guarantees of the test.
+  - **Stopping a test as soon as it "looks significant."** Repeated peeking dramatically inflates the real false-positive rate beyond the stated alpha level.
+  - **Not accounting for the novelty effect** on short tests — a genuinely neutral or even negative change can look like a short-term win purely because it's new and users are curious.
+  - **Testing dozens of metrics at once and reporting whichever one moved.** With enough metrics tested, some will appear "significant" purely by chance.
+
+  ## Real-world Data Analyst use cases
+
+  - **Marketing analysis:** testing two email subject lines or ad creatives.
+  - **Product analysis:** testing a checkout or onboarding flow redesign.
+  - **Pricing analysis:** testing a price change on a small, randomized subset before a full rollout.
+
+  ## Related concepts
+
+  ```
+  Statistics — Hypothesis Testing
+    ↓
+  Business Analytics
+    ↓
+  A/B Testing & Experimentation ← you are here
+    ↓
+  Funnel Analysis (often the metric being A/B tested)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the purpose of randomly assigning users to control and variant groups?
+
+  ### Medium
+  2. A team wants to declare a "winner" after 2 days of a planned 2-week test, because the variant is currently ahead. What's the risk?
+
+  ### Interview/Advanced
+  3. Why must the primary metric be chosen before the test starts, rather than after seeing which metric moved the most?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Randomization ensures the only systematic difference between the two groups is the change being tested, so any resulting difference in the outcome can be attributed to that change rather than a pre-existing difference between the groups.
+  2. Early results are noisy and can reverse as more data comes in ("peeking"); stopping early significantly inflates the risk of declaring a false positive — a result that looks significant now may not hold up over the full planned duration.
+  3. Choosing the metric after seeing results allows cherry-picking whichever metric happened to move favorably by chance, which invalidates the statistical meaning of "significance" — pre-registering the metric ensures the test's conclusion is trustworthy rather than a coincidental pattern found after the fact.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What makes an A/B test a valid way to establish causation, unlike a simple before/after comparison?**
+  Short answer: Random assignment to control and variant groups, running concurrently, isolates the change being tested as the only systematic difference between groups — a before/after comparison can be confounded by anything else that changed over time (seasonality, other launches).
+
+  ### Conceptual questions
+  **Q: Why is "peeking" at results early and stopping risky?**
+  Short answer: It inflates the real false-positive rate well beyond the nominal significance threshold, because repeatedly checking increases the chance of catching a moment where random noise happens to look significant.
+
+  ### Scenario-based questions
+  **Q: A variant shows a big lift in its first 3 days but the test was planned for 2 weeks. What do you recommend?**
+  Short answer: Continue running the test for its full pre-planned duration — early results are noisy, can be affected by novelty effects or day-of-week patterns, and stopping early risks shipping a change based on a result that wouldn't hold up over the full test.
+
+  ### Practical questions
+  **Q: How would you design a test for a new onboarding flow, from hypothesis to decision rule?**
+  Short answer: State a specific hypothesis, define control (current flow) and variant (new flow), choose one primary metric (e.g., activation rate) and a significance threshold before launch, determine a minimum sample size/duration, and commit to the decision rule regardless of interim results.
+
+  ## Interview traps / tricky points
+
+  - A statistically significant result isn't automatically worth shipping — always also weigh practical significance and implementation cost (see [Hypothesis Testing](/skills/stats-hypothesis-testing)).
+  - The novelty effect can produce a real but temporary lift — a test long enough to let novelty fade is more trustworthy than a short one.
+  - Testing many secondary metrics is fine for context, but the *decision* should rest on the single pre-committed primary metric.
+
+  ## Best practices
+
+  - Write the hypothesis, primary metric, and decision rule down before the test launches.
+  - Commit to a minimum sample size/duration in advance, and don't stop early based on interim results.
+  - Watch for and account for novelty effects on short-duration tests.
+  - Report secondary metrics as context, but base the ship/no-ship decision on the primary metric alone.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Randomization** → isolates the tested change as the only systematic difference
+  **Primary metric** → chosen before the test starts, never after seeing results
+  **Duration/sample size** → decided in advance; don't stop early ("peeking")
+  **Watch for:** novelty effects, testing too many metrics, underpowered samples

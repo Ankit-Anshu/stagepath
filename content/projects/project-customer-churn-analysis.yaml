@@ -1,0 +1,46 @@
+title: Customer Churn Analysis
+level: portfolio
+duration: 6-10 hours
+description: >-
+  Explore a customer/subscription dataset in pandas to identify churn drivers and segment customers
+  by risk.
+problem_statement: A subscription company is losing customers but retention outreach is expensive. Identify credible churn signals and define useful customer segments for targeted intervention.
+scenario: You are the analyst supporting a retention manager who needs a prioritized action plan, not only a predictive chart.
+dataset:
+  name: Telco-style customer subscriptions
+  description: Synthetic customer-level CSV with tenure, contract, support, billing, usage, and churn fields.
+  source_url: /datasets/customer-churn.csv
+  format: CSV
+  size: 50 customers
+  files: [customer-churn.csv]
+skills:
+  - pandas
+  - statistics
+datasets:
+  - Customer subscription and usage history (CSV)
+tasks:
+  - Explore churn drivers
+  - Segment customers by risk
+  - Summarize findings and a recommendation in a notebook
+requirements:
+  - Define churn and check target balance before segmenting
+  - Compare churn rates across at least four defensible customer dimensions
+  - Avoid causal language unless the design supports it
+milestones:
+  - title: Prepare and profile
+    description: Validate types, missing values, category levels, and outcome balance.
+  - title: Find risk patterns
+    description: Quantify churn differences and test whether small segments are stable enough to use.
+  - title: Design interventions
+    description: Create three actionable segments with recommended outreach and measurement plans.
+rubric:
+  - criterion: Analytical rigor
+    definition: Rates use correct denominators and uncertainty or sample-size limitations are visible.
+  - criterion: Actionability
+    definition: Segments are identifiable, sizeable, and linked to a realistic intervention.
+  - criterion: Communication
+    definition: The notebook leads with the decision and supports it with concise evidence.
+artifacts:
+  - Jupyter Notebook
+  - GitHub repository
+  - README

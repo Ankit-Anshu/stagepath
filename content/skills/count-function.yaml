@@ -1,0 +1,111 @@
+title: COUNT Function
+what_is_it: Counting how many cells in a range contain a number (COUNT) or aren't empty (COUNTA).
+why_it_matters: Counting rows correctly is the basis for almost every rate or percentage calculation — conversion rate, completion rate, and more all start with a correct count.
+objectives:
+  - Count numeric entries with COUNT and non-empty entries with COUNTA
+  - Explain the difference between COUNT and COUNTA
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-count-1
+    title: Count completed orders
+    description: Count how many rows in an orders column represent a completed order, and explain why COUNT or COUNTA was the right choice.
+verify:
+  - Correct function (COUNT vs. COUNTA) is chosen for the data type
+  - Count matches a manual spot check
+category: Spreadsheets
+prerequisites: []
+note: |
+  ## 🎯 What is it?
+
+  **COUNT** counts how many cells in a range contain a number. **COUNTA** counts how many cells are not empty (numbers, text, or dates alike).
+
+  ## 💡 Why is it important?
+
+  Counting rows correctly is the basis for almost every rate or percentage — conversion rate, completion rate, and more all start with a correct count of the numerator and denominator.
+
+  ## Syntax
+
+  ```
+  =COUNT(range)    → counts numeric cells only
+  =COUNTA(range)   → counts non-empty cells (any type)
+  ```
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Order | Delivered Date |
+  | 2 | 1 | 2024-01-05 |
+  | 3 | 2 | *(blank)* |
+  | 4 | 3 | 2024-01-07 |
+
+  **Formula:** `=COUNT(B2:B4)` → `2` (counts dates, which are stored as numbers)
+  **Formula:** `=COUNTA(B2:B4)` → `2` (same here, since the only difference matters with text values)
+
+  If column B instead held text status labels ("Delivered", blank, "Delivered"), `COUNT` would return `0` (no numbers) while `COUNTA` would return `2`.
+
+  ## Multiple examples
+
+  **Beginner:** `=COUNTA(A2:A100)` — how many orders exist at all.
+  **Intermediate:** `=COUNT(B2:B100)` — how many of those orders have a numeric delivered-date, i.e. how many were actually delivered.
+  **Real-world:** `=COUNT(B2:B100)/COUNTA(A2:A100)` — delivery completion rate.
+
+  ## ⚠️ Common mistakes
+
+  - **Using COUNT when the column is text**, expecting it to count non-empty text cells — COUNT only counts numbers; COUNTA is needed for text/dates/mixed content.
+  - **Confusing COUNT/COUNTA with COUNTIF/COUNTIFS**, which count based on a condition, not just presence.
+  - **Forgetting that a formula returning an empty string (`""`) still counts as non-empty for COUNTA** — a cell with a formula that "looks empty" isn't actually empty.
+
+  ## Real-world Data Analyst use cases
+
+  - **Marketing analysis:** counting how many leads exist (COUNTA) vs. how many have a recorded numeric score (COUNT).
+  - **Operations analysis:** counting completed shipments (COUNT of a numeric delivery-time column) against total shipments (COUNTA).
+
+  ## Related concepts
+
+  ```
+  SUM → AVERAGE → COUNT ← you are here → MIN/MAX → SUMIFS/COUNTIFS
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What does COUNTA return for a range with 10 rows, 2 of which are blank?
+
+  ### Medium
+  2. Given an `orders` column (always filled) and a `refund_date` column (filled only for refunded orders), write a formula for the refund rate.
+
+  ### Interview/Advanced
+  3. Why would COUNT and COUNTA return different results on the exact same range?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `8` — COUNTA counts all non-empty cells regardless of type.
+  2. `=COUNT(B2:B100)/COUNTA(A2:A100)` (assuming refund_date is column B, orders is column A).
+  3. COUNT only counts cells holding numbers (including dates); COUNTA counts any non-empty cell, so a range containing text or mixed content will show a higher COUNTA than COUNT.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between COUNT and COUNTA?**
+  Short answer: COUNT counts only numeric cells; COUNTA counts any non-empty cell, regardless of whether it's a number, text, or date.
+
+  ## Interview traps / tricky points
+
+  - A cell containing a formula that evaluates to an empty string `""` is *not* truly blank — COUNTA will still count it, which can quietly inflate a count.
+  - Dates are stored as numbers internally, so COUNT works on date columns even though they display as text-like values.
+
+  ## Best practices
+
+  - Choose COUNT vs. COUNTA deliberately based on the column's data type, and document which one a report uses.
+  - Sanity-check a count against a manual filter/spot check before trusting it in a report.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **COUNT** → numeric cells only
+  **COUNTA** → any non-empty cell (text, number, date)
+  **Watch for:** formulas returning `""` still count as non-empty for COUNTA

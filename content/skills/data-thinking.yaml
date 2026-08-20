@@ -1,0 +1,174 @@
+title: Data Thinking
+what_is_it: 'Framing a business question as an answerable data question: defining metrics, choosing the right level of granularity, and knowing what evidence would change a decision.'
+why_it_matters: Most failed analyses fail before any query is written — the wrong question was asked. Data thinking is the skill of translating a vague business ask into something measurable.
+prerequisites: []
+objectives:
+  - Turn a vague business question into a measurable one
+  - Choose an appropriate metric and time window
+  - Identify what evidence would change the decision
+  - Recognize when the data cannot answer the question
+estimated_minutes: 180
+resources:
+  - r-grow-google-data-analytics
+  - r-kaggle-data-cleaning
+practice:
+  - id: ex-data-thinking-1
+    title: Reframe a vague ask
+    description: Given the prompt "sales feel slow this quarter," write the specific, measurable question you would actually answer, and what data you would need.
+verify:
+  - States a specific, measurable question rather than a vague one
+  - Identifies the metric, segment, and time window
+  - Names what data would be needed and where it might come from
+  - Identifies at least one way the analysis could be misleading
+category: Foundations
+subtopics:
+  - title: Framing a question
+    description: Turning a vague prompt like "sales feel slow" into a specific, measurable question with a metric and time window.
+    outcomes:
+      - Rewrite a vague ask as a measurable question
+  - title: Choosing a metric
+    description: Picking the right metric and denominator for a situation — rate vs. count, per-user vs. total.
+    outcomes:
+      - Choose between a rate and a raw count for a given question
+  - title: Data sources
+    description: Knowing where the needed data likely lives — database, spreadsheet, event log, or third-party — and its limitations.
+    outcomes:
+      - List where you would find the data for a given question
+  - title: Evidence and decisions
+    description: Identifying what result would actually change the decision being made, before you start analyzing.
+    outcomes:
+      - State what evidence would change a stakeholder's mind
+note: |
+  ## 🎯 What is it?
+
+  **Data thinking** is the skill of turning a vague business question into a specific, measurable one — choosing the right metric, the right time window, and knowing in advance what result would actually change the decision.
+
+  It's the mental translation step between "sales feel slow" (a feeling) and "is Q3 revenue tracking below Q2, and by how much?" (a question you can actually answer with data).
+
+  ## 💡 Why is it important?
+
+  - Most failed analyses fail before a single query is written — the wrong question got answered well, instead of the right question being answered at all.
+  - It's what separates someone who can run a query from someone who can actually be trusted to lead an analysis.
+  - It prevents wasted effort: knowing upfront what evidence would change the decision stops you from over-analyzing a question that only needed a quick check.
+  - It's the practical, everyday version of the scientific method applied to business problems.
+
+  ## Core concept
+
+  ### Framing a question
+  Take the vague prompt apart: what metric, what time window, and what comparison is actually implied?
+
+  *"Sales feel slow"* →
+  - Metric: revenue (or units sold?)
+  - Time window: this month vs. what — last month? same month last year?
+  - Comparison: is "slow" relative to a target, a forecast, or a prior period?
+
+  ### Choosing a metric
+  Two common traps: picking a raw count when a rate would be fairer (100 new signups means very different things for a company with 1,000 vs. 1,000,000 existing users), and picking a total when a per-user average would answer the real question.
+
+  | Question shape | Better metric choice |
+  |---|---|
+  | "Are more people buying?" | Conversion rate, not raw order count |
+  | "Is engagement healthy?" | DAU/MAU ratio, not total logins |
+  | "Are we growing efficiently?" | Revenue per customer, not total revenue alone |
+
+  ### Data sources
+  Before analyzing, know roughly where the data lives: a transactional database, an event-tracking log, a third-party ads platform, or a spreadsheet someone maintains manually — each has different reliability and freshness.
+
+  ### Evidence and decisions
+  Before starting, ask: "what result, if I found it, would actually change what we do?" If no plausible result would change the decision, the analysis isn't worth doing yet — or the real question hasn't been found.
+
+  ## 📊 Example
+
+  **Vague ask:** "Marketing wants to know if the new landing page is working."
+
+  **Data-thinking pass:**
+  - Metric: conversion rate (visits → signups), not raw signup count (traffic could have simply increased).
+  - Time window: compare a matched period before/after launch, ideally with a control if possible.
+  - Evidence that changes the decision: if conversion rate is flat or down, recommend reverting; if it's up meaningfully (beyond normal week-to-week noise), recommend keeping it.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** reframing "are we hitting target?" into a specific run-rate-vs-target calculation with a stated time window.
+  - **Marketing analysis:** choosing conversion rate over raw traffic to judge a campaign's real effect.
+  - **Product analysis:** choosing retention rate over total user count to judge product health.
+
+  ## ⚠️ Common mistakes
+
+  - **Answering the literal words of a request instead of the underlying need.** "Sales feel slow" is a feeling, not yet a measurable question — translating it is the analyst's job, not the stakeholder's.
+  - **Defaulting to totals when a rate is more honest.** Totals are easy to compute but often misleading when the underlying population is changing.
+  - **Skipping the "what evidence would change the decision" question**, leading to over-built analyses that don't actually move anything forward.
+
+  ## Related concepts
+
+  ```
+  Business Understanding
+    ↓
+  KPIs & Metrics
+    ↓
+  Data Thinking ← you are here
+    ↓
+  The Data Analytics Lifecycle (this feeds "Ask & Plan")
+    ↓
+  Statistics — Hypothesis Testing (formal version of "what evidence matters")
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Rewrite "sales feel slow this quarter" as a specific, measurable question.
+  2. Why might a raw count be misleading compared to a rate?
+
+  ### Medium
+  3. For the question "is our new feature helping?" — name the metric, time window, and comparison you'd use.
+
+  ### Interview/Advanced
+  4. A stakeholder wants an analysis, but you determine that no plausible result would change what they do. What do you do next?
+
+  <details>
+  <summary><strong>Answer / Solution</strong></summary>
+
+  1. Example: "Is Q3 revenue-to-date tracking below the same period in Q2, and if so, by how much and in which product line?"
+  2. Because the underlying population size can change over time — 100 new customers is a very different signal for a company with 1,000 existing customers than one with 1,000,000.
+  3. Example: metric = feature adoption rate among eligible users; time window = 2 weeks post-launch; comparison = adoption rate vs. a pre-defined success threshold, or against a similar past feature launch.
+  4. Go back to the stakeholder and clarify the actual decision at stake — either the real question hasn't been surfaced yet, or the analysis genuinely isn't needed right now, and it's better to say so than to produce a report that changes nothing.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What is "data thinking" and why does it matter?**
+  Short answer: It's translating a vague business question into a specific, measurable one before starting analysis — it matters because analyzing the wrong question wastes time even when the work itself is technically correct.
+
+  ### Conceptual questions
+  **Q: Why would you choose a rate over a raw count when analyzing growth?**
+  Short answer: A rate accounts for changes in the underlying population, making comparisons over time fair; a raw count can look impressive or alarming purely because the population itself grew or shrank.
+
+  ### Scenario-based questions
+  **Q: A stakeholder says "check if customers are happy." How do you turn this into an answerable question?**
+  Short answer: Ask what "happy" should be measured by (NPS score, support ticket volume, retention rate) and over what time window, then pick the metric that most directly reflects the decision they're trying to make.
+
+  ### Practical questions
+  **Q: Before starting an analysis, what's one question you should always ask yourself?**
+  Short answer: "What result, if I found it, would actually change the decision?" — if no plausible answer changes anything, the analysis isn't targeting the real need yet.
+
+  ## Interview traps / tricky points
+
+  - Interviewers often give an intentionally vague prompt specifically to see whether you ask clarifying questions or just start describing a SQL query.
+  - Picking a metric that "sounds right" without checking whether it's a rate or a total is a very common early mistake that experienced interviewers watch for.
+
+  ## Best practices
+
+  - Always restate a vague request as a specific, written question before starting any analysis.
+  - Default to rates/ratios over raw totals when comparing across time or between groups of different sizes.
+  - Ask "what would change the decision?" early — it keeps the scope of analysis honest and focused.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data thinking** → turning a vague ask into a specific, measurable question
+  **Metric choice** → prefer rates over raw totals when population size can change
+  **Time window** → always state explicitly; "this month" is meaningless without a comparison point
+  **Evidence check** → before starting, know what result would actually change the decision
+  Remember: most failed analyses fail before the first query — the wrong question, well answered.

@@ -1,0 +1,165 @@
+title: Power Query Introduction
+category: Spreadsheets
+what_is_it: Importing, transforming, and combining data from multiple sources using Power Query, before it ever reaches a formula or pivot table.
+why_it_matters: Manually pasting and reformatting data every week doesn't scale. Power Query turns a repeatable cleaning process into a few clicks that refresh automatically.
+prerequisites:
+  - performance-dashboard
+objectives:
+  - Import data from a file or folder
+  - Apply and save a repeatable transformation
+  - Merge two queries
+  - Refresh a query after the source changes
+subtopics:
+  - title: Importing data
+    description: Connecting to a file, folder, or web source as a query instead of pasting values.
+    outcomes:
+      - Import a CSV as a query
+  - title: Transform steps
+    description: A saved, repeatable, step-by-step cleaning process instead of one-off manual edits.
+    outcomes:
+      - Build a multi-step, repeatable transformation
+  - title: Merging queries
+    description: Combining two data sources by a shared key, similar to a SQL join.
+    outcomes:
+      - Merge two queries on a shared column
+estimated_minutes: 180
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-1
+    title: Automate a monthly import
+    description: Set up a query that imports and cleans a raw export so re-running it on next month's file takes one click instead of starting over.
+verify:
+  - Import is repeatable, not a one-time manual paste
+  - Transformation steps are visible and in a logical order
+  - Refreshing the query correctly reflects new source data
+note: |
+  ## 🎯 What is it?
+
+  **Power Query** is a spreadsheet tool for importing, transforming, and combining data from multiple sources as a **repeatable, saved process** — instead of manually pasting and reformatting the same import every time new data arrives.
+
+  Think of it as recording a macro for data cleaning, except every step is visible, editable, and re-runs automatically on refresh — not a black-box recording.
+
+  ## 💡 Why is it important?
+
+  Manually pasting and reformatting a weekly or monthly export doesn't scale — it's slow and error-prone, and every manual repeat is a chance to make a different mistake than last time. Power Query turns that repeatable cleaning process into a few clicks that refresh consistently, every time.
+
+  ## Core concept
+
+  ### Importing data
+  Instead of pasting values, you connect to a file, folder, or web source as a **query** — a live reference to the source, not a one-time copy.
+
+  ### Transform steps
+  Every cleaning action (removing a column, filtering rows, splitting a column, changing a data type) is recorded as a **named, ordered step**. This step list is the repeatable "recipe" — re-running it on a new file re-applies the exact same cleaning automatically.
+
+  ### Merging queries
+  Combining two queries by a shared key — conceptually the same as a SQL JOIN or a spreadsheet VLOOKUP, but built into the query itself so both sources refresh and re-merge together.
+
+  ## Syntax / Formula / Structure
+
+  A typical Power Query workflow, as a sequence of steps (each one visible and editable in the Applied Steps pane):
+
+  ```
+  1. Source          → connect to file/folder
+  2. Changed Type     → set correct data types per column
+  3. Filtered Rows    → remove test/invalid rows
+  4. Removed Columns  → drop unneeded fields
+  5. Merged Queries   → join with a second table by key
+  6. Renamed Columns  → clean, consistent column names
+  7. Close & Load     → send the result back into the spreadsheet
+  ```
+
+  ## 📊 Example
+
+  **Task:** Every month, a new `sales_export.csv` arrives with the same structure but a new filename/date.
+
+  **Without Power Query:** manually open the file, delete a header row, fix date formatting, remove test rows, paste into the master sheet — every single month.
+
+  **With Power Query:** build the transform once — Source → Filtered Rows (remove test accounts) → Changed Type (fix date format) → Close & Load. Next month, just refresh the query against the new file; every step re-applies automatically.
+
+  ## Multiple examples
+
+  **Beginner:** Import a single CSV and set correct data types.
+  **Intermediate:** Import a CSV, filter out test/internal rows, and rename columns to a consistent naming convention.
+  **Real-world:** Import an entire folder of monthly CSVs, combine them into one table automatically, merge in a reference table (e.g., region lookup) by key, and load the result straight into a pivot-table-ready sheet — repeatable with one click every month going forward.
+
+  ## ⚠️ Common mistakes
+
+  - **Editing the loaded output table directly instead of the query.** Manual edits to the final table get wiped out on the next refresh — all changes must happen as query steps.
+  - **Building an overly long, undocumented step list** that's hard for anyone else (or future you) to audit — rename steps descriptively as you go.
+  - **Merging queries without deduplicating the key column first**, which can silently multiply rows (a classic "fan-out" bug also seen in SQL joins).
+  - **Hardcoding a specific file path** instead of pointing at a folder or a parameter, which breaks the moment the file is renamed or moved.
+
+  ## Real-world Data Analyst use cases
+
+  - **Operations analysis:** automatically combining weekly regional CSV exports into one master table every week.
+  - **Finance analysis:** merging a transactions export with a currency-conversion reference table on refresh.
+  - **Any recurring reporting job:** replacing a manual "paste and reformat" ritual with a one-click refresh.
+
+  ## Related concepts
+
+  ```
+  Pivot Tables → Charts & Dashboards
+    ↓
+  Power Query Introduction ← you are here
+    ↓
+  SQL — SELECT / JOIN (the next step up in scale and repeatability)
+  ```
+  Power Query's "merge queries" step is conceptually the direct spreadsheet precursor to [SQL — JOIN](/skills/sql-joins).
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the key difference between pasting data manually and importing it as a Power Query?
+
+  ### Medium
+  2. You need to combine 12 monthly CSV files (same structure) into one table automatically. Which Power Query feature handles this in one step?
+
+  ### Interview/Advanced
+  3. A merged query is producing far more rows than either source table. What's the most likely cause?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A pasted value is a one-time static copy; a Power Query import is a live, repeatable connection whose transform steps automatically re-apply every time the query is refreshed.
+  2. Importing an entire folder as a query source ("From Folder") — it combines every file matching the pattern into one table automatically.
+  3. A duplicate key on one or both sides of the merge — every duplicate match multiplies the resulting rows, the same "fan-out" issue that occurs with a SQL join on a non-unique key.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What problem does Power Query solve?**
+  Short answer: It replaces a manual, repeated "import and reformat" process with a saved, automatically-repeatable set of transform steps.
+
+  ### Conceptual questions
+  **Q: Why shouldn't you manually edit the final output table of a Power Query import?**
+  Short answer: Because the next refresh regenerates that table from the query's steps, silently overwriting any manual edits — changes need to be made as query steps instead.
+
+  ### Scenario-based questions
+  **Q: Your team currently spends an hour every week manually cleaning a CSV export before analysis. How would you propose fixing this?**
+  Short answer: Build a Power Query that captures every cleaning step once, then have the team simply refresh the query each week — turning an hour of manual work into a one-click refresh.
+
+  ### Practical questions
+  **Q: How would you combine data from a folder of similarly-structured CSVs into one table?**
+  Short answer: Use Power Query's "From Folder" source, which automatically reads and appends every matching file in the folder into a single combined table.
+
+  ## Interview traps / tricky points
+
+  - Merging on a key that isn't unique on at least one side silently multiplies rows — always check for duplicate keys before merging, the same discipline needed for SQL joins.
+  - A query that references a specific, hardcoded file path breaks the moment that file is renamed or moved — parameterizing the path (or using a folder source) avoids this fragility.
+
+  ## Best practices
+
+  - Never hand-edit the output of a query — always add or fix a transform step instead.
+  - Name each transform step descriptively so the process is auditable by someone else.
+  - Prefer folder/parameter-based sources over hardcoded single-file paths for anything recurring.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Power Query** → repeatable import + transform, not a one-time paste
+  **Transform steps** → an ordered, editable "recipe" that reruns on refresh
+  **Merge queries** → spreadsheet-scale JOIN; check for duplicate keys first
+  **Rule:** never manually edit the loaded output — edit the query instead

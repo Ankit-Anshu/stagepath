@@ -1,0 +1,114 @@
+title: Dashboard
+category: Spreadsheets
+what_is_it: Assembling KPIs, charts, and slicers onto a single spreadsheet tab, laid out so a viewer can answer a specific question in seconds.
+why_it_matters: This is the culmination of the entire Visualization & Dashboards group — every chart type and KPI display comes together into one finished, decision-ready artifact.
+prerequisites:
+  - data-storytelling-spreadsheets
+objectives:
+  - Assemble KPIs, charts, and slicers into one dashboard tab
+  - Apply visual hierarchy so the most important element is the most prominent
+estimated_minutes: 40
+resources:
+  - r-datavizcatalogue
+  - r-ms-powerbi-training
+practice:
+  - id: ex-dashboard-spreadsheets-1
+    title: Build a one-tab sales dashboard
+    description: Combine 2 KPI cards, a line chart, a bar chart, and a slicer into one clean, readable dashboard tab answering "how is this month's sales performance trending?"
+verify:
+  - The dashboard's core question is answerable in under 10 seconds
+  - Slicer(s) correctly update every connected chart and KPI
+  - Layout has a clear visual hierarchy, not equally-weighted clutter
+note: |
+  ## 🎯 What is it?
+
+  A **Dashboard** assembles [KPIs](/skills/kpi-spreadsheets), charts (bar, column, line, scatter), and [slicers](/skills/slicers) onto a single spreadsheet tab, laid out so a viewer can answer a specific question in seconds — the practical, hands-on culmination of everything in the Visualization & Dashboards group.
+
+  ## 💡 Why is it important?
+
+  This is where every individual chart type and KPI display comes together into one finished, decision-ready artifact — a dashboard is not a pile of charts, but a tool designed around one specific decision-maker's specific question (see [Dashboard Design](/skills/dashboard-design) for the full design principles this applies).
+
+  ## Core concept
+
+  A practical spreadsheet dashboard build sequence:
+
+  ```
+  1. Identify the ONE core question this dashboard must answer
+  2. Convert source data into a Table (auto-expanding, structured references)
+  3. Build the Pivot Table(s) needed to summarize that data
+  4. Build Pivot Charts from those pivot tables
+  5. Add KPI cards for the 1-3 most important numbers, each with a comparison
+  6. Add Slicers connected to every relevant chart/pivot table
+  7. Lay out with visual hierarchy — most important element largest/most prominent
+  8. Test: can a first-time viewer answer the core question in under 10 seconds?
+  ```
+
+  ## 📊 Example
+
+  **Core question:** "How is this month's sales performance trending against target?"
+
+  **Layout:**
+  - **Top-left, largest:** a KPI card — "$1.2M / $1.5M target (80%)"
+  - **Center:** a line chart of daily revenue vs. a target line
+  - **Right:** a bar chart of revenue by region
+  - **Top filter bar:** a Region slicer connected to both charts and the KPI card
+
+  **Explanation:** A first-time viewer sees the core answer (80% to target) immediately, and the supporting charts answer the natural follow-up questions ("is this trending up or down?", "which region is behind?") without any further explanation needed.
+
+  ## Multiple examples
+
+  **Beginner:** A single-page dashboard with one KPI card and one supporting chart.
+  **Intermediate:** Adding a slicer connected to both the chart and the KPI card, so filtering updates everything together.
+  **Real-world:** A full monthly sales dashboard built entirely from a Table-based source, with Pivot Tables/Pivot Charts that automatically update as new weekly data is pasted in, KPI cards with month-over-month comparisons, and a Region+Product slicer — the complete, self-updating spreadsheet dashboard pattern used across real recurring reporting.
+
+  ## ⚠️ Common mistakes
+
+  - **Skipping the "what's the core question" step** and just assembling every chart that seems interesting — this produces clutter, not a dashboard (see [Dashboard Design](/skills/dashboard-design)).
+  - **Building on a plain range instead of a Table**, requiring manual range updates on every pivot table and chart each time new data arrives.
+  - **Not testing whether a first-time viewer can actually answer the core question quickly** — this is the real test of whether a dashboard succeeded, not how many charts it contains.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any recurring stakeholder report:** a self-updating, one-tab dashboard is one of the most commonly requested deliverables from a data analyst.
+
+  ## Related concepts
+
+  ```
+  Interactive Filters → Dashboard ← you are here
+    ↓
+  Executive Dashboard → Sales Dashboard → Performance Dashboard
+  ```
+  This is the Excel Dashboards chapter's practical build sequence — the topics that follow apply it to three specific real-world dashboard types. The underlying design principles are covered in full in [Dashboard Design](/skills/dashboard-design), later in the Visualization stage.
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the first step before building any dashboard, according to this build sequence?
+
+  ### Interview/Advanced
+  2. Why should a spreadsheet dashboard be built on a Table rather than a plain range?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Identify the single core question the dashboard needs to answer — everything else in the build follows from that.
+  2. A Table auto-expands as new data is added, so every pivot table, Pivot Chart, and formula built on top of it automatically stays current — building on a plain range instead means manually updating every range reference each time new data arrives.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you test whether a finished dashboard is actually successful?**
+  Short answer: Have someone unfamiliar with it try to answer the dashboard's core question within about 10 seconds of looking at it — if they can't, the layout, hierarchy, or KPI prominence needs rework, regardless of how much data or how many charts it contains.
+
+  ## Best practices
+
+  - Always start from a single, clearly identified core question.
+  - Build on a Table, so the whole dashboard stays current automatically as data grows.
+  - Test the finished dashboard on a first-time viewer before considering it done.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Dashboard build sequence:** core question → Table → Pivot Table → Pivot Chart → KPI cards → Slicers → hierarchy
+  **Test:** can a first-time viewer answer the core question in under 10 seconds?

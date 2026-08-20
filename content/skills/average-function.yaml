@@ -1,0 +1,112 @@
+title: AVERAGE Function
+what_is_it: Calculating the mean of a range of numbers.
+why_it_matters: Averages are used constantly in reporting — but also frequently misused. Knowing how to compute one is step one to knowing when not to trust it.
+objectives:
+  - Calculate the average of a range correctly
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-average-1
+    title: Average order value
+    description: Calculate the average order value from a transactions column and sanity-check it against the total and count.
+verify:
+  - Average is calculated correctly
+  - Result is sanity-checked against SUM divided by COUNT
+category: Spreadsheets
+prerequisites: []
+note: |
+  ## 🎯 What is it?
+
+  **AVERAGE** calculates the mean of a range of numbers — the sum divided by the count of numeric values.
+
+  ## 💡 Why is it important?
+
+  Averages appear in nearly every report — but they're also one of the most frequently misused statistics. Knowing how to compute one correctly is step one to knowing when an average is the wrong number to report at all.
+
+  ## Syntax
+
+  ```
+  =AVERAGE(range)
+  ```
+
+  - **range** — the cells to average. Text and blank cells are ignored (not counted as zero).
+
+  ## 📊 Example
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Order | Amount |
+  | 2 | 1 | 40 |
+  | 3 | 2 | 60 |
+  | 4 | 3 | 200 |
+
+  **Formula:** `=AVERAGE(B2:B4)`
+  **Result:** `100`
+
+  **Explanation:** (40+60+200)/3 = 100.
+
+  ## Multiple examples
+
+  **Beginner:** `=AVERAGE(B2:B100)` — average order value.
+  **Intermediate:** `=AVERAGE(IF(C2:C100="West",B2:B100))` (array formula) — average order value for the West region only.
+  **Real-world:** Compare `=AVERAGE(B2:B100)` against `=MEDIAN(B2:B100)` — a large gap signals the average is being skewed by outliers, which is common with order-value or salary data.
+
+  ## ⚠️ Common mistakes
+
+  - **Reporting an average without checking for skew.** A single $50,000 order can drag the "average" order value far above what a typical customer actually spends — the median is often more representative.
+  - **Averaging a rate/percentage column directly** instead of computing a weighted average — this treats a segment of 10 customers the same as a segment of 10,000.
+  - **Not sanity-checking**: AVERAGE should roughly equal SUM ÷ COUNT — if it doesn't, something (like a hidden filter) is off.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** average order value.
+  - **Product analysis:** average session duration.
+  - **Finance analysis:** average monthly expense per category.
+
+  ## Related concepts
+
+  ```
+  SUM → AVERAGE → COUNT → MIN/MAX
+  ```
+  Also connects to [Statistics — Descriptive Statistics](/skills/stats-descriptive) (mean vs. median vs. mode).
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula for the average of `B2:B50`.
+
+  ### Medium
+  2. Given an order-value column with one $50,000 outlier among typical $20–$200 orders, which statistic — AVERAGE or MEDIAN — better represents a "typical" order? Why?
+
+  ### Interview/Advanced
+  3. Explain why averaging a column of per-store conversion-rate percentages can mislead if stores have very different traffic volumes.
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=AVERAGE(B2:B50)`
+  2. MEDIAN — it isn't pulled toward the extreme outlier the way AVERAGE is, so it better reflects what a typical order looks like.
+  3. A simple average treats a low-traffic store's rate the same as a high-traffic store's rate, even though the high-traffic store represents far more actual conversions — a traffic-weighted average (total conversions ÷ total visits) is more accurate.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you use MEDIAN instead of AVERAGE?**
+  Short answer: When the data has outliers or is skewed — median isn't affected by extreme values the way average is, so it better represents a "typical" case.
+
+  ## Interview traps / tricky points
+
+  - AVERAGE silently ignores blanks (doesn't treat them as zero) — a common source of confusion when a formula's result looks "too high."
+  - Averaging an already-averaged column (average of averages) without weighting is a classic and easy-to-miss error.
+
+  ## Best practices
+
+  - Pair AVERAGE with MEDIAN when reporting a "typical" value — a large gap between them is worth flagging.
+  - Use a weighted average (SUM/SUM) instead of AVERAGE of a per-row rate when segments differ in size.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **AVERAGE(range)** → mean of numeric values, ignores blanks/text
+  **Watch for:** outliers skewing the result — compare against MEDIAN

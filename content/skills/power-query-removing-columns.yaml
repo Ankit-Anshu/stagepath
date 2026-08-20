@@ -1,0 +1,59 @@
+title: Removing Columns
+category: Spreadsheets
+what_is_it: Deleting columns that aren't needed for analysis, as a permanent, repeatable step in a Power Query pipeline.
+why_it_matters: Loading only the columns actually needed keeps the result focused, smaller, and faster — and doing it in Power Query means it happens automatically every refresh.
+prerequisites:
+  - power-query-filtering
+objectives:
+  - Remove one or more unneeded columns as a Power Query step
+  - Explain the benefit of removing columns in Power Query versus after loading
+estimated_minutes: 15
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-removing-columns-1
+    title: Trim an import to essentials
+    description: Given an imported table with 20 columns, remove every column not actually needed for a specific report, as a Power Query step.
+verify:
+  - Can remove columns as a Power Query step
+  - Can explain why doing this in Power Query is better than deleting columns after loading
+note: |
+  ## 🎯 What is it?
+
+  **Removing columns** deletes columns that aren't needed for the analysis at hand, recorded as a step in the query — right-click any column header and choose Remove (or Remove Other Columns to keep only the ones selected).
+
+  ## 💡 Why is it important?
+
+  - Loading only the columns actually needed keeps the result focused, smaller, and faster to work with — a source system export often includes many irrelevant columns for a specific report.
+  - Doing this in Power Query (rather than deleting columns manually after loading into the worksheet) means it happens automatically on every refresh, without needing to be redone.
+
+  ## 📊 Example
+
+  A source export includes 20 columns, but a specific sales report only needs 5 (date, region, product, quantity, revenue). Using **Remove Other Columns** on those 5 keeps the loaded result focused and small — and if the source export gains a new irrelevant column later, it's automatically excluded too, without any extra work.
+
+  ## ⚠️ Common mistakes
+
+  - **Removing a column that turns out to be needed later**, requiring the step to be found and edited — always double-check which columns a report might need before trimming aggressively.
+  - **Manually deleting columns after loading into the worksheet** instead of removing them in Power Query — this has to be redone by hand on every refresh.
+
+  ## Related concepts
+
+  ```
+  Filtering
+    ↓
+  Removing Columns ← you are here
+    ↓
+  Splitting Columns
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A source import has 20 columns but a report only needs 5. What's the best way to trim it in Power Query?**
+  Short answer: Select the 5 needed columns and use "Remove Other Columns" — this keeps the load focused and automatically excludes any new irrelevant columns the source might add later, unlike manually deleting columns after loading.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Removing columns** → delete unneeded columns as a repeatable Power Query step
+  Keeps the loaded result focused and small — and automatically excludes new irrelevant columns on future refreshes.

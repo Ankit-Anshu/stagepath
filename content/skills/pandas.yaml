@@ -1,0 +1,210 @@
+title: Pandas
+what_is_it: Loading, cleaning, transforming, and summarizing tabular data in Python using DataFrames — the Python equivalent of a supercharged spreadsheet.
+why_it_matters: Pandas is the default tool for real-world data cleaning and exploratory analysis in Python, and the bridge between raw data and every downstream step, including modeling and visualization.
+prerequisites:
+  - numpy
+objectives:
+  - Load and inspect a DataFrame
+  - Filter, sort, and group data
+  - Handle missing values deliberately
+  - Merge two DataFrames correctly
+estimated_minutes: 360
+resources:
+  - r-pandas-10min
+  - r-kaggle-pandas
+practice:
+  - id: ex-pandas-1
+    title: Clean and merge two datasets
+    description: Given a customers DataFrame and an orders DataFrame with missing values, clean both and merge them into one analysis-ready table.
+project: project-customer-churn-analysis
+verify:
+  - Missing values are handled deliberately, not silently dropped without justification
+  - Merge uses the correct join type and key
+  - Resulting DataFrame shape matches expectations
+  - Can explain each transformation step
+assessment: assessment-python-foundations-checkpoint
+category: Python
+subtopics:
+  - title: DataFrames & Series
+    description: Loading tabular data and inspecting its shape, column types, and first/last rows.
+    outcomes:
+      - Load a CSV and inspect its structure
+  - title: Selecting & filtering
+    description: Using loc/iloc for position- and label-based selection, and boolean masks for filtering.
+    outcomes:
+      - Filter rows using a boolean condition
+  - title: Missing data
+    description: Detecting NaNs and deliberately choosing to drop, fill, or flag them — never silently.
+    outcomes:
+      - Decide and apply a missing-data strategy with justification
+  - title: GroupBy
+    description: Splitting data into groups, applying a calculation, and combining the results with groupby().
+    outcomes:
+      - Summarize data with groupby and agg
+  - title: Merging
+    description: Combining two DataFrames with the correct join type and key, without losing or duplicating rows.
+    outcomes:
+      - Merge two DataFrames without losing or duplicating rows
+note: |
+  ## 🎯 What is it?
+
+  **Pandas** is Python's library for loading, cleaning, transforming, and summarizing tabular data using **DataFrames** — essentially a supercharged, programmable spreadsheet. It's the default tool for real-world data cleaning and exploratory analysis in Python.
+
+  ## 💡 Why is it important?
+
+  Pandas is the bridge between raw data and every downstream step — modeling, visualization, or reporting. It handles the messy, repetitive parts of real analysis (loading, cleaning, merging, grouping) far more powerfully and reproducibly than a spreadsheet once data gets large or the cleaning steps get complex.
+
+  ## Core concept
+
+  ### DataFrames & Series
+  A **DataFrame** is a 2D table (rows and columns), like a spreadsheet or a SQL table. A **Series** is a single column of a DataFrame — a 1D labeled array. `.head()`, `.info()`, and `.shape` are the standard first commands to inspect any new DataFrame.
+
+  ### Selecting & filtering
+  `.loc[]` selects by **label** (row/column name); `.iloc[]` selects by **integer position**. A **boolean mask** (`df[df["amount"] > 100]`) filters rows based on a condition — the pandas equivalent of SQL's WHERE.
+
+  ### Missing data
+  Pandas represents missing values as `NaN`. `.isna()` detects them; `.dropna()` removes rows/columns with them; `.fillna()` fills them with a chosen value — the choice should always be deliberate and justified (see [Data Cleaning & Quality](/skills/data-cleaning)), never a silent default.
+
+  ### GroupBy
+  `.groupby()` splits data into groups (like SQL's GROUP BY), applies a calculation to each group, and combines the results — the pandas equivalent of aggregation.
+
+  ### Merging
+  `.merge()` combines two DataFrames by a shared key — the pandas equivalent of a SQL JOIN, with the same `how="inner"/"left"/"right"/"outer"` options and the same row-multiplication risk if the key isn't unique.
+
+  ## Syntax
+
+  ```python
+  import pandas as pd
+
+  df = pd.read_csv("orders.csv")
+  df.head()                                  # first 5 rows
+  df.info()                                  # column types and non-null counts
+
+  # Filtering (boolean mask)
+  large_orders = df[df["amount"] > 200]
+
+  # Missing data
+  df["region"] = df["region"].fillna("Unknown")
+
+  # GroupBy
+  region_totals = df.groupby("region")["amount"].sum()
+
+  # Merging
+  merged = orders_df.merge(customers_df, on="customer_id", how="left")
+  ```
+
+  ## 📊 Example
+
+  `orders` DataFrame:
+
+  | order_id | customer_id | amount |
+  |---|---|---|
+  | 1 | 101 | 200 |
+  | 2 | 102 | 150 |
+  | 3 | 101 | 300 |
+
+  **Code:**
+
+  ```python
+  totals = df.groupby("customer_id")["amount"].sum().reset_index()
+  ```
+
+  **Output:**
+
+  | customer_id | amount |
+  |---|---|
+  | 101 | 500 |
+  | 102 | 150 |
+
+  **Explanation:** `groupby("customer_id")` splits the DataFrame into groups by customer, `["amount"].sum()` sums each group, and `.reset_index()` turns the grouped result back into a normal, flat DataFrame.
+
+  ## Multiple examples
+
+  **Beginner:** `df[df["status"] == "completed"]` — filter to only completed orders.
+  **Intermediate:** `df.groupby(["region", "month"])["revenue"].sum()` — a two-level grouped summary, the pandas equivalent of a pivot table.
+  **Real-world:** Loading a customers DataFrame and an orders DataFrame, deliberately deciding how to handle missing `signup_date` values, merging them with `how="left"` (keeping all customers, even those without orders), and confirming the merged shape matches expectations — the full clean-and-merge workflow.
+
+  ## ⚠️ Common mistakes
+
+  - **Silently dropping rows with `.dropna()`** without checking how many rows were removed or whether the missingness was random — see [Data Cleaning & Quality](/skills/data-cleaning) for the same principle applied at scale.
+  - **Using the wrong merge type**, accidentally dropping rows that should have been kept (e.g., using `how="inner"` when `how="left"` was actually needed to preserve unmatched customers).
+  - **Not checking the merged DataFrame's shape** after a merge — a silent row-multiplication (from a non-unique key) is one of the most common real pandas bugs, directly analogous to SQL's join row-explosion problem.
+  - **Chained indexing** (e.g., `df[df["x"]>0]["y"] = 1`) which can trigger pandas' `SettingWithCopyWarning` and may silently fail to update the original DataFrame — use `.loc[]` for both selecting and assigning in one step instead.
+
+  ## Real-world Data Analyst use cases
+
+  - **Customer analysis:** cleaning and merging a customers table with an orders table to compute customer lifetime value.
+  - **Sales analysis:** grouping transactions by region and month to build a summary table, feeding directly into a chart.
+  - **Any recurring analysis:** replacing a manual spreadsheet cleaning routine with a reproducible pandas script that runs identically every time.
+
+  ## Related concepts
+
+  ```
+  NumPy (the foundation pandas is built on)
+    ↓
+  Pandas ← you are here
+    ↓
+  Data Visualization with Python
+    ↓
+  Working with APIs / Regular Expressions for Data Cleaning
+  ```
+  Pandas' `.groupby()`, boolean filtering, and `.merge()` map directly onto SQL's GROUP BY, WHERE, and JOIN — if you've learned the SQL stage first, most of pandas' logic will already feel familiar.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write pandas code to filter a DataFrame `df` to rows where `amount > 100`.
+
+  ### Medium
+  2. Write pandas code that groups `df` by `region` and returns the average `amount` per region.
+
+  ### Interview/Advanced
+  3. After merging two DataFrames, the result has more rows than either original DataFrame. What's the likely cause, and how would you confirm it?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `df[df["amount"] > 100]`
+  2. `df.groupby("region")["amount"].mean()`
+  3. The merge key is likely not unique on at least one side, causing a one-to-many (or many-to-many) match that multiplies rows — the same "row explosion" issue as a SQL join. Confirm by checking `df["key_column"].duplicated().sum()` on each side before merging, and compare the merged result's row count against expectations.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between `.loc[]` and `.iloc[]`?**
+  Short answer: `.loc[]` selects by label (row/column name), while `.iloc[]` selects by integer position — they can return different results if the DataFrame's index isn't a simple 0-based range.
+
+  ### Conceptual questions
+  **Q: How would you decide whether to drop, fill, or flag missing values in a pandas DataFrame?**
+  Short answer: The same principle as data cleaning generally — it depends on whether the missingness is random and rare (often safe to drop), has a reasonable default (fill), or is itself meaningful (flag and keep) — never drop silently without checking how much data is affected.
+
+  ### Scenario-based questions
+  **Q: A groupby().sum() on revenue returns a number much higher than the actual total. What would you check?**
+  Short answer: Whether the DataFrame was joined/merged before the groupby in a way that duplicated rows — check the DataFrame's row count against the expected raw data count before trusting the aggregation.
+
+  ### Practical questions
+  **Q: Write pandas code to merge an `orders` DataFrame with a `customers` DataFrame on `customer_id`, keeping all orders even if the customer record is missing.**
+  Short answer: `orders.merge(customers, on="customer_id", how="left")`
+
+  ## Interview traps / tricky points
+
+  - `SettingWithCopyWarning` from chained indexing is a very common real-world pandas gotcha — always use `.loc[]` for combined selecting-and-assigning.
+  - `NaN` in pandas is not equal to itself (`NaN == NaN` is False) — always use `.isna()` to check for missing values, never `== NaN`, mirroring the SQL `IS NULL` vs. `= NULL` issue.
+  - A merge's default `how="inner"` silently drops unmatched rows on both sides — always choose the merge type deliberately, not by default.
+
+  ## Best practices
+
+  - Always inspect a DataFrame's shape and a few rows (`.head()`, `.shape`) immediately after loading, filtering, and merging.
+  - Choose and justify a specific missing-data strategy — never let `.dropna()` run silently without checking its impact.
+  - Use `.loc[]` for any operation that both selects and assigns, to avoid chained-indexing warnings and silent no-op bugs.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **DataFrame** → 2D table; **Series** → single column
+  **.loc[]** → label-based selection · **.iloc[]** → position-based selection
+  **.groupby()** → pandas' GROUP BY equivalent
+  **.merge()** → pandas' JOIN equivalent — check for row-multiplication after
+  **NaN** → pandas' missing value; use `.isna()`, never `== NaN`

@@ -1,0 +1,72 @@
+title: Pivot / Unpivot in Power Query
+category: Spreadsheets
+what_is_it: Reshaping a query's columns into rows (Unpivot) or rows into columns (Pivot) — the repeatable, automated Power Query version of the general Reshaping Data concept.
+why_it_matters: Unpivot is one of the most useful Power Query transformations for turning wide, human-readable source exports into the long format most analysis tools expect.
+prerequisites:
+  - power-query-merging-columns
+objectives:
+  - Unpivot columns into rows to convert wide data to long format
+  - Explain when Pivot (rather than Unpivot) is the appropriate operation
+estimated_minutes: 25
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-pivot-unpivot-1
+    title: Unpivot a wide export
+    description: Given a source export with a column per month (Jan_Sales, Feb_Sales, Mar_Sales...), use Power Query's Unpivot Columns to reshape it into a long "Month, Sales" format.
+verify:
+  - Can unpivot wide columns into long format
+  - Can explain when Pivot rather than Unpivot is appropriate
+note: |
+  ## 🎯 What is it?
+
+  **Unpivot** turns columns into rows — the standard way to convert wide-format source data (one column per month, per product) into the long format most analysis tools expect (see Wide vs Long Data). **Pivot** does the reverse, turning row values into columns — less commonly needed inside Power Query, since Excel's own Pivot Table usually handles final-stage pivoting.
+
+  ## 💡 Why is it important?
+
+  - Real source exports (especially from older systems or manual reports) are very often wide — Unpivot is one of the single most useful Power Query transformations for making that data usable at all.
+  - Doing this reshape in Power Query, rather than manually rebuilding the table's layout by hand, means it automatically reapplies to every future data refresh.
+
+  ## Core concept
+
+  ```
+  Wide (before Unpivot):              Long (after Unpivot):
+  Product | Jan | Feb | Mar             Product | Attribute | Value
+  Widget  | 100 | 120 | 90       →      Widget  | Jan       | 100
+                                          Widget  | Feb       | 120
+                                          Widget  | Mar       | 90
+  ```
+
+  To Unpivot: select the columns to unpivot (Jan, Feb, Mar), right-click → **Unpivot Columns**. Power Query automatically creates "Attribute" and "Value" columns from the selected column headers and their values.
+
+  ## 📊 Example
+
+  A monthly sales export with a separate column per month can't be easily summed or charted by month directly. Unpivoting the month columns produces a long-format table with one row per product per month — now trivially summarized with a pivot table or SUMIFS by month, something the original wide layout made awkward.
+
+  ## ⚠️ Common mistakes
+
+  - **Unpivoting columns that shouldn't be combined** (e.g., accidentally including an ID column in the unpivot selection), producing a nonsensical result mixing unrelated fields.
+  - **Not renaming the generic "Attribute" and "Value" columns** Power Query creates by default, leaving a loaded result with unclear, generic column names.
+
+  ## Related concepts
+
+  ```
+  Merging Columns in Power Query
+    ↓
+  Pivot / Unpivot ← you are here
+    ↓
+  Group By
+  ```
+  Directly applies Wide vs Long Data and Reshaping Data from the Data Transformation chapter.
+
+  ## 🎤 Interview preparation
+
+  **Q: A source export has one column per month. How would you reshape it for analysis in Power Query?**
+  Short answer: Select the month columns and use Unpivot Columns — this converts them into a long-format "Attribute" (month) and "Value" (the figure) pair, one row per original cell, which is far easier to summarize, filter, and chart than the original wide layout.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Unpivot** → columns → rows (wide → long) · **Pivot** → rows → columns (long → wide)
+  Unpivot is the most commonly needed of the two when cleaning up a real-world wide export.

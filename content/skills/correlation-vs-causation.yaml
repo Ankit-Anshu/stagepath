@@ -1,0 +1,70 @@
+title: Correlation vs Causation
+category: Foundations
+what_is_it: The distinction between two things moving together (correlation) and one thing actually causing the other (causation) — one of the most important guardrails in analytical thinking.
+why_it_matters: Mistaking correlation for causation leads to confidently wrong conclusions and bad recommendations — it's one of the most common analyst mistakes, and one of the most commonly tested interview concepts.
+prerequisites:
+  - comparison
+objectives:
+  - Define correlation and causation, and explain the difference
+  - Give an example of a correlation that is not causation
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-correlation-causation-1
+    title: Find a spurious correlation
+    description: Think of (or look up) two variables that correlate but clearly don't cause each other, and explain a plausible alternative reason they move together.
+verify:
+  - Can define correlation and causation
+  - Can explain why correlation alone doesn't prove causation
+note: |
+  ## 🎯 What is it?
+
+  **Correlation** means two variables tend to move together — when one goes up, the other tends to go up (or down) too. **Causation** means one variable actually *causes* the change in the other. Correlation does not, by itself, prove causation — two variables can move together for other reasons, including pure coincidence or a hidden third factor driving both.
+
+  ## 💡 Why is it important?
+
+  - Mistaking correlation for causation leads to confidently wrong conclusions — recommending an action that doesn't actually cause the outcome you want.
+  - It's one of the most frequently tested concepts in analyst interviews and case studies, precisely because it's such a common real mistake.
+
+  ## Core concept
+
+  Ways two variables can correlate without one causing the other:
+  - **Coincidence** — pure chance, especially in small samples.
+  - **Reverse causation** — B might actually be causing A, not the other way around.
+  - **A hidden third factor (confounder)** — something else drives both. Classic example: ice cream sales and drowning deaths both rise in summer — heat drives both, ice cream doesn't cause drowning.
+
+  The only reliable way to establish causation is a well-designed experiment (like A/B Testing), which isolates one variable at a time.
+
+  ## 📊 Example
+
+  A company notices that months with higher ad spend also have higher revenue, and concludes "ad spend causes revenue growth." But it's possible a confounder — like a seasonal sales peak — drives both higher ad spend *and* higher revenue independently (the company simply spends more ahead of a season it already expects to be strong). Only a controlled test (spending more in some regions but not others, then comparing) could actually confirm causation.
+
+  ## ⚠️ Common mistakes
+
+  - **Recommending an action based purely on correlation** without considering confounders or reverse causation — a very common, costly mistake.
+  - **Assuming a strong, statistically significant correlation is automatically causal.** Statistical significance (covered in Statistics) tells you a correlation is unlikely to be random noise — it says nothing about whether it's causal.
+
+  ## Related concepts
+
+  ```
+  Comparison
+    ↓
+  Correlation vs Causation ← you are here
+    ↓
+  Data-Driven Decision Making
+  ```
+  Builds directly toward the Statistics stage's Correlation and A/B Testing topics, where this distinction is formalized and tested rigorously.
+
+  ## 🎤 Interview preparation
+
+  **Q: A company finds that customers who use a certain feature have higher retention. Does this mean the feature causes better retention?**
+  Short answer: Not necessarily — it's correlation. A confounder is possible (more engaged users might both use the feature *and* retain better for unrelated reasons). Establishing causation would require a controlled experiment, like an A/B test, rather than just observing the correlation.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Correlation** → two variables move together
+  **Causation** → one variable actually causes the change in the other
+  Correlation alone never proves causation — watch for confounders and reverse causation.

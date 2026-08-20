@@ -1,0 +1,99 @@
+title: Import Data
+category: Spreadsheets
+what_is_it: Connecting Power Query to a data source — a file, a folder, a database, or a web page — as a live, repeatable connection instead of a one-time copy-paste.
+why_it_matters: This is the practical first step of every Power Query workflow, and the difference between a report that updates itself and one that requires manual re-importing every time.
+prerequisites:
+  - dashboard-spreadsheets
+objectives:
+  - Connect Power Query to a file, folder, or web source
+  - Explain the difference between importing as a query vs. pasting values
+estimated_minutes: 25
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-pq-import-1
+    title: Import a folder of files
+    description: Set up a Power Query connection to a folder, so every CSV file inside it is automatically combined into one table.
+verify:
+  - Data is connected as a live query, not a one-time paste
+  - Combined data correctly reflects every file/source connected
+note: |
+  ## 🎯 What is it?
+
+  **Importing data** in Power Query means connecting to a source — a file, a folder of files, a database, or a web page — as a **live, repeatable connection**, not a one-time copy-paste of static values. This is the practical, hands-on first step introduced conceptually in [Power Query Introduction](/skills/spreadsheets-power-query).
+
+  ## 💡 Why is it important?
+
+  This is the difference between a report that updates itself with a single refresh click and one that requires manually re-importing and reformatting data every single time — establishing this connection correctly at the start is what makes everything downstream (transforms, merges, refreshes) actually work.
+
+  ## Core concept
+
+  | Source type | Common use case |
+  |---|---|
+  | A single file (CSV, Excel) | A one-time or occasional recurring import |
+  | A folder | Automatically combining many similarly-structured files (e.g., 12 monthly exports) into one table |
+  | A database | Pulling live, queryable data directly, without an export step |
+  | A web page | Extracting a table directly from a webpage |
+
+  Importing "as a query" means Power Query remembers *how* to re-fetch the data, not just a frozen snapshot of what it looked like at import time.
+
+  ## 📊 Example
+
+  **Task:** Combine 12 monthly sales CSV exports (all in one folder, all the same structure) into a single table.
+
+  **Steps:** Power Query → Get Data → From Folder → select the folder → Combine & Transform.
+
+  **Result:** All 12 files are automatically read and stacked into one combined table — and next month, when a 13th file is added to the same folder, simply refreshing the query picks it up automatically, with zero manual work.
+
+  ## Multiple examples
+
+  **Beginner:** Importing a single CSV file as a query.
+  **Intermediate:** Importing an entire folder of similarly-structured files, combined automatically.
+  **Real-world:** Connecting directly to a company database as a query source, replacing a manual "export to CSV, then import" routine that a team previously repeated every week.
+
+  ## ⚠️ Common mistakes
+
+  - **Pasting values instead of importing as a query.** A pasted value is a frozen, one-time snapshot — it never updates, no matter how the source changes.
+  - **Hardcoding a specific single file path** when a folder or parameterized source would be more resilient to the file being renamed or a new period's file being added.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any recurring reporting task:** replacing a manual, repeated import-and-clean routine with a live, refreshable connection.
+
+  ## Related concepts
+
+  ```
+  Dashboard → Import Data ← you are here → Transform Data → Merge → Append → Refresh
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the key difference between importing data as a query and pasting values into a sheet?
+
+  ### Interview/Advanced
+  2. Why would importing "From Folder" be more resilient than importing a single named file for a recurring monthly report?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A query is a live, repeatable connection that can be refreshed to reflect the current state of the source; a pasted value is a frozen, one-time snapshot that never updates on its own.
+  2. A folder-based import automatically picks up any file placed inside it (matching the expected pattern), so a new month's file just needs to be added to the folder — no formula or query needs to be edited — whereas a single hardcoded file path breaks the moment the filename changes (e.g., includes the month in its name).
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is connecting to a live data source better than a one-time copy-paste for a recurring report?**
+  Short answer: A live connection can be refreshed to pull the current data automatically, while a pasted value is a permanent, frozen snapshot that requires manually redoing the entire import every time the source changes.
+
+  ## Best practices
+
+  - Import data as a live query, never as a static paste, for anything recurring.
+  - Prefer a folder or parameterized source over a hardcoded single file path when the source will change or grow over time.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Import as a query** → a live, repeatable connection, not a frozen paste
+  **From Folder** → automatically combines every matching file, resilient to new files being added

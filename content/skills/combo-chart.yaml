@@ -1,0 +1,63 @@
+title: Combo Chart
+category: Spreadsheets
+what_is_it: A single chart combining two chart types (commonly bars and a line) — often to show two related metrics with very different scales together.
+why_it_matters: It's the standard way to show a total alongside a rate or percentage (like revenue and margin %) on one chart, using a secondary axis so both are readable.
+prerequisites:
+  - area-chart
+objectives:
+  - Build a combo chart with a secondary axis
+  - Explain when two metrics need a secondary axis to be shown together clearly
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-combo-chart-1
+    title: Combine revenue and margin
+    description: Build a combo chart showing monthly revenue as bars and profit margin % as a line on a secondary axis.
+verify:
+  - Can build a combo chart with two chart types
+  - Can explain why a secondary axis is needed for two very differently-scaled metrics
+note: |
+  ## 🎯 What is it?
+
+  A **combo chart** combines two chart types in one — most commonly bars for one metric and a line for another — often paired with a **secondary axis** so two metrics with very different scales (like revenue in thousands and a percentage) can both be read clearly on the same chart.
+
+  ## 💡 Why is it important?
+
+  - It's the standard way to show a total alongside a rate — revenue (bars) and profit margin % (line) — where plotting both on the same axis would make one of them unreadable (a percentage line would look flat next to bars in the thousands).
+  - It lets a viewer see the relationship between two related metrics — like whether margin holds steady as revenue grows — in one glance, instead of comparing two separate charts.
+
+  ## Core concept
+
+  Without a secondary axis, a metric measured in single-digit percentages plotted alongside one measured in thousands of dollars would appear as a flat line at the bottom of the chart — a **secondary axis** gives the second series its own independent scale.
+
+  ## 📊 Example
+
+  Monthly revenue ($10K–$50K range) as bars, and profit margin (15%–25% range) as a line on a secondary axis — both series are clearly readable at their own natural scale, and a viewer can see at a glance whether margin is holding steady, rising, or falling as revenue changes.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting to move the second series to a secondary axis**, causing it to appear flat or invisible next to a much larger-scaled series.
+  - **Combining more than two genuinely different scales in one combo chart**, which quickly becomes cluttered and hard to read — two is usually the practical limit.
+
+  ## Related concepts
+
+  ```
+  Area Chart
+    ↓
+  Combo Chart ← you are here
+    ↓
+  KPI Cards
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: You want to show monthly revenue and profit margin % on one chart. Why would you need a secondary axis?**
+  Short answer: Revenue (in the thousands) and margin (a percentage) have very different scales — plotted on the same axis, the margin line would appear nearly flat at the bottom. A secondary axis gives margin its own scale so both series are readable together.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Combo chart** → combines two chart types (e.g., bars + line), often with a secondary axis
+  Use when two related metrics have very different scales but need to be compared together.

@@ -1,0 +1,71 @@
+title: Advanced Filter
+category: Spreadsheets
+what_is_it: Filtering a range using multiple complex criteria defined in a separate criteria range, beyond what the standard Filter dropdown supports.
+why_it_matters: Standard filtering handles simple per-column conditions well, but multi-condition OR logic across columns, or extracting matched rows to a new location, needs Advanced Filter.
+prerequisites:
+  - filter-spreadsheets
+objectives:
+  - Set up a criteria range for Advanced Filter
+  - Explain when Advanced Filter is needed over the standard Filter dropdown
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-advanced-filter-1
+    title: Filter with OR logic
+    description: Given a sales table, use Advanced Filter to find rows where region is "East" OR amount exceeds $10,000 — a condition the standard Filter dropdown can't express directly.
+verify:
+  - Can set up a criteria range for Advanced Filter
+  - Can explain a scenario Advanced Filter handles that standard Filter can't
+note: |
+  ## 🎯 What is it?
+
+  **Advanced Filter** filters a range using criteria defined in a separate **criteria range** on the sheet, rather than the standard per-column Filter dropdown — enabling more complex logic, including OR conditions across different columns, and the ability to extract matching rows to a new location.
+
+  ## 💡 Why is it important?
+
+  - The standard Filter dropdown handles simple, per-column AND-style conditions well, but can't express "region is East OR amount > $10,000" (an OR across two different columns) — Advanced Filter can.
+  - It can copy matching results to a separate location automatically, which the standard filter doesn't do.
+
+  ## Core concept
+
+  A criteria range mirrors the source data's headers, with conditions written underneath:
+
+  ```
+  Region | Amount
+  East   |
+         | >10000
+  ```
+
+  Conditions on the **same row** are combined with AND; conditions on **different rows** are combined with OR. The layout above means: Region = East, **OR** Amount > 10,000.
+
+  ## 📊 Example
+
+  To find all orders that are either from the East region or worth more than $10,000, a standard Filter dropdown can't express this OR-across-columns logic — Advanced Filter, using the criteria range above, correctly returns both groups of matching rows.
+
+  ## ⚠️ Common mistakes
+
+  - **Misunderstanding the same-row-AND, different-row-OR convention**, producing a criteria range that filters for the wrong logic entirely.
+  - **Forgetting to match the criteria range's headers exactly to the source data's headers** — a typo or mismatch causes Advanced Filter to silently fail to apply that condition.
+
+  ## Related concepts
+
+  ```
+  Filter
+    ↓
+  Advanced Filter ← you are here
+    ↓
+  Conditional Formatting
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you filter a sales table for rows that are either from the East region or over $10,000, when the standard Filter dropdown can't express an OR across two different columns?**
+  Short answer: Use Advanced Filter with a criteria range that places the two conditions on separate rows — same-row conditions combine with AND, different-row conditions combine with OR, correctly capturing this logic.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Advanced Filter** → filters using a separate criteria range; same row = AND, different rows = OR
+  Handles cross-column OR logic and can extract results to a new location — beyond the standard Filter dropdown.

@@ -1,0 +1,5 @@
+timestamp,device_id,user,parent_process,process,command_line,sha256
+2026-07-21T08:05:02Z,NB-LT-044,alex,explorer.exe,chrome.exe,chrome.exe --profile-directory=Default,known
+2026-07-21T08:22:14Z,NB-LT-044,alex,WINWORD.EXE,powershell.exe,powershell.exe -enc REDACTED,7f-demo
+2026-07-21T08:22:18Z,NB-LT-044,alex,powershell.exe,rundll32.exe,rundll32.exe temp.dll Start,9a-demo
+

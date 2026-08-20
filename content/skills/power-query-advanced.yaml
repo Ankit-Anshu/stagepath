@@ -1,0 +1,105 @@
+title: Advanced Power Query
+category: Spreadsheets
+what_is_it: Going beyond the standard click-based transform steps into the M formula language, custom columns, parameters, and functions for more complex, reusable transformations.
+why_it_matters: Some cleaning problems need logic beyond what the click-based interface offers directly — this is where Power Query becomes a genuinely programmable tool.
+prerequisites:
+  - power-query-refresh
+objectives:
+  - Add a custom column using a formula-based calculation
+  - Explain what a Power Query parameter is used for
+estimated_minutes: 35
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-pq-advanced-1
+    title: Add a custom calculated column
+    description: Add a custom column to a query that categorizes each order as "Large" or "Standard" based on a conditional rule, using a formula.
+verify:
+  - Custom column correctly applies the intended logic to every row
+  - Can explain what a parameter would be used for in a more advanced query
+note: |
+  ## 🎯 What is it?
+
+  **Advanced Power Query** goes beyond the standard click-based transform steps into the **M formula language**, custom columns, parameters, and reusable functions — for transformations more complex than the built-in click-based options directly support.
+
+  ## 💡 Why is it important?
+
+  Some cleaning problems need logic beyond what the standard interface offers directly — a conditional categorization rule, a calculation combining several columns, or a query that needs to behave differently depending on an input parameter. This is where Power Query becomes a genuinely programmable data-transformation tool, not just a click-based cleaner.
+
+  ## Core concept
+
+  | Advanced feature | Purpose |
+  |---|---|
+  | Custom column (formula-based) | Add a calculated column using logic not available as a built-in transform |
+  | M language | The formula language underlying every Power Query step, editable directly for full control |
+  | Parameters | A reusable input (like a date range or file path) that can be changed without editing the query's steps |
+  | Custom functions | A reusable, named transformation that can be applied repeatedly, similar to a function in Python |
+
+  ## 📊 Example
+
+  **Task:** Categorize each order as "Large" (over $500) or "Standard," a rule not directly available as a built-in transform.
+
+  **Custom column formula (M language):**
+  ```
+  if [Amount] > 500 then "Large" else "Standard"
+  ```
+
+  **Explanation:** This is conceptually identical to an [IF](/skills/if-function) formula in a spreadsheet cell, but built directly into the query itself — it reapplies automatically to every row, including new ones, on every refresh.
+
+  ## Multiple examples
+
+  **Beginner:** A custom column applying a simple conditional rule to categorize rows.
+  **Intermediate:** A parameter controlling which folder or date range a query pulls from, changeable without editing the underlying steps.
+  **Real-world:** A custom function that standardizes a text column (trimming, fixing casing, removing known problem characters) applied consistently across several different queries that all need the same cleaning logic — built once as a function, reused everywhere, instead of duplicating the same manual steps in every query.
+
+  ## ⚠️ Common mistakes
+
+  - **Reaching for a custom M formula when a built-in transform step already does the same job** — the click-based interface covers the vast majority of real cleaning needs; custom formulas are for the genuine remainder.
+  - **Hardcoding a value (like a date range or file path) directly in a query's steps** instead of using a parameter, making the query harder to reuse or adjust later.
+  - **Building overly clever, hard-to-read custom M code** without comments or clear naming, making it difficult for anyone else (or future you) to maintain.
+
+  ## Real-world Data Analyst use cases
+
+  - **Complex categorization rules:** adding a custom column with conditional logic not available as a built-in transform.
+  - **Reusable, parameterized reports:** a single query template that different team members can point at different date ranges or folders by changing one parameter, without editing any query logic.
+
+  ## Related concepts
+
+  ```
+  Refresh → Advanced Power Query ← you are here
+  ```
+  This closes the Power Query & Advanced group — and, with it, the entire Spreadsheets stage.
+
+  ## Practice questions
+
+  ### Easy
+  1. What's a Power Query parameter used for?
+
+  ### Interview/Advanced
+  2. Why would a team build a custom function instead of repeating the same manual transform steps in several different queries?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A reusable input (like a date range, file path, or threshold value) that can be changed in one place without needing to edit the query's underlying steps directly.
+  2. A custom function centralizes the logic in one place — if the cleaning rule ever needs to change, it's updated once in the function definition, rather than needing to find and manually update the same steps duplicated across every query that uses them, which is slower and much more error-prone.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you need to go beyond Power Query's built-in click-based transforms into custom M formulas?**
+  Short answer: When a transformation involves logic the built-in interface doesn't directly support — like a multi-condition categorization rule or a calculation combining several columns in a way not covered by a standard transform button.
+
+  ## Best practices
+
+  - Prefer built-in transform steps whenever they cover the need; reach for custom M formulas only for the genuine remainder.
+  - Use parameters instead of hardcoded values for anything that might need to change (a date range, a file path).
+  - Comment and clearly name custom M code for maintainability.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Custom column (M formula)** → for logic beyond the built-in transform steps
+  **Parameter** → a reusable, changeable input, avoiding hardcoded values
+  **Custom function** → reusable transformation logic, shared across multiple queries

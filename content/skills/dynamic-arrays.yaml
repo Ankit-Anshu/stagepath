@@ -1,0 +1,66 @@
+title: Dynamic Arrays
+category: Spreadsheets
+what_is_it: A formula that automatically "spills" its results into as many neighboring cells as needed, instead of returning just one value or needing to be manually copied down.
+why_it_matters: It's the foundation modern functions like FILTER, SORT, and UNIQUE are built on — understanding spilling is required before any of them make sense.
+prerequisites:
+  - power-query-dependencies
+objectives:
+  - Explain what a "spilled" array formula is
+  - 'Reference a full spilled range using the # operator'
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-dynamic-arrays-1
+    title: Observe a spill
+    description: Write a formula that returns multiple values (like a SEQUENCE or a filtered list) in one cell and observe how it spills into neighboring cells automatically.
+verify:
+  - Can explain what a spilled array is
+  - 'Can reference a spilled range with #'
+note: |
+  ## 🎯 What is it?
+
+  A **dynamic array** formula returns more than one value at once, and those values automatically **spill** into as many neighboring cells as needed — no manual copying down, no pre-selecting a range first. Entering the formula in just one cell is enough; Excel fills in the rest.
+
+  ## 💡 Why is it important?
+
+  - It's the foundation FILTER, SORT, and UNIQUE (covered next in this chapter) are all built on — none of them make sense without first understanding that a formula can legitimately return many values from one cell.
+  - It replaces older, clunkier "array formula" workarounds (which required a special `Ctrl+Shift+Enter` entry) with formulas that behave normally and update automatically as their result size changes.
+
+  ## Core concept
+
+  ```
+  =SEQUENCE(5)
+  ```
+
+  Entered in cell A1, this single formula spills the numbers 1 through 5 down into A1:A5 automatically — only A1 actually contains the formula; A2:A5 show a "ghost" spilled value that moves and updates automatically if the formula or its result changes.
+
+  ## 📊 Example
+
+  Entering `=UNIQUE(A2:A100)` in cell C1 automatically spills every unique value from A2:A100 down column C, however many there turn out to be — if the source data changes and there are now more or fewer unique values, the spill range automatically resizes.
+
+  ## ⚠️ Common mistakes
+
+  - **Typing a value into a cell a formula is currently spilling into**, which blocks the spill and produces a `#SPILL!` error — the spill range must stay empty.
+  - **Referencing only the anchor cell (A1) instead of the whole spilled range** when a later formula needs every spilled value — use the `#` spill operator instead (see the "Related concepts" example).
+
+  ## Related concepts
+
+  ```
+  Dynamic Arrays ← you are here
+    ↓
+  FILTER → SORT → UNIQUE
+  ```
+  Referencing a full spilled range: `=SUM(C1#)` sums every value in the spill starting at C1, however large it currently is.
+
+  ## 🎤 Interview preparation
+
+  **Q: What does a #SPILL! error mean, and what usually causes it?**
+  Short answer: A dynamic array formula can't spill its results because something (usually existing data) is blocking one or more of the cells it needs — clearing that data, or moving the formula, resolves it.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Dynamic array** → a formula that automatically spills multiple results into neighboring cells
+  Reference the whole spill with `AnchorCell#` — e.g., `C1#`.

@@ -1,0 +1,94 @@
+title: MAX Function
+category: Spreadsheets
+what_is_it: Finding the largest value in a range of numbers.
+why_it_matters: Spotting the highest value in a column — the biggest order, the longest delay — is a constant reporting need, and a fast way to catch an outlier or data-entry error.
+prerequisites:
+  - min-function
+objectives:
+  - Find the maximum value in a range
+  - Use MAX to spot a likely outlier or data-entry error
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-max-1
+    title: Find the largest order
+    description: Use MAX to find the largest order amount in a dataset and determine whether it looks like a real value or a likely error.
+verify:
+  - MAX correctly identifies the largest value
+  - Can explain whether the extreme value found is plausible or an error
+note: |
+  ## 🎯 What is it?
+
+  **MAX** finds the largest value in a range of numbers — the direct counterpart to [MIN](/skills/min-function).
+
+  ## 💡 Why is it important?
+
+  Spotting the highest value in a column — the biggest single order, the longest delivery delay — is a constant reporting need, and just like MIN, it's a fast way to catch an outlier or a data-entry error before it gets reported as real.
+
+  ## Syntax
+
+  ```
+  =MAX(range)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 45 |
+  | 2 | 12 |
+  | 3 | 89 |
+
+  **Formula:** `=MAX(A1:A3)` → `89`
+
+  ## Multiple examples
+
+  **Beginner:** `=MAX(B2:B50)` — the largest order amount.
+  **Real-world:** `=MAX(order_amount_range)` returning $500,000 in a dataset of otherwise $20–$500 orders — a strong signal to investigate before including it in a "typical order" analysis (see [Descriptive Statistics](/skills/stats-descriptive) on outliers).
+
+  ## ⚠️ Common mistakes
+
+  - **Treating the MAX value as automatically "the best" result** without checking whether it's plausible — a maximum could just as easily be a duplicate-entry error.
+  - **MAX silently ignores text and blank cells**, same as MIN, SUM, and AVERAGE.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** largest single order, both as a reporting metric and a data-quality check.
+  - **Operations analysis:** longest delivery delay, to flag a likely process breakdown.
+
+  ## Related concepts
+
+  ```
+  MIN → MAX ← you are here → ROUND
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula for the largest value in C2:C40.
+
+  ### Interview/Advanced
+  2. How would you find the *second*-largest value in a range, not just the maximum?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=MAX(C2:C40)`
+  2. `=LARGE(range, 2)` — LARGE returns the Nth largest value; `LARGE(range,1)` is equivalent to MAX.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you use MAX to catch a likely data-entry error?**
+  Short answer: Run MAX on a numeric column and check whether the result is a plausible value given the rest of the data — an implausibly large maximum is a fast signal to investigate before trusting a report built on it.
+
+  ## Best practices
+
+  - Pair MIN and MAX together as a standard first-pass sanity check on any new numeric column.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **MAX(range)** → largest value; use alongside MIN as a quick data-quality check

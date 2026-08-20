@@ -1,0 +1,24 @@
+title: Component Frameworks
+category: Frontend Development
+what_is_it: Building stateful applications with reusable components and declarative rendering.
+why_it_matters: Modern products need consistent UI composition, routing, data flow, and maintainable state.
+estimated_minutes: 4200
+prerequisites: [javascript-browser, css-responsive]
+objectives: [Design reusable components, Manage state deliberately, Build routed data-driven applications]
+subtopics:
+  - title: Component mental model
+    description: Props, composition, state, lifecycle, identity, and rendering.
+    outcomes: [Split a UI into components, Keep state in the right place]
+  - title: State and forms
+    description: Local state, derived state, reducers, controlled inputs, validation, and server state.
+    outcomes: [Avoid duplicated state, Build a complex form]
+  - title: Routing and layouts
+    description: Nested routes, parameters, loading states, errors, and navigation.
+    outcomes: [Build multi-page application flows, Handle missing routes]
+  - title: Data fetching
+    description: Fetch lifecycles, caching, optimistic updates, pagination, and race conditions.
+    outcomes: [Design resilient data UI, Prevent stale updates]
+  - title: Architecture
+    description: Feature boundaries, shared components, dependency direction, and framework escape hatches.
+    outcomes: [Organize a medium application, Recognize over-abstraction]
+

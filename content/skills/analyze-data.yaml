@@ -1,0 +1,69 @@
+title: Analyze Data
+category: Foundations
+what_is_it: The step where an analyst formally applies a chosen method — comparison, segmentation, statistical testing — to answer the defined business question.
+why_it_matters: It's the core, deliberate step the rest of the process supports — everything before it prepares the data, and everything after it communicates the result.
+prerequisites:
+  - explore-data
+objectives:
+  - Explain how analyzing data differs from exploring data
+  - Name two common analysis techniques
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-analyze-data-1
+    title: Choose an analysis method
+    description: For a business question you're curious about, decide which technique (comparison, segmentation, correlation, statistical test) fits best, and why.
+verify:
+  - Can distinguish analyzing from exploring
+  - Can name two analysis techniques
+note: |
+  ## 🎯 What is it?
+
+  **Analyzing data** is the deliberate, methodical step where an analyst applies a chosen technique — comparison, segmentation, trend analysis, correlation, or a formal statistical test — to answer the defined business question with a clear, defensible finding.
+
+  ## 💡 Why is it important?
+
+  - It's the step everything else in the process supports: collecting and cleaning prepare the data, exploring builds intuition, analyzing produces the actual answer.
+  - Choosing the right technique matters — the wrong method (e.g., comparing raw totals across groups of very different sizes without normalizing) can produce a misleading answer even with perfectly clean data.
+
+  ## Core concept
+
+  | Technique | Used for |
+  |---|---|
+  | Comparison | Is X higher/lower than Y, or than last period? |
+  | Segmentation | Does the answer differ by group (region, channel, customer type)? |
+  | Trend analysis | Is a metric moving up, down, or staying flat over time? |
+  | Correlation | Do two variables move together? |
+  | Statistical testing | Is an observed difference real, or could it be random noise? |
+
+  ## 📊 Example
+
+  To answer "did the new checkout design increase conversion rate?", the analysis step might compare conversion rate before vs. after the change, segment by device type to check the effect held across mobile and desktop, and run a statistical test to confirm the difference wasn't just random variation.
+
+  ## ⚠️ Common mistakes
+
+  - **Choosing a technique that doesn't fit the question** — e.g., comparing raw counts between a small and a large group without normalizing (rates, not raw totals) misleads.
+  - **Treating a plausible-looking pattern from exploration as a confirmed finding** without applying a more rigorous analysis or test.
+
+  ## Related concepts
+
+  ```
+  Explore Data
+    ↓
+  Analyze Data ← you are here
+    ↓
+  Visualize Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you analyze whether a new checkout design actually improved conversion rate?**
+  Short answer: Compare conversion rate before and after the change, segment by device/traffic source to check consistency, and ideally confirm the difference is statistically significant rather than random noise — not just eyeball two numbers.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Analyze data** → apply a deliberate technique (comparison, segmentation, correlation, testing) to answer the defined question
+  The core step — everything before prepares the data, everything after communicates the result.

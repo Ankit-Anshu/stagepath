@@ -1,0 +1,185 @@
+title: Customer Segmentation
+category: Business Analytics
+what_is_it: Grouping customers into meaningful segments based on behavior or characteristics, like purchase frequency or spend, instead of treating everyone as average.
+why_it_matters: Averages hide meaningful differences between customer groups. Segmentation is what lets a business target the right message, offer, or intervention at the right group.
+prerequisites:
+  - pandas
+objectives:
+  - Segment customers using a simple rule-based approach
+  - Explain RFM (recency, frequency, monetary) segmentation
+  - Compare behavior across segments
+  - Recommend an action based on a segment's profile
+subtopics:
+  - title: Rule-based segmentation
+    description: Grouping customers using simple thresholds, like high/medium/low spend.
+    outcomes:
+      - Segment customers using a simple rule-based approach
+  - title: RFM segmentation
+    description: Segmenting by recency, frequency, and monetary value — a standard, widely-used framework.
+    outcomes:
+      - Explain what each component of RFM measures
+  - title: Comparing segments
+    description: Measuring how behavior actually differs across the segments you've defined.
+    outcomes:
+      - Compare a key metric across two or more segments
+estimated_minutes: 180
+resources:
+  - r-kaggle-pandas
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-segmentation-1
+    title: Build an RFM segmentation
+    description: Given a transactions dataset, calculate recency, frequency, and monetary value per customer, and assign each to a segment.
+verify:
+  - RFM values are calculated correctly per customer
+  - Segments are meaningfully different from one another on the underlying metric
+  - A specific action is recommended for at least one segment
+note: |
+  ## 🎯 What is it?
+
+  **Customer segmentation** is grouping customers into meaningful segments based on behavior or characteristics — like purchase frequency or spend — instead of treating every customer as if they were "average."
+
+  ## 💡 Why is it important?
+
+  Averages hide meaningful differences between customer groups. Segmentation is what lets a business target the right message, offer, or intervention at the right group, instead of a one-size-fits-all approach that's suboptimal for almost everyone.
+
+  ## Core concept
+
+  ### Rule-based segmentation
+  The simplest approach: grouping customers using straightforward thresholds — e.g., "high spend" = over $500/month, "low spend" = under $50/month. Easy to explain and implement, though the thresholds are somewhat arbitrary and need business judgment to set sensibly.
+
+  ### RFM segmentation
+  A standard, widely-used framework segmenting customers on three dimensions:
+
+  | Component | Measures | Example |
+  |---|---|---|
+  | **Recency** | How recently did they last purchase? | Days since last order |
+  | **Frequency** | How often do they purchase? | Number of orders in the last year |
+  | **Monetary** | How much do they spend? | Total or average spend |
+
+  Customers are typically scored (e.g., 1–5) on each dimension, then combined into segments like "Champions" (high on all three) or "At-risk" (was high, now low recency).
+
+  ### Comparing segments
+  Once defined, segments should be compared on metrics that matter (retention, average order value, response to a campaign) — a segmentation that doesn't reveal meaningfully different behavior across groups isn't actually useful yet.
+
+  ## Syntax / Formula / Structure
+
+  ```
+  Recency  = days since customer's most recent order
+  Frequency = count of orders in a defined period (e.g., last 12 months)
+  Monetary  = total (or average) spend in that same period
+  ```
+
+  A simple rule-based segment example:
+
+  ```
+  IF total_spend > 500 AND order_count >= 5   → "VIP"
+  IF total_spend > 500 AND order_count < 5    → "Big Spender, Infrequent"
+  IF days_since_last_order > 180              → "At Risk / Churned"
+  ELSE                                          → "Regular"
+  ```
+
+  ## 📊 Example
+
+  `customers` (summarized):
+
+  | customer_id | days_since_last_order | order_count_12mo | total_spend_12mo |
+  |---|---|---|---|
+  | 1 | 5 | 12 | 1,200 |
+  | 2 | 200 | 2 | 800 |
+  | 3 | 10 | 1 | 40 |
+
+  **RFM-style read:**
+  - **Customer 1:** Recent, frequent, high spend → "Champion" — the segment to protect and reward.
+  - **Customer 2:** High past spend, but hasn't ordered in 200 days → "At Risk" — a strong win-back campaign target.
+  - **Customer 3:** Recent but only 1 low-value order → "New/Low-value" — needs nurturing to become a repeat customer.
+
+  **Explanation:** Three customers with wildly different profiles would all just look like "one customer" in an averaged report — segmentation reveals each one needs a completely different action.
+
+  ## Multiple examples
+
+  **Beginner:** A simple high/medium/low spend segmentation using fixed thresholds.
+  **Intermediate:** A full RFM segmentation scoring each customer 1–5 on all three dimensions.
+  **Real-world:** Using RFM segments to target three different email campaigns: a loyalty reward for "Champions," a win-back discount for "At Risk," and an onboarding nurture sequence for "New" customers — each segment getting a message actually relevant to its behavior, instead of one generic email to everyone.
+
+  ## ⚠️ Common mistakes
+
+  - **Setting arbitrary thresholds without checking the actual data distribution.** A "high spend" cutoff of $500 might describe almost everyone or almost no one, depending on the business — always check against real percentiles first.
+  - **Creating segments that don't actually differ meaningfully in behavior.** If two segments have nearly identical retention/response rates, the segmentation isn't adding useful information yet.
+  - **Segmenting once and never revisiting it.** Customer behavior changes; segments should be recalculated periodically, not treated as a permanent, one-time label.
+  - **Recommending the same action for every segment**, which defeats the entire purpose of segmenting in the first place.
+
+  ## Real-world Data Analyst use cases
+
+  - **Marketing analysis:** targeting different email campaigns to different RFM segments.
+  - **Customer analysis:** identifying "at risk" customers (high past value, declining recency) for proactive retention outreach.
+  - **Product analysis:** comparing feature adoption between high-frequency and low-frequency user segments.
+
+  ## Related concepts
+
+  ```
+  Pandas (GroupBy is the core tool for building segments)
+    ↓
+  Business Analytics
+    ↓
+  Customer Segmentation ← you are here
+    ↓
+  Cohort & Retention Analysis
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What do the three components of RFM stand for?
+
+  ### Medium
+  2. A customer hasn't ordered in 250 days but historically had high spend and frequency. What RFM segment does this suggest, and what action would you recommend?
+
+  ### Interview/Advanced
+  3. Why might a rule-based "high/medium/low spend" segmentation with arbitrary thresholds fail to be useful in practice?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Recency (how recently), Frequency (how often), Monetary (how much spent).
+  2. "At risk" or "churned" — high historical value but poor recent recency; recommend a targeted win-back campaign rather than a generic offer, since this customer has demonstrated high value in the past.
+  3. If the thresholds don't reflect the actual distribution of the customer base, a segment could end up nearly empty or containing almost everyone, making the segmentation useless for targeting — thresholds should be checked against real percentiles/quantiles of the data, not chosen arbitrarily.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What is RFM segmentation?**
+  Short answer: A framework that segments customers based on Recency (how recently they purchased), Frequency (how often), and Monetary value (how much they've spent).
+
+  ### Conceptual questions
+  **Q: Why is segmentation more useful than looking at an average customer metric?**
+  Short answer: Averages blend together very different customer behaviors, hiding meaningful differences — segmentation reveals distinct groups that each warrant a different message, offer, or intervention.
+
+  ### Scenario-based questions
+  **Q: A marketing team wants to send the same win-back email to "all inactive customers." How would segmentation improve this approach?**
+  Short answer: Distinguish inactive customers by their prior value (e.g., high-value churned vs. low-value churned) so the win-back offer and effort can be prioritized toward the segment most worth recovering, rather than treating every inactive customer identically.
+
+  ### Practical questions
+  **Q: How would you calculate an RFM score for each customer from a raw transactions table?**
+  Short answer: Group transactions by customer_id; compute days since the most recent order (recency), count of orders in the period (frequency), and total or average spend (monetary); then score or bucket each dimension (e.g., quintiles) and combine into a segment label.
+
+  ## Interview traps / tricky points
+
+  - A segmentation that isn't revisited over time can become stale — customer behavior shifts, and segments should be recalculated on a regular cadence.
+  - Rule-based thresholds set without checking the underlying data distribution are a common, easy-to-miss source of an unbalanced or meaningless segmentation.
+
+  ## Best practices
+
+  - Check the actual data distribution (percentiles) before setting rule-based thresholds.
+  - Validate that defined segments actually differ meaningfully on a relevant metric before using them to drive decisions.
+  - Recalculate segments periodically, since customer behavior changes over time.
+  - Pair each segment with a specific, distinct recommended action — not a uniform one-size-fits-all response.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Recency** → how recently they purchased · **Frequency** → how often · **Monetary** → how much spent
+  **Rule-based segmentation** → simple thresholds; check real data distribution first
+  **Validate:** segments should differ meaningfully in behavior, and be recalculated periodically

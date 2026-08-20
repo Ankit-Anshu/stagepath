@@ -1,0 +1,100 @@
+title: COUNTIF Function
+category: Spreadsheets
+what_is_it: Counting how many cells in a range meet one specific condition — like counting how many orders are "Completed".
+why_it_matters: Counting rows by category is one of the most common reporting needs, and COUNTIF answers it directly without a pivot table.
+prerequisites:
+  - sumifs-function
+objectives:
+  - Write a COUNTIF formula with one condition
+  - Use COUNTIF to check for duplicate values
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-countif-1
+    title: Count orders by status
+    description: Given a list of orders, use COUNTIF to count how many have status "Completed".
+verify:
+  - COUNTIF correctly counts only matching rows
+  - Can use COUNTIF to identify duplicate values in a column
+note: |
+  ## 🎯 What is it?
+
+  **COUNTIF** counts how many cells in a range meet **one specific condition** — like counting how many orders have status "Completed," without manually filtering and counting rows.
+
+  ## 💡 Why is it important?
+
+  Counting rows by category ("how many are X?") is one of the most common reporting needs, and COUNTIF answers it directly in a single formula. It's also the standard way to check for duplicate values in a column.
+
+  ## Syntax
+
+  ```
+  =COUNTIF(range, criteria)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Completed |
+  | 2 | Pending |
+  | 3 | Completed |
+
+  **Formula:** `=COUNTIF(A1:A3,"Completed")`
+  **Result:** `2`
+
+  ## Multiple examples
+
+  **Beginner:** `=COUNTIF(A2:A100,"West")` — how many rows are the West region.
+  **Intermediate:** `=COUNTIF(A2:A100,A2)>1` — checking whether the value in A2 appears more than once in the range, a common building block for spotting duplicates.
+  **Real-world:** `=COUNTIF(email_range,email_range)` (as an array formula) applied down a column, flagging every row whose email address appears more than once — a fast, formula-based duplicate-detection technique.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting quotes around text criteria** (`"Completed"`, not `Completed`).
+  - **Trying to check two conditions with COUNTIF**, which only supports one — see [COUNTIFS](/skills/countifs-function) for multiple conditions.
+  - **Using COUNTIF for duplicate detection without understanding the count includes the row itself** — a count of 1 means unique; a count of 2+ means the value is duplicated.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** flagging duplicate customer IDs or email addresses before deduplication.
+  - **Marketing analysis:** counting how many leads fall into a specific status or source category.
+
+  ## Related concepts
+
+  ```
+  SUMIFS → COUNTIF ← you are here → COUNTIFS → AVERAGEIF → AVERAGEIFS
+  ```
+  COUNTIF-based duplicate detection connects directly to [Data Cleaning & Quality](/skills/data-cleaning)'s duplicate-detection principles.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a COUNTIF that counts how many cells in A2:A50 equal "Yes".
+
+  ### Interview/Advanced
+  2. How would you use COUNTIF to flag every duplicate value in a column?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=COUNTIF(A2:A50,"Yes")`
+  2. A formula like `=COUNTIF($A$2:$A$100,A2)>1` in a helper column, copied down — it counts how many times each row's value appears across the whole range (using absolute references for the range and a relative reference for the value being checked), flagging TRUE for any value that appears more than once.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you check for duplicate values in a column using COUNTIF?**
+  Short answer: Use COUNTIF with the entire column locked as an absolute reference and the current row's value as the criteria, copied down — any result greater than 1 indicates that value is duplicated somewhere in the column.
+
+  ## Best practices
+
+  - Use absolute references for the range when copying a COUNTIF-based duplicate check down a column.
+  - Switch to COUNTIFS as soon as more than one condition is needed.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **COUNTIF(range, criteria)** → conditional count, one condition
+  **Duplicate check:** `=COUNTIF($A$2:$A$100,A2)>1`

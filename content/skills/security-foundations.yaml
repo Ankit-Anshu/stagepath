@@ -1,0 +1,23 @@
+title: Security Foundations
+category: Cybersecurity
+what_is_it: The concepts used to reason about assets, risk, controls, identity, and adversaries.
+why_it_matters: Tools are useful only when you can explain what is protected, from whom, and why a control helps.
+estimated_minutes: 2400
+objectives: [Assess basic risk, Explain common control types, Build a threat model]
+subtopics:
+  - title: Security goals
+    description: Confidentiality, integrity, availability, authenticity, accountability, privacy, and safety.
+    outcomes: [Classify a security impact, Identify competing goals]
+  - title: Risk and controls
+    description: Assets, threats, vulnerabilities, likelihood, impact, preventive, detective, and corrective controls.
+    outcomes: [Write a simple risk statement, Map controls to risks]
+  - title: Identity and access
+    description: Authentication, authorization, least privilege, MFA, federation, and account lifecycle.
+    outcomes: [Explain identity versus permission, Review an access model]
+  - title: Cryptography basics
+    description: Hashing, symmetric and asymmetric encryption, signatures, certificates, and key management.
+    outcomes: [Choose the right primitive, Explain TLS at a high level]
+  - title: Threat modeling
+    description: Trust boundaries, data flows, attacker goals, STRIDE, misuse cases, and mitigation priorities.
+    outcomes: [Diagram a threat model, Prioritize practical mitigations]
+

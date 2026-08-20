@@ -1,0 +1,160 @@
+title: Business Understanding
+category: Foundations
+what_is_it: Understanding how a business actually operates — its functional areas, how it makes money, and what its stakeholders care about — so your analysis targets what actually matters.
+why_it_matters: The best SQL query in the world is worthless if it answers a question nobody was asking. Business context is what makes an analysis relevant instead of just technically correct.
+prerequisites: []
+objectives:
+  - Identify a company's core business model
+  - Name the typical functional areas of a business
+  - Identify what a specific stakeholder likely cares about
+  - Ask a clarifying question that surfaces the real ask
+subtopics:
+  - title: Business models & revenue
+    description: How a company actually makes money, and why that shapes which metrics matter.
+    outcomes:
+      - Identify how a given company generates revenue
+  - title: Functional areas
+    description: Sales, marketing, product, operations, and finance — and what each measures success by.
+    outcomes:
+      - Name what a marketing team vs. a finance team would each care about in the same dataset
+  - title: Stakeholder needs
+    description: Figuring out what the person asking for an analysis actually needs, which is often not what they literally said.
+    outcomes:
+      - Ask a clarifying question that surfaces the real business need
+estimated_minutes: 120
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-business-understanding-1
+    title: Interview a stakeholder request
+    description: Given a vague analysis request ("can you look into why sales are down?"), write three clarifying questions you would ask before starting.
+verify:
+  - Clarifying questions target the actual decision being made
+  - Can explain how two departments would view the same number differently
+  - Recognizes when a request is too vague to act on yet
+note: |
+  ## 🎯 What is it?
+
+  **Business understanding** means knowing how a company actually makes money, how it's organized, and what each stakeholder cares about — so your analysis targets what's actually useful, not just what's technically interesting.
+
+  Imagine being handed a company's entire database with zero context. You could write perfectly correct SQL all day and still produce nothing useful, because you wouldn't know which numbers matter to whom. Business understanding is the missing map.
+
+  ## 💡 Why is it important?
+
+  - The best query in the world is worthless if it answers a question nobody was asking — business context is what makes analysis *relevant*.
+  - Different teams care about the same data differently: a "customer" means something different to sales (a lead) than to finance (a billing account).
+  - It's how you turn a vague request ("look into this") into a specific, answerable question.
+  - It's one of the fastest ways to stand out in an interview — technical skill is assumed, business judgment is what differentiates candidates.
+
+  ## Core concept
+
+  ### How a business makes money
+  Every company has a revenue model — subscriptions, one-time purchases, ads, transaction fees, and so on. The model shapes which metrics matter most (e.g., a subscription business obsesses over churn; a marketplace obsesses over take rate).
+
+  ### Functional areas and what each measures success by
+
+  | Function | Cares most about |
+  |---|---|
+  | Sales | Pipeline, deal size, close rate |
+  | Marketing | Leads, conversion rate, cost per acquisition |
+  | Product | Engagement, retention, feature adoption |
+  | Finance | Revenue, margin, cash flow |
+  | Operations | Efficiency, cost per unit, on-time rate |
+
+  ### Stakeholder needs
+  The person asking for an analysis often states a symptom, not the real question. "Can you look into why sales are down?" might actually mean "I need to know if I should be worried in tomorrow's leadership meeting." Getting to the real need usually takes one or two clarifying questions.
+
+  ## 📊 Example
+
+  A stakeholder from **marketing** and a stakeholder from **finance** both ask about "customers" this month.
+
+  - Marketing means: how many new leads converted to a first purchase (a growth signal).
+  - Finance means: how many billing accounts are active and paying (a revenue signal).
+
+  The same word, two different, equally valid numbers — using the wrong one in the wrong report causes real confusion and lost trust.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** knowing that "sales" for a SaaS company usually means new + renewed subscription revenue, not one-time transaction count.
+  - **Marketing analysis:** understanding cost-per-acquisition targets differ wildly between a luxury brand and a budget retailer.
+  - **Finance analysis:** knowing the difference between "revenue" (booked) and "cash" (collected) before building any report that uses either term.
+
+  ## ⚠️ Common mistakes
+
+  - **Starting an analysis immediately after a vague request**, instead of asking one or two clarifying questions first. This is the single most common way analysts waste days of work.
+  - **Assuming a term like "active user" or "customer" has one universal definition** across the whole company — it almost never does (see [KPIs & Metrics](/skills/kpis-metrics)).
+  - **Ignoring who the audience is.** A number that's perfectly correct for an engineering team can be the wrong framing for an executive summary.
+
+  ## Related concepts
+
+  ```
+  What is Data Analytics
+    ↓
+  Business Understanding ← you are here
+    ↓
+  KPIs & Metrics
+    ↓
+  Data Thinking
+    ↓
+  The Data Analytics Lifecycle (feeds "Ask & Plan")
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Name two functional areas of a business and one metric each would prioritize.
+  2. Why might "customer" mean different things to two different departments?
+
+  ### Medium
+  3. Given the vague request "can you look into why sales are down?" — write three clarifying questions you'd ask before starting.
+
+  ### Interview/Advanced
+  4. Explain, with a concrete example, how the same dataset could produce two "correct" but conflicting numbers depending on which department is asking.
+
+  <details>
+  <summary><strong>Answer / Solution</strong></summary>
+
+  1. Example: Marketing → cost per acquisition; Finance → gross margin.
+  2. Because each department defines the term around what it manages — sales owns the funnel, finance owns billing — so their operational definitions diverge even though both are "correct" within their own context.
+  3. Example: "Which time period are we comparing — this week vs. last week, or this quarter vs. last quarter?" "Do you mean total revenue, unit sales, or a specific product line?" "Is there a specific region or channel you suspect is driving this?"
+  4. Example: "Total customers" reported by marketing (all-time signups) vs. finance (currently paying accounts) will legitimately differ — both are correct definitions of "customer," just answering different underlying questions.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why does business context matter for a data analyst?**
+  Short answer: It's what makes analysis relevant to a real decision, rather than just technically correct — the same data can support very different, equally valid questions depending on who's asking.
+
+  ### Conceptual questions
+  **Q: How would you find out what a stakeholder actually needs when their request is vague?**
+  Short answer: Ask a small number of targeted clarifying questions — about the metric, time window, and the decision the analysis will inform — before starting any work.
+
+  ### Scenario-based questions
+  **Q: Marketing and Finance report different "total customer" numbers from the same database, and both insist they're right. How do you resolve it?**
+  Short answer: Confirm each team's operational definition of "customer," document both explicitly, and label each report with its definition so both numbers can coexist without appearing contradictory.
+
+  ### Practical questions
+  **Q: You're handed a new company's database with no documentation. What's your first step before writing any query?**
+  Short answer: Learn the business model and functional structure first — how the company makes money and what each team is measured on — since that context determines which tables and definitions actually matter.
+
+  ## Interview traps / tricky points
+
+  - Interviewers sometimes deliberately give an ambiguous prompt to see whether you ask clarifying questions before diving into a solution — jumping straight to "I'd write a query that..." without clarifying is a common trap.
+  - Don't assume metric names are self-explanatory across companies or even across teams within the same company.
+
+  ## Best practices
+
+  - Ask clarifying questions before starting any non-trivial analysis — it's faster than redoing work later.
+  - Document the exact definition behind any metric you report, especially ones like "active user" or "customer" that vary by team.
+  - When two teams report conflicting numbers on the same topic, resolve it by surfacing both definitions rather than picking a "winner."
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Business understanding** → knowing how a company makes money and what each team is measured on
+  **Functional areas** → sales, marketing, product, finance, operations — each with different priorities
+  **Stakeholder need** → often different from the literal request; clarify before starting
+  Remember: the same word ("customer," "active," "revenue") can mean different, equally correct things depending on who's asking.

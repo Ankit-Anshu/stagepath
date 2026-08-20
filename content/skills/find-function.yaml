@@ -1,0 +1,97 @@
+title: FIND Function
+category: Spreadsheets
+what_is_it: Finding the position of one piece of text within another, case-sensitively — often used to locate a delimiter before extracting a substring with LEFT, RIGHT, or MID.
+why_it_matters: Real-world text isn't always a fixed length — FIND lets a formula locate a delimiter dynamically instead of hardcoding a position that might not hold for every row.
+prerequisites:
+  - len-function
+objectives:
+  - Use FIND to locate the position of a character or substring
+  - Combine FIND with MID or LEFT to extract a variable-length segment
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-find-1
+    title: Extract text before a delimiter
+    description: Given a column of "Name - Department" values, use FIND to locate the dash, then LEFT to extract just the name.
+verify:
+  - FIND correctly locates the position of the target text
+  - Combined formula correctly extracts the intended segment across varying-length values
+note: |
+  ## 🎯 What is it?
+
+  **FIND** locates the position of one piece of text within another, and is **case-sensitive**. It's most often used to dynamically locate a delimiter (like a dash or comma) before extracting a substring with [LEFT](/skills/left-function), [RIGHT](/skills/right-function), or [MID](/skills/mid-function).
+
+  ## 💡 Why is it important?
+
+  Real-world text isn't always a fixed length — a name followed by a department, separated by a dash, can vary in length row to row. FIND lets a formula locate the delimiter's position *dynamically*, instead of hardcoding a fixed character count that only works for one specific row length.
+
+  ## Syntax
+
+  ```
+  =FIND(find_text, within_text, [start_num])
+  ```
+
+  Returns the position (a number) where `find_text` first appears within `within_text` — or a `#VALUE!` error if it's not found at all.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | Ana Silva - Marketing |
+
+  **Formula:** `=FIND("-",A1)` → `11` (the dash is the 11th character)
+
+  **Combined with LEFT to extract the name:** `=LEFT(A1,FIND("-",A1)-1)` → `"Ana Silva "` (everything before the dash; wrap with TRIM to clean the trailing space).
+
+  ## Multiple examples
+
+  **Beginner:** `=FIND("@",A2)` — find the position of the @ symbol in an email address.
+  **Real-world:** `=TRIM(LEFT(A2,FIND("-",A2)-1))` used across a whole column of "Name - Department" values with varying name lengths, correctly extracting just the name from every row regardless of how long each name is.
+
+  ## ⚠️ Common mistakes
+
+  - **Not handling the case where the delimiter is missing.** FIND returns a `#VALUE!` error if the target text isn't found at all — wrapping with [IFERROR](/skills/iferror-function) handles rows that don't match the expected format.
+  - **Forgetting FIND is case-sensitive.** Searching for "Marketing" won't match "marketing" — use [SEARCH](/skills/search-function) instead if case-insensitivity is needed.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** dynamically locating a delimiter to split a combined field into its component parts.
+
+  ## Related concepts
+
+  ```
+  LEN → FIND ← you are here → SEARCH → TEXTJOIN
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that finds the position of the comma in A1.
+
+  ### Interview/Advanced
+  2. Why is combining FIND with LEFT more robust than a hardcoded LEFT(A1,10) for extracting a name before a delimiter?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=FIND(",",A1)`
+  2. A hardcoded character count only works correctly for names of exactly that length — FIND dynamically locates the actual delimiter position for each row, so the extraction correctly adapts to names of any length, not just one specific case.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between FIND and SEARCH?**
+  Short answer: FIND is case-sensitive; SEARCH is not — otherwise they work almost identically for locating a substring's position.
+
+  ## Best practices
+
+  - Combine FIND (or SEARCH) with LEFT/RIGHT/MID whenever a substring's position varies by row, instead of hardcoding a fixed character count.
+  - Wrap with IFERROR to handle rows where the expected delimiter is missing.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **FIND(find_text, within_text)** → position of a substring, case-sensitive
+  **Use with LEFT/RIGHT/MID** to extract a variable-length segment dynamically

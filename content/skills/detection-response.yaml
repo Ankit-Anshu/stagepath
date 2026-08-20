@@ -1,0 +1,24 @@
+title: Detection & Incident Response
+category: Cybersecurity
+what_is_it: Turning logs and alerts into evidence, containment decisions, and repeatable defensive playbooks.
+why_it_matters: Defenders need to distinguish true incidents from noise and respond without destroying evidence.
+estimated_minutes: 4200
+prerequisites: [linux-security, web-security]
+objectives: [Triage alerts, Build incident timelines, Write detections and response playbooks]
+subtopics:
+  - title: Log sources and SIEM
+    description: Endpoint, identity, network, DNS, proxy, cloud, and application logs; parsing and normalization.
+    outcomes: [Choose useful data sources, Validate logging coverage]
+  - title: Alert triage
+    description: Context, enrichment, baselines, false positives, severity, scope, and escalation.
+    outcomes: [Triage an alert consistently, Document an investigation decision]
+  - title: Detection engineering
+    description: Hypotheses, indicators, behaviors, ATT&CK mapping, query logic, testing, and tuning.
+    outcomes: [Write a behavioral detection, Measure detection quality]
+  - title: Incident lifecycle
+    description: Preparation, identification, containment, eradication, recovery, communication, and lessons learned.
+    outcomes: [Choose containment actions, Build an incident timeline]
+  - title: Forensic thinking
+    description: Evidence integrity, volatile data, timelines, artifacts, uncertainty, and defensible conclusions.
+    outcomes: [Preserve evidence, State confidence and limitations]
+

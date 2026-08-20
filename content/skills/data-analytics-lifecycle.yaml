@@ -1,0 +1,171 @@
+title: The Data Analytics Lifecycle
+category: Foundations
+what_is_it: The repeatable sequence a real analysis follows — from defining the question through collecting, cleaning, analyzing, visualizing, and communicating results.
+why_it_matters: Without a mental model of the full lifecycle, it's easy to jump straight to charts before the question is even clear, or skip communicating findings after doing the hard analytical work.
+prerequisites:
+  - what-is-data-analytics
+objectives:
+  - Name each stage of the analytics lifecycle in order
+  - Explain what happens at each stage
+  - Identify which stage a stalled project is stuck in
+  - Explain why skipping a stage causes problems later
+subtopics:
+  - title: Ask & plan
+    description: Defining the question and what a good answer would look like before touching any data.
+    outcomes:
+      - Write a clear question and success criteria before starting an analysis
+  - title: Collect & clean
+    description: Gathering the needed data and preparing it for analysis.
+    outcomes:
+      - List where the data for a given question would come from
+  - title: Analyze
+    description: Applying the right method — summary statistics, segmentation, or modeling — to answer the question.
+    outcomes:
+      - Match an analysis method to a stated question
+  - title: Visualize & communicate
+    description: Turning the result into something a decision-maker can understand and act on.
+    outcomes:
+      - Explain why an analysis without communication has no impact
+estimated_minutes: 90
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-lifecycle-1
+    title: Map a real analysis to the lifecycle
+    description: Take a past project (yours or a public case study) and label which lifecycle stage each part belongs to.
+verify:
+  - All four stages are correctly identified and ordered
+  - Can explain what goes wrong when a stage is skipped
+  - Can diagnose which stage a stalled real-world project is stuck in
+note: |
+  ## 🎯 What is it?
+
+  The **Data Analytics Lifecycle** is the repeatable sequence a real analysis follows, from "what are we even asking?" to "here's what we found and what to do." A common version has four stages: **Ask & Plan → Collect & Clean → Analyze → Visualize & Communicate.**
+
+  Think of it like a recipe: skipping "read the whole recipe first" (Ask & Plan) or "taste before serving" (Visualize & Communicate) doesn't just make the process messier — it can ruin the result even if every individual step was technically done correctly.
+
+  ## 💡 Why is it important?
+
+  - Without this mental model, it's easy to jump straight into a dashboard or a chart before the question is even clearly defined — wasted effort chasing the wrong answer.
+  - It gives you a way to diagnose a stalled analysis: "we're stuck" almost always maps to a specific stage.
+  - Every real analyst project — from a two-hour ad-hoc request to a multi-week dashboard build — follows this shape, just at different scales.
+  - Interviewers frequently ask you to "walk me through how you'd approach this problem," and structuring your answer around the lifecycle signals a mature process.
+
+  ## Core concept
+
+  ### 1. Ask & Plan
+  Define the question precisely and agree on what a good answer looks like *before* touching data. Includes clarifying the audience, the decision it will inform, and the deadline.
+
+  ### 2. Collect & Clean
+  Gather the data needed (queries, exports, third-party sources) and get it into a trustworthy, analysis-ready state — handling missing values, duplicates, and formatting issues (see [Data Cleaning & Quality](/skills/data-cleaning)).
+
+  ### 3. Analyze
+  Apply the right method to the clean data — a simple summary, a segmentation, a statistical test, or a model — chosen to match the type of question (see [Types of Data Analytics](/skills/types-of-data-analytics)).
+
+  ### 4. Visualize & Communicate
+  Turn the result into something a decision-maker can understand and act on: the right chart, a clear headline finding, and a specific recommendation.
+
+  | Stage | Typical output | Common failure if skipped |
+  |---|---|---|
+  | Ask & Plan | A precise, written question | Analysis answers the wrong thing |
+  | Collect & Clean | A trustworthy dataset | Garbage-in, garbage-out results |
+  | Analyze | A finding | Wrong method for the question |
+  | Visualize & Communicate | A decision-ready deliverable | Correct work has zero business impact |
+
+  ## 📊 Example
+
+  A stakeholder says: "Sales feel slow this quarter." Walking the lifecycle:
+
+  1. **Ask & Plan:** Reframe as "Is Q3 revenue tracking below Q2, and if so, by how much and in which segment?"
+  2. **Collect & Clean:** Pull Q2 and Q3 order data; dedupe, fix currency formatting, exclude test orders.
+  3. **Analyze:** Compare Q3-to-date revenue against the same period in Q2, segmented by region.
+  4. **Visualize & Communicate:** A one-slide chart showing the two quarters side by side, with a one-sentence headline: "Q3 revenue is down 9%, concentrated in the East region."
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** the full lifecycle behind a quarterly business review deck.
+  - **Product analysis:** a lifecycle run in miniature for a single Slack question like "did the new onboarding flow help?"
+  - **Operations analysis:** a recurring weekly report that re-runs Collect → Analyze → Communicate on a schedule, having only done Ask & Plan once.
+
+  ## ⚠️ Common mistakes
+
+  - **Skipping "Ask & Plan" and going straight to a query.** This is the single most common cause of analyses that technically work but answer the wrong question.
+  - **Treating "Analyze" as the finish line.** Good analysis with no clear communication rarely changes a decision.
+  - **Cleaning data without a defined question first**, which leads to over-cleaning fields that don't matter and under-cleaning ones that do.
+
+  ## Related concepts
+
+  ```
+  What is Data Analytics
+    ↓
+  The Data Analytics Lifecycle ← you are here
+    ↓
+  Business Understanding (feeds "Ask & Plan")
+    ↓
+  Data Cleaning & Quality (the "Collect & Clean" stage)
+    ↓
+  KPIs & Metrics / Statistics (the "Analyze" stage)
+    ↓
+  Visualization & Storytelling (the "Communicate" stage)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Name the four stages of the analytics lifecycle in order.
+  2. Which stage is most often skipped by beginners, and what typically goes wrong as a result?
+
+  ### Medium
+  3. A colleague says their dashboard project has been "stuck for two weeks." What questions would you ask to figure out which lifecycle stage it's actually stuck in?
+
+  ### Interview/Advanced
+  4. Take a past project (yours or a public case study) and map each part of it to a lifecycle stage.
+
+  <details>
+  <summary><strong>Answer / Solution</strong></summary>
+
+  1. Ask & Plan → Collect & Clean → Analyze → Visualize & Communicate.
+  2. Ask & Plan — beginners often start querying immediately, which leads to an analysis that answers a question nobody actually asked.
+  3. Example questions: "Is the question/audience/deadline written down anywhere?" (Ask & Plan), "Do you trust the data you're working with?" (Collect & Clean), "Have you found a result yet, even a rough one?" (Analyze), "Has anyone outside the project seen it?" (Communicate).
+  4. Answers will vary — the key skill is correctly bucketing each real task into one of the four stages.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Walk me through your general process for a new analysis request.**
+  Short answer: Clarify the question and success criteria, gather and clean the needed data, apply the right analysis method, then package the result into a clear, actionable communication.
+
+  ### Conceptual questions
+  **Q: Why does "Ask & Plan" come before touching any data?**
+  Short answer: Because analyzing before the question is clear risks answering something nobody asked — clarifying scope and success criteria up front is far cheaper than redoing analysis later.
+
+  ### Scenario-based questions
+  **Q: You're two days into an analysis and realize the original question was ambiguous. What do you do?**
+  Short answer: Pause and go back to the stakeholder to clarify rather than guessing and continuing — a short clarifying conversation is cheaper than finishing an analysis that turns out to answer the wrong question.
+
+  ### Practical questions
+  **Q: Describe, stage by stage, how you'd approach "did our new checkout redesign reduce cart abandonment?"**
+  Short answer: Ask & Plan — define "cart abandonment" precisely and the comparison window; Collect & Clean — pull before/after checkout event data; Analyze — compare abandonment rate before vs. after, checking for confounders like seasonality; Communicate — a clear before/after chart with a recommendation.
+
+  ## Interview traps / tricky points
+
+  - Interviewers sometimes present a flawed process (e.g., "I always start by building the dashboard") specifically to see if you catch that the question wasn't defined first.
+  - The lifecycle is iterative, not strictly linear — clarifying questions can surface mid-analysis and send you back to "Ask & Plan"; acknowledging this shows real-world experience.
+
+  ## Best practices
+
+  - Write the question and success criteria down before writing a single query — even a one-line note prevents scope drift.
+  - Timebox the "Collect & Clean" stage; perfect data cleaning on fields that don't affect the answer is wasted effort.
+  - Always end with a specific recommendation or next step, not just a chart.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Ask & Plan** → define the question and success criteria
+  **Collect & Clean** → gather and prepare trustworthy data
+  **Analyze** → apply the right method to answer the question
+  **Visualize & Communicate** → package the result into a decision-ready deliverable
+  Remember: a stalled project is almost always stuck in one specific stage — diagnose which one before trying to "just work harder."

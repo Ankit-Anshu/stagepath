@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const projects = await getCollection('projects');
+const skills = await getCollection('skills');
+const skillById = new Map(skills.map((skill) => [skill.id, skill]));
+const levels = [
+  { key: 'mini', title: 'Mini projects', blurb: 'Focused practice that proves one important skill.' },
+  { key: 'portfolio', title: 'Portfolio projects', blurb: 'Realistic multi-skill briefs with enough depth to discuss in an interview.' },
+  { key: 'capstone', title: 'Capstone projects', blurb: 'End-to-end systems with architecture, quality, and communication deliverables.' },
+] as const;
+---
+
+<Base title="Project Briefs" description="Real problems, real data, and a rubric — not vague build prompts." wide>
+  <header class="projects-header"><h1 class="display-title">Projects</h1></header>
+  {levels.map((level) => {
+    const items = projects.filter((project) => project.data.level === level.key);
+    if (!items.length) return null;
+    return <section class="project-level"><div class="level-head"><div><span>{level.key}</span><h2>{level.title}</h2></div><p>{level.blurb}</p></div><div class="project-grid">{items.map((project) => {
+      const category = skillById.get(project.data.skills[0])?.data.category ?? 'General';
+      return <a href={`/projects/${project.id}`} class="project-card"><div class="card-meta"><span>{category}</span><b>{project.data.duration}</b></div><h3>{project.data.title}</h3><div class="card-footer"><span>{project.data.skills.length} related topics</span></div></a>;
+    })}</div></section>;
+  })}
+</Base>
+
+<style>
+  .projects-header{padding:20px 0 40px}.projects-header .display-title{color:var(--green);font-size:clamp(45px,6vw,70px)}.project-level{padding:45px 0;border-top:1px solid var(--line)}.level-head{display:flex;align-items:end;justify-content:space-between;gap:35px}.level-head div>span{color:var(--green);font-size:8px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.level-head h2{margin:2px 0 0;font-size:28px;letter-spacing:-.04em}.level-head>p{max-width:470px;margin:0;color:var(--muted);font-size:12px}.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}.project-card{position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:140px;padding:18px;border:1px solid var(--line);border-radius:14px;background:white;transition:.18s}.project-card:hover{transform:translateY(-3px);border-color:#a8c2b0;box-shadow:0 13px 35px rgba(22,43,37,.08)}.card-meta{display:flex;justify-content:space-between;color:#879188;font-size:8px;font-weight:800;text-transform:uppercase}.project-card h3{margin:18px 0 0;font-size:18px;letter-spacing:-.03em}.card-footer{position:relative;margin-top:auto;padding-top:12px;border-top:1px solid #edf0ed;color:#849087;font-size:8px}@media(max-width:850px){.project-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.project-grid{grid-template-columns:1fr}.level-head{align-items:start;flex-direction:column;gap:10px}}
+</style>
+

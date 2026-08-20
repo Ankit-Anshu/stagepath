@@ -1,0 +1,24 @@
+title: Endpoint & Linux Security
+category: Cybersecurity
+what_is_it: Hardening and investigating hosts through permissions, services, processes, logs, and command-line tools.
+why_it_matters: Endpoints contain the evidence needed to understand compromise and stop persistence.
+estimated_minutes: 3000
+prerequisites: [networking-systems]
+objectives: [Harden a Linux host, Investigate suspicious processes, Collect useful endpoint evidence]
+subtopics:
+  - title: Shell and filesystem
+    description: Navigation, pipelines, text processing, permissions, ownership, links, and special files.
+    outcomes: [Build investigation pipelines, Audit file permissions]
+  - title: Processes and services
+    description: Process trees, jobs, signals, systemd, scheduled tasks, startup, and resource use.
+    outcomes: [Trace process ancestry, Find unexpected services]
+  - title: Accounts and privilege
+    description: Users, groups, sudo, PAM, SSH keys, privilege escalation, and least privilege.
+    outcomes: [Audit privileged access, Harden remote login]
+  - title: Logging and auditing
+    description: Syslog, journal, authentication logs, auditd, retention, and time synchronization.
+    outcomes: [Build a login timeline, Configure useful audit events]
+  - title: Hardening and patching
+    description: Baselines, unnecessary services, firewalling, package updates, integrity, and configuration drift.
+    outcomes: [Apply a hardening checklist, Document compensating controls]
+

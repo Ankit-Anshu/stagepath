@@ -1,0 +1,69 @@
+title: Data Model
+category: Spreadsheets
+what_is_it: The set of tables and relationships loaded into Power Pivot — the spreadsheet's own miniature relational database, defining how tables connect for analysis.
+why_it_matters: A well-built data model (correct relationships, right cardinality) is what makes every measure and pivot table built on top of it behave correctly.
+prerequisites:
+  - power-pivot
+objectives:
+  - Explain what a data model is within Power Pivot
+  - Build a relationship between two tables in the data model
+estimated_minutes: 20
+resources:
+  - r-ms-powerbi-training
+practice:
+  - id: ex-data-model-1
+    title: Diagram a data model
+    description: Given three related tables (Customers, Orders, Products), diagram the data model showing each relationship and its direction.
+verify:
+  - Can explain what a data model is
+  - Can identify the relationships needed between a given set of tables
+note: |
+  ## 🎯 What is it?
+
+  The **data model** is the set of tables and relationships loaded into Power Pivot — effectively a miniature relational database living inside the spreadsheet, directly applying the Relational Database, Primary Key, and Foreign Key concepts from the SQL stage to a spreadsheet context.
+
+  ## 💡 Why is it important?
+
+  - A well-built data model — correct relationships, correct cardinality (one-to-many, etc.) — is what makes every pivot table, measure, and chart built on top of it behave correctly; a broken or missing relationship produces silently wrong results.
+  - It's the direct spreadsheet-world parallel to a database schema, reinforcing that the same relational thinking applies across tools.
+
+  ## Core concept
+
+  ```
+  Customers (1) ────< (many) Orders (1) ────< (many) Order Items
+       id                customer_id                 order_id
+  ```
+
+  Each relationship connects a "one" side (a table's primary key) to a "many" side (a foreign key) — exactly the same pattern as Primary Key/Foreign Key/Relationships in the SQL stage.
+
+  ## 📊 Example
+
+  A data model with `Customers`, `Orders`, and `Products` tables, related by `customer_id` and `product_id`, lets a single pivot table pull `customer region` (from Customers), `order date` (from Orders), and `product category` (from Products) all at once — the data model handles the "joining," so the pivot table doesn't need one flattened source table.
+
+  ## ⚠️ Common mistakes
+
+  - **Building an incorrect relationship direction or cardinality**, causing a measure to double-count or under-count — the same "fan-out" risk covered in Relationships and Query Dependencies.
+  - **Leaving a table unrelated to the rest of the model**, which then can't be meaningfully combined with the others in a single pivot table or chart.
+
+  ## Related concepts
+
+  ```
+  Power Pivot
+    ↓
+  Data Model ← you are here
+    ↓
+  Basic DAX
+  ```
+  Directly applies Relational Database and Relationships from the SQL stage.
+
+  ## 🎤 Interview preparation
+
+  **Q: Why might a measure in Power Pivot show an unexpectedly inflated total?**
+  Short answer: Likely an incorrect relationship in the data model — a one-to-many relationship set up backward, or a missing relationship between two tables, can cause a measure to double-count or aggregate incorrectly, the same "fan-out" risk seen with SQL joins.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data model** → the tables and relationships loaded into Power Pivot — a miniature relational database in the spreadsheet
+  A wrong relationship or cardinality silently produces wrong totals downstream.

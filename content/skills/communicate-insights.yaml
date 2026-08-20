@@ -1,0 +1,72 @@
+title: Communicate Insights
+category: Foundations
+what_is_it: Presenting an analysis's findings and interpretation to stakeholders clearly enough that they can act on it — verbally, in a written summary, or via a dashboard.
+why_it_matters: An analysis that never gets understood by the people who need to act on it has no business impact, regardless of how rigorous the underlying work was.
+prerequisites:
+  - interpret-results
+objectives:
+  - Explain why communication is treated as a core analyst skill, not an afterthought
+  - Describe a simple structure for presenting a finding
+estimated_minutes: 25
+resources:
+  - r-storytelling-with-data
+practice:
+  - id: ex-communicate-insights-1
+    title: Write a one-page summary
+    description: 'Take any finding from an earlier exercise and write a 3-sentence summary suitable for a non-technical stakeholder: what happened, why, what to do.'
+verify:
+  - Can explain why communication is a core analyst skill
+  - 'Can structure a finding as: what happened, why, what to do'
+note: |
+  ## 🎯 What is it?
+
+  **Communicating insights** means presenting an analysis's findings and interpretation clearly enough that stakeholders — who usually aren't technical and weren't involved in the analysis — can understand and act on it. It can take the form of a verbal readout, a written summary, a slide, or a dashboard.
+
+  ## 💡 Why is it important?
+
+  - An analysis that's technically correct but poorly communicated has zero business impact — this is one of the most common gaps between junior and senior analysts.
+  - It's a distinct skill from the analysis itself, and interviewers frequently probe it directly ("walk me through how you'd present this finding to a non-technical VP").
+
+  ## Core concept
+
+  A simple, reusable structure for communicating a finding:
+
+  ```
+  1. What happened      (the headline finding, in one sentence)
+  2. Why it happened     (the likely cause, briefly)
+  3. What to do about it (a specific, actionable recommendation)
+  ```
+
+  Lead with the headline, not the methodology — stakeholders want the answer first, with supporting detail available if they ask for it.
+
+  ## 📊 Example
+
+  Poor communication: a 12-slide deck walking through every query and intermediate chart before reaching a conclusion. Good communication: "Revenue is on track to miss the Q1 target by 8%, mainly due to a slowdown in the EU region. I recommend reallocating 15% of the EU ad budget to the US region, which is currently outperforming its target." — headline, cause, recommendation, in three sentences, with supporting detail available on request.
+
+  ## ⚠️ Common mistakes
+
+  - **Leading with methodology instead of the finding.** Most stakeholders want the answer first; the "how" belongs later or in an appendix.
+  - **Using unexplained jargon** (p-values, joins, grains) with a non-technical audience — translate the finding into plain business language.
+
+  ## Related concepts
+
+  ```
+  Interpret Results
+    ↓
+  Communicate Insights ← you are here
+    ↓
+  Make Recommendations
+  ```
+  Closely related to the existing Storytelling topic (Visualization stage), which covers dashboard-level narrative in more depth.
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you present a technical finding to a non-technical executive?**
+  Short answer: Lead with the headline finding in plain language, briefly explain the likely cause, and end with a specific recommendation — save methodology and supporting detail for if they ask, rather than leading with it.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Communicate insights** → present findings so non-technical stakeholders can act on them
+  Structure: what happened → why → what to do. Lead with the headline, not the method.

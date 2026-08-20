@@ -1,0 +1,24 @@
+title: Web Application Security
+category: Cybersecurity
+what_is_it: Understanding and testing the trust boundaries, inputs, sessions, and browser behavior of web applications.
+why_it_matters: Web applications expose valuable data and business actions directly to untrusted users.
+estimated_minutes: 3600
+prerequisites: [networking-systems]
+objectives: [Test common web weaknesses safely, Explain exploit impact, Recommend specific fixes]
+subtopics:
+  - title: Request and browser model
+    description: HTTP, cookies, sessions, same-origin policy, CORS, CSP, and browser storage.
+    outcomes: [Inspect an authenticated request, Explain browser trust boundaries]
+  - title: Injection
+    description: SQL, command, template, and other injection paths plus parameterization and allowlisting.
+    outcomes: [Recognize injection conditions, Recommend safe query handling]
+  - title: Authentication and access control
+    description: Session flaws, credential attacks, insecure recovery, IDOR, and privilege escalation.
+    outcomes: [Test object-level authorization, Review session controls]
+  - title: Browser-side attacks
+    description: XSS, CSRF, clickjacking, unsafe redirects, and content security policy.
+    outcomes: [Explain stored versus reflected XSS, Design CSRF protection]
+  - title: Security testing workflow
+    description: Reconnaissance, proxying, manual testing, evidence, severity, and responsible reporting.
+    outcomes: [Write a reproducible finding, Separate observation from impact]
+

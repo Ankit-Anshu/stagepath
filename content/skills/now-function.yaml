@@ -1,0 +1,86 @@
+title: NOW Function
+category: Spreadsheets
+what_is_it: Returning the current date AND time, updating automatically every time the spreadsheet recalculates.
+why_it_matters: Needed whenever a timestamp — not just a date — matters, like logging exactly when a row was last updated.
+prerequisites:
+  - today-function
+objectives:
+  - Use NOW to get the current date and time
+  - Explain the difference between TODAY and NOW
+estimated_minutes: 15
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-now-1
+    title: Timestamp a data entry
+    description: Add a "last updated" column using NOW that shows the exact date and time each row was last edited.
+verify:
+  - NOW correctly returns the current date and time
+note: |
+  ## 🎯 What is it?
+
+  **NOW** returns the current date **and** time, updating automatically every time the spreadsheet recalculates — the time-inclusive counterpart to [TODAY](/skills/today-function).
+
+  ## 💡 Why is it important?
+
+  Needed whenever a precise timestamp — not just a date — matters, such as logging exactly when a row was last updated or when a form response was submitted.
+
+  ## Syntax
+
+  ```
+  =NOW()
+  ```
+
+  Takes no arguments — returns the current date and time together.
+
+  ## 📊 Example
+
+  **Formula:** `=NOW()`
+  **Result (example):** `2024-01-05 14:32` — the current date and time at the moment of calculation.
+
+  ## Multiple examples
+
+  **Beginner:** `=NOW()` — display the current date and time in a cell.
+  **Real-world:** A "last refreshed" cell at the top of a dashboard using NOW, so anyone viewing it can immediately see how current the data is.
+
+  ## ⚠️ Common mistakes
+
+  - **Using NOW when only the date matters.** NOW includes a time component that can clutter a report or cause unexpected behavior in a date-only comparison — use TODAY instead if time isn't relevant.
+  - **Expecting NOW to "freeze" at the moment a row was created.** Like TODAY, NOW recalculates every time the sheet updates — it does not remember the time a formula was first entered; a separate logging approach (or a script) is needed for a true "created at" timestamp that shouldn't change.
+
+  ## Real-world Data Analyst use cases
+
+  - **Dashboard freshness indicators:** showing exactly when a report was last refreshed.
+
+  ## Related concepts
+
+  ```
+  TODAY → NOW ← you are here → DATE
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the difference between TODAY() and NOW()?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. TODAY() returns just the current date; NOW() returns the current date and time together.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would a dashboard use NOW() instead of TODAY() for a "last refreshed" indicator?**
+  Short answer: A precise timestamp (including time) is more useful for showing data freshness within a single day, which TODAY's date-only output can't convey.
+
+  ## Best practices
+
+  - Use NOW only when the time component genuinely adds value; default to TODAY for date-only needs.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **NOW()** → current date and time, updates automatically
+  **vs. TODAY():** NOW includes time, TODAY is date-only

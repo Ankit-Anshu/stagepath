@@ -1,0 +1,71 @@
+title: Arithmetic Operators
+category: Spreadsheets
+what_is_it: The basic math symbols a spreadsheet formula uses — + - * / and ^ — for addition, subtraction, multiplication, division, and exponents.
+why_it_matters: Every formula, no matter how advanced, is ultimately built from these basic operators — they're the starting point before any named function.
+prerequisites:
+  - spreadsheet-tables
+objectives:
+  - Write a formula using +, -, *, /, and ^
+  - Explain how operator precedence (order of operations) affects a formula's result
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-arithmetic-operators-1
+    title: Order of operations
+    description: Write a formula that calculates (price - discount) * quantity, using parentheses correctly.
+verify:
+  - Can write a formula using all five basic operators
+  - Can explain why parentheses matter in a multi-operator formula
+note: |
+  ## 🎯 What is it?
+
+  **Arithmetic operators** are the basic math symbols a spreadsheet formula uses: `+` (add), `-` (subtract), `*` (multiply), `/` (divide), and `^` (exponent — "to the power of"). Every formula in a spreadsheet starts with an equals sign, followed by a combination of cell references and these operators.
+
+  ## 💡 Why is it important?
+
+  - Every formula, no matter how advanced, is ultimately built from these basic operators combined with cell references — they're the true starting point before any named function like SUM or IF.
+  - Getting **order of operations** (precedence) wrong is a common source of a formula that runs without error but produces the wrong number.
+
+  ## Core concept
+
+  | Operator | Meaning | Example |
+  |---|---|---|
+  | `+` | Addition | `=A1+B1` |
+  | `-` | Subtraction | `=A1-B1` |
+  | `*` | Multiplication | `=A1*B1` |
+  | `/` | Division | `=A1/B1` |
+  | `^` | Exponent | `=A1^2` (A1 squared) |
+
+  Standard order of operations applies: exponents first, then multiplication/division, then addition/subtraction — use **parentheses** to force a different order.
+
+  ## 📊 Example
+
+  `=A1+B1*C1` calculates `B1*C1` **first**, then adds `A1` — multiplication happens before addition. To add `A1` and `B1` *first*, then multiply by `C1`, parentheses are required: `=(A1+B1)*C1`.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting parentheses when a calculation needs a specific order** — e.g., writing `=A1+B1*C1` when `=(A1+B1)*C1` was actually intended, silently producing the wrong result.
+  - **Forgetting the leading `=`** — without it, a spreadsheet treats `A1+B1` as plain text, not a formula.
+
+  ## Related concepts
+
+  ```
+  Excel Tables
+    ↓
+  Arithmetic Operators ← you are here
+    ↓
+  SUM
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: `=A1+B1*C1` — which operation happens first?**
+  Short answer: Multiplication (`B1*C1`) happens first, then the result is added to `A1` — standard order of operations applies in spreadsheet formulas, just like in math.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Operators** → `+ - * / ^`
+  Standard order of operations applies — use parentheses to override it.

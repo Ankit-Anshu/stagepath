@@ -1,0 +1,95 @@
+title: Filter
+category: Spreadsheets
+what_is_it: Temporarily hiding rows that don't match a chosen condition, so only the relevant subset is visible, without altering or deleting the underlying data.
+why_it_matters: The fastest way to focus on a specific subset of data for a quick look, without writing a formula or building a pivot table.
+prerequisites:
+  - sort-spreadsheets
+objectives:
+  - Apply a filter to show only rows matching a condition
+  - Explain why filtering doesn't delete or alter hidden data
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-filter-1
+    title: Filter to one region
+    description: Apply a filter to a transactions list to show only rows where region = "West".
+verify:
+  - Filter correctly shows only matching rows
+  - Underlying data is unaltered — hidden rows still exist
+note: |
+  ## 🎯 What is it?
+
+  **Filter** temporarily hides rows that don't match a chosen condition, so only the relevant subset is visible — without altering, deleting, or permanently changing the underlying data.
+
+  ## 💡 Why is it important?
+
+  It's the fastest way to focus on a specific subset of data for a quick look — "show me only West region orders" — without writing a formula (like [SUMIF](/skills/sumif-function)) or building a full pivot table, when a quick visual look is all that's needed.
+
+  ## Core concept
+
+  Filters apply per column, using the dropdown that appears on each header when filtering is turned on. Multiple column filters combine with AND — a row must match every active filter to remain visible.
+
+  **Key distinction:** filtering only **hides** non-matching rows; it doesn't delete them, and any formula referencing the full range (like a plain SUM) still includes the hidden rows in its calculation unless a filter-aware function (like SUBTOTAL) is used instead.
+
+  ## 📊 Example
+
+  A transactions list is filtered to show only `region = "West"` and `status = "Completed"`.
+
+  **Result:** Only rows matching *both* conditions remain visible — an East-region completed order, or a West-region pending order, are both hidden (not deleted).
+
+  ## Multiple examples
+
+  **Beginner:** Filtering a single column to show only one specific value.
+  **Intermediate:** Filtering two columns at once, combining conditions with AND automatically.
+  **Real-world:** Filtering a large transactions export down to just the current month and one specific product category, to quickly spot-check a handful of records before trusting a broader formula-based analysis of the same data.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming a SUM formula referencing the full range only totals the visible (filtered) rows.** A plain SUM still includes hidden rows — `=SUBTOTAL(109, range)` is needed to sum only currently visible rows.
+  - **Forgetting a filter is still active**, leading to confusion when a later action (like a chart or another formula) seems to be "missing" data that's actually just hidden by an old filter.
+  - **Copying filtered (visible-only) data without realizing hidden rows might still be included** in a simple copy-paste, depending on the tool and method used.
+
+  ## Real-world Data Analyst use cases
+
+  - **Quick data exploration:** spot-checking a subset of records before building a broader analysis.
+  - **Data quality review:** filtering to rows that meet a suspicious condition (e.g., a negative amount) for manual review.
+
+  ## Related concepts
+
+  ```
+  Sort → Filter ← you are here → Excel Tables → Pivot Tables
+  ```
+  For a repeatable, formula-based version of "sum only what matches a condition," see [SUMIF](/skills/sumif-function)/[SUMIFS](/skills/sumifs-function) — those work correctly regardless of what's currently filtered/visible.
+
+  ## Practice questions
+
+  ### Easy
+  1. Does filtering delete the hidden rows?
+
+  ### Interview/Advanced
+  2. Why does a plain SUM formula still include hidden (filtered-out) rows in its total?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. No — filtering only hides rows that don't match the active condition; the underlying data remains completely intact and reappears when the filter is removed.
+  2. A plain SUM sums every cell in its specified range regardless of visibility — it has no awareness of the filter state. SUBTOTAL is specifically designed to be filter-aware and only sums currently visible rows.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: If you filter a sheet and then look at a SUM formula's total, will it reflect only the visible rows?**
+  Short answer: Not with a plain SUM — it includes hidden rows regardless of the filter. SUBTOTAL is the filter-aware alternative that only totals currently visible rows.
+
+  ## Best practices
+
+  - Use SUBTOTAL instead of SUM when a total specifically needs to reflect only the currently filtered/visible rows.
+  - Double-check whether an old filter is still active before assuming a sheet shows all its data.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Filter** → temporarily hides non-matching rows; doesn't delete or alter data
+  **SUM still includes hidden rows** — use SUBTOTAL for a filter-aware total

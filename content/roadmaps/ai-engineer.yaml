@@ -1,0 +1,28 @@
+title: AI Engineer
+category: Data
+difficulty: intermediate
+estimated_hours: 720
+audience: Developers and data learners who want to build, evaluate, and ship reliable AI-powered products.
+description: Learn the programming, data, machine-learning, evaluation, API, and production skills needed to build practical AI systems.
+stages:
+  - id: programming-foundation
+    title: Build the programming foundation
+    description: Become comfortable solving problems and working with data in Python.
+    skills: [programming-foundations, python-fundamentals, numpy]
+  - id: data-foundation
+    title: Prepare and understand data
+    description: Clean datasets, explore patterns, and apply the statistics behind model behavior.
+    skills: [pandas, statistics, data-thinking]
+  - id: machine-learning
+    title: Train machine-learning systems
+    description: Learn supervised and unsupervised workflows from baselines through feature engineering.
+    skills: [machine-learning-fundamentals, model-evaluation]
+  - id: ai-products
+    title: Build AI-powered products
+    description: Expose models through dependable services and integrate them into complete applications.
+    skills: [api-design, databases, backend-testing]
+  - id: production-ai
+    title: Ship and monitor AI
+    description: Deploy systems, observe failures, protect endpoints, and improve performance over time.
+    skills: [deployment-observability, backend-security, workflow-orchestration]
+

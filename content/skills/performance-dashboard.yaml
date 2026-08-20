@@ -1,0 +1,68 @@
+title: Performance Dashboard
+category: Spreadsheets
+what_is_it: A dashboard tracking operational or team performance against a set of goals or SLAs — broader than a sales-specific dashboard, applicable to support, operations, or project tracking.
+why_it_matters: It generalizes the sales dashboard pattern (KPI vs. target, trend, breakdown) to any team or process that needs to monitor its own performance.
+prerequisites:
+  - sales-dashboard
+objectives:
+  - Identify appropriate performance metrics for a non-sales team context
+  - Design a performance dashboard tracking goals or SLAs
+estimated_minutes: 20
+resources:
+  - r-storytelling-with-data
+practice:
+  - id: ex-performance-dashboard-1
+    title: Design a support performance dashboard
+    description: Design a dashboard for a customer support team tracking ticket volume, average response time vs. an SLA target, and resolution rate.
+verify:
+  - Can identify appropriate metrics for a non-sales performance dashboard
+  - Can design a dashboard tracking goals or SLAs
+note: |
+  ## 🎯 What is it?
+
+  A **performance dashboard** tracks operational or team performance against a set of goals or SLAs (service-level agreements) — the same core pattern as a Sales Dashboard (KPI vs. target, trend, breakdown), generalized to any team or process: customer support, operations, project delivery, and more.
+
+  ## 💡 Why is it important?
+
+  - It shows the sales-dashboard pattern isn't sales-specific — the same design thinking (pick a few KPIs, compare to target, show trend, break down by a meaningful dimension) applies to nearly any team that needs to monitor its own performance.
+  - It's a common, practical portfolio project that demonstrates dashboard design skill in a non-sales business context.
+
+  ## Core concept
+
+  | Team | Example KPIs |
+  |---|---|
+  | Customer support | Ticket volume, average response time vs. SLA, resolution rate |
+  | Operations | Order fulfillment time, error rate, capacity utilization |
+  | Project delivery | On-time delivery rate, budget vs. actual, milestone completion |
+
+  Same structure as a sales dashboard: headline KPI(s) vs. target/SLA, a trend view, and a meaningful breakdown (by team, by category, by priority).
+
+  ## 📊 Example
+
+  A customer support performance dashboard shows average response time (2.3 hours) against a 4-hour SLA target as a headline KPI, a trend line of weekly response time, and a breakdown of ticket volume by category — letting the team lead spot both overall SLA health and which ticket category is driving the most volume.
+
+  ## ⚠️ Common mistakes
+
+  - **Copying a sales dashboard's specific metrics onto an unrelated team** instead of selecting metrics genuinely tied to that team's actual goals (see KPI Selection) — the *pattern* generalizes, not the specific metrics.
+  - **Omitting the target/SLA line entirely**, leaving a viewer unable to judge whether current performance is actually acceptable.
+
+  ## Related concepts
+
+  ```
+  Sales Dashboard
+    ↓
+  Performance Dashboard ← you are here
+  ```
+  This closes the Excel Dashboards chapter — the next chapter (Power Query) covers how to feed a live, automatically-refreshing data source into dashboards like these.
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you adapt the sales dashboard pattern for a customer support team?**
+  Short answer: Keep the same structure (a headline KPI vs. target, a trend view, a meaningful breakdown) but swap in support-specific metrics — like average response time vs. an SLA target, and ticket volume broken down by category — since the pattern generalizes even though the specific metrics don't.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Performance dashboard** → the sales-dashboard pattern (KPI vs. target + trend + breakdown), generalized to any team or SLA
+  Same design thinking, different metrics — support, operations, project delivery, and more.

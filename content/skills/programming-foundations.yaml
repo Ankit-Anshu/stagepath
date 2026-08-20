@@ -1,0 +1,20 @@
+title: Programming Foundations
+category: Backend Development
+what_is_it: The language, data structures, debugging, and problem-solving skills used to build server software.
+why_it_matters: Backend frameworks change; control flow, data modeling, and debugging remain.
+estimated_minutes: 4200
+objectives: [Write modular programs, Select basic data structures, Debug systematically]
+subtopics:
+  - title: Language fluency
+    description: Types, control flow, functions, modules, exceptions, and standard libraries.
+    outcomes: [Write idiomatic programs, Handle failures deliberately]
+  - title: Data structures and complexity
+    description: Lists, maps, sets, stacks, queues, trees, Big O, and tradeoffs.
+    outcomes: [Choose a suitable structure, Estimate common operation costs]
+  - title: Object and functional design
+    description: Encapsulation, composition, pure functions, immutability, and dependency boundaries.
+    outcomes: [Design cohesive modules, Reduce hidden state]
+  - title: Debugging and tooling
+    description: Logs, debuggers, stack traces, profilers, package management, and version control.
+    outcomes: [Reproduce and isolate a bug, Use version control safely]
+

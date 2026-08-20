@@ -1,0 +1,27 @@
+title: ETL Fundamentals
+what_is_it: >-
+  The extract-transform-load pattern for moving data from source systems into a place it can be
+  analyzed, and the tradeoffs of ETL vs ELT.
+why_it_matters: >-
+  Nothing downstream — dashboards, models, reports — works if the data pipeline feeding it is
+  unreliable. ETL is the foundation of the data engineer's job.
+prerequisites:
+  - sql-joins
+  - python-fundamentals
+objectives:
+  - Explain the difference between ETL and ELT
+  - Identify extract, transform, and load steps in an existing pipeline
+  - Design a simple pipeline for a given source and destination
+estimated_minutes: 180
+resources:
+  - r-aws-what-is-etl
+practice:
+  - id: ex-etl-1
+    title: Diagram a pipeline
+    description: >-
+      Given a source (an API) and a destination (a warehouse table), diagram the extract, transform,
+      and load steps and where each could fail.
+verify:
+  - Diagram correctly separates extract, transform, and load stages
+  - Identifies at least one realistic failure point
+  - Can justify the ETL vs ELT choice made

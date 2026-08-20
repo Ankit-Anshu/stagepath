@@ -1,0 +1,49 @@
+title: Customer Dashboard
+level: portfolio
+duration: 4-6 hours
+description: Build a one-tab interactive dashboard showing customer health — value, recency, and segment mix — for the account management team.
+problem_statement: >-
+  Account managers currently check customer status by scrolling a raw export. Build a single
+  dashboard tab that answers "who should I be worried about, and who's our most valuable customer
+  right now?" in seconds.
+scenario: You are the analyst building a self-serve dashboard the account team will open every Monday morning.
+dataset:
+  name: Customer summary export
+  description: One row per customer with signup date, region, segment, order count, total spend, and last order date.
+  source_url: /datasets/customer-analysis.csv
+  format: CSV
+  size: 14 customers
+  files: [customer-analysis.csv]
+skills:
+  - dashboard-spreadsheets
+  - slicers
+  - kpi-spreadsheets
+datasets:
+  - Customer summary dataset
+tasks:
+  - Convert the source data into a Table and build the pivot tables needed to summarize it
+  - Add KPI cards for total customers, total spend, and count of at-risk customers
+  - Build a chart breaking down spend by segment and a chart showing customer count by region
+  - Add a segment slicer connected to every chart and KPI
+requirements:
+  - The dashboard's core question is answerable within 10 seconds of opening it
+  - KPI cards include a clear definition of "at-risk" (e.g., no order in 90+ days)
+  - The segment slicer correctly filters every connected chart and KPI simultaneously
+milestones:
+  - title: Prepare the source
+    description: Convert the export to a Table and build the pivot table(s) needed for the dashboard's charts and KPIs.
+  - title: Build the dashboard
+    description: Assemble KPI cards, charts, and a slicer onto one dashboard tab with a clear visual hierarchy.
+  - title: Test it
+    description: Have someone unfamiliar with it try to answer the core question in under 10 seconds, and refine based on what's unclear.
+rubric:
+  - criterion: Metric definitions
+    definition: Every KPI (especially "at-risk") has a precise, stated definition, not an ambiguous label.
+  - criterion: Interactivity
+    definition: The slicer correctly and visibly updates every connected element on the dashboard.
+  - criterion: Layout and hierarchy
+    definition: The most important information is the most prominent; a first-time viewer can find it immediately.
+artifacts:
+  - Dashboard
+  - Screenshots
+  - README

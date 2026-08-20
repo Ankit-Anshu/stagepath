@@ -1,0 +1,210 @@
+title: Python Fundamentals
+what_is_it: 'Core Python: variables, data types, control flow, functions, and working with files — enough to write a script that transforms data.'
+why_it_matters: Python is the connective tissue of a modern data workflow — it is what you reach for when a spreadsheet or SQL query alone is not enough.
+prerequisites: []
+objectives:
+  - Write functions with parameters and return values
+  - Use lists, dicts, and loops to process data
+  - Read and write a CSV file
+  - Debug a script using error messages
+estimated_minutes: 600
+resources:
+  - r-python-docs-tutorial
+  - r-automate-boring-stuff
+  - r-kaggle-python
+practice:
+  - id: ex-python-fundamentals-1
+    title: Parse and summarize a CSV
+    description: Without pandas, write a script that reads a CSV of transactions and prints total amount per category.
+verify:
+  - Script runs without errors on the sample file
+  - Uses functions instead of one long block
+  - Correctly handles a malformed row instead of crashing
+category: Python
+subtopics:
+  - title: Variables & data types
+    description: Numbers, strings, booleans, lists, and dictionaries — the building blocks of every script.
+    outcomes:
+      - Store and manipulate data using lists and dicts
+  - title: Control flow
+    description: if/else branching and for/while loops for repeating and conditional logic.
+    outcomes:
+      - Write a loop that processes a list conditionally
+  - title: Functions
+    description: Defining functions with parameters, return values, and default arguments for reusable logic.
+    outcomes:
+      - Write a reusable function with parameters and a return value
+  - title: Files & errors
+    description: Reading and writing files, and handling exceptions gracefully with try/except.
+    outcomes:
+      - Read a CSV file and handle a missing-file error
+note: |
+  ## 🎯 What is it?
+
+  **Python Fundamentals** covers the core building blocks of the language — variables, data types, control flow (if/else, loops), functions, and reading/writing files — enough to write a script that transforms data on its own, without a spreadsheet or SQL editor.
+
+  ## 💡 Why is it important?
+
+  Python is the connective tissue of a modern data workflow — it's what you reach for when a spreadsheet or a SQL query alone isn't enough: automating a repetitive cleaning task, pulling data from an API, or running a calculation too complex for a formula. Every later Python topic (pandas, NumPy, visualization) builds directly on these fundamentals.
+
+  ## Core concept
+
+  ### Variables & data types
+  Python's core types: `int`/`float` (numbers), `str` (text), `bool` (True/False), `list` (an ordered, changeable collection), and `dict` (key-value pairs — Python's version of a lookup table).
+
+  ### Control flow
+  `if`/`elif`/`else` branches based on a condition; `for` loops iterate over a collection; `while` loops repeat until a condition becomes false.
+
+  ### Functions
+  A reusable, named block of logic that takes inputs (parameters) and optionally returns a value — the way to avoid repeating the same code multiple times.
+
+  ### Files & errors
+  Reading and writing files with `open()`, and handling exceptions gracefully with `try`/`except` so one bad row or missing file doesn't crash an entire script.
+
+  ## Syntax
+
+  ```python
+  # Variables and types
+  name = "Ana"
+  orders = [120, 340, 210]
+  customer = {"name": "Ana", "region": "West"}
+
+  # Control flow
+  for order in orders:
+      if order > 200:
+          print(f"{order} is a large order")
+
+  # Function
+  def total_revenue(order_list):
+      return sum(order_list)
+
+  # Files & errors
+  try:
+      with open("orders.csv") as f:
+          data = f.read()
+  except FileNotFoundError:
+      print("File not found — check the path.")
+  ```
+
+  ## 📊 Example
+
+  **Input data** (`orders.csv`):
+  ```
+  category,amount
+  Widgets,120
+  Gadgets,340
+  Widgets,90
+  ```
+
+  **Code:**
+
+  ```python
+  import csv
+
+  totals = {}
+  with open("orders.csv") as f:
+      reader = csv.DictReader(f)
+      for row in reader:
+          category = row["category"]
+          amount = float(row["amount"])
+          totals[category] = totals.get(category, 0) + amount
+
+  print(totals)
+  ```
+
+  **Output:**
+  ```
+  {'Widgets': 210.0, 'Gadgets': 340.0}
+  ```
+
+  **Explanation:** The loop reads each row, and `totals.get(category, 0)` safely handles a category seen for the first time (defaulting to 0) before adding the new amount — a common, idiomatic pattern for accumulating totals without a KeyError.
+
+  ## Multiple examples
+
+  **Beginner:** A function that returns whether a number is even or odd.
+  **Intermediate:** A script that reads a list of customer dicts and returns only those in a specific region.
+  **Real-world:** A script that reads a raw CSV export, skips malformed rows (wrapped in try/except so one bad row doesn't crash the whole run), and writes a cleaned CSV — the exact shape of a lightweight, repeatable data-cleaning script.
+
+  ## ⚠️ Common mistakes
+
+  - **Writing one long block of code instead of functions.** This makes a script hard to test, reuse, or debug — breaking logic into small, named functions is a core habit to build early.
+  - **Letting one bad row crash the entire script.** Real files always have some malformed data — wrapping the risky part in try/except (and logging what was skipped) keeps the script robust.
+  - **Confusing a list and a dict**, or using the wrong one for the job — a list is for an ordered sequence, a dict is for fast lookup by key.
+  - **Not closing a file** (or not using `with`, which closes it automatically) — this can leave data unwritten or the file locked on some systems.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any repetitive cleaning task:** a script that runs the same cleaning steps on every new weekly export.
+  - **Sales analysis:** a script that reads a raw transactions file and computes category totals without needing pandas for a simple case.
+  - **Data quality:** a script that scans a file and reports every row that doesn't match an expected format.
+
+  ## Related concepts
+
+  ```
+  Python Fundamentals ← you are here
+    ↓
+  Jupyter Notebooks & Exploratory Workflow
+    ↓
+  NumPy
+    ↓
+  Pandas
+    ↓
+  Data Visualization with Python / Working with APIs / Regular Expressions
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a function that takes a list of numbers and returns their sum.
+
+  ### Medium
+  2. Write a script that reads a list of dicts (each with a "category" and "amount" key) and returns a dict of total amount per category.
+
+  ### Interview/Advanced
+  3. Why is wrapping file-reading logic in try/except considered a best practice rather than just letting the script fail on a bad file?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `def total(numbers): return sum(numbers)`
+  2. `def totals_by_category(rows): result = {}; [result.update({r["category"]: result.get(r["category"], 0) + r["amount"]}) for r in rows]; return result` (a straightforward loop-based version is equally correct and often clearer).
+  3. A script that crashes outright on a missing/malformed file gives no useful information and stops any downstream processing entirely; catching the specific expected exception (e.g., FileNotFoundError) lets the script fail gracefully with a clear message, or skip/log the problem and continue, which is far more robust for a real, repeatable data pipeline.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What's the difference between a list and a dictionary in Python?**
+  Short answer: A list is an ordered collection accessed by position (index); a dictionary is a collection of key-value pairs accessed by key, optimized for fast lookup.
+
+  ### Conceptual questions
+  **Q: Why use a function instead of writing the same logic inline multiple times?**
+  Short answer: Functions make logic reusable, testable in isolation, and easier to read and maintain — changing the logic in one place updates every use, instead of hunting down every duplicated copy.
+
+  ### Scenario-based questions
+  **Q: A script processing a 10,000-row CSV crashes on row 4,521 due to a malformed value. How would you make it more robust?**
+  Short answer: Wrap the row-processing logic in a try/except block that catches the specific expected error, logs or skips the bad row, and continues processing the rest of the file instead of stopping entirely.
+
+  ### Practical questions
+  **Q: Write a function that reads a CSV and returns the average of a numeric column, skipping any row where that value is missing or invalid.**
+  Short answer: Iterate rows, attempt to convert the value with a try/except (or a check before converting), skip invalid ones, and compute sum/count only over the valid values.
+
+  ## Interview traps / tricky points
+
+  - Mutable default arguments (e.g., `def f(items=[])`) are a classic Python gotcha — the same list object persists across calls unless a new one is created inside the function.
+  - Using `==` vs. `is` for comparison is commonly confused — `==` checks value equality, `is` checks object identity.
+
+  ## Best practices
+
+  - Break logic into small, well-named functions rather than one long script.
+  - Always handle the specific exceptions you expect (FileNotFoundError, ValueError), rather than a bare `except:` that hides real bugs.
+  - Use `with open(...)` so files are always closed properly, even if an error occurs.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **list** → ordered collection, indexed by position
+  **dict** → key-value pairs, indexed by key
+  **function** → reusable, named, testable logic block
+  **try/except** → handle expected errors gracefully instead of crashing

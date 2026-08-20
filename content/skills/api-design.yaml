@@ -1,0 +1,24 @@
+title: API Design
+category: Backend Development
+what_is_it: Designing stable, understandable interfaces between systems and clients.
+why_it_matters: An API becomes a product contract that is expensive to change once consumers depend on it.
+estimated_minutes: 2800
+prerequisites: [web-protocols]
+objectives: [Design resource-oriented APIs, Validate inputs, Document and evolve contracts]
+subtopics:
+  - title: Resource modeling
+    description: Resources, identifiers, relationships, representations, and URL design.
+    outcomes: [Model a domain as resources, Avoid action-heavy endpoints]
+  - title: Inputs and errors
+    description: Schemas, validation, consistent errors, localization, and safe error detail.
+    outcomes: [Create a validation contract, Design actionable error responses]
+  - title: Query capabilities
+    description: Filtering, sorting, searching, pagination, sparse fields, and limits.
+    outcomes: [Design predictable collections, Prevent unbounded queries]
+  - title: Authentication and authorization
+    description: Sessions, tokens, scopes, ownership, and server-side policy enforcement.
+    outcomes: [Separate identity from permission, Enforce object ownership]
+  - title: Documentation and versioning
+    description: OpenAPI, examples, compatibility, deprecation, and consumer communication.
+    outcomes: [Publish a usable API reference, Plan a safe change]
+

@@ -1,0 +1,70 @@
+title: Data Cleaning in Power Query
+category: Spreadsheets
+what_is_it: Applying the same cleaning principles from the Data Cleaning chapter — trimming, standardizing, handling errors — as repeatable Power Query steps instead of one-time worksheet formulas.
+why_it_matters: Doing cleaning in Power Query means it happens automatically on every refresh, instead of needing to be manually reapplied to every new batch of imported data.
+prerequisites:
+  - power-query-group-by
+objectives:
+  - Apply common cleaning operations (Trim, Clean, Replace Errors) as Power Query steps
+  - Explain the advantage of cleaning in Power Query over cleaning after loading
+estimated_minutes: 25
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-power-query-data-cleaning-1
+    title: Build a cleaning pipeline
+    description: Given a messy imported column, apply Trim, Clean, and Replace Values as Power Query steps to produce consistently clean data on every refresh.
+verify:
+  - Can apply Trim/Clean/Replace Errors as Power Query steps
+  - Can explain why this is preferable to cleaning after loading
+note: |
+  ## 🎯 What is it?
+
+  **Data cleaning** in Power Query applies the same principles from the Data Cleaning chapter — trimming whitespace, standardizing values, handling errors — as built-in, repeatable transformation steps (Format → Trim/Clean, Replace Values, Replace Errors) instead of one-time worksheet formulas.
+
+  ## 💡 Why is it important?
+
+  - Doing cleaning in Power Query means it happens automatically on every refresh — a new batch of messy imported data gets the exact same cleaning applied without anyone needing to remember to redo it.
+  - It moves cleaning "upstream," before the data ever reaches a formula or pivot table, so everything downstream can assume clean data.
+
+  ## Core concept
+
+  | Power Query tool | Worksheet equivalent |
+  |---|---|
+  | Format → Trim | TRIM function |
+  | Format → Clean | CLEAN function |
+  | Replace Values | Find & Replace |
+  | Replace Errors | IFERROR |
+  | Remove Duplicates (right-click column) | Remove Duplicates |
+
+  ## 📊 Example
+
+  A recurring weekly CSV import always has trailing whitespace and inconsistent capitalization in its "Region" column. Applying Trim and a standardizing Replace Values step once, in Power Query, means every future week's import automatically gets cleaned the same way — instead of manually re-cleaning a new batch of messy data every single week.
+
+  ## ⚠️ Common mistakes
+
+  - **Cleaning data manually in the worksheet after loading**, requiring the exact same manual cleanup to be repeated every time new data is imported.
+  - **Applying cleaning steps in the wrong order** — e.g., standardizing values before trimming whitespace can miss matches that trimming first would have caught.
+
+  ## Related concepts
+
+  ```
+  Group By
+    ↓
+  Data Cleaning in Power Query ← you are here
+    ↓
+  Data Transformation Workflow
+  ```
+  Directly applies the Data Cleaning chapter's principles, automated.
+
+  ## 🎤 Interview preparation
+
+  **Q: Why clean data inside Power Query rather than with worksheet formulas like TRIM after loading?**
+  Short answer: A Power Query cleaning step is permanently recorded and automatically reapplies on every refresh — a worksheet formula only cleans the data that's already there, and would need to be manually reapplied (or dragged down) every time new, equally messy data is imported.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data cleaning in Power Query** → Trim/Clean/Replace Values/Replace Errors as repeatable steps
+  Cleans "upstream," once, so it automatically applies to every future refresh.

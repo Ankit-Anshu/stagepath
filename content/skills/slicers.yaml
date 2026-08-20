@@ -1,0 +1,97 @@
+title: Slicers
+category: Spreadsheets
+what_is_it: Clickable, visual filter buttons connected to a pivot table (or multiple pivot tables/charts at once), letting a viewer filter interactively without touching the underlying data or formulas.
+why_it_matters: It's what turns a static pivot table report into a self-service dashboard a non-technical stakeholder can explore on their own.
+prerequisites:
+  - pivot-charts
+objectives:
+  - Add a slicer connected to a pivot table
+  - Connect one slicer to multiple pivot tables or charts at once
+estimated_minutes: 25
+resources:
+  - r-ms-pivot-tables
+practice:
+  - id: ex-slicers-1
+    title: Add an interactive region filter
+    description: Add a slicer for the Region field, connected to both a pivot table and its Pivot Chart, so one click filters both.
+verify:
+  - Slicer correctly filters the connected pivot table(s)
+  - One slicer correctly controls multiple visuals at once, if connected to more than one
+note: |
+  ## 🎯 What is it?
+
+  **Slicers** are clickable, visual filter buttons connected to a pivot table (or multiple pivot tables and Pivot Charts at once), letting a viewer filter interactively — with a click, not a dropdown menu — without touching the underlying data or any formula.
+
+  ## 💡 Why is it important?
+
+  It's what turns a static pivot table report into a **self-service dashboard** a non-technical stakeholder can explore on their own — clicking "West" to see just West-region numbers, without needing to know how to use a pivot table's field list or filter dropdown.
+
+  ## Core concept
+
+  A slicer is inserted for a specific field (e.g., Region) and, critically, can be **connected to more than one pivot table or Pivot Chart at once** — clicking one slicer button then filters every connected visual simultaneously, keeping a whole dashboard tab in sync with a single click.
+
+  | Feature | Benefit |
+  |---|---|
+  | Visual, clickable buttons | Far more approachable for a non-technical viewer than a dropdown filter |
+  | Multi-report connection | One slicer can filter several pivot tables/charts together |
+  | Clear visual state | Shows at a glance which value(s) are currently selected |
+
+  ## 📊 Example
+
+  A dashboard tab has a pivot table and a Pivot Chart, both summarizing revenue by month. A **Region slicer** is connected to both.
+
+  **Interaction:** Clicking "West" on the slicer instantly filters both the pivot table and the chart to West-region data only — one click, two visuals updated together, with no need to open a menu or type anything.
+
+  ## Multiple examples
+
+  **Beginner:** A single slicer connected to one pivot table.
+  **Intermediate:** One slicer connected to two different pivot tables summarizing different metrics, keeping both in sync.
+  **Real-world:** A sales dashboard with Region and Product-Category slicers, both connected to every pivot table and chart on the tab — a sales manager can self-serve any combination of region and category without ever touching a formula or asking an analyst for a custom cut of the data.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting to connect a slicer to every relevant pivot table/chart on a dashboard**, leaving some visuals unfiltered while others respond — a confusing, inconsistent experience for the viewer.
+  - **Adding too many slicers**, cluttering a dashboard and overwhelming a viewer with filter options instead of a clean, focused view (see [Dashboard Design](/skills/dashboard-design) principles).
+
+  ## Real-world Data Analyst use cases
+
+  - **Self-service dashboards:** letting a stakeholder explore data themselves without repeated ad-hoc requests to an analyst.
+
+  ## Related concepts
+
+  ```
+  Pivot Charts → Slicers ← you are here → Grouping
+  ```
+  This is the spreadsheet-scale version of a full BI tool's filters, covered later in [Dashboards & BI Tools](/skills/dashboard-design).
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the main advantage of a slicer over a standard pivot table filter dropdown?
+
+  ### Interview/Advanced
+  2. Why would you connect one slicer to multiple pivot tables instead of adding a separate slicer to each?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. It's a visual, clickable button interface that's more approachable and intuitive for a non-technical viewer, compared to using a dropdown filter menu inside the pivot table itself.
+  2. Connecting one slicer to multiple pivot tables keeps every related visual on a dashboard in sync with a single click — separate, unconnected slicers for each visual would require a viewer to filter each one individually, and risk them ending up showing inconsistent, mismatched views of the data.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you let a stakeholder filter an entire dashboard tab (multiple charts and pivot tables) with a single click?**
+  Short answer: Add a slicer and connect it to every relevant pivot table and Pivot Chart on the tab — one click on the slicer then filters all of them together, in sync.
+
+  ## Best practices
+
+  - Connect a slicer to every relevant visual on a dashboard, so filtering behaves consistently across the whole tab.
+  - Limit the number of slicers on one dashboard to avoid overwhelming the viewer.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Slicer** → clickable, visual filter, can connect to multiple pivot tables/charts at once
+  **Use case:** turns a static report into a self-service dashboard

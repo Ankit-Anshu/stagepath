@@ -1,0 +1,47 @@
+title: Customer Analysis
+level: mini
+duration: 2-3 hours
+description: Segment a customer list by value and recency to find who the business should prioritize retaining.
+problem_statement: >-
+  Leadership wants to know which customers are most valuable and which ones look at risk of
+  churning, using nothing but a customer export — no CRM system involved yet.
+scenario: You're the analyst asked to turn a raw customer export into a segmentation the account team can act on this week.
+dataset:
+  name: Customer summary export
+  description: One row per customer with signup date, region, segment, order count, total spend, and last order date.
+  source_url: /datasets/customer-analysis.csv
+  format: CSV
+  size: 14 customers
+  files: [customer-analysis.csv]
+skills:
+  - pivot-charts
+  - conditional-formatting-spreadsheets
+  - customer-segmentation
+datasets:
+  - Customer summary dataset
+tasks:
+  - Calculate each customer's days since last order
+  - Build a pivot table of total spend and order count by segment and region
+  - Flag customers with no order in the last 90 days using conditional formatting
+  - Identify the top 20% of customers by total spend
+requirements:
+  - Days-since-last-order is calculated with a formula, not typed in manually
+  - At-risk customers are visually flagged, not just listed in a separate column
+  - The pivot table breaks total spend down by both segment and region
+milestones:
+  - title: Prepare the data
+    description: Convert the export to a Table, calculate days since last order, and confirm data types are correct.
+  - title: Segment and flag
+    description: Build the pivot table summary and apply conditional formatting to flag at-risk customers.
+  - title: Summarize the finding
+    description: Write a 3-sentence summary naming the highest-value segment and the size of the at-risk group.
+rubric:
+  - criterion: Calculation correctness
+    definition: Days-since-last-order and spend totals are calculated correctly and update if the source data changes.
+  - criterion: Segmentation clarity
+    definition: The pivot table and formatting make it immediately clear who is high-value and who is at risk.
+  - criterion: Actionable summary
+    definition: The written summary names a specific, usable recommendation for the account team.
+artifacts:
+  - Spreadsheet
+  - README

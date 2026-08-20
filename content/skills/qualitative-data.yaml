@@ -1,0 +1,66 @@
+title: Qualitative Data
+category: Foundations
+what_is_it: Descriptive, non-numeric data that captures qualities or characteristics — categories, labels, opinions — rather than measurable quantities.
+why_it_matters: Choosing the right summary (a count or a percentage, not an average) depends on recognizing whether a field is qualitative or quantitative — get it wrong and the summary is meaningless.
+prerequisites:
+  - unstructured-data
+objectives:
+  - Define qualitative data and give two examples
+  - Explain why you can't average qualitative data
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-qualitative-data-1
+    title: Classify a dataset's columns
+    description: Take any dataset (even a spreadsheet you use for work) and label each column as qualitative or quantitative.
+verify:
+  - Can define qualitative data
+  - Can name two qualitative columns from a real dataset
+note: |
+  ## 🎯 What is it?
+
+  **Qualitative data** describes a quality or characteristic rather than a measurable amount — it's non-numeric, even when it's stored as a code. Country, product category, customer segment, and survey comments are all qualitative.
+
+  ## 💡 Why is it important?
+
+  - It determines *how* you're allowed to summarize a column: qualitative data is counted or grouped, never averaged.
+  - Misclassifying a field (e.g., treating a "customer ID" as a number to average) is one of the most common beginner mistakes in exploratory analysis.
+  - Most real business dimensions — region, channel, product line — are qualitative, and slicing metrics *by* them is most of an analyst's job.
+
+  ## Core concept
+
+  | | Qualitative | Quantitative |
+  |---|---|---|
+  | Describes | Categories, labels, qualities | Measurable amounts |
+  | Example | Country, product category | Revenue, order count |
+  | Valid summary | Count, mode, percentage | Sum, average, median |
+
+  ## 📊 Example
+
+  A `country` column ("US", "UK", "IN") is qualitative — you can count how many customers are in each country, but "averaging" the country column is meaningless. A `revenue` column is quantitative — you can sum or average it.
+
+  ## ⚠️ Common mistakes
+
+  - **Averaging an ID or code column** just because it's stored as a number (e.g., a ZIP code or customer ID) — these are qualitative labels, not quantities.
+  - **Forgetting qualitative data can still be ordered** — see Ordinal Data for qualitative categories that do have a meaningful rank (like "low/medium/high").
+
+  ## Related concepts
+
+  ```
+  Qualitative Data ← you are here      Quantitative Data
+         ↓                                    ↓
+    Nominal / Ordinal              Discrete / Continuous
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why can't you calculate the "average" of a product category column?**
+  Short answer: It's qualitative — the values are category labels, not quantities. The valid summary is a count or percentage per category, not an average.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Qualitative data** → describes a quality/category, not a quantity — summarize with counts, not averages
+  Examples: country, product category, customer segment.

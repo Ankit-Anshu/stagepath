@@ -1,0 +1,20 @@
+title: How the Web Works
+category: Frontend Development
+what_is_it: The browser, network, and document model behind every website.
+why_it_matters: Framework knowledge is fragile without understanding requests, responses, URLs, rendering, and browser tools.
+estimated_minutes: 1200
+objectives: [Explain a page request end to end, Debug requests with browser tools, Choose appropriate browser storage]
+subtopics:
+  - title: Internet and DNS
+    description: IP addresses, domains, DNS resolution, clients, and servers.
+    outcomes: [Trace a domain lookup, Distinguish the internet from the web]
+  - title: HTTP fundamentals
+    description: Methods, status codes, headers, caching, cookies, and HTTPS.
+    outcomes: [Read a network request, Explain common status codes]
+  - title: Browser rendering
+    description: Parsing HTML and CSS, layout, paint, compositing, and the critical rendering path.
+    outcomes: [Explain how source becomes pixels, Identify render-blocking work]
+  - title: Browser developer tools
+    description: Elements, console, network, storage, performance, and accessibility panels.
+    outcomes: [Inspect and debug a page, Reproduce a network problem]
+

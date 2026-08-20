@@ -1,0 +1,73 @@
+title: Tables
+category: SQL
+what_is_it: The core structure a relational database stores data in — a grid of rows and columns, similar to a spreadsheet, where every row follows the same set of columns.
+why_it_matters: Every SQL query reads from or writes to one or more tables — understanding what a table actually is is the ground floor for everything else in SQL.
+prerequisites:
+  - what-is-rdbms
+objectives:
+  - Define a database table
+  - Explain the relationship between a table, a row, and a column
+estimated_minutes: 15
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-database-tables-1
+    title: Design a table
+    description: Sketch out the columns you'd expect in a products table for an online store.
+verify:
+  - Can define a table
+  - Can name the columns a simple products table might have
+note: |
+  ## 🎯 What is it?
+
+  A **table** is the core structure a relational database stores data in — a grid of **rows** and **columns**, much like a spreadsheet, where every row shares the same set of columns. A `customers` table might have columns `id`, `name`, `email`, and `signup_date`, with one row per customer.
+
+  ## 💡 Why is it important?
+
+  - Every SQL query — `SELECT`, `WHERE`, `JOIN` — operates on tables. It's the foundational unit everything else in SQL builds on.
+  - A well-designed table (with the right columns and a clear grain — see Understand the Data) is what makes later querying straightforward instead of confusing.
+
+  ## Core concept
+
+  ```
+  customers
+  +----+--------+------------------+-------------+
+  | id | name   | email            | signup_date |
+  +----+--------+------------------+-------------+
+  | 1  | Amir   | amir@email.com   | 2024-01-15  |
+  | 2  | Priya  | priya@email.com  | 2024-02-03  |
+  +----+--------+------------------+-------------+
+  ```
+
+  Each **row** = one customer. Each **column** = one attribute, shared by every row.
+
+  ## 📊 Example
+
+  A database for an online store typically has separate tables for `customers`, `products`, and `orders` — each holding a different kind of "thing," linked together (see Relationships) rather than crammed into one giant table.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming a table can only ever look like a spreadsheet tab you manually built.** Database tables are usually designed deliberately, with specific data types and constraints enforced on each column (see Constraints).
+  - **Not checking what one row in an unfamiliar table actually represents** before querying it — see the earlier Understand the Data topic on checking a table's "grain."
+
+  ## Related concepts
+
+  ```
+  RDBMS
+    ↓
+  Tables ← you are here
+    ↓
+  Rows → Columns → Primary Key → Foreign Key
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the difference between a table and a spreadsheet?**
+  Short answer: They look similar, but a database table enforces data types and rules (constraints) on every row automatically, supports many concurrent users safely, and is designed to relate to other tables via keys — a spreadsheet does none of this by default.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Table** → the core structure holding data: rows (records) × columns (attributes)
+  Every SQL query ultimately reads from or writes to tables.

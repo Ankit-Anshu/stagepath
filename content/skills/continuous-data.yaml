@@ -1,0 +1,66 @@
+title: Continuous Data
+category: Foundations
+what_is_it: Numerical data that can take any value within a range, including fractions and decimals — measured rather than counted.
+why_it_matters: Continuous data is what histograms, most statistical tests, and regression models are built for — recognizing it tells you which analysis techniques are valid.
+prerequisites:
+  - discrete-data
+objectives:
+  - Define continuous data and give two examples
+  - Explain why continuous data suits histograms and regression
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-continuous-data-1
+    title: Find the continuous fields
+    description: In a dataset you use, identify which numeric fields are continuous (revenue, time, weight) versus discrete (counts).
+verify:
+  - Can define continuous data
+  - Can name two continuous fields from a real dataset
+note: |
+  ## 🎯 What is it?
+
+  **Continuous data** is numerical data that can take any value within a range, including fractions and decimals — it's measured, not counted. Revenue, temperature, time-on-page, and weight are all continuous: there's always a meaningful value between any two points (e.g., $19.99 and $20.00).
+
+  ## 💡 Why is it important?
+
+  - Most statistical techniques an analyst uses day to day — averages, standard deviation, regression, t-tests — are designed for continuous data.
+  - Histograms with adjustable bin widths are the standard way to visualize a continuous variable's distribution, unlike discrete data's natural integer bins.
+
+  ## Core concept
+
+  | | Discrete | Continuous |
+  |---|---|---|
+  | Example | Order count | Order value ($), time (seconds) |
+  | Values between two points | Not meaningful | Always meaningful |
+  | Typical chart | Bar chart, count histogram | Histogram, box plot, line chart |
+
+  ## 📊 Example
+
+  `order_value` ($4.99, $19.50, $102.37...) is continuous — there's a meaningful value between any two amounts. A histogram of order values with $10 bins reveals the distribution's shape (skewed, normal, bimodal) in a way a simple count never could.
+
+  ## ⚠️ Common mistakes
+
+  - **Binning continuous data too coarsely or too finely** — bins that are too wide hide real structure; bins that are too narrow turn the histogram into noise.
+  - **Applying discrete-only techniques (like a straightforward mode) as the primary summary** for continuous data — mean, median, and standard deviation are usually more informative.
+
+  ## Related concepts
+
+  ```
+  Numerical Data
+         ↓
+  Discrete Data      Continuous Data ← you are here
+  (order count)      (order value, time, weight)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is a histogram, rather than a simple bar chart, the standard way to visualize order values?**
+  Short answer: Order value is continuous — a histogram groups the continuous range into bins to reveal the distribution's shape, which a bar chart (built for discrete categories) can't do meaningfully.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Continuous data** → measured, can take any value in a range (including decimals) — revenue, time, weight
+  Pairs with histograms, averages, and regression.

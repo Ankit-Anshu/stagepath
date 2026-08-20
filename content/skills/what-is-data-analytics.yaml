@@ -1,0 +1,177 @@
+title: What is Data Analytics
+category: Foundations
+what_is_it: An overview of what data analytics actually is, what a data analyst does day to day, and how the role differs from adjacent roles like data science and data engineering.
+why_it_matters: Starting without a clear picture of the job itself leads to learning skills in the wrong order — or learning skills for a different role entirely, like data science, by mistake.
+prerequisites: []
+objectives:
+  - Define data analytics in plain language
+  - Describe a data analyst's typical day-to-day work
+  - Distinguish a data analyst from a data scientist and data engineer
+  - Identify industries and teams that employ data analysts
+subtopics:
+  - title: What data analytics is
+    description: Turning raw data into decisions — the short definition, and why it matters to a business.
+    outcomes:
+      - Explain data analytics in one sentence to a non-technical person
+  - title: The data analyst role
+    description: 'What a data analyst actually does day to day: querying, cleaning, visualizing, and reporting.'
+    outcomes:
+      - List the core day-to-day responsibilities of a data analyst
+  - title: Data analyst vs. data scientist vs. data engineer
+    description: How these three commonly-confused roles differ in scope and skillset.
+    outcomes:
+      - Explain the difference between these three roles to a recruiter
+  - title: Where data analysts work
+    description: The industries, team types, and company sizes that typically hire data analysts.
+    outcomes:
+      - Name three industries or team types that hire data analysts
+estimated_minutes: 90
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-what-is-data-analytics-1
+    title: Write your own definition
+    description: Write a 3-sentence explanation of what a data analyst does that a non-technical friend or family member would understand.
+verify:
+  - Definition is in plain language, no jargon
+  - Can name at least one clear difference from a data scientist role
+  - Can name where data analysts typically work
+note: |
+  ## 🎯 What is it?
+
+  **Data analytics** is the practice of examining raw data to find useful patterns, answer questions, and support decisions. A **Data Analyst** is the person who does this day to day: pulling data, cleaning it, analyzing it, and explaining what it means to people who will act on it.
+
+  Think of a business like a car dashboard full of gauges. Data is the raw fuel and sensor readings; the data analyst is the person who reads those gauges, notices something is off, and tells the driver what to do about it — rather than just handing over a spreadsheet of numbers.
+
+  ## 💡 Why is it important?
+
+  - It's the role you're training for — getting a clear, accurate picture of what it involves prevents months spent learning the wrong skills.
+  - Companies in every industry — retail, finance, healthcare, tech, logistics — run on decisions informed by data analysts.
+  - It sits at the intersection of business and technical work: understanding *what to ask* is just as important as knowing *how to query*.
+  - It connects directly to hiring: interviewers frequently start with "tell me what a data analyst does," and a vague answer is an easy way to lose credibility early.
+
+  ## Core concept
+
+  ### What a data analyst actually does, day to day
+
+  | Activity | Example |
+  |---|---|
+  | Pull data | Query a database or export a report |
+  | Clean data | Fix missing values, duplicates, inconsistent formats |
+  | Analyze | Summarize, segment, compare, find trends |
+  | Visualize | Build charts and dashboards |
+  | Communicate | Present findings and a recommendation to stakeholders |
+
+  ### Data Analyst vs. Data Scientist vs. Data Engineer
+
+  | Role | Core focus | Typical tools |
+  |---|---|---|
+  | **Data Analyst** | Answering business questions with existing data; reporting and dashboards | SQL, Excel, BI tools (Power BI/Tableau), light Python |
+  | **Data Scientist** | Building predictive models and running experiments | Python/R, machine learning, statistics |
+  | **Data Engineer** | Building and maintaining the pipelines that move and store data | SQL, Python, cloud data warehouses, orchestration tools |
+
+  A simple way to remember it: the **engineer** builds the pipes, the **analyst** reads what flows through them and explains it, the **scientist** builds models to predict what will flow through them next.
+
+  ### Where data analysts work
+
+  Nearly every mid-to-large company has analysts — e-commerce, SaaS, banking, healthcare, media, logistics, and government. Common team homes: Business Intelligence, Marketing Analytics, Product Analytics, Finance/FP&A, and Operations.
+
+  ## 📊 Example
+
+  A retail company notices weekly sales dipped 12% last month. A data analyst would:
+  1. Confirm the number is real (pull the sales query, check for a reporting bug).
+  2. Segment it — by region, product category, channel — to find *where* the dip is concentrated.
+  3. Look for a plausible cause (a stockout, a pricing change, a competitor promotion).
+  4. Present a one-page summary: what happened, likely cause, and a recommended next step.
+
+  That loop — confirm, segment, explain, recommend — is the shape of most real analyst work, regardless of industry.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** explaining a revenue dip or spike to leadership.
+  - **Marketing analysis:** reporting which campaigns are actually driving signups.
+  - **Product analysis:** finding where users drop off in an onboarding flow.
+  - **Operations analysis:** identifying which warehouse is causing shipping delays.
+
+  ## Related concepts
+
+  ```
+  What is Data Analytics
+    ↓
+  Types of Data Analytics (descriptive/diagnostic/predictive/prescriptive)
+    ↓
+  The Data Analytics Lifecycle
+    ↓
+  Business Understanding
+    ↓
+  KPIs & Metrics
+  ```
+
+  This topic is the entry point — every other Foundations topic builds on having a clear picture of the role itself.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing the analyst role with the data scientist role** and spending months learning machine learning before ever writing a real SQL query or building a dashboard.
+  - **Assuming the job is mostly about tools.** In reality, a large part of the job is understanding the business question well enough to know what to pull and why.
+  - **Underestimating the communication side.** An analysis that's correct but poorly explained often has zero business impact.
+
+  ## Practice questions
+
+  ### Easy
+  1. In one sentence, explain what a data analyst does to someone with no technical background.
+  2. Name two industries that employ data analysts.
+
+  ### Medium
+  3. A friend says "data analyst, data scientist, same thing basically." Give one concrete difference that would correct them.
+
+  ### Interview/Advanced
+  4. A hiring manager asks: "Why did you pick data analyst over data scientist?" Draft a two-sentence answer.
+
+  <details>
+  <summary><strong>Answer / Solution</strong></summary>
+
+  1. Example: "A data analyst looks at a company's data to figure out what's happening and why, then explains it to the people making decisions."
+  2. Example: retail/e-commerce, healthcare, finance, logistics, media — any two.
+  3. Example: a data scientist typically builds predictive models and runs experiments; a data analyst typically answers existing business questions with reporting, dashboards, and SQL — with far less model-building.
+  4. Example: "I'm energized by translating data into a decision a business can act on right away, rather than spending most of my time building and tuning predictive models — the analyst role's mix of business context and hands-on querying fits how I like to work."
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What does a data analyst do?**
+  Short answer: Pulls, cleans, analyzes, and visualizes data to answer business questions, then communicates findings and recommendations to stakeholders.
+
+  ### Conceptual questions
+  **Q: How is a data analyst different from a data engineer?**
+  Short answer: A data engineer builds and maintains the infrastructure and pipelines that make data available and reliable; a data analyst consumes that data to answer specific business questions.
+
+  ### Scenario-based questions
+  **Q: A stakeholder emails "can you check on our numbers?" — what's your first move?**
+  Short answer: Ask clarifying questions before touching any data — which numbers, over what time period, and what decision this will inform — since "the numbers" is too vague to act on.
+
+  ### Practical questions
+  **Q: Walk through, at a high level, how you'd investigate a reported drop in weekly signups.**
+  Short answer: Confirm the drop is real, segment by channel/region/device to isolate where it's concentrated, check for an obvious cause (outage, pricing change, seasonality), then summarize findings with a recommendation.
+
+  ## Interview traps / tricky points
+
+  - Interviewers sometimes probe whether you actually understand the *boundary* between analyst/scientist/engineer roles — vague or interchangeable answers signal you haven't worked in or researched the field closely.
+  - "Tell me about a time you used data to make a decision" is a very common opener — have a concrete, specific example ready, not a general statement about "loving data."
+
+  ## Best practices
+
+  - Always confirm you understand the actual business question before writing a single query.
+  - Default to the simplest analysis that answers the question — don't reach for a complex method when a straightforward summary will do.
+  - Practice explaining your findings to a non-technical audience; it's a distinct skill from the analysis itself.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Data analyst** → answers business questions using existing data (query, clean, analyze, visualize, communicate)
+  **Data scientist** → builds predictive models and runs experiments
+  **Data engineer** → builds and maintains the data pipelines/infrastructure
+  **Core loop** → confirm → segment → explain → recommend
+  Remember: the job is at least as much about the business question as it is about the tool.

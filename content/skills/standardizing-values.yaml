@@ -1,0 +1,67 @@
+title: Standardizing Values
+category: Spreadsheets
+what_is_it: Making inconsistent entries of the same real-world value consistent — like "NY," "N.Y.," and "New York" all becoming one standard form.
+why_it_matters: Inconsistent values silently break GROUP BY-style summaries and lookups — a pivot table sees "NY" and "New York" as two completely different categories.
+prerequisites:
+  - error-handling-spreadsheets
+objectives:
+  - Identify inconsistent entries representing the same real-world value
+  - Standardize a column using Find & Replace or a mapping formula
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-standardizing-values-1
+    title: Standardize a category column
+    description: Given a column with "NY," "N.Y.," and "New York" all present, standardize every entry to one consistent value.
+verify:
+  - Can identify inconsistent entries representing the same value
+  - Can standardize a column to one consistent form
+note: |
+  ## 🎯 What is it?
+
+  **Standardizing values** means making inconsistent entries that represent the same real-world thing consistent — "NY," "N.Y.," and "New York" should usually all become one agreed-upon value before any grouping, counting, or lookup is done on that column.
+
+  ## 💡 Why is it important?
+
+  - A pivot table or `GROUP BY`-style summary treats "NY" and "New York" as two entirely different categories, silently splitting what should be one group's total into two smaller, both-wrong totals.
+  - It's a prerequisite for reliably detecting business duplicates (see Duplicate Data) and for any lookup that depends on exact-match category names.
+
+  ## Core concept
+
+  | Approach | When to use |
+  |---|---|
+  | Find & Replace | A handful of known inconsistent variants |
+  | A mapping table + VLOOKUP | Many known variants, reused across files |
+  | TRIM + UPPER/PROPER | Whitespace and casing inconsistencies |
+
+  ## 📊 Example
+
+  A "State" column contains "NY," "New York," and "ny" — all meant to represent the same state. Standardizing (via Find & Replace or a lookup-based mapping table) to one consistent value ("NY") before building a pivot table ensures New York's total is calculated correctly as one group, not split across three near-identical labels.
+
+  ## ⚠️ Common mistakes
+
+  - **Standardizing only the most obvious variants** and missing subtler ones (extra whitespace, inconsistent capitalization) — always combine with TRIM/UPPER/PROPER as a first pass.
+  - **Standardizing to a value that loses meaningful distinction** — e.g., merging two genuinely different categories that happen to look similar.
+
+  ## Related concepts
+
+  ```
+  Error Handling
+    ↓
+  Standardizing Values ← you are here
+    ↓
+  Cleaning Text
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A pivot table shows "NY" and "New York" as two separate rows with smaller totals, when they should be one. What's the fix?**
+  Short answer: Standardize the source column's values to one consistent form (via Find & Replace or a mapping lookup) before building the pivot table — the pivot table only groups by exact text match, so inconsistent source values produce split, incorrect groups.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Standardizing values** → make inconsistent entries of the same real-world thing consistent
+  Required before any grouping, counting, or lookup can trust a text column.

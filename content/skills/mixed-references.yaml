@@ -1,0 +1,67 @@
+title: Mixed References
+category: Spreadsheets
+what_is_it: A cell reference that locks only its row or only its column ($B2 or B$2), letting a formula be copied correctly in both directions at once.
+why_it_matters: It's the technique that lets one formula be copied across an entire grid (both down and across) instead of being rewritten by hand for every row and column combination.
+prerequisites:
+  - absolute-references
+objectives:
+  - Define a mixed reference and write one using $
+  - Choose the right kind of mixed reference for a formula that needs to be copied in two directions
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-mixed-references-1
+    title: Build a multiplication grid
+    description: Build a small multiplication table using one formula with mixed references, copied across both rows and columns.
+verify:
+  - Can define a mixed reference
+  - Can choose between $B2 and B$2 correctly for a given scenario
+note: |
+  ## 🎯 What is it?
+
+  A **mixed reference** locks only the row *or* only the column, using a single `$`: `$B2` locks the column (B stays fixed, the row shifts), while `B$2` locks the row (row 2 stays fixed, the column shifts). It sits between a fully relative reference (`B2`, nothing locked) and a fully absolute one (`$B$2`, both locked).
+
+  ## 💡 Why is it important?
+
+  - It's what lets a single formula be copied correctly in *two* directions at once — both down a column and across a row — without being rewritten by hand for every cell.
+  - It shows up constantly in grid-style calculations: multiplication tables, lookup matrices, and any "row header × column header" style layout.
+
+  ## Core concept
+
+  | Reference | Locks | Behavior when copied |
+  |---|---|---|
+  | `B2` | Nothing | Both row and column shift |
+  | `$B2` | Column | Column stays fixed, row shifts |
+  | `B$2` | Row | Row stays fixed, column shifts |
+  | `$B$2` | Both | Neither shifts |
+
+  ## 📊 Example
+
+  Building a multiplication grid where row headers are in column A and column headers are in row 1: the formula in B2 would be `=$A2*B$1` — `$A2` always looks at column A (but lets the row shift as you copy down), and `B$1` always looks at row 1 (but lets the column shift as you copy across). Copied across the whole grid, this single formula correctly multiplies every row header by every column header.
+
+  ## ⚠️ Common mistakes
+
+  - **Using a fully absolute reference when only one dimension needs to be locked**, which then prevents the formula from adjusting correctly in the direction it *should* shift.
+  - **Mixing up which symbol locks which part** — remember: the `$` locks whatever comes directly after it (before the column letter locks the column; before the row number locks the row).
+
+  ## Related concepts
+
+  ```
+  Absolute References
+    ↓
+  Mixed References ← you are here
+  ```
+  This closes the reference-locking sequence (Relative → Absolute → Mixed) — together, these three control exactly how a formula behaves when copied anywhere in a sheet.
+
+  ## 🎤 Interview preparation
+
+  **Q: When would you use a mixed reference instead of a fully relative or fully absolute one?**
+  Short answer: When a formula needs to be copied in both directions (down *and* across a grid) while keeping one dimension fixed — e.g., always referencing column A's value regardless of which column the formula is copied into, while still letting the row shift normally.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Mixed reference** → locks only the row or only the column, never both
+  `$B2` → column locked, row shifts · `B$2` → row locked, column shifts

@@ -1,0 +1,199 @@
+title: Correlation & Regression
+category: Statistics
+what_is_it: Measuring how two variables move together with a correlation coefficient, and fitting a simple linear regression to describe the relationship.
+why_it_matters: '"These two things are related" is one of the most common — and most often misused — claims in data analysis. This is how you back it up correctly, and where its limits are.'
+prerequisites:
+  - stats-distributions
+objectives:
+  - Interpret a correlation coefficient
+  - Explain why correlation does not imply causation
+  - Fit and interpret a simple linear regression
+  - Identify a likely confounding variable
+subtopics:
+  - title: Correlation coefficient
+    description: Reading the strength and direction of a relationship between two variables.
+    outcomes:
+      - Interpret a correlation coefficient's strength and direction
+  - title: Correlation vs. causation
+    description: Naming a plausible confounding variable instead of assuming a causal link.
+    outcomes:
+      - Explain a spurious correlation with a real example
+  - title: Simple linear regression
+    description: Fitting a line through data and interpreting its slope.
+    outcomes:
+      - Interpret the slope of a fitted regression line
+estimated_minutes: 180
+resources:
+  - r-khan-statistics
+  - r-seeing-theory
+practice:
+  - id: ex-stats-correlation-1
+    title: Investigate a correlation
+    description: Given two correlated variables, calculate the correlation coefficient and propose a plausible confounding variable.
+verify:
+  - Correlation coefficient is interpreted correctly
+  - A specific, plausible confounder is named, not just "correlation isn't causation"
+  - Regression slope is interpreted in context
+note: |
+  ## 🎯 What is it?
+
+  **Correlation** measures how strongly two variables move together, expressed as a single number between −1 and 1. **Regression** goes further, fitting a line (or curve) through the data to describe and quantify that relationship — e.g., "for every extra $1 spent on ads, revenue tends to rise by $4."
+
+  ## 💡 Why is it important?
+
+  - "These two things are related" is one of the most common — and most often misused — claims in data analysis. This topic is how you back that claim up correctly, and understand its limits.
+  - Correlation and regression are everywhere in analyst work: relating marketing spend to revenue, tenure to churn, price to demand.
+  - Misusing correlation as proof of causation is one of the most common and consequential mistakes a data analyst can make — and one of the most commonly tested interview topics.
+
+  ## Core concept
+
+  ### Correlation coefficient (r)
+  A number from **−1 to 1** describing the strength and direction of a linear relationship.
+
+  | r value | Meaning |
+  |---|---|
+  | +1 | Perfect positive relationship (both rise together) |
+  | 0 | No linear relationship |
+  | −1 | Perfect negative relationship (one rises as the other falls) |
+  | ±0.1 to ±0.3 | Weak |
+  | ±0.3 to ±0.7 | Moderate |
+  | ±0.7 to ±1.0 | Strong |
+
+  ### Correlation vs. causation
+  A strong correlation between two variables does **not** prove one causes the other. A third, hidden variable — a **confounder** — often explains both. Classic example: ice cream sales and drowning incidents are correlated, but summer heat (the confounder) drives both.
+
+  ### Simple linear regression
+  Fits the "best" straight line through the data, described by:
+
+  ```
+  y = m·x + b
+  ```
+
+  - **y** — the outcome being predicted (dependent variable)
+  - **x** — the predictor (independent variable)
+  - **m** — the **slope**: how much y changes per 1-unit increase in x
+  - **b** — the **intercept**: the predicted value of y when x = 0
+
+  ## Syntax / Formula / Structure
+
+  ```
+  Correlation (r) = how consistently two variables move together,
+                     relative to their own individual spread
+                     (ranges from −1 to +1)
+  ```
+
+  In practice, analysts compute r with a spreadsheet's `CORREL()` function or a statistical library — the exact hand-calculation formula is worth understanding conceptually (it compares how two variables vary together against how much each varies on its own) rather than calculating by hand routinely.
+
+  ## 📊 Example
+
+  Weekly ad spend and revenue for 6 weeks:
+
+  | Week | Ad spend ($) | Revenue ($) |
+  |---|---|---|
+  | 1 | 500 | 4,200 |
+  | 2 | 800 | 5,100 |
+  | 3 | 1,200 | 6,000 |
+  | 4 | 1,500 | 7,300 |
+  | 5 | 900 | 5,400 |
+  | 6 | 1,800 | 8,100 |
+
+  **Correlation:** r ≈ 0.98 (very strong positive relationship).
+  **Regression line (approx.):** Revenue ≈ 3.1 × Spend + 2,600
+
+  **Interpretation:** Each additional dollar in ad spend is associated with about $3.10 more revenue, on average, within this data's range — but this is an *association*, not proof that spend directly *causes* that exact amount of extra revenue (seasonality, promotions, or other factors could be confounders).
+
+  ## Multiple examples
+
+  **Beginner:** Correlate hours studied and exam score for a class — likely a moderate-to-strong positive r.
+  **Intermediate:** Correlate employee tenure and productivity score — check whether a confounder (like role seniority) might explain both.
+  **Real-world:** Fit a regression of price vs. demand to estimate price elasticity, but flag that other factors (season, competitor pricing) that changed at the same time as price could bias the estimated slope.
+
+  ## Types / Variations
+
+  | Type | What it measures |
+  |---|---|
+  | Positive correlation | Both variables move in the same direction |
+  | Negative correlation | Variables move in opposite directions |
+  | No/weak correlation | No consistent linear relationship (may still have a non-linear one!) |
+
+  ## ⚠️ Common mistakes
+
+  - **Treating any correlation as causation.** Always ask "what third factor could explain both?" before concluding one variable drives the other.
+  - **Assuming r = 0 means "no relationship" at all.** It only rules out a *linear* relationship — two variables can have a strong curved (non-linear) relationship with a correlation near 0.
+  - **Extrapolating a regression line far beyond the range of the actual data.** A relationship that holds between $500–$1,800 of ad spend may not hold at $50,000 of spend.
+  - **Ignoring an obvious confounder** (e.g., season, a concurrent promotion) when reporting a correlation as a business insight.
+
+  ## Real-world Data Analyst use cases
+
+  - **Marketing analysis:** correlating ad spend with revenue, while checking for seasonal confounders.
+  - **HR analysis:** correlating tenure with performance score, then checking whether role or team is a confounder.
+  - **Product analysis:** regressing feature usage against retention to estimate impact, with the same causation caveat.
+
+  ## Related concepts
+
+  ```
+  Descriptive Statistics → Probability → Distributions
+    ↓
+  Correlation & Regression ← you are here
+    ↓
+  Hypothesis Testing (formally testing whether a relationship is statistically significant)
+  ```
+  Also connects directly to [A/B Testing](/skills/ab-testing) — the proper way to establish causation, rather than relying on correlation alone.
+
+  ## Practice questions
+
+  ### Easy
+  1. What does a correlation coefficient of −0.85 indicate about the relationship between two variables?
+
+  ### Medium
+  2. A company finds that stores with more employees have higher sales (r = 0.7). Propose a plausible confounding variable.
+
+  ### Interview/Advanced
+  3. A regression shows revenue rises $3 for every $1 of ad spend, fit on data ranging from $500–$1,800/week. Why would it be risky to use this line to predict revenue at $50,000/week of spend?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A strong negative relationship — as one variable increases, the other tends to decrease substantially.
+  2. Store size (or location/foot traffic) — larger, higher-traffic stores likely need more employees *and* naturally generate more sales, without more employees directly causing more sales.
+  3. This is extrapolation far outside the range of observed data — the relationship might not stay linear at that scale (diminishing returns are common in real ad spend), so the prediction is unreliable and unsupported by the actual data.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What does a correlation coefficient measure?**
+  Short answer: The strength and direction of a linear relationship between two variables, on a scale from −1 to 1.
+
+  ### Conceptual questions
+  **Q: Why doesn't correlation imply causation?**
+  Short answer: A strong correlation can be explained by one variable causing the other, the reverse, or — very commonly — a third confounding variable that influences both, so correlation alone can't distinguish between these explanations.
+
+  ### Scenario-based questions
+  **Q: You find a strong correlation between customer support response time and churn. How would you investigate whether it's causal?**
+  Short answer: Look for plausible confounders (e.g., issue severity might drive both slower response times and higher churn), and ideally design a controlled experiment (A/B test) that manipulates response time directly to isolate its actual effect.
+
+  ### Practical questions
+  **Q: How would you interpret a regression slope of 2.5 in a model predicting revenue from website visits?**
+  Short answer: On average, each additional visit is associated with $2.50 more revenue, within the range of the data used to fit the model — with the caveat that this is an association from the fitted data, not a guaranteed causal effect.
+
+  ## Interview traps / tricky points
+
+  - "Correlation does not imply causation" is often stated without naming an actual plausible confounder — interviewers want the specific confounder, not just the phrase.
+  - A correlation near 0 doesn't rule out a strong non-linear relationship — always visualize the data (scatter plot) rather than relying on r alone.
+  - Extrapolating a regression line beyond the observed data range is a subtle but serious error.
+
+  ## Best practices
+
+  - Always propose a concrete, plausible confounder when discussing a correlation — "it might just be coincidence" is a weaker answer than naming a specific alternative explanation.
+  - Plot a scatter plot alongside any correlation coefficient — the number alone can hide outliers or non-linear patterns.
+  - Only trust a regression's predictions within (or very close to) the range of data it was fit on.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Correlation (r)** → strength & direction of a *linear* relationship, −1 to 1
+  **Correlation ≠ causation** → always consider confounding variables
+  **Regression slope** → change in y per 1-unit change in x
+  **Watch for:** extrapolating beyond the data's range, non-linear relationships with r near 0

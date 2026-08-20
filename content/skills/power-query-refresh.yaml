@@ -1,0 +1,99 @@
+title: Refresh
+category: Spreadsheets
+what_is_it: Re-running a query's connection and every one of its transform steps against the current state of the source data, updating the loaded result.
+why_it_matters: This is the single action that makes the entire Power Query workflow pay off — one click re-applies an entire cleaning, merging, and combining pipeline automatically.
+prerequisites:
+  - power-query-append
+objectives:
+  - Refresh a query and confirm it reflects updated source data
+  - Explain what refresh does and does not automatically handle
+estimated_minutes: 20
+resources:
+  - r-ms-power-query-docs
+practice:
+  - id: ex-pq-refresh-1
+    title: Update a report with one click
+    description: Add new rows to a query's source file, then refresh the query and confirm every downstream step and result updates correctly.
+verify:
+  - Refresh correctly re-applies every transform step against the new source data
+  - Downstream artifacts (pivot tables, charts) referencing the query correctly reflect the refreshed data
+note: |
+  ## 🎯 What is it?
+
+  **Refresh** re-runs a query's connection and every one of its recorded transform steps against the **current** state of the source data, updating the loaded result — this is the single action that makes the entire Power Query workflow pay off.
+
+  ## 💡 Why is it important?
+
+  Everything built earlier in this group — [Import Data](/skills/power-query-import-data), [Transform Data](/skills/power-query-transform-data), [Merge](/skills/power-query-merge), [Append](/skills/power-query-append) — exists to be re-run automatically with one click. Refresh is that click: it re-applies an entire multi-step cleaning, merging, and combining pipeline against fresh data, with zero manual rework.
+
+  ## Core concept
+
+  | What refresh does | What refresh does NOT do |
+  |---|---|
+  | Re-fetches the source data | Change the query's steps themselves |
+  | Re-applies every transform step, in order | Fix a step that's now broken by a structural change in the source |
+  | Updates the loaded table with the new result | Automatically refresh downstream pivot tables (they usually need their own separate refresh) |
+
+  **Note:** downstream pivot tables built on a query's output typically still need their own refresh after the query refreshes — the two are related but often separate steps, depending on the specific spreadsheet tool's settings.
+
+  ## 📊 Example
+
+  A query imports and cleans a weekly sales file. A new week's rows are pasted into the source file.
+
+  **Action:** Click Refresh.
+
+  **Result:** The query re-runs its full step sequence — reads the new file state, re-filters, re-types, re-merges (if applicable) — and the loaded table updates to reflect the new week's data, all in one click, exactly reproducing the same cleaning logic that was applied to every prior week.
+
+  ## Multiple examples
+
+  **Beginner:** Manually clicking Refresh after updating a source file.
+  **Intermediate:** Setting a query to refresh automatically when the workbook opens.
+  **Real-world:** A recurring Monday-morning report where the only manual step is pasting the past week's raw export into the source location — refreshing the query (and its downstream pivot tables) instantly reproduces the entire cleaned, merged, and summarized report for the new data.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting to refresh after updating source data**, and then trusting a stale report that doesn't reflect the latest changes.
+  - **Assuming a pivot table automatically updates just because its underlying query refreshed** — many spreadsheet tools require refreshing the pivot table separately (or setting "refresh on open") in addition to the query itself.
+  - **Not noticing a refresh error** caused by a structural change in the source (like a renamed or missing column), which can silently break a step further down the sequence.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any recurring report:** the one-click action that makes an entire cleaning-and-combining pipeline reproducible, week after week or month after month.
+
+  ## Related concepts
+
+  ```
+  Append → Refresh ← you are here → Advanced Power Query
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What does refreshing a query actually do?
+
+  ### Interview/Advanced
+  2. Why might a pivot table still show stale data even after its underlying query has been refreshed?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. It re-fetches the source data and re-applies every one of the query's recorded transform steps in order, updating the loaded table with the current result.
+  2. Many spreadsheet tools require a separate refresh step for a pivot table built on top of a query's output — refreshing the underlying query alone doesn't always automatically cascade to every pivot table referencing it, depending on the tool's settings (this can often be configured to refresh automatically on open).
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why is "refresh" the single most valuable action in the entire Power Query workflow?**
+  Short answer: It re-executes an entire recorded pipeline — import, clean, merge, combine — against the current source data in one click, which is exactly what turns a one-time cleaning effort into a fully repeatable, low-maintenance recurring report.
+
+  ## Best practices
+
+  - Always refresh (and verify downstream pivot tables also refresh) after updating source data, before trusting a report.
+  - Consider setting queries/pivot tables to refresh automatically on workbook open for a recurring report.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Refresh** → re-runs the query's connection and every transform step against current source data
+  **Remember:** downstream pivot tables often need their own separate refresh too

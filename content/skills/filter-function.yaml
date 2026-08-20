@@ -1,0 +1,67 @@
+title: FILTER Function
+category: Spreadsheets
+what_is_it: Returning only the rows of a range that meet one or more conditions, spilled dynamically — a live, formula-based alternative to the manual Filter feature.
+why_it_matters: Unlike the standard Filter dropdown, FILTER's result is a live formula that automatically updates as source data changes, and can feed directly into other formulas.
+prerequisites:
+  - dynamic-arrays
+objectives:
+  - Filter a range to matching rows using FILTER
+  - Combine multiple conditions in a single FILTER formula
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-filter-function-1
+    title: Filter with two conditions
+    description: Use FILTER to return only rows where region is "East" AND amount exceeds $1,000.
+verify:
+  - Can write a basic FILTER formula
+  - Can combine multiple conditions in one FILTER formula
+note: |
+  ## 🎯 What is it?
+
+  **FILTER** returns only the rows of a range that meet one or more conditions, spilling the matching rows dynamically starting from the formula's cell — a live, formula-based alternative to the standard Filter dropdown (see Filter, in Excel Data Analysis).
+
+  ## 💡 Why is it important?
+
+  - Unlike the standard Filter feature (which just hides non-matching rows in place), FILTER's result is a genuine formula output that lives wherever you put it, updates automatically as source data changes, and can feed directly into other formulas or charts.
+  - It replaces many older, clunkier array-formula or Advanced Filter workarounds with one readable function.
+
+  ## Syntax
+
+  ```
+  =FILTER(array, include, [if_empty])
+  ```
+
+  `include` is a logical test (or combination of tests) that returns TRUE/FALSE for each row.
+
+  ## 📊 Example
+
+  `=FILTER(A2:D100, (C2:C100="East")*(D2:D100>1000))` returns only the rows where region (column C) is "East" **and** amount (column D) exceeds 1,000 — multiplying two logical arrays together combines them with AND; adding them (`+`) combines with OR.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting the `if_empty` argument**, causing a `#CALC!` error if no rows match the condition — always provide a fallback like `""` for when there are zero matches.
+  - **Using `AND()`/`OR()` directly inside the include argument instead of `*`/`+`** — FILTER's array-based conditions need the multiply/add pattern shown above, not the standard AND/OR functions, which don't operate element-wise the same way.
+
+  ## Related concepts
+
+  ```
+  Dynamic Arrays
+    ↓
+  FILTER ← you are here
+    ↓
+  SORT
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you write a FILTER formula for rows where region is "East" OR amount exceeds $1,000?**
+  Short answer: `=FILTER(range, (region="East")+(amount>1000), "No matches")` — adding the two logical conditions combines them with OR (multiplying would combine with AND), and the third argument handles the case where nothing matches.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **FILTER(array, include, [if_empty])** → returns only matching rows, spilled dynamically
+  Combine conditions with `*` (AND) or `+` (OR) — always include an `if_empty` fallback.

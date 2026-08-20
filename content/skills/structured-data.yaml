@@ -1,0 +1,69 @@
+title: Structured Data
+category: Foundations
+what_is_it: Data organized into a strict, predictable format — rows and columns with a fixed schema, like a spreadsheet or a database table.
+why_it_matters: It's the easiest data to query, aggregate, and visualize, and it's what most of an analyst's day-to-day tooling (SQL, Excel, pivot tables) is built around.
+prerequisites:
+  - what-is-data-analytics
+objectives:
+  - Define structured data and give two examples
+  - Explain why structured data is easier to analyze than unstructured data
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-structured-data-1
+    title: Spot the structure
+    description: Look at a spreadsheet export from any app you use and identify its columns, data types, and the "grain" of one row.
+verify:
+  - Can define structured data in one sentence
+  - Can name two tools built specifically for structured data
+note: |
+  ## 🎯 What is it?
+
+  **Structured data** is data organized into a fixed, predictable format — a table of rows and columns where every row has the same fields and every column has a consistent data type. A sales database table (order_id, customer_id, amount, date) is structured data: every row means the same thing, in the same shape.
+
+  ## 💡 Why is it important?
+
+  - It's the easiest data type to store, query, and analyze — SQL, spreadsheets, and BI tools are all built around it.
+  - Most of an analyst's first year is spent almost entirely in structured data (databases, CSV exports, spreadsheets).
+  - Recognizing when data *isn't* structured (see Semi-Structured and Unstructured Data) tells you when you need a different toolset before you can analyze it at all.
+
+  ## Core concept
+
+  | Trait | Structured data |
+  |---|---|
+  | Schema | Fixed and known in advance |
+  | Storage | Relational databases, spreadsheets, CSVs |
+  | Example | A `customers` table with columns `id`, `name`, `signup_date`, `country` |
+  | Query tools | SQL, Excel, pandas |
+
+  ## 📊 Example
+
+  A retail `orders` table — every row is one order, every column (`order_id`, `customer_id`, `product`, `amount`, `order_date`) means exactly the same thing for every row. You can `SUM(amount)` or `GROUP BY country` immediately, with no extra preparation.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming all business data is structured.** Support tickets, reviews, and PDFs are not — they need cleaning or a different approach before they fit a table.
+  - **Confusing "structured" with "clean."** A structured table can still have duplicates, nulls, or wrong data types — structure describes the *shape*, not the *quality*, of the data.
+
+  ## Related concepts
+
+  ```
+  Structured Data ← you are here
+    ↓
+  Semi-Structured Data (JSON, XML — some structure, no fixed schema)
+    ↓
+  Unstructured Data (text, images — no inherent structure)
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Give an example of structured vs. unstructured data.**
+  Short answer: A sales database table is structured (fixed rows/columns); a folder of customer support emails is unstructured (free text, no fixed fields).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Structured data** → fixed schema, rows and columns, e.g. a database table
+  Easiest to query directly with SQL/Excel — most analyst work starts here.

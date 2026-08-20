@@ -1,0 +1,60 @@
+title: Spreadsheets
+what_is_it: >-
+  Using a spreadsheet tool (Excel or Google Sheets) to organize, clean, and summarize tabular data
+  with formulas, lookups, and pivot tables.
+why_it_matters: >-
+  Spreadsheets are still the most common tool business stakeholders use to review data. Being fluent
+  in them lets you clean data quickly and communicate with non-technical teams in a format they
+  already trust.
+prerequisites: []
+objectives:
+  - Clean messy tabular data
+  - Use lookup and reference formulas
+  - Build and read a pivot table
+  - Spot data entry errors and inconsistencies
+estimated_minutes: 300
+resources:
+  - r-ms-pivot-tables
+  - r-exceljet-functions
+practice:
+  - id: ex-spreadsheets-1
+    title: Clean a messy sales export
+    description: >-
+      Given a CSV with duplicate rows, inconsistent date formats, and blank cells, produce a clean
+      version ready for analysis.
+project: project-clean-messy-sales-data
+verify:
+  - Removes duplicates without deleting valid rows
+  - Formulas reference cells instead of hard-coded values
+  - Pivot table correctly summarizes by category and date
+  - Can explain each cleaning step taken
+category: Foundations
+subtopics:
+  - title: Formulas & functions
+    description: >-
+      SUM, AVERAGE, IF, and text functions — writing formulas that reference cells instead of typing
+      numbers directly.
+    outcomes:
+      - Write a multi-condition IF formula
+      - Use SUMIFS/COUNTIFS to summarize by criteria
+  - title: Lookup formulas
+    description: VLOOKUP/XLOOKUP and INDEX-MATCH to pull matching data from another table by a shared key.
+    outcomes:
+      - Pull a value from a second table by ID
+      - Explain why XLOOKUP is safer than VLOOKUP
+  - title: Data cleaning
+    description: >-
+      Removing duplicates, trimming whitespace, fixing types, splitting or combining columns, and
+      flagging blanks.
+    outcomes:
+      - Deduplicate a messy list
+      - Standardize inconsistent text entries
+  - title: Pivot tables
+    description: Summarizing rows into totals, counts, and averages by category, with filters and slicers.
+    outcomes:
+      - Build a pivot table from raw rows
+      - Add a calculated field to a pivot table
+  - title: Charts in spreadsheets
+    description: Turning a pivot summary into a readable bar or line chart with correct labels and scale.
+    outcomes:
+      - Build a chart directly from a pivot table

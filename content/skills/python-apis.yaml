@@ -1,0 +1,185 @@
+title: Working with APIs
+what_is_it: Fetching data from a web API with Python's requests library and turning the response into a usable DataFrame.
+why_it_matters: Not all data comes as a clean CSV. A huge amount of real-world data — weather, finance, product catalogs — is only available through an API, so pulling it yourself is a core skill.
+prerequisites:
+  - python-fundamentals
+objectives:
+  - Make a GET request and handle the response
+  - Parse a JSON response into a DataFrame
+  - Handle a failed request gracefully
+  - Explain what an API key/rate limit is for
+subtopics:
+  - title: Making a request
+    description: Using requests.get() and checking the status code before trusting the response.
+    outcomes:
+      - Make a GET request and check for a successful status code
+  - title: Parsing JSON
+    description: Turning a nested JSON response into a flat, analysis-ready DataFrame.
+    outcomes:
+      - Convert a JSON API response into a pandas DataFrame
+  - title: Handling failures
+    description: Timeouts, rate limits, and error responses — and not letting one bad request crash a script.
+    outcomes:
+      - Handle a failed request without crashing the script
+estimated_minutes: 180
+resources:
+  - r-python-requests-docs
+practice:
+  - id: ex-apis-1
+    title: Pull data from a public API
+    description: Fetch data from any free public API, parse the JSON response, and load the result into a pandas DataFrame.
+verify:
+  - Request checks the status code before parsing the response
+  - JSON is correctly flattened into a usable table
+  - A failed request is handled instead of crashing the script
+note: |
+  ## 🎯 What is it?
+
+  **Working with APIs** means fetching data from a web service using Python's `requests` library, and turning the response (usually JSON) into a usable pandas DataFrame. Not all data comes as a clean CSV — a huge amount of real-world data (weather, finance, product catalogs, internal company services) is only available this way.
+
+  ## 💡 Why is it important?
+
+  Pulling data from an API yourself is a core, practical skill — it's how you get data that isn't handed to you as a file, and it's a standard task in real analyst and data-engineering-adjacent work: pulling marketing platform data, enriching a dataset with external information, or building a recurring automated pull.
+
+  ## Core concept
+
+  ### Making a request
+  `requests.get(url)` sends an HTTP GET request and returns a response object. **Always check the status code** before trusting the response — `200` means success, but `4xx`/`5xx` codes mean something went wrong (bad request, unauthorized, server error), and blindly parsing a failed response as if it succeeded is a common beginner mistake.
+
+  ### Parsing JSON
+  Most APIs return data as JSON — a nested structure of objects and lists. `response.json()` converts this into Python dicts/lists; `pd.json_normalize()` (or manual restructuring) flattens nested JSON into a proper, analysis-ready DataFrame.
+
+  ### Handling failures
+  Real APIs fail sometimes — timeouts, rate limits (too many requests too fast), and error responses are normal, expected conditions, not edge cases to ignore. A production-quality script handles them explicitly rather than crashing or silently producing incomplete data.
+
+  ## Syntax
+
+  ```python
+  import requests
+  import pandas as pd
+
+  response = requests.get("https://api.example.com/orders", timeout=10)
+
+  if response.status_code == 200:
+      data = response.json()
+      df = pd.json_normalize(data["results"])
+  else:
+      print(f"Request failed: {response.status_code}")
+  ```
+
+  ## 📊 Example
+
+  **API response (JSON):**
+
+  ```json
+  {
+    "results": [
+      {"id": 1, "customer": {"name": "Ana", "region": "West"}, "amount": 200},
+      {"id": 2, "customer": {"name": "Wei", "region": "East"}, "amount": 340}
+    ]
+  }
+  ```
+
+  **Code:**
+
+  ```python
+  data = response.json()
+  df = pd.json_normalize(data["results"])
+  ```
+
+  **Output (DataFrame):**
+
+  | id | customer.name | customer.region | amount |
+  |---|---|---|---|
+  | 1 | Ana | West | 200 |
+  | 2 | Wei | East | 340 |
+
+  **Explanation:** `json_normalize` automatically flattens the nested `customer` object into separate `customer.name`/`customer.region` columns, producing a clean, table-shaped DataFrame ready for analysis.
+
+  ## Multiple examples
+
+  **Beginner:** A GET request to a free public API, checking the status code before printing the response.
+  **Intermediate:** Parsing a nested JSON response with `json_normalize` into a flat DataFrame.
+  **Real-world:** A script that pulls data from a paginated API (looping through multiple pages of results), handles a rate-limit response by pausing and retrying, and combines every page into one final DataFrame — a realistic production data-pull pattern.
+
+  ## ⚠️ Common mistakes
+
+  - **Not checking the status code before parsing the response.** A failed request (e.g., a 404 or 500 error) often still returns *some* body — parsing it as if it succeeded produces confusing downstream errors or silently wrong/empty data.
+  - **Not setting a timeout.** Without one, a hung request can block a script indefinitely — always pass `timeout=...`.
+  - **Ignoring rate limits.** Sending requests too fast can get you temporarily or permanently blocked by the API — real scripts should respect documented rate limits and handle a 429 ("Too Many Requests") response gracefully.
+  - **Hardcoding an API key directly in a script** that might be shared or committed to version control — a real security risk, not just a style issue.
+
+  ## Real-world Data Analyst use cases
+
+  - **Marketing analysis:** pulling campaign performance data from an ad platform's API.
+  - **Finance analysis:** pulling live currency exchange rates from a financial data API to enrich a report.
+  - **Product analysis:** pulling usage data from an internal analytics service's API for a custom report not available in the standard dashboard.
+
+  ## Related concepts
+
+  ```
+  Python Fundamentals
+    ↓
+  Pandas
+    ↓
+  Working with APIs ← you are here
+    ↓
+  Regular Expressions for Data Cleaning (often needed after parsing messy API text fields)
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Write code to make a GET request and check whether it succeeded.
+
+  ### Medium
+  2. Given a JSON response with a nested "customer" object per record, write code to flatten it into a DataFrame.
+
+  ### Interview/Advanced
+  3. A script pulling from an API works fine in testing but starts failing intermittently in production with a 429 status code. What's happening, and how would you fix it?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `response = requests.get(url, timeout=10); if response.status_code == 200: ... else: print("failed")`
+  2. `df = pd.json_normalize(data["results"])` (assuming the JSON structure matches the example above).
+  3. A 429 status code means "Too Many Requests" — the script is hitting the API's rate limit. Fix: add a delay between requests, respect any `Retry-After` header the API provides, and implement retry logic with backoff instead of firing requests as fast as possible.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why should you always check the response status code before parsing an API response?**
+  Short answer: A failed request can still return a response body, and parsing it as if it succeeded can produce misleading downstream results or confusing errors — checking the status code first lets the script handle failure explicitly.
+
+  ### Conceptual questions
+  **Q: What does it mean for an API to be "rate limited," and why does it matter for a script?**
+  Short answer: The API restricts how many requests can be made in a given time window; a script that ignores this can get temporarily or permanently blocked, so production scripts should pace requests and handle rate-limit responses gracefully.
+
+  ### Scenario-based questions
+  **Q: You need to pull all records from an API that returns results in pages of 100. How would you approach it?**
+  Short answer: Loop through pages using the API's pagination parameter (e.g., a page number or cursor token), collecting and combining each page's results, until the API signals there are no more pages left.
+
+  ### Practical questions
+  **Q: How would you securely handle an API key in a script that might be shared with others?**
+  Short answer: Store it in an environment variable (or a config file excluded from version control) rather than hardcoding it directly in the script.
+
+  ## Interview traps / tricky points
+
+  - A "successful" 200 status code doesn't guarantee the response body contains the expected data structure — always validate the shape of the parsed JSON before assuming it matches expectations.
+  - Deeply nested or inconsistent JSON (e.g., a field that's sometimes a list, sometimes a single object) can break a naive `json_normalize` call — real-world API responses often need extra handling for this kind of inconsistency.
+
+  ## Best practices
+
+  - Always check the status code, and set an explicit timeout, on every request.
+  - Handle expected failure modes (timeouts, rate limits, error responses) explicitly rather than letting the script crash.
+  - Never hardcode credentials/API keys directly in a script; use environment variables or a secrets manager.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **requests.get(url, timeout=...)** → always set a timeout, always check status_code
+  **response.json()** → parses the response body into Python dicts/lists
+  **pd.json_normalize()** → flattens nested JSON into a table-shaped DataFrame
+  **429 status code** → rate limited; add delay/backoff, don't just retry immediately

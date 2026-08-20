@@ -1,0 +1,59 @@
+title: Splitting Columns
+category: Spreadsheets
+what_is_it: Breaking one column's combined content into two or more separate columns — like splitting "Full Name" into "First Name" and "Last Name."
+why_it_matters: Analysis and lookups often need a specific individual field (just the first name, just the area code) that only exists combined in the source data.
+prerequisites:
+  - conditional-transformations
+objectives:
+  - Split a column into multiple columns using Text to Columns or a formula
+  - Choose between a delimiter and a fixed-width split
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-splitting-columns-1
+    title: Split a full name
+    description: Given a "Full Name" column, split it into separate "First Name" and "Last Name" columns.
+verify:
+  - Can split a column using Text to Columns
+  - Can choose between delimiter-based and fixed-width splitting
+note: |
+  ## 🎯 What is it?
+
+  **Splitting columns** breaks one column's combined content into two or more separate columns — most commonly with **Text to Columns** (delimiter-based, like splitting on a space or comma) or fixed-width splitting (when every field occupies the same character positions).
+
+  ## 💡 Why is it important?
+
+  - Analysis and lookups frequently need one specific piece of a combined field — just the area code from a phone number, just the first name from a full name — which only exists bundled together in the raw source data.
+  - It's a foundational transformation step, usually needed before further calculated columns or lookups can work cleanly.
+
+  ## 📊 Example
+
+  A "Full Name" column contains "Amir Khan." Using **Text to Columns** with a space delimiter splits it into "Amir" (First Name) and "Khan" (Last Name) — two separate, independently usable columns.
+
+  ## ⚠️ Common mistakes
+
+  - **Splitting on a delimiter that isn't consistent across every row** (e.g., some names have a middle name, some don't), producing a misaligned result for exceptions.
+  - **Overwriting the original combined column** without keeping a backup, making the split hard to redo if the delimiter choice turns out wrong.
+
+  ## Related concepts
+
+  ```
+  Conditional Transformations
+    ↓
+  Splitting Columns ← you are here
+    ↓
+  Combining Columns
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you split a "Full Name" column into separate first and last name columns?**
+  Short answer: Use Text to Columns with a space as the delimiter (or LEFT/RIGHT/FIND formulas for a more flexible, formula-based split) — checking first whether every row consistently has exactly one space, to avoid misaligned results for exceptions like middle names.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Splitting columns** → Text to Columns (delimiter or fixed-width) breaks one column into several
+  Check for inconsistent delimiters (extra spaces, missing parts) before splitting the whole column.

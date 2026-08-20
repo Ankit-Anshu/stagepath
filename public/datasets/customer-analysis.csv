@@ -1,0 +1,15 @@
+customer_id,signup_date,region,segment,total_orders,total_spend,last_order_date
+C001,2024-02-14,North,Consumer,12,2140,2025-05-02
+C002,2024-03-01,South,Corporate,5,8600,2025-04-18
+C003,2024-01-22,West,Consumer,3,410,2024-09-30
+C004,2024-05-09,East,Small Business,9,3320,2025-05-10
+C005,2024-06-17,North,Consumer,1,95,2024-06-20
+C006,2024-02-28,South,Corporate,14,15200,2025-05-12
+C007,2024-04-11,West,Small Business,6,1870,2025-03-01
+C008,2024-07-03,East,Consumer,2,260,2024-08-15
+C009,2024-01-05,North,Corporate,20,22400,2025-05-14
+C010,2024-08-19,South,Consumer,4,540,2025-01-09
+C011,2024-03-25,West,Small Business,7,2960,2025-04-29
+C012,2024-09-30,East,Consumer,1,120,2024-10-02
+C013,2024-02-08,North,Small Business,10,4100,2025-05-08
+C014,2024-11-14,South,Consumer,2,300,2025-02-11

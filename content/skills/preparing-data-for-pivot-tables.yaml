@@ -1,0 +1,67 @@
+title: Preparing Data for Pivot Tables
+category: Spreadsheets
+what_is_it: The specific readiness requirements a source range needs before a Pivot Table will summarize it correctly — no blank rows/columns, one header row, and consistent, long-format data.
+why_it_matters: A pivot table built on a badly-shaped source range fails silently or produces a confusing, incomplete summary — these specific requirements prevent that.
+prerequisites:
+  - preparing-data-for-analysis
+objectives:
+  - List the structural requirements a pivot table source range needs
+  - Fix a source range that violates one of these requirements
+estimated_minutes: 20
+resources:
+  - r-ms-pivot-tables
+practice:
+  - id: ex-preparing-data-for-pivot-tables-1
+    title: Fix a pivot-unfriendly range
+    description: Given a source range with a blank row in the middle and merged header cells, fix it so it's ready for a Pivot Table.
+verify:
+  - Can list the structural requirements for a pivot table source range
+  - Can fix a common pivot-table-unfriendly issue
+note: |
+  ## 🎯 What is it?
+
+  **Preparing data for Pivot Tables** covers the specific structural requirements a source range needs before Excel's Pivot Table tool will summarize it correctly — narrower and more mechanical than the general Preparing Data for Analysis checklist, but just as easy to violate without noticing.
+
+  ## 💡 Why is it important?
+
+  - A pivot table built on a badly-shaped source range doesn't always error clearly — it can silently produce an incomplete or confusing summary, which is worse than an obvious failure.
+  - These requirements are specific and checkable, making them a fast pre-flight check before building any pivot table.
+
+  ## Core concept
+
+  | Requirement | Why |
+  |---|---|
+  | One header row, no merged cells | Pivot Table uses header row values as field names |
+  | No blank rows or columns within the range | A blank row/column can silently cut off the detected range |
+  | Consistent data type per column | Mixed text/number in one column causes inconsistent grouping |
+  | Long format, not wide | Pivot Tables group by column values — wide data doesn't group cleanly |
+
+  ## 📊 Example
+
+  A source range with a blank row separating two "halves" of a table causes Excel to only detect the *first* half as the pivot table's source when auto-selecting the range — silently excluding real data from every summary, with no error raised. Removing the blank row (or manually confirming the full range) fixes it.
+
+  ## ⚠️ Common mistakes
+
+  - **Trusting Excel's auto-detected range without checking it**, especially on a source range with any blank rows/columns — always verify the detected range covers all the actual data.
+  - **Using merged header cells for readability**, which breaks the Pivot Table's field-name detection — keep the source range's headers in plain, unmerged single cells (merge only in the final presentation, if at all).
+
+  ## Related concepts
+
+  ```
+  Preparing Data for Analysis
+    ↓
+  Preparing Data for Pivot Tables ← you are here
+  ```
+  This closes the Data Transformation chapter — the next chapter (Data Analysis) puts a properly-prepared source range to work with Pivot Tables, Sort, Filter, and more.
+
+  ## 🎤 Interview preparation
+
+  **Q: A pivot table seems to be missing some rows of data that clearly exist in the source range. What's a likely cause?**
+  Short answer: A blank row or column within the source range can cause Excel to auto-detect only part of the range — always verify the pivot table's source range explicitly covers all the actual data, rather than trusting auto-detection on a range with any gaps.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Pivot table readiness** → one clean header row, no blank rows/columns, consistent types, long format
+  Always verify the auto-detected source range actually covers all the data.

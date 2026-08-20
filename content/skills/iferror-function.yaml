@@ -1,0 +1,109 @@
+title: IFERROR Function
+category: Spreadsheets
+what_is_it: 'Catching a formula error and replacing it with a clean, intentional result instead of letting a raw error value (like #N/A or #DIV/0!) appear in a report.'
+why_it_matters: Real formulas fail sometimes — a missing lookup match, a division by zero — and IFERROR is how you handle that gracefully instead of shipping a report full of alarming error codes.
+prerequisites:
+  - or-function
+objectives:
+  - Wrap a formula with IFERROR to handle a likely failure case
+  - Explain the risk of using IFERROR too broadly
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-iferror-1
+    title: Clean up a lookup column
+    description: 'Wrap a VLOOKUP that sometimes fails to find a match with IFERROR, showing "Not found" instead of a raw #N/A error.'
+verify:
+  - IFERROR replaces the error with a clear, intentional message
+  - IFERROR does not silently hide a genuine formula bug
+note: |
+  ## 🎯 What is it?
+
+  **IFERROR** catches any error a formula produces (`#N/A`, `#DIV/0!`, `#REF!`, etc.) and replaces it with a clean, intentional value instead — so a reader sees "Not found" or a blank instead of a raw, alarming-looking error code.
+
+  ## 💡 Why is it important?
+
+  Real formulas fail sometimes — a lookup with no match, a division by a value that turns out to be zero — and IFERROR is how you handle that gracefully in a report meant for a stakeholder, rather than shipping a spreadsheet full of visible `#N/A` and `#DIV/0!` cells.
+
+  ## Syntax
+
+  ```
+  =IFERROR(formula, value_if_error)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 100 |
+  | 2 | 0 |
+
+  **Formula (without protection):** `=A1/A2` → `#DIV/0!` error.
+  **Formula (with IFERROR):** `=IFERROR(A1/A2,"N/A")` → `"N/A"`
+
+  **Explanation:** The underlying division-by-zero problem still exists, but instead of an alarming raw error, the report shows a clean, intentional "N/A" — readable and clearly not a bug.
+
+  ## Multiple examples
+
+  **Beginner:** `=IFERROR(A1/B1,0)` — return 0 instead of a division error.
+  **Intermediate:** `=IFERROR(VLOOKUP(A2,customers!A:B,2,FALSE),"Not found")` — a lookup that clearly labels a missing match instead of showing `#N/A`.
+  **Real-world:** Wrapping every formula in a stakeholder-facing dashboard with IFERROR so a data-quality issue in the source data (a missing row, an unexpected zero) never produces a visible, unexplained error cell in front of an executive audience.
+
+  ## ⚠️ Common mistakes
+
+  - **Using IFERROR to silently hide a genuine bug**, rather than to handle a known, expected edge case. If a formula is erroring because of an actual mistake in its logic, IFERROR just makes that mistake invisible instead of fixing it — the underlying formula is still wrong.
+  - **Replacing an error with a misleading value**, like `0`, when the honest answer is "unknown" or "not found" — this can silently distort a downstream SUM or AVERAGE that treats the 0 as a real value.
+  - **Wrapping every formula in IFERROR by default**, out of habit, instead of understanding *why* a specific formula might error and handling that specific case intentionally.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any lookup-heavy report:** replacing raw `#N/A` errors from unmatched VLOOKUP/XLOOKUP results with a clear, intentional label.
+  - **Ratio/rate calculations:** protecting a division formula (like a conversion rate) from a `#DIV/0!` error when the denominator happens to be zero for a given row.
+
+  ## Related concepts
+
+  ```
+  AND → OR → IFERROR ← you are here
+  ```
+  This closes the core logic building blocks — the SUMIF/COUNTIF/AVERAGEIF family that follows builds directly on IF's conditional logic.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that returns "Error" instead of a raw error if A1/B1 fails.
+
+  ### Medium
+  2. Why is replacing a lookup error with 0 sometimes worse than replacing it with "Not found"?
+
+  ### Interview/Advanced
+  3. When is using IFERROR actually a bad practice?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=IFERROR(A1/B1,"Error")`
+  2. Because 0 looks like a real, valid numeric result — a downstream SUM or AVERAGE would silently include it as if it were a genuine zero value, distorting the result, whereas "Not found" is clearly not a number and won't be miscounted.
+  3. When it's used to mask a genuine formula bug rather than handle a known, expected edge case — this hides the real problem instead of fixing it, and can make a broken formula look like it's working correctly.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would you wrap a lookup formula with IFERROR in a report meant for stakeholders?**
+  Short answer: To replace a raw, technical-looking error (like #N/A) with a clear, intentional message, so the report reads cleanly rather than looking broken — while still making sure the underlying missing-match issue is understood, not just hidden.
+
+  ## Interview traps / tricky points
+
+  - IFERROR can mask a genuine bug just as easily as it can handle a legitimate edge case — always be able to explain *why* a specific formula might error before wrapping it.
+
+  ## Best practices
+
+  - Use IFERROR intentionally for known, expected failure cases — not as a blanket habit on every formula.
+  - Choose a replacement value that won't be misread as real data downstream (prefer a text label like "Not found" over a numeric 0 in most cases).
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **IFERROR(formula, value_if_error)** → catches any error, replaces with a clean value
+  **Watch for:** using it to hide a real bug instead of handling a known edge case

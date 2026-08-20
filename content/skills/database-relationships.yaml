@@ -1,0 +1,72 @@
+title: Relationships
+category: SQL
+what_is_it: The way tables connect to each other via primary and foreign keys — categorized as one-to-one, one-to-many, or many-to-many depending on how many rows on each side can match.
+why_it_matters: Knowing a relationship's type in advance tells you whether a join is likely to multiply rows unexpectedly — a common source of inflated totals.
+prerequisites:
+  - foreign-key
+objectives:
+  - Define the three types of table relationships
+  - Identify the relationship type between two example tables
+estimated_minutes: 20
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-relationships-1
+    title: Classify a relationship
+    description: For customers and orders (one customer can have many orders), identify the relationship type and explain why.
+verify:
+  - Can define one-to-many, one-to-one, and many-to-many
+  - Can classify the relationship in a simple example
+note: |
+  ## 🎯 What is it?
+
+  A **relationship** describes how two tables connect via primary/foreign keys, and how many rows on each side can match:
+
+  - **One-to-one** — one row in Table A matches exactly one row in Table B (e.g., one `user` and one `user_profile`).
+  - **One-to-many** — one row in Table A can match many rows in Table B (e.g., one `customer` can have many `orders`).
+  - **Many-to-many** — many rows in Table A can match many rows in Table B, usually via a third "junction" table (e.g., many `students` enroll in many `courses`, linked through an `enrollments` table).
+
+  ## 💡 Why is it important?
+
+  - Knowing a relationship's type before joining tells you whether the join is likely to multiply rows — joining a one-to-many relationship the wrong direction, or a many-to-many without care, silently inflates row counts and totals.
+  - It's a common interview and design topic — being able to say "this is one-to-many" precisely, and why, signals real understanding of the data model.
+
+  ## Core concept
+
+  | Relationship | Example | Risk if mishandled |
+  |---|---|---|
+  | One-to-one | `user` ↔ `user_profile` | Low — rare to accidentally multiply |
+  | One-to-many | `customer` → `orders` | Joining `orders` to `customers` is safe; joining the other way multiplies each customer row by their order count |
+  | Many-to-many | `students` ↔ `courses` | Requires a junction table; a naive direct join can multiply rows dramatically |
+
+  ## 📊 Example
+
+  One customer can place many orders (one-to-many). Joining `customers` to `orders` produces one row *per order*, not per customer — if you then `COUNT(*)` on the joined result expecting "number of customers," you'll actually get "number of orders," which is usually a bigger, wrong number.
+
+  ## ⚠️ Common mistakes
+
+  - **Not checking the relationship type before joining and aggregating** — this is one of the most common causes of a mysteriously inflated total in a report.
+  - **Treating a many-to-many relationship as one-to-many** by skipping the junction table, which can produce a cross-product-like row explosion.
+
+  ## Related concepts
+
+  ```
+  Foreign Key
+    ↓
+  Relationships ← you are here
+    ↓
+  Constraints
+  ```
+  Directly sets up Duplicate Rows from Joins later in this stage's Joins chapter.
+
+  ## 🎤 Interview preparation
+
+  **Q: You join customers to orders and get more rows than there are customers. Why?**
+  Short answer: The relationship is one-to-many (one customer can have many orders) — joining produces one row per order, not per customer, so the row count reflects orders, not customers. This is expected, not a bug, but needs to be accounted for in any aggregation afterward.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Relationships** → one-to-one, one-to-many, many-to-many
+  Know the type before joining — it predicts whether row counts will multiply.

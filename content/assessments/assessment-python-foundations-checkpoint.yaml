@@ -1,0 +1,12 @@
+title: Python Foundations Checkpoint
+type: checkpoint
+skills:
+  - python-fundamentals
+  - numpy
+  - pandas
+checklist:
+  - Write and debug Python scripts independently
+  - Manipulate arrays with NumPy
+  - Clean and transform data with pandas
+  - Complete the Customer Churn Analysis project
+pass_criteria: All checklist items demonstrated, and the Customer Churn Analysis project is complete.

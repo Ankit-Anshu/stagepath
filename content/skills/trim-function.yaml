@@ -1,0 +1,105 @@
+title: TRIM Function
+what_is_it: Removing extra leading, trailing, and repeated spaces from a text value.
+why_it_matters: Invisible extra spaces are one of the most common reasons a lookup or match silently fails — the values look identical but aren't.
+objectives:
+  - Remove extra spaces from a text column with TRIM
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-trim-1
+    title: Fix a broken lookup
+    description: Given a lookup that fails due to extra spaces, use TRIM to fix the matching column.
+verify:
+  - Extra spaces are removed without altering the actual text
+  - A previously-failing lookup now matches correctly
+category: Spreadsheets
+prerequisites: []
+note: |
+  ## 🎯 What is it?
+
+  **TRIM** removes extra leading, trailing, and repeated internal spaces from a text value, leaving single spaces between words.
+
+  ## 💡 Why is it important?
+
+  Invisible extra spaces are one of the most common reasons a lookup or match silently fails — the values look identical to the eye but aren't identical to the spreadsheet.
+
+  ## Syntax
+
+  ```
+  =TRIM(text)
+  ```
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | " Acme  Corp " |
+
+  **Formula:** `=TRIM(A1)`
+  **Result:** `"Acme Corp"`
+
+  **Explanation:** Leading/trailing spaces are removed, and the double space between "Acme" and "Corp" is collapsed to one.
+
+  ## Multiple examples
+
+  **Beginner:** `=TRIM(A2)` — clean a single column of extra spaces.
+  **Intermediate:** `=TRIM(PROPER(A2))` — fix spacing and casing together.
+  **Real-world:** A VLOOKUP that returns `#N/A` even though the value "appears" to match — wrapping the lookup key with TRIM (`=VLOOKUP(TRIM(A2),...)`) is one of the most common practical fixes for a broken-looking lookup.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming two cells "look the same" means they match exactly.** A trailing space is invisible but breaks exact-match comparisons.
+  - **Only trimming the lookup value, not the lookup table's key column** — both sides need to be clean, or the mismatch persists.
+  - **Using TRIM expecting it to also fix non-breaking spaces** (common when data is pasted from a website) — TRIM handles regular spaces; non-breaking spaces sometimes need a SUBSTITUTE step first.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning (any domain):** fixing a broken VLOOKUP/merge caused by inconsistent spacing after a CSV import.
+  - **Customer analysis:** cleaning a name or email column before deduplication.
+
+  ## Related concepts
+
+  ```
+  UPPER/LOWER/PROPER → TRIM ← you are here → REPLACE/SUBSTITUTE → CONCAT
+  ```
+  Also directly supports [VLOOKUP](/skills/vlookup-function) and [XLOOKUP](/skills/xlookup-function) — a "broken" lookup is very often actually a whitespace problem.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula to remove extra spaces from A2.
+
+  ### Medium
+  2. A VLOOKUP fails to find a match even though the value looks identical in both sheets. What's your first thing to try?
+
+  ### Interview/Advanced
+  3. Why can TRIM alone sometimes fail to fix a lookup, even on data pasted from a webpage?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=TRIM(A2)`
+  2. Wrap both the lookup value and the target key column with TRIM (and check casing too) — invisible extra spaces are the most common cause of an apparently-identical match failing.
+  3. Web-pasted data sometimes contains non-breaking spaces (a different character than a normal space), which TRIM doesn't remove — a SUBSTITUTE replacing that specific character first is needed.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: A lookup fails on values that look identical. What's your first diagnostic step?**
+  Short answer: Suspect invisible whitespace or casing differences first — wrap both sides of the comparison in TRIM (and consider UPPER/LOWER) before assuming the data itself is wrong.
+
+  ## Interview traps / tricky points
+
+  - TRIM doesn't remove tabs or non-breaking spaces in every spreadsheet tool — know the limitation rather than assuming it's a universal fix.
+
+  ## Best practices
+
+  - Apply TRIM as a standard first step when importing any external or manually-entered text data.
+  - Trim both sides of a lookup/merge key, not just one.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **TRIM(text)** → removes leading/trailing spaces and collapses repeated internal spaces
+  **Use case:** the #1 fix for a lookup that "should" match but doesn't

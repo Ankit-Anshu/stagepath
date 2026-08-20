@@ -1,0 +1,100 @@
+title: AVERAGEIFS Function
+category: Spreadsheets
+what_is_it: Averaging a range based on two or more conditions at once — like the average order value for the West region in January only.
+why_it_matters: This completes the *IF/*IFS family — the same pattern (SUM, COUNT, AVERAGE, each with a single-condition and multi-condition version) covers the vast majority of real conditional-summary needs in a spreadsheet.
+prerequisites:
+  - averageif-function
+objectives:
+  - Write an AVERAGEIFS formula with two or more conditions
+  - Explain the full *IF/*IFS function family
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-averageifs-1
+    title: Average order value by region and month
+    description: Given a transactions list, use AVERAGEIFS to calculate the average order value for the "West" region in "January" only.
+verify:
+  - AVERAGEIFS correctly averages only rows matching every condition
+  - All criteria ranges are correctly aligned with the average range
+note: |
+  ## 🎯 What is it?
+
+  **AVERAGEIFS** averages a range based on **two or more conditions at once** — like the average order value for the West region in January only, following the same multi-condition pattern as [SUMIFS](/skills/sumifs-function) and [COUNTIFS](/skills/countifs-function).
+
+  ## 💡 Why is it important?
+
+  This completes the conditional-aggregation family: SUM/SUMIF/SUMIFS, COUNT/COUNTIF/COUNTIFS, and AVERAGE/AVERAGEIF/AVERAGEIFS together cover the vast majority of real "give me a number, but only for this specific slice of data" questions in a spreadsheet — no pivot table required for a quick, targeted calculation.
+
+  ## Syntax
+
+  ```
+  =AVERAGEIFS(average_range, criteria_range1, criteria1, criteria_range2, criteria2, ...)
+  ```
+
+  > Note: like SUMIFS, the range to calculate (`average_range`) comes **first**, followed by the criteria pairs — the same argument-order pattern as SUMIFS, different from the single-condition AVERAGEIF.
+
+  ## 📊 Example
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Region | Month | Amount |
+  | 2 | West | Jan | 100 |
+  | 3 | West | Feb | 300 |
+  | 4 | West | Jan | 200 |
+
+  **Formula:** `=AVERAGEIFS(C2:C4,A2:A4,"West",B2:B4,"Jan")`
+  **Result:** `150` — the average of rows 2 and 4 (100 and 200), the only rows matching both "West" and "Jan".
+
+  ## Multiple examples
+
+  **Beginner:** `=AVERAGEIFS(B2:B100,A2:A100,"Completed")` — AVERAGEIFS with one condition.
+  **Real-world:** `=AVERAGEIFS(amount,region,"West",status,"Completed",order_date,">="&DATE(2024,1,1))` — average order value for completed West-region orders from a specific date onward, combining three conditions in one formula.
+
+  ## ⚠️ Common mistakes
+
+  - **Confusing AVERAGEIF's argument order (range last) with AVERAGEIFS's (range first)** — the same trap as SUMIF vs. SUMIFS.
+  - **Averaging a segment with very few matching rows**, producing a number that's technically correct but not statistically meaningful — always sanity-check the underlying count (with COUNTIFS) alongside a conditional average.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** average order value for a specific region and time period combined.
+  - **HR analysis:** average performance score for a specific department and tenure band.
+
+  ## Related concepts
+
+  ```
+  AVERAGEIF → AVERAGEIFS ← you are here
+  ```
+  This closes the Logic & Conditional group. Together with SUMIF/SUMIFS and COUNTIF/COUNTIFS, this family answers almost any conditional summary question directly — [Pivot Tables](/skills/spreadsheets-pivot-tables) handle the same job when the breakdown needs to be interactive or cover many categories at once.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write an AVERAGEIFS that averages column C where column A = "West" and column B = "Jan".
+
+  ### Interview/Advanced
+  2. Why is it good practice to check COUNTIFS alongside AVERAGEIFS for the same conditions?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=AVERAGEIFS(C:C,A:A,"West",B:B,"Jan")`
+  2. To confirm how many rows the average is actually based on — an average computed from only 1 or 2 matching rows can be technically correct but misleadingly unstable or unrepresentative, and checking the count first prevents over-interpreting a small-sample average.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you calculate the average order value for one region within one specific month?**
+  Short answer: `=AVERAGEIFS(amount_range, region_range, "West", month_range, "Jan")` — combining the two conditions in one AVERAGEIFS call.
+
+  ## Best practices
+
+  - Always sanity-check a conditional average's underlying row count with COUNTIFS before trusting or reporting it, especially for a narrow, multi-condition slice.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **AVERAGEIFS(average_range, crit_range1, crit1, ...)** → average_range comes FIRST (like SUMIFS)
+  **Sanity check:** pair with COUNTIFS to confirm the underlying sample size isn't too small

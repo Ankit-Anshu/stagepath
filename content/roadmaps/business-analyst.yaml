@@ -1,0 +1,28 @@
+title: Business Analyst
+category: Data
+difficulty: beginner
+estimated_hours: 430
+audience: People who enjoy translating business problems into evidence, requirements, decisions, and measurable outcomes.
+description: Turn stakeholder questions into structured analysis, clear requirements, useful dashboards, and persuasive recommendations.
+stages:
+  - id: business-context
+    title: Frame business problems
+    description: Understand objectives, stakeholders, constraints, processes, and success measures.
+    skills: [data-thinking, business-analytics]
+  - id: everyday-analysis
+    title: Analyze everyday business data
+    description: Work confidently with spreadsheets and retrieve reliable answers from relational data.
+    skills: [spreadsheets, sql-select, sql-filtering, sql-aggregation]
+  - id: connected-data
+    title: Connect and structure evidence
+    description: Combine business entities and organize reusable analytical logic.
+    skills: [sql-joins, sql-ctes, databases]
+  - id: decision-support
+    title: Communicate decisions
+    description: Design charts, dashboards, and narratives that make recommendations understandable.
+    skills: [charts, dashboard-design, storytelling]
+  - id: career-proof
+    title: Prove your business impact
+    description: Package complete case studies that show analysis, communication, and measurable value.
+    skills: [portfolio-building, job-preparation]
+

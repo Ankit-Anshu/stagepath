@@ -1,0 +1,69 @@
+title: Collect Data
+category: Foundations
+what_is_it: Gathering the raw data needed to answer a defined business question — from a database, an export, an API, or a survey.
+why_it_matters: Knowing where and how to get the right data — not just any data — is a practical skill that determines whether the rest of the analysis is even possible.
+prerequisites:
+  - define-business-problem
+objectives:
+  - List common sources a data analyst collects data from
+  - Explain how the defined business problem shapes what data to collect
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-collect-data-1
+    title: Map data sources
+    description: For a business question you're curious about, list every system or source that might hold relevant data.
+verify:
+  - Can name three common data sources an analyst pulls from
+  - Can explain how the defined problem narrows down what to collect
+note: |
+  ## 🎯 What is it?
+
+  **Collecting data** means gathering the raw data needed to answer the defined business question — querying a database, exporting a report, calling an API, or running a survey. What gets collected is driven directly by the problem defined in the previous step.
+
+  ## 💡 Why is it important?
+
+  - The wrong or incomplete data collected here undermines everything downstream, no matter how good the later analysis is.
+  - Real data often lives across multiple systems (a sales database, an ad platform, a support tool) — knowing where to look is itself a skill.
+
+  ## Core concept
+
+  | Source | Example |
+  |---|---|
+  | Internal database | Orders, customers, transactions |
+  | Third-party platform | Google Analytics, an ad platform, a CRM |
+  | File export | A CSV or Excel report shared by another team |
+  | API | Pulling live data from a web service |
+  | Survey | Data collected directly for the analysis (primary data) |
+
+  ## 📊 Example
+
+  To answer "did the March email campaign drive signups?", an analyst would need to collect data from at least two sources: the email platform (who received/opened/clicked the campaign) and the product's own signup database (who actually signed up, and when) — joined together by email address or a tracking ID.
+
+  ## ⚠️ Common mistakes
+
+  - **Collecting only the most convenient data** rather than the data that actually answers the question — e.g., using only in-app data when the real answer requires joining with an ad platform's data.
+  - **Not checking data access/permissions early** — discovering you can't access a needed system partway through an analysis wastes time that clarifying up front would have caught.
+
+  ## Related concepts
+
+  ```
+  Define the Business Problem
+    ↓
+  Collect Data ← you are here
+    ↓
+  Understand Data
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: You need to analyze whether a marketing campaign drove signups. What data would you collect, and from where?**
+  Short answer: Campaign engagement data from the email/ad platform (sends, opens, clicks) and signup data from the product's own database, joined by a shared identifier like email address, over the campaign's time window.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Collect data** → gather the raw data the defined problem actually requires, from databases, exports, APIs, or surveys
+  What to collect is driven by the problem, not by what's most convenient.

@@ -1,0 +1,24 @@
+title: JavaScript in the Browser
+category: Frontend Development
+what_is_it: The language and runtime used to add behavior, data, and interaction to web interfaces.
+why_it_matters: Strong JavaScript fundamentals make every framework easier to learn and debug.
+estimated_minutes: 4800
+prerequisites: [web-foundations]
+objectives: [Write modern JavaScript, Build DOM interactions, Work safely with asynchronous data]
+subtopics:
+  - title: Language fundamentals
+    description: Values, variables, operators, control flow, functions, scope, closures, and modules.
+    outcomes: [Write predictable functions, Explain lexical scope]
+  - title: Data structures
+    description: Arrays, objects, maps, sets, destructuring, iteration, and immutable updates.
+    outcomes: [Transform collections, Model application data]
+  - title: DOM and events
+    description: Querying, updating, event propagation, forms, and delegation.
+    outcomes: [Build an interactive component, Explain bubbling]
+  - title: Asynchronous JavaScript
+    description: Event loop, promises, async-await, fetch, cancellation, and error handling.
+    outcomes: [Fetch and render API data, Handle loading and failure]
+  - title: Modules and tooling
+    description: ES modules, package managers, bundlers, source maps, linting, and formatting.
+    outcomes: [Structure a modular project, Debug bundled code]
+

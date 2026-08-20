@@ -1,0 +1,107 @@
+title: Sort
+category: Spreadsheets
+what_is_it: Reordering rows in a range based on the values in one or more columns, ascending or descending.
+why_it_matters: One of the most basic and frequently used data-analysis actions — finding the largest, smallest, most recent, or alphabetically first values in a dataset.
+prerequisites:
+  - conditional-formatting-spreadsheets
+objectives:
+  - Sort a range by a single column
+  - Sort a range by multiple columns with different sort directions
+estimated_minutes: 20
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-sort-1
+    title: Sort a sales list
+    description: Sort a transactions list by region (A-Z), then by amount (largest to smallest) within each region.
+verify:
+  - Sort correctly orders by the primary column
+  - Multi-level sort correctly applies the secondary sort within each primary group
+note: |
+  ## 🎯 What is it?
+
+  **Sort** reorders rows in a range based on the values in one or more columns, ascending (A-Z, smallest-to-largest) or descending (Z-A, largest-to-smallest).
+
+  ## 💡 Why is it important?
+
+  One of the most basic and frequently used data-analysis actions — finding the largest orders, the most recent dates, or alphabetically organizing a customer list are all sort operations, and they're often the very first step in exploring a new dataset.
+
+  ## Core concept
+
+  - **Single-level sort:** order the whole range by one column.
+  - **Multi-level sort:** order by a primary column first, then a secondary column *within* each group of the primary column — e.g., sort by region (A-Z), then by revenue (largest first) within each region.
+
+  Sorting should always be applied to the **whole related row**, not just one column — sorting only one column while leaving others in place breaks the row-to-row relationships in the data (a name would no longer match its correct amount).
+
+  ## 📊 Example
+
+  | region | revenue |
+  |---|---|
+  | East | 300 |
+  | West | 500 |
+  | West | 200 |
+
+  **Multi-level sort (region A-Z, then revenue largest-first):**
+
+  | region | revenue |
+  |---|---|
+  | East | 300 |
+  | West | 500 |
+  | West | 200 |
+
+  **Explanation:** Regions are grouped alphabetically, and within the "West" group, the higher revenue value comes first — this is exactly the layout needed to quickly scan "top performer per region."
+
+  ## Multiple examples
+
+  **Beginner:** Sorting a single column of dates from oldest to newest.
+  **Intermediate:** Sorting by category (A-Z) then by price (highest first) within each category.
+  **Real-world:** Sorting a customer list by "last order date" ascending to immediately surface the customers who haven't ordered in the longest time, as a starting point for a re-engagement campaign.
+
+  ## ⚠️ Common mistakes
+
+  - **Selecting only one column to sort**, leaving the rest of the row's data behind — this scrambles the relationship between a row's values and produces corrupted, meaningless data.
+  - **Sorting a range that includes a header row as if it were data**, or forgetting to exclude/include the header correctly, which can sort the header itself into the middle of the data.
+  - **Sorting a Table or named range without realizing formulas referencing specific fixed cell positions (rather than structured references) can break**, since the underlying data has physically moved.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any exploratory look at new data:** sorting to quickly find the largest/smallest/most-recent values.
+  - **Reporting:** sorting a summary table by value (largest first) so the most important rows are immediately visible at the top.
+
+  ## Related concepts
+
+  ```
+  Conditional Formatting → Sort ← you are here → Filter → Excel Tables
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the difference between a single-level and multi-level sort?
+
+  ### Interview/Advanced
+  2. Why is selecting only one column to sort (instead of the whole related range) a dangerous mistake?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A single-level sort orders by one column only; a multi-level sort orders by a primary column, then applies a secondary sort within each group of that primary column.
+  2. It breaks the relationship between a row's values — e.g., a customer name would end up next to a different customer's amount, silently corrupting the data without any visible error or warning.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How would you find the top 3 sales by region in a large transactions list?**
+  Short answer: Apply a multi-level sort — region A-Z as the primary sort, revenue largest-first as the secondary sort — then read the top rows within each region's group directly.
+
+  ## Best practices
+
+  - Always select the entire related range (all relevant columns) when sorting, not just one column.
+  - Confirm whether a header row is correctly excluded from the sort.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Sort** → reorders rows by one or more columns, ascending or descending
+  **Rule:** always sort the whole related row, never just one column in isolation

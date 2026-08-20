@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Find Your Path" description="Answer a few questions to find your closest-matching career roadmap.">
+  <header class="finder-head"><span class="eyebrow">Path finder</span><h1 class="display-title">Find your path</h1><p>Pick what sounds most like you — this is a starting point, not a test.</p></header>
+  <form id="finder" class="finder"><fieldset><legend>Select any that fit</legend><div class="interest-grid">
+    <label><input type="checkbox" value="visual"/><span><b>Visual building</b>I like turning ideas into interactive, polished interfaces.</span></label>
+    <label><input type="checkbox" value="systems"/><span><b>Systems and logic</b>I enjoy APIs, databases, automation, and reliability.</span></label>
+    <label><input type="checkbox" value="investigation"/><span><b>Investigation</b>I like finding unusual patterns and understanding what happened.</span></label>
+    <label><input type="checkbox" value="people"/><span><b>People and behavior</b>I want to understand users and improve their experience.</span></label>
+    <label><input type="checkbox" value="business"/><span><b>Business decisions</b>I enjoy metrics, questions, trends, and communicating insights.</span></label>
+    <label><input type="checkbox" value="math"/><span><b>Models and experiments</b>I like statistics, prediction, and careful uncertainty.</span></label>
+    <label><input type="checkbox" value="infrastructure"/><span><b>Infrastructure</b>I like pipelines, platforms, data movement, and operations.</span></label>
+    <label><input type="checkbox" value="craft"/><span><b>Structure and craft</b>I notice confusing flows, inconsistent patterns, and unclear language.</span></label>
+  </div></fieldset><button class="button-primary" type="submit">Show my closest path →</button></form>
+  <section id="result" class="result" hidden><span>Closest starting match</span><h2 id="result-title"></h2><p id="result-copy"></p><div id="result-reasons"></div><a id="result-link" class="button-primary" href="#">Open this roadmap →</a><button id="try-again" type="button">Change selections</button></section>
+  <script>
+    const paths = {
+      'frontend-developer': { title:'Frontend Developer', copy:'Build accessible, responsive interfaces and interactive web applications.', weights:{visual:3,craft:2,systems:1} },
+      'backend-developer': { title:'Backend Developer', copy:'Design APIs, data models, secure services, and reliable production systems.', weights:{systems:3,infrastructure:2,investigation:1} },
+      'cybersecurity-analyst': { title:'Cybersecurity Analyst', copy:'Investigate threats, understand systems, and turn evidence into defensive action.', weights:{investigation:3,systems:2,infrastructure:1} },
+      'ux-designer': { title:'UX Designer', copy:'Research people, structure experiences, prototype ideas, and test usability.', weights:{people:3,craft:3,visual:1} },
+      'data-analyst': { title:'Data Analyst', copy:'Use SQL, spreadsheets, statistics, and dashboards to support business decisions.', weights:{business:3,investigation:1,math:1} },
+      'data-scientist': { title:'Data Scientist', copy:'Use statistics, experiments, programming, and models to study complex patterns.', weights:{math:3,investigation:2,systems:1} },
+      'data-engineer': { title:'Data Engineer', copy:'Build pipelines, warehouses, transformations, and dependable data platforms.', weights:{infrastructure:3,systems:3,business:1} },
+    };
+    const form = document.querySelector('#finder'); const result = document.querySelector('#result');
+    form?.addEventListener('submit',(event)=>{event.preventDefault();const selected=[...form.querySelectorAll('input:checked')].map((input)=>input.value);let winner=Object.entries(paths).map(([id,path])=>({id,path,score:selected.reduce((sum,key)=>sum+(path.weights[key]||0),0)})).sort((a,b)=>b.score-a.score)[0];if(!selected.length) winner={id:'frontend-developer',path:paths['frontend-developer'],score:0};document.querySelector('#result-title').textContent=winner.path.title;document.querySelector('#result-copy').textContent=winner.path.copy;document.querySelector('#result-reasons').textContent=selected.length?`Matched from: ${selected.join(' · ')}`:'A broad beginner-friendly place to start.';document.querySelector('#result-link').href=`/roadmaps/${winner.id}`;form.hidden=true;result.hidden=false;result.scrollIntoView({behavior:'smooth'});});
+    document.querySelector('#try-again')?.addEventListener('click',()=>{result.hidden=true;form.hidden=false;});
+  </script>
+</Base>
+<style>
+  .finder-head{padding:20px 0 45px}.finder-head .display-title{font-size:clamp(44px,6vw,68px)}.finder-head .display-title span{color:var(--green)}.finder-head>p{max-width:650px;color:var(--muted)}.finder fieldset{padding:0;border:0}.finder legend{margin-bottom:12px;font-size:10px;font-weight:850;text-transform:uppercase}.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.interest-grid label{position:relative;display:block}.interest-grid input{position:absolute;opacity:0}.interest-grid span{display:block;min-height:93px;padding:16px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--muted);font-size:10px;cursor:pointer;transition:.18s}.interest-grid span b{display:block;margin-bottom:3px;color:var(--ink);font-size:13px}.interest-grid input:checked+span{border-color:var(--green);background:var(--green-soft);box-shadow:inset 0 0 0 1px var(--green)}.finder>.button-primary{margin-top:18px;border:0}.result{padding:28px;border:1px solid #a9c8b4;border-radius:17px;background:white}.result>span{color:var(--green);font-size:8px;font-weight:850;text-transform:uppercase}.result h2{margin:5px 0 0;font-size:34px}.result p{color:var(--muted)}#result-reasons{margin:15px 0;color:#879188;font-size:9px}.result .button-primary{margin-right:12px}.result button{border:0;background:none;color:var(--muted);font-size:10px}@media(max-width:600px){.interest-grid{grid-template-columns:1fr}}
+</style>
+

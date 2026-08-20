@@ -1,0 +1,101 @@
+title: TEXTJOIN Function
+category: Spreadsheets
+what_is_it: Joining multiple text values together with a chosen separator, while automatically skipping any empty cells in the range.
+why_it_matters: It solves CONCAT's biggest practical annoyance — manually handling separators and blank values when joining more than 2-3 cells.
+prerequisites:
+  - search-function
+objectives:
+  - Join a range of text values with a separator using TEXTJOIN
+  - Explain how TEXTJOIN handles blank cells differently from CONCAT
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-textjoin-1
+    title: Build an address from multiple fields
+    description: Join street, city, and state fields (where state is sometimes blank) into one clean address using TEXTJOIN.
+verify:
+  - TEXTJOIN correctly joins values with the specified separator
+  - Blank cells are skipped, not shown as an empty extra separator
+note: |
+  ## 🎯 What is it?
+
+  **TEXTJOIN** joins multiple text values together with a chosen separator, and automatically **skips any empty cells** in the range — solving [CONCAT](/skills/concat-function)'s biggest practical annoyance when joining more than 2-3 values.
+
+  ## 💡 Why is it important?
+
+  CONCAT requires manually adding a separator between every single value, and doesn't skip blanks — joining 5 fields where 2 might be empty produces a messy result with doubled-up separators. TEXTJOIN handles both problems in one function call.
+
+  ## Syntax
+
+  ```
+  =TEXTJOIN(delimiter, ignore_empty, text1, [text2], ...)
+  ```
+
+  - **delimiter** — the separator to place between values (e.g., `", "`).
+  - **ignore_empty** — `TRUE` to skip blank cells automatically (almost always what you want), `FALSE` to include them as empty entries.
+
+  ## 📊 Example
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Street | City | State |
+  | 2 | 123 Main St | Springfield | *(blank)* |
+
+  **Formula:** `=TEXTJOIN(", ",TRUE,A2:C2)`
+  **Result:** `"123 Main St, Springfield"`
+
+  **Explanation:** The blank State cell is automatically skipped — no dangling extra comma at the end, which a manual CONCAT formula would have required extra logic to avoid.
+
+  ## Multiple examples
+
+  **Beginner:** `=TEXTJOIN(" ",TRUE,A2,B2)` — join a first and last name with a space, functionally similar to CONCAT for just 2 values.
+  **Intermediate:** `=TEXTJOIN(", ",TRUE,A2:E2)` — join 5 fields with a comma separator, letting TEXTJOIN handle any blanks automatically.
+  **Real-world:** Building a full mailing address from separate street/city/state/zip columns where some records are missing a secondary address line — TEXTJOIN produces a clean, correctly-punctuated address for every row without a custom IF-based formula to handle the missing field.
+
+  ## ⚠️ Common mistakes
+
+  - **Using CONCAT (or &) for joining many fields with possible blanks**, requiring much more complex manual logic to avoid doubled separators — TEXTJOIN handles this natively.
+  - **Forgetting the `ignore_empty` argument**, or setting it to FALSE without meaning to, which then includes blank entries and produces doubled-up separators exactly like CONCAT would.
+
+  ## Real-world Data Analyst use cases
+
+  - **Data cleaning:** building a clean, combined field (like a full address or a summary tag) from several source columns with inconsistent blanks.
+
+  ## Related concepts
+
+  ```
+  SEARCH → TEXTJOIN ← you are here → REPLACE → SUBSTITUTE
+  ```
+  Builds directly on the same joining concept as [CONCAT](/skills/concat-function), adding separator and blank-handling automation.
+
+  ## Practice questions
+
+  ### Easy
+  1. Write a formula that joins A2:C2 with a comma-space separator, skipping blanks.
+
+  ### Interview/Advanced
+  2. Why is TEXTJOIN generally preferred over CONCAT/& when joining more than 2-3 fields that might contain blanks?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=TEXTJOIN(", ",TRUE,A2:C2)`
+  2. CONCAT/& requires manually inserting a separator between every value and has no built-in way to skip blanks — with several fields where any could be blank, this quickly becomes a complex, error-prone formula; TEXTJOIN handles both the separator placement and blank-skipping automatically in one call.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: How does TEXTJOIN improve on CONCAT for joining several fields?**
+  Short answer: TEXTJOIN takes a separator once and applies it automatically between every value, and can skip blank cells entirely — CONCAT requires manually placing a separator between each value and has no blank-handling logic at all.
+
+  ## Best practices
+
+  - Prefer TEXTJOIN over CONCAT/& whenever joining more than 2 values, or when any value might be blank.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **TEXTJOIN(delimiter, ignore_empty, range)** → joins values with a separator, auto-skips blanks if TRUE
+  **Advantage over CONCAT:** no manual separator placement, no doubled-up separators from blanks

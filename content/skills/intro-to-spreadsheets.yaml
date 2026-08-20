@@ -1,0 +1,120 @@
+title: Introduction to Spreadsheets
+category: Spreadsheets
+what_is_it: What a spreadsheet application (Excel or Google Sheets) is, what it's good for, and the basic mental model of a grid of cells you can calculate on.
+why_it_matters: Every later spreadsheet skill — formulas, pivot tables, dashboards — assumes this basic mental model. Starting here means nothing later feels like magic.
+prerequisites: []
+objectives:
+  - Explain what a spreadsheet is and what problems it solves
+  - Identify the main parts of a spreadsheet application's interface
+  - Distinguish Excel from Google Sheets at a high level
+estimated_minutes: 60
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-intro-spreadsheets-1
+    title: Open and explore
+    description: Open Excel or Google Sheets, create a new blank file, and identify the ribbon/toolbar, the grid, and the sheet tabs.
+verify:
+  - Can explain what a spreadsheet is to a non-technical person
+  - Can identify the main interface areas without help
+note: |
+  ## 🎯 What is it?
+
+  A **spreadsheet** is a digital grid of rows and columns where each intersection (a **cell**) can hold a number, text, or a formula that calculates something. Excel and Google Sheets are the two most common spreadsheet applications.
+
+  Think of it like an infinitely large piece of graph paper that can do math for you — instead of writing "12 + 8 = 20" by hand, you put 12 in one box, 8 in another, and a formula in a third box that always shows their sum, automatically updating if either number changes.
+
+  ## 💡 Why is it important?
+
+  - It's the most widely used data tool in business — nearly every company, in every industry, uses a spreadsheet somewhere.
+  - Every later spreadsheet skill (formulas, lookups, pivot tables, dashboards) assumes you're comfortable with the basic grid, so this is the true starting point.
+  - It's usually a candidate's very first hands-on data tool, well before SQL or Python — a comfortable foundation here makes everything after it easier.
+
+  ## Core concept
+
+  A spreadsheet **file** (called a *workbook*) contains one or more **sheets** (grids), each made of **rows** (numbered) and **columns** (lettered), and their intersections are **cells**, each identified by an address like `B3` (column B, row 3).
+
+  | Term | Meaning |
+  |---|---|
+  | Workbook | The whole file |
+  | Sheet / Worksheet | One grid/tab inside the file |
+  | Cell | One box in the grid, identified by column+row (e.g., A1) |
+  | Formula | An instruction in a cell that calculates a result |
+  | Ribbon / Toolbar | The menu of commands at the top of the application |
+
+  ## 📊 Example
+
+  A simple spreadsheet tracking weekly expenses:
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Item | Cost |
+  | 2 | Coffee | 4 |
+  | 3 | Lunch | 12 |
+  | 4 | Total | =SUM(B2:B3) |
+
+  Cell B4 doesn't contain the number 16 directly — it contains the formula `=SUM(B2:B3)`, which *calculates* 16 and updates automatically if B2 or B3 changes. This automatic recalculation is the core value a spreadsheet adds over a plain table.
+
+  ## Multiple examples
+
+  **Beginner:** Typing a name in A1 and a number in B1, with nothing calculated yet.
+  **Intermediate:** Adding a formula in C1 (`=B1*2`) that calculates based on another cell.
+  **Real-world:** A small budget tracker with categories in column A, amounts in column B, and a running total formula at the bottom that updates as new rows are added.
+
+  ## ⚠️ Common mistakes
+
+  - **Typing a calculated value directly instead of using a formula** (e.g., typing "16" instead of `=SUM(B2:B3)`) — this breaks the moment the underlying numbers change, since nothing updates automatically.
+  - **Confusing a workbook (the file) with a worksheet (one tab inside it)** — these terms come up constantly and mixing them up causes confusion when following instructions or documentation.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any small analysis:** a spreadsheet is often the fastest tool to open and start working in before reaching for SQL or Python.
+  - **Sharing results:** spreadsheets are still the most universally accessible way to share a table of numbers with a non-technical stakeholder.
+
+  ## Related concepts
+
+  ```
+  Introduction to Spreadsheets ← you are here
+    ↓
+  Workbook & Worksheet
+    ↓
+  Rows, Columns & Cells
+    ↓
+  Cell References
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What's the difference between a workbook and a worksheet?
+
+  ### Medium
+  2. Why is typing a calculated number directly into a cell considered a bad habit, compared to using a formula?
+
+  ### Interview/Advanced
+  3. Why do you think spreadsheets remain so widely used in business despite more powerful tools like SQL and Python existing?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. A workbook is the entire file; a worksheet is one grid/tab inside that file — a single workbook can contain many worksheets.
+  2. A typed-in value doesn't update automatically if the underlying numbers change, silently going stale — a formula recalculates every time, staying accurate.
+  3. Accessibility and low barrier to entry — nearly anyone can open a spreadsheet and understand a grid of numbers, no coding or setup required, making it the default tool for quick, shared, everyday calculations.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What's the core advantage of a formula over typing a number directly?**
+  Short answer: A formula recalculates automatically whenever the cells it depends on change, keeping the result always accurate — a typed-in number does not.
+
+  ## Best practices
+
+  - Always use a formula for any value that's calculated from other cells, never type the result manually.
+  - Get comfortable navigating with cell addresses (like B3) early — it's the foundation for every formula that follows.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Workbook** → the whole file · **Worksheet** → one tab/grid inside it · **Cell** → one box, addressed like B3
+  **Formula** → a calculated instruction, not a typed value — it updates automatically

@@ -1,0 +1,192 @@
+title: Portfolio Building
+what_is_it: Turning finished projects into evidence a hiring manager can evaluate in minutes — a clear README, a public repository, and a short write-up per project.
+why_it_matters: A finished project nobody can find or understand is functionally the same as an unfinished one. Portfolio building is what makes learning visible to someone else.
+prerequisites:
+  - business-analytics
+  - git-version-control
+objectives:
+  - Write a README that explains the problem, approach, and findings
+  - Publish a project to a public GitHub repository
+  - Select the 3-4 projects that best represent target-role skills
+estimated_minutes: 240
+resources:
+  - r-readme-so
+  - r-github-best-practices
+practice:
+  - id: ex-portfolio-1
+    title: Write a project README
+    description: 'Take one completed project and write a README covering: problem, approach, tools, key findings, and how to reproduce it.'
+verify:
+  - README explains the problem before the solution
+  - A stranger could understand what was done without asking questions
+  - Repository is public and actually runs / opens as described
+category: Portfolio
+subtopics:
+  - title: README writing
+    description: Presenting problem, approach, tools, and findings in a format a hiring manager can scan in minutes.
+    outcomes:
+      - Write a complete, scannable project README
+  - title: Publishing on GitHub
+    description: Making a repository public, well-organized, and understandable to a stranger.
+    outcomes:
+      - Publish a clean, working public repository
+  - title: Choosing what to show
+    description: Selecting the 3-4 projects that best represent the skills your target role actually needs.
+    outcomes:
+      - Select and justify your best 3-4 portfolio projects
+note: |
+  ## 🎯 What is it?
+
+  **Portfolio building** is turning finished projects into evidence a hiring manager can actually evaluate in minutes — a clear README, a well-organized public repository, and a short write-up per project.
+
+  ## 💡 Why is it important?
+
+  A finished project nobody can find or understand is functionally the same as an unfinished one, from a hiring manager's perspective. Portfolio building is what makes learning visible to someone else — it's the bridge between "I did the work" and "I can prove I did the work, and someone can verify it in minutes."
+
+  ## Core concept
+
+  ### README writing
+  A README should present, in order: the **problem** being solved, the **approach** taken, the **tools** used, and the **key findings** — scannable by a busy hiring manager in a couple of minutes, not requiring them to read every line of code to understand what happened.
+
+  ### Publishing on GitHub
+  A public, well-organized repository — clear folder structure, a working README, code that actually runs as described — is what makes a project genuinely reviewable, versus a private or disorganized repo that asks too much effort from a stranger.
+
+  ### Choosing what to show
+  Select the **3-4 projects** that best represent the skills your target role actually needs — not every project you've built, and not necessarily your most *technically* complex one if it doesn't map to what the role is hiring for.
+
+  ## Syntax / Formula / Structure
+
+  A strong project README structure:
+
+  ```
+  # Project Title
+
+  ## Problem
+  [1-3 sentences: what business question or problem this addresses]
+
+  ## Approach
+  [Brief: what data, what methods/tools, what steps]
+
+  ## Key Findings
+  [The 1-3 most important results, stated plainly — with a chart if relevant]
+
+  ## Tools Used
+  [SQL, Python, Power BI, etc.]
+
+  ## How to Reproduce
+  [Steps or a link to the notebook/script]
+  ```
+
+  ## 📊 Example
+
+  **Weak README:** A wall of code with no explanation, or a one-line description: "Sales analysis project."
+
+  **Strong README:**
+  ```
+  # E-Commerce Revenue Analysis
+
+  ## Problem
+  The client wanted to know why Q2 revenue was flat despite a 20% increase
+  in site traffic.
+
+  ## Approach
+  Cleaned and joined 3 months of order and traffic data in SQL; segmented
+  by channel and device to isolate the driver.
+
+  ## Key Findings
+  Mobile conversion rate dropped 40% in Q2 due to a broken checkout step,
+  fully offsetting traffic gains. Desktop performance was stable.
+
+  ## Tools Used
+  PostgreSQL, Python (pandas), Tableau
+
+  ## How to Reproduce
+  See /notebooks/analysis.ipynb — run against the sample data in /data.
+  ```
+
+  **Explanation:** A reviewer understands the entire project's value in under a minute, without opening a single script — the finding is stated plainly, and the path to verify it (reproduction steps) is explicit.
+
+  ## Multiple examples
+
+  **Beginner:** A README for a single, simple project stating problem, approach, and one key finding.
+  **Intermediate:** A README with a chart image embedded showing the key finding visually, alongside the text summary.
+  **Real-world:** Selecting 3 projects — one SQL-heavy, one Python/pandas-heavy, one dashboard-focused — deliberately chosen to demonstrate range across the specific skills a target job posting lists, rather than 3 projects that happen to overlap in the same skill.
+
+  ## ⚠️ Common mistakes
+
+  - **A repository with code but no README**, forcing a reviewer to reverse-engineer the project's purpose from the code alone.
+  - **Burying the finding** at the bottom of a long README instead of stating it clearly near the top.
+  - **Showcasing every project ever built**, including unfinished or low-quality ones, diluting the strength of the best work.
+  - **A repository that doesn't actually run as described** — an unverified "how to reproduce" section is worse than none at all, since it actively wastes a reviewer's time.
+
+  ## Real-world Data Analyst use cases
+
+  - **Job applications:** the primary evidence a hiring manager reviews before an interview.
+  - **Interview preparation:** a well-documented project is easy to discuss confidently, since the README itself is a rehearsed summary.
+
+  ## Related concepts
+
+  ```
+  Git & Version Control → Personal Portfolio Website
+    ↓
+  Portfolio Building ← you are here
+    ↓
+  Case Study Presentations
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. What four things should a project README cover, in order?
+
+  ### Medium
+  2. A finished project has clean code but no README. Why is this a problem for a job search?
+
+  ### Interview/Advanced
+  3. How would you choose between two strong projects when only 4 portfolio slots are available and a target job posting emphasizes SQL and dashboarding?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Problem, approach, tools used, and key findings — in that order, so a reviewer understands the project's value before digging into details.
+  2. A hiring manager typically has only minutes to review a portfolio — without a README, they can't quickly understand the problem or the value of the work, effectively making a good project invisible.
+  3. Prioritize the project(s) that most directly demonstrate SQL and dashboarding skills specifically, since the goal is to show the exact skills the target role is hiring for — a technically impressive but less relevant project (e.g., a machine learning project for an analyst role) is a weaker choice even if it required more work.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What should a project README include?**
+  Short answer: The problem being solved, the approach taken, the tools used, and the key findings — structured so a reviewer can understand the project's value in a couple of minutes.
+
+  ### Conceptual questions
+  **Q: Why does portfolio building matter as much as the analysis work itself?**
+  Short answer: A project's value to a job search depends entirely on whether someone else can find, understand, and verify it — a technically strong but poorly documented project provides almost no signal to a hiring manager who won't invest the time to reverse-engineer it.
+
+  ### Scenario-based questions
+  **Q: You have 6 completed projects but should only showcase 3-4. How do you decide which to cut?**
+  Short answer: Prioritize the projects that best demonstrate the specific skills your target role needs, show genuine range (not 4 versions of the same skill), and are the most polished/complete — cut projects that are redundant with a stronger one or are unfinished/unpolished.
+
+  ### Practical questions
+  **Q: How would you write a README for a project with a genuinely surprising or counterintuitive finding?**
+  Short answer: State the surprising finding clearly and early (it's inherently more compelling than an expected result), then walk through the approach that led to it, so the reader immediately understands why the project is interesting before the details.
+
+  ## Interview traps / tricky points
+
+  - A hiring manager is very unlikely to run code themselves — the README's clarity, not the code's cleverness, is often the actual deciding factor in whether a project makes an impression.
+  - Choosing "most technically impressive" over "most relevant to the role" is a common portfolio-selection mistake.
+
+  ## Best practices
+
+  - Write the README before considering a project "done" — it's part of the deliverable, not an afterthought.
+  - State the key finding clearly and early in the README.
+  - Curate for relevance to the target role, not just technical difficulty.
+  - Verify the "how to reproduce" steps actually work before publishing.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **README structure:** problem → approach → tools → key findings → how to reproduce
+  **Curate:** 3-4 projects matched to the target role's actual required skills
+  **Rule:** a project nobody can understand quickly is functionally invisible to a hiring manager

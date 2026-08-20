@@ -1,0 +1,70 @@
+title: Database Schemas
+category: SQL
+what_is_it: A schema is the overall blueprint of a database — which tables exist, their columns, data types, and how they relate to each other.
+why_it_matters: Reading a schema (or a diagram of one) before writing any query is what turns an unfamiliar database from a guessing game into something navigable.
+prerequisites:
+  - sql-null
+objectives:
+  - Define a database schema
+  - Explain why reviewing a schema before querying saves time
+estimated_minutes: 20
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-database-schemas-1
+    title: Sketch a schema
+    description: 'Sketch a simple schema (tables, key columns, relationships) for a small blog: users, posts, comments.'
+verify:
+  - Can define a database schema
+  - Can sketch a simple 2-3 table schema for a familiar scenario
+note: |
+  ## 🎯 What is it?
+
+  A **database schema** is the overall blueprint of a database — every table, its columns and data types, its keys, and how it relates to other tables. Where a single table shows one grid, a schema shows the whole structure at once, often as a diagram (an ER diagram — covered later in Data Modeling).
+
+  ## 💡 Why is it important?
+
+  - Reviewing a schema before writing a query turns an unfamiliar database from a guessing game into something navigable — you can see what tables exist and how they connect before running a single `SELECT`.
+  - Most real analyst work starts with an unfamiliar schema, not a table you already know well — this is a genuinely practical, frequently-used skill.
+
+  ## Core concept
+
+  ```
+  Schema: ecommerce
+  ├── customers (id, name, email, signup_date)
+  ├── products  (id, name, price, category)
+  ├── orders    (id, customer_id → customers.id, order_date)
+  └── order_items (order_id → orders.id, product_id → products.id, quantity)
+  ```
+
+  A schema shows every table and every relationship at once — the arrows are foreign keys pointing to primary keys.
+
+  ## 📊 Example
+
+  Given a new, unfamiliar database, an analyst's first move is usually to pull up its schema (a diagram, or a query against the database's own metadata tables) to see what tables exist and how they connect — before attempting to answer any real business question with it.
+
+  ## ⚠️ Common mistakes
+
+  - **Diving straight into writing queries against an unfamiliar database** without first reviewing its schema — this often leads to wrong joins or misunderstood table grains.
+  - **Assuming a schema never changes.** Real schemas evolve — a column or table that existed last month may have moved or been renamed; worth a quick sanity check on an important, recurring query.
+
+  ## Related concepts
+
+  ```
+  NULL
+    ↓
+  Database Schemas ← you are here
+  ```
+  This closes the Database Fundamentals chapter. Builds directly toward SQL Fundamentals (next chapter) and ER Diagrams (Data Modeling stage, later in this roadmap).
+
+  ## 🎤 Interview preparation
+
+  **Q: You're handed access to an unfamiliar company database. What's your first step before writing any queries?**
+  Short answer: Review its schema — what tables exist, their key columns, and how they relate — either from documentation, a diagram, or the database's own metadata, rather than guessing at table structure while writing a query.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Database schema** → the full blueprint: every table, column, data type, and relationship
+  Always worth reviewing before querying an unfamiliar database.

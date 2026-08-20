@@ -1,0 +1,104 @@
+title: XLOOKUP Function
+category: Spreadsheets
+what_is_it: The modern lookup function that searches in any direction, has a built-in "not found" default, and doesn't break when a column is inserted — designed to directly replace VLOOKUP.
+why_it_matters: It fixes VLOOKUP's two biggest limitations in a single, simpler function, without needing to combine two functions like INDEX-MATCH does.
+prerequisites:
+  - index-match-function
+objectives:
+  - Replace a VLOOKUP with an XLOOKUP
+  - Use XLOOKUP's built-in not-found default
+estimated_minutes: 35
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-xlookup-1
+    title: Rebuild a VLOOKUP as an XLOOKUP
+    description: Take an existing VLOOKUP formula and rewrite it as an XLOOKUP, including a default value for a missing match.
+verify:
+  - XLOOKUP correctly returns the matching value
+  - A missing match returns the specified default instead of a raw error
+note: |
+  ## 🎯 What is it?
+
+  **XLOOKUP** is the modern lookup function — it can search in **any direction** (not just left-to-right like VLOOKUP), has a **built-in "not found" default**, and doesn't break when a column is inserted into the source table. It's designed as a direct, simpler replacement for VLOOKUP.
+
+  ## 💡 Why is it important?
+
+  It fixes VLOOKUP's two biggest limitations — direction and structural fragility — in a single, simpler function, without needing to combine two functions the way [INDEX + MATCH](/skills/index-match-function) does. Where available, it's the recommended default choice for new lookup formulas.
+
+  ## Syntax
+
+  ```
+  =XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found])
+  ```
+
+  - **lookup_array** and **return_array** are separate ranges (like INDEX-MATCH), not one combined table — this is what lets XLOOKUP search and return in any direction.
+  - **if_not_found** — an optional 4th argument providing a clean default value instead of a raw `#N/A` error.
+
+  ## 📊 Example
+
+  `customers` table:
+
+  | customer_id | name | region |
+  |---|---|---|
+  | 101 | Ana Silva | West |
+  | 102 | Wei Chen | East |
+
+  **Formula:** `=XLOOKUP(102, A:A, C:C, "Unknown")`
+  **Result:** `"East"`
+
+  If customer_id 999 (not present) were searched instead, the result would be `"Unknown"` — the specified default — instead of a raw `#N/A` error.
+
+  ## Multiple examples
+
+  **Beginner:** `=XLOOKUP(A2,customers!A:A,customers!B:B)` — a direct VLOOKUP replacement.
+  **Intermediate:** `=XLOOKUP(A2,customers!C:C,customers!A:A)` — looking left of the key column, something VLOOKUP structurally cannot do, in one simple call.
+  **Real-world:** Replacing a workbook's VLOOKUP formulas with XLOOKUP as a cleanup pass, immediately eliminating both the direction limitation and the risk of a formula breaking after a column is inserted, while also removing the need for a separate IFERROR wrapper thanks to the built-in default argument.
+
+  ## ⚠️ Common mistakes
+
+  - **Not using the built-in `if_not_found` argument**, and instead still wrapping XLOOKUP in a separate IFERROR — redundant, since XLOOKUP already handles this natively.
+  - **Assuming XLOOKUP is available in every spreadsheet tool/version.** It's a newer function; older versions of Excel or other spreadsheet tools may not support it, in which case INDEX-MATCH remains the fallback.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any new lookup formula**, where XLOOKUP should generally be the first choice over VLOOKUP.
+  - **Cleaning up a legacy workbook** by replacing fragile VLOOKUPs with more resilient XLOOKUPs.
+
+  ## Related concepts
+
+  ```
+  INDEX + MATCH → XLOOKUP ← you are here → XMATCH
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Rewrite `=VLOOKUP(A2,customers!A:C,2,FALSE)` as an XLOOKUP.
+
+  ### Interview/Advanced
+  2. Why might a team still use INDEX-MATCH instead of XLOOKUP in some workbooks?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=XLOOKUP(A2,customers!A:A,customers!B:B)`
+  2. XLOOKUP is a newer function not available in every spreadsheet version or tool — a workbook that needs to remain compatible with older software, or a shared template used across an organization with mixed software versions, may need to stick with the more universally-supported INDEX-MATCH.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: What are XLOOKUP's two main advantages over VLOOKUP?**
+  Short answer: It can search in any direction (not just left-to-right), and it has a built-in default value for a missing match, removing the need for a separate IFERROR wrapper — and unlike VLOOKUP, it isn't vulnerable to breaking when a column is inserted into the source table.
+
+  ## Best practices
+
+  - Default to XLOOKUP for new lookup work where it's available; fall back to INDEX-MATCH for compatibility with older tools/versions.
+  - Use the built-in `if_not_found` argument instead of a separate IFERROR wrapper.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **XLOOKUP(value, lookup_array, return_array, [default])** → any direction, built-in not-found default
+  **Modern default choice** where available; INDEX-MATCH remains the fallback for compatibility

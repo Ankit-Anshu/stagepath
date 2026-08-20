@@ -1,0 +1,170 @@
+title: SQL — Query Optimization Basics
+what_is_it: Reading a query plan and understanding how indexes make a query fast — enough to recognize and explain why a query is slow.
+why_it_matters: As tables grow to millions of rows, a query that "just works" can quietly become the query that times out. Knowing the basics is what separates writing correct SQL from writing SQL that scales.
+prerequisites:
+  - sql-window-functions
+objectives:
+  - Explain what an index does at a conceptual level
+  - Read a basic query execution plan
+  - Identify a likely cause of a slow query
+  - Explain why SELECT * is often wasteful at scale
+subtopics:
+  - title: What an index does
+    description: Why an index lets the database avoid scanning every row, and what it costs to maintain one.
+    outcomes:
+      - Explain in plain language what an index speeds up
+  - title: Reading a query plan
+    description: Using EXPLAIN to see whether a query is scanning a full table or using an index.
+    outcomes:
+      - Read an EXPLAIN plan and identify a full table scan
+  - title: Common slow-query causes
+    description: Missing indexes, SELECT *, and functions applied to filtered columns.
+    outcomes:
+      - Identify a likely reason a specific query is slow
+estimated_minutes: 150
+resources:
+  - r-postgres-tutorial
+practice:
+  - id: ex-sql-optimization-1
+    title: Diagnose a slow query
+    description: Given a query and its EXPLAIN output, identify whether it's using an index and propose one change to speed it up.
+verify:
+  - Correctly identifies whether a plan uses an index or a full scan
+  - Proposed fix is specific, not just "add an index somewhere"
+  - Can explain the tradeoff of adding an index
+note: |
+  ## 🎯 What is it?
+
+  **Query optimization basics** means being able to read a query execution plan and understand, at a conceptual level, how indexes make a query fast — enough to recognize *why* a query is slow and propose a specific fix, not just "add an index somewhere."
+
+  ## 💡 Why is it important?
+
+  As tables grow to millions of rows, a query that "just works" during development can quietly become the query that times out in production. Knowing the basics is what separates writing correct SQL from writing SQL that scales — a distinction employers explicitly test for in analyst interviews at companies with large datasets.
+
+  ## Core concept
+
+  ### What an index does
+  An index is a separate, ordered data structure (conceptually similar to a book's index) that lets the database jump directly to matching rows instead of scanning the entire table row by row. It speeds up lookups and filters on the indexed column(s) dramatically, at the cost of extra storage and slightly slower writes (since the index must also be updated).
+
+  ### Reading a query plan
+  `EXPLAIN` (or `EXPLAIN ANALYZE`) shows how the database actually plans to execute a query — most importantly, whether it's using an index (`Index Scan`) or reading the whole table (`Sequential Scan` / `Full Table Scan`) to satisfy a filter.
+
+  ### Common slow-query causes
+
+  | Cause | Why it's slow |
+  |---|---|
+  | Missing index on a filtered/joined column | Forces a full table scan |
+  | `SELECT *` on a wide table | Transfers far more data than needed |
+  | A function applied to a filtered column (e.g., `WHERE UPPER(name) = 'X'`) | Often prevents the database from using an existing index on that column |
+  | Filtering on a low-selectivity column (e.g., a boolean with only 2 values) | An index may not help much — the database might still scan most of the table |
+
+  ## Syntax
+
+  ```sql
+  EXPLAIN
+  SELECT * FROM orders WHERE customer_id = 1042;
+  ```
+
+  A simplified example of what the output distinguishes:
+
+  ```
+  Seq Scan on orders  (cost=0.00..18334.00 rows=1 ...)     ← full table scan, no index used
+  Index Scan using orders_customer_id_idx on orders ...     ← index used, much cheaper
+  ```
+
+  ## 📊 Example
+
+  A query filters 10 million rows: `SELECT * FROM orders WHERE customer_id = 1042;`
+
+  **Without an index on customer_id:** `EXPLAIN` shows a `Seq Scan` — the database reads every one of the 10 million rows to find matches.
+
+  **With an index on customer_id:** `EXPLAIN` shows an `Index Scan` — the database jumps almost directly to the matching rows.
+
+  **Explanation:** The query is functionally identical in both cases — the difference is purely about *how* the database finds the matching rows, and it can mean the difference between a sub-second query and one that times out.
+
+  ## Multiple examples
+
+  **Beginner:** Recognize `Seq Scan` vs. `Index Scan` in a basic EXPLAIN output.
+  **Intermediate:** Diagnose a slow query that filters on `UPPER(email) = 'JOHN@EXAMPLE.COM'` — the function call on the column likely prevents index use; propose either a functional index or storing a normalized column instead.
+  **Real-world:** A dashboard query pulling `SELECT *` from a 60-column, 50-million-row events table times out — switching to only the 5 needed columns, and confirming an index exists on the date column used in the WHERE clause, together resolve it.
+
+  ## ⚠️ Common mistakes
+
+  - **Assuming "add an index" is always the fix.** Indexes speed up reads but slow down writes and use storage — indexing every column indiscriminately is itself a performance anti-pattern.
+  - **Applying a function to a filtered column** (`WHERE UPPER(name) = ...`, `WHERE YEAR(date) = 2024`) without realizing this commonly prevents the database from using a plain index on that column.
+  - **Using `SELECT *`** on wide tables, which transfers unnecessary data regardless of whether an index is used — see [SQL — SELECT](/skills/sql-select) common mistakes.
+  - **Proposing a vague fix** ("add an index") in an interview or code review instead of identifying the *specific* column and the *specific* query pattern that would benefit.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any dashboard on a large table:** diagnosing why a report is slow to load and proposing a specific, targeted fix.
+  - **Data engineering handoffs:** explaining to a data engineer, using EXPLAIN output, exactly why a particular recurring report query is timing out.
+  - **Cost control:** in cloud data warehouses billed by data scanned, reducing unnecessary full scans directly reduces cost, not just speed.
+
+  ## Related concepts
+
+  ```
+  JOIN → SUBQUERY → CTE → WINDOW FUNCTIONS
+    ↓
+  SQL — Query Optimization Basics ← you are here
+  ```
+  This closes the SQL stage — the next stage, Python, picks up where SQL's data-pulling ends and programmatic analysis begins.
+
+  ## Practice questions
+
+  ### Easy
+  1. What does an EXPLAIN plan showing "Seq Scan" indicate?
+
+  ### Medium
+  2. A query filters `WHERE YEAR(order_date) = 2024` and is slow despite an index existing on `order_date`. What's the likely cause?
+
+  ### Interview/Advanced
+  3. A stakeholder wants every column indexed "to make things faster." What's wrong with this request, and how would you respond?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. The database is scanning the entire table row by row, rather than using an index to jump directly to matching rows.
+  2. Wrapping the column in a function (`YEAR(order_date)`) typically prevents the database from using a plain index on `order_date` — rewriting the filter as a range (`WHERE order_date >= '2024-01-01' AND order_date < '2025-01-01'`) usually restores index usage.
+  3. Indexing every column has real costs: more storage, and slower writes (every insert/update must also update every index) — the response should be to identify which specific columns are actually used in frequent filters/joins and index only those, rather than indexing indiscriminately.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: What does an index do, in plain terms?**
+  Short answer: It lets the database find matching rows quickly by jumping almost directly to them, instead of scanning the entire table row by row.
+
+  ### Conceptual questions
+  **Q: Why isn't "just add more indexes" always the right answer?**
+  Short answer: Every index adds storage overhead and slows down writes (inserts/updates/deletes), since each index must also be kept up to date — indexes should be added deliberately for columns that are actually frequently filtered, joined, or sorted on.
+
+  ### Scenario-based questions
+  **Q: A query that used to run in under a second now takes 30 seconds after the table grew to 20 million rows. What's your diagnostic approach?**
+  Short answer: Run EXPLAIN on the query to see whether it's doing a full table scan; if so, check whether the filtered/joined columns have an appropriate index, and whether any function applied to those columns in the query is preventing that index from being used.
+
+  ### Practical questions
+  **Q: How would you explain to a non-technical stakeholder why `SELECT *` on a huge table is slower than selecting specific columns?**
+  Short answer: Compare it to ordering an entire menu when you only wanted one dish — the database still has to retrieve and transfer every column's data for every row, even the columns nobody will actually look at.
+
+  ## Interview traps / tricky points
+
+  - Wrapping a filtered column in a function is a subtle but very common way to accidentally disable index usage — a favorite "why is this slow" interview scenario.
+  - An index doesn't help every kind of filter — a column with very few distinct values (low selectivity, like a boolean) often gains little from being indexed.
+  - Indexes speed up reads but slow down writes — this tradeoff is frequently the actual point an interviewer is testing for, not just "do you know what an index is."
+
+  ## Best practices
+
+  - Run EXPLAIN before assuming why a query is slow — diagnose, don't guess.
+  - Index columns that are frequently filtered, joined, or sorted on — not every column indiscriminately.
+  - Avoid wrapping filtered/joined columns in functions when an equivalent range-based or pre-normalized approach would preserve index usage.
+  - Select only the columns actually needed, especially on wide, large tables.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Index** → lets the database jump to matching rows instead of scanning everything
+  **EXPLAIN** → shows whether a query uses an index (Index Scan) or not (Seq Scan)
+  **Common slow-query causes** → missing index, SELECT *, functions on filtered columns
+  **Tradeoff:** indexes speed up reads, slow down writes, and use storage — index deliberately

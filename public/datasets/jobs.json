@@ -1,0 +1,11 @@
+[
+  {"id":"J001","title":"Junior Frontend Developer","discipline":"Engineering","level":"Junior","location":"Bengaluru","workMode":"Hybrid","salaryMin":700000,"salaryMax":1000000,"skills":["HTML","CSS","JavaScript"]},
+  {"id":"J002","title":"UX Designer","discipline":"Design","level":"Mid","location":"Remote","workMode":"Remote","salaryMin":900000,"salaryMax":1400000,"skills":["Research","Figma","Prototyping"]},
+  {"id":"J003","title":"Backend Engineer","discipline":"Engineering","level":"Mid","location":"Pune","workMode":"Hybrid","salaryMin":1200000,"salaryMax":1800000,"skills":["APIs","PostgreSQL","Python"]},
+  {"id":"J004","title":"Security Operations Analyst","discipline":"Security","level":"Junior","location":"Hyderabad","workMode":"On-site","salaryMin":800000,"salaryMax":1200000,"skills":["SIEM","Networking","Linux"]},
+  {"id":"J005","title":"Data Analyst","discipline":"Data","level":"Junior","location":"Remote","workMode":"Remote","salaryMin":650000,"salaryMax":950000,"skills":["SQL","Spreadsheets","Dashboards"]},
+  {"id":"J006","title":"Product Designer","discipline":"Design","level":"Senior","location":"Mumbai","workMode":"Hybrid","salaryMin":1800000,"salaryMax":2600000,"skills":["Systems","Research","Strategy"]},
+  {"id":"J007","title":"Frontend Engineer","discipline":"Engineering","level":"Senior","location":"Remote","workMode":"Remote","salaryMin":2200000,"salaryMax":3200000,"skills":["TypeScript","React","Performance"]},
+  {"id":"J008","title":"Analytics Engineer","discipline":"Data","level":"Mid","location":"Bengaluru","workMode":"Hybrid","salaryMin":1300000,"salaryMax":1900000,"skills":["SQL","dbt","Warehousing"]}
+]
+

@@ -1,0 +1,18 @@
+title: SQL Foundations Checkpoint
+type: checkpoint
+skills:
+  - sql-select
+  - sql-filtering
+  - sql-aggregation
+  - sql-joins
+  - sql-ctes
+  - sql-window-functions
+checklist:
+  - Write queries using JOINs
+  - Aggregate data correctly
+  - Use CTEs
+  - Use window functions
+  - Explain query logic
+  - Complete the SQL project
+  - Pass the checkpoint assessment
+pass_criteria: All checklist items demonstrated, and the E-commerce Customer Analysis project is complete.

@@ -1,0 +1,97 @@
+title: Scatter Plot
+category: Spreadsheets
+what_is_it: A chart plotting individual data points on two numeric axes, used to explore the relationship between two variables.
+why_it_matters: The standard chart for visually assessing whether — and how — two variables relate, before or alongside computing a formal correlation.
+prerequisites:
+  - line-chart
+objectives:
+  - Build a scatter plot to explore the relationship between two variables
+  - Visually assess a scatter plot for correlation strength and outliers
+estimated_minutes: 25
+resources:
+  - r-datavizcatalogue
+practice:
+  - id: ex-scatter-plot-1
+    title: Explore a relationship
+    description: Build a scatter plot of ad spend vs. revenue across 20 campaigns, and visually assess the strength and direction of the relationship.
+verify:
+  - Chart correctly plots both variables against each other
+  - Can describe the visual pattern (strength, direction, outliers) in plain language
+note: |
+  ## 🎯 What is it?
+
+  A **scatter plot** plots individual data points on two numeric axes — one variable on each axis — used to visually explore the **relationship** between two variables.
+
+  ## 💡 Why is it important?
+
+  It's the standard chart for visually assessing whether, and how, two variables relate — before or alongside computing a formal [correlation coefficient](/skills/stats-correlation-regression), a scatter plot often reveals the *shape* of a relationship (linear, curved, no relationship, an outlier) that a single correlation number alone can hide.
+
+  ## Core concept
+
+  | Pattern in a scatter plot | Suggests |
+  |---|---|
+  | Points trending up-and-to-the-right | A positive relationship |
+  | Points trending down-and-to-the-right | A negative relationship |
+  | Points scattered with no visible pattern | Little to no linear relationship |
+  | A tight, narrow band of points | A strong relationship |
+  | A wide, loose cloud of points | A weak relationship |
+  | One or a few points far from the rest | Likely outliers, worth investigating separately |
+
+  ## 📊 Example
+
+  Plotting weekly ad spend (x-axis) against weekly revenue (y-axis) for 20 campaigns. Points trending clearly up-and-to-the-right, in a fairly tight band, visually suggest a strong positive relationship — matching a high correlation coefficient computed for the same data.
+
+  ## Multiple examples
+
+  **Beginner:** A scatter plot of hours studied vs. exam score for a class.
+  **Intermediate:** A scatter plot revealing a clear positive trend, but with one clear outlier point far from the rest — worth investigating separately rather than letting it skew interpretation of the overall pattern.
+  **Real-world:** A scatter plot of employee tenure vs. performance score, used alongside a correlation coefficient (see [Correlation & Regression](/skills/stats-correlation-regression)) to visually confirm the relationship's shape and spot any outliers before drawing a business conclusion.
+
+  ## ⚠️ Common mistakes
+
+  - **Relying only on a correlation number without ever visualizing the data.** A scatter plot can reveal a strong *non-linear* relationship that a linear correlation coefficient near 0 would completely miss, or expose that an apparent correlation is actually driven by one or two outlier points.
+  - **Assuming a scattered, patternless plot means "no relationship" is fully explored.** It rules out a *linear* relationship in that data, but a different kind of pattern (non-linear, conditional) is still worth checking separately.
+
+  ## Real-world Data Analyst use cases
+
+  - **Marketing analysis:** visually exploring the relationship between spend and revenue before formalizing it with a regression.
+  - **Data quality:** spotting an outlier visually, before it distorts a downstream statistical calculation.
+
+  ## Related concepts
+
+  ```
+  Line Chart → Scatter Plot ← you are here → KPI → Dashboard
+  ```
+  Directly pairs with [Correlation & Regression](/skills/stats-correlation-regression) — a scatter plot is the visual companion to a correlation coefficient, not a replacement for it.
+
+  ## Practice questions
+
+  ### Easy
+  1. What does a scatter plot show that a bar chart cannot?
+
+  ### Interview/Advanced
+  2. Why might a correlation coefficient near 0 still come with a visually striking scatter plot pattern?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. The relationship between two numeric variables — how they move together (or don't) — plotted as individual points, rather than comparing a single value across categories.
+  2. A correlation coefficient specifically measures *linear* relationship strength — a scatter plot can reveal a strong *non-linear* pattern (like a U-shape or curve) that produces a correlation near 0 despite a very real, visually obvious relationship existing in the data.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why would you look at a scatter plot in addition to computing a correlation coefficient?**
+  Short answer: A scatter plot can reveal the actual shape of a relationship — including non-linear patterns or outliers — that a single correlation number alone can hide or be misled by.
+
+  ## Best practices
+
+  - Always visualize a relationship with a scatter plot alongside (not instead of) a computed correlation coefficient.
+  - Investigate any visually obvious outlier points separately before drawing a conclusion about the overall relationship.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Scatter plot** → plots two variables against each other, one point per observation
+  **Reveals:** relationship direction, strength, shape (linear vs. non-linear), and outliers

@@ -1,0 +1,100 @@
+title: IFS Function
+category: Spreadsheets
+what_is_it: Checking multiple conditions in order and returning the result for the first one that's true — a flatter, more readable alternative to nesting many IF functions inside each other.
+why_it_matters: Nested IFs become unreadable past 2-3 levels; IFS handles any number of conditions in one flat, top-to-bottom list that's much easier to audit and edit.
+prerequisites:
+  - if-function
+objectives:
+  - Write an IFS formula with 3 or more conditions
+  - Explain why IFS is easier to maintain than nested IF
+estimated_minutes: 30
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-ifs-1
+    title: Grade a score with tiers
+    description: Rewrite a 4-tier nested IF grading formula (A/B/C/D) using IFS instead.
+verify:
+  - IFS returns the correct tier for every test value
+  - Includes a final catch-all TRUE condition
+note: |
+  ## 🎯 What is it?
+
+  **IFS** checks multiple conditions in order and returns the result for the first one that's true — a flatter, more readable alternative to nesting many [IF](/skills/if-function) functions inside each other.
+
+  ## 💡 Why is it important?
+
+  Nested IFs become unreadable and error-prone past 2-3 levels of parentheses. IFS handles any number of conditions in one flat, top-to-bottom list, which is far easier to audit, debug, and edit as business rules change.
+
+  ## Syntax
+
+  ```
+  =IFS(condition1, result1, condition2, result2, ..., TRUE, default_result)
+  ```
+
+  - Conditions are checked **in order**; the first TRUE one wins.
+  - A final `TRUE, default_result` pair acts as a catch-all "else" — without it, IFS returns an `#N/A` error if no condition matches.
+
+  ## 📊 Example
+
+  | | A |
+  |---|---|
+  | 1 | 85 |
+
+  **Formula:** `=IFS(A1>=90,"A",A1>=80,"B",A1>=70,"C",TRUE,"D")`
+  **Result:** `"B"`
+
+  **Compare to nested IF:** `=IF(A1>=90,"A",IF(A1>=80,"B",IF(A1>=70,"C","D")))` — same result, but IFS reads top-to-bottom without stacked parentheses.
+
+  ## Multiple examples
+
+  **Beginner:** `=IFS(A1>10,"High",TRUE,"Low")` — a 2-tier check, equivalent to a simple IF.
+  **Real-world:** `=IFS(score>=90,"A",score>=80,"B",score>=70,"C",score>=60,"D",TRUE,"F")` — a 5-tier grading rule that stays readable as a flat list instead of 4 levels of nesting.
+
+  ## ⚠️ Common mistakes
+
+  - **Forgetting the final `TRUE, default` catch-all** — without it, any value that doesn't match an earlier condition returns `#N/A` instead of a sensible default.
+  - **Ordering conditions incorrectly.** Since IFS stops at the first TRUE condition, a broader condition placed before a narrower one can shadow it — conditions should generally go from most specific/highest to least specific/lowest.
+
+  ## Real-world Data Analyst use cases
+
+  - **Sales analysis:** tiered commission-rate lookups based on sales volume.
+  - **Customer analysis:** segmenting customers into 4+ tiers based on spend, without deeply nested IFs.
+
+  ## Related concepts
+
+  ```
+  IF → IFS ← you are here → AND → OR → IFERROR
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Rewrite `=IF(A1>=60,"Pass","Fail")` using IFS.
+
+  ### Interview/Advanced
+  2. Why is condition order important in IFS but not in a simple IF?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. `=IFS(A1>=60,"Pass",TRUE,"Fail")`
+  2. IFS evaluates conditions top-to-bottom and stops at the first TRUE one — if a broader/less specific condition is placed earlier, it can "catch" a value before a later, more specific condition ever gets checked, silently producing the wrong result.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  **Q: Why choose IFS over nested IF?**
+  Short answer: IFS avoids stacked parentheses and reads as a flat, top-to-bottom list of conditions, making it much easier to read, audit, and modify than 3+ levels of nested IF.
+
+  ## Best practices
+
+  - Always include a final `TRUE, default` catch-all condition.
+  - Order conditions from most specific to least specific.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **IFS(cond1,result1,cond2,result2,...)** → checks conditions in order, first TRUE wins
+  **Always end with:** `TRUE, default_result` as a catch-all

@@ -1,0 +1,23 @@
+title: UX Designer
+category: Design
+difficulty: beginner
+estimated_hours: 420
+audience: People who enjoy understanding users and turning ambiguity into usable experiences.
+description: Learn research, information architecture, interaction design, visual systems, testing, and portfolio storytelling.
+stages:
+  - id: foundations
+    title: Understand people and problems
+    description: Frame design work around evidence instead of assumptions.
+    skills: [design-foundations, user-research]
+  - id: structure
+    title: Structure the experience
+    description: Organize information and design clear task flows.
+    skills: [information-architecture, interaction-design]
+  - id: interface
+    title: Design and test interfaces
+    description: Create coherent visuals, prototypes, and usability evidence.
+    skills: [ui-design-systems, prototyping-testing]
+  - id: portfolio
+    title: Communicate the work
+    description: Explain decisions, tradeoffs, outcomes, and learning.
+    skills: [ux-portfolio]

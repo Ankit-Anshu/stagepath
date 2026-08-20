@@ -1,0 +1,69 @@
+title: Trend Analysis
+category: Foundations
+what_is_it: Examining how a metric changes over time to determine whether it's consistently rising, falling, staying flat, or moving in cycles.
+why_it_matters: A single snapshot number can't tell you direction — trend analysis is what reveals whether things are getting better, worse, or staying the same.
+prerequisites:
+  - pattern-identification
+objectives:
+  - Define trend analysis and explain what it reveals that a single number can't
+  - Distinguish a trend from a one-off spike
+estimated_minutes: 20
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-trend-analysis-1
+    title: Plot a trend
+    description: 'Take any metric with at least 6 data points over time and describe its trend: rising, falling, flat, or cyclical.'
+verify:
+  - Can define trend analysis
+  - Can distinguish a genuine trend from a one-off spike
+note: |
+  ## 🎯 What is it?
+
+  **Trend analysis** examines how a metric changes over multiple time periods to determine its direction — consistently rising, falling, flat, or moving in a repeating cycle — rather than looking at just one snapshot in time.
+
+  ## 💡 Why is it important?
+
+  - A single number ("revenue was $50K last month") tells you almost nothing about direction; a trend ("$40K → $45K → $50K over the last 3 months") tells a much more useful story.
+  - It's the analytical thinking skill behind line charts, forecasting, and predictive analytics — you can't reasonably forecast what's next without first understanding the trend so far.
+
+  ## Core concept
+
+  | Trend shape | What it suggests |
+  |---|---|
+  | Steady rise/fall | A consistent underlying driver — worth understanding and potentially forecasting |
+  | Flat | Stability — a change would be the more notable event |
+  | Cyclical | Seasonality — compare like periods (this December to last December, not to November) |
+  | One-off spike | Likely a single event, not a trend — investigate the specific cause rather than assuming it continues |
+
+  ## 📊 Example
+
+  Weekly signups: 100, 105, 98, 250, 110, 102. The "250" is a one-off spike (likely a specific campaign or event), not part of the underlying trend, which is roughly flat around 100–110. Reporting "signups are trending up" based on that one week would be a mistake — the trend, excluding the spike, is flat.
+
+  ## ⚠️ Common mistakes
+
+  - **Calling a single spike or dip a "trend."** A trend needs to be observed across multiple consistent periods, not one outlier week.
+  - **Comparing a cyclical metric to the wrong baseline** — comparing December sales to November's, instead of to last December's, misreads normal seasonality as a real change.
+
+  ## Related concepts
+
+  ```
+  Pattern Identification
+    ↓
+  Trend Analysis ← you are here
+    ↓
+  Segmentation
+  ```
+  Builds toward Predictive Analytics and the Business Analytics stage's Forecasting & Trend Analysis topic.
+
+  ## 🎤 Interview preparation
+
+  **Q: Weekly signups jumped from 100 to 250 in one week, then back to 110. Is this a trend?**
+  Short answer: No — it's a one-off spike, not a trend. A trend requires a consistent direction across multiple periods; this looks like a single event (a campaign, a press mention) worth investigating on its own, not evidence signups are generally rising.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Trend analysis** → examine direction (up/down/flat/cyclical) across multiple periods, not a single snapshot
+  A one-off spike is not a trend — verify consistency before calling it one.

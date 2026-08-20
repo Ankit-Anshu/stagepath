@@ -1,0 +1,81 @@
+title: Worksheet
+category: Spreadsheets
+what_is_it: One grid/tab inside a workbook — the actual rows-and-columns surface you enter data and formulas into.
+why_it_matters: Creating, naming, and referencing worksheets correctly is what turns a workbook from a jumble of "Sheet1, Sheet2, Sheet3" into a navigable, professional file.
+prerequisites:
+  - workbook
+objectives:
+  - Create, rename, and navigate between worksheets
+  - Reference a cell on a different worksheet
+estimated_minutes: 25
+resources:
+  - r-exceljet-functions
+practice:
+  - id: ex-worksheet-1
+    title: Cross-sheet reference
+    description: Create a workbook with two sheets, "Raw Data" and "Summary," and write a formula on Summary that references a cell on Raw Data.
+verify:
+  - Sheets are named clearly, not left as "Sheet1"
+  - A cross-sheet reference correctly pulls the right value
+note: |
+  ## 🎯 What is it?
+
+  A **worksheet** (or just "sheet") is one grid/tab inside a workbook — the actual surface of rows and columns you enter data and formulas into. A workbook's tabs, shown along the bottom of the window, are each a separate worksheet.
+
+  ## 💡 Why is it important?
+
+  - Naming and organizing worksheets clearly is what makes a multi-tab file navigable instead of a wall of "Sheet1, Sheet2, Sheet3."
+  - Formulas can reference cells on a *different* worksheet — a key technique for keeping raw data, calculations, and summaries separate but connected.
+
+  ## Core concept
+
+  | Action | How |
+  |---|---|
+  | Create a sheet | Click the "+" tab, or right-click a tab → Insert |
+  | Rename a sheet | Double-click the tab and type a new name |
+  | Reorder sheets | Drag a tab left/right |
+  | Reference another sheet | `=SheetName!A1` |
+
+  ## Syntax
+
+  ```
+  =SheetName!CellAddress
+  =Summary!B2         (references cell B2 on the "Summary" sheet)
+  ='Raw Data'!B2       (sheet names with spaces need single quotes)
+  ```
+
+  ## 📊 Example
+
+  ```
+  =SUM('Raw Data'!B2:B100)
+  ```
+
+  This formula lives on a "Summary" sheet but sums values from a "Raw Data" sheet — the single quotes around `'Raw Data'` are required because the sheet name contains a space.
+
+  ## ⚠️ Common mistakes
+
+  - **Leaving sheets named "Sheet1," "Sheet2,"** making a multi-tab workbook much harder to navigate.
+  - **Forgetting single quotes around a sheet name that contains a space** in a cross-sheet formula, causing a formula error.
+  - **Mixing raw data and calculations on the same sheet**, making it hard to tell what's original versus derived.
+
+  ## Related concepts
+
+  ```
+  Workbook
+    ↓
+  Worksheet ← you are here
+    ↓
+  Rows
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: A formula referencing a sheet named "Q1 Sales" throws an error. What's the likely cause?**
+  Short answer: The sheet name contains a space and needs single quotes around it in the formula: `='Q1 Sales'!A1`.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Worksheet** → one grid/tab inside a workbook
+  **Cross-sheet reference:** `=SheetName!Cell` (use `'Sheet Name'!Cell` if the name has a space)

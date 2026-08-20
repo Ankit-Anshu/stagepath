@@ -1,0 +1,71 @@
+title: Typical Analyst Workflow
+category: Foundations
+what_is_it: The recurring, day-to-day pattern of work a data analyst actually follows — receive a question, pull data, analyze it, and report back — repeated across most tasks.
+why_it_matters: Knowing this pattern in advance sets realistic expectations for what the job feels like day to day, beyond just the list of tools and techniques.
+prerequisites:
+  - data-analytics-lifecycle
+objectives:
+  - Describe the typical steps in a data analyst's day-to-day workflow
+  - Distinguish the analyst workflow from the broader data analytics lifecycle
+estimated_minutes: 25
+resources:
+  - r-grow-google-data-analytics
+practice:
+  - id: ex-analyst-workflow-1
+    title: Map a real request
+    description: Imagine a stakeholder asks "why did our conversion rate drop last week?" — write out the concrete steps you'd take from that message to a final answer.
+verify:
+  - Can list the typical steps of an analyst's day-to-day workflow
+  - Can explain how this differs from the broader analytics lifecycle
+note: |
+  ## 🎯 What is it?
+
+  The **typical analyst workflow** is the recurring day-to-day pattern most analyst tasks follow: a stakeholder asks a question → the analyst clarifies it → pulls and cleans the relevant data → analyzes it → builds a chart or report → presents findings and a recommendation. It's the practical, everyday shape of the broader Data Analytics Lifecycle, applied to one specific request at a time.
+
+  ## 💡 Why is it important?
+
+  - It sets realistic day-to-day expectations for the job — a large share of the work is clarifying vague requests and pulling/cleaning data, not just "doing analysis."
+  - Recognizing this pattern helps a new analyst move faster: instead of guessing where to start on a new request, they can follow the same repeatable steps.
+
+  ## Core concept
+
+  | Step | What it looks like |
+  |---|---|
+  | 1. Receive a question | Often vague: "can you check on our numbers?" |
+  | 2. Clarify | Ask what decision this will inform, what time window, which metric exactly |
+  | 3. Pull data | Query a database, export a report |
+  | 4. Clean & prepare | Handle missing values, duplicates, wrong types |
+  | 5. Analyze | Summarize, segment, compare |
+  | 6. Visualize | Build a chart or dashboard |
+  | 7. Communicate | Present findings and a recommendation |
+
+  ## 📊 Example
+
+  A marketing manager asks, "How did last week's email campaign do?" A typical workflow: clarify what "did well" means (opens? clicks? conversions?) → pull the campaign's data from the email platform and the sales database → clean and join them → calculate open rate, click rate, and conversion rate → chart them against the last 3 campaigns for comparison → present a one-page summary with a recommendation (e.g., "this subject line outperformed — reuse the format").
+
+  ## ⚠️ Common mistakes
+
+  - **Skipping the clarify step** and pulling data based on an assumption about what the stakeholder meant — this often leads to redoing the whole analysis.
+  - **Treating every request as a from-scratch project** instead of recognizing the repeatable shape — experienced analysts build reusable queries and templates specifically because this workflow repeats so often.
+
+  ## Related concepts
+
+  ```
+  Data Analytics Lifecycle (the broader, formal process)
+    ↓
+  Typical Analyst Workflow ← you are here (the everyday, request-by-request version)
+    ↓
+  Tools Used by Data Analysts
+  ```
+
+  ## 🎤 Interview preparation
+
+  **Q: Walk me through your typical process when a stakeholder sends you a data question.**
+  Short answer: Clarify exactly what's being asked and why, pull and clean the relevant data, analyze and visualize it, then present findings with a clear recommendation — not just raw numbers.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Typical analyst workflow** → clarify → pull data → clean → analyze → visualize → communicate
+  The everyday, repeatable shape of most analyst requests.

@@ -1,0 +1,171 @@
+title: Color & Accessibility in Visualization
+what_is_it: Choosing chart colors and contrast that work for colorblind viewers and remain readable at a glance, not just on your own screen.
+why_it_matters: A chart that relies on red-vs-green to convey meaning is unreadable to a meaningful share of any audience — and low contrast fails everyone in a bright room or on a projector.
+prerequisites:
+  - charts
+objectives:
+  - Choose a colorblind-safe palette
+  - Check a color combination for sufficient contrast
+  - Avoid relying on color alone to convey meaning
+  - Use color consistently across a set of charts
+subtopics:
+  - title: Colorblind-safe palettes
+    description: Avoiding red-green combinations that are indistinguishable to common forms of color blindness.
+    outcomes:
+      - Choose a colorblind-safe palette for a chart
+  - title: Contrast
+    description: Ensuring text and key chart elements are readable against their background.
+    outcomes:
+      - Check a color pairing against a contrast standard
+  - title: Beyond color
+    description: Using shape, pattern, or labels alongside color so meaning isn't lost for anyone.
+    outcomes:
+      - Add a non-color cue to a chart that currently relies on color alone
+estimated_minutes: 90
+resources:
+  - r-webaim-contrast
+  - r-datavizcatalogue
+practice:
+  - id: ex-color-accessibility-1
+    title: Audit a chart's colors
+    description: Take an existing chart, check its color choices for colorblind-safety and contrast, and fix any issues found.
+verify:
+  - Palette remains distinguishable under a colorblind simulation
+  - Text and key elements meet a reasonable contrast standard
+  - Meaning does not depend on color alone
+note: |
+  ## 🎯 What is it?
+
+  Choosing chart **colors and contrast** that work for colorblind viewers and remain readable at a glance — not just on your own screen, in your own lighting, with your own color vision.
+
+  ## 💡 Why is it important?
+
+  A chart that relies on red-vs-green to convey meaning is unreadable to a meaningful share of any audience (red-green color blindness affects roughly 1 in 12 men and 1 in 200 women) — and low contrast fails everyone equally in a bright room, on a projector, or printed in grayscale. Accessible design isn't a nice-to-have; it's the difference between a chart that actually communicates and one that silently fails part of its audience.
+
+  ## Core concept
+
+  ### Colorblind-safe palettes
+  Avoid encoding meaning purely through red-vs-green, which is indistinguishable to the most common forms of color blindness. Colorblind-safe palettes (blue/orange, or perceptually-distinct sequential palettes) remain distinguishable across the most common types of color vision deficiency.
+
+  ### Contrast
+  Text and key chart elements need sufficient contrast against their background to remain readable — especially important for anything projected, printed, or viewed in bright light. The WCAG contrast standard (a widely-used accessibility benchmark) requires a contrast ratio of at least 4.5:1 for normal text.
+
+  ### Beyond color
+  Never let color be the *only* way meaning is conveyed — pair it with a label, a pattern, a shape, or direct annotation, so the chart still works for someone who can't distinguish the colors at all (or when printed in black and white).
+
+  ## Syntax / Formula / Structure
+
+  A practical accessibility checklist for any chart:
+
+  ```
+  1. Would this chart still make sense in grayscale?
+  2. Are red and green ever both used to distinguish two different categories?
+  3. Does text meet a 4.5:1 contrast ratio against its background?
+  4. Is there a non-color cue (label, pattern, shape) backing up every color-coded meaning?
+  ```
+
+  ## 📊 Example
+
+  **Before:** A chart marking "on target" in green and "off target" in red, with no other labeling.
+
+  **Problem:** A colorblind viewer (or anyone viewing a grayscale printout) sees two bars that look nearly identical, with no way to tell which is which.
+
+  **After:** The same chart uses blue for "on target" and orange for "off target" (a colorblind-safe pair), *and* adds a direct text label ("On Target" / "Off Target") next to each bar.
+
+  **Explanation:** The fix layers two independent safeguards — a colorblind-safe palette, plus a non-color cue — so the meaning survives even if one safeguard alone would have failed for a given viewer or viewing condition.
+
+  ## Multiple examples
+
+  **Beginner:** Swapping a red/green two-category chart for a blue/orange palette.
+  **Intermediate:** Checking a dashboard's background/text contrast against the WCAG 4.5:1 standard using a contrast checker tool.
+  **Real-world:** A performance dashboard that colors metrics red/yellow/green (a common pattern) is redesigned to also show an icon (✓/⚠/✗) or explicit text label next to each color, so it remains interpretable for colorblind viewers, in grayscale, and via a screen reader.
+
+  ## ⚠️ Common mistakes
+
+  - **Defaulting to a stoplight red/yellow/green scheme without a backup cue.** This is one of the most common accessibility failures in business dashboards specifically because it "looks obviously right" to someone without color vision deficiency.
+  - **Only checking a chart's colors on your own monitor.** Contrast and color distinguishability can look fine on one screen and fail in different lighting, on a projector, or in print.
+  - **Assuming accessibility only matters for a small edge-case audience.** Given the prevalence of red-green color blindness, most charts shared broadly will reach at least a few affected viewers.
+
+  ## Real-world Data Analyst use cases
+
+  - **Any status/KPI dashboard:** replacing pure red/green status indicators with a colorblind-safe palette plus icons or labels.
+  - **Executive presentations:** verifying a deck's charts remain legible if printed in grayscale, a common real-world scenario.
+  - **Company-wide reporting:** establishing a consistent, accessible color palette used across every chart in a reporting suite.
+
+  ## Real-world use cases / Business use case
+
+  Applying a consistent, accessible palette across a whole reporting suite (not just one chart) also builds trust and recognition — stakeholders learn "blue = current period, gray = prior period" once, and that convention holds everywhere.
+
+  ## ⚠️ Common mistakes (continued)
+
+  - **Using color alone in a legend without any other way to distinguish series** (e.g., two very similar shades of blue) — this fails for many people even without formal color blindness, in low light or on a small screen.
+
+  ## Related concepts
+
+  ```
+  Charts
+    ↓
+  Color & Accessibility in Visualization ← you are here
+    ↓
+  Geospatial & Map Visualization
+    ↓
+  Dashboard Design
+  ```
+
+  ## Practice questions
+
+  ### Easy
+  1. Why is a red/green color scheme risky for conveying meaning in a chart?
+
+  ### Medium
+  2. A dashboard uses only color (green checkmark background vs. red X background) to indicate pass/fail. Propose one specific fix.
+
+  ### Interview/Advanced
+  3. A chart passes a colorblind simulation check but still fails an accessibility review. What else might be wrong?
+
+  <details><summary><strong>Answer / Solution</strong></summary>
+
+  1. Red-green color blindness is relatively common, and viewers with this condition may not be able to distinguish the two colors at all, making the chart's meaning invisible to them.
+  2. Add a non-color cue — a checkmark/X icon or an explicit "Pass"/"Fail" text label — alongside the color, so the meaning survives even without perceiving the color difference.
+  3. Likely a contrast issue — even with colorblind-safe hues, text or key elements might not meet a sufficient contrast ratio (e.g., 4.5:1) against their background, making them hard to read regardless of color vision.
+
+  </details>
+
+  ## 🎤 Interview preparation
+
+  ### Basic interview questions
+  **Q: Why does color accessibility matter in data visualization?**
+  Short answer: A meaningful share of any audience has some form of color vision deficiency, and relying on color alone (especially red/green) to convey meaning makes a chart unreadable for them — accessible design ensures the chart communicates to everyone.
+
+  ### Conceptual questions
+  **Q: What's the difference between choosing a "colorblind-safe" palette and adding a "non-color cue"?**
+  Short answer: A colorblind-safe palette picks colors that remain visually distinguishable under common color vision deficiencies; a non-color cue (label, icon, pattern) is an independent safeguard that conveys the same meaning even if color perception fails entirely or the chart is viewed in grayscale.
+
+  ### Scenario-based questions
+  **Q: A stakeholder insists on a red/green status dashboard because "that's how everyone does it." How do you respond?**
+  Short answer: Keep the familiar red/green convention if desired, but add a non-color cue (icon or label) alongside it — this preserves the familiar look for most viewers while making the dashboard genuinely accessible to colorblind viewers too, without a tradeoff.
+
+  ### Practical questions
+  **Q: How would you check whether a chart's text meets an accessible contrast standard?**
+  Short answer: Use a contrast-checking tool to measure the contrast ratio between the text color and its background, and confirm it meets or exceeds the WCAG minimum (commonly 4.5:1 for normal text).
+
+  ## Interview traps / tricky points
+
+  - "I made it colorblind-safe" isn't complete if color is still the *only* signal — the non-color cue is the actual safeguard for full accessibility, not the palette choice alone.
+  - Contrast and colorblind-safety are two separate, independent checks — passing one doesn't mean the other is satisfied.
+
+  ## Best practices
+
+  - Never rely on color alone to convey meaning — always pair it with a label, icon, or pattern.
+  - Avoid red/green as the sole distinguishing pair; use blue/orange or another colorblind-safe combination instead.
+  - Check contrast against a recognized standard (like WCAG 4.5:1), not just "does it look fine to me."
+  - Establish one consistent, accessible palette and reuse it across every chart in a reporting suite.
+
+  ---
+
+  ### ⚡ Quick Revision
+
+  **Avoid:** red/green as the only distinguishing colors
+  **Always add:** a non-color cue (label, icon, pattern) backing up any color-coded meaning
+  **Contrast standard:** WCAG 4.5:1 minimum for normal text
+  **Test:** would this chart still make sense in grayscale?
