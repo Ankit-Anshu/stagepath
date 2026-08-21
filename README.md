@@ -4,10 +4,10 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-6bc58c.svg)](./CONTRIBUTING.md)
 [![CI](https://github.com/Ankit-Anshu/stagepath/actions/workflows/ci.yml/badge.svg)](https://github.com/Ankit-Anshu/stagepath/actions/workflows/ci.yml)
 
-An open-source, community-editable learning roadmap platform for data and tech careers. Ordered
-career roadmaps, reusable skill notes written for both first-time learning and interview prep,
-curated resources, and hands-on project briefs (with datasets) — rendered by a static Astro site with
-no accounts, no backend, and no tracking of any kind.
+StagePath is an open-source learning roadmap platform for data and tech careers. It maps out ordered
+career paths, publishes a reusable library of skill notes written for both first-time learning and
+interview preparation, curates learning resources, and pairs topics with hands-on project briefs and
+datasets — all built to be improved by its community over time.
 
 **This is a community project.** Anyone can suggest or submit a new resource, project, dataset, or
 skill note — see [CONTRIBUTING.md](./CONTRIBUTING.md) to get started. It's maintainer-reviewed
@@ -24,8 +24,7 @@ npm run build     # static output to /dist
 npm run preview   # serve the production build locally
 ```
 
-No accounts, no backend, no environment variables, no analytics, no client-side progress tracking —
-it's fully static. Every page is pre-rendered at build time from the YAML in `content/`.
+Every page is pre-rendered at build time from the content in `content/`.
 
 ## What's here
 
@@ -40,7 +39,7 @@ it's fully static. Every page is pre-rendered at build time from the YAML in `co
   date — and growing with community contributions.
 - **16 project briefs** (mini / portfolio / capstone) with real problem statements, requirements,
   milestones, and review rubrics — several with their own datasets — plus checkpoint assessments.
-- An interactive homepage knowledge-graph of every roadmap and skill, an "I'm not sure yet" quiz that
+- An interactive homepage knowledge-graph of every roadmap and skill, a "find my path" quiz that
   points at a starting roadmap, a resource catalog, and a topic library.
 
 ## Project layout
@@ -74,26 +73,22 @@ Fastest ways to help right now:
 - Improve an existing skill note's explanation or examples.
 - Check the [issues](../../issues) for `good first issue` / `help wanted` labels.
 
-## Deliberate scope decisions
+## Design notes
 
-- **No accounts, no progress tracking, no personal dashboard, no certificates.** StagePath doesn't
-  pretend that checking a box creates competence — it's a public map, not a learning-management
-  system. Use whatever notes/task system you already prefer alongside it.
 - **Node granularity**: SQL and Python are split into meaningfully distinct sub-skills
   (`sql-select` → `sql-window-functions`); most other topics are one skill node each to keep the
   content set reviewable. Splitting further is just adding more YAML files.
-- **Resource verification is manual, not automated.** Every resource has a `last_verified` date, but
-  there's no scheduled job that re-checks links for rot — see
-  [content/resources/README.md](./content/resources/README.md) for what's expected of contributors
-  instead.
+- **Resource verification is manual, not automated.** Every resource has a `last_verified` date; see
+  [content/resources/README.md](./content/resources/README.md) for what's expected of contributors.
 - **Two different patterns for skill-based roadmaps** (one derived from the shared skill graph, one a
   set of hand-transcribed curriculum trees) — this is intentional, not inconsistent; see
   [ARCHITECTURE.md](./ARCHITECTURE.md#two-kinds-of-skill-based-roadmap) for why.
 
 ## Stack
 
-Astro (static output) + Tailwind v4 utilities, YAML content via Astro content collections. No backend,
-no auth, no database — ready for GitHub Pages (see `.github/workflows/deploy.yml`).
+Astro (static output) with Tailwind utilities. Content lives in YAML, validated at build time through
+Astro's content collections against the schemas in `src/content.config.ts`. Deployed to GitHub Pages
+via GitHub Actions (see `.github/workflows/deploy.yml`).
 
 ## License
 

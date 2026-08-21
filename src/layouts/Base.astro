@@ -81,8 +81,11 @@ const explore = [
     <footer class="site-footer">
       <div class="footer-shell">
         <div>
-          <a href={withBase('/')} class="brand brand-footer"><span class="brand-mark" aria-hidden="true">S</span><span>Stage<span>Path</span></span></a>
-          <p>Clear roadmaps from first topic to finished project.</p>
+          <div class="brand-row">
+            <a href={withBase('/')} class="brand brand-footer"><span class="brand-mark" aria-hidden="true">S</span><span>Stage<span>Path</span></span></a>
+            <span class="brand-credit">by <a href="https://www.linkedin.com/in/ankitanshu01/" target="_blank" rel="noopener noreferrer">Ankit Anshu</a></span>
+          </div>
+          <p class="footer-tagline">Clear roadmaps from first topic to finished project.</p>
         </div>
         <div class="footer-links">
           <div><strong>Explore</strong><a href={withBase('/roadmaps')}>Roadmaps</a><a href={withBase('/skill-roadmaps')}>Skill roadmaps</a><a href={withBase('/skills')}>Skill library</a><a href={withBase('/projects')}>Projects</a></div>
@@ -90,7 +93,6 @@ const explore = [
           <div><strong>Project</strong><a href={withBase('/about')}>About</a><a href="https://github.com" target="_blank" rel="noopener noreferrer">Open source ↗</a></div>
         </div>
       </div>
-      <div class="footer-note">No account. No progress tracking. Just clear, public learning paths anyone can use.</div>
     </footer>
     <script is:inline define:vars={{ homeHref: withBase('/') }}>
       const goBackBtn = document.getElementById('global-back-btn');

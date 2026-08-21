@@ -55,13 +55,16 @@ button, summary, select { cursor: pointer; }
 .site-footer { padding: 50px 20px 22px; background: var(--navy); color: #dce8e1; }
 .footer-shell { width: min(1120px, 100%); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
 .brand-footer { color: white; }
-.brand-footer + p { max-width: 330px; margin: 16px 0 0; color: #a9bbb1; font-size: 14px; }
+.brand-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.brand-credit { color: #859b90; font-size: 12px; white-space: nowrap; }
+.brand-credit a { color: #a9bbb1; font-weight: 650; }
+.brand-credit a:hover { color: white; }
+.footer-tagline { max-width: 330px; margin: 16px 0 0; color: #a9bbb1; font-size: 14px; }
 .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 .footer-links div { display: flex; flex-direction: column; gap: 7px; }
 .footer-links strong { margin-bottom: 4px; color: white; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .footer-links a { color: #afbeb6; font-size: 14px; }
 .footer-links a:hover { color: white; }
-.footer-note { width: min(1120px, 100%); margin: 42px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.1); color: #859b90; font-size: 12px; }
 
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-size: 12px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
 .eyebrow::before { content: ''; width: 20px; height: 2px; border-radius: 2px; background: currentColor; }
