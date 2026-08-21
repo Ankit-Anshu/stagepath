@@ -67,8 +67,8 @@ const stageDetails = roadmap.data.stages.map((stage, index) => {
   const stageSkills = stage.skills.map((id) => skillById.get(id)).filter(Boolean);
   const projectIds = [...new Set(stageSkills.map((s) => s!.data.project).filter(Boolean))];
   // Crowded stages (per topic.md's learning-group PRD) define `groups` in
-  // their YAML as a list of shared chapter ids (multi_role_roadmaps.md) —
-  // when present, the roadmap shows one tile per chapter instead of one
+  // their YAML as a list of shared chapter ids. When present, the roadmap
+  // shows one tile per chapter instead of one
   // tile per individual skill, linking to a group page that lists just
   // that chapter's topics. Stages without groups keep the original
   // behavior of one tile per skill, linking straight to its note.

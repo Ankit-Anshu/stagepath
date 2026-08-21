@@ -1,230 +1,163 @@
 # Contributing to StagePath
 
-Thanks for wanting to help. StagePath is learner-facing content first, app second — the highest-value
-contributions are usually **a new resource, project, dataset, or a better-written skill note**, not
-new code. You don't need to know Astro to contribute something useful here.
+Thanks for helping improve StagePath. Contributions to roadmap content, learning resources, projects, datasets, documentation, and the website are welcome.
 
-This project is maintainer-reviewed (see [GOVERNANCE.md](./GOVERNANCE.md)): anyone can open a pull
-request, every pull request is reviewed and merged by [@Ankit-Anshu](https://github.com/Ankit-Anshu).
-That keeps quality and tone consistent — it doesn't mean contributions aren't welcome, quite the
-opposite.
+## Before you start
 
-## Quick links
+- Search existing [issues](https://github.com/Ankit-Anshu/stagepath/issues) and [pull requests](https://github.com/Ankit-Anshu/stagepath/pulls) to avoid duplicate work.
+- Small corrections can be submitted directly as a pull request.
+- Open an issue before creating a new roadmap, changing the content model, redesigning the interface, or adding a dependency.
+- Keep each pull request focused on one clear improvement.
 
-- Found a broken link, a typo, or an outdated `last_verified` date? → smallest possible PR, very
-  welcome, usually merged fast.
-- Want to add a resource, project, dataset, or skill note? → read [What you can contribute](#what-you-can-contribute) below.
-- Want to change how the site works (a page, a component, a new collection)? → open an issue first,
-  see [Code changes](#code-changes).
-- Not sure where to start? → look for issues labeled [`good first issue`](../../issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
-  or [`help wanted`](../../issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
+## Local setup
 
-## Getting set up
+Requirements:
+
+- Node.js 22.12 or later
+- npm
 
 ```bash
 git clone https://github.com/Ankit-Anshu/stagepath.git
 cd stagepath
 npm install
-npm run dev       # http://localhost:4321
+npm run dev
 ```
 
-Requires Node 22.12+. No accounts, no API keys, no backend — it's a fully static Astro site, so if
-`npm run dev` starts, you're set up correctly.
-
-Before opening a pull request, always run:
+Before submitting a pull request, run:
 
 ```bash
 npm run build
 ```
 
-This type-checks every content file against its schema (`src/content.config.ts`) — most content
-mistakes (a missing required field, wrong type, bad enum value) show up here as a build error with
-the exact file and field. A PR that doesn't build won't be merged.
+The build validates every YAML content file and generates all website routes.
 
-## What's in scope
+## Find the right place to contribute
 
-- Adding a **resource** (video, article, course, book, docs) for an existing skill.
-- Adding a **project** (mini / portfolio / capstone), with or without a dataset.
-- Adding a **dataset** used by a project.
-- Adding or improving a **skill note** (the "Learn" content on a skill page — what it is, why it
-  matters, examples, practice questions, interview prep).
-- Adding a new **skill** to fill a real gap in an existing roadmap or skill-based roadmap.
-- Adding a **chapter** to group related skills within a stage, once a stage's skill list gets long
-  (see [content/chapters/README.md](./content/chapters/README.md)), or a standalone **assessment**
-  that spans multiple skills (see [content/assessments/README.md](./content/assessments/README.md)).
-- Fixing incorrect, outdated, or broken content (dead links, wrong `last_verified` dates, stale
-  info).
-- Small app/UI fixes: typos in copy, broken styling, accessibility issues, small bugs.
+| Contribution | Location | Guide |
+| --- | --- | --- |
+| Career roadmap | `content/roadmaps/` | [Roadmap schema](./content/roadmaps/README.md) |
+| Skill or learning note | `content/skills/` | [Skill schema](./content/skills/README.md) |
+| Reusable skill chapter | `content/chapters/` | [Chapter schema](./content/chapters/README.md) |
+| Learning resource | `content/resources/` | [Resource schema](./content/resources/README.md) |
+| Project brief | `content/projects/` | [Project schema](./content/projects/README.md) |
+| Assessment | `content/assessments/` | [Assessment schema](./content/assessments/README.md) |
+| Project dataset | `public/datasets/` | [Dataset guidelines](./public/datasets/README.md) |
+| Skill curriculum | `src/lib/*-curriculum.ts` | [Architecture](./ARCHITECTURE.md) |
+| Website or UI | `src/` | [Architecture](./ARCHITECTURE.md) |
 
-Larger structural changes — a new content collection, a new page type, a visual redesign, a new
-dependency — are welcome as **ideas**, but open an issue to discuss the approach before writing the
-pull request, so you don't spend time on something that doesn't fit. See
-[GOVERNANCE.md](./GOVERNANCE.md#how-decisions-get-made).
+All content IDs come from filenames. Use lowercase kebab-case and search the repository before creating a new ID.
 
-## Project layout
+## Contribution workflow
+
+1. Fork the repository and create a branch.
+2. Make one focused change.
+3. Connect new content to the relevant roadmap, skill, resource, or project by ID.
+4. Verify links, facts, examples, and dataset permissions.
+5. Run `npm run build`.
+6. Open a pull request and explain what changed and how it helps learners.
+
+Example branch names:
 
 ```text
-content/            The content repository — almost all contributions live here.
-                     Full map + per-collection schemas: content/README.md and content/*/README.md.
-public/datasets/     CSV/JSON data files referenced by project YAML. See public/datasets/README.md.
-src/                 The Astro application. See src/README.md, and for the deep dive on how
-                     everything fits together (routing, the curriculum-tree pattern, the
-                     knowledge-note pipeline, styling conventions), ARCHITECTURE.md.
-scripts/             One-off scripts used to originally generate the content set — you almost
-                     certainly don't need these. See scripts/README.md.
+add-python-testing-skill
+improve-data-engineer-roadmap
+fix-broken-sql-resource
+add-customer-churn-project
 ```
 
-## What you can contribute
+## Content standards
 
-All content is plain YAML — no code required. Add a file, follow the shape below, open a PR.
-IDs are the reuse mechanism: any resource/project/skill id can be referenced from as many roadmaps or
-skills as makes sense, so check whether something similar already exists before adding a duplicate.
+Every contribution should be:
 
-### Adding a resource
+- **Relevant:** include skills and resources that materially help someone progress toward the roadmap goal.
+- **Accurate:** verify technical claims, examples, prerequisites, and terminology.
+- **Clear:** write for a learner encountering the topic for the first time.
+- **Practical:** connect theory to decisions, exercises, or work a learner can demonstrate.
+- **Current:** verify external links and use the actual verification date.
+- **Original:** do not copy protected course material, articles, or datasets.
 
-New file in `content/resources/`, filename becomes the id (e.g. `r-my-new-resource.yaml`). Full
-schema and quality checklist: [content/resources/README.md](./content/resources/README.md).
+Do not submit:
 
-```yaml
-title: Apache Airflow Documentation
-type: documentation        # video | article | interactive | course | book | documentation
-url: https://airflow.apache.org/docs/
-provider: Apache Airflow
-duration_minutes: 120
-difficulty: intermediate    # beginner | intermediate | advanced
-free: true
-language: en
-last_verified: '2026-08-18' # the date YOU checked the link works — always update this
-quality_score: 4.3          # optional, 0-5
-recommended: true           # optional, only for standout resources
-```
+- Resources you have not reviewed
+- Affiliate links, promotional links, or low-quality listicles
+- Duplicate skills or resources under slightly different names
+- Large collections of links without explanation or selection
+- Generated filler that has not been checked for accuracy and usefulness
+- Personal, confidential, or unlicensed data
 
-Then reference its id from a skill's `resources:` list (see below) so it's actually reachable.
-Only submit resources you've personally checked are live, free (or clearly marked otherwise), and
-genuinely good — not just the first search result.
+Content should be written in English. Use direct language, short paragraphs, descriptive headings, and examples where they improve understanding.
 
-### Adding a project
+## Adding or improving a roadmap
 
-New file in `content/projects/`. Full schema (including the `milestones` vs `tasks` and `rubric` vs
-`artifacts` fallback behavior): [content/projects/README.md](./content/projects/README.md).
+A roadmap should describe a realistic progression toward a specific role. It must include:
 
-```yaml
-title: A/B Testing Analysis
-level: portfolio             # mini | portfolio | capstone
-duration: 4-6 hours
-description: 'Analyze the results of an A/B test end to end: hypothesis, significance test, and recommendation.'
-problem_statement: A short realistic scenario the learner is solving.
-scenario: Who the learner is playing (e.g. "You are the product analyst...").
-skills: [statistics, business-analytics, stats-hypothesis-testing]  # skill ids used
-tasks:
-  - State a clear hypothesis
-  - Test for statistical significance
-requirements:
-  - Check sample balance and missing values before testing the outcome
-milestones:
-  - title: Validate the experiment
-    description: Confirm assignment quality, sample sizes, and metric definitions.
-rubric:
-  - criterion: Statistical correctness
-    definition: The test, assumptions, confidence interval, and interpretation are appropriate.
-artifacts:
-  - Notebook or report
-dataset:                     # optional, only if the project ships its own dataset
-  name: Signup experiment results
-  description: Synthetic user-level CSV containing assignment, conversion, device, country.
-  source_url: /datasets/ab-test-signup.csv
-  format: CSV
-  size: 60 observations
-  files: [ab-test-signup.csv]
-```
+- A clear audience and outcome
+- Ordered stages with meaningful titles
+- Skills arranged by prerequisite and practical importance
+- Projects or assessments at useful checkpoints
+- Enough detail to guide learning without listing every tool in the industry
 
-### Adding a dataset
+For a new roadmap, open an issue first with:
 
-If a project needs data, put the file in `public/datasets/` (CSV preferred, keep it small — a few
-hundred rows is plenty for a learning project) and point the project's `dataset.source_url` at
-`/datasets/your-file.csv`. Please only submit **synthetic or clearly-licensed-for-reuse** data —
-never real personal data, and never a dataset you don't have the right to redistribute. Full
-guidance: [public/datasets/README.md](./public/datasets/README.md).
+- Target role
+- Intended learner level
+- Proposed stages
+- Key skills and projects
+- Sources used to validate the structure
 
-### Adding or improving a skill note
+After approval, follow the [roadmap schema](./content/roadmaps/README.md).
 
-Skill files in `content/skills/` are the biggest lever for learner quality — full schema, the
-`note:` markdown structure, and the "subtopics vs objectives" gotcha (short version: don't add
-`subtopics:` to new skills, it's no longer rendered) are in
-**[content/skills/README.md](./content/skills/README.md)**. A minimal skill:
+## Adding a skill note
 
-```yaml
-title: A/B Testing & Experimentation
-category: Business Analytics
-what_is_it: One or two sentences.
-why_it_matters: One or two sentences on why a learner should care.
-prerequisites: [stats-hypothesis-testing]   # skill ids, used to order roadmaps
-objectives:
-  - Design a test with a clear control and variant
-resources: [r-grow-google-data-analytics]   # resource ids
-project: project-ab-testing-analysis        # optional, a project id
-```
+A strong skill note usually contains:
 
-The optional `note:` field (multi-line YAML block) is the full "Learn" page content and is where
-most of the learner value lives — see `content/skills/README.md` for the expected structure (What is
-it? / Why it matters / core concepts / a worked example / common mistakes / practice questions with
-a collapsible answer / interview prep / a short quick-revision summary at the end), or any existing
-skill file with a `note:` for a full worked example. Improving an existing `note:` — clearer
-explanations, a better example, fixing something inaccurate — is one of the most valuable
-contributions you can make, and doesn't require adding anything new.
+1. What the topic is
+2. Why it matters
+3. Core concepts
+4. A worked example
+5. Common mistakes
+6. Practice questions
+7. Interview preparation where relevant
+8. A short revision summary
 
-### Curriculum-tree skill roadmaps (SQL, Python, Power BI, Tableau, Git & GitHub, Statistics,
-### Spreadsheets, Machine Learning)
+Follow the complete [skill schema and writing guide](./content/skills/README.md).
 
-These are intentionally **not** YAML content — they're large hand-transcribed section/topic trees in
-`src/lib/*-curriculum.ts`, rendered without individual detail pages per topic (by design — hundreds
-of granular topics, no per-topic note). To fix or extend one of these, edit the relevant array
-directly; keep the existing naming conventions (no numeric prefixes, no `.md` extensions, hyphens
-normalized except for standard hyphenated terms like `P-Value` or `K-Means` — see the header comment
-in each file for the exact whitelist).
+## Adding a resource
 
-## Content quality bar
+Only add a resource after reviewing it. Confirm that:
 
-- Links must work and go to genuinely useful, currently-accurate material.
-- Prefer free resources; if something is paid, make sure `free: false` is set — don't mark paid
-  content as free.
-- `last_verified` should be the date you actually checked the link, not a copy-pasted old date.
-- Skill notes should be accurate and reasonably beginner-friendly — assume the learner is meeting the
-  topic for the first time.
-- No AI-generated filler. If you use an assistant to help draft something, read it, verify it, and
-  make sure it's actually correct before submitting — content quality here directly affects people
-  trying to learn a real skill.
+- The link works
+- The title and provider are correct
+- Free or paid status is accurate
+- Difficulty and estimated duration are reasonable
+- The resource adds value beyond existing entries
 
-## Code changes
+Add the YAML file in `content/resources/`, then reference its ID from at least one relevant skill. See the [resource guide](./content/resources/README.md).
 
-For app/UI changes: this is an Astro (static output) project with plain scoped `<style>` blocks per
-component — no CSS framework beyond Tailwind utilities where already used. Match the existing style
-of whatever file you're editing rather than introducing a new pattern. Run `npm run build` before
-opening a PR — it's the fastest way to catch a broken route or type error.
+## Adding a project or dataset
 
-Read **[ARCHITECTURE.md](./ARCHITECTURE.md)** first — it covers routing conventions, the two
-different skill-based-roadmap patterns, the knowledge-note markdown/TOC pipeline, the shared `Base`
-layout's props, and why the page-scoped `<style>` blocks are written dense/single-line by convention
-rather than reformatted.
+Projects should produce work a learner can explain or include in a portfolio. Include a realistic problem statement, requirements, milestones, expected deliverables, and evaluation criteria.
 
-## Pull request process
+Datasets must be synthetic, public domain, or licensed for redistribution. Remove personal or confidential information and document the source. See the [project guide](./content/projects/README.md) and [dataset guidelines](./public/datasets/README.md).
 
-1. Fork the repo, create a branch (`git checkout -b add-resource-xyz`).
-2. Make your change. Keep PRs focused — one resource/project/skill/fix per PR is easier to review
-   and merge quickly than one PR bundling ten unrelated changes.
-3. Run `npm run build` and confirm it succeeds.
-4. Open the PR and fill in the template — what changed and why is usually enough for content PRs.
-5. A maintainer will review. Expect requested changes on anything content-related (accuracy, tone,
-   consistency with the rest of the site) — that's normal, not a rejection.
-6. Once approved, the maintainer merges. You'll be credited in the commit/PR history.
+## Code and design changes
 
-## Reporting issues
+- Follow existing Astro and styling patterns.
+- Keep pages responsive and keyboard accessible.
+- Reuse existing components and design tokens where possible.
+- Avoid unrelated refactoring in the same pull request.
+- Include screenshots for visible interface changes.
+- Read [ARCHITECTURE.md](./ARCHITECTURE.md) before changing routes, schemas, shared layouts, or roadmap rendering.
 
-Use the issue templates — there's one for bugs, one for suggesting new content (resource, project,
-dataset, skill), and one for general feature ideas. Include enough detail to act on: a URL/skill id
-for content issues, steps to reproduce for bugs.
+## Pull request checklist
 
-## Code of Conduct
+- [ ] The change addresses one clear problem.
+- [ ] New IDs are unique and use lowercase kebab-case.
+- [ ] Content is accurate, useful, and written clearly.
+- [ ] External links were opened and verified.
+- [ ] Dataset licensing and attribution are documented.
+- [ ] `npm run build` passes.
+- [ ] UI changes include screenshots when appropriate.
+- [ ] The pull request explains the learner benefit.
 
-This project follows the [Contributor Covenant](./CODE_OF_CONDUCT.md). Be kind — a lot of the people
-using this site are just starting out.
+All contributions must follow the [Code of Conduct](./CODE_OF_CONDUCT.md) and are accepted under the [MIT License](./LICENSE).

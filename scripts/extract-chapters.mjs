@@ -1,4 +1,4 @@
-// One-time migration per multi_role_roadmaps.md: extracts the inline
+// One-time migration that extracts the inline
 // `groups: [{id, title, skills}]` currently embedded in each roadmap stage
 // into standalone files under content/chapters/, then rewrites the
 // roadmap's `groups` field down to a plain array of chapter ids. Zero

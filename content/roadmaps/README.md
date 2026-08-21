@@ -55,9 +55,9 @@ the roadmap's title.
 
 ## Adding a new career roadmap
 
-If you're proposing a whole new career roadmap (not editing an existing one), open an issue first per
-[GOVERNANCE.md](../../GOVERNANCE.md#how-decisions-get-made) — it's a bigger content investment than a
-single resource or project, worth agreeing on scope before writing 5-10 stages of content. One more
+If you're proposing a whole new career roadmap (not editing an existing one), open an issue first as
+described in [CONTRIBUTING.md](../../CONTRIBUTING.md#adding-or-improving-a-roadmap). It is a bigger
+content investment than a single resource or project, so agree on scope before writing 5-10 stages. One more
 thing to update if you do: `src/pages/start.astro`'s "I'm not sure" quiz hardcodes a small map of
 roadmap id → interest weights (see the comment at the top of that file) — a new roadmap won't show up
 as a quiz result unless you add it there too.

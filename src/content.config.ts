@@ -69,8 +69,7 @@ const assessments = defineCollection({
 
 // A Chapter groups related Topics (skill ids) within a broader subject —
 // e.g. "SQL / Joins & Combining Data" or "Spreadsheets / Fundamentals".
-// It is a first-class, globally reusable entity per multi_role_roadmaps.md
-// (section 7): one chapter can be referenced by any roadmap stage's
+// It is a first-class, globally reusable entity: one chapter can be referenced by any roadmap stage's
 // `groups` list (see below) instead of every roadmap re-declaring its own
 // copy of the same grouping and topic list.
 const chapters = defineCollection({

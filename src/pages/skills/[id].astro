@@ -58,8 +58,8 @@ if (skill.data.note) {
 // prev/next links to its neighbors in the same group. Skills outside any
 // group (most of the app, still) render exactly as before — this block is
 // purely additive. `groups` on a stage is a list of shared chapter ids
-// (multi_role_roadmaps.md) — the title and topic order live on the
-// chapter, not the roadmap, so the same chapter can be reused elsewhere.
+// The title and topic order live on the chapter, not the roadmap, so the
+// same chapter can be reused elsewhere.
 const allChapters = await getCollection('chapters');
 const chapterById = new Map(allChapters.map((chapter) => [chapter.id, chapter]));
 let groupContext: { roadmapId: string; roadmapTitle: string; stageId: string; stageTitle: string; groupId: string; groupTitle: string; prevId: string | null; nextId: string | null } | null = null;
