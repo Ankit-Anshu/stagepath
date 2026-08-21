@@ -1,4 +1,7 @@
 ---
+// Project briefs index ("/projects"). Lists every entry from the `projects`
+// content collection grouped by level (mini / portfolio / capstone). Each
+// card links to the project's own brief page (projects/[id].astro).
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 const projects = await getCollection('projects');

@@ -1,4 +1,11 @@
 ---
+// One of 8 near-identical curriculum-tree roadmap pages (Git & GitHub
+// here) — see src/pages/skill-roadmaps/sql.astro or ARCHITECTURE.md for the
+// shared pattern these all follow (winding "stage track" of plain,
+// non-clickable topic tiles built from a src/lib/*-curriculum.ts array, no
+// per-topic detail pages). Fixing a rendering bug here almost certainly
+// means fixing it in all 8 files, since the markup/script/style were
+// intentionally copied rather than shared as a component.
 import Base from '../../layouts/Base.astro';
 import { GIT_GITHUB_CURRICULUM } from '../../lib/git-github-curriculum';
 
@@ -16,7 +23,6 @@ const sectionDetails = GIT_GITHUB_CURRICULUM.map((section, index) => ({
 <Base title="Git & GitHub Roadmap" description="The full Git and GitHub curriculum, start to finish — commits, branching, pull requests, Actions, and more." wide>
   <header class="roadmap-hero">
     <div class="hero-main">
-      <a href="/skill-roadmaps" class="back-link">← Browse skill roadmaps</a>
       <div class="hero-tags"><span>Skill roadmap</span></div>
       <h1>Git &amp; GitHub</h1>
       <p>Every stop in the full Git and GitHub curriculum, from your first commit to rebasing, open source, CI/CD, and team workflows — one complete reference map.</p>

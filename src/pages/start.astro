@@ -1,4 +1,11 @@
 ---
+// "I'm not sure" quiz ("/start"). Static markup + a client-side script
+// (below) that scores checkbox answers against a small hardcoded map of
+// roadmap id -> interest weights, then links to the single best-matching
+// roadmap's detail page. That map is hand-maintained here, separately from
+// the `roadmaps` content collection — if you add a new career roadmap, also
+// add an entry for it in the `paths` object in the <script> below, or it
+// simply won't ever come up as a quiz result.
 import Base from '../layouts/Base.astro';
 ---
 <Base title="Find Your Path" description="Answer a few questions to find your closest-matching career roadmap.">

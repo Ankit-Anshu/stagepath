@@ -1,8 +1,8 @@
 # Security Policy
 
-StagePath is a fully static site (Astro static output, no backend, no accounts, no user data
-collected server-side — all learner progress lives in the visitor's own browser `localStorage`). The
-realistic attack surface is small, but if you find something, please report it responsibly.
+StagePath is a fully static site (Astro static output, no backend, no accounts, no analytics, no
+client-side or server-side data collection of any kind — every page is pre-rendered at build time).
+The realistic attack surface is small, but if you find something, please report it responsibly.
 
 ## Reporting a vulnerability
 
@@ -13,8 +13,9 @@ Please **do not** open a public issue for a security concern. Instead, email
 - Steps to reproduce, if applicable.
 
 Report anything that could affect site visitors, such as a stored/reflected XSS via content
-rendering, a dependency with a known exploit, or a way to inject arbitrary HTML through user-editable
-storage. Please **do not** open a public issue for these — email instead.
+rendering (skill notes are markdown parsed with `marked` and injected via `set:html` — see
+ARCHITECTURE.md's "knowledge-note pipeline"), or a dependency with a known exploit. Please **do not**
+open a public issue for these — email instead.
 
 Content quality issues (wrong info, broken links) are not security issues — please use a regular
 [GitHub issue](../../issues/new/choose) for those instead.

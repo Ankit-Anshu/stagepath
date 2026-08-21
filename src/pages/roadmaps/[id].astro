@@ -1,4 +1,11 @@
 ---
+// Single career roadmap page ("/roadmaps/[id]"), one per entry in the
+// `roadmaps` collection. Renders the winding "stage track" visualization:
+// one stage per `stages[]` entry, each showing either its skills directly
+// or, if the stage declares a `groups` list, one tile per chapter (see
+// content/chapters/README.md) that links out to a dedicated group page
+// (roadmaps/[id]/[stageId]/[groupId].astro) instead of listing every skill
+// inline.
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
@@ -85,7 +92,6 @@ const stageDetails = roadmap.data.stages.map((stage, index) => {
 <Base title={roadmap.data.title} description={roadmap.data.description} wide>
   <header class="roadmap-hero">
     <div class="hero-main">
-      <a href="/roadmaps" class="back-link">← Browse all roadmaps</a>
       <div class="hero-tags"><span>{roadmap.data.category}</span><span>{roadmap.data.difficulty}</span></div>
       <h1>{roadmap.data.title}</h1>
       <p>{roadmap.data.description}</p>

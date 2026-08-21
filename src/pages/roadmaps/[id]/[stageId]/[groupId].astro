@@ -33,7 +33,6 @@ const skills = (await Promise.all(chapter!.data.skills.map((id: string) => getEn
 
 <Base title={`${chapter!.data.title} · ${roadmap.data.title}`} description={`Topics in ${chapter!.data.title}, part of the ${stage.title} stage.`}>
   <div class="group-page">
-    <a href={`/roadmaps/${roadmap.id}#stage-${stage.id}`} class="back-link">← Back to {stage.title}</a>
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={`/roadmaps/${roadmap.id}`}>{roadmap.data.title}</a>
       <span>/</span>

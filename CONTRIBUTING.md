@@ -49,6 +49,9 @@ the exact file and field. A PR that doesn't build won't be merged.
 - Adding or improving a **skill note** (the "Learn" content on a skill page — what it is, why it
   matters, examples, practice questions, interview prep).
 - Adding a new **skill** to fill a real gap in an existing roadmap or skill-based roadmap.
+- Adding a **chapter** to group related skills within a stage, once a stage's skill list gets long
+  (see [content/chapters/README.md](./content/chapters/README.md)), or a standalone **assessment**
+  that spans multiple skills (see [content/assessments/README.md](./content/assessments/README.md)).
 - Fixing incorrect, outdated, or broken content (dead links, wrong `last_verified` dates, stale
   info).
 - Small app/UI fixes: typos in copy, broken styling, accessibility issues, small bugs.
@@ -61,19 +64,14 @@ pull request, so you don't spend time on something that doesn't fit. See
 ## Project layout
 
 ```text
-content/                   the content repository — almost all contributions live here
-  roadmaps/                 career roadmaps (stage → skill tree), e.g. data-analyst.yaml
-  chapters/                  reusable topic groupings referenced by roadmap stages
-  skills/                    ~300 reusable skill/topic nodes, one YAML file each
-  resources/                 curated learning resources (video/article/course/book/docs)
-  projects/                  hands-on projects (mini / portfolio / capstone)
-  assessments/               checkpoint self-checks
-public/datasets/            CSV/data files referenced by project YAML
-src/
-  content.config.ts          the schema every file above is validated against
-  lib/*-curriculum.ts        hand-built full curriculum trees (SQL, Python, Power BI, etc.) for
-                              the skill-roadmaps section — see note below
-  pages/                     the Astro routes
+content/            The content repository — almost all contributions live here.
+                     Full map + per-collection schemas: content/README.md and content/*/README.md.
+public/datasets/     CSV/JSON data files referenced by project YAML. See public/datasets/README.md.
+src/                 The Astro application. See src/README.md, and for the deep dive on how
+                     everything fits together (routing, the curriculum-tree pattern, the
+                     knowledge-note pipeline, styling conventions), ARCHITECTURE.md.
+scripts/             One-off scripts used to originally generate the content set — you almost
+                     certainly don't need these. See scripts/README.md.
 ```
 
 ## What you can contribute
@@ -84,7 +82,8 @@ skills as makes sense, so check whether something similar already exists before 
 
 ### Adding a resource
 
-New file in `content/resources/`, filename becomes the id (e.g. `r-my-new-resource.yaml`):
+New file in `content/resources/`, filename becomes the id (e.g. `r-my-new-resource.yaml`). Full
+schema and quality checklist: [content/resources/README.md](./content/resources/README.md).
 
 ```yaml
 title: Apache Airflow Documentation
@@ -106,7 +105,8 @@ genuinely good — not just the first search result.
 
 ### Adding a project
 
-New file in `content/projects/`:
+New file in `content/projects/`. Full schema (including the `milestones` vs `tasks` and `rubric` vs
+`artifacts` fallback behavior): [content/projects/README.md](./content/projects/README.md).
 
 ```yaml
 title: A/B Testing Analysis
@@ -143,11 +143,15 @@ dataset:                     # optional, only if the project ships its own datas
 If a project needs data, put the file in `public/datasets/` (CSV preferred, keep it small — a few
 hundred rows is plenty for a learning project) and point the project's `dataset.source_url` at
 `/datasets/your-file.csv`. Please only submit **synthetic or clearly-licensed-for-reuse** data —
-never real personal data, and never a dataset you don't have the right to redistribute.
+never real personal data, and never a dataset you don't have the right to redistribute. Full
+guidance: [public/datasets/README.md](./public/datasets/README.md).
 
 ### Adding or improving a skill note
 
-Skill files in `content/skills/` are the biggest lever for learner quality. A minimal skill:
+Skill files in `content/skills/` are the biggest lever for learner quality — full schema, the
+`note:` markdown structure, and the "subtopics vs objectives" gotcha (short version: don't add
+`subtopics:` to new skills, it's no longer rendered) are in
+**[content/skills/README.md](./content/skills/README.md)**. A minimal skill:
 
 ```yaml
 title: A/B Testing & Experimentation
@@ -157,20 +161,17 @@ why_it_matters: One or two sentences on why a learner should care.
 prerequisites: [stats-hypothesis-testing]   # skill ids, used to order roadmaps
 objectives:
   - Design a test with a clear control and variant
-subtopics:
-  - title: Test design
-    description: One sentence.
-    outcomes: [Design a test with a valid control group]
 resources: [r-grow-google-data-analytics]   # resource ids
 project: project-ab-testing-analysis        # optional, a project id
 ```
 
 The optional `note:` field (multi-line YAML block) is the full "Learn" page content and is where
-most of the learner value lives — see any existing skill file for the expected structure (What is
+most of the learner value lives — see `content/skills/README.md` for the expected structure (What is
 it? / Why it matters / core concepts / a worked example / common mistakes / practice questions with
-a collapsible answer / interview prep / a short quick-revision summary at the end). Improving an
-existing `note:` — clearer explanations, a better example, fixing something inaccurate — is one of
-the most valuable contributions you can make, and doesn't require adding anything new.
+a collapsible answer / interview prep / a short quick-revision summary at the end), or any existing
+skill file with a `note:` for a full worked example. Improving an existing `note:` — clearer
+explanations, a better example, fixing something inaccurate — is one of the most valuable
+contributions you can make, and doesn't require adding anything new.
 
 ### Curriculum-tree skill roadmaps (SQL, Python, Power BI, Tableau, Git & GitHub, Statistics,
 ### Spreadsheets, Machine Learning)
@@ -200,6 +201,11 @@ For app/UI changes: this is an Astro (static output) project with plain scoped `
 component — no CSS framework beyond Tailwind utilities where already used. Match the existing style
 of whatever file you're editing rather than introducing a new pattern. Run `npm run build` before
 opening a PR — it's the fastest way to catch a broken route or type error.
+
+Read **[ARCHITECTURE.md](./ARCHITECTURE.md)** first — it covers routing conventions, the two
+different skill-based-roadmap patterns, the knowledge-note markdown/TOC pipeline, the shared `Base`
+layout's props, and why the page-scoped `<style>` blocks are written dense/single-line by convention
+rather than reformatted.
 
 ## Pull request process
 

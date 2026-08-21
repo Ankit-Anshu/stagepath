@@ -1,4 +1,9 @@
 ---
+// Resource catalog ("/resources"). Lists every entry from the `resources`
+// content collection with client-side filtering by type — resources aren't
+// linked from here to a page of their own, they're external URLs (see
+// content/resources/README.md); the catalog and each skill's own
+// "Resources" section are the only two places they're surfaced.
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 

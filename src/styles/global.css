@@ -39,6 +39,9 @@ button, summary, select { cursor: pointer; }
 .nav-actions { display: flex; align-items: center; gap: 8px; }
 .nav-cta { display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 10px; background: var(--navy); color: white; font-size: 14px; font-weight: 750; transition: transform .18s, background .18s; }
 .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+.back-link { display: inline-flex; align-items: center; gap: 5px; margin-bottom: 27px; border: none; background: none; padding: 0; color: var(--muted); font-size: 12px; font-weight: 700; }
+.global-back-btn { cursor: pointer; transition: color .18s ease, transform .18s ease; }
+.global-back-btn:hover { color: var(--green-dark); transform: translateX(-2px); }
 .mobile-menu { display: none; position: relative; }
 .mobile-menu summary { width: 40px; height: 40px; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: white; list-style: none; }
 .mobile-menu summary::-webkit-details-marker { display: none; }

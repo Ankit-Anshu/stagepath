@@ -1,3 +1,13 @@
+// Renders the homepage's interactive knowledge-graph visualization: a
+// force-directed layout of every roadmap + skill, drawn on the <canvas>
+// in src/pages/index.astro. Loaded there via a plain <script src="...">
+// tag (not an Astro component import), so this file runs as an ordinary
+// client-side module. The graph data itself is built server-side in
+// index.astro's frontmatter and handed across as JSON inside a
+// <script type="application/json" id="graph-data"> tag, which this file
+// reads via document.querySelector('#graph-data') below — this file only
+// knows how to draw and interact with whatever data it finds there, not
+// how to fetch or shape it.
 type RoadmapRecord = {
   id: string;
   title: string;

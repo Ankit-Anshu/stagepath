@@ -1,4 +1,11 @@
 ---
+// One of 8 near-identical curriculum-tree roadmap pages (Power BI here) —
+// see src/pages/skill-roadmaps/sql.astro or ARCHITECTURE.md for the shared
+// pattern these all follow (winding "stage track" of plain, non-clickable
+// topic tiles built from a src/lib/*-curriculum.ts array, no per-topic
+// detail pages). Fixing a rendering bug here almost certainly means fixing
+// it in all 8 files, since the markup/script/style were intentionally
+// copied rather than shared as a component.
 import Base from '../../layouts/Base.astro';
 import { POWERBI_CURRICULUM } from '../../lib/powerbi-curriculum';
 
@@ -16,7 +23,6 @@ const sectionDetails = POWERBI_CURRICULUM.map((section, index) => ({
 <Base title="Power BI Roadmap" description="The full Power BI curriculum, start to finish — Power Query, data modeling, DAX, visuals, service, and more." wide>
   <header class="roadmap-hero">
     <div class="hero-main">
-      <a href="/skill-roadmaps" class="back-link">← Browse skill roadmaps</a>
       <div class="hero-tags"><span>Skill roadmap</span></div>
       <h1>Power BI</h1>
       <p>Every stop in the full Power BI curriculum, from your first report to DAX, data modeling, performance tuning, and Microsoft Fabric — one complete reference map.</p>

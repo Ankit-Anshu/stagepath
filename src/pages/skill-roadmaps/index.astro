@@ -1,4 +1,12 @@
 ---
+// Skill-based roadmaps index ("/skill-roadmaps"). Two different card
+// "shapes" are merged into one grid here: the 8 hand-built curriculum-tree
+// roadmaps (SQL, Python, Power BI, ...; each its own page under this same
+// folder, sourced from src/lib/*-curriculum.ts) show a sections/topics
+// count, while the remaining prerequisite-ordered roadmaps derived from the
+// shared `skills` collection (src/lib/skill-roadmaps.ts) show a
+// topics/subtopics count. See ARCHITECTURE.md for why these two patterns
+// coexist instead of being unified into one.
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { SKILL_ROADMAPS, orderByPrerequisites } from '../../lib/skill-roadmaps';

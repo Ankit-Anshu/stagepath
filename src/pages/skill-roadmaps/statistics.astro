@@ -1,4 +1,11 @@
 ---
+// One of 8 near-identical curriculum-tree roadmap pages (Statistics here)
+// — see src/pages/skill-roadmaps/sql.astro or ARCHITECTURE.md for the
+// shared pattern these all follow (winding "stage track" of plain,
+// non-clickable topic tiles built from a src/lib/*-curriculum.ts array, no
+// per-topic detail pages). Fixing a rendering bug here almost certainly
+// means fixing it in all 8 files, since the markup/script/style were
+// intentionally copied rather than shared as a component.
 import Base from '../../layouts/Base.astro';
 import { STATISTICS_CURRICULUM } from '../../lib/statistics-curriculum';
 
@@ -16,7 +23,6 @@ const sectionDetails = STATISTICS_CURRICULUM.map((section, index) => ({
 <Base title="Statistics Roadmap" description="The full Statistics curriculum, start to finish — probability, distributions, hypothesis testing, regression, and more." wide>
   <header class="roadmap-hero">
     <div class="hero-main">
-      <a href="/skill-roadmaps" class="back-link">← Browse skill roadmaps</a>
       <div class="hero-tags"><span>Skill roadmap</span></div>
       <h1>Statistics</h1>
       <p>Every stop in the full Statistics curriculum, from descriptive stats to hypothesis testing, regression, Bayesian methods, and statistics for machine learning — one complete reference map.</p>

@@ -5,15 +5,22 @@ interface Props {
   title: string;
   description?: string;
   wide?: boolean;
+  // Pages that already render their own "← Back to X" link (in the same
+  // back-link spot, at the top of their hero) pass backLink={false} so this
+  // layout doesn't stack a second, generic one above it. Every other page
+  // gets this one for free, in that same top-left position — never floating.
+  backLink?: boolean;
 }
+
+const pathname = Astro.url.pathname;
 
 const {
   title,
   description = 'Clear, project-driven learning paths for modern careers.',
   wide = false,
+  backLink = pathname !== '/',
 } = Astro.props;
 
-const pathname = Astro.url.pathname;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (href: string) => `${base}${href}` || '/';
 const ogImage = new URL(withBase('/og-node-map.png'), Astro.site ?? Astro.url).toString();
@@ -57,8 +64,6 @@ const explore = [
           {explore.map((item) => <a href={withBase(item.href)} class:list={{ active: isActive(item.href) }}>{item.label}</a>)}
         </nav>
         <div class="nav-actions">
-          <a href={withBase('/projects')} class="workspace-link">Build projects</a>
-          <a href={withBase('/roadmaps')} class="nav-cta">Explore paths <span aria-hidden="true">→</span></a>
           <details class="mobile-menu">
             <summary aria-label="Open navigation"><span></span><span></span><span></span></summary>
             <div class="mobile-menu-panel">
@@ -69,7 +74,10 @@ const explore = [
         </div>
       </div>
     </header>
-    <main id="main-content" class:list={['page-shell', { 'page-shell-wide': wide }]}><slot /></main>
+    <main id="main-content" class:list={['page-shell', { 'page-shell-wide': wide }]}>
+      {backLink && <button type="button" id="global-back-btn" class="back-link global-back-btn" aria-label="Go back"><span aria-hidden="true">←</span> Back</button>}
+      <slot />
+    </main>
     <footer class="site-footer">
       <div class="footer-shell">
         <div>
@@ -84,6 +92,13 @@ const explore = [
       </div>
       <div class="footer-note">No account. No progress tracking. Just clear, public learning paths anyone can use.</div>
     </footer>
+    <script is:inline define:vars={{ homeHref: withBase('/') }}>
+      const goBackBtn = document.getElementById('global-back-btn');
+      goBackBtn?.addEventListener('click', () => {
+        if (window.history.length > 1) window.history.back();
+        else window.location.href = homeHref;
+      });
+    </script>
     <script is:inline define:vars={{ base }}>
       if (base) {
         const prefixLinks = (root = document) => {

@@ -1,4 +1,10 @@
 ---
+// Single project brief page ("/projects/[id]"), one per entry in the
+// `projects` collection. `milestones` falls back to a synthetic list built
+// from `tasks` when a project doesn't define its own, and `rubric` falls
+// back to one built from `artifacts` — so a minimal project YAML (just
+// tasks + artifacts) still renders a complete-looking brief without every
+// project having to hand-author every field. See content/projects/README.md.
 import Base from '../../layouts/Base.astro';
 import { getCollection, getEntry } from 'astro:content';
 export async function getStaticPaths() { const projects = await getCollection('projects'); return projects.map((project) => ({ params: { id: project.id }, props: { project } })); }
@@ -10,7 +16,7 @@ const rubric = project.data.rubric.length ? project.data.rubric : project.data.a
 ---
 
 <Base title={project.data.title} description={project.data.description} wide>
-  <header class="brief-hero"><div><a href="/projects" class="back-link">← All project briefs</a><div class="brief-tags"><span>{project.data.level} project</span><span>{project.data.duration}</span></div><h1>{project.data.title}</h1><p>{project.data.description}</p></div><aside><span>Brief includes</span><b>Problem & scenario</b><b>Downloadable dataset</b><b>Milestones & requirements</b><b>Deliverables & rubric</b></aside></header>
+  <header class="brief-hero"><div><div class="brief-tags"><span>{project.data.level} project</span><span>{project.data.duration}</span></div><h1>{project.data.title}</h1><p>{project.data.description}</p></div><aside><span>Brief includes</span><b>Problem & scenario</b><b>Downloadable dataset</b><b>Milestones & requirements</b><b>Deliverables & rubric</b></aside></header>
   <div class="brief-layout"><nav class="brief-nav"><strong>In this brief</strong><a href="#problem">01 Problem</a><a href="#dataset">02 Dataset</a><a href="#requirements">03 Requirements</a><a href="#milestones">04 Milestones</a><a href="#deliverables">05 Deliverables</a><a href="#rubric">06 Review rubric</a></nav><article class="brief-content">
     <section id="problem" class="content-section"><span class="section-no">01</span><div><small>The assignment</small><h2>Problem statement</h2><p class="lead">{problem}</p>{project.data.scenario && <div class="scenario"><strong>Your role</strong><p>{project.data.scenario}</p></div>}</div></section>
     <section id="dataset" class="content-section"><span class="section-no">02</span><div><small>Working material</small><h2>Dataset</h2>{project.data.dataset ? <div class="dataset-card"><div><span class="file-icon">CSV</span><div><strong>{project.data.dataset.name}</strong><p>{project.data.dataset.description}</p><small>{project.data.dataset.format}{project.data.dataset.size ? ` · ${project.data.dataset.size}` : ''}</small></div></div>{project.data.dataset.source_url && <a href={project.data.dataset.source_url} download>Download dataset ↓</a>}<div class="file-list">{project.data.dataset.files.map((file) => <a href={`/datasets/${file}`} download>{file} ↓</a>)}</div></div> : <ul>{project.data.datasets.map((item) => <li>{item}</li>)}</ul>}<p class="data-note">All bundled datasets are synthetic and safe for learning. Validate their quality as part of the assignment.</p></div></section>

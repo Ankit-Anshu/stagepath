@@ -1,4 +1,8 @@
 ---
+// Topic library ("/skills"). Lists every entry from the `skills` content
+// collection, grouped by category, as the site's flat A-to-Z index of every
+// topic — independent of which roadmap(s) it belongs to. Each card links to
+// the topic's own knowledge-note page (skills/[id].astro).
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 const skills = await getCollection('skills');

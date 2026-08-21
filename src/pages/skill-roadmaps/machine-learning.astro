@@ -1,4 +1,11 @@
 ---
+// One of 8 near-identical curriculum-tree roadmap pages (Machine Learning
+// here) — see src/pages/skill-roadmaps/sql.astro or ARCHITECTURE.md for the
+// shared pattern these all follow (winding "stage track" of plain,
+// non-clickable topic tiles built from a src/lib/*-curriculum.ts array, no
+// per-topic detail pages). Fixing a rendering bug here almost certainly
+// means fixing it in all 8 files, since the markup/script/style were
+// intentionally copied rather than shared as a component.
 import Base from '../../layouts/Base.astro';
 import { MACHINE_LEARNING_CURRICULUM } from '../../lib/machine-learning-curriculum';
 
@@ -16,7 +23,6 @@ const sectionDetails = MACHINE_LEARNING_CURRICULUM.map((section, index) => ({
 <Base title="Machine Learning Roadmap" description="The full Machine Learning curriculum, start to finish — math, classic ML, deep learning, MLOps, and more." wide>
   <header class="roadmap-hero">
     <div class="hero-main">
-      <a href="/skill-roadmaps" class="back-link">← Browse skill roadmaps</a>
       <div class="hero-tags"><span>Skill roadmap</span></div>
       <h1>Machine Learning</h1>
       <p>Every stop in the full Machine Learning curriculum, from the math foundations through classic models, deep learning, MLOps, and responsible AI — one complete reference map.</p>

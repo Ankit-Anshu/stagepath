@@ -1,4 +1,11 @@
 ---
+// Generic skill-based roadmap page ("/skill-roadmaps/[id]"), one per entry
+// in src/lib/skill-roadmaps.ts (SKILL_ROADMAPS) — NOT the 8 curriculum-tree
+// technologies (SQL, Python, ...), which each have their own dedicated page
+// instead (see src/pages/skill-roadmaps/sql.astro). This one derives its
+// topic list from the shared `skills` collection and orders it purely by
+// prerequisite chain, so each topic is a real, clickable link to its own
+// skill page rather than a plain text tile.
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { SKILL_ROADMAPS, orderByPrerequisites } from '../../lib/skill-roadmaps';
@@ -32,7 +39,6 @@ const nodeDetails = items.map((skill, index) => ({
 <Base title={`${def.title} Roadmap`} description={def.description} wide>
   <header class="roadmap-hero">
     <div class="hero-main">
-      <a href="/skill-roadmaps" class="back-link">← Browse skill roadmaps</a>
       <div class="hero-tags"><span>Skill roadmap</span></div>
       <h1>{def.title}</h1>
       <p>{def.description}</p>

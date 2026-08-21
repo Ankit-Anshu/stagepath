@@ -1,4 +1,11 @@
 ---
+// One of 8 near-identical curriculum-tree roadmap pages (SQL here) — see
+// src/pages/skill-roadmaps/python.astro or ARCHITECTURE.md for the shared
+// pattern these all follow (winding "stage track" of plain, non-clickable
+// topic tiles built from a src/lib/*-curriculum.ts array, no per-topic
+// detail pages). Fixing a rendering bug here almost certainly means fixing
+// it in all 8 files, since the markup/script/style were intentionally
+// copied rather than shared as a component.
 import Base from '../../layouts/Base.astro';
 import { SQL_CURRICULUM } from '../../lib/sql-curriculum';
 
@@ -16,7 +23,6 @@ const sectionDetails = SQL_CURRICULUM.map((section, index) => ({
 <Base title="SQL Roadmap" description="The full SQL curriculum, start to finish — basics, joins, window functions, optimization, warehousing, and more." wide>
   <header class="roadmap-hero">
     <div class="hero-main">
-      <a href="/skill-roadmaps" class="back-link">← Browse skill roadmaps</a>
       <div class="hero-tags"><span>Skill roadmap</span></div>
       <h1>SQL</h1>
       <p>Every stop in the full SQL curriculum, from your first SELECT to query optimization, data warehousing, and cloud SQL — one complete reference map.</p>
