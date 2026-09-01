@@ -1,0 +1,120 @@
+title: Spreadsheet Shortcuts
+category: Spreadsheets
+what_is_it: A small set of key combinations that do common actions, select data, copy, undo, edit, without reaching for the mouse.
+why_it_matters: The same handful of key combinations save real time on every sheet you ever touch, but the wrong one applied to the wrong cell can silently overwrite a formula equally fast.
+prerequisites:
+  - formula-bar
+objectives:
+  - Use a keyboard shortcut to jump to the edge of a block of data
+  - Use a keyboard shortcut to undo a change immediately after making it
+  - Predict what a fill-down shortcut does to the cell below the one copied
+  - Explain why checking a selection before using a shortcut matters
+estimated_minutes: 10
+note: |
+  # Spreadsheet shortcuts
+
+  Spreadsheet shortcuts are a small set of key combinations that do common actions, select data, copy, undo, edit, without reaching for the mouse.
+
+  ## The 30-second answer
+
+  - A shortcut is a key combination that does something you could also do through a menu, only faster.
+  - Ctrl+Arrow jumps to the edge of a block of data in that direction.
+  - Ctrl+C and Ctrl+V copy and paste. Ctrl+Z undoes the last action, and can be pressed repeatedly.
+  - F2 edits the selected cell directly, opening the same content the formula bar already shows.
+  - Ctrl+D fills the selected cell downward with the content of the cell above it, including a formula.
+
+  ## What it means
+
+  A shortcut does not do anything a menu command could not already do. It skips the trip to the ribbon and back, which matters once you are doing the same handful of actions dozens of times across a large sheet. Selecting a row, copying it, and undoing a mistake are actions you repeat constantly, and doing each one with two keys instead of a menu adds up over a real working session.
+
+  The trade-off is that a shortcut acts immediately on whatever is currently selected, with no confirmation step. A menu command usually gives you a moment to see what you are about to do. A shortcut does it the instant you press the keys, which means a shortcut used on the wrong cell does exactly as much damage, exactly as fast, as one used correctly.
+
+  ## How it works
+
+  | Shortcut | What it does |
+  |---|---|
+  | `Ctrl` + Arrow key | Jumps to the last cell before a gap, in the direction of the arrow |
+  | `Ctrl` + `C` / `Ctrl` + `V` | Copies the selection, then pastes it into the new selection |
+  | `Ctrl` + `Z` | Undoes the most recent action, repeatable |
+  | `F2` | Edits the selected cell directly, same content the formula bar shows |
+  | `Ctrl` + `D` | Fills the selection downward with the content of the topmost cell in it |
+
+  What happens, in order, when you use Ctrl+D on a selection:
+
+  1. You select a block of cells, starting with the one whose content you want to copy down.
+  2. You press Ctrl+D.
+  3. Every other cell in the selection is overwritten with the top cell's content.
+  4. If the top cell held a formula, each cell below gets that formula with its references shifted to match its own row, the same as a manual copy and paste.
+
+  ## Example
+
+  The line totals in column D, rows 2 to 5, are filled down from a single formula in D2 using Ctrl+D instead of copying and pasting each one by hand.
+
+  | | D |
+  |---|---|
+  | 2 | `=B2*C2` |
+  | 3 | |
+  | 4 | |
+  | 5 | |
+
+  Selecting D2:D5 and pressing Ctrl+D fills D3, D4 and D5 with the same formula, references shifted to match each row.
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Select D2:D5, press Ctrl+D | D3:D5 filled with D2's formula, references shifted | Fills a formula down a column without copying and pasting each cell separately |
+  | Press Ctrl+Z right after | The fill is undone | Reverses the last action immediately, safest right after a mistake |
+
+  **Where it bites**
+
+  Correct use: D2:D5 holds the line total formula, and D6, one row below, separately holds `=SUM(D2:D5)`, the grand total, currently showing `10`.
+
+  Wrong use: meaning to select only D2:D5, the selection is dragged one row too far, to D2:D6, and Ctrl+D is pressed. D6's formula is overwritten with D5's content, so D6 now shows `3`, a fixed copy of D5's line total, no longer a total of anything.
+
+  Both versions show a normal-looking number in D6 right after the mistake happens, since D5 also happened to show a plausible number. Nothing marks D6 as broken. The difference only appears the next time a price or quantity changes elsewhere in the sheet: the correct D6 updates, and the overwritten one sits frozen at `3` forever.
+
+  ## When to use it
+
+  **Use it when** you are repeating the same small action, such as copying a formula down many rows, several times in a row. The time saved compounds quickly.
+
+  **Use something else when** the action is a one-off, or when you are not fully sure what is currently selected. A menu command gives you a chance to double-check before committing.
+
+  **Never** use a shortcut like Ctrl+D on a selection you have not visually confirmed. It acts on every cell in the selection immediately, with no warning.
+
+  ## Common mistakes
+
+  - "A formula I relied on suddenly shows a frozen number." A fill-down or copy shortcut was likely used on a selection that accidentally included that cell, overwriting its formula with a plain value. Check the formula bar, then undo if the mistake was recent.
+  - "I pressed Ctrl+Z but it undid more than I wanted." Ctrl+Z undoes one action per press, but several small actions can happen faster than you notice. Press it once, check the result, then decide whether to press it again.
+  - "I meant to jump to the bottom of my data but landed somewhere in the middle." Ctrl+Arrow stops at the first gap it finds, not necessarily at the true end of the data. A single blank cell partway down the column will stop the jump early.
+  - "F2 put me straight into editing and I typed over the cell by accident." F2 opens the cell for editing immediately, the same as double-clicking it. If you only meant to look at the content, read the formula bar instead of pressing F2.
+
+  ## Interview questions
+
+  1. What does Ctrl+D do when a formula is in the top cell of the selection?
+
+  <details><summary>Answer</summary>It copies that formula into every other cell in the selection, shifting its references to match each row, the same result as copying the top cell and pasting it into the rest of the selection.</details>
+
+  2. Why can a keyboard shortcut cause more damage, faster, than the same action done through a menu?
+
+  <details><summary>Answer</summary>A shortcut acts immediately on whatever is currently selected, with no pause to confirm. A menu command usually shows a preview or a dialog first. If the wrong cells are selected when a shortcut is pressed, the action still happens instantly and exactly as intended, only on the wrong cells.</details>
+
+  3. A formula that used to update automatically now shows a number that never changes. What do you check first?
+
+  <details><summary>Answer</summary>Whether a fill or copy shortcut was recently used on a selection that happened to include that cell, replacing its formula with a plain value from a neighbouring cell. The formula bar will show a plain number instead of a formula if that happened.</details>
+
+  4. When would you choose Ctrl+D over manually copying and pasting a formula down a column?
+
+  <details><summary>Answer</summary>When you are filling the same formula down many rows in one go and you have already confirmed exactly which cells are selected. For a single cell or when you are not sure of the selection, a manual copy and paste, or a menu command, gives you more of a chance to catch a mistake before it happens.</details>
+
+  5. Explain what these key combinations are for, to a colleague who has never used one, without using the word `shortcut`.
+
+  <details><summary>Answer</summary>They are key combinations that do the same thing a menu button would do, only without reaching for the mouse. Pressing two keys together can select data, copy it, undo a mistake, or fill a formula down a column, all instantly, the moment you press them.</details>
+
+  ## Related concepts
+
+  ```text
+  Formula bar
+    ↓
+  Spreadsheet shortcuts ← you are here
+    ↓
+  Basic operations
+  ```

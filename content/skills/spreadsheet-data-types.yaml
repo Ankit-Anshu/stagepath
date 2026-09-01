@@ -1,128 +1,120 @@
 title: Data Types
 category: Spreadsheets
-what_is_it: How a spreadsheet distinguishes numbers, text, dates, and booleans internally, and why a value "looking" like a number doesn't always mean it is one.
-why_it_matters: A huge share of "broken formula" problems trace back to a mismatched data type — a number stored as text, or a date that's actually just text that happens to look like one.
+what_is_it: How a spreadsheet tells numbers, text, dates and formulas apart internally, so that a value which looks like a number is not always treated as one.
+why_it_matters: A large share of "broken formula" problems are really a data type mismatch, most often a number that got stored as text and is quietly ignored by every math function that touches it.
 prerequisites:
   - mixed-references
 objectives:
-  - Identify whether a cell holds a number, text, date, or boolean
-  - Explain why a number stored as text breaks SUM and other math functions
-  - Convert text that looks like a number into an actual number
-estimated_minutes: 60
-resources:
-  - r-exceljet-functions
-practice:
-  - id: ex-data-types-1
-    title: Fix numbers stored as text
-    description: Given a column of prices imported as text (left-aligned, ignored by SUM), convert them into real numbers so they sum correctly.
-verify:
-  - Can identify a data-type mismatch from cell alignment
-  - Converted values sum/calculate correctly
+  - Identify whether a cell holds a number, text, a date or a formula
+  - Predict what happens when a real number and a text number are added together
+  - Spot a number stored as text by its alignment
+  - Explain why a date is secretly stored as a number
+estimated_minutes: 16
 note: |
-  ## 🎯 What is it?
+  # Data types
 
-  Every cell in a spreadsheet internally stores its value as a specific **data type** — most commonly a **number**, **text**, a **date** (which is secretly a number), or a **boolean** (TRUE/FALSE) — and formulas behave differently depending on which type they're working with.
+  A spreadsheet tells numbers, text, dates and formulas apart internally, so a value which looks like a number is not always treated as one.
 
-  ## 💡 Why is it important?
+  ## The 30-second answer
 
-  A huge share of "broken formula" problems trace back to a mismatched data type — most often a number that's secretly stored as text (commonly after importing a CSV), which looks completely normal to the eye but gets silently ignored by SUM, AVERAGE, and other math functions.
+  - Every cell stores its content as one type: most often a number, text, a date, or a formula.
+  - A real number is right-aligned by default. Text, including text that looks like a number, is left-aligned.
+  - Math functions such as a total or an average only count real numbers. They quietly skip anything stored as text.
+  - A date is secretly stored as a plain number counting days from a fixed starting point, which is why dates can be added and subtracted.
+  - Data that arrives from outside the sheet, such as a CSV import, often arrives as text even when it looks exactly like a number.
 
-  ## Core concept
+  ## What it means
 
-  | Data type | Example | Default alignment | Notes |
+  A cell's data type is not something you usually choose on purpose. It is decided by how the value got there: typing `120` gives you a real number, typing `120` with a leading character that forces text mode, or pasting it in from a system that exports everything as text, gives you something that looks identical on screen but behaves completely differently in a formula.
+
+  This matters because a spreadsheet trusts the stored type completely and the screen almost never shows you what that type actually is. Two cells can both display `120`, one ready to be added up correctly and one that a total formula will walk straight past as if it were not there. The only reliable way to tell them apart is to check, not to look.
+
+  ## How it works
+
+  | Type | Example | Default alignment | Behaves in math as |
   |---|---|---|---|
-  | Number | `120`, `3.5` | Right-aligned | Can be used in math directly |
-  | Text | `"Widget"` | Left-aligned | Cannot be used in math directly |
-  | Date | `2024-01-15` | Right-aligned | Secretly stored as a number (days since a reference date) |
-  | Boolean | `TRUE`, `FALSE` | Center-aligned | Used in logical formulas like IF |
+  | Number | `120`, `3.5` | Right | A real value |
+  | Text | `Notebook` | Left | Not a value. Skipped by SUM, AVERAGE and similar functions |
+  | Date | `05/01/2026` | Right | A number counting days, which is why dates can be subtracted |
+  | Formula | `=B2*C2` | Matches the result's type | Whatever type its result turns out to be |
 
-  ### The classic trap: numbers stored as text
-  When data is imported (especially from a CSV or another system), numbers sometimes arrive as **text that looks like a number** — e.g., "120" as a text string rather than the number 120. SUM and AVERAGE silently skip these cells rather than erroring, which can quietly and significantly under-report a total.
+  What happens, in order, when a number arrives as text:
 
-  **Visual clue:** a real number is right-aligned by default; a number stored as text is left-aligned — this alignment difference is the fastest way to spot the problem.
+  1. A value that looks like a number is typed or imported in a way that stores it as text.
+  2. The cell shows the value, left-aligned, with nothing marking it as wrong.
+  3. A total formula that includes that cell in its range runs normally, with no error.
+  4. The result is lower than expected, because the text-stored value was silently treated as if it were not there.
 
-  ## Syntax
+  ## Example
 
-  ```
-  =VALUE(A1)     converts text that looks like a number into a real number
-  =ISTEXT(A1)    returns TRUE if A1 is stored as text
-  =ISNUMBER(A1)  returns TRUE if A1 is stored as a real number
-  ```
+  A new column, `Date purchased`, is added to the January worksheet, holding a real date for each item.
 
-  ## 📊 Example
+  | | A | B | E |
+  |---|---|---|---|
+  | 1 | Item | Price | Date purchased |
+  | 2 | Notebook | 2 | 05/01/2026 |
+  | 3 | Pen | 1 | 05/01/2026 |
+  | 4 | Eraser | 1 | 06/01/2026 |
+  | 5 | Ruler | 3 | 06/01/2026 |
 
-  | | A |
-  |---|---|
-  | 1 | 120 (left-aligned — stored as text) |
-  | 2 | 340 (left-aligned — stored as text) |
+  Each date is right-aligned, confirming it is stored as a real date rather than as text that happens to read like one.
 
-  **Formula:** `=SUM(A1:A2)`
-  **Result:** `0` — because SUM ignores text values entirely, even ones that look like numbers.
+  | Input | Result | What it does |
+  |---|---|---|
+  | A real date typed into E2 | Right-aligned, usable in date maths | Stored as a number counting days, so it can be compared or subtracted |
+  | The same date pasted in as plain text | Left-aligned, looks identical | Cannot be used in date maths without first converting it |
 
-  **Fix:** `=VALUE(A1)` in a helper column converts "120" (text) into 120 (a real number), after which SUM works correctly.
+  **Where it bites**
 
-  ## Multiple examples
+  Correct version: B2 through B5 all hold real numbers, right-aligned, and the total formula `=SUM(B2:B5)` in B6 correctly shows 7.
 
-  **Beginner:** Checking a column's alignment to spot text-stored numbers at a glance.
-  **Intermediate:** Using `=ISNUMBER(A1)` to flag every cell in a column that isn't actually a real number.
-  **Real-world:** A price column imported from a legacy system arrives with every value stored as text (often due to a leading apostrophe or a mismatched CSV export setting) — recognizing this immediately from the left-alignment, rather than spending time debugging a "broken" SUM formula.
+  Wrong version: Ruler's price in B5 was pasted in from another system and landed as text, left-aligned, but still displaying `3` exactly like the others.
 
-  ## ⚠️ Common mistakes
+  Both versions show a full column of prices that look identical at a glance. The total formula runs with no error in either case, but in the wrong version it silently skips B5, so B6 shows 4 instead of 7. Nothing about the grid marks Ruler's price as different from the rest: no colour, no icon, no warning, only a total that is quietly short by exactly the value that got skipped.
 
-  - **Trusting that a value "looks like" a number means it is one.** Only the underlying data type matters to a formula, not visual appearance.
-  - **Not noticing left-alignment as the tell-tale sign** of a number stored as text — this single visual cue diagnoses the problem instantly, once you know to look for it.
-  - **Formatting a cell to "look like" a date without the underlying value actually being a real date** — this breaks any date-math formula (like DATEDIF) applied to it.
+  ## When to use it
 
-  ## Real-world Data Analyst use cases
+  **Use it when** you import data from another system, especially a CSV file, and need to confirm the numbers and dates arrived as real numbers and dates rather than text that only looks like them.
 
-  - **Data cleaning (any domain):** the very first check on any newly imported dataset — are the number and date columns actually stored as numbers and dates, not text?
-  - **Troubleshooting a "broken" total:** recognizing that a SUM returning 0 (or an unexpectedly low number) is very often a data-type problem, not a formula problem.
+  **Use something else when** you are troubleshooting a formula that is producing an outright error rather than a silently wrong number. A mismatched data type usually causes a quietly wrong result, not a visible error.
+
+  **Never** trust a value's appearance alone when a total looks lower than it should. Check the alignment, or use a function built to test the type directly.
+
+  ## Common mistakes
+
+  - "My total is lower than it should be but there is no error." One or more of the summed cells is storing a number as text. Check each cell's alignment: text sits left, real numbers sit right.
+  - "I imported a CSV and none of my totals work." CSV imports very often bring numbers in as text. Convert the column to real numbers before calculating with it.
+  - "A date formula is not working even though the cell shows a date." The cell holds text that reads like a date, not a real date. Only a real date, right-aligned, can be used in date maths such as counting days between two of them.
+  - "I fixed one cell but the total still looks wrong." Data type problems are usually not limited to one cell. Check the whole range the formula covers, not only the value that first caught your eye.
+
+  ## Interview questions
+
+  1. What are the main data types a spreadsheet cell can hold?
+
+  <details><summary>Answer</summary>Number, text, date and formula are the main ones. A date is a special case of a number, and a formula's type depends on whatever its result turns out to be.</details>
+
+  2. Why can a real date be subtracted from another date to get a number of days?
+
+  <details><summary>Answer</summary>Because a date is not stored as the words you see. It is stored as a plain number counting days from a fixed starting point, so subtracting two dates is really subtracting two numbers, and the result naturally comes out as a count of days.</details>
+
+  3. A SUM formula returns a number lower than you expect, with no error shown. What do you check first?
+
+  <details><summary>Answer</summary>Whether every cell inside the formula's range is actually stored as a real number, by checking its alignment. A number stored as text is left-aligned and is silently skipped by SUM, which produces a plausible but too-low total with no warning.</details>
+
+  4. When would you specifically check a column's data type before doing anything else with it?
+
+  <details><summary>Answer</summary>Right after importing data from an outside source, such as a CSV file or another system's export, since those very often bring numbers and dates in as plain text even though they display normally.</details>
+
+  5. Explain why a spreadsheet can silently give a wrong total, to a colleague who has never heard the term `data type`.
+
+  <details><summary>Answer</summary>A spreadsheet does not only look at what a value looks like on screen, it remembers whether that value is really a number or only text shaped like one. If a number gets stored as text by mistake, a total that adds up a column of numbers walks right past it as if the cell were empty, and nothing on screen warns you that happened.</details>
 
   ## Related concepts
 
-  ```
-  Relative & Absolute References
+  ```text
+  Cell references
     ↓
-  Data Types ← you are here
+  Data types ← you are here
     ↓
-  Tables
+  Formula bar
   ```
-  This same underlying issue reappears throughout Spreadsheets — it's the root cause behind many [SUM](/skills/sum-function) and [DATEDIF](/skills/datedif-function) surprises.
-
-  ## Practice questions
-
-  ### Easy
-  1. What visual cue suggests a number is actually stored as text?
-
-  ### Medium
-  2. A SUM formula returns 0 on a column that clearly has numbers in it. What's your first hypothesis?
-
-  ### Interview/Advanced
-  3. Why does SUM silently ignore text-stored numbers instead of throwing an error?
-
-  <details><summary><strong>Answer / Solution</strong></summary>
-
-  1. Left-alignment — real numbers are right-aligned by default, while text (including text that looks like a number) is left-aligned.
-  2. The values are very likely stored as text, not real numbers — check the alignment, then convert with `=VALUE()` or a paste-special "convert to number" step.
-  3. SUM is designed to skip non-numeric content gracefully (like blank cells or genuine text labels) rather than error on every non-numeric cell it encounters — this is usually helpful, but becomes a trap specifically when a numeric-looking value was accidentally imported as text.
-
-  </details>
-
-  ## 🎤 Interview preparation
-
-  **Q: How would you diagnose why a SUM formula is returning a lower total than expected?**
-  Short answer: Check whether the summed values are actually stored as numbers — left-aligned cells are a strong visual signal that values are stored as text and are being silently skipped by SUM.
-
-  ## Best practices
-
-  - Check column alignment as a fast, first-pass data-quality check on any new dataset.
-  - Use `=VALUE()` (or a "convert to number" tool) to fix text-stored numbers before calculating with them.
-  - Never assume a value's data type from how it looks — verify it.
-
-  ---
-
-  ### ⚡ Quick Revision
-
-  **Number** → right-aligned by default · **Text** → left-aligned by default
-  **Classic trap:** numbers imported as text are silently skipped by SUM/AVERAGE
-  **Fix:** `=VALUE(cell)` converts text that looks like a number into a real number

@@ -97,7 +97,41 @@ const CURRICULUM_CONTEXT: Record<string, { roadmapTitle: string; roadmapHref: st
     stageTitle: 'Foundations',
     stageHref: '/skill-roadmaps/spreadsheet#section-foundations',
     prev: null,
-    next: { title: 'Spreadsheet Interface', href: '/skill-roadmaps/spreadsheet#section-foundations' },
+    next: { title: 'Spreadsheet Interface', href: '/skills/spreadsheet-interface' },
+  },
+  // 'workbook', 'worksheet', 'rows', 'cells', 'cell-references' and
+  // 'spreadsheet-data-types' deliberately have no entry here even though
+  // they're linked tiles on the Spreadsheet curriculum tree: all six also
+  // sit inside content/chapters/fundamentals.yaml, which is wired into
+  // data-analyst.yaml's own `groups`, so groupContext above is already
+  // truthy for them and wins (see `!groupContext` in curriculumContext's
+  // definition). They already render a working breadcrumb/pager card, just
+  // one framed as "Data Analyst / Spreadsheets / Fundamentals" rather than
+  // "Spreadsheet / Foundations". An entry here for any of them would never
+  // be read.
+  'spreadsheet-interface': {
+    roadmapTitle: 'Spreadsheet',
+    roadmapHref: '/skill-roadmaps/spreadsheet',
+    stageTitle: 'Foundations',
+    stageHref: '/skill-roadmaps/spreadsheet#section-foundations',
+    prev: { title: 'What is a Spreadsheet', href: '/skills/what-is-a-spreadsheet' },
+    next: { title: 'Workbook', href: '/skills/workbook' },
+  },
+  'formula-bar': {
+    roadmapTitle: 'Spreadsheet',
+    roadmapHref: '/skill-roadmaps/spreadsheet',
+    stageTitle: 'Foundations',
+    stageHref: '/skill-roadmaps/spreadsheet#section-foundations',
+    prev: { title: 'Data Types', href: '/skills/spreadsheet-data-types' },
+    next: { title: 'Spreadsheet Shortcuts', href: '/skills/spreadsheet-shortcuts' },
+  },
+  'spreadsheet-shortcuts': {
+    roadmapTitle: 'Spreadsheet',
+    roadmapHref: '/skill-roadmaps/spreadsheet',
+    stageTitle: 'Foundations',
+    stageHref: '/skill-roadmaps/spreadsheet#section-foundations',
+    prev: { title: 'Formula Bar', href: '/skills/formula-bar' },
+    next: { title: 'Basic Operations', href: '/skill-roadmaps/spreadsheet#section-basic-operations' },
   },
 };
 const curriculumContext = !groupContext ? CURRICULUM_CONTEXT[skill.id] ?? null : null;

@@ -1,81 +1,117 @@
 title: Worksheet
 category: Spreadsheets
-what_is_it: One grid/tab inside a workbook — the actual rows-and-columns surface you enter data and formulas into.
-why_it_matters: Creating, naming, and referencing worksheets correctly is what turns a workbook from a jumble of "Sheet1, Sheet2, Sheet3" into a navigable, professional file.
+what_is_it: One grid inside a workbook, shown as a tab along the bottom, holding its own separate set of rows and columns.
+why_it_matters: A workbook with unnamed, unfamiliar tabs turns a two-second lookup into a guessing game, and knowing which sheet you are looking at is the first thing every later formula depends on.
 prerequisites:
   - workbook
 objectives:
-  - Create, rename, and navigate between worksheets
-  - Reference a cell on a different worksheet
-estimated_minutes: 25
-resources:
-  - r-exceljet-functions
-practice:
-  - id: ex-worksheet-1
-    title: Cross-sheet reference
-    description: Create a workbook with two sheets, "Raw Data" and "Summary," and write a formula on Summary that references a cell on Raw Data.
-verify:
-  - Sheets are named clearly, not left as "Sheet1"
-  - A cross-sheet reference correctly pulls the right value
+  - Rename a worksheet tab and explain why a clear name matters
+  - Predict which worksheet you are editing by reading the tab bar
+  - Write a reference to a cell on a different worksheet
+  - Explain why two identically shaped worksheets can still hold different data
+estimated_minutes: 12
 note: |
-  ## 🎯 What is it?
+  # Worksheet
 
-  A **worksheet** (or just "sheet") is one grid/tab inside a workbook — the actual surface of rows and columns you enter data and formulas into. A workbook's tabs, shown along the bottom of the window, are each a separate worksheet.
+  A worksheet is one grid inside a workbook, shown as a tab along the bottom, holding its own separate set of rows and columns.
 
-  ## 💡 Why is it important?
+  ## The 30-second answer
 
-  - Naming and organizing worksheets clearly is what makes a multi-tab file navigable instead of a wall of "Sheet1, Sheet2, Sheet3."
-  - Formulas can reference cells on a *different* worksheet — a key technique for keeping raw data, calculations, and summaries separate but connected.
+  - A worksheet is one grid: rows, columns and cells, shown as one tab in the workbook.
+  - A workbook can hold several worksheets, each independent of the others unless a formula links them.
+  - The active worksheet is the one tab currently on screen. Typing only affects that tab.
+  - Worksheets can be renamed, reordered, or coloured, which does not change the data on them.
+  - A formula can pull a value from a different worksheet by naming that sheet before the cell address.
 
-  ## Core concept
+  ## What it means
+
+  A worksheet is where the actual work happens: the grid you type into, format, and write formulas in. The workbook around it is only the file that carries one or more of these grids together. Two worksheets in the same workbook do not share data automatically. A cell on one tab and a cell in the same position on another tab are two entirely separate cells, and changing one has no effect on the other unless a formula on one deliberately points at the other.
+
+  This is why naming worksheets clearly matters more than it first seems. A workbook left with tabs named `Sheet1`, `Sheet2` and `Sheet3` gives no clue which one holds which data, and the only way to check is to click through each one. A worksheet named for what it actually holds turns that guesswork into a glance.
+
+  ## How it works
 
   | Action | How |
   |---|---|
-  | Create a sheet | Click the "+" tab, or right-click a tab → Insert |
-  | Rename a sheet | Double-click the tab and type a new name |
-  | Reorder sheets | Drag a tab left/right |
-  | Reference another sheet | `=SheetName!A1` |
+  | Switch worksheet | Click a different tab along the bottom |
+  | Rename a worksheet | Double-click the tab and type a new name |
+  | Add a worksheet | Click the add-tab button next to the existing tabs |
+  | Reference another worksheet | Write the sheet name, an exclamation mark, then the cell address |
 
-  ## Syntax
+  What happens, in order, when a formula reaches across sheets:
 
-  ```
-  =SheetName!CellAddress
-  =Summary!B2         (references cell B2 on the "Summary" sheet)
-  ='Raw Data'!B2       (sheet names with spaces need single quotes)
-  ```
+  1. You are on one worksheet and start a formula.
+  2. You click a tab for a different worksheet.
+  3. You click a cell on that worksheet.
+  4. The formula records that cell's address together with the worksheet's name, so it keeps pointing at the right sheet even after you switch back.
 
-  ## 📊 Example
+  ## Example
 
-  ```
-  =SUM('Raw Data'!B2:B100)
-  ```
+  The workbook now holds two worksheets: `Sheet1`, the January shopping list (Notebook, Pen, Eraser, Ruler, priced 2, 1, 1, 3, total 7 in B6), and `Sheet2`, a separate February list with its own items and its own total.
 
-  This formula lives on a "Summary" sheet but sums values from a "Raw Data" sheet — the single quotes around `'Raw Data'` are required because the sheet name contains a space.
+  Both tabs are renamed so they can be told apart at a glance.
 
-  ## ⚠️ Common mistakes
+  | Before | After |
+  |---|---|
+  | `Sheet1` | `January` |
+  | `Sheet2` | `February` |
 
-  - **Leaving sheets named "Sheet1," "Sheet2,"** making a multi-tab workbook much harder to navigate.
-  - **Forgetting single quotes around a sheet name that contains a space** in a cross-sheet formula, causing a formula error.
-  - **Mixing raw data and calculations on the same sheet**, making it hard to tell what's original versus derived.
+  | Input | Result | What it does |
+  |---|---|---|
+  | Click the `February` tab | The grid now shows February's list, not January's | Confirms which worksheet is active before typing anything |
+  | A formula on `February` referencing `January`'s total | Shows January's total number on the February tab | Pulls one value across sheets without duplicating the data |
+
+  **Where it bites**
+
+  Correct version: two tabs, clearly labelled `January` and `February`, each holding its own list.
+
+  Wrong version: two tabs still labelled `Sheet1` and `Sheet2`, both showing a similar-looking list of four items and a total.
+
+  Both workbooks look almost identical at a glance, tab bar included. Nothing marks either tab as the wrong one to edit. A person meaning to update January's prices, but clicking whichever tab happens to be active, can edit February's numbers instead, and the sheet still looks completely normal afterward: a list, some prices, a total, only for the wrong month.
+
+  ## When to use it
+
+  **Use it when** you have more than one distinct set of data that belongs in the same workbook, such as one month per tab, or raw data kept apart from a summary.
+
+  **Use something else when** the data does not actually need to be kept apart. Splitting one small, single list across several worksheets for no reason only adds tabs to click through.
+
+  **Never** leave more than one or two worksheets with their default name. Rename a tab as soon as you know what it is for.
+
+  ## Common mistakes
+
+  - "I edited the wrong list and did not notice." You typed without checking the tab bar first. Confirm the active tab's name before making changes, especially in a workbook with several similar-looking sheets.
+  - "I have three tabs and I cannot tell which is which." They were left with their default names. Rename every tab as soon as its purpose is clear, not at the end of the project.
+  - "My cross-sheet formula broke after I deleted a tab." A formula pointing at a worksheet that no longer exists cannot find its data and returns an error. Check which sheets a formula depends on before deleting one.
+  - "I have two tabs that look the same and I am not sure they hold different data." Two worksheets with the same layout are still two separate grids. Click into each one and check its cells rather than assuming from the shape alone.
+
+  ## Interview questions
+
+  1. What is the relationship between a worksheet and a workbook?
+
+  <details><summary>Answer</summary>A worksheet is one grid, shown as a tab, and a workbook is the file that holds one or more worksheets together. Every worksheet belongs to exactly one workbook.</details>
+
+  2. Why doesn't editing a cell on one worksheet ever change the same-looking cell on another worksheet?
+
+  <details><summary>Answer</summary>Because each worksheet is its own separate grid. A cell's position, such as B2, only means something within the one worksheet it sits on. Two worksheets never share cells unless a formula on one is written to specifically pull a value from the other.</details>
+
+  3. Someone says a number on their summary tab looks stale. What do you check first?
+
+  <details><summary>Answer</summary>Whether the summary tab's formulas actually reference the other worksheet's current cells, and whether those source cells have been renamed, moved, or deleted since the formula was written. A broken cross-sheet reference often still shows a number, only an outdated one.</details>
+
+  4. When would you split data across multiple worksheets instead of keeping it on one?
+
+  <details><summary>Answer</summary>When the data serves genuinely different purposes, such as raw entries on one sheet and a calculated summary on another, or one period's figures per tab. If the data is small and always used together, one worksheet is simpler and avoids unnecessary cross-sheet formulas.</details>
+
+  5. Explain what a worksheet is to a colleague who already knows what a workbook is, without using the word `tab`.
+
+  <details><summary>Answer</summary>A worksheet is one page of the workbook: its own grid of rows and columns, separate from every other page in the same file. You can have several of these pages inside one workbook, and you switch between them to see one page's data at a time.</details>
 
   ## Related concepts
 
-  ```
+  ```text
   Workbook
     ↓
-  Worksheet ← you are here
+  Worksheets ← you are here
     ↓
-  Rows
+  Rows and Columns
   ```
-
-  ## 🎤 Interview preparation
-
-  **Q: A formula referencing a sheet named "Q1 Sales" throws an error. What's the likely cause?**
-  Short answer: The sheet name contains a space and needs single quotes around it in the formula: `='Q1 Sales'!A1`.
-
-  ---
-
-  ### ⚡ Quick Revision
-
-  **Worksheet** → one grid/tab inside a workbook
-  **Cross-sheet reference:** `=SheetName!Cell` (use `'Sheet Name'!Cell` if the name has a space)

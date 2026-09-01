@@ -1,67 +1,119 @@
-title: Rows
+title: Rows and Columns
 category: Spreadsheets
-what_is_it: The horizontal lines of a spreadsheet grid, numbered 1, 2, 3... — one of the two axes every cell address is built from.
-why_it_matters: Inserting, deleting, and selecting rows correctly (via the menu, not manual cut-and-paste) is what keeps formulas from silently breaking as a dataset grows.
+what_is_it: The two axes every cell address is built from, rows running horizontally and numbered, columns running vertically and lettered.
+why_it_matters: Inserting, deleting, and reading rows and columns the right way is what keeps formulas correct as a sheet grows, instead of silently pointing at the wrong data.
 prerequisites:
   - worksheet
 objectives:
-  - Identify a row by its number
-  - Insert and delete a row without breaking existing formulas
-estimated_minutes: 15
-resources:
-  - r-exceljet-functions
-practice:
-  - id: ex-rows-1
-    title: Insert a row safely
-    description: Given a small table with a SUM formula, insert a new row in the middle using the Insert Row command and confirm the formula still works.
-verify:
-  - Can identify a row by its number
-  - Inserting a row does not break an existing formula
+  - Identify a row by its number and a column by its letter
+  - Insert a row or column without breaking an existing formula
+  - Predict which cell a formula shifts to point at after an insert
+  - Explain why manually shifting data down is riskier than using Insert
+estimated_minutes: 14
 note: |
-  ## 🎯 What is it?
+  # Rows and columns
 
-  **Rows** run horizontally across a spreadsheet, numbered 1, 2, 3... down the left side. A row is one of the two coordinates (along with column) that make up every cell's address.
+  Rows and columns are the two axes every cell address is built from: rows running horizontally and numbered, columns running vertically and lettered.
 
-  ## 💡 Why is it important?
+  ## The 30-second answer
 
-  - Most datasets are organized "one row per record" (one row per order, one row per customer) — understanding rows is core to reading any table correctly.
-  - Inserting or deleting a row the right way (through the menu) automatically updates every formula's references; doing it by manually cutting and pasting data does not, and silently breaks formulas.
+  - Rows run horizontally and are numbered down the left side: 1, 2, 3, and so on.
+  - Columns run vertically and are lettered across the top: A, B, C, and after Z, AA, AB, and so on.
+  - A cell's address is its column letter followed by its row number, such as C5.
+  - Inserting a row or column through the proper command shifts everything after it and updates formula ranges automatically.
+  - Manually cutting and pasting data to make room does not update formulas, and can silently break them.
 
-  ## Core concept
+  ## What it means
+
+  Rows and columns are the grid's coordinate system. Every cell sits at the point where exactly one row meets exactly one column, and that pair is the only thing that gives a cell its address. Without this system, there would be no reliable way to say "this exact value" instead of only "some value somewhere in the sheet."
+
+  This is also why inserting a row or column is not the same action as moving data around by hand. The proper insert command tells the whole sheet that a new row or column now exists at that position, so every formula that reads past it automatically adjusts. Moving data by cutting and pasting only moves the values. It does not touch any formula elsewhere that was counting on the old layout, which is why the two approaches can look identical on screen and behave completely differently underneath.
+
+  ## How it works
 
   | Action | Correct approach |
   |---|---|
   | Select a row | Click the row number on the left |
-  | Insert a row | Right-click a row number → Insert |
-  | Delete a row | Right-click a row number → Delete |
+  | Select a column | Click the column letter at the top |
+  | Insert a row or column | Right-click the row number or column letter, choose Insert |
+  | Delete a row or column | Right-click the row number or column letter, choose Delete |
 
-  ## 📊 Example
+  What happens, in order, when you insert a row through the proper command:
 
-  Given a table with a total formula in row 10 summing rows 2–9, inserting a new row at row 5 (via Insert, not manual cut-paste) automatically expands the SUM formula's range to include the new row — this automatic adjustment only happens with a proper insert.
+  1. You right-click a row number and choose Insert.
+  2. A new, empty row appears at that position.
+  3. Every row below it shifts down by one.
+  4. Any formula that referenced a range crossing that position automatically expands to include the new row.
 
-  ## ⚠️ Common mistakes
+  ## Example
 
-  - **Manually cutting a row's data and pasting it elsewhere** to "move" it instead of using cut/insert commands — this can break formulas that referenced the original row.
-  - **Deleting a row that other formulas depend on**, producing a `#REF!` error everywhere that row was referenced.
+  The January worksheet gains a new column: `Quantity`, in column C, next to the existing `Item` and `Price` columns.
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Item | Price | Quantity |
+  | 2 | Notebook | 2 | 1 |
+  | 3 | Pen | 1 | 3 |
+  | 4 | Eraser | 1 | 2 |
+  | 5 | Ruler | 3 | 1 |
+  | 6 | Total | 7 | |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Insert a column between A and B via the menu | A new blank column appears, existing columns shift right, formulas update to match | Adds a column without breaking anything referencing the old layout |
+  | Right-click row 3 (Pen) and choose Insert | A new blank row appears above Pen, `B6`'s SUM range automatically grows to include it | Keeps the total formula correct without editing it by hand |
+
+  **Where it bites**
+
+  Correct version: a fifth item is added properly, using Insert on row 6 (pushing the old row 6, Total, down to row 7), so the total formula automatically becomes `=SUM(B2:B6)`.
+
+  Wrong version: the same fifth item is added by typing its data directly into row 6, overwriting what used to be the Total row, then retyping "Total" and its formula one row lower by hand, without ever using Insert.
+
+  Both sheets end up looking the same: five items, a total row underneath. But in the wrong version, nothing forced the retyped formula to be correct. If its range was typed as `=SUM(B2:B5)` out of habit instead of `=SUM(B2:B6)`, the newest item is silently left out of the total, with no error and no visual difference from a sheet that added it correctly.
+
+  ## When to use it
+
+  **Use it when** you need to add or remove a whole record or a whole field without disturbing anything else on the sheet, or when you need to reorganise a table's shape.
+
+  **Use something else when** you are only changing a value that already has its own row and column. Reach for Insert only when the grid's shape itself needs to change.
+
+  **Never** make room for new data by manually retyping everything one row or column over. Always use Insert, and check that any formula whose range should have grown actually did.
+
+  ## Common mistakes
+
+  - "My total does not include the row I added most recently." The row was typed in by hand instead of inserted, so the existing formula's range never grew to include it. Use Insert, then check the formula's range afterward.
+  - "I deleted a row and now I have a #REF! error somewhere else." Some formula referenced a cell in that row directly. Deleting a row that other formulas depend on breaks those references outright.
+  - "I cannot tell if column C is really the third column." Past column Z, letters continue as AA, AB, AC, so counting by eye in a wide sheet is unreliable. Check the name box or column header instead of counting.
+  - "I inserted a column and a formula that used to work now points at the wrong data." A formula written with a fixed range or a specific typed-out reference outside the inserted area does not always shift the way you expect. Re-check any formula that referenced cells near the insertion point.
+
+  ## Interview questions
+
+  1. How is a cell's address built from its row and column?
+
+  <details><summary>Answer</summary>The column letter comes first, then the row number, so a cell at the meeting point of column C and row 5 has the address C5.</details>
+
+  2. Why does using the Insert command keep formulas correct, when manually shifting data does not?
+
+  <details><summary>Answer</summary>Insert tells the sheet that a new row or column now exists at that exact position, so every formula referencing a range that crosses it is automatically rewritten to include it. Manually cutting and pasting only moves values around. It never touches any formula elsewhere, so those formulas keep reading the old positions.</details>
+
+  3. A total formula stops including a row you added most recently. What do you check first?
+
+  <details><summary>Answer</summary>Whether that row was added using Insert or typed in by hand. If it was typed in without inserting, the formula's range never grew, and you need to fix the range manually.</details>
+
+  4. When would you insert a whole column instead of only filling in a value in an existing one?
+
+  <details><summary>Answer</summary>When you are adding a genuinely new field that every row needs, such as a new attribute of each item. If you are only filling in a value for a field that already exists, you do not need to insert anything, you only need to type into the right cell.</details>
+
+  5. Explain what a row and a column are to a colleague who has never used a spreadsheet, without using the word `grid`.
+
+  <details><summary>Answer</summary>A row is a straight line of boxes going sideways, numbered down the side. A column is a straight line of boxes going up and down, lettered across the top. Every box sits on exactly one row and one column at the same time, which is how you point to any one box exactly.</details>
 
   ## Related concepts
 
-  ```
-  Worksheet
+  ```text
+  Worksheets
     ↓
-  Rows ← you are here
+  Rows and columns ← you are here
     ↓
-  Columns
+  Cells and ranges
   ```
-
-  ## 🎤 Interview preparation
-
-  **Q: Why does inserting a row through the menu matter instead of manually shifting data down?**
-  Short answer: The Insert Row command automatically updates every formula's references to account for the new row; manually moving data doesn't, and can silently break references without any warning.
-
-  ---
-
-  ### ⚡ Quick Revision
-
-  **Row** → horizontal, numbered (1, 2, 3...)
-  Always insert/delete rows via the menu — never by manually cutting and pasting data.

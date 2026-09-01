@@ -1,0 +1,119 @@
+title: Spreadsheet Interface
+category: Spreadsheets
+what_is_it: The screen layout around the grid, made up of the ribbon, the name box, the formula bar and the sheet tabs, each with one fixed job.
+why_it_matters: Knowing where each part of the screen lives means you can find a command fast and check what a cell really holds instead of guessing from what it shows.
+objectives:
+  - Name the four main parts of the spreadsheet screen
+  - Point to where the address of the selected cell is shown
+  - Point to where the raw content of a cell is shown, not only its result
+  - Predict which cell is selected after clicking, using the name box
+estimated_minutes: 12
+note: |
+  # Spreadsheet interface
+
+  The spreadsheet interface is the screen layout around the grid: the ribbon, the name box, the formula bar and the sheet tabs, each with one fixed job.
+
+  ## The 30-second answer
+
+  - The interface is everything around the grid that stays in the same place no matter what you type: the ribbon, the name box, the formula bar, the grid, and the sheet tabs.
+  - The ribbon sits at the top and holds the buttons, grouped into tabs such as Home, Insert and Data.
+  - The name box, at the left end of the row above the grid, shows the address of the cell you have selected.
+  - The formula bar, next to the name box, shows the raw content of that cell: what you typed, not the result you see in the grid.
+  - The sheet tabs run along the bottom and switch which worksheet of the open workbook you are looking at.
+
+  ## What it means
+
+  Every spreadsheet program puts the same four things on screen, in the same rough places, because you need to do the same four things every time you open one: find a command, see where you are, see what a cell actually holds, and move between sheets. Once you know where each of those lives, a spreadsheet from a program you have never opened before still looks familiar, even when the exact button names differ.
+
+  The part that trips people up first is the difference between what a cell shows and what a cell holds. The grid shows results: a cell can display `7` while actually holding a formula that adds four other cells. The formula bar is the only place that shows the real content, so it is the first place to check whenever a number on screen does not match what you expect.
+
+  ## How it works
+
+  | Part | Where it sits | What it shows or does |
+  |---|---|---|
+  | `Ribbon` | Top of the window | Buttons and commands, grouped into tabs such as Home, Insert and Data |
+  | `Name box` | Left edge, above the grid | The address of the cell that is currently selected |
+  | `Formula bar` | Right of the name box | The raw content of the selected cell: a typed value or a formula |
+  | `Grid` | The main area | Rows and columns of cells, each showing its result, not necessarily its content |
+  | `Sheet tabs` | Bottom edge | One tab per worksheet in the open workbook, used to switch between them |
+
+  What happens, in order, when you select a cell:
+
+  1. You click a cell in the grid.
+  2. The name box updates to show that cell's address.
+  3. The formula bar updates to show that cell's raw content.
+  4. The ribbon's active tab stays the same, but its buttons may grey in or out depending on what that cell holds.
+
+  ## Example
+
+  The shopping list: Notebook, Pen, Eraser and Ruler in column A, priced 2, 1, 1 and 3 in column B, with a total in B6.
+
+  Click on cell B6, the total, and the interface responds in three places at once.
+
+  | Part | Shows |
+  |---|---|
+  | Name box | `B6` |
+  | Formula bar | The formula that adds B2 through B5, not the number `7` |
+  | Grid, cell B6 | `7`, the result of that formula |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Click cell A2 | Name box shows `A2`, formula bar shows `Notebook` | Confirms which cell is selected and what it holds |
+  | Click cell B6 | Name box shows `B6`, formula bar shows the sum formula | Shows that a cell's displayed result and its real content can differ |
+
+  **Where it bites**
+
+  Two versions of the same workbook, both showing `7` in cell B6:
+
+  Correct version: the formula bar, with B6 selected, shows a formula adding B2 through B5.
+
+  Broken version: the formula bar, with B6 selected, shows the number `7`, typed in directly, with no formula behind it.
+
+  Both grids look identical and both show the same total today. Nothing on the grid marks the second one as different: no icon, no colour change, no warning. The first total updates on its own if a price changes. The second total is a number that happens to be right today and will quietly go wrong the next time a price changes, because nothing behind it is adding anything.
+
+  ## When to use it
+
+  **Use it when** you need to confirm what a cell actually contains, find a command you do not use often, or check which cell is selected before typing.
+
+  **Use something else when** you already know a cell's content from memory and are moving between nearby cells you have already checked. Reading the formula bar for every cell you touch slows you down for no reason.
+
+  **Never** trust the number shown in the grid alone when checking whether a total is a real formula or a typed-in value. Read the formula bar first.
+
+  ## Common mistakes
+
+  - "I do not know if this number will update or not." You are reading the grid, which shows the same thing for a formula and a typed value. Click the cell and read the formula bar instead.
+  - "I clicked Home but I cannot find the button I want." The command lives under a different ribbon tab, often Insert or Data. Buttons are grouped by what they do, not by how often people use them.
+  - "I am not sure which cell I actually clicked." You judged it by eye instead of checking the name box. In a wide or busy sheet, the highlighted cell can be misjudged at a glance.
+  - "I typed a formula and the cell shows the formula's text instead of a result." The cell was formatted to show formulas, or the formula was typed with a character that turned it into plain text. Check the cell's format before retyping.
+
+  ## Interview questions
+
+  1. What are the four main parts of the spreadsheet interface, and what does each one do?
+
+  <details><summary>Answer</summary>The ribbon, holding grouped commands. The name box, showing the address of the selected cell. The formula bar, showing that cell's raw content. And the sheet tabs, switching between worksheets.</details>
+
+  2. Why does a spreadsheet show a different thing in the grid than in the formula bar for the same cell?
+
+  <details><summary>Answer</summary>The grid is built to show results, the numbers and text you want to read. The formula bar is built to show content, what was actually typed into the cell, which can be a formula that produces that result. Keeping them separate lets you read a clean sheet of numbers while still being able to check how any one of them was produced.</details>
+
+  3. A cell shows a number that looks wrong. What do you check first?
+
+  <details><summary>Answer</summary>Click the cell and read the formula bar. It shows whether the number is a typed value, which never changes until someone edits it, or a formula, which depends on other cells and may be reading the wrong ones.</details>
+
+  4. When does checking the name box actually matter, instead of only clicking and typing?
+
+  <details><summary>Answer</summary>In a wide or busy sheet, where the selected cell's outline is quick to lose track of, or right after a keyboard shortcut moves the selection somewhere unexpected. The name box removes any doubt about exactly which cell is about to receive whatever you type next.</details>
+
+  5. Explain what the ribbon is to a colleague who has never opened a spreadsheet, without using the word `interface`.
+
+  <details><summary>Answer</summary>It is the strip of buttons across the top of the screen, sorted into labelled groups like Home and Insert. You click a group's name to see the buttons that belong to it, the same way a toolbox has separate trays for different kinds of tools.</details>
+
+  ## Related concepts
+
+  ```text
+  What is a spreadsheet
+    ↓
+  Spreadsheet interface ← you are here
+    ↓
+  Workbook
+  ```

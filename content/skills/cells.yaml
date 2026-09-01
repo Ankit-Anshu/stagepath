@@ -1,72 +1,120 @@
-title: Cells
+title: Cells and Ranges
 category: Spreadsheets
-what_is_it: The individual box where a specific row and column meet — the basic unit that holds one piece of data or one formula.
-why_it_matters: Every formula, every data point, and every reference in a spreadsheet ultimately points at a cell — it's the atomic unit everything else is built from.
+what_is_it: A cell is the single box where one row meets one column, and a range is a rectangular group of two or more cells, written as two corner addresses joined by a colon.
+why_it_matters: Almost every formula beyond a single value takes a range as its input, so a range's boundaries need checking constantly, since they are quick to get subtly wrong.
 prerequisites:
   - columns
 objectives:
-  - Identify a cell by its address
-  - Select a single cell versus a range of cells
-estimated_minutes: 15
-resources:
-  - r-exceljet-functions
-practice:
-  - id: ex-cells-1
-    title: Address practice
-    description: Given a small table, write down the address of five different specific cells by their row/column intersection.
-verify:
-  - Can correctly identify any cell by its address
-  - Can select a single cell and distinguish it from selecting a range
+  - Write the address of a single cell from its row and column
+  - Write a range using colon notation for a given block of cells
+  - Predict what a range that is one row too short leaves out
+  - Explain why a range needs to be checked after new rows are added
+estimated_minutes: 14
 note: |
-  ## 🎯 What is it?
+  # Cells and ranges
 
-  A **cell** is the box where a specific row and column meet — the basic unit of a spreadsheet, identified by its address: column letter followed by row number, like `C5` (column C, row 5). A cell can hold a value, text, or a formula.
+  A cell is the single box where one row meets one column. A range is a rectangular group of two or more cells, written as two corner addresses joined by a colon.
 
-  ## 💡 Why is it important?
+  ## The 30-second answer
 
-  - Every formula, every data point, and every reference in a spreadsheet ultimately points at a cell — it's the atomic unit everything else (rows, columns, ranges, formulas) is built from.
-  - Fluently identifying a cell's address is the physical skill every later spreadsheet topic (references, formulas, lookups) assumes you already have.
+  - A cell is one box in the grid, addressed by its column letter and row number, such as B3.
+  - A range is a block of two or more cells, written as its top-left address, a colon, then its bottom-right address, such as B2:B5.
+  - A range can be a single column, a single row, or a rectangle covering several of both.
+  - Most formulas that do more than read one value, such as adding or averaging, take a range as their input.
+  - A range's boundaries do not update themselves. If new data is added past the edge of a range, the range has to be corrected by hand or written to expand on its own.
 
-  ## Core concept
+  ## What it means
 
-  | | Identified by | Example |
+  A cell is the unit everything else is built from: one address, one piece of content, referenced or typed into on its own. A range groups several cells together so a formula can treat them as one input instead of listing every cell individually. `B2:B5` is shorter to write and easier to read than `B2, B3, B4, B5`, and it is also what almost every real formula, from a simple total to a lookup, actually expects to receive.
+
+  The part that causes real trouble is that a range is only two fixed addresses. It has no memory of why it was drawn that way, and it does not notice when the data around it grows. A range that was correct when a table had ten rows is still exactly the same range after the table grows to fifteen, unless someone deliberately updates it or it was built in a way that expands on its own.
+
+  ## How it works
+
+  | Range | Meaning |
+  |---|---|
+  | `B2:B5` | A single column, rows 2 through 5 |
+  | `A2:C2` | A single row, columns A through C |
+  | `A2:C5` | A rectangular block: 3 columns, 4 rows |
+
+  What happens, in order, when you select a range by dragging:
+
+  1. You click the top-left cell of the block you want.
+  2. You hold the mouse button and drag to the bottom-right cell.
+  3. Every cell inside that rectangle is now selected together.
+  4. Typing a formula that expects a range, such as a total, uses exactly that block as its input.
+
+  ## Example
+
+  The January worksheet: `Item` in column A, `Price` in column B, `Quantity` in column C, four items long, with a total in B6.
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Item | Price | Quantity |
+  | 2 | Notebook | 2 | 1 |
+  | 3 | Pen | 1 | 3 |
+  | 4 | Eraser | 1 | 2 |
+  | 5 | Ruler | 3 | 1 |
+  | 6 | Total | 7 | |
+
+  The single cell B2 holds one price. The range B2:B5 holds all four prices together, and is what the total formula in B6 actually adds up.
+
+  | Input | Result | What it does |
   |---|---|---|
-  | Cell | Column letter + row number | B3 |
+  | Click cell B2 | Selects one cell | Refers to exactly one piece of data, the Notebook's price |
+  | Drag from B2 to B5 | Selects a range of four cells | Groups all four prices so a formula can treat them as one input |
 
-  A cell can contain: a **value** (text or number), or a **formula** (which calculates and displays a result).
+  **Where it bites**
 
-  ## 📊 Example
+  Correct version: the total formula reads `=SUM(B2:B5)`, covering all four prices, and shows 7.
 
-  | | A | B |
-  |---|---|---|
-  | 1 | Product | Q1 |
-  | 2 | Widget | 100 |
+  Wrong version: the total formula reads `=SUM(B2:B4)`, one row short, and still shows a number: 4.
 
-  Cell **B2** = 100 (Widget's Q1 value). Cell **A1** contains the text "Product." Each is independently addressable and independently referenceable by a formula anywhere else in the sheet.
+  Both formulas return a plain number with no error and no warning. The second one stopped one row early, silently leaving Ruler's price out of the total. Nothing about the grid or the result marks it as incomplete: it looks exactly as finished as the correct version, only wrong by exactly the value that fell outside the range.
 
-  ## ⚠️ Common mistakes
+  ## When to use it
 
-  - **Confusing a cell's displayed value with its underlying content** — a cell showing "16" might actually contain the formula `=SUM(B2:B3)`, visible in the formula bar, not the literal number 16.
-  - **Miscounting rows or columns when reading an address**, especially past column Z (where columns continue as AA, AB, AC...).
+  **Use it when** a formula needs to treat several cells as one group, such as adding a column of prices or averaging a column of scores.
+
+  **Use something else when** you only need one specific value. Wrapping a single cell in range syntax adds nothing and makes the formula harder to read.
+
+  **Never** assume a range still covers every row after new data is added. Check a range's boundaries any time the table it covers grows.
+
+  ## Common mistakes
+
+  - "My total looks low but there is no error." A range used in the total formula is one row or column short of the real data. Check the exact boundaries of the range against the current size of the table.
+  - "I added a new row at the bottom and the total did not change." The formula's range was typed with fixed boundaries that stop above the new row. Either extend the range by hand or insert the new row inside the range's existing boundaries instead of below them.
+  - "I selected a range but the formula bar shows a single cell." Only the first cell of the selection was actually typed into the formula. Confirm the full range, from the top-left address to the bottom-right address, is what actually appears in the formula.
+  - "I included the header row in my range by accident." A range like B1:B5 pulls in the column heading along with the real data, which can throw off a calculation depending on what the formula does with it. Start ranges on the first row of actual data, not the header.
+
+  ## Interview questions
+
+  1. What is the difference between a cell and a range?
+
+  <details><summary>Answer</summary>A cell is one box, addressed by one column letter and one row number. A range is a group of two or more cells, written as two corner addresses joined by a colon, such as B2:B5.</details>
+
+  2. Why do most formulas take a range rather than a list of individual cells?
+
+  <details><summary>Answer</summary>A range describes a whole block of cells with two addresses instead of naming every cell one at a time. It is shorter to write, easier to read, and it is what functions like a total or an average are built to expect as their input.</details>
+
+  3. A total formula returns a number that looks too low, with no error shown. What do you check first?
+
+  <details><summary>Answer</summary>Whether the range inside the formula actually covers every row of real data. A range that is one row short of the table still returns a normal-looking number, only one that silently excludes whatever fell outside it.</details>
+
+  4. When would you use a single cell reference instead of a range?
+
+  <details><summary>Answer</summary>When the formula only ever needs one specific value, such as multiplying a price by a tax rate held in one cell. A range is for grouping several cells together as one input, which is unnecessary when there is only one value to begin with.</details>
+
+  5. Explain what a range is to a colleague who already knows what a cell is, without using the word `block`.
+
+  <details><summary>Answer</summary>A range is a way of pointing at several cells at once instead of only one, by naming the cell in one corner, then the cell in the opposite corner. Everything between those two corners is included, so a formula can treat the whole group as a single input.</details>
 
   ## Related concepts
 
-  ```
-  Columns
+  ```text
+  Rows and columns
     ↓
-  Cells ← you are here
+  Cells and ranges ← you are here
     ↓
-  Ranges
+  Cell references
   ```
-
-  ## 🎤 Interview preparation
-
-  **Q: What's the address of the cell in column D, row 7?**
-  Short answer: D7 — column letter first, then row number.
-
-  ---
-
-  ### ⚡ Quick Revision
-
-  **Cell** → the intersection of a row and column, e.g. B3
-  Holds either a value or a formula — check the formula bar to see which.

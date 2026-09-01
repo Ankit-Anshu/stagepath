@@ -1,122 +1,119 @@
 title: Cell References
 category: Spreadsheets
-what_is_it: How a formula points at another cell's value by its address, so the formula's result updates automatically whenever the referenced cell changes.
-why_it_matters: Cell references are what make a spreadsheet dynamic instead of a static table of typed numbers — nearly every formula you'll ever write uses one.
+what_is_it: How a formula points at another cell's value by its address, so the formula's result updates automatically whenever that cell changes.
+why_it_matters: A reference is what makes a spreadsheet update itself instead of needing every number retyped by hand, and nearly every formula you will ever write uses one.
 prerequisites:
   - ranges
 objectives:
-  - Write a formula that references another cell
-  - Explain what happens to a formula's result when a referenced cell changes
-  - Reference a range of cells in a formula
-estimated_minutes: 45
-resources:
-  - r-exceljet-functions
-practice:
-  - id: ex-cell-references-1
-    title: Build a linked calculation
-    description: Given a price in one cell and a quantity in another, write a formula in a third cell that references both to calculate a total.
-verify:
-  - Formula references cells, not typed-in values
-  - Changing a referenced cell correctly updates the formula's result
+  - Write a formula that references another cell instead of typing its value
+  - Predict what happens to a formula's result when a referenced cell changes
+  - Spot a formula copied to the wrong row from a value that does not match its row
+  - Explain why a copied formula's references shift instead of staying fixed
+estimated_minutes: 16
 note: |
-  ## 🎯 What is it?
+  # Cell references
 
-  A **cell reference** is how a formula points at another cell's value by its address (like `B2`) instead of typing the value directly — so the formula's result automatically updates whenever the referenced cell changes.
+  A cell reference is how a formula points at another cell's value by its address, so the formula's result updates automatically whenever that cell changes.
 
-  ## 💡 Why is it important?
+  ## The 30-second answer
 
-  Cell references are what make a spreadsheet dynamic instead of a static table of typed numbers — nearly every formula you'll ever write uses one, and understanding them is the difference between a spreadsheet that updates itself and one that requires constant manual re-typing.
+  - A reference is an address, such as B2, written inside a formula instead of a typed number.
+  - A formula that reads `=B2*C2` always uses whatever is currently in B2 and C2, not whatever those cells held when the formula was written.
+  - Change either referenced cell, and the formula's result updates on its own, with no retyping.
+  - Copying a formula to a new row shifts its references to match that row, unless it was deliberately locked in place.
+  - A formula can reference a cell on the same sheet, a range of cells, or a cell on a different worksheet.
 
-  ## Core concept
+  ## What it means
 
-  A formula that says `=B2*C2` doesn't calculate a fixed number — it says "always multiply whatever is currently in B2 by whatever is currently in C2." Change either cell, and the formula's result updates instantly, with no manual re-entry needed.
+  A formula built from references does not store a result, it stores a set of instructions for finding one. `=B2*C2` does not mean "6". It means "multiply whatever is in B2 by whatever is in C2, right now." That distinction is the entire reason a spreadsheet can stay correct after a value changes: nothing needs to be recalculated by hand, because every formula that reads the changed cell recalculates itself the moment it changes.
 
-  References can point to:
-  - A **single cell**: `=B2`
-  - A **range of cells**: `=SUM(B2:B10)`
-  - A **cell on another sheet**: `=Summary!B2`
+  This only works because a reference is followed exactly, not approximately. A reference to B2 always means B2, never "roughly that area" or "whatever used to be there." That precision is also where mistakes creep in: a reference that is one row or one column off from the one you meant still points at a real cell and still returns a real number, so nothing about the result looks broken.
 
-  ## Syntax
+  ## How it works
 
-  ```
-  =B2          (reference a single cell)
-  =B2:B10      (reference a range of cells, used inside a function)
-  =B2+C2       (combine two references in a calculation)
-  ```
+  | Reference | Points at |
+  |---|---|
+  | `B2` | One specific cell on the current sheet |
+  | `B2:B5` | A range of cells on the current sheet |
+  | `January!B2` | A specific cell on a different worksheet, named `January` |
 
-  ## 📊 Example
+  What happens, in order, when you copy a formula down a column:
 
-  | | A | B | C |
-  |---|---|---|---|
-  | 1 | Product | Price | Total (Price × 10) |
-  | 2 | Widget | 12 | =B2*10 |
+  1. You write a formula in one cell, such as `=B2*C2` in D2.
+  2. You copy that cell and paste it into the cell below, D3.
+  3. The reference shifts by one row to match: the pasted formula reads `=B3*C3`, not `=B2*C2`.
+  4. Repeating this down the column gives every row a formula that reads its own row, not the first row's.
 
-  **Result:** C2 shows 120.
+  ## Example
 
-  If the price in B2 is changed to 15, C2 automatically recalculates to 150 — no manual edit to C2 needed. This automatic update is the entire point of using a reference instead of typing `=120` directly.
+  A `Line total` column, D, is added to the January worksheet: each row's price multiplied by its quantity.
 
-  ## Multiple examples
+  | | A | B | C | D |
+  |---|---|---|---|---|
+  | 1 | Item | Price | Quantity | Line total |
+  | 2 | Notebook | 2 | 1 | 2 |
+  | 3 | Pen | 1 | 3 | 3 |
+  | 4 | Eraser | 1 | 2 | 2 |
+  | 5 | Ruler | 3 | 1 | 3 |
 
-  **Beginner:** `=A1` — a cell that simply displays whatever value is in A1.
-  **Intermediate:** `=B2*C2` — a calculation combining two referenced cells.
-  **Real-world:** A cost calculator where changing a single "tax rate" cell at the top of the sheet automatically updates every total throughout the sheet, because every relevant formula references that one cell instead of having the tax rate typed in repeatedly.
+  D2 holds the formula `=B2*C2`. Copying D2 down to D3, D4 and D5 gives each row its own correct formula: `=B3*C3`, `=B4*C4`, `=B5*C5`.
 
-  ## ⚠️ Common mistakes
+  | Input | Result | What it does |
+  |---|---|---|
+  | `=B2*C2` typed in D2 | D2 shows `2` | Multiplies Notebook's price by its quantity |
+  | D2 copied down to D3:D5 | Each row shows its own correct line total | Shifts the references to match each new row automatically |
 
-  - **Typing a value directly instead of referencing the cell it came from** — this is the single most common beginner habit that breaks a spreadsheet's automatic-update advantage.
-  - **Referencing the wrong cell** (an easy typo, like B2 instead of B3), producing a formula that looks correct but calculates the wrong thing.
-  - **Not noticing a reference points to an empty cell**, silently treating it as 0 in a calculation where that might not be the intended behavior.
+  **Where it bites**
 
-  ## Real-world Data Analyst use cases
+  Correct version: D2 through D5 hold `=B2*C2`, `=B3*C3`, `=B4*C4`, `=B5*C5`, each row correctly multiplying its own price by its own quantity.
 
-  - **Any linked calculation:** referencing a tax rate, exchange rate, or discount percentage from one central cell so it can be updated once and flow through every dependent formula.
-  - **Cross-checking:** referencing a total from one sheet on a summary sheet, so the summary always reflects the latest underlying data.
+  Wrong version: D3 was typed by hand instead of copied down, and reads `=B2*C3`, Notebook's price multiplied by Pen's quantity, giving 6 instead of the correct 3.
+
+  Both versions show a full column of plausible-looking numbers, no errors anywhere. The wrong version's total across D2:D5 comes to 13 instead of the correct 10, and nothing on the sheet points at row 3 as the source of the difference. The only way to catch it is to check each row's formula individually.
+
+  ## When to use it
+
+  **Use it when** a formula's result depends on a value that lives in another cell, which is almost always: prices, quantities, rates, and totals all belong in their own cells and get referenced, not retyped.
+
+  **Use something else when** a number genuinely never changes and has no source cell of its own, such as a fixed constant used only once. Even then, giving it its own labelled cell and referencing it is usually still clearer.
+
+  **Never** type a value directly into a formula when that value already lives in a cell somewhere on the sheet. Reference the cell instead.
+
+  ## Common mistakes
+
+  - "My total looks right today but I do not trust it." Some cell in the formula chain may hold a typed value instead of a reference, which means it will not update the next time the source data changes. Check the formula bar, not only the result.
+  - "I copied a formula down and one row looks off." The formula in that row may have been typed by hand instead of copied, giving it references that do not match its row. Compare the formula in the odd row against the ones above and below it.
+  - "I referenced a cell and got a value from last week." The formula is referencing a cell that has since been moved or overwritten with something else, not the cell you originally meant. Click the formula and check exactly which address it points at.
+  - "Everything after row 20 is wrong." A single early formula in that column was likely typed with a fixed reference instead of copied, and every row after it inherited the mistake by being copied from the wrong source.
+
+  ## Interview questions
+
+  1. What does a cell reference actually store inside a formula?
+
+  <details><summary>Answer</summary>An address, not a value. The formula reads whatever is currently in that address every time it recalculates, rather than storing a fixed number from when it was written.</details>
+
+  2. Why does copying a formula down a column change the row numbers inside it?
+
+  <details><summary>Answer</summary>Because a plain reference is relative to the cell it is written in. When the formula is copied to a new row, the reference shifts by the same number of rows so it keeps pointing at the value in its own row, rather than always pointing back at the original row.</details>
+
+  3. A column of line totals looks fine except one row seems too high. What do you check first?
+
+  <details><summary>Answer</summary>The exact formula in that one row, by clicking the cell and reading the formula bar. A row that was typed by hand instead of copied down often ends up referencing the wrong row, giving a plausible but wrong number.</details>
+
+  4. When would you reference a cell on a different worksheet instead of copying its value over?
+
+  <details><summary>Answer</summary>Whenever the value already exists somewhere else and might change, such as pulling a total from a raw data sheet onto a summary sheet. Referencing it keeps the summary correct automatically. Copying the value over freezes it at whatever it was on the day you copied it.</details>
+
+  5. Explain what a cell reference is to a colleague who has never written a formula, without using the word `formula`.
+
+  <details><summary>Answer</summary>It is a way of telling a cell to look at another cell's value instead of typing that value in directly. If the other cell's value changes later, the one pointing at it changes too, automatically, without anyone having to update it by hand.</details>
 
   ## Related concepts
 
+  ```text
+  Cells and ranges
+    ↓
+  Cell references ← you are here
+    ↓
+  Data types
   ```
-  Rows, Columns & Cells
-    ↓
-  Cell References ← you are here
-    ↓
-  Relative & Absolute References
-    ↓
-  Data Types
-  ```
-
-  ## Practice questions
-
-  ### Easy
-  1. Write a formula in C1 that simply displays whatever value is in A1.
-
-  ### Medium
-  2. Given price in B2 and quantity in C2, write a formula for the total in D2.
-
-  ### Interview/Advanced
-  3. Why is referencing a "tax rate" cell better practice than typing the tax rate directly into every formula that needs it?
-
-  <details><summary><strong>Answer / Solution</strong></summary>
-
-  1. `=A1`
-  2. `=B2*C2`
-  3. If the tax rate ever changes, referencing one central cell means updating it once and every dependent formula recalculates automatically — typing the rate directly into every formula means finding and manually fixing every single occurrence, which is slow and error-prone.
-
-  </details>
-
-  ## 🎤 Interview preparation
-
-  **Q: What's the core advantage of a cell reference over a typed-in value?**
-  Short answer: A reference keeps the formula dynamic — it automatically recalculates whenever the referenced cell changes, while a typed value goes stale the moment the underlying data changes.
-
-  ## Best practices
-
-  - Always reference the cell containing a value rather than retyping that value inside a formula.
-  - Centralize frequently-reused values (like a tax rate or exchange rate) in one clearly labeled cell that other formulas reference.
-
-  ---
-
-  ### ⚡ Quick Revision
-
-  **Cell reference** → a formula points at another cell's address, not a typed value
-  **Result:** the formula automatically updates whenever the referenced cell changes
-  **Range reference:** `B2:B10` — a whole block of cells used inside a function

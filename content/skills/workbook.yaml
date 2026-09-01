@@ -1,70 +1,117 @@
 title: Workbook
 category: Spreadsheets
-what_is_it: The entire spreadsheet file — a container that can hold one or many worksheets.
-why_it_matters: Knowing the workbook/worksheet distinction is what makes a multi-tab file navigable and lets you organize related data across separate, purposeful sheets instead of one sprawling grid.
+what_is_it: The whole file a spreadsheet program opens and saves, able to hold one worksheet or many, each shown as its own tab.
+why_it_matters: Mixing up the file with the sheet inside it leads to saving the wrong thing, overwriting other people's tabs, or hunting for data that is one tab away the whole time.
 prerequisites:
   - excel-interface
 objectives:
-  - Define a workbook and distinguish it from a worksheet
-  - Explain why real spreadsheet projects usually use multiple sheets within one workbook
-estimated_minutes: 20
-resources:
-  - r-exceljet-functions
-practice:
-  - id: ex-workbook-1
-    title: Plan a workbook
-    description: Sketch out what sheets a workbook for tracking a month of personal expenses might have, and what each sheet would hold.
-verify:
-  - Can define a workbook
-  - Can name a reason to split data across multiple sheets in one workbook
+  - Write the difference between a workbook and a worksheet in one sentence
+  - Predict which worksheets are saved when you save a workbook
+  - Spot how many worksheets a workbook holds by looking at its tabs
+  - Explain why one workbook can safely hold data for two different months
+estimated_minutes: 12
 note: |
-  ## 🎯 What is it?
+  # Workbook
 
-  A **workbook** is the entire spreadsheet file — the thing you save, email, or open. A single workbook can contain one worksheet or many, each holding its own grid of data, shown as tabs along the bottom of the window.
+  A workbook is the whole file a spreadsheet program opens and saves, able to hold one worksheet or many, each shown as its own tab along the bottom.
 
-  ## 💡 Why is it important?
+  ## The 30-second answer
 
-  - Real spreadsheet projects almost always use multiple sheets *within one workbook* to organize related data — raw data, calculations, and a summary, kept separate but bundled in one file.
-  - Understanding "workbook" as the outer container is the first step to organizing a project cleanly, instead of piling everything into a single sprawling sheet.
+  - A workbook is the file itself: the thing you save, email, or open from a folder.
+  - One workbook can hold one worksheet or dozens, each with its own tab.
+  - Saving a workbook saves every worksheet inside it at once, not only the one you are looking at.
+  - Closing a workbook closes every worksheet in it, even ones you never opened during that session.
+  - Adding a worksheet does not create a new file. It is still the same workbook, with one more tab added.
 
-  ## Core concept
+  ## What it means
 
-  ```
-  Workbook (the file)
-   ├── Worksheet: "Raw Data"
-   ├── Worksheet: "Calculations"
-   └── Worksheet: "Summary"
-  ```
+  A workbook is best thought of as a folder that happens to hold grids instead of documents. The folder itself has one name and one save action, but what is inside it can be organised into as many separate grids as you need, each kept apart from the others by its own tab.
 
-  Think of a workbook like a binder, and each worksheet like one page inside it.
+  This matters because a worksheet cannot exist on its own. You cannot save one tab by itself as a separate thing without exporting it out into a new workbook or copying its data somewhere else. Every worksheet you see always belongs to exactly one workbook, and saving that workbook is the only way any of its worksheets get saved.
 
-  ## 📊 Example
+  ## How it works
 
-  A monthly expense tracker workbook might contain three worksheets: "Transactions" (raw entries), "Categories" (a lookup table of category names), and "Summary" (a dashboard pulling totals from the other two) — all saved as one workbook file.
+  | Part | What it is |
+  |---|---|
+  | `Workbook` | The file. Has one file name and one save action. |
+  | `Worksheet` | One grid inside the workbook, shown as a tab along the bottom. |
+  | `Active worksheet` | The one worksheet currently visible on screen. |
+  | `Save` | Writes the entire workbook to disk: every worksheet in it, not only the active one. |
 
-  ## ⚠️ Common mistakes
+  What happens, in order, when you add a second worksheet:
 
-  - **Creating a separate workbook file for every logical grouping** instead of separate worksheets within one workbook — this scatters related data across multiple files unnecessarily.
-  - **Confusing "workbook" and "worksheet"** in conversation or documentation, which can cause real confusion when giving or following instructions.
+  1. You are looking at one worksheet inside an already-open workbook.
+  2. You add a new worksheet, which appears as a new tab next to the existing one.
+  3. The workbook now holds two worksheets, both part of the same file.
+  4. You save once, and both worksheets are written to disk together.
+
+  ## Example
+
+  The shopping list workbook so far holds one worksheet, its tab showing the Notebook, Pen, Eraser and Ruler list, priced 2, 1, 1 and 3, with a total of 7 in cell B6.
+
+  A second month's shopping list is added as a new worksheet inside the same workbook, so the workbook now holds two tabs.
+
+  | Tab | Contents |
+  |---|---|
+  | `Sheet1` | Notebook, Pen, Eraser, Ruler, total 7 |
+  | `Sheet2` | A second, separate shopping list, with its own items and its own total |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Add a new worksheet | A second tab appears | Creates a second grid inside the same workbook, not a second file |
+  | Save the workbook once | Both tabs are written to disk | One save covers every worksheet in the file, not only the visible one |
+
+  **Where it bites**
+
+  Correct expectation: one workbook file on disk, holding both `Sheet1` and `Sheet2`, opened together every time the file is opened.
+
+  Wrong expectation: two people each have the workbook open. One saves after finishing `Sheet1`, the other saves five minutes later after finishing `Sheet2`, and neither notices the other's tab.
+
+  Nothing warns either person that a save affects the whole file. Whoever saves last writes the entire workbook to disk exactly as it looked on their screen, including whatever state `Sheet1` was in for them, silently overwriting the first person's finished work on that tab even though they never touched it.
+
+  ## When to use it
+
+  **Use it when** several related grids belong together and should always travel and open as one unit, such as one month's data per tab inside a single yearly file.
+
+  **Use something else when** the grids belong to different, unrelated projects that different people manage separately. Keep those as separate workbook files instead of tabs in one shared file.
+
+  **Never** assume saving the tab you are looking at is different from saving the workbook. There is no way to save one worksheet on its own without exporting or copying it out.
+
+  ## Common mistakes
+
+  - "I saved my changes but my colleague says their tab is missing them." You are both editing separate copies of the workbook, not the same file. Confirm you are working in the same saved file before assuming a shared save.
+  - "I closed the file and lost work on a tab I never even opened this session." Closing a workbook closes every worksheet in it, whether or not you looked at it, so unsaved changes on any tab are lost together.
+  - "I thought I made a new file, but it only added a tab." Adding a worksheet keeps you inside the same workbook. Making a genuinely new file needs a separate save-as or new-file action.
+  - "I cannot find last month's data, I know I typed it somewhere." It is likely sitting on a different tab of the same workbook rather than in a different file. Check the sheet tabs before searching other folders.
+
+  ## Interview questions
+
+  1. What is the difference between a workbook and a worksheet?
+
+  <details><summary>Answer</summary>A workbook is the file, the thing you save and open. A worksheet is one grid inside that file, shown as a tab. One workbook can hold many worksheets.</details>
+
+  2. Why does saving a workbook save every worksheet in it, rather than only the one you are viewing?
+
+  <details><summary>Answer</summary>Because a worksheet has no existence outside its workbook and no save action of its own. The file on disk is the workbook as a whole, so writing it to disk always writes the current state of every tab inside it together.</details>
+
+  3. A teammate says their copy of the file is missing a tab you added. What do you check first?
+
+  <details><summary>Answer</summary>Whether you are both actually working from the same saved file. Adding a tab only shows up for someone else once they open the exact version of the workbook you saved it into, not an older copy or a separate file with a similar name.</details>
+
+  4. When would you keep several months of data as separate tabs in one workbook instead of separate files?
+
+  <details><summary>Answer</summary>When the data is closely related and people need to compare or combine it, such as month over month figures for the same list. Keeping it as one workbook means it always opens and travels together. Separate, unrelated projects are better kept as separate files.</details>
+
+  5. Explain what a workbook is to a colleague who already knows what a worksheet is, without using the word `file`.
+
+  <details><summary>Answer</summary>A workbook is the container that holds one or more worksheets together. Think of the worksheets as pages and the workbook as the notebook they are bound inside: you save and open the whole notebook at once, not one page by itself.</details>
 
   ## Related concepts
 
-  ```
-  Excel Interface
+  ```text
+  Spreadsheet interface
     ↓
   Workbook ← you are here
     ↓
-  Worksheet
+  Worksheets
   ```
-
-  ## 🎤 Interview preparation
-
-  **Q: What's the difference between a workbook and a worksheet?**
-  Short answer: A workbook is the entire file; a worksheet is one grid/tab inside that file. One workbook can contain many worksheets.
-
-  ---
-
-  ### ⚡ Quick Revision
-
-  **Workbook** → the whole file
-  Can contain one or many worksheets, organized as tabs.
