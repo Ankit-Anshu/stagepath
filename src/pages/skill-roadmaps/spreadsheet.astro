@@ -11,6 +11,16 @@ import { SPREADSHEET_CURRICULUM } from '../../lib/spreadsheet-curriculum';
 
 const totalTopics = SPREADSHEET_CURRICULUM.reduce((sum, section) => sum + section.topics.length, 0);
 
+// Curriculum topics are plain, non-clickable tiles by design (see the
+// header comment above) since almost none of them have a real skill page.
+// This is the one exception so far: a small, deliberate opt-in map from a
+// topic's exact display text to a real content/skills/*.yaml id, rendered
+// as a link with the identical .topic-tile styling so it's visually
+// indistinguishable from every other, still-unlinked tile.
+const TOPIC_LINKS: Record<string, string> = {
+  'What is a Spreadsheet': 'what-is-a-spreadsheet',
+};
+
 const ACCENTS = ['#146c43', '#b5482f', '#3a5ba0', '#8667c8', '#a97b26', '#1f7a8c', '#8a3b5e', '#4a6b3f', '#475569'];
 
 const sectionDetails = SPREADSHEET_CURRICULUM.map((section, index) => ({
@@ -63,7 +73,9 @@ const sectionDetails = SPREADSHEET_CURRICULUM.map((section, index) => ({
               <svg class="branch-svg" data-branch-svg aria-hidden="true"><path style={`--accent:${accent}`}></path></svg>
               <div class="topic-card" data-topic-card style={`--accent:${accent}`}>
                 <div class="topic-tiles">
-                  {section.topics.map((topic) => <span class:list={['topic-tile', { wide: topic.length >= 20 }]}>{topic}</span>)}
+                  {section.topics.map((topic) => TOPIC_LINKS[topic]
+                    ? <a href={`/skills/${TOPIC_LINKS[topic]}`} class:list={['topic-tile', { wide: topic.length >= 20 }]}>{topic}</a>
+                    : <span class:list={['topic-tile', { wide: topic.length >= 20 }]}>{topic}</span>)}
                 </div>
               </div>
             </div>
