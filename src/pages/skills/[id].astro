@@ -83,6 +83,24 @@ outer: for (const rm of roadmaps) {
 }
 const prevSkill = groupContext?.prevId ? await getEntry('skills', groupContext.prevId) : null;
 const nextSkill = groupContext?.nextId ? await getEntry('skills', groupContext.nextId) : null;
+
+// Curriculum-tree topics (see skill-roadmaps/*.astro, e.g. the Spreadsheet
+// curriculum) aren't part of the content/roadmaps `groups` system above, so
+// groupContext stays null for them even once they get a real skill page.
+// This is a small manual opt-in, reusing the exact same
+// .group-context/.crumbs/.topic-pager card the block above renders, for
+// the handful of curriculum topics that have one (currently just this one).
+const CURRICULUM_CONTEXT: Record<string, { roadmapTitle: string; roadmapHref: string; stageTitle: string; stageHref: string; prev: { title: string; href: string } | null; next: { title: string; href: string } | null }> = {
+  'what-is-a-spreadsheet': {
+    roadmapTitle: 'Spreadsheet',
+    roadmapHref: '/skill-roadmaps/spreadsheet',
+    stageTitle: 'Foundations',
+    stageHref: '/skill-roadmaps/spreadsheet#section-foundations',
+    prev: null,
+    next: { title: 'Spreadsheet Interface', href: '/skill-roadmaps/spreadsheet#section-foundations' },
+  },
+};
+const curriculumContext = !groupContext ? CURRICULUM_CONTEXT[skill.id] ?? null : null;
 ---
 <Base title={skill.data.title} description={skill.data.what_is_it} wide>
   {groupContext && (
@@ -100,7 +118,20 @@ const nextSkill = groupContext?.nextId ? await getEntry('skills', groupContext.n
       </div>
     </div>
   )}
-  <header class="topic-hero"><div><span class="topic-category">{skill.data.category}</span><h1>{skill.data.title}</h1><p>{skill.data.what_is_it}</p></div><aside><span>At a glance</span><div><b>{skill.data.objectives.length}</b><small>outcomes</small></div>{skill.data.estimated_minutes && <div><b>~{Math.max(1,Math.round(skill.data.estimated_minutes/60))}h</b><small>estimated effort</small></div>}</aside></header>
+  {curriculumContext && (
+    <div class="group-context">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={curriculumContext.roadmapHref}>{curriculumContext.roadmapTitle}</a>
+        <span>/</span>
+        <a href={curriculumContext.stageHref}>{curriculumContext.stageTitle}</a>
+      </nav>
+      <div class="topic-pager">
+        {curriculumContext.prev ? <a href={curriculumContext.prev.href}>← {curriculumContext.prev.title}</a> : <span />}
+        {curriculumContext.next ? <a href={curriculumContext.next.href}>{curriculumContext.next.title} →</a> : <span />}
+      </div>
+    </div>
+  )}
+  <header class="topic-hero"><div><span class="topic-category">{skill.data.category}</span><h1>{skill.data.title}</h1><p>{skill.data.what_is_it}</p></div><aside><span>At a glance</span><div><b>{skill.data.objectives.length}</b><small>outcomes</small></div>{resources.length>0 && <div><b>{resources.length}</b><small>resources</small></div>}{skill.data.estimated_minutes && <div><b>~{Math.max(1,Math.round(skill.data.estimated_minutes/60))}h</b><small>estimated effort</small></div>}</aside></header>
   <div class="topic-layout"><nav><strong>On this page</strong>
       {noteHtml && (
         <div class="nav-group">
@@ -113,7 +144,7 @@ const nextSkill = groupContext?.nextId ? await getEntry('skills', groupContext.n
         </div>
       )}
       <a href="#why">01 Why it matters</a><a href="#outcomes">02 Outcomes</a><a href="#resources">03 Resources</a><a href="#projects">04 Projects</a></nav><article>
-    {noteHtml && <section id="note"><span>00</span><div><small>Full knowledge note{noteReadMinutes > 0 && ` · ~${noteReadMinutes} min read`}</small><div class="note-body" set:html={noteHtml} /></div></section>}
+    {noteHtml && <section id="note"><span>00</span><div>{!curriculumContext && <small>Full knowledge note{noteReadMinutes > 0 && ` · ~${noteReadMinutes} min read`}</small>}<div class="note-body" set:html={noteHtml} /></div></section>}
     <section id="why"><span>01</span><div><small>Context</small><h2>Why it matters</h2><p class="lead">{skill.data.why_it_matters}</p>{roadmaps.length>0&&<div class="used-in"><strong>Appears in</strong>{roadmaps.map((roadmap)=><a href={`/roadmaps/${roadmap.id}`}>{roadmap.data.title} ↗</a>)}</div>}</div></section>
     <section id="outcomes"><span>02</span><div><small>Self-check</small><h2>Self-review before moving on</h2><ul class="outcomes">{skill.data.objectives.map((objective)=><li><i aria-hidden="true">✓</i><span>{objective}</span></li>)}</ul></div></section>
     <section id="resources"><span>03</span><div><small>Curated starting points</small><h2>Resources</h2>{resources.length?<div class="resources">{resources.map((resource)=>resource&&<a href={resource.data.url} target="_blank" rel="noopener noreferrer"><span>{resource.data.type}</span><div><strong>{resource.data.title}</strong><p>{resource.data.provider} · ~{resource.data.duration_minutes} min · {resource.data.difficulty}</p></div><b>↗</b></a>)}</div>:<p class="empty">Resource curation is in progress.</p>}</div></section>

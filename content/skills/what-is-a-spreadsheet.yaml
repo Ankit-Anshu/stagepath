@@ -11,13 +11,9 @@ resources:
   - r-wikipedia-spreadsheet
 estimated_minutes: 15
 note: |
-  `Spreadsheet` / `Foundations`
-
   # What is a spreadsheet
 
   A spreadsheet is a grid of cells where you store numbers and text and let the program calculate results for you.
-
-  `Level: foundational` · `Read: 4 min` · `Practice: 0.5 hour` · `Before this: none, this is the first topic` · `After this: Spreadsheet interface`
 
   ---
 
