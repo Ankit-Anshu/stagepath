@@ -1,0 +1,123 @@
+title: Delete Columns
+category: Spreadsheets
+what_is_it: Removing one or more entire columns from the sheet, closing the gap by shifting every column after it left, and breaking any formula that pointed directly at a cell in that column.
+why_it_matters: A field that looks unused in the visible part of a sheet can still be read by a formula sitting far away, and deleting its column removes both at once with no warning.
+prerequisites:
+  - delete-rows
+objectives:
+  - Delete a single column using the menu
+  - Delete several columns at once from one selection
+  - Predict when deleting a column produces a broken reference error
+  - Check for distant formulas that reference a column before deleting it
+estimated_minutes: 10
+note: |
+  # Delete columns
+
+  Deleting columns removes one or more entire columns from the sheet, closing the gap by shifting every column after it left, and breaking any formula that pointed directly at a cell in that column.
+
+  ## The 30-second answer
+
+  - Right-click a column letter and choose Delete to remove that entire column.
+  - Every column after the deleted one shifts left to close the gap, no blank column is left behind.
+  - A formula that summed a range including the deleted column keeps working, over a narrower range.
+  - A formula referencing one specific cell in the deleted column breaks outright, showing an error.
+  - A field can look unused on screen while a formula somewhere else on the sheet still depends on it.
+
+  ## What it means
+
+  Deleting a column behaves the same way as deleting a row, only along the other axis: the column disappears entirely, and everything to its right shifts left to close the gap. Whether that is safe again depends on how other formulas reference the deleted column, a range-based formula shrinks and keeps working, a formula naming one specific cell inside it breaks.
+
+  What makes a column specifically risky to delete is how quickly you can misjudge whether it is genuinely unused. A row's data is usually visible together on screen. A formula that reads a column far to the right, or on a different worksheet entirely, can be completely out of view when deciding whether that column looks safe to remove, so a column that appears untouched can still be load-bearing somewhere the eye never checked.
+
+  ## How it works
+
+  | Action | How |
+  |---|---|
+  | Delete one column | Right-click a column letter, choose Delete |
+  | Delete several columns | Select that many column letters first, then Delete |
+  | Effect on columns after it | They shift left to close the gap, no blank column remains |
+  | Effect on a range-based formula | Keeps working, now covering one fewer column |
+  | Effect on a formula naming that column directly | Breaks, showing a reference error |
+
+  What happens, in order, when you delete a column referenced elsewhere on the sheet:
+
+  1. You right-click the column letter to remove and choose Delete.
+  2. The column disappears entirely, and every column after it shifts left by one.
+  3. A formula whose range included that column is rewritten to a narrower range.
+  4. A formula naming a specific cell inside that column directly shows a reference error, since that cell no longer exists.
+
+  ## Example
+
+  `Date purchased` is no longer needed on the January worksheet, and its column is deleted.
+
+  | | D | E |
+  |---|---|---|
+  | 1 | Line total | Date purchased |
+  | 2 | 2 | 05/01/2026 |
+
+  Deleting column E removes `Date purchased` entirely, with nothing shifting in from the right since it was the last column.
+
+  | | D |
+  |---|---|
+  | 1 | Line total |
+  | 2 | 2 |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Right-click column E, choose Delete | `Date purchased` and all its values are gone | Removes the column entirely, with no blank column left behind |
+  | A formula elsewhere referencing E2 directly | Now shows a reference error | The exact cell it pointed at no longer exists |
+
+  **Where it bites**
+
+  Correct version: nothing else on the sheet referenced the `Date purchased` column, so deleting it removes only what was intended, with no error anywhere.
+
+  Wrong version: a formula on a different worksheet, out of view while deciding whether `Date purchased` looked safe to remove, directly referenced one of its cells to flag purchases made after a certain date.
+
+  Right after the delete, the January worksheet looks completely clean, no error, nothing visibly broken. The problem surfaces only on the other worksheet, where a formula that used to work now shows a reference error, with no obvious connection back to a column deletion that happened somewhere else entirely.
+
+  ## When to use it
+
+  **Use it when** a field is genuinely no longer needed anywhere in the workbook, not only in the part of the sheet currently visible.
+
+  **Use something else when** a column is only unused for now but might be needed again soon. Hiding it, rather than deleting it, keeps the data and any formulas depending on it intact.
+
+  **Never** delete a column without checking for formulas on other worksheets that might reference it. A column can look completely unused from the sheet it lives on.
+
+  ## Common mistakes
+
+  - "A formula on a different sheet broke and I do not know why." A column it referenced directly was deleted from another worksheet, out of view at the time. Rebuild the formula to point at wherever that data now lives, if it still exists.
+  - "I deleted a column that turned out to still be needed." Check whether Undo, used immediately, can restore it before rebuilding it by hand.
+  - "My table shifted after deleting a column, and a different formula now reads the wrong data." A formula naming a fixed column letter directly, rather than a range, does not always shift correctly after nearby columns move. Recheck any formula written this way near the deletion.
+  - "I could not tell if a column was safe to delete." Visual inspection alone cannot rule out a distant reference. Search the workbook for the column's letter or its header text before deleting it.
+
+  ## Interview questions
+
+  1. What happens to the columns after a deleted column?
+
+  <details><summary>Answer</summary>They shift left by one to close the gap the deleted column leaves behind. No blank column remains where the deleted one used to be.</details>
+
+  2. Why can deleting a column that looks unused still break something?
+
+  <details><summary>Answer</summary>Because a formula referencing that column might not be visible on the same part of the sheet, or might live on a completely different worksheet. Looking unused within the visible area is not the same as being unused across the whole workbook.</details>
+
+  3. A formula on a different worksheet suddenly shows a reference error. What do you check first?
+
+  <details><summary>Answer</summary>Whether a column or row it directly referenced was recently deleted elsewhere in the workbook. A reference error appearing with no other visible cause is the classic sign of exactly this.</details>
+
+  4. When would you hide a column instead of deleting it?
+
+  <details><summary>Answer</summary>When the column is not currently needed but might be needed again, or when something elsewhere in the workbook might still depend on it. Hiding keeps the data and every formula referencing it intact, while deleting removes both permanently.</details>
+
+  5. Explain what happens when you delete a column, to a colleague who has never used a spreadsheet, without using the word `delete`.
+
+  <details><summary>Answer</summary>The entire column disappears, and everything after it slides over to fill the gap, so no empty column is left behind. Anything anywhere in the file that was pointing directly at a box inside that column now has nothing to point at, and shows an error instead, even if that formula was somewhere you were not looking.</details>
+
+  ## Related concepts
+
+  ```text
+  Delete rows
+    ↓
+  Delete columns ← you are here
+    ↓
+  Hide unhide
+  ```

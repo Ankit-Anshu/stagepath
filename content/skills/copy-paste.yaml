@@ -1,0 +1,121 @@
+title: Copy Paste
+category: Spreadsheets
+what_is_it: Duplicating a cell or a block of cells with Ctrl+C and Ctrl+V, carrying over its value, its formula, and its formatting to a new location.
+why_it_matters: A pasted formula does not paste the number you saw, it pastes the formula shifted to its new position, which is exactly right most of the time and quietly wrong the rest.
+prerequisites:
+  - editing-data
+objectives:
+  - Copy a cell and paste it into a new location
+  - Predict whether a pasted formula's references shift or stay fixed
+  - Use Paste Special to paste only a value, without its formula
+  - Explain why pasting a formula into the wrong spot can look correct
+estimated_minutes: 12
+note: |
+  # Copy paste
+
+  Copy paste duplicates a cell or a block of cells with Ctrl+C and Ctrl+V, carrying over its value, its formula, and its formatting to a new location.
+
+  ## The 30-second answer
+
+  - Ctrl+C copies whatever is selected. Ctrl+V pastes it into the new selection.
+  - A plain value pastes as the same value, unchanged.
+  - A formula pastes as a formula, with its references shifted to fit the new location, the same shift that happens when a formula is copied down a column.
+  - Formatting travels with a normal paste. Paste Special lets you paste only the value, only the formula, or only the formatting, one at a time.
+  - Copying does not remove the original. Cutting, with Ctrl+X, does.
+
+  ## What it means
+
+  Copy paste feels like a single action, but it is really two: copying takes a snapshot of a cell's full content, and pasting writes that snapshot somewhere else. What gets carried over in that snapshot, a fixed value, a shifting formula, borders, colours, is the part worth understanding, because a normal paste brings all of it, whether or not that is what you wanted.
+
+  The part that catches people out is that pasting a formula is not the same as pasting a number. A formula's references are relative to where it sits, so pasting `=B2*C2` from D2 into D9 does not produce `=B2*C2` again. It produces `=B9*C9`, shifted to match its new row. That is usually exactly what you want, and occasionally exactly what you do not.
+
+  ## How it works
+
+  | Action | Shortcut | What travels |
+  |---|---|---|
+  | Copy | `Ctrl` + `C` | Takes a snapshot of the selection, original stays in place |
+  | Cut | `Ctrl` + `X` | Takes a snapshot and removes the original once pasted |
+  | Paste | `Ctrl` + `V` | Value, formula (references shifted), and formatting |
+  | Paste Special | Varies by program | Lets you choose only one of value, formula, or formatting |
+
+  What happens, in order, when you copy a formula to a new cell:
+
+  1. You select the cell holding the formula and press Ctrl+C.
+  2. You click the destination cell and press Ctrl+V.
+  3. The formula is pasted with its references shifted to match the destination's position relative to the original.
+  4. The destination cell now recalculates using its own row or column's values, not the original's.
+
+  ## Example
+
+  A new item, `Highlighter`, priced 2, quantity 1, is added on the January worksheet. Its line total is filled in by copying Ruler's line total formula instead of typing a new one.
+
+  | | B | C | D |
+  |---|---|---|---|
+  | 5 | 3 | 1 | `=B5*C5` |
+  | 6 | 2 | 1 | (empty) |
+
+  Copying D5 and pasting into D6 shifts the formula to match row 6.
+
+  | | B | C | D |
+  |---|---|---|---|
+  | 6 | 2 | 1 | `=B6*C6` |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Copy D5, paste into D6 | D6 holds `=B6*C6`, showing `2` | Reuses the formula pattern, shifted to read row 6's own values |
+  | Copy D5, Paste Special (values only) into D6 | D6 holds a plain `3`, Ruler's result, unrelated to row 6 | Pastes only the number that was showing, with no formula behind it |
+
+  **Where it bites**
+
+  Correct version: D5 is copied and pasted normally into D6, landing as `=B6*C6`, correctly multiplying Highlighter's own price and quantity.
+
+  Wrong version: D5 is copied, but pasted using Paste Special with only values selected, landing in D6 as the plain number `3`, Ruler's line total, with no connection to Highlighter's own price or quantity at all.
+
+  Both versions show a number in D6 right after pasting, and neither shows an error. The wrong version happens to look plausible since `3` is a normal-looking line total. The mistake only surfaces if Highlighter's price or quantity is ever checked against its line total, or if either one changes later and D6 does not move.
+
+  ## When to use it
+
+  **Use it when** the same value, formula, or formatting already exists somewhere and reusing it is faster and more reliable than recreating it by hand.
+
+  **Use something else when** the destination cell needs to keep its own existing formatting or formula untouched. Paste Special, choosing only what you actually want to bring over, avoids overwriting the rest.
+
+  **Never** assume a pasted cell's formula still points at what you expect without checking. A shifted reference can point at a completely unrelated part of the sheet if the paste lands somewhere unexpected.
+
+  ## Common mistakes
+
+  - "I pasted a formula and the number does not make sense." The pasted formula's references shifted to match its new position and are now reading the wrong cells. Click it and check the formula bar.
+  - "I meant to paste only the value but the formatting changed too." A normal paste brings the formula, or the value, and the formatting all at once. Use Paste Special and choose only what should transfer.
+  - "I copied a cell, then made changes, and my paste brought back the old version." The clipboard holds whatever was copied at the time of the Ctrl+C, not the cell's current state. Copy again if the source has changed since.
+  - "I cut a cell instead of copying it, and now the original is gone." Ctrl+X removes the original once the cut content is pasted somewhere. Use Ctrl+C when the original needs to stay in place.
+
+  ## Interview questions
+
+  1. What is the difference between copying and cutting a cell?
+
+  <details><summary>Answer</summary>Copying leaves the original cell exactly as it was and creates a duplicate wherever it is pasted. Cutting removes the original once the content is pasted somewhere else, so the value ends up in only one place.</details>
+
+  2. Why does a formula pasted into a new cell often show a different result than the cell it was copied from?
+
+  <details><summary>Answer</summary>Because a formula's references are relative to its own position. Pasting it into a new cell shifts those references by the same distance the cell itself moved, so it reads different source cells and typically produces a different result, even though the formula's structure is identical.</details>
+
+  3. A pasted cell shows a plausible number, but something feels off. What do you check first?
+
+  <details><summary>Answer</summary>Whether it holds a formula or a plain value, by reading the formula bar, and if it is a formula, whether its shifted references actually point at the cells you intended. A shifted reference can land on unrelated data and still return a normal-looking number.</details>
+
+  4. When would you use Paste Special instead of a normal paste?
+
+  <details><summary>Answer</summary>When only part of what a normal paste brings over is wanted, such as the value without the formula, or the formatting without overwriting an existing value. Paste Special lets you choose exactly which of those to bring across instead of all of them together.</details>
+
+  5. Explain what happens when you copy and paste a cell, to a colleague who has never used a spreadsheet, without using the word `copy`.
+
+  <details><summary>Answer</summary>It takes a snapshot of a box's content, including any calculation behind it, and places that snapshot into a different box. If the original box had a calculation rather than a fixed value, the new box gets its own version of that calculation, adjusted to use whatever is next to it instead.</details>
+
+  ## Related concepts
+
+  ```text
+  Editing data
+    ↓
+  Copy paste ← you are here
+    ↓
+  Fill handle
+  ```

@@ -1,0 +1,121 @@
+title: Entering Data
+category: Spreadsheets
+what_is_it: Typing a value into a cell and moving to the next one, using Enter or Tab to commit each entry in a consistent direction.
+why_it_matters: Every spreadsheet starts as a blank grid, and how you move while entering data decides whether a fast typing session lands values in the right cells or quietly a row or column off.
+prerequisites:
+  - spreadsheet-shortcuts
+objectives:
+  - Enter a value into a cell and commit it with Enter
+  - Predict which cell is selected next after pressing Enter versus Tab
+  - Explain why typing into a row reserved for a total overwrites it
+  - Check the correct row is free before entering a new record
+estimated_minutes: 10
+note: |
+  # Entering data
+
+  Entering data is typing a value into a cell and moving to the next one, using Enter or Tab to commit each entry in a consistent direction.
+
+  ## The 30-second answer
+
+  - Click a cell, type a value, and press Enter to store it and move to the cell below.
+  - Press Tab instead of Enter to store the value and move one cell to the right.
+  - After a row of Tab presses, pressing Enter returns you to the start of the next row, not straight down from your last cell.
+  - Typing into a cell that already holds something overwrites it immediately, with no confirmation.
+  - A total row is a normal cell like any other. Typing into it deletes the total, whether or not that was intended.
+
+  ## What it means
+
+  Entering data is the simplest action a spreadsheet supports, and also the one every other skill assumes you already do correctly. What makes it worth its own topic is not the typing itself, it is the movement between cells while typing a whole record, because that movement decides whether five values land in five correct cells or drift by one row or column partway through.
+
+  Enter and Tab both commit a value and move the selection, but in different directions, and mixing them without noticing produces exactly the kind of small, silent misalignment that a formula built afterward has no way to detect. The spreadsheet only knows what is in each cell. It has no memory of which cell you meant to be in when you typed it.
+
+  ## How it works
+
+  | Key | Commits the value and moves to |
+  |---|---|
+  | `Enter` | The cell directly below |
+  | `Tab` | The cell directly to the right |
+  | `Enter` after a row of Tabs | The start of the next row, below where the row began |
+  | `Esc` | Cancels the entry, the cell keeps its previous content |
+
+  What happens, in order, when you enter one row of a record using Tab then Enter:
+
+  1. You click the first cell of the row and type the first value.
+  2. You press Tab, which commits it and moves one cell right.
+  3. You repeat for each value in the row, pressing Tab after each one.
+  4. You press Enter after the last value, which returns you to the first column, one row down.
+
+  ## Example
+
+  A fifth item, `Glue`, priced 2, quantity 2, is added to the January worksheet below the existing four items and their total.
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 6 | Total | 7 | |
+
+  A blank row is inserted above row 6 first, so the new item has somewhere to go without disturbing the total.
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 6 | Glue | 2 | 2 |
+  | 7 | Total | 7 | |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Type `Glue`, press Tab | A6 shows `Glue`, selection moves to B6 | Commits the item name and moves right for the price |
+  | Type `2`, Tab, `2`, Enter | B6 and C6 filled, selection returns to A7 | Finishes the row and starts the next one at the correct column |
+
+  **Where it bites**
+
+  Correct version: a blank row is inserted above the total first, so the new item's data lands in its own row and the total stays intact below it.
+
+  Wrong version: no row is inserted, and `Glue`'s details are typed directly into row 6, the row that used to hold the total.
+
+  Both versions show a full, tidy-looking table right after typing: five items, values in every column. Nothing marks the wrong version as broken. Only a closer look shows that the total is gone entirely, quietly replaced by the last item's price, because the row that used to add up the column was typed over like any other empty cell.
+
+  ## When to use it
+
+  **Use it when** you are filling in new records into cells that are genuinely empty, whether typing one value or a whole table by hand.
+
+  **Use something else when** the value already exists somewhere else in the sheet. Copying or referencing it keeps the two in sync. Retyping it creates a second, disconnected copy that can drift out of agreement.
+
+  **Never** type into a row or column without first checking what it currently holds. A total, a header, or a formula can sit in a cell that looks empty from a distance.
+
+  ## Common mistakes
+
+  - "My total disappeared and I do not know why." A new row of data was typed directly into the row that held the total, overwriting it. Insert a blank row for new data instead of typing into an existing one.
+  - "My values are in the wrong columns." Tab and Enter were mixed without noticing, so a value meant for column B landed in column C once the pattern shifted. Watch the name box while entering a row, especially the first few times.
+  - "I pressed Escape but my value is still there." Escape only cancels an entry that has not been committed yet. Once Enter or Tab has been pressed, the value is already stored, and Escape does nothing to it.
+  - "I entered five rows and the fifth one looks different from the rest." A stray keystroke, an extra space, or a slightly different value slipped in during a fast typing pass. Read back a batch of entries once, rather than trusting that typing quickly was also typing correctly.
+
+  ## Interview questions
+
+  1. What is the difference between pressing Enter and pressing Tab while entering data?
+
+  <details><summary>Answer</summary>Enter commits the value and moves the selection down to the cell below. Tab commits the value and moves the selection right to the next cell in the same row.</details>
+
+  2. Why does pressing Enter after a row of Tab presses return you to the start of the next row instead of moving straight down?
+
+  <details><summary>Answer</summary>The spreadsheet remembers which cell a Tab sequence started from within that row. Once Enter is pressed, it returns the selection to that same starting column, one row down, so the next row can be entered the same way without hunting for the right cell.</details>
+
+  3. A total that used to be at the bottom of a column is missing. What do you check first?
+
+  <details><summary>Answer</summary>Whether a new row of data was typed directly into the cell that held the total, rather than into a properly inserted blank row above it. Typing into any cell replaces its content immediately, total formulas included.</details>
+
+  4. When would you insert a new row before entering data, rather than typing directly into the next available row?
+
+  <details><summary>Answer</summary>Whenever the next available row already holds something, such as a total or a formula, rather than being genuinely empty. Inserting a row first guarantees the new data has its own space without overwriting anything already there.</details>
+
+  5. Explain what it means to enter data into a spreadsheet, to a colleague who has never opened one, without using the word `type`.
+
+  <details><summary>Answer</summary>It means clicking a box in the grid and writing a value into it, then moving to the next box to keep going. The box remembers exactly what was written into it until someone changes it again.</details>
+
+  ## Related concepts
+
+  ```text
+  Spreadsheet shortcuts
+    ↓
+  Entering data ← you are here
+    ↓
+  Editing data
+  ```

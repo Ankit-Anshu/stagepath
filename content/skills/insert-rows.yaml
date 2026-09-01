@@ -1,0 +1,125 @@
+title: Insert Rows
+category: Spreadsheets
+what_is_it: Adding one or more blank rows at a chosen position, pushing every row from that point down and expanding any formula range that used to stop above it.
+why_it_matters: A properly inserted row keeps every formula around it correct automatically, which is the entire reason it exists instead of only typing over the next empty-looking row.
+prerequisites:
+  - autofill
+objectives:
+  - Insert a single row above a chosen row using the menu
+  - Insert several rows at once from one selection
+  - Predict which formulas expand to include a newly inserted row
+  - Explain why a manually shifted row does not update formula ranges
+estimated_minutes: 10
+note: |
+  # Insert rows
+
+  Inserting rows adds one or more blank rows at a chosen position, pushing every row from that point down and expanding any formula range that used to stop above it.
+
+  ## The 30-second answer
+
+  - Right-click a row number and choose Insert to add a blank row above it.
+  - Every row from that point down shifts down by one to make room.
+  - A formula whose range used to end directly above the inserted row automatically grows to include it.
+  - Selecting several row numbers before inserting adds that same number of blank rows at once.
+  - Inserting a row is different from typing into an empty-looking row further down. Only a real insert shifts everything and updates formula ranges.
+
+  ## What it means
+
+  Inserting a row is a structural change to the sheet, not only a way of finding blank space. When a row is inserted, the spreadsheet does not only add empty cells, it also rewrites every formula whose range crossed that position, so a total that used to stop at row 5 automatically becomes a total that stops at row 6 once a new row is inserted at row 5 or above it.
+
+  This is the entire reason to reach for Insert instead of scrolling to the next blank-looking row and typing there. A genuinely blank row further down has no relationship to the formulas above it. Typing into it does not expand anything. Only inserting a row at the correct position, inside the range formulas already depend on, keeps those formulas growing along with the data.
+
+  ## How it works
+
+  | Action | How |
+  |---|---|
+  | Insert one row | Right-click a row number, choose Insert |
+  | Insert several rows | Select that many row numbers first, then Insert |
+  | Row shift direction | Every row at or below the insertion point moves down |
+  | Formula range effect | A range ending directly above the insertion point grows to include the new row |
+
+  What happens, in order, when you insert a row inside an existing total's range:
+
+  1. You right-click the row number where the new row should appear.
+  2. You choose Insert, and a blank row appears there, shifting rows below it down by one.
+  3. Any formula whose range used to end directly above that row is rewritten to include the new row.
+  4. You type the new data into the blank row, and it is already included in that formula's result.
+
+  ## Example
+
+  A new item, `Tape`, priced 1, quantity 4, is added between `Eraser` and `Ruler` on the January worksheet.
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 4 | Eraser | 1 | 2 |
+  | 5 | Ruler | 3 | 1 |
+  | 6 | Total | 7 | |
+
+  Inserting a row at row 5 shifts Ruler and the total down, and the total formula's range expands automatically.
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 4 | Eraser | 1 | 2 |
+  | 5 | Tape | 1 | 4 |
+  | 6 | Ruler | 3 | 1 |
+  | 7 | Total | 8 | |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Right-click row 5, choose Insert | A blank row appears at 5, everything below shifts down | Makes room for Tape without disturbing existing data |
+  | Total formula after the insert | Now reads `=SUM(B2:B6)`, was `=SUM(B2:B5)` | Automatically includes the new row inside the existing total |
+
+  **Where it bites**
+
+  Correct version: the new row is inserted properly at row 5, and the total formula's range grows on its own to `=SUM(B2:B6)`, correctly including Tape's price.
+
+  Wrong version: instead of inserting, Ruler's old row is manually copied one row down by hand to make space, and Tape's data is typed into the row Ruler used to occupy, without ever using Insert.
+
+  Both versions can end up looking identical: five items, a total row underneath. But in the wrong version, the total formula never moved, since nothing was actually inserted. It still reads `=SUM(B2:B5)`, silently missing whichever row ended up outside that original range, with the total showing a number that looks complete but is not.
+
+  ## When to use it
+
+  **Use it when** a new record needs to sit inside an existing range that formulas already depend on, such as adding an item in the middle of a priced list.
+
+  **Use something else when** the new data belongs after everything else, with no existing formula range to expand. Typing into the next truly blank row works fine there.
+
+  **Never** make room for new data by manually shifting existing rows down one at a time. Use Insert, then confirm any nearby formula's range actually grew to match.
+
+  ## Common mistakes
+
+  - "My total does not include a row I added in the middle of the table." The row was typed into an existing blank space instead of being properly inserted, so no formula range expanded to include it. Insert the row, then re-check the formula.
+  - "I inserted a row but it appeared below where I wanted it." Insert adds the new row above the row that was right-clicked, not below it. Right-click the row that should end up beneath the new one.
+  - "I needed three new rows and inserted them one at a time in the wrong order." Selecting all three target row numbers first, then inserting once, adds all three in the correct order in a single action.
+  - "A formula elsewhere broke after I inserted a row." A formula referencing a specific cell outside the inserted range, rather than a range that crossed it, does not shift the way a range-based formula does. Check any single-cell references near the insertion point.
+
+  ## Interview questions
+
+  1. What happens to the rows below an insertion point when a new row is inserted?
+
+  <details><summary>Answer</summary>Every row at or below that position shifts down by one to make room for the new blank row, and any formula whose range crossed that position is rewritten to include it.</details>
+
+  2. Why does inserting a row keep formulas correct, when manually shifting data down does not?
+
+  <details><summary>Answer</summary>An insert is a structural change the whole sheet is aware of, so every formula whose range crossed the insertion point is automatically rewritten to include the new row. Manually copying data down only moves values around. It never touches any formula, so those formulas keep reading their original, now outdated range.</details>
+
+  3. A total stops matching the visible data after a new row was added in the middle of a table. What do you check first?
+
+  <details><summary>Answer</summary>Whether that row was added using Insert or typed into an existing blank row by hand. If it was typed in without inserting, the total's range never grew, and the formula needs to be corrected manually.</details>
+
+  4. When would you insert several rows at once instead of one at a time?
+
+  <details><summary>Answer</summary>When more than one new record needs to be added together at the same position, such as several new items at once. Selecting that many row numbers before inserting adds them all in one action, in the correct order, rather than repeating the insert step multiple times.</details>
+
+  5. Explain what happens when you add a new row in the middle of a table, to a colleague who has never used a spreadsheet, without using the word `insert`.
+
+  <details><summary>Answer</summary>A blank row appears exactly where you asked for it, and everything below it shifts down to make room. Any calculation that used to add up the rows above that point automatically grows to include the new one, so nothing needs to be fixed by hand afterward.</details>
+
+  ## Related concepts
+
+  ```text
+  AutoFill
+    ↓
+  Insert rows ← you are here
+    ↓
+  Insert columns
+  ```

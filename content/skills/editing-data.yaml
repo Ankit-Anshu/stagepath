@@ -1,0 +1,120 @@
+title: Editing Data
+category: Spreadsheets
+what_is_it: Changing a value a cell already holds, either by retyping it completely or by opening it to adjust part of what is there.
+why_it_matters: Editing the wrong cell, or editing a formula by accident instead of the value that feeds it, is one of the quietest ways a working sheet stops being correct.
+prerequisites:
+  - entering-data
+objectives:
+  - Overwrite a cell's value completely by typing over it
+  - Open a cell to adjust part of its content without retyping all of it
+  - Predict what happens when you edit a cell that holds a formula directly
+  - Explain why editing the source cell is safer than editing a formula's result
+estimated_minutes: 10
+note: |
+  # Editing data
+
+  Editing data is changing a value a cell already holds, either by retyping it completely or by opening it to adjust part of what is there.
+
+  ## The 30-second answer
+
+  - Clicking a cell and typing replaces its entire content the moment you press Enter.
+  - Pressing F2, or double-clicking, opens the cell so you can change part of its content without retyping the rest.
+  - Editing a cell that holds a formula changes the formula itself, not the number the formula produced.
+  - Editing the source value that a formula reads from is different from editing the formula, and only one of them keeps the formula intact.
+  - There is no separate confirmation step. An edit takes effect the instant it is committed.
+
+  ## What it means
+
+  Editing is not a separate operation from entering data, it is entering data into a cell that already has something in it. The difference that matters is what you are actually changing. A cell holding a plain value only ever holds what you last typed into it. A cell holding a formula holds instructions for producing a value, and editing that cell changes the instructions, not only the number currently on display.
+
+  This distinction is why the same keystroke can be completely safe in one cell and destructive in another. Typing a new number into a price cell replaces one plain value with another, exactly as intended. Typing the same new number into a total cell that used to hold a formula deletes that formula, replacing something that recalculated on its own with something that never will again.
+
+  ## How it works
+
+  | Action | Effect |
+  |---|---|
+  | Click a cell, type, press Enter | Replaces the entire previous content |
+  | Press F2 on a selected cell | Opens it for editing without erasing its content |
+  | Double-click a cell | Same as F2, opens it for editing in place |
+  | Edit a formula cell directly | Changes the formula, not the value it currently shows |
+
+  What happens, in order, when you correct part of a value instead of retyping it:
+
+  1. You select the cell that needs a small change.
+  2. You press F2, or double-click it, which opens it without clearing its content.
+  3. You move the cursor to the part that needs changing and edit only that part.
+  4. You press Enter, committing the whole cell with only that part changed.
+
+  ## Example
+
+  Pen's price on the January worksheet was entered as 1, but it should be 2.
+
+  | | A | B |
+  |---|---|---|
+  | 3 | Pen | 1 |
+
+  Clicking B3 and typing `2` replaces the whole cell.
+
+  | | A | B |
+  |---|---|---|
+  | 3 | Pen | 2 |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Click B3, type `2`, press Enter | B3 now shows `2` | Replaces the old price entirely with the corrected one |
+  | Any formula referencing B3 | Recalculates using `2` | Confirms the edit was made to the source value, which every dependent formula picks up automatically |
+
+  **Where it bites**
+
+  Correct version: Pen's price is corrected in B3, the cell that holds the plain typed value. Every formula referencing B3, including the line total and the grand total, updates on its own.
+
+  Wrong version: instead of correcting B3, the line total in D3 is edited directly, typing a new number over the formula that used to calculate it.
+
+  Both versions can end up showing the same number in D3 right after the edit. The difference appears the next time B3 or C3 changes: the correct version recalculates, and the version edited in D3 stays frozen at whatever was typed there, no longer connected to the price or quantity it is sitting next to.
+
+  ## When to use it
+
+  **Use it when** a value has genuinely changed and the cell holding it needs to reflect the new one, such as correcting a price or updating a quantity.
+
+  **Use something else when** the value you want to change is not stored where you are looking, but calculated by a formula elsewhere. Trace it back to its source and edit that instead.
+
+  **Never** edit a cell that displays a number without first checking, through the formula bar, whether that number is typed or calculated.
+
+  ## Common mistakes
+
+  - "I fixed a value but the total did not change." The total may already be a fixed, typed number rather than a formula, so editing an unrelated cell has no effect on it. Check whether the total is still a live formula.
+  - "I meant to fix one digit and retyped the whole cell instead." Clicking and typing replaces everything. Use F2 or a double-click when only part of a value needs to change.
+  - "A formula I relied on now shows a plain number." It was edited directly instead of editing the value it was calculating from, which replaced the formula with a fixed result. Rebuild the formula if this was not intended.
+  - "I do not remember what a cell used to say before I changed it." There is no built-in history shown on the cell itself. Undo, right after the change, is the only quick way back, so fix a mistaken edit as soon as it is noticed.
+
+  ## Interview questions
+
+  1. What is the difference between clicking a cell and typing, versus pressing F2 first?
+
+  <details><summary>Answer</summary>Clicking and typing immediately replaces the entire content of the cell. Pressing F2 opens the existing content for editing, so only the part you change is affected, and the rest stays exactly as it was.</details>
+
+  2. Why can editing a cell that displays a correct-looking number still be a mistake?
+
+  <details><summary>Answer</summary>Because the number on display might be the result of a formula, not a value typed directly into that cell. Editing it replaces the formula with whatever was typed, which can look identical to the previous result while permanently losing the calculation behind it.</details>
+
+  3. A formula-driven total has stopped updating when its source values change. What do you check first?
+
+  <details><summary>Answer</summary>Whether the total cell still holds a formula at all, by selecting it and reading the formula bar. If it now holds a plain typed number, it was edited directly at some point, replacing the formula that used to keep it current.</details>
+
+  4. When would you edit a cell's value directly instead of tracing back to fix a formula that produces it?
+
+  <details><summary>Answer</summary>When the cell you are looking at genuinely is the source, a plainly typed value with nothing calculating it. If the value is the output of a formula, editing it directly only overwrites that formula, so the fix needs to happen at the actual source cell the formula reads from instead.</details>
+
+  5. Explain what editing a cell means, to a colleague who has never used a spreadsheet, without using the word `edit`.
+
+  <details><summary>Answer</summary>It means opening a box that already has something written in it and changing what is there, either by writing something completely new over it or by fixing only part of it. What the box shows afterward depends entirely on what was written into it last.</details>
+
+  ## Related concepts
+
+  ```text
+  Entering data
+    ↓
+  Editing data ← you are here
+    ↓
+  Copy paste
+  ```

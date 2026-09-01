@@ -1,0 +1,122 @@
+title: Insert Columns
+category: Spreadsheets
+what_is_it: Adding one or more blank columns at a chosen position, pushing every column from that point right and expanding any formula range that used to stop before it.
+why_it_matters: A new field usually belongs beside data that already exists, and inserting the column properly is what keeps every formula around it pointing at the right place afterward.
+prerequisites:
+  - insert-rows
+objectives:
+  - Insert a single column to the left of a chosen column using the menu
+  - Insert several columns at once from one selection
+  - Predict which formulas expand to include a newly inserted column
+  - Explain why a formula that names a fixed column letter can break after an insert
+estimated_minutes: 10
+note: |
+  # Insert columns
+
+  Inserting columns adds one or more blank columns at a chosen position, pushing every column from that point right and expanding any formula range that used to stop before it.
+
+  ## The 30-second answer
+
+  - Right-click a column letter and choose Insert to add a blank column to its left.
+  - Every column at or after that point shifts right by one to make room.
+  - A formula whose range used to stop right before the inserted column automatically grows to include it.
+  - Selecting several column letters before inserting adds that same number of blank columns at once.
+  - A formula that names one fixed column letter, rather than a range, can end up pointing at the wrong data once columns shift.
+
+  ## What it means
+
+  Inserting a column follows the same logic as inserting a row, applied sideways. The spreadsheet does not only make room for new data, it also rewrites every formula whose range crossed the insertion point, so a total that used to cover columns B through D automatically becomes a total covering B through E once a new column is inserted inside that range.
+
+  The part that catches people out with columns specifically is a formula written to reference one exact column letter rather than a range, such as a lookup pointing at column D by name. A range-based formula shifts along with the insert. A formula naming a single fixed letter does not always shift the same way, and can end up reading a column that used to be D but now holds something else entirely.
+
+  ## How it works
+
+  | Action | How |
+  |---|---|
+  | Insert one column | Right-click a column letter, choose Insert |
+  | Insert several columns | Select that many column letters first, then Insert |
+  | Column shift direction | Every column at or after the insertion point moves right |
+  | Formula range effect | A range ending right before the insertion point grows to include the new column |
+
+  What happens, in order, when you insert a column inside an existing formula's range:
+
+  1. You right-click the column letter where the new column should appear.
+  2. You choose Insert, and a blank column appears there, shifting columns to its right over by one.
+  3. Any formula whose range crossed that position is rewritten to include the new column.
+  4. You type the new field's data into the blank column, and it is already included in that formula's result.
+
+  ## Example
+
+  A new field, `Category`, is added between `Item` and `Price` on the January worksheet.
+
+  | | A | B |
+  |---|---|---|
+  | 1 | Item | Price |
+  | 2 | Notebook | 2 |
+
+  Inserting a column at B shifts `Price` right, and `Category` takes its place.
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Item | Category | Price |
+  | 2 | Notebook | | 2 |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Right-click column B, choose Insert | A blank column appears at B, `Price` shifts to C | Makes room for `Category` without disturbing the existing price data |
+  | A formula that summed a range across B before the insert | Automatically shifts to sum across C instead | Keeps reading the correct data, now one column over |
+
+  **Where it bites**
+
+  Correct version: a formula elsewhere referencing the price range shifts automatically after the insert, still correctly reading the `Price` column, now in C instead of B.
+
+  Wrong version: a different formula elsewhere was written to name column B directly, expecting it to always mean `Price`, and after the insert it now reads the new, empty `Category` column instead.
+
+  Both formulas keep returning a number with no error immediately after the insert, since column B still exists and still holds something readable. The wrong version now silently reads an empty or unrelated column, producing a plausible-looking result that has nothing to do with `Price` anymore.
+
+  ## When to use it
+
+  **Use it when** a new field genuinely belongs beside existing columns, such as a category, a note, or a status attached to each row.
+
+  **Use something else when** the new field belongs at the far edge of the table, after every existing column, with nothing needing to shift out of the way.
+
+  **Never** insert a column without checking whether any formula nearby names a fixed column letter directly rather than a range. That kind of formula deserves a second look after any insert.
+
+  ## Common mistakes
+
+  - "A formula that used to work now points at the wrong column." It likely names a specific column letter directly instead of using a range that shifts automatically. Re-check any formula written this way after inserting a column near it.
+  - "I inserted a column in the wrong place." Insert adds the new column to the left of the column letter that was right-clicked, not to its right. Right-click the column that should end up to the right of the new one.
+  - "My table now has an extra, unlabelled column and I am not sure why." A column was inserted and never given a header. Label a new column immediately after inserting it, before entering any data into it.
+  - "I needed two new columns and inserted them separately in the wrong order." Selecting both target column letters first, then inserting once, adds both in the correct order in a single action.
+
+  ## Interview questions
+
+  1. What happens to the columns after an insertion point when a new column is added?
+
+  <details><summary>Answer</summary>Every column at or after that position shifts right by one to make room for the new blank column, and any formula whose range crossed that position is rewritten to include it.</details>
+
+  2. Why can a formula that names a specific column letter break after a column insert, even though the insert itself worked correctly?
+
+  <details><summary>Answer</summary>A range-based formula shifts automatically because the whole range it covers moves together. A formula written to reference one fixed column letter directly is not always tied to the data that used to sit there, so once columns shift, that letter can end up pointing at completely different content.</details>
+
+  3. A formula starts returning an unexpected, but plausible-looking, result right after a column was inserted nearby. What do you check first?
+
+  <details><summary>Answer</summary>Whether that formula references a range, which shifts automatically, or names one fixed column letter directly, which does not always move with the data it used to point at. A fixed-letter reference is the more likely source of a silent break.</details>
+
+  4. When would you insert several columns at once instead of one at a time?
+
+  <details><summary>Answer</summary>When more than one new field needs to be added together at the same position, such as two related attributes for every row. Selecting that many column letters before inserting adds them all in one action, in the correct order.</details>
+
+  5. Explain what happens when you add a new field in the middle of a table, to a colleague who has never used a spreadsheet, without using the word `insert`.
+
+  <details><summary>Answer</summary>A blank column appears exactly where you asked for it, and everything to its right shifts over to make room. Any calculation that used to cover the columns around that point automatically adjusts to include the new one, so most formulas keep working without needing to be rewritten.</details>
+
+  ## Related concepts
+
+  ```text
+  Insert rows
+    ↓
+  Insert columns ← you are here
+    ↓
+  Delete rows
+  ```

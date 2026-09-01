@@ -1,0 +1,124 @@
+title: Delete Rows
+category: Spreadsheets
+what_is_it: Removing one or more entire rows from the sheet, closing the gap by shifting every row below it up, and breaking any formula that pointed directly at a cell in that row.
+why_it_matters: A deleted row does not leave a blank space behind, it disappears completely, taking any formula it was directly referenced by down with it.
+prerequisites:
+  - insert-columns
+objectives:
+  - Delete a single row using the menu
+  - Delete several rows at once from one selection
+  - Predict when deleting a row produces a broken reference error
+  - Explain the difference between a row referenced directly and one only inside a range
+estimated_minutes: 10
+note: |
+  # Delete rows
+
+  Deleting rows removes one or more entire rows from the sheet, closing the gap by shifting every row below it up, and breaking any formula that pointed directly at a cell in that row.
+
+  ## The 30-second answer
+
+  - Right-click a row number and choose Delete to remove that entire row.
+  - Every row below the deleted one shifts up to close the gap, no blank row is left behind.
+  - A formula that summed a range including the deleted row keeps working, only over a smaller range.
+  - A formula that referenced one specific cell in the deleted row breaks outright, showing an error.
+  - Selecting several row numbers before deleting removes all of them at once.
+
+  ## What it means
+
+  Deleting a row is a permanent structural change, not a way of clearing a row's content while leaving it in place. Clearing a row's cells leaves the row itself where it was, empty but present. Deleting the row removes it entirely, and everything below shifts up to close the gap left behind.
+
+  Whether that deletion is safe depends entirely on how other formulas relate to the row being removed. A formula summing a range that happened to include that row keeps working afterward, only totalling one fewer row than before, with no error and no obvious sign anything changed. A formula that names one specific cell inside that row directly has nothing left to point at once the row is gone, and shows a broken reference error instead.
+
+  ## How it works
+
+  | Action | How |
+  |---|---|
+  | Delete one row | Right-click a row number, choose Delete |
+  | Delete several rows | Select that many row numbers first, then Delete |
+  | Effect on rows below | They shift up to close the gap, no blank row remains |
+  | Effect on a range-based formula | Keeps working, now covering one fewer row |
+  | Effect on a formula naming that row directly | Breaks, showing a reference error |
+
+  What happens, in order, when you delete a row referenced by a range formula:
+
+  1. You right-click the row number to remove and choose Delete.
+  2. The row disappears entirely, and every row below it shifts up by one.
+  3. A formula whose range included that row is rewritten to a smaller range, one row shorter.
+  4. The formula's result updates automatically, now totalling one fewer row of data.
+
+  ## Example
+
+  `Eraser` is discontinued and its row is deleted from the January worksheet.
+
+  | | A | B |
+  |---|---|---|
+  | 4 | Eraser | 1 |
+  | 5 | Ruler | 3 |
+  | 6 | Total | 7 |
+
+  Deleting row 4 removes `Eraser` entirely, and `Ruler` and the total shift up.
+
+  | | A | B |
+  |---|---|---|
+  | 4 | Ruler | 3 |
+  | 5 | Total | 6 |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Right-click row 4, choose Delete | `Eraser`'s row is gone, `Ruler` and Total shift up | Removes the row entirely and closes the gap |
+  | Total formula after the delete | Now reads `=SUM(B2:B4)`, was `=SUM(B2:B5)` | Automatically shrinks to match the smaller range |
+
+  **Where it bites**
+
+  Correct version: the only thing referencing Eraser's row is the total's range formula, which shrinks automatically and keeps returning a correct, smaller total.
+
+  Wrong version: a separate cell elsewhere on the sheet, labelled `Featured item price`, directly referenced Eraser's price cell by its exact address, expecting it to always mean Eraser.
+
+  After the delete, the total formula updates cleanly with no visible problem. The `Featured item price` cell, on the other hand, shows a broken reference error immediately, since the exact cell it pointed at no longer exists. The two formulas react completely differently to the same deletion, depending only on whether they referenced a range or one specific cell.
+
+  ## When to use it
+
+  **Use it when** a record no longer belongs in the sheet at all, and closing the gap it leaves behind is the correct outcome.
+
+  **Use something else when** the row's data should be cleared but the row itself should stay in place, such as resetting a template. Clearing the cells' content, rather than deleting the row, leaves the structure intact.
+
+  **Never** delete a row without checking whether any formula elsewhere references a specific cell inside it directly. A range-based formula usually survives. A direct single-cell reference usually does not.
+
+  ## Common mistakes
+
+  - "I deleted a row and now I have a broken reference error somewhere else." A formula elsewhere referenced a specific cell in that row directly. Rebuild the formula to point at wherever that data now lives, if it still exists.
+  - "My total changed after I deleted a row, but there is no error." This is expected. A range-based total shrinks automatically to reflect one fewer row, with no error, since it never depended on that exact row existing.
+  - "I meant to clear a row's content but deleted the row entirely." Deleting removes the row and shifts everything below it up. Clearing content, instead, empties the cells without moving anything.
+  - "I deleted several rows and the wrong ones ended up gone." Row numbers were selected in the wrong order, or an extra row was accidentally included in the selection. Check the selected row numbers carefully before confirming a multi-row delete.
+
+  ## Interview questions
+
+  1. What happens to the rows below a deleted row?
+
+  <details><summary>Answer</summary>They shift up by one to close the gap the deleted row leaves behind. No blank row remains where the deleted one used to be.</details>
+
+  2. Why does deleting a row sometimes produce an error and sometimes not?
+
+  <details><summary>Answer</summary>It depends on how other formulas relate to that row. A formula summing a range that included the row keeps working over a smaller range, with no error. A formula referencing one specific cell inside that row directly has nothing left to point at once the row is gone, which produces a broken reference error.</details>
+
+  3. A reference error appears somewhere on the sheet right after a row was deleted elsewhere. What do you check first?
+
+  <details><summary>Answer</summary>Whether the broken formula referenced a specific cell that used to sit inside the deleted row. That is the most common cause: a direct, single-cell reference to data that no longer exists.</details>
+
+  4. When would you clear a row's content instead of deleting the row entirely?
+
+  <details><summary>Answer</summary>When the row itself, and its position in the sheet, should stay in place, such as resetting a template row for reuse. Clearing content removes the values without shifting anything else. Deleting the row removes it structurally and moves every row below it up.</details>
+
+  5. Explain what happens when you delete a row, to a colleague who has never used a spreadsheet, without using the word `delete`.
+
+  <details><summary>Answer</summary>The entire row disappears, and everything below it slides up to fill the gap, so no empty row is left behind. Anything that was pointing directly at a box inside that row now has nothing to point at, and shows an error instead.</details>
+
+  ## Related concepts
+
+  ```text
+  Insert columns
+    ↓
+  Delete rows ← you are here
+    ↓
+  Delete columns
+  ```

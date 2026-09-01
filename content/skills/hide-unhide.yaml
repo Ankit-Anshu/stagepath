@@ -1,0 +1,120 @@
+title: Hide Unhide
+category: Spreadsheets
+what_is_it: Collapsing a row or column so it does not show on screen, without removing its data or breaking anything that reads it.
+why_it_matters: A hidden row or column still calculates normally, so a total that looks unexplained often has a perfectly good reason sitting out of view.
+prerequisites:
+  - delete-columns
+objectives:
+  - Hide a column so it no longer shows on screen
+  - Unhide a hidden column so it becomes visible again
+  - Explain why a hidden column still affects formulas that reference it
+  - Spot the sign that a row or column between two visible ones is hidden
+estimated_minutes: 8
+note: |
+  # Hide unhide
+
+  Hiding a row or column collapses it so it does not show on screen, without removing its data or breaking anything that reads it.
+
+  ## The 30-second answer
+
+  - Right-click a row number or column letter and choose Hide to collapse it out of view.
+  - A hidden row or column still holds its data, and any formula reading it still works exactly as before.
+  - The gap where a hidden row or column used to be shown is a visible sign, a skipped letter or number in the header.
+  - Right-click across the columns or rows on either side of the gap and choose Unhide to bring it back.
+  - Hiding is not the same as deleting. Nothing is removed and no formula breaks.
+
+  ## What it means
+
+  Hiding a row or column is a display setting, not a change to the data itself. Everything that was in a hidden row or column is still there, unchanged, and every formula that reads it keeps reading it exactly as before. The only thing that changes is whether it shows on screen.
+
+  This is exactly what makes a hidden row or column worth knowing about specifically: a total that includes a hidden column's values is still correct, but looking at the visible columns alone will not explain how that total was reached. The explanation is there, it is only out of view, and the header row or column letters are the one clue that something is missing between two visible ones.
+
+  ## How it works
+
+  | Action | How |
+  |---|---|
+  | Hide a column | Right-click its letter, choose Hide |
+  | Hide a row | Right-click its number, choose Hide |
+  | Unhide | Select the columns or rows on either side of the gap, right-click, choose Unhide |
+  | Data and formulas | Unaffected. Still stored and still calculated exactly as before |
+
+  What happens, in order, when you hide then unhide a column:
+
+  1. You right-click the column letter and choose Hide.
+  2. The column collapses out of view, and the header skips straight from its neighbour on one side to its neighbour on the other.
+  3. Any formula referencing that column keeps working, unchanged.
+  4. To bring it back, you select the two visible columns on either side of the gap, right-click, and choose Unhide.
+
+  ## Example
+
+  The `Date purchased` column, E, is hidden on the January worksheet to keep the view focused on prices and totals while it is not currently needed.
+
+  | | D | E |
+  |---|---|---|
+  | 1 | Line total | Date purchased |
+
+  Hiding column E leaves the header skipping straight from D to F, with nothing visibly labelled E anymore.
+
+  | | D | F |
+  |---|---|---|
+  | 1 | Line total | (next visible column) |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Right-click column E, choose Hide | Column E disappears, header jumps from D to F | Removes it from view without touching its data |
+  | The grand total formula, which reads column D, not E | Unaffected, still shows the same result | Confirms hiding a column has no effect on formulas that do not reference it |
+
+  **Where it bites**
+
+  Correct version: the header row reads `D, F`, a visible skip that signals column E is hidden, not missing.
+
+  Wrong version: someone unfamiliar with the sheet sees the same `D, F` header and assumes column E was deleted, and inserts a brand new column at that position to replace what they think is missing data.
+
+  Both readings are plausible from a glance at the header alone. The correct reading only becomes obvious by noticing the skipped letter and checking for a hidden column specifically, rather than assuming it is gone entirely. Treating a hidden column as deleted, and inserting a fresh one in its place, can leave the workbook with a genuinely empty new column sitting next to a still-hidden one holding real data.
+
+  ## When to use it
+
+  **Use it when** a row or column holds data that is still needed by formulas, or needed again later, but is not relevant to what someone is currently looking at.
+
+  **Use something else when** the data is genuinely never needed again. Deleting it, rather than hiding it, avoids leaving inactive data sitting in the file indefinitely.
+
+  **Never** assume a skipped letter or number in the header means data is missing. Check for a hidden row or column before adding something new in its place.
+
+  ## Common mistakes
+
+  - "A total includes a number I cannot account for." A hidden row or column is likely contributing to it. Check for a skipped letter or number in the header before assuming the formula itself is wrong.
+  - "I see a gap in the column letters and thought data was deleted." A skipped letter usually means a hidden column, not a deleted one. Select across the gap and choose Unhide to check before assuming anything is missing.
+  - "I inserted a new column where I thought one was missing, and now something looks duplicated." The column was hidden, not deleted, and still held real data. Undo the insert, unhide the original column, and confirm what is actually there first.
+  - "I hid a row and now cannot find it to unhide it again." Select a wider range of rows spanning well beyond where the hidden one should be, right-click, and choose Unhide. Selecting only the exact two neighbouring rows can be fiddly if you are not certain which they are.
+
+  ## Interview questions
+
+  1. What is the difference between hiding a column and deleting it?
+
+  <details><summary>Answer</summary>Hiding only changes whether the column shows on screen. Its data stays exactly as it was, and every formula referencing it keeps working. Deleting removes the column and its data entirely, breaking any formula that referenced a specific cell inside it.</details>
+
+  2. Why can a total look unexplained even though it is completely correct?
+
+  <details><summary>Answer</summary>Because it might include a hidden row or column in its range. The total is still accurate, but the visible cells alone do not show every value contributing to it, since one or more of them are not currently on screen.</details>
+
+  3. You notice the column letters skip from D straight to F. What do you check first?
+
+  <details><summary>Answer</summary>Whether column E is hidden rather than deleted. Selecting across the gap and choosing Unhide reveals whether there is a genuine column sitting there with real data in it.</details>
+
+  4. When would you hide a column instead of deleting it?
+
+  <details><summary>Answer</summary>When the data in it is still used by a formula, or might be needed again later, even if it is not relevant to what is currently being looked at. Hiding keeps everything intact and reversible, while deleting removes it permanently.</details>
+
+  5. Explain what it means for a column to be hidden, to a colleague who has never used a spreadsheet, without using the word `hide`.
+
+  <details><summary>Answer</summary>It means a column is still fully there, with all its data and any calculations relying on it working exactly as before, it is only not being shown on screen right now. A gap in the column letters is usually the sign that this happened, rather than a column having been removed.</details>
+
+  ## Related concepts
+
+  ```text
+  Delete columns
+    ↓
+  Hide unhide ← you are here
+    ↓
+  Freeze panes
+  ```

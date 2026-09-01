@@ -1,0 +1,122 @@
+title: Fill Handle
+category: Spreadsheets
+what_is_it: The small square at the bottom-right corner of a selected cell that copies or extends its content into adjacent cells when dragged.
+why_it_matters: It is the fastest way to repeat a formula or a value down a column or across a row, and it overwrites whatever is already in its path with no warning.
+prerequisites:
+  - copy-paste
+objectives:
+  - Locate the fill handle on a selected cell
+  - Drag the fill handle to copy a value into adjacent cells
+  - Predict what happens to existing content in the fill handle's path
+  - Explain why dragging over data already there is risky
+estimated_minutes: 8
+note: |
+  # Fill handle
+
+  The fill handle is the small square at the bottom-right corner of a selected cell that copies or extends its content into adjacent cells when dragged.
+
+  ## The 30-second answer
+
+  - Click a cell, and a small square appears at its bottom-right corner. That square is the fill handle.
+  - Dragging the fill handle down or across copies the cell's content into every cell it passes over.
+  - A formula dragged this way behaves like a copy and paste: its references shift to match each new cell.
+  - The fill handle overwrites whatever was already in the cells it is dragged across, without asking first.
+  - Double-clicking the fill handle, instead of dragging it, fills down automatically to match the length of an adjacent column of data.
+
+  ## What it means
+
+  The fill handle exists because dragging is often faster than copying and pasting, especially when repeating the same formula down many rows. It does exactly what a copy and paste does, shift a formula's references to fit each new cell, copy a plain value unchanged, only triggered by a drag of the mouse instead of two separate key presses.
+
+  What makes it worth knowing on its own is that a drag has no pause built in. Copying and pasting is two deliberate actions, each of which is a moment to notice if something is about to be overwritten. Dragging the fill handle is one continuous motion, and the moment you release the mouse, every cell under the drag is overwritten, whether or not it already held something worth keeping.
+
+  ## How it works
+
+  | Action | Result |
+  |---|---|
+  | Click a cell, drag its fill handle down | Copies the cell into every cell the drag passes over |
+  | Drag the fill handle over a formula cell | Shifts the formula's references to match each new row or column |
+  | Double-click the fill handle | Fills down automatically, matching the length of an adjacent filled column |
+  | Drag over a cell that already has content | Overwrites it immediately, no warning shown |
+
+  What happens, in order, when you drag the fill handle down a column of formulas:
+
+  1. You click the cell holding the formula you want repeated.
+  2. You find the small square at its bottom-right corner and press the mouse down on it.
+  3. You drag down to the last row that needs the formula and release the mouse.
+  4. Every cell in that range now holds the same formula, shifted to match its own row.
+
+  ## Example
+
+  The `Date purchased` column on the January worksheet needs the same date, `06/01/2026`, filled into a new row for `Highlighter`, matching the date already used for `Ruler`.
+
+  | | E |
+  |---|---|
+  | 5 | `06/01/2026` |
+  | 6 | (empty) |
+
+  Dragging E5's fill handle down to E6 copies the date.
+
+  | | E |
+  |---|---|
+  | 5 | `06/01/2026` |
+  | 6 | `06/01/2026` |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Drag E5's fill handle down to E6 | E6 shows `06/01/2026` | Copies a plain value unchanged into the new cell |
+  | Drag D5's fill handle down to D6 | D6 holds `=B6*C6`, shifted from `=B5*C5` | Copies the formula with its references shifted to match row 6 |
+
+  **Where it bites**
+
+  Correct version: E6 was genuinely empty before the drag, so filling `06/01/2026` into it adds new data with nothing lost.
+
+  Wrong version: E6 already held a different, correct date for Highlighter, but the fill handle was dragged across it anyway while filling E5's date down for another purpose, silently replacing Highlighter's real date with Ruler's.
+
+  Both versions leave E6 showing a normal-looking date, no error, no warning. The difference is invisible unless someone happens to remember what E6 used to say, since a drag that overwrites existing content looks identical to a drag that only fills genuinely empty cells.
+
+  ## When to use it
+
+  **Use it when** you are repeating a formula down a column, or copying the same value into a run of genuinely empty adjacent cells.
+
+  **Use something else when** the destination cells already hold data that needs to be checked, not blindly replaced. A slower copy and paste, done one step at a time, gives a chance to notice what is being overwritten.
+
+  **Never** drag the fill handle across a range without first glancing at what is currently in it.
+
+  ## Common mistakes
+
+  - "Data I had already entered is gone and I do not know why." The fill handle was dragged across cells that already held something, overwriting it silently. Undo immediately if this is caught right after it happens.
+  - "I dragged the fill handle but nothing happened." The fill handle only appears on the very corner of a selected cell. Dragging from anywhere else on the cell moves or selects it instead of filling.
+  - "My formula's references look wrong after filling down." The fill handle shifts formula references the same way a copy and paste does. Check that the destination row or column is actually meant to use shifted references.
+  - "I wanted the exact same value in every cell, but it changed as I dragged." Certain values, such as numbers or dates, can trigger an automatic series instead of a plain copy. Check the small options menu that appears after dragging, or hold the key that forces a straight copy.
+
+  ## Interview questions
+
+  1. Where is the fill handle, and what does dragging it do?
+
+  <details><summary>Answer</summary>It is the small square at the bottom-right corner of a selected cell. Dragging it copies the cell's content into every cell the drag passes over, shifting a formula's references to match each new position.</details>
+
+  2. Why is dragging the fill handle riskier than copying and pasting the same thing?
+
+  <details><summary>Answer</summary>Copying and pasting are two separate actions, giving a moment to notice what is being overwritten before it happens. Dragging the fill handle is one continuous motion that overwrites every cell it passes over the instant the mouse is released, with no pause and no warning.</details>
+
+  3. Data that used to be in a cell is missing, with no error shown anywhere. What do you check first?
+
+  <details><summary>Answer</summary>Whether the fill handle was recently dragged across that cell for an unrelated purpose, since dragging overwrites existing content immediately and without confirmation. Undo, used right away, is usually the fastest way to recover it.</details>
+
+  4. When would you choose a slower copy and paste over the fill handle, even though it takes longer?
+
+  <details><summary>Answer</summary>When the destination cells might already hold data worth checking before it is replaced. The fill handle overwrites its whole path in one motion, while a copy and paste done deliberately gives a chance to look at each destination first.</details>
+
+  5. Explain what the fill handle does, to a colleague who has never used a spreadsheet, without using the word `handle`.
+
+  <details><summary>Answer</summary>It is a small square in the corner of a selected box that, when dragged, copies whatever is in that box into every box the drag passes over. If the box being dragged from held a calculation, each new box gets its own version of that calculation instead of a fixed copy.</details>
+
+  ## Related concepts
+
+  ```text
+  Copy paste
+    ↓
+  Fill handle ← you are here
+    ↓
+  AutoFill
+  ```

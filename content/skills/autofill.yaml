@@ -1,0 +1,124 @@
+title: AutoFill
+category: Spreadsheets
+what_is_it: The pattern-recognition behind the fill handle, extending two or more seed values into a continuing series instead of copying them flat.
+why_it_matters: Whether a drag produces a repeated series or a flat copy depends entirely on how many seed cells were selected first, and guessing wrong fills a whole column with the wrong thing at once.
+prerequisites:
+  - fill-handle
+objectives:
+  - Select two seed values to establish a series before dragging
+  - Predict whether dragging one cell copies it or continues a series
+  - Extend a numbered list using AutoFill instead of typing each number
+  - Explain why AutoFill needs at least two cells to detect a pattern
+estimated_minutes: 10
+note: |
+  # AutoFill
+
+  AutoFill is the pattern-recognition behind the fill handle, extending two or more seed values into a continuing series instead of copying them flat.
+
+  ## The 30-second answer
+
+  - Dragging the fill handle from a single cell copies that cell's value unchanged into every cell it passes.
+  - Dragging from two or more selected cells extends whatever pattern those cells suggest: a count, a date sequence, or a repeating list.
+  - A pattern needs at least two seed cells to be recognised. One cell alone gives no direction to continue in.
+  - Typed text with a number at the end, such as `Item 1`, can also be recognised and continued as `Item 2`, `Item 3`.
+  - A small options button appears after a drag, letting you switch between a flat copy and a continued series after the fact.
+
+  ## What it means
+
+  AutoFill is what the fill handle does when it has more than one value to learn from. With a single cell selected, there is nothing to detect a trend from, so a drag can only repeat that one value. With two cells selected, the difference between them becomes a signal: if the second is one more than the first, dragging continues counting upward. If the two cells are identical, dragging keeps copying that same value, since there is no increase to continue.
+
+  This is why the number of cells selected before dragging changes the entire outcome. Selecting one cell and dragging always copies. Selecting two cells and dragging tries to detect and continue whatever changed between them, which is powerful when that is exactly what is wanted, and confusing the moment it is not.
+
+  ## How it works
+
+  | Selected before dragging | Result of dragging |
+  |---|---|
+  | One cell, a plain value | Copies that value unchanged |
+  | Two cells, increasing by a fixed amount | Continues counting by that same amount |
+  | Two cells, identical values | Copies that value unchanged, since nothing increased |
+  | One or two dates | Continues the date sequence, by day, month, or another detected step |
+
+  What happens, in order, when you extend a numbered list with AutoFill:
+
+  1. You type `1` in the first cell and `2` in the cell directly below it.
+  2. You select both cells together.
+  3. You drag the fill handle from the bottom of that selection downward.
+  4. Each new cell continues the count: `3`, `4`, `5`, matching the step between the first two.
+
+  ## Example
+
+  A new column, `Item no.`, is added to the January worksheet, numbering each row from 1.
+
+  | | F |
+  |---|---|
+  | 2 | `1` |
+  | 3 | `2` |
+  | 4 | (empty) |
+  | 5 | (empty) |
+
+  Selecting F2:F3 and dragging the fill handle down to F5 continues the count.
+
+  | | F |
+  |---|---|
+  | 4 | `3` |
+  | 5 | `4` |
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Select only F2, drag down | F3:F5 all show `1` | Copies the single value with no pattern to continue |
+  | Select F2:F3, drag down | F4 shows `3`, F5 shows `4` | Detects the step between the two seed values and continues counting |
+
+  **Where it bites**
+
+  Correct version: F2 holds `1` and F3 holds `2`, both selected before dragging, so the drag continues counting `3`, `4`, `5` down the column.
+
+  Wrong version: F2 and F3 were both typed as `1` by mistake, then selected and dragged the same way.
+
+  Both versions look like a normal filled column right after the drag: numbers all the way down, no error shown. The wrong version does not count upward at all, since there was no increase between the two seed cells to continue, so it copies `1` into every row instead, silently numbering every item the same.
+
+  ## When to use it
+
+  **Use it when** you need a sequence, a count, a series of dates, or a repeating list, and the first couple of values in that sequence already exist to seed it from.
+
+  **Use something else when** every cell genuinely needs the same fixed value with no progression. A single-cell drag, or a plain copy and paste, does that without any risk of an unwanted series.
+
+  **Never** trust a filled series without checking its first and last values. A pattern detected from the wrong two seed cells still fills the whole range with confidence.
+
+  ## Common mistakes
+
+  - "My numbered list is not actually counting up." Only one seed value was selected before dragging, or both seed values were identical, so there was no increase for AutoFill to continue. Select two genuinely different, correctly ordered seed cells first.
+  - "I wanted a flat copy but got a counting series instead." AutoFill detected an increase between two selected cells and continued it. Use the small options button that appears after the drag to switch to a plain copy.
+  - "My dates skipped further ahead than I expected." A date series can step by more than one day if the two seed dates were more than a day apart. Check the exact gap between the seed dates before dragging.
+  - "The series looked right until partway down, then it changed." The drag may have started or ended one row off from where the seed cells actually sat. Recheck exactly which cells were selected before the drag began.
+
+  ## Interview questions
+
+  1. What is the difference between dragging the fill handle from one selected cell and from two?
+
+  <details><summary>Answer</summary>Dragging from one cell copies its value unchanged into every cell it passes. Dragging from two selected cells detects the difference between them and continues that pattern, such as counting upward by a fixed step.</details>
+
+  2. Why does AutoFill need at least two seed cells to detect a series?
+
+  <details><summary>Answer</summary>A single value has nothing to compare itself against, so there is no way to know whether it should repeat or change. Two values give a measurable difference, such as an increase of one, that AutoFill can extend consistently into the cells that follow.</details>
+
+  3. A filled column of numbers is not actually counting upward. What do you check first?
+
+  <details><summary>Answer</summary>How many seed cells were selected before dragging, and whether they were genuinely different from each other. A single selected cell, or two identical values, gives AutoFill nothing to count by, so it copies the same value instead of continuing a series.</details>
+
+  4. When would you deliberately select two seed cells instead of one before using the fill handle?
+
+  <details><summary>Answer</summary>Whenever the goal is a continuing sequence, such as row numbers, dates spaced a fixed amount apart, or a repeating list, rather than the same value copied everywhere. The two seed cells establish the pattern that the rest of the drag continues.</details>
+
+  5. Explain what AutoFill does, to a colleague who has never used a spreadsheet, without using the word `series`.
+
+  <details><summary>Answer</summary>If you give it two boxes that show a clear step from one to the next, dragging from them continues that same step into every box after. Give it only one box, and it has nothing to continue from, so it only copies that one box's content instead.</details>
+
+  ## Related concepts
+
+  ```text
+  Fill handle
+    ↓
+  AutoFill ← you are here
+    ↓
+  Insert rows
+  ```

@@ -1,99 +1,120 @@
-title: Find & Replace
+title: Find and Replace
 category: Spreadsheets
-what_is_it: A built-in tool for finding every occurrence of a specific value across a sheet (or workbook) and replacing it, without writing a formula.
-why_it_matters: The fastest way to fix a recurring typo, standardize a value, or update a reference across an entire sheet in one action.
+what_is_it: A built-in tool that finds every occurrence of a value across a sheet or a whole workbook and swaps it for another, without writing a formula.
+why_it_matters: It fixes a consistent typo or an outdated label everywhere at once, and used carelessly it can as easily change something that was never meant to change.
 prerequisites:
   - text-to-columns
 objectives:
-  - Use Find & Replace to fix a value across a range
-  - Explain the risk of a "Replace All" without reviewing matches first
-estimated_minutes: 20
-resources:
-  - r-exceljet-functions
-practice:
-  - id: ex-find-replace-1
-    title: Fix a recurring typo
-    description: Given a column with a consistent misspelling of a category name, use Find & Replace to fix every occurrence at once.
-verify:
-  - Every intended occurrence is correctly replaced
-  - No unintended values were accidentally changed
+  - Use Find and Replace to fix a value across a range
+  - Turn on match entire cell contents before a risky replace
+  - Explain why Replace All should be previewed before it runs
+  - Choose whether a replace should apply to one sheet or the whole workbook
+estimated_minutes: 10
 note: |
-  ## 🎯 What is it?
+  # Find and replace
 
-  **Find & Replace** is a built-in tool for finding every occurrence of a specific value across a sheet (or an entire workbook) and replacing it — without writing a [SUBSTITUTE](/skills/substitute-function) formula.
+  Find and replace is a built-in tool that finds every occurrence of a value across a sheet or a whole workbook and swaps it for another, without writing a formula.
 
-  ## 💡 Why is it important?
+  ## The 30-second answer
 
-  It's the fastest way to fix a recurring typo, standardize an inconsistent value, or update a reference across many cells in one action — a one-time interactive cleanup tool, as opposed to SUBSTITUTE's formula-based, repeatable approach.
+  - Find and Replace searches for a value and swaps every occurrence of it for another, in one action.
+  - Replace All applies the swap everywhere it matches, immediately, with no per-cell confirmation.
+  - Match entire cell contents restricts a match to cells that hold exactly the search term, not any cell that contains it somewhere inside a longer value.
+  - A search can be limited to the current sheet, or expanded to every sheet in the workbook.
+  - It changes stored values directly. It does not create a formula, and there is nothing left behind explaining that a change happened.
 
-  ## Core concept
+  ## What it means
+
+  Find and Replace exists for the situation where the same mistake, or the same outdated value, appears in many places at once, and fixing each one by hand would take far longer than describing the fix once and letting the sheet apply it everywhere. Typing "Notebook" correctly once and letting Replace All fix every misspelled occurrence of it is faster than hunting down each one individually.
+
+  The trade-off is that Replace All has no sense of context. It matches text, not intent, so a search term that happens to also appear inside a longer, unrelated value gets changed along with the ones that were actually meant to change. Match entire cell contents narrows a search to cells holding exactly the search term and nothing else, which avoids this in most cases, but only when it is actually turned on.
+
+  ## How it works
 
   | Option | What it controls |
   |---|---|
-  | Match case | Whether "Sale" and "sale" are treated as different |
+  | Match case | Whether `Sale` and `sale` count as the same or different |
   | Match entire cell contents | Whether a partial match inside a longer value also counts |
-  | Within: Sheet vs. Workbook | Whether the search applies to just the current sheet or every sheet |
-  | Replace vs. Replace All | Review and confirm each match individually, or replace every match at once |
+  | Within: sheet or workbook | Whether the search applies to the current sheet only, or every sheet |
+  | Replace vs Replace All | Confirm each match one at a time, or replace every match immediately |
 
-  ## 📊 Example
+  What happens, in order, when you fix a consistent typo with Replace All:
 
-  A category column has "Electornics" misspelled consistently across 200 rows.
+  1. You open Find and Replace and type the incorrect value into Find.
+  2. You type the correct value into Replace.
+  3. You choose whether the search covers the current sheet or the whole workbook.
+  4. You press Replace All, and every matching cell changes at once.
 
-  **Find & Replace:** Find "Electornics", Replace with "Electronics", **Replace All**.
+  ## Example
 
-  **Explanation:** All 200 occurrences are fixed in one action — far faster than manually correcting each cell, or building a formula for a genuinely one-time fix.
+  `Notebook` was entered as `Noteboko` on the January worksheet, and the mistake needs fixing.
 
-  ## Multiple examples
+  | | A |
+  |---|---|
+  | 2 | Noteboko |
 
-  **Beginner:** Fixing a single recurring typo across a column.
-  **Intermediate:** Using "Match entire cell contents" to avoid accidentally replacing a partial match inside a longer, unrelated value.
-  **Real-world:** Standardizing an inconsistent category label ("USA" vs. "United States") across an entire workbook (not just one sheet) using the "Within: Workbook" option, ensuring the fix applies everywhere the value appears.
+  Find `Noteboko`, Replace with `Notebook`, Replace All.
 
-  ## ⚠️ Common mistakes
+  | | A |
+  |---|---|
+  | 2 | Notebook |
 
-  - **Using "Replace All" without first checking how many matches exist**, or reviewing a few to confirm the search term isn't also matching something unintended (like a partial match inside a different, longer word).
-  - **Forgetting "Match entire cell contents"** when only a full-value match should be replaced, accidentally replacing a substring within a longer, unrelated value.
-  - **Running a workbook-wide replace when only one sheet was intended**, unintentionally changing data on other sheets.
+  | Input | Result | What it does |
+  |---|---|---|
+  | Find `Noteboko`, Replace `Notebook`, Replace All | A2 corrected to `Notebook` | Fixes the one occurrence in a single action |
+  | Match entire cell contents turned on first | Only cells holding exactly `Noteboko` are matched | Avoids catching the same letters if they appear inside a longer, unrelated value |
 
-  ## Real-world Data Analyst use cases
+  **Where it bites**
 
-  - **Data cleaning (one-time fixes):** correcting a known, consistent typo or outdated label across a sheet or workbook.
+  Correct version: Match entire cell contents is turned on before running Replace All, so only cells holding exactly `Noteboko` are changed.
+
+  Wrong version: Match entire cell contents is left off, and a note elsewhere on the sheet happens to contain the word `Notebooko` as part of a longer comment, unrelated to the item itself.
+
+  Both versions run Replace All with no error and no warning. The correct version changes exactly one cell, as intended. The wrong version also silently changes the unrelated comment, since its text contained the same letters as the search term, and nothing about Replace All distinguishes an intended match from a coincidental one.
+
+  ## When to use it
+
+  **Use it when** the same value needs to change in more than a couple of places, and describing the change once is clearly faster than editing each cell by hand.
+
+  **Use something else when** the value being changed is the result of a formula rather than a plain typed value. Find and Replace works on stored text, not on what a formula calculates.
+
+  **Never** run Replace All across a whole workbook without first checking, on a smaller scope, how many matches actually turn up and whether they are all genuinely intended.
+
+  ## Common mistakes
+
+  - "A word changed somewhere I did not expect." The search term matched a substring inside a longer, unrelated value, and Match entire cell contents was not turned on to prevent it. Turn it on before running a risky replace.
+  - "I ran Replace All on the whole workbook when I only meant one sheet." Within was left set to Workbook instead of Sheet. Check that setting before pressing Replace All, not after.
+  - "I fixed a typo but a similar one in a formula did not change." Find and Replace changes plain stored text. A formula that builds a similar-looking value through a calculation is not affected the same way.
+  - "I do not know how many things actually changed." Replace All does not summarise its changes prominently. Use Replace, one match at a time, when the scope of the change needs to be understood before committing to it.
+
+  ## Interview questions
+
+  1. What is the difference between Replace and Replace All?
+
+  <details><summary>Answer</summary>Replace changes one match at a time, letting you confirm or skip each one. Replace All changes every match across the chosen scope immediately, with no per-match confirmation.</details>
+
+  2. Why can Match entire cell contents prevent an unwanted change?
+
+  <details><summary>Answer</summary>Without it, a search matches the search term anywhere inside a cell's value, including as part of a longer, unrelated piece of text. Turning it on restricts a match to cells whose entire content is exactly the search term, so a coincidental substring elsewhere is left alone.</details>
+
+  3. A value changed somewhere on the sheet that was not meant to. What do you check first?
+
+  <details><summary>Answer</summary>Whether the changed cell's original content contained the search term as part of something longer, and whether Match entire cell contents was turned on before running Replace All. A partial, unintended match is the most common cause.</details>
+
+  4. When would you use Replace instead of Replace All, even though it takes longer?
+
+  <details><summary>Answer</summary>When it is not yet clear how many matches exist or whether all of them are genuinely intended. Replace, one match at a time, gives a chance to confirm or skip each one, which Replace All does not offer.</details>
+
+  5. Explain what Find and Replace does, to a colleague who has never used a spreadsheet, without using the word `replace`.
+
+  <details><summary>Answer</summary>You describe a value that appears somewhere in the sheet and the new value it should become, and it finds every place that matches and swaps it in one go, instead of you searching and fixing each one by hand.</details>
 
   ## Related concepts
 
+  ```text
+  Freeze panes
+    ↓
+  Find and replace ← you are here
+    ↓
+  Formatting
   ```
-  Text to Columns → Find & Replace ← you are here → Data Validation → Conditional Formatting
-  ```
-  The formula-based, repeatable equivalent is [SUBSTITUTE](/skills/substitute-function) — Find & Replace is the faster, interactive, one-time version.
-
-  ## Practice questions
-
-  ### Easy
-  1. What's the risk of using "Replace All" without first reviewing the matches?
-
-  ### Interview/Advanced
-  2. When would you use Find & Replace instead of a SUBSTITUTE formula, and vice versa?
-
-  <details><summary><strong>Answer / Solution</strong></summary>
-
-  1. The search term might unintentionally match something other than what was intended (like a substring inside an unrelated longer value), silently corrupting data that shouldn't have changed.
-  2. Find & Replace fits a one-time, interactive fix where reviewing and confirming matches is valuable; SUBSTITUTE fits a repeatable, formula-driven fix that needs to reapply automatically every time new data is added or the sheet recalculates.
-
-  </details>
-
-  ## 🎤 Interview preparation
-
-  **Q: Why might you preview matches before clicking "Replace All"?**
-  Short answer: To confirm the search term isn't accidentally matching something unintended, like a partial match inside a longer, unrelated value — previewing prevents silently corrupting data that shouldn't have changed.
-
-  ## Best practices
-
-  - Preview or spot-check matches before using Replace All on a large range.
-  - Use "Match entire cell contents" whenever only a full-value match should be replaced.
-
-  ---
-
-  ### ⚡ Quick Revision
-
-  **Find & Replace** → fast, interactive, one-time fix across a sheet or workbook
-  **vs. SUBSTITUTE:** a formula-based, repeatable alternative for ongoing data

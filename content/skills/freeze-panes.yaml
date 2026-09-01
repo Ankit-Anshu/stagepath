@@ -1,0 +1,116 @@
+title: Freeze Panes
+category: Spreadsheets
+what_is_it: Locking chosen rows or columns in place so they stay on screen while the rest of the sheet scrolls underneath them.
+why_it_matters: A long sheet without frozen headers turns every scroll into guesswork about which column is which, and freezing the wrong row locks the wrong thing in place as easily as the right one.
+prerequisites:
+  - hide-unhide
+objectives:
+  - Freeze the header row so it stays visible while scrolling down
+  - Predict which cell needs to be selected before freezing panes
+  - Explain the difference between freezing rows and freezing columns
+  - Spot when the wrong row or column has been frozen by mistake
+estimated_minutes: 8
+note: |
+  # Freeze panes
+
+  Freezing panes locks chosen rows or columns in place so they stay on screen while the rest of the sheet scrolls underneath them.
+
+  ## The 30-second answer
+
+  - Freeze Panes keeps chosen rows or columns fixed on screen while the rest of the sheet scrolls normally.
+  - Freezing the top row keeps column headers visible no matter how far down you scroll.
+  - Freezing the first column keeps row labels visible no matter how far right you scroll.
+  - What gets frozen depends on which cell is selected before turning Freeze Panes on, not only which menu option is chosen.
+  - Freezing does not change the data or the layout. It only changes what stays fixed while scrolling.
+
+  ## What it means
+
+  Freeze Panes solves a specific, common problem: once a sheet has more rows than fit on one screen, scrolling down carries the header row out of view along with everything else, and every column starts to look the same without a label above it to check against. Freezing the header keeps it pinned at the top, so the labels are always visible no matter how far down the data goes.
+
+  A common mistake is treating freezing as a fixed "top row" or "first column" option rather than what it really is. It freezes everything above and to the left of whichever cell was selected when it was turned on. Selecting the wrong cell before freezing locks the wrong rows or columns in place, and the mistake is not always obvious until you actually try to scroll.
+
+  ## How it works
+
+  | Setting | What stays fixed |
+  |---|---|
+  | Freeze top row | Row 1 only, regardless of which cell is selected |
+  | Freeze first column | Column A only, regardless of which cell is selected |
+  | Freeze panes (custom) | Everything above and to the left of the selected cell |
+
+  What happens, in order, when you freeze the header row and the first column together:
+
+  1. You click the cell at the intersection directly below the header row and directly to the right of the label column, such as B2.
+  2. You turn on Freeze Panes.
+  3. Row 1 and column A lock in place.
+  4. Scrolling down or to the right moves the rest of the grid, while row 1 and column A stay fixed on screen.
+
+  ## Example
+
+  The January worksheet's header row, `Item, Price, Quantity, Line total, Date purchased`, is frozen so it stays visible while scrolling through a longer list of items below it.
+
+  | | A | B | C |
+  |---|---|---|---|
+  | 1 | Item | Price | Quantity |
+  | 2 | Notebook | 2 | 1 |
+
+  Clicking A2, the first cell below the header, then turning on Freeze Panes, locks row 1 in place.
+
+  | Input | Result | What it does |
+  |---|---|---|
+  | Click A2, turn on Freeze Panes | Row 1 stays fixed while scrolling down | Keeps column labels visible no matter how far down the list goes |
+  | Click B2 instead, turn on Freeze Panes | Row 1 and column A both stay fixed | Locks the header row and the item names together while scrolling right |
+
+  **Where it bites**
+
+  Correct version: A2 was selected before freezing, so only row 1 locks in place, and scrolling down keeps the header visible above every row of data.
+
+  Wrong version: A3 was selected by mistake before freezing, one row too low, so both row 1 and row 2 lock in place together.
+
+  Both versions look identical the moment Freeze Panes is turned on, since nothing changes until you actually scroll. Only once the sheet is scrolled down does the mistake become visible: Notebook's row, frozen along with the header, stays pinned at the top forever, no matter how far down the list is scrolled, while every row after it moves normally underneath.
+
+  ## When to use it
+
+  **Use it when** a sheet has more rows or columns than fit on one screen, and losing sight of the header while scrolling would make the data hard to read.
+
+  **Use something else when** the whole sheet already fits on screen at once. Freezing panes on a short sheet has nothing meaningful to protect against.
+
+  **Never** turn on Freeze Panes without first checking exactly which cell is selected. What freezes depends entirely on that.
+
+  ## Common mistakes
+
+  - "An extra row stayed stuck at the top that should not have." The cell selected before freezing was one row too low, locking that row in along with the header. Unfreeze, reselect the correct cell, and freeze again.
+  - "I froze the header but it did not seem to do anything." The mistake often is not noticed until scrolling, since nothing visibly changes the moment Freeze Panes is turned on. Scroll down to confirm it worked as expected.
+  - "I wanted to freeze the header and the first column together, but only one stayed fixed." Only the top-row or first-column shortcuts freeze exactly one of those. Freezing both together needs the cell directly below and to the right of both to be selected first.
+  - "I cannot tell if a row is frozen or the sheet has stopped scrolling for another reason." Frozen rows and columns often show a slightly thicker line marking the boundary. Look for that line, or check the Freeze Panes setting directly.
+
+  ## Interview questions
+
+  1. What determines exactly which rows or columns get frozen?
+
+  <details><summary>Answer</summary>Whichever cell is selected at the moment Freeze Panes is turned on. Everything above and to the left of that cell freezes, not a fixed "top row" or "first column" regardless of selection, unless one of those specific shortcut options is used instead.</details>
+
+  2. Why might freezing panes seem to do nothing right after it is turned on?
+
+  <details><summary>Answer</summary>Because freezing only changes what happens while scrolling. The screen looks identical immediately after it is turned on, since nothing has moved yet, so the effect is only visible once you actually scroll the sheet.</details>
+
+  3. A row that should not be frozen is stuck at the top of the screen while scrolling. What do you check first?
+
+  <details><summary>Answer</summary>Which cell was selected before Freeze Panes was turned on. If it was one row lower than intended, that extra row gets locked in along with the header, and the fix is to unfreeze, reselect the correct cell, and freeze again.</details>
+
+  4. When would you freeze both the header row and the first column at the same time?
+
+  <details><summary>Answer</summary>When a sheet is wide as well as long, so that scrolling either down or right risks losing sight of the column headers or the row labels. Selecting the cell directly past both of them before freezing locks both in place together.</details>
+
+  5. Explain what freezing a row does, to a colleague who has never used a spreadsheet, without using the word `freeze`.
+
+  <details><summary>Answer</summary>It pins a chosen row or column in place on screen, so it stays visible no matter how far you scroll through the rest of the data. Everything else moves normally underneath it, only that one part stays put.</details>
+
+  ## Related concepts
+
+  ```text
+  Hide unhide
+    ↓
+  Freeze panes ← you are here
+    ↓
+  Find and replace
+  ```
