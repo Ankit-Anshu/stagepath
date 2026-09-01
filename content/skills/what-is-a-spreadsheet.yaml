@@ -15,8 +15,6 @@ note: |
 
   A spreadsheet is a grid of cells where you store numbers and text and let the program calculate results for you.
 
-  ---
-
   ## The 30-second answer
 
   - A spreadsheet is a grid made of rows and columns, and the box where a row and a column cross is called a cell.
@@ -25,8 +23,6 @@ note: |
   - Change one cell, and every other cell that depends on it updates on its own.
   - People use spreadsheets to track lists, run budgets, and answer "what happens if I change this number" questions.
 
-  ---
-
   ## What it means
 
   A spreadsheet is a way of storing information so that each fact has its own place. Instead of writing "Notebook costs 2 dollars" as a sentence, you put "Notebook" in one box and "2" in the box next to it. That box is called a cell, and every cell sits at the meeting point of one row and one column, so it always has an exact address, such as B3.
@@ -34,8 +30,6 @@ note: |
   Without a spreadsheet, the same job gets done on paper or in a plain document, and every calculation has to be worked out by hand. If a price changes, you cross out the old total and recalculate the new one yourself. A spreadsheet removes that step: once a cell is set up to add up other cells, it keeps that total correct on its own, every time one of those numbers changes.
 
   This is why a spreadsheet is not the same thing as a table in a document. A table there holds fixed text. A spreadsheet holds live numbers: it remembers where each one lives and reacts when one of them changes.
-
-  ---
 
   ## How it works
 
@@ -55,9 +49,7 @@ note: |
   3. You type a value, which is stored in that exact cell and nowhere else.
   4. You move to another cell, and the value you typed stays where you put it.
 
-  ---
-
-  ## Worked example
+  ## Example
 
   A 4-item shopping list: Notebook, Pen, Eraser and Ruler, priced at 2, 1, 1 and 3. Each item goes in its own row in column A, with its price next to it in column B.
 
@@ -103,8 +95,6 @@ note: |
 
   Both grids look like a finished shopping list. Nothing on the screen marks the second one as wrong: no red text, no warning, no error. Notebook now appears to cost nothing and Ruler appears to cost 1, and the total in row 6 is not a total at all: it holds Ruler's price, sitting in the wrong cell.
 
-  ---
-
   ## When to use it
 
   **Use it when** you have a list of similar items, at least one number attached to each one, and you expect that number to change or to need a total.
@@ -113,8 +103,6 @@ note: |
 
   **Never** put the same fact in two different cells and update them by hand separately. If two cells are meant to hold the same value, make one of them refer to the other instead of retyping it.
 
-  ---
-
   ## Common mistakes
 
   - "I typed the price in, but I cannot find it now." You clicked a different cell than the one you meant to before typing, so the value landed somewhere else. Check the cell reference box for the address before you type.
@@ -122,8 +110,6 @@ note: |
   - "My old data is gone and I did not delete anything." You clicked on a cell that already held a value and typed straight over it. A cell's old content disappears with no warning, so check what is already there before you type into it.
   - "I asked for B2 and got the wrong box." You mixed up which axis is which. Columns run left to right and use letters, rows run top to bottom and use numbers, so B2 means column B, row 2.
   - "I do not see why this beats a plain document." You are using the grid like one long block of text instead of one value per cell. A spreadsheet only pays off once each fact has its own cell, because that is what lets it be found and recalculated on its own.
-
-  ---
 
   ## Interview questions
 
@@ -145,9 +131,9 @@ note: |
 
   5. Explain what a spreadsheet is to a colleague who has never used one, without using the word `cell`.
 
-  ---
+  <details><summary>Answer</summary>A spreadsheet is a program that holds numbers and text in a grid of boxes, arranged into rows and columns. You put one fact in each box, and you can set some of those boxes to work out a result from the others automatically, so the whole grid stays correct as soon as one number changes.</details>
 
-  ## Where this sits
+  ## Related concepts
 
   ```text
   Foundations stage
@@ -156,5 +142,3 @@ note: |
     ↓
   Spreadsheet interface
   ```
-
-  **Related:** Spreadsheet interface · Workbook · Worksheets · Cells and ranges
